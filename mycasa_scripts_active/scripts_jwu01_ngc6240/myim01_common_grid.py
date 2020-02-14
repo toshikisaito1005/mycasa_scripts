@@ -3,15 +3,14 @@ import glob
 import numpy as np
 from astropy.coordinates import SkyCoord
 
-# choose image
-dir_data = "/Users/saito/data/proj_jwu/data_raw/"
-imagename= glob.glob(dir_data + "ngc6240_co10_12m7m_na.smooth")[0]
-imagenames = glob.glob(dir_data + "*.smooth")
-imagenames.extend(glob.glob(dir_data + "*.pb"))
 
 #####################
 ### Define Parameters
 #####################
+dir_data = "/Users/saito/data/myproj_active/proj_jwu01_ngc6240/data_raw/"
+imagename= glob.glob(dir_data + "ngc6240_co10_12m7m_na.smooth")[0]
+imagenames = glob.glob(dir_data + "*.smooth")
+imagenames.extend(glob.glob(dir_data + "*.pb"))
 
 
 

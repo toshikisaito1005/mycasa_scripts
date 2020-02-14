@@ -66,6 +66,9 @@ for i in range(len(imagenames)):
     os.system("cp -r " + imagenames[i].replace("smooth","pb") + " " + pbimage)
 
     print("### woking on " + name_line)
+    # noise histgrams
+
+
     # imsmooth
     cubesmooth1 = cubeimage.replace(".image",".smooth1") # 4.0 mJy
     imsmooth(imagename = cubeimage,
