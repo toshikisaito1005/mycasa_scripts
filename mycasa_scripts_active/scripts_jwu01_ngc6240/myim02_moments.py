@@ -89,21 +89,21 @@ def noisehist(imagename,noises_byeye,output,bins=200,thres=0.00001):
     plt.plot(x, func1(x, popt[0], popt[1]),
              '-', c="black", lw=5, label = "1 sigma = " + str(np.round(popt[1]*1000,2)) + " mJy beam$^{-1}$")
     plt.plot([0,0],
-             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*8.0],
+             [1e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*8.0],
              '-',color='black',lw=2)
     plt.plot([popt[1],popt[1]],
-             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*8.0],
+             [1e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*8.0],
              '--',color='black',lw=2)
     plt.plot([popt[1]*2.5,popt[1]*2.5],
-             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*8.0],
+             [1e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*8.0],
              '--',color='black',lw=4)
     plt.plot([-popt[1],-popt[1]],
-             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*8.0],
+             [1e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*8.0],
              '--',color='black',lw=2)
                         
     plt.title(imagename.split("/")[-1])
     plt.xlim(histrange)
-    plt.ylim([2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*8.0])
+    plt.ylim([1e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*8.0])
     plt.xlabel("Pixel value (Jy beam$^{-1}$)")
     plt.ylabel("Number of pixels")
     plt.legend(loc = "upper right")
