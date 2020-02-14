@@ -28,11 +28,12 @@ myqa = aU.createCasaTool(qatool)
 #####################
 ### Parameters
 #####################
-dir_proj = "/Users/saito/data/proj_jwu/data/"
-imagenames = glob.glob(dir_proj + "*.smooth.regrid")
+dir_data = "/Users/saito/data/myproj_active/proj_jwu01_ngc6240/data/"
+imagenames = glob.glob(dir_data + "*.smooth.regrid")
 imagenames.sort()
 noises = [0.0011,0.005,0.0006,0.0004,0.0004]
 pbcuts = [0.75,0.35,0.9,0.9,0.9]
+
 
 #####################
 ### Functions
@@ -50,10 +51,72 @@ def createmask(imagename,thres,outmask):
            mode = "del",
            hdkey = "beammajor")
 
+def func1(x, a, c):
+    return a*np.exp(-(x)**2/(2*c**2))
+
+def noisehist(imagename,noises_byeye,output,bins=200,thres=0.0001):
+    """
+    """
+    shape = imhead(imagename,mode="list")["shape"]
+    box = "0,0,"+str(shape[0]-1)+","+str(shape[1]-1)
+    data = imval(imagename,box=box)
+    pixvalues = data["data"].flatten()
+    pixvalues = pixvalues[abs(pixvalues)>thres]
+    
+    # plot
+    histrange = [pixvalues.min()/1.5-0.02,-pixvalues.min()/1.5+0.02]
+    plt.figure(figsize=(10,10))
+    plt.rcParams["font.size"] = 22
+    histdata = plt.hist(pixvalues,
+                        bins=bins,
+                        range=histrange,
+                        lw=0,
+                        log=True,
+                        color="blue",
+                        alpha=0.5)
+        
+    popt, pcov = curve_fit(func1,
+                           histdata[1][2:][histdata[1][2:]<noises_byeye],
+                           histdata[0][1:][histdata[1][2:]<noises_byeye],
+                           p0 = [np.max(histdata[0][1:][histdata[1][2:]<noises_byeye]),
+                                 noises_byeye],
+                           maxfev = 10000)
+                        
+    x = np.linspace(histdata[1][1], histdata[1][-1], 200)
+    plt.plot(x, func1(x, popt[0], popt[1]),
+             '-', c="black", lw=5, label = "1 sigma = " + str(np.round(popt[1],3)) + " Jy beam$^{-1}$")
+    plt.plot([0,0],
+             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
+             '-',color='black',lw=2)
+    plt.plot([popt[1],popt[1]],
+             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
+             '--',color='black',lw=2)
+    plt.plot([popt[1]*2.5,popt[1]*2.5],
+             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
+             '--',color='black',lw=4)
+    plt.plot([-popt[1],-popt[1]],
+             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
+             '--',color='black',lw=2)
+                        
+    plt.title(imagename.split("/")[-1])
+    plt.xlim(histrange)
+    plt.ylim([2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0])
+    plt.xlabel("Pixel value (Jy beam$^{-1}$)")
+    plt.ylabel("Number of pixels")
+    plt.legend(loc = "upper right")
+    plt.savefig(output,dpi=100)
+                        
+    return popt[1]
+
 
 #####################
 ### Main
 #####################
+dir_eps = dir_data + "../eps/"
+done = glob.glob(dir_eps)
+if not done:
+    os.mkdir(dir_eps)
+
 for i in range(len(imagenames)):
     # prepare workinf directory e.g., image_co10
     name_line = imagenames[i].split("ngc6240_")[1].split("_")[0]
@@ -67,7 +130,8 @@ for i in range(len(imagenames)):
 
     print("### woking on " + name_line)
     # noise histgrams
-
+    output = dir_eps + "noise_" + name_line + ".png"
+    popt1 = noisehist(imagenames[i],noises[i],output,bins=200,thres=0.0001)
 
     # imsmooth
     cubesmooth1 = cubeimage.replace(".image",".smooth1") # 4.0 mJy
