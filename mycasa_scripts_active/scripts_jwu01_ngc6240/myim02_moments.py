@@ -155,7 +155,7 @@ for i in range(len(imagenames)):
 
     # create mask
     createmask(cubeimage,popt1*1.*2.0,dir_image+"/"+name_line+"_mask0.image")
-    createmask(cubesmooth1,popt1*2.*3.0,dir_image+"/"+name_line+"_mask1.image")
+    createmask(cubesmooth1,popt1*2.*5.0,dir_image+"/"+name_line+"_mask1.image")
     createmask(cubesmooth2,popt1*5.*8.0,dir_image+"/"+name_line+"_mask2.image")
     
     immath(imagename = [dir_image+"/"+name_line+"_mask0.image",
