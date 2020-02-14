@@ -140,8 +140,8 @@ for i in range(len(imagenames)):
     cubesmooth1 = cubeimage.replace(".image",".smooth1") # 4.0 mJy
     imsmooth(imagename = cubeimage,
              targetres = True,
-             major = "1.0arcsec",
-             minor = "1.0arcsec",
+             major = "1.5arcsec",
+             minor = "1.5arcsec",
              pa = "0deg",
              outfile = cubesmooth1)
 
@@ -154,9 +154,9 @@ for i in range(len(imagenames)):
              outfile = cubesmooth2)
 
     # create mask
-    createmask(cubeimage,popt1*1.*2.5,dir_image+"/"+name_line+"_mask0.image")
-    createmask(cubesmooth1,popt1*2.*3.5,dir_image+"/"+name_line+"_mask1.image")
-    createmask(cubesmooth2,popt1*5.*8.5,dir_image+"/"+name_line+"_mask2.image")
+    createmask(cubeimage,popt1*1.*2.0,dir_image+"/"+name_line+"_mask0.image")
+    createmask(cubesmooth1,popt1*2.*3.0,dir_image+"/"+name_line+"_mask1.image")
+    createmask(cubesmooth2,popt1*5.*8.0,dir_image+"/"+name_line+"_mask2.image")
     
     immath(imagename = [dir_image+"/"+name_line+"_mask0.image",
                         dir_image+"/"+name_line+"_mask1.image",
