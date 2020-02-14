@@ -57,7 +57,7 @@ def createmask(imagename,thres,outmask):
 def func1(x, a, c):
     return a*np.exp(-(x)**2/(2*c**2))
 
-def noisehist(imagename,noises_byeye,output,bins=200,thres=0.0001):
+def noisehist(imagename,noises_byeye,output,bins=200,thres=0.00001):
     """
     """
     shape = imhead(imagename,mode="list")["shape"]
@@ -87,23 +87,23 @@ def noisehist(imagename,noises_byeye,output,bins=200,thres=0.0001):
                         
     x = np.linspace(histdata[1][1], histdata[1][-1], 200)
     plt.plot(x, func1(x, popt[0], popt[1]),
-             '-', c="black", lw=5, label = "1 sigma = " + str(np.round(popt[1],3)) + " Jy beam$^{-1}$")
+             '-', c="black", lw=5, label = "1 sigma = " + str(np.round(popt[1]*1000,2)) + " mJy beam$^{-1}$")
     plt.plot([0,0],
-             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
+             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*8.0],
              '-',color='black',lw=2)
     plt.plot([popt[1],popt[1]],
-             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
+             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*8.0],
              '--',color='black',lw=2)
     plt.plot([popt[1]*2.5,popt[1]*2.5],
-             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
+             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*8.0],
              '--',color='black',lw=4)
     plt.plot([-popt[1],-popt[1]],
-             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
+             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*8.0],
              '--',color='black',lw=2)
                         
     plt.title(imagename.split("/")[-1])
     plt.xlim(histrange)
-    plt.ylim([2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0])
+    plt.ylim([2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*8.0])
     plt.xlabel("Pixel value (Jy beam$^{-1}$)")
     plt.ylabel("Number of pixels")
     plt.legend(loc = "upper right")
@@ -154,9 +154,9 @@ for i in range(len(imagenames)):
              outfile = cubesmooth2)
 
     # create mask
-    createmask(cubeimage,noises[i]*1.*2.5,dir_image+"/"+name_line+"_mask0.image")
-    createmask(cubesmooth1,noises[i]*2.*3.5,dir_image+"/"+name_line+"_mask1.image")
-    createmask(cubesmooth2,noises[i]*5.*8.5,dir_image+"/"+name_line+"_mask2.image")
+    createmask(cubeimage,popt1*1.*2.5,dir_image+"/"+name_line+"_mask0.image")
+    createmask(cubesmooth1,popt1*2.*3.5,dir_image+"/"+name_line+"_mask1.image")
+    createmask(cubesmooth2,popt1*5.*8.5,dir_image+"/"+name_line+"_mask2.image")
     
     immath(imagename = [dir_image+"/"+name_line+"_mask0.image",
                         dir_image+"/"+name_line+"_mask1.image",
@@ -187,17 +187,17 @@ for i in range(len(imagenames)):
     
     immoments(imagename = cubeimage+".pbcor.masked",
               moments = [0],
-              includepix = [noises[i],100000.],
+              includepix = [popt1,100000.],
               outfile = dir_image+"/"+name_line+".moment0")
         
     immoments(imagename = cubeimage+".pbcor.masked",
               moments = [1],
-              includepix = [noises[i],100000.],
+              includepix = [popt1,100000.],
               outfile = dir_image+"/"+name_line+".moment1")
               
     immoments(imagename = cubeimage+".pbcor.masked",
               moments = [8],
-              includepix = [noises[i],100000.],
+              includepix = [popt1,100000.],
               outfile = dir_image+"/"+name_line+".moment8")
 
 
