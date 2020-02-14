@@ -1,0 +1,7 @@
+taskname           = "imval"
+imagename          =  "../../phangs/co_ratio/ngc4321_co10_12m+7m+tp_k.image.smooth.moment0"
+region             =  "../../phangs/co_ratio/casa_region/H_18_8.region"
+box                =  ""
+chans              =  ""
+stokes             =  ""
+#imval(imagename="../../phangs/co_ratio/ngc4321_co10_12m+7m+tp_k.image.smooth.moment0",region="../../phangs/co_ratio/casa_region/H_18_8.region",box="",chans="",stokes="")

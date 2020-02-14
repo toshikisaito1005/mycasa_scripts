@@ -1,0 +1,9 @@
+taskname           = "makemask"
+mode               =  "copy"
+inpimage           =  "/Users/saito/data/phangs/co_ratio/ngc4321/ngc4321_r21_32p0_m8.mask"
+inpmask            =  "/Users/saito/data/phangs/co_ratio/ngc4321/ngc4321_r21_32p0_m8.mask"
+output             =  "/Users/saito/data/phangs/co_ratio/ngc4321/ngc4321_r21_32p0_m8.mask:mask0"
+overwrite          =  True
+inpfreqs           =  []
+outfreqs           =  []
+#makemask(mode="copy",inpimage="/Users/saito/data/phangs/co_ratio/ngc4321/ngc4321_r21_32p0_m8.mask",inpmask="/Users/saito/data/phangs/co_ratio/ngc4321/ngc4321_r21_32p0_m8.mask",output="/Users/saito/data/phangs/co_ratio/ngc4321/ngc4321_r21_32p0_m8.mask:mask0",overwrite=True,inpfreqs=[],outfreqs=[])

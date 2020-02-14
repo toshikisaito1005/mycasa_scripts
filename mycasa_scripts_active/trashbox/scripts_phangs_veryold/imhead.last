@@ -1,0 +1,7 @@
+taskname           = "imhead"
+imagename          =  "/Users/saito/data/phangs/co_ratio/data/ngc4321_co10_sv.pb.regrid"
+mode               =  "list"
+hdkey              =  ""
+hdvalue            =  ""
+verbose            =  False
+#imhead(imagename="/Users/saito/data/phangs/co_ratio/data/ngc4321_co10_sv.pb.regrid",mode="list",hdkey="",hdvalue="",verbose=False)

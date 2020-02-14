@@ -1,0 +1,16 @@
+taskname           = "immath"
+imagename          =  ['../../phangs/co_ratio/mom_12co21.mask', '../../phangs/co_ratio/mom_12co10.mask']
+mode               =  "evalexpr"
+outfile            =  "../../phangs/co_ratio/R_12co21_12co10.mask"
+expr               =  "IM0 * IM1"
+varnames           =  ""
+sigma              =  "0.0mJy/beam"
+polithresh         =  ""
+mask               =  ""
+region             =  ""
+box                =  ""
+chans              =  ""
+stokes             =  ""
+stretch            =  False
+imagemd            =  ""
+#immath(imagename=['../../phangs/co_ratio/mom_12co21.mask', '../../phangs/co_ratio/mom_12co10.mask'],mode="evalexpr",outfile="../../phangs/co_ratio/R_12co21_12co10.mask",expr="IM0 * IM1",varnames="",sigma="0.0mJy/beam",polithresh="",mask="",region="",box="",chans="",stokes="",stretch=False,imagemd="")

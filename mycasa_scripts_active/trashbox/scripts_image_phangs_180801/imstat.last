@@ -1,0 +1,21 @@
+taskname           = "imstat"
+imagename          =  "../../phangs/co_ratio/ngc4321_co10_12m+7m+tp_k.image.smooth.moment0"
+axes               =  -1
+region             =  ""
+box                =  ""
+chans              =  ""
+stokes             =  ""
+listit             =  True
+verbose            =  True
+mask               =  ""
+stretch            =  False
+logfile            =  ""
+append             =  True
+algorithm          =  "classic"
+fence              =  -1
+center             =  "mean"
+lside              =  True
+zscore             =  -1
+maxiter            =  -1
+clmethod           =  "auto"
+#imstat(imagename="../../phangs/co_ratio/ngc4321_co10_12m+7m+tp_k.image.smooth.moment0",axes=-1,region="",box="",chans="",stokes="",listit=True,verbose=True,mask="",stretch=False,logfile="",append=True,algorithm="classic",fence=-1,center="mean",lside=True,zscore=-1,maxiter=-1,clmethod="auto")

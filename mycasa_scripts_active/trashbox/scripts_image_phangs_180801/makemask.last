@@ -1,0 +1,9 @@
+taskname           = "makemask"
+mode               =  "copy"
+inpimage           =  "../../phangs/co_ratio/R_12co21_12co10.mask"
+inpmask            =  "../../phangs/co_ratio/R_12co21_12co10.mask"
+output             =  "../../phangs/co_ratio/R_12co21_12co10.mask:mask0"
+overwrite          =  True
+inpfreqs           =  []
+outfreqs           =  []
+#makemask(mode="copy",inpimage="../../phangs/co_ratio/R_12co21_12co10.mask",inpmask="../../phangs/co_ratio/R_12co21_12co10.mask",output="../../phangs/co_ratio/R_12co21_12co10.mask:mask0",overwrite=True,inpfreqs=[],outfreqs=[])

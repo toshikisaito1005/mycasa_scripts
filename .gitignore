@@ -1,0 +1,11 @@
+.DS_Store
+.directory
+TempLattice*
+*.pyc
+*.last
+*.fits
+ipython*.log
+casa-*.log
+*.aux
+*.out
+*.synctex.gz

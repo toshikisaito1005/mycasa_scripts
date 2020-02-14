@@ -1,0 +1,5 @@
+# imagename                median    sum     rms
+12m+7m_merge            -0.000158 -1.359 0.00198
+featherfirst_then_merge  0.000419  3.389  0.0024
+pbcorrfirst_then_merge   0.000126  1.174 0.00206
+merge_then_pbcorrfirst    6.1e-05 -0.023 0.00188

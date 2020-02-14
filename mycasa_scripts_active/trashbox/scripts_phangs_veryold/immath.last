@@ -1,0 +1,16 @@
+taskname           = "immath"
+imagename          =  ['/Users/saito/data/phangs/co_ratio/ngc4321/ngc4321_co10_32p0_mom8.mask', '/Users/saito/data/phangs/co_ratio/ngc4321/ngc4321_co21_32p0_mom8.mask']
+mode               =  "evalexpr"
+outfile            =  "/Users/saito/data/phangs/co_ratio/ngc4321/ngc4321_r21_32p0_m8.mask"
+expr               =  "IM0*IM1"
+varnames           =  ""
+sigma              =  "0.0mJy/beam"
+polithresh         =  ""
+mask               =  ""
+region             =  ""
+box                =  ""
+chans              =  ""
+stokes             =  ""
+stretch            =  False
+imagemd            =  ""
+#immath(imagename=['/Users/saito/data/phangs/co_ratio/ngc4321/ngc4321_co10_32p0_mom8.mask', '/Users/saito/data/phangs/co_ratio/ngc4321/ngc4321_co21_32p0_mom8.mask'],mode="evalexpr",outfile="/Users/saito/data/phangs/co_ratio/ngc4321/ngc4321_r21_32p0_m8.mask",expr="IM0*IM1",varnames="",sigma="0.0mJy/beam",polithresh="",mask="",region="",box="",chans="",stokes="",stretch=False,imagemd="")

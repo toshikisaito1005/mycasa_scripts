@@ -1,0 +1,14 @@
+taskname           = "exportfits"
+imagename          =  "../../../ngc3110/ana/data_nyquist/nyquist_corr_sfr_density.image"
+fitsimage          =  "../../../ngc3110/ana/data_nyquist/nyquist_corr_sfr_density.fits"
+velocity           =  False
+optical            =  False
+bitpix             =  -32
+minpix             =  0
+maxpix             =  -1
+overwrite          =  True
+dropstokes         =  False
+stokeslast         =  True
+history            =  True
+dropdeg            =  False
+#exportfits(imagename="../../../ngc3110/ana/data_nyquist/nyquist_corr_sfr_density.image",fitsimage="../../../ngc3110/ana/data_nyquist/nyquist_corr_sfr_density.fits",velocity=False,optical=False,bitpix=-32,minpix=0,maxpix=-1,overwrite=True,dropstokes=False,stokeslast=True,history=True,dropdeg=False)

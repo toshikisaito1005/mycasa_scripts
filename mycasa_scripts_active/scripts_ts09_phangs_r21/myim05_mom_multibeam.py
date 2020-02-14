@@ -1,0 +1,73 @@
+import os
+import glob
+import scripts_phangs_r21 as r21
+
+
+#####################
+### Parameters
+#####################
+dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
+galaxy = ["ngc0628", "ngc4321", "ngc4254", "ngc3627"]
+co10noises = [[0.020,0.030,0.040,0.050,0.060,0.070,0.080,0.090,0.095,0.130,0.060], # ngc0628
+              [0.020,0.028,0.035,0.040,0.045,0.050,0.055,0.060,0.060,0.060,0.028], # ngc4321
+              [0.030,0.036,0.040,0.045,0.050,0.050,0.055,0.060,0.066,0.080], # ngc4254
+              [0.038,0.045,0.055,0.065,0.080,0.090,0.100,0.110,0.125,0.150,0.065]] # ngc3627
+co21noises = [[0.025,0.030,0.035,0.037,0.060,0.039,0.040,0.042,0.043,0.055,0.060], # ngc0628
+              [0.022,0.026,0.027,0.028,0.029,0.030,0.030,0.030,0.031,0.050,0.026], # ngc4321
+              [0.028,0.030,0.032,0.033,0.033,0.035,0.037,0.038,0.040,0.060], # ngc4254
+              [0.023,0.025,0.027,0.027,0.028,0.029,0.030,0.031,0.033,0.040,0.027]] # ngc3627
+"""
+co10noises = [[0.020,0.130], # ngc0628
+              [0.020,0.060], # ngc4321
+              [0.030,0.080], # ngc4254
+              [0.038,0.150]] # ngc3627
+co21noises = [[0.025,0.055], # ngc0628
+              [0.022,0.050], # ngc4321
+              [0.028,0.060], # ngc4254
+              [0.0230.040]] # ngc3627
+"""
+snr_mom = 2.0
+percent = 0.0
+
+
+#####################
+### Main
+#####################
+for i in range(len(galaxy)):
+    galname = galaxy[i]
+    co10images = glob.glob(dir_proj + galname + "_*/co10*cube*0.image")
+    co10images.sort()
+    co21images = glob.glob(dir_proj + galname + "_*/co21*cube*0.image")
+    co21images.sort()
+
+    for j in range(len(co10images)):
+        beamp = co10images[j].split("/")[-1].split("_")[-1].replace(".image","")
+        # co10
+        output = dir_proj+"eps/noise_"+galname+"_"+co10images[j].split("/")[-1].replace(".image","").replace("_cube","")+".png"
+        noiserms = r21.noisehist(co10images[j],
+                                 co10noises[i][j],
+                                 output)
+        r21.eazy_immoments(dir_proj + galname + "_co10/",
+                           co10images[j],
+                           galname,
+                           noiserms,
+                           beamp,
+                           snr_mom,
+                           percent,
+                           myim="05")
+        # co21
+        output = dir_proj+"eps/noise_"+galname+"_"+co21images[j].split("/")[-1].replace(".image","").replace("_cube","")+".png"
+        noiserms = r21.noisehist(co21images[j],
+                                 co21noises[i][j],
+                                 output)
+        r21.eazy_immoments(dir_proj + galname + "_co21/",
+                           co21images[j],
+                           galname,
+                           noiserms,
+                           beamp,
+                           snr_mom,
+                           percent,
+                           myim="05")
+
+
+os.system("rm -rf *.last")
