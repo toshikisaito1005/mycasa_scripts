@@ -179,6 +179,7 @@ for i in range(len(imagenames)):
     
     impbcor(imagename = cubeimage,
             pbimage = pbimage,
+            cutoff = 0.3,
             outfile = cubeimage+".pbcor")
             
     immath(imagename = [cubeimage+".pbcor",dir_image+"/"+name_line+"_mask.image"],
