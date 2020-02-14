@@ -36,7 +36,7 @@ imagenames = glob.glob(dir_data + "*.smooth.regrid")
 imagenames.sort()
 noises = [0.0011,0.005,0.0006,0.0004,0.0004]
 pbcuts = [0.75,0.35,0.9,0.9,0.9]
-snr = 2.0
+snr = 2.5
 
 #####################
 ### Functions
@@ -140,8 +140,8 @@ for i in range(len(imagenames)):
     cubesmooth1 = cubeimage.replace(".image",".smooth1") # 4.0 mJy
     imsmooth(imagename = cubeimage,
              targetres = True,
-             major = "1.5arcsec",
-             minor = "1.5arcsec",
+             major = "1.2arcsec",
+             minor = "1.2arcsec",
              pa = "0deg",
              outfile = cubesmooth1)
 
