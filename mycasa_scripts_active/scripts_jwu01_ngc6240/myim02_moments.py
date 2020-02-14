@@ -4,6 +4,9 @@ import scipy
 from astropy.io import fits
 from astropy import units as u
 from astropy.coordinates import SkyCoord
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
+plt.ioff()
 
 # CASA imports
 from taskinit import *
@@ -120,7 +123,7 @@ if not done:
 for i in range(len(imagenames)):
     # prepare workinf directory e.g., image_co10
     name_line = imagenames[i].split("ngc6240_")[1].split("_")[0]
-    dir_image = dir_proj+"../image_"+name_line+"/"
+    dir_image = dir_data+"../image_"+name_line+"/"
     pbimage = dir_image + name_line + "_cube.pb"
     cubeimage = dir_image + name_line + "_cube.image"
     os.system("rm -rf " + dir_image)
