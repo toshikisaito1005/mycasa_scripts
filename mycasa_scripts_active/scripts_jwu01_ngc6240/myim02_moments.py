@@ -36,7 +36,7 @@ imagenames = glob.glob(dir_data + "*.smooth.regrid")
 imagenames.sort()
 noises = [0.0011,0.005,0.0006,0.0004,0.0004]
 pbcuts = [0.75,0.35,0.9,0.9,0.9]
-
+snr = 2.0
 
 #####################
 ### Functions
@@ -188,17 +188,17 @@ for i in range(len(imagenames)):
     
     immoments(imagename = cubeimage+".pbcor.masked",
               moments = [0],
-              includepix = [popt1,100000.],
+              includepix = [popt1*snr,100000.],
               outfile = dir_image+"/"+name_line+".moment0")
         
     immoments(imagename = cubeimage+".pbcor.masked",
               moments = [1],
-              includepix = [popt1,100000.],
+              includepix = [popt1*snr,100000.],
               outfile = dir_image+"/"+name_line+".moment1")
               
     immoments(imagename = cubeimage+".pbcor.masked",
               moments = [8],
-              includepix = [popt1,100000.],
+              includepix = [popt1*snr,100000.],
               outfile = dir_image+"/"+name_line+".moment8")
 
 
