@@ -36,7 +36,7 @@ imagenames = glob.glob(dir_data + "*.smooth.regrid")
 imagenames.sort()
 noises = [0.001,0.0011,0.005,0.0006,0.0004,0.0004]
 pbcuts = [0.5,0.75,0.35,0.9,0.9,0.9]
-snr = 2.5
+snr = 2.0
 
 
 #####################
