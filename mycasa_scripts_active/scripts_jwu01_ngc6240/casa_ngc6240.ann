@@ -1,3 +1,4 @@
 #CRTFv0
 global coord=J2000
-ann symbol[[16:52:58.896, 2.24.04.005], "*"], linewidth=1, linestyle=-, symsize=5, symthick=1, color=black, font=Helvetica, fontsize=10, fontstyle=bold
+ann text[[16:52:58.896, 2.24.04.005], 'text'], color=white, font=Helvetica, fontsize=10, fontstyle=bold
+ann symbol[[16:52:58.896, 2.24.04.005], '+'], linewidth=3, linestyle=-, symsize=5, symthick=1, color=white
