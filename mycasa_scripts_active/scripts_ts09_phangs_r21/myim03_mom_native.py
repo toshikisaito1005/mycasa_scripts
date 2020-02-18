@@ -11,10 +11,14 @@ co10names = glob.glob(dir_proj + "ngc*co10*.image")
 co10names.sort()
 co21names = glob.glob(dir_proj + "ngc*co21*.image")
 co21names.sort()
-noises_co10_byeye = [0.010,0.020, # ngc0628
-                0.030,0.020, # ngc3627
-                0.025,0.025, # ngc4254
-                0.012,0.012] # ngc4321
+noises_co10_byeye = [0.010, # ngc0628
+                     0.030, # ngc3627
+                     0.025, # ngc4254
+                     0.012] # ngc4321
+noises_co21_byeye = [0.020, # ngc0628
+                     0.020, # ngc3627
+                     0.025, # ngc4254
+                     0.012] # ngc4321
 beams = ["04p0","04p0",
          "08p0","08p0",
          "08p0","08p0",
@@ -30,15 +34,22 @@ if not done:
 #####################
 ### Main
 #####################
-for i in range(len(imagenames)):
-    galname = imagenames[i].split("/")[-1].split("_")[0]
-    print("### working on " + imagenames[i].split("/")[-1])
+for i in range(len(co21names)):
+    galname = co21names[i].split("/")[-1].split("_")[0]
+    print("### working on " + co21names[i].split("/")[-1])
+
+    # measure co21 noise
+    output = dir_proj+"../eps/noise_"+co21names[i].split("/")[-1].replace(".image","")+".png"
+    co21rms = r21.noisehist(co21names[i],noises_co21_byeye[i],output)
     
-    # measure noise
-    output = dir_proj+"../eps/noise_"+imagenames[i].split("/")[-1].replace(".image","")+".png"
-    noiserms = r21.noisehist(imagenames[i],noises_byeye[i],output)
+    output = dir_proj+"../eps/noise_"+co10names[i].split("/")[-1].replace(".image","")+".png"
+    co10rms = r21.noisehist(co10names[i],noises_co10_byeye[i],output)
 
     # moment map creation
-    r21.eazy_immoments(dir_proj,imagenames[i],galname,noiserms,beams[i],snr_mom,percent)
+    maskname = \
+        r21.eazy_immoments(dir_proj,co21names[i],galname,co21rms,beams[i],snr_mom,percent)
+
+    r21.eazy_immoments(dir_proj,co10names[i],galname,co10rms,beams[i],snr_mom,percent,
+                       maskname=maskname)
 
 os.system("rm -rf *.last")
