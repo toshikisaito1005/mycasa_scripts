@@ -38,7 +38,7 @@ for i in range(len(co21names)):
     galname = co21names[i].split("/")[-1].split("_")[0]
     print("### working on " + galname)
 
-    # measure co21 noise
+    # measure noise
     output = dir_proj+"../eps/noise_"+co21names[i].split("/")[-1].replace(".image","")+".png"
     co21rms = r21.noisehist(co21names[i],noises_co21_byeye[i],output)
     

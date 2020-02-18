@@ -16,7 +16,6 @@ co21noises = [[0.025,0.030,0.035,0.037,0.060,0.039,0.040,0.042,0.043,0.055,0.060
               [0.022,0.026,0.027,0.028,0.029,0.030,0.030,0.030,0.031,0.050,0.026], # ngc4321
               [0.028,0.030,0.032,0.033,0.033,0.035,0.037,0.038,0.040,0.060], # ngc4254
               [0.023,0.025,0.027,0.027,0.028,0.029,0.030,0.031,0.033,0.040,0.027]] # ngc3627
-"""
 co10noises = [[0.020,0.130], # ngc0628
               [0.020,0.060], # ngc4321
               [0.030,0.080], # ngc4254
@@ -25,7 +24,6 @@ co21noises = [[0.025,0.055], # ngc0628
               [0.022,0.050], # ngc4321
               [0.028,0.060], # ngc4254
               [0.0230.040]] # ngc3627
-"""
 snr_mom = 2.0
 percent = 0.0
 
@@ -42,31 +40,34 @@ for i in range(len(galaxy)):
 
     for j in range(len(co10images)):
         beamp = co10images[j].split("/")[-1].split("_")[-1].replace(".image","")
-        # co10
+        # measure noise
         output = dir_proj+"eps/noise_"+galname+"_"+co10images[j].split("/")[-1].replace(".image","").replace("_cube","")+".png"
-        noiserms = r21.noisehist(co10images[j],
+        co10rms = r21.noisehist(co10images[j],
                                  co10noises[i][j],
                                  output)
+        output = dir_proj+"eps/noise_"+galname+"_"+co21images[j].split("/")[-1].replace(".image","").replace("_cube","")+".png"
+        co21rms = r21.noisehist(co21images[j],
+                                 co21noises[i][j],
+                                 output)
+            
+        # moment map creation
+        maskname = r21.eazy_immoments(dir_proj + galname + "_co21/",
+                                      co21images[j],
+                                      galname,
+                                      co21rms,
+                                      beamp,
+                                      snr_mom,
+                                      percent,
+                                      myim="05")
+                                 
         r21.eazy_immoments(dir_proj + galname + "_co10/",
                            co10images[j],
                            galname,
-                           noiserms,
+                           co10rms,
                            beamp,
                            snr_mom,
                            percent,
-                           myim="05")
-        # co21
-        output = dir_proj+"eps/noise_"+galname+"_"+co21images[j].split("/")[-1].replace(".image","").replace("_cube","")+".png"
-        noiserms = r21.noisehist(co21images[j],
-                                 co21noises[i][j],
-                                 output)
-        r21.eazy_immoments(dir_proj + galname + "_co21/",
-                           co21images[j],
-                           galname,
-                           noiserms,
-                           beamp,
-                           snr_mom,
-                           percent,
+                           maskname=maskname,
                            myim="05")
 
 
