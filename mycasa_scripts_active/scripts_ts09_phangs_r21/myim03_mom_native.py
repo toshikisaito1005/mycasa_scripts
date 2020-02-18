@@ -7,9 +7,11 @@ import scripts_phangs_r21 as r21
 ### Parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/data_ready/"
-imagenames = glob.glob(dir_proj + "ngc*co*.image")
-imagenames.sort()
-noises_byeye = [0.010,0.020, # ngc0628
+co10names = glob.glob(dir_proj + "ngc*co10*.image")
+co10names.sort()
+co21names = glob.glob(dir_proj + "ngc*co21*.image")
+co21names.sort()
+noises_co10_byeye = [0.010,0.020, # ngc0628
                 0.030,0.020, # ngc3627
                 0.025,0.025, # ngc4254
                 0.012,0.012] # ngc4321

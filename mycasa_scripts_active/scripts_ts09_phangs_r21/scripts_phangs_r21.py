@@ -249,7 +249,7 @@ def noisehist(imagename,noises_byeye,output,bins=200,thres=0.0001):
     return popt[1]
 
 def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
-                   mask=None,
+                   maskname=None,
                    myim="03"):
     """
     myim03, myim05
@@ -270,7 +270,7 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
     
     print("### woking on " + galname + " " + name_line + " " + beamp)
 
-    if mask==None:
+    if maskname==None:
         os.system("rm -rf " + cubeimage+".masked")
         #os.system("rm -rf " + dir_image+"*.noise")
         os.system("rm -rf " + dir_image+"*.mask*")
@@ -285,32 +285,37 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
                  pa = "0deg",
                  outfile = cubesmooth1)
         
-    cubesmooth2 = cubeimage.replace(".image",".smooth2") # 10 mJy
-    imsmooth(imagename = cubeimage,
-             targetres = True,
-             major = str(bmaj*1.8) + "arcsec",
-             minor = str(bmaj*1.8) + "arcsec",
-             pa = "0deg",
-             outfile = cubesmooth2)
+        cubesmooth2 = cubeimage.replace(".image",".smooth2") # 10 mJy
+        imsmooth(imagename = cubeimage,
+                 targetres = True,
+                 major = str(bmaj*1.8) + "arcsec",
+                 minor = str(bmaj*1.8) + "arcsec",
+                 pa = "0deg",
+                 outfile = cubesmooth2)
 
-    # create mask
-    tscreatemask(cubeimage,noise*1.*2.,dir_image+name_line+"_mask0.image")
-    tscreatemask(cubesmooth1,noise*2.*3.,dir_image+name_line+"_mask1.image")
-    tscreatemask(cubesmooth2,noise*5.*5.,dir_image+name_line+"_mask2.image")
+        # create mask
+        tscreatemask(cubeimage,noise*1.*2.,dir_image+name_line+"_mask0.image")
+        tscreatemask(cubesmooth1,noise*2.*3.,dir_image+name_line+"_mask1.image")
+        tscreatemask(cubesmooth2,noise*5.*5.,dir_image+name_line+"_mask2.image")
 
-    immath(imagename = [dir_image+name_line+"_mask0.image",
-                        dir_image+name_line+"_mask1.image",
-                        dir_image+name_line+"_mask2.image"],
-           expr = "iif(IM0+IM1+IM2 >= 2.0, 1.0, 0.0)",
-           outfile = dir_image+name_line+"_"+beamp+"_mask.image")
+        immath(imagename = [dir_image+name_line+"_mask0.image",
+                            dir_image+name_line+"_mask1.image",
+                            dir_image+name_line+"_mask2.image"],
+               expr = "iif(IM0+IM1+IM2 >= 2.0, 1.0, 0.0)",
+               outfile = dir_image+name_line+"_"+beamp+"_mask.image")
 
-    os.system("rm -rf "+cubesmooth1)
-    os.system("rm -rf "+cubesmooth2)
-    os.system("rm -rf "+dir_image+name_line+"_mask0.image")
-    os.system("rm -rf "+dir_image+name_line+"_mask1.image")
-    os.system("rm -rf "+dir_image+name_line+"_mask2.image")
+        os.system("rm -rf "+cubesmooth1)
+        os.system("rm -rf "+cubesmooth2)
+        os.system("rm -rf "+dir_image+name_line+"_mask0.image")
+        os.system("rm -rf "+dir_image+name_line+"_mask1.image")
+        os.system("rm -rf "+dir_image+name_line+"_mask2.image")
 
-    mask_use_here = dir_image+name_line+"_"+beamp+"_mask.image"
+        mask_use_here = dir_image+name_line+"_"+beamp+"_mask.image"
+
+        return mask_use_here
+
+    else:
+        mask_use_here = maskname
 
     immath(imagename = [cubeimage,mask_use_here],
            expr = "iif( IM0>=" + str(noise*snr_mom) + ", IM0*IM1, 0.0)",
