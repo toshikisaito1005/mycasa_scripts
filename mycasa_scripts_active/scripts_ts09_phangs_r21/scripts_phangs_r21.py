@@ -315,7 +315,8 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
         return mask_use_here
 
     else:
-        mask_use_here = maskname
+        mask_use_here = dir_image+name_line+"_"+beamp+"_mask.image"
+        os.sysmtem("cp -r " + maskname + " " + mask_use_here)
 
     immath(imagename = [cubeimage,mask_use_here],
            expr = "iif( IM0>=" + str(noise*snr_mom) + ", IM0*IM1, 0.0)",
