@@ -34,9 +34,10 @@ if not done:
 #####################
 ### Main
 #####################
-for i in range(len(co21names)):
+#for i in range(len(co21names)):
+for i in range(1):
     galname = co21names[i].split("/")[-1].split("_")[0]
-    print("### working on " + co21names[i].split("/")[-1])
+    print("### working on " + galname)
 
     # measure co21 noise
     output = dir_proj+"../eps/noise_"+co21names[i].split("/")[-1].replace(".image","")+".png"
@@ -48,8 +49,9 @@ for i in range(len(co21names)):
     # moment map creation
     maskname = \
         r21.eazy_immoments(dir_proj,co21names[i],galname,co21rms,beams[i],snr_mom,percent)
-
+    """
     r21.eazy_immoments(dir_proj,co10names[i],galname,co10rms,beams[i],snr_mom,percent,
                        maskname=maskname)
+    """
 
 os.system("rm -rf *.last")
