@@ -16,7 +16,7 @@ plt.ioff()
 #####################
 ### parameters
 #####################
-i = 3
+i = 0
 snr = 2.5
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 gals = ["ngc0628", "ngc3627", "ngc4254", "ngc4321"]
