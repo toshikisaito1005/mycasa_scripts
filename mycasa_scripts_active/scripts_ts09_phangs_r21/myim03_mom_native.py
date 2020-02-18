@@ -4,13 +4,6 @@ import scripts_phangs_r21 as r21
 
 
 #####################
-### functions
-#####################
-def func1(x, a, c):
-    return a*np.exp(-(x)**2/(2*c**2))
-
-
-#####################
 ### Parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/data_ready/"

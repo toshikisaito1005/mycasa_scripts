@@ -248,14 +248,9 @@ def noisehist(imagename,noises_byeye,output,bins=200,thres=0.0001):
 
     return popt[1]
 
-def eazy_immoments_r21(dir_proj,imagename,galname,noise,beamp,snr_mom,percent):
-    """
-    myim03, myim05
-    use co21 mask for co10
-    """
-
-
-def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,myim="03"):
+def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
+                   mask=None,
+                   myim="03"):
     """
     myim03, myim05
     use co10 mask for co10, co21 mask for co21
@@ -274,19 +269,21 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,myim="
         cubeimage = imagename
     
     print("### woking on " + galname + " " + name_line + " " + beamp)
-    os.system("rm -rf " + cubeimage+".masked")
-    #os.system("rm -rf " + dir_image+"*.noise")
-    os.system("rm -rf " + dir_image+"*.mask*")
+
+    if mask==None:
+        os.system("rm -rf " + cubeimage+".masked")
+        #os.system("rm -rf " + dir_image+"*.noise")
+        os.system("rm -rf " + dir_image+"*.mask*")
     
-    # imsmooth
-    cubesmooth1 = cubeimage.replace(".image",".smooth1") # 4.0 mJy
-    bmaj = imhead(cubeimage,"list")["beammajor"]["value"]
-    imsmooth(imagename = cubeimage,
-             targetres = True,
-             major = str(bmaj*1.2) + "arcsec",
-             minor = str(bmaj*1.2) + "arcsec",
-             pa = "0deg",
-             outfile = cubesmooth1)
+        # imsmooth
+        cubesmooth1 = cubeimage.replace(".image",".smooth1") # 4.0 mJy
+        bmaj = imhead(cubeimage,"list")["beammajor"]["value"]
+    	imsmooth(imagename = cubeimage,
+                 targetres = True,
+                 major = str(bmaj*1.2) + "arcsec",
+                 minor = str(bmaj*1.2) + "arcsec",
+                 pa = "0deg",
+                 outfile = cubesmooth1)
         
     cubesmooth2 = cubeimage.replace(".image",".smooth2") # 10 mJy
     imsmooth(imagename = cubeimage,
