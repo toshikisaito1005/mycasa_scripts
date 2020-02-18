@@ -312,8 +312,6 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
 
         mask_use_here = dir_image+name_line+"_"+beamp+"_mask.image"
 
-        return mask_use_here
-
     else:
         mask_use_here = dir_image+name_line+"_"+beamp+"_mask.image"
         os.system("cp -r " + maskname + " " + mask_use_here)
@@ -374,3 +372,5 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
     os.system("rm -rf " + dir_image+name_line+".moment0_tmp")
     os.system("rm -rf " + dir_image+name_line+".moment1_tmp")
     os.system("rm -rf " + dir_image+name_line+".moment8_tmp")
+
+    return mask_use_here

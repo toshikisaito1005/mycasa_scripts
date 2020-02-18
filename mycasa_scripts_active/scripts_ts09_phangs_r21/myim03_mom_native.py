@@ -49,9 +49,9 @@ for i in range(1):
     # moment map creation
     maskname = \
         r21.eazy_immoments(dir_proj,co21names[i],galname,co21rms,beams[i],snr_mom,percent)
-    """
+
     r21.eazy_immoments(dir_proj,co10names[i],galname,co10rms,beams[i],snr_mom,percent,
                        maskname=maskname)
-    """
+
 
 os.system("rm -rf *.last")
