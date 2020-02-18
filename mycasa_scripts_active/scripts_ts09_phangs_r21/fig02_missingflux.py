@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/data_other/"
 dir_empire = dir_data + "empire_co10/"
 dir_heracles = dir_data + "heracles_co21/"
-scales = [44/1.0, 103/1.4, 52/1.3, 130/1.6]
+scales = [44/1.0, 52/1.3, 130/1.6, 103/1.4]
 
 fits_sd_co10 = glob.glob(dir_empire + "*.moment0.regrid")
 fits_sd_co10.sort()
