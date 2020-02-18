@@ -34,8 +34,7 @@ if not done:
 #####################
 ### Main
 #####################
-#for i in range(len(co21names)):
-for i in range(1):
+for i in range(len(co21names)):
     galname = co21names[i].split("/")[-1].split("_")[0]
     print("### working on " + galname)
 
