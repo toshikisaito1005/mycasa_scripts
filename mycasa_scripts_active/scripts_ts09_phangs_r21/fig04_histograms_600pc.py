@@ -17,7 +17,7 @@ plt.ioff()
 #####################
 ### parameters
 #####################
-snr = 3.0
+snr = 2.5
 def_nucleus = [2200,2000,4063,3680] # pc [50".0,50".0,,]
 dir_data = "/Users/saito/data/phangs/co_ratio/"
 gals = ["ngc0628", "ngc3627", "ngc4254", "ngc4321"]
