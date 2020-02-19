@@ -26,7 +26,7 @@ def hist_percent(histo,percent):
     
     return i
 
-dir_data = "/Users/saito/data/phangs/co_ratio/"
+dir_data = "/Users/saito/data/mycasa_scripts_active/scripts_ts09_phangs_r21/"
 gals = ["ngc0628", "ngc3627", "ngc4254", "ngc4321"]
 medians = [0.567146319177,
            0.694100944171,
