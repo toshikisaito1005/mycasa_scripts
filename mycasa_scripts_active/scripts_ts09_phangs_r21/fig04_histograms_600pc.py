@@ -22,7 +22,7 @@ def_nucleus = [2200,
                2000,
                #4063,
                3680] # pc [50".0,50".0,,]
-dir_data = "/Users/saito/data/phangs/co_ratio/"
+dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 gals = ["ngc0628",
         "ngc3627",
         #"ngc4254",
