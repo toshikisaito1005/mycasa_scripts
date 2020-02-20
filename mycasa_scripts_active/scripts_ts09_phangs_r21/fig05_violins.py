@@ -19,7 +19,7 @@ plt.ioff()
 i = 0   # i != 2
 snr = 3
 resolutions = ["13.6","15.0","8.0","8.2"]
-dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21//"
+dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 gals = ["ngc0628", "ngc3627", "ngc4254", "ngc4321"]
 beam = [[4.0,8.0,12.0,16.0,20.0],
         [8.0,12.0,16.0,20.0,24.0],
@@ -121,11 +121,11 @@ def import_data(dir_data,
                 index=0):
     """
     """
-    image = dir_data+gal+"_"+line+"_"+suffix+"."+ext
-    txtdata = dir_data+gal+"_"+suffix+"_f08_"+txtname+".txt"
+    image = dir_data+line+"_"+suffix+"."+ext
+    txtdata = dir_data+"f04_"+line+"_"+suffix+"."+txtname+".txt"
     process_fits(image,txtdata,mode,index=index)
     data = np.loadtxt(txtdata)
-    
+
     return data
 
 def violin_wt(ax,data,xval,bins,range,wt,step,color):
@@ -161,11 +161,11 @@ def violin_wt(ax,data,xval,bins,range,wt,step,color):
 
     return value, value2, value3
 
-def check_nchan(dir_data,gal,suffix):
+def check_nchan(dir_data,gal,suffix,line):
     """
     """
-    imagename = dir_data+gal+"_combine_"+suffix+".mask"
-    outfile = imagename.replace(".mask",".nchan")
+    imagename = dir_data+line+"_"+suffix+"_mask.image"
+    outfile = imagename.replace("_mask.image",".nchan")
     os.system("rm -rf "+outfile)
     immoments(imagename=imagename,
               moments=[0],
@@ -183,28 +183,33 @@ for j in range(len(beam[i])):
     name_title = gals[i].replace("ngc","NGC ")
     beamfloat = float(beam[i][j])
     suffix = str(beam[i][j]).replace(".","p")
-    d_fits = dir_data+gals[i]+"_co/"
-
-    Ico10_tmp_ = import_data(d_fits,gals[i],"co10",suffix,
-                             "moment0","data","Ico10")
-    Ico21_tmp_ = import_data(d_fits,gals[i],"co21",suffix,
-                             "moment0","data","Ico21")
+    d_fits_co10 = dir_data + gals[i] + "_co10/"
+    d_fits_co21 = dir_data + gals[i] + "_co21/"
+    Ico10_tmp_ = import_data(d_fits_co10,gals[i],"co10",beam[i],"moment0","data","Ico10")
+    Ico21_tmp_ = import_data(d_fits_co21,gals[i],"co21",beam[i],"moment0","data","Ico21")
     co10_jy2k = 1.222e6 / beamfloat**2 / 115.27120**2
     co21_jy2k = 1.222e6 / beamfloat**2 / 230.53800**2
     
-    check_nchan(d_fits,gals[i],suffix)
-    nchan_tmp_ = import_data(d_fits,gals[i],"combine",suffix,
-                             "nchan","data","nchan")
+    check_nchan(d_fits_co10,gals[i],beam[i],"co10")
+    nchan_tmp_ = import_data(d_fits_co10,gals[i],"co10",beam[i],"nchan","data","nchan")
 
     # define cut
-    cut_co10 = (Ico10_tmp_ > Irms_co10[i][j]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]))
-    cut_co21 = (Ico21_tmp_ > Irms_co21[i][j]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]))
-    cut_all = np.where((cut_co10) & (cut_co21))
+    Rco10 = Irms_co10[i]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
+    Rco21 = Irms_co21[i]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
+    cut_pos = (ra_tmp_ > 0) & (dec_tmp_ > 0)
+    cut_co10 = (Ico10_tmp_ > Rco10)
+    cut_co21 = (Ico21_tmp_ > Rco21)
+    cut_all = np.where((cut_pos) & (cut_co10) & (cut_co21))
 
     # cut data
-    Ico21 = Ico21_tmp_[cut_all] * co21_jy2k
-    Ico10 = Ico10_tmp_[cut_all] * co10_jy2k
-    r21 = Ico21/Ico10
+    Ico21_tmp2_ = Ico21_tmp_[cut_all] * co21_jy2k
+    Ico10_tmp2_ = Ico10_tmp_[cut_all] * co10_jy2k
+    r21_tmp2_ = Ico21_tmp2_/Ico10_tmp2_
+    r21_tmp2_[np.where(np.isnan(r21_tmp2_) & np.isinf(r21_tmp2_))] = 0
+
+    Ico10 = Ico10_tmp2_[r21_tmp2_>0]
+    Ico21 = Ico21_tmp2_[r21_tmp2_>0]
+    r21 = r21_tmp2_[r21_tmp2_>0]
 
     num, num2, num3 = violin_wt(ax,r21,beamfloat,bins,xlim,None,step,
                           cm.brg(i/3.5))
