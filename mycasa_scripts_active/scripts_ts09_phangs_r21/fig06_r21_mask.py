@@ -37,18 +37,18 @@ value = None
 
 ### R21
 # R21 color + CO(2-1) moment 0 contour
-color_contour = "black"
+color_contour = "black" # "grey"
 color_beam = "grey"
 imagename_contour = "ngc0628_co21/co21_04p0.moment0.fits"
 imagename_color = "ngc0628_r21/r21_04p0.moment0.highlowmask.fits"
-contour = [0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
+contour = [0.04] # [0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
 title = "NGC 0628 Line Ratio Mask"
 colorscale = "bwr"
 colorlog = False
 colorbar = False
 colorbar_label = "Line Ratio"
 output = "eps/ngc0628_r21_mask.png"
-clim = [-1.5,1.5]
+clim = [-1.7,1.7]
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
               imagename_contour = imagename_contour,
@@ -82,7 +82,7 @@ color_contour = "black"
 color_beam = "grey"
 imagename_contour = "ngc4321_co21/co21_04p0.moment0.fits"
 imagename_color = "ngc4321_r21/r21_04p0.moment0.highlowmask.fits"
-contour = [0.01, 0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
+contour = [0.01] # [0.01, 0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
 title = "NGC 4321 Line Ratio Mask"
 colorscale = "bwr"
 colorlog = False
