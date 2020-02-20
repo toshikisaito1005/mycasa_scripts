@@ -4,11 +4,26 @@ import numpy as np
 import scripts_phangs_r21 as r21
 
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/data/"
-galnames = ["ngc0628", "ngc4321", "ngc4254", "ngc3627"]
-image_lengths = [280., 230., 250., 280.] # arcsec
-direction_ras = ["24.174deg", "185.729deg", "184.706deg", "170.063deg"]
-direction_decs = ["15.783deg", "15.8223deg", "14.4169deg", "12.9914deg"]
-chanss = ["14~36","","34~64", "25~74"]
+galnames = ["ngc0628",
+            "ngc4321",
+            #"ngc4254",
+            "ngc3627"]
+image_lengths = [280.,
+                 230.,
+                 #250.,
+                 280.] # arcsec
+direction_ras = ["24.174deg",
+                 "185.729deg",
+                 #"184.706deg",
+                 "170.063deg"]
+direction_decs = ["15.783deg",
+                  "15.8223deg",
+                  #"14.4169deg",
+                  "12.9914deg"]
+chanss = ["14~36",
+          "",
+          #"34~64",
+          "25~74"]
 
 
 #####################
