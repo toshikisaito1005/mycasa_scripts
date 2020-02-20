@@ -47,7 +47,7 @@ colorlog = False
 colorbar = False
 colorbar_label = "Line Ratio"
 output = "eps/ngc0628_r21_mask.png"
-clim = [-0.1,0.1]
+clim = [-1.5,1.5]
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
               imagename_contour = imagename_contour,
@@ -83,12 +83,12 @@ imagename_contour = "ngc4321_co21/co21_04p0.moment0.fits"
 imagename_color = "ngc4321_r21/r21_04p0.moment0.highlowmask.fits"
 contour = [0.01, 0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
 title = "NGC 4321 Line Ratio Mask"
-colorscale = "coolwarm"
+colorscale = "bwr"
 colorlog = False
 colorbar = False
 colorbar_label = "Ratio"
 output = "eps/ngc4321_r21_mask.png"
-clim = [-0.1,0.1]
+clim = [-1.5,1.5]
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
               imagename_contour = imagename_contour,
@@ -112,83 +112,22 @@ myim.fits2eps(dir_data = dir_data,
 ### ngc3627
 ra_center = "11:20:15.35"
 dec_center = "12.58.87.0"
-xlim = [-160, 160]
-ylim = [160, -160]
+xlim = [-135, 135]
+ylim = [160, -110]
 value = None
-
-###12CO(1-0)
-# moment 0 color + moment 0 contour
-imagename_contour = "ngc3627_co10/co10_08p0.moment0.fits"
-imagename_color = "ngc3627_co10/co10_08p0.moment0.fits"
-contour = [0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
-title = "$^{12}$CO (1-0) Integrated Intensity"
-colorscale = "PuBu"
-color_contour = "black"
-color_beam = "black"
-colorlog = True
-colorbar = False
-colorbar_label = "(Jy km s$^{-1}$)"
-output = "eps/ngc3627_12co10_m0.png"
-myim.fits2eps(dir_data = dir_data,
-              imagename_color = imagename_color,
-              imagename_contour = imagename_contour,
-              ra_center = ra_center,
-              dec_center = dec_center,
-              title = title,
-              colorbar_label = colorbar_label,
-              output = output,
-              colorscale = colorscale,
-              colorlog = colorlog,
-              color_contour = color_contour,
-              color_beam = color_beam,
-              colorbar = colorbar,
-              value = value,
-              contour = contour,
-              xlim = xlim,
-              ylim = ylim)
-
-
-### 12CO(2-1)
-# moment 0 color + moment 0 contour
-imagename_contour = "ngc3627_co21/co21_08p0.moment0.fits"
-imagename_color = "ngc3627_co21/co21_08p0.moment0.fits"
-contour = [0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
-title = "$^{12}$CO (2-1) Integrated Intensity"
-colorscale = "OrRd"
-colorlog = True
-colorbar = False
-colorbar_label = "(Jy km s$^{-1}$)"
-output = "eps/ngc3627_12co21_m0.png"
-myim.fits2eps(dir_data = dir_data,
-              imagename_color = imagename_color,
-              imagename_contour = imagename_contour,
-              ra_center = ra_center,
-              dec_center = dec_center,
-              title = title,
-              colorbar_label = colorbar_label,
-              output = output,
-              colorscale = colorscale,
-              colorlog = colorlog,
-              color_contour = color_contour,
-              color_beam = color_beam,
-              colorbar = colorbar,
-              value = value,
-              contour = contour,
-              xlim = xlim,
-              ylim = ylim)
 
 ### R21
 # R21 color + CO(2-1) moment 0 contour
 imagename_contour = "ngc3627_co21/co21_08p0.moment0.fits"
-imagename_color = "ngc3627_r21/r21_08p0.moment0.fits"
+imagename_color = "ngc3627_r21/r21_08p0.moment0.highlowmask.fits"
 contour = [0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
-title = "$^{12}$CO (2-1)/$^{12}$CO (1-0) Line Ratio"
-colorscale = "jet"
+title = "NGC 3627 Line Ratio Mask"
+colorscale = "bwr"
 colorlog = False
-colorbar = True
+colorbar = False
 colorbar_label = "Line Ratio"
-output = "eps/ngc3627_r21.png"
-clim = [0, 1.2]
+output = "eps/ngc3627_r21_mask.png"
+clim = [-1.5,1.5]
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
               imagename_contour = imagename_contour,

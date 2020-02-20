@@ -266,8 +266,8 @@ myim.fits2eps(dir_data = dir_data,
 ### ngc3627
 ra_center = "11:20:15.35"
 dec_center = "12.58.87.0"
-xlim = [-160, 160]
-ylim = [160, -160]
+xlim = [-135, 135]
+ylim = [160, -110]
 value = None
 
 ###12CO(1-0)
