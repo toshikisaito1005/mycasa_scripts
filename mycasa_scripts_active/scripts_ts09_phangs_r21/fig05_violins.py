@@ -16,10 +16,10 @@ plt.ioff()
 #####################
 ### parameters
 #####################
-i = 0
+i = 0   # i != 2
 snr = 3
 resolutions = ["13.6","15.0","8.0","8.2"]
-dir_data = "/Users/saito/data/phangs/co_ratio/"
+dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21//"
 gals = ["ngc0628", "ngc3627", "ngc4254", "ngc4321"]
 beam = [[4.0,8.0,12.0,16.0,20.0],
         [8.0,12.0,16.0,20.0,24.0],
