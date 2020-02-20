@@ -16,8 +16,8 @@ plt.ioff()
 #####################
 ### parameters
 #####################
-i = 0   # i != 2
-snr = 3
+i = 3   # i != 2
+snr = 2.5
 resolutions = ["13.6","15.0","8.0","8.2"]
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 gals = ["ngc0628", "ngc3627", "ngc4254", "ngc4321"]
@@ -196,10 +196,9 @@ for j in range(len(beam[i])):
     # define cut
     Rco10 = Irms_co10[i][j]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
     Rco21 = Irms_co21[i][j]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
-    cut_pos = (ra_tmp_ > 0) & (dec_tmp_ > 0)
     cut_co10 = (Ico10_tmp_ > Rco10)
     cut_co21 = (Ico21_tmp_ > Rco21)
-    cut_all = np.where((cut_pos) & (cut_co10) & (cut_co21))
+    cut_all = np.where((cut_co10) & (cut_co21))
 
     # cut data
     Ico21_tmp2_ = Ico21_tmp_[cut_all] * co21_jy2k
@@ -260,25 +259,33 @@ yerr2 = []
 for j in range(len(beam[i])):
     name_title = gals[i].replace("ngc","NGC ")
     beamfloat = float(beam[i][j])
-    suffix = str(beam[i][j]).replace(".","p")
-    d_fits = dir_data+gals[i]+"_co/"
-    
-    Ico10_tmp_ = import_data(d_fits,gals[i],"co10",suffix,
-                             "moment0","data","Ico10")
-    Ico21_tmp_ = import_data(d_fits,gals[i],"co21",suffix,
-                             "moment0","data","Ico21")
+    suffix = str(beam[i][j]).replace(".","p").zfill(4)
+    d_fits_co10 = dir_data + gals[i] + "_co10/"
+    d_fits_co21 = dir_data + gals[i] + "_co21/"
+    Ico10_tmp_ = import_data(d_fits_co10,gals[i],"co10",suffix,"moment0","data","Ico10")
+    Ico21_tmp_ = import_data(d_fits_co21,gals[i],"co21",suffix,"moment0","data","Ico21")
     co10_jy2k = 1.222e6 / beamfloat**2 / 115.27120**2
     co21_jy2k = 1.222e6 / beamfloat**2 / 230.53800**2
+    
+    check_nchan(d_fits_co10,gals[i],suffix,"co10")
+    nchan_tmp_ = import_data(d_fits_co10,gals[i],"co10",suffix,"nchan","data","nchan")
 
     # define cut
-    cut_co10 = (Ico10_tmp_ > Irms_co10[i][j]*snr)
-    cut_co21 = (Ico21_tmp_ > Irms_co21[i][j]*snr)
+    Rco10 = Irms_co10[i][j]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
+    Rco21 = Irms_co21[i][j]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
+    cut_co10 = (Ico10_tmp_ > Rco10)
+    cut_co21 = (Ico21_tmp_ > Rco21)
     cut_all = np.where((cut_co10) & (cut_co21))
 
     # cut data
-    Ico21 = Ico21_tmp_[cut_all] * co21_jy2k
-    Ico10 = Ico10_tmp_[cut_all] * co10_jy2k
-    r21 = Ico21/Ico10
+    Ico21_tmp2_ = Ico21_tmp_[cut_all] * co21_jy2k
+    Ico10_tmp2_ = Ico10_tmp_[cut_all] * co10_jy2k
+    r21_tmp2_ = Ico21_tmp2_/Ico10_tmp2_
+    r21_tmp2_[np.where(np.isnan(r21_tmp2_) & np.isinf(r21_tmp2_))] = 0
+
+    Ico10 = Ico10_tmp2_[r21_tmp2_>0]
+    Ico21 = Ico21_tmp2_[r21_tmp2_>0]
+    r21 = r21_tmp2_[r21_tmp2_>0]
 
     num, num2, num3 = violin_wt(ax,r21,beam[i][j],bins,xlim,Ico10,step,
                           cm.brg(i/3.5))
@@ -327,25 +334,33 @@ yerr2 = []
 for j in range(len(beam[i])):
     name_title = gals[i].replace("ngc","NGC ")
     beamfloat = float(beam[i][j])
-    suffix = str(beam[i][j]).replace(".","p")
-    d_fits = dir_data+gals[i]+"_co/"
-    
-    Ico10_tmp_ = import_data(d_fits,gals[i],"co10",suffix,
-                             "moment0","data","Ico10")
-    Ico21_tmp_ = import_data(d_fits,gals[i],"co21",suffix,
-                             "moment0","data","Ico21")
+    suffix = str(beam[i][j]).replace(".","p").zfill(4)
+    d_fits_co10 = dir_data + gals[i] + "_co10/"
+    d_fits_co21 = dir_data + gals[i] + "_co21/"
+    Ico10_tmp_ = import_data(d_fits_co10,gals[i],"co10",suffix,"moment0","data","Ico10")
+    Ico21_tmp_ = import_data(d_fits_co21,gals[i],"co21",suffix,"moment0","data","Ico21")
     co10_jy2k = 1.222e6 / beamfloat**2 / 115.27120**2
     co21_jy2k = 1.222e6 / beamfloat**2 / 230.53800**2
+    
+    check_nchan(d_fits_co10,gals[i],suffix,"co10")
+    nchan_tmp_ = import_data(d_fits_co10,gals[i],"co10",suffix,"nchan","data","nchan")
 
     # define cut
-    cut_co10 = (Ico10_tmp_ > Irms_co10[i][j]*snr)
-    cut_co21 = (Ico21_tmp_ > Irms_co21[i][j]*snr)
+    Rco10 = Irms_co10[i][j]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
+    Rco21 = Irms_co21[i][j]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
+    cut_co10 = (Ico10_tmp_ > Rco10)
+    cut_co21 = (Ico21_tmp_ > Rco21)
     cut_all = np.where((cut_co10) & (cut_co21))
 
     # cut data
-    Ico21 = Ico21_tmp_[cut_all] * co21_jy2k
-    Ico10 = Ico10_tmp_[cut_all] * co10_jy2k
-    r21 = Ico21/Ico10
+    Ico21_tmp2_ = Ico21_tmp_[cut_all] * co21_jy2k
+    Ico10_tmp2_ = Ico10_tmp_[cut_all] * co10_jy2k
+    r21_tmp2_ = Ico21_tmp2_/Ico10_tmp2_
+    r21_tmp2_[np.where(np.isnan(r21_tmp2_) & np.isinf(r21_tmp2_))] = 0
+
+    Ico10 = Ico10_tmp2_[r21_tmp2_>0]
+    Ico21 = Ico21_tmp2_[r21_tmp2_>0]
+    r21 = r21_tmp2_[r21_tmp2_>0]
 
     num, num2, num3 = violin_wt(ax,r21,beam[i][j],bins,xlim,Ico21,step,
                           cm.brg(i/3.5))
