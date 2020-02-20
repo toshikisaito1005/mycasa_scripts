@@ -28,6 +28,7 @@ if not done:
 #####################
 ### Main Procedure
 #####################
+# ngc0628
 ra_center = "01:36:41.8"
 dec_center = "15.47.0.0"
 xlim = [-120, 120]
@@ -149,6 +150,7 @@ myim.fits2eps(dir_data = dir_data,
 
 
 ### ngc4254
+"""
 ra_center = "12:18:49.3"
 dec_center = "14.25.01.0"
 xlim = [-120, 120]
@@ -185,7 +187,7 @@ myim.fits2eps(dir_data = dir_data,
               xlim = xlim,
               ylim = ylim,
               clim = clim)
-
+"""
 
 os.system("rm -rf *.last")
 
