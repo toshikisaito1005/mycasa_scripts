@@ -47,3 +47,8 @@ rm -rf $dir_data"ngc0628_r21_mask.png" $dir_data"ngc0628_r21_maskb.png"
 rm -rf 580x570+75+20 $dir_data"ngc3627_r21_mask.png" $dir_data"ngc3627_r21_maskb.png"
 rm -rf 580x570+75+20 $dir_data"ngc4254_r21_mask.png" $dir_data"ngc4254_r21_maskb.png"
 rm -rf 600x570+75+20 $dir_data"ngc4321_r21_mask.png" $dir_data"ngc4321_r21_maskb.png"
+
+
+### figure 7
+### figure 8
+
