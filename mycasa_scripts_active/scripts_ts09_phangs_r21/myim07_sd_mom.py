@@ -7,8 +7,9 @@ dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/data_other/"
 dir_empire = dir_data + "empire_co10/"
 dir_heracles = dir_data + "heracles_co21/"
 
-chans_co10 = ["89~98","60~117","80~108","74~107"]
-#chans_co10 = ["","","",""]
+chans_co10 = ["85~100","60~117","74~110"]
+chans_co21 = ["107~125","70~165","80~140"]
+
 
 ######
 fits_co10 = glob.glob(dir_empire + "*.fits")
