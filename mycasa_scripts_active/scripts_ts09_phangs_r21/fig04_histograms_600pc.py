@@ -433,3 +433,4 @@ for i in [0,1,2]:
 
     plt.savefig(dir_data+"eps/figure_hists_"+gals[i]+".png",dpi=100)
 
+os.system("rm -rf *.last")
