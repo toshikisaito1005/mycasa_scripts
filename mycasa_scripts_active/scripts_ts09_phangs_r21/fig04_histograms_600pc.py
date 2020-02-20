@@ -59,6 +59,10 @@ incs = [90-8.7,
         90-56.2,
         #90-35.2,
         90-35.1]
+velres = [6.0,
+          10.0,
+          #10.0,
+          5.0]
 
 bins=50
 step=0.03
@@ -200,11 +204,11 @@ for i in [0,1,2]:
     nchan_tmp_ = import_data(d_fits_co10,gals[i],"co10",beam[i],"nchan","data","nchan")
 
     # define cut
-    Rco10 = Irms_co10[i][j]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
-    Rco21 = Irms_co21[i][j]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
+    Rco10 = Irms_co10[i]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
+    Rco21 = Irms_co21[i]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
     cut_pos = (ra_tmp_ > 0) & (dec_tmp_ > 0)
-    cut_co10 = (Ico10_tmp_>Irms_co10[i]*snr*np.sqrt(nchan_tmp_))
-    cut_co21 = (Ico21_tmp_ > Irms_co21[i]*snr*np.sqrt(nchan_tmp_))
+    cut_co10 = (Ico10_tmp_ > Rco10)
+    cut_co21 = (Ico21_tmp_ > Rco21)
     cut_all = np.where((cut_pos) & (cut_co10) & (cut_co21))
 
     # cut data
@@ -214,7 +218,6 @@ for i in [0,1,2]:
     Ico10_tmp2_ = Ico10_tmp_[cut_all] * co10_jy2k
     r21_tmp2_ = Ico21_tmp2_/Ico10_tmp2_
     r21_tmp2_[np.where(np.isnan(r21_tmp2_) & np.isinf(r21_tmp2_))] = 0
-    w3 = w3_tmp_[cut_all]
 
     dist_tmp_ = distance(ra,dec,pas[i],incs[i],cnt_ras[i],cnt_decs[i],scales[i])
     dist = dist_tmp_[r21_tmp2_>0]
@@ -353,6 +356,7 @@ for i in [0,1,2]:
     plt3.set_ylim(ylim)
     
     ## hist 4
+    """
     histo1 = np.histogram(r21,bins=bins,range=(xlim),weights=w3)
     histo1x,histo1y = np.delete(histo1[1],-1),histo1[0]
     histo2 = np.histogram(r21[dist<def_nucleus[i]],bins=bins,range=(xlim),
@@ -390,6 +394,7 @@ for i in [0,1,2]:
     #plt4.set_yscale("log")
     plt4.set_xlim(xlim)
     plt4.set_ylim(ylim)
+    """
 
     plt1.tick_params(labelbottom=False)
     plt2.tick_params(labelleft=False,labelbottom=False)
@@ -409,27 +414,22 @@ for i in [0,1,2]:
         plt1.text(xlim[0]+(xlim[1]-xlim[0])*0.0,ylim[1]*1.04,"# of Sightlines")
         plt2.text(xlim[0]+(xlim[1]-xlim[0])*0.0,ylim[1]*1.04,"CO(1-0) Flux")
         plt3.text(xlim[0]+(xlim[1]-xlim[0])*0.0,ylim[1]*1.04,"CO(2-1) Flux")
-        plt4.text(xlim[0]+(xlim[1]-xlim[0])*0.0,ylim[1]*1.04,"W3 Flux")
 
     if gals[i]=="ngc4321":
         plt1.set_xlabel("$R_{21}$")
         plt2.set_xlabel("$R_{21}$")
         plt3.set_xlabel("$R_{21}$")
-        plt4.set_xlabel("$R_{21}$")
         plt1.tick_params(labelbottom=True)
         plt2.tick_params(labelleft=False,labelbottom=True)
         plt3.tick_params(labelleft=False,labelbottom=True)
-        plt4.tick_params(labelleft=False,labelbottom=True)
 
     plt1.legend()
     plt2.legend()
     plt3.legend()
-    plt4.legend()
 
     plt1.set_yticks(np.arange(0, 0.15 + 0.01, 0.03))
     plt2.set_yticks(np.arange(0, 0.15 + 0.01, 0.03))
     plt3.set_yticks(np.arange(0, 0.15 + 0.01, 0.03))
-    plt4.set_yticks(np.arange(0, 0.15 + 0.01, 0.03))
 
     plt.savefig(dir_data+"eps/figure_hists_"+gals[i]+"_wise.png",dpi=100)
 
