@@ -43,19 +43,22 @@ elif i==3:
     text1 = "a) log $I_{CO(1-0)}$ vs log $I_{CO(2-1)}$"
 
 velres = [6.0,10.0,10.0,5.0]
+Irms_co10_n0628 = [0.013,0.022,0.032,0.,0.,0.,0.,0.,0.] # Jy/beam
+Irms_co10_n3627 = [0.,0.,0.,0.,0.,0.,0.,0.,0.] # Jy/beam
+Irms_co10_n4254 = [0.,0.,0.,0.,0.,0.,0.,0.,0.] # Jy/beam
+Irms_co10_n4321 = [0.,0.,0.,0.,0.,0.,0.,0.,0.] # Jy/beam
+
 Irms_co10_n0628 = [0.010,0.020,0.030,0.040,0.050,0.060,0.070,0.080,0.090] # Jy/beam
 Irms_co10_n3627 = [0.030,0.038,0.045,0.055,0.065,0.080,0.090,0.100,0.110] # Jy/beam
 Irms_co10_n4254 = [0.025,0.030,0.036,0.040,0.045,0.050,0.050,0.055,0.060] # Jy/beam
 Irms_co10_n4321 = [0.012,0.020,0.028,0.035,0.040,0.045,0.050,0.055,0.060] # Jy/beam
 Irms_co10 = [Irms_co10_n0628,Irms_co10_n3627,Irms_co10_n4254,Irms_co10_n4321]
-Irms_co10 = (np.array(Irms_co10)/1.2).tolist()
 
 Irms_co21_n0628 = [0.025,0.030,0.035,0.037,0.038,0.039,0.040,0.042,0.043] # Jy/beam
 Irms_co21_n3627 = [0.023,0.025,0.027,0.027,0.028,0.029,0.030,0.031,0.033] # Jy/beam
 Irms_co21_n4254 = [0.028,0.030,0.032,0.033,0.033,0.035,0.037,0.038,0.040] # Jy/beam
 Irms_co21_n4321 = [0.023,0.025,0.027,0.027,0.028,0.029,0.030,0.031,0.033] # Jy/beam
 Irms_co21 = [Irms_co21_n0628,Irms_co21_n3627,Irms_co21_n4254,Irms_co21_n4321]
-Irms_co21 = (np.array(Irms_co21)/1.2).tolist()
 
 #####################
 ### functions
@@ -196,8 +199,8 @@ for j in range(len(beam[i])):
     # define cut
     Rco10 = Irms_co10[i][j]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
     Rco21 = Irms_co21[i][j]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
-    cut_co10 = (Ico10_tmp_ > 0) # Rco10)
-    cut_co21 = (Ico21_tmp_ > 0) # Rco21)
+    cut_co10 = (Ico10_tmp_ > Rco10)
+    cut_co21 = (Ico21_tmp_ > Rco21)
     cut_all = np.where((cut_co10) & (cut_co21))
 
     # cut data
