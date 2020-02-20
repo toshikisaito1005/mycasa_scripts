@@ -75,113 +75,20 @@ xlim = [-100, 100]
 ylim = [100, -100]
 value = None
 
-###12CO(1-0)
-# moment 0 color + moment 0 contour
-imagename_contour = "ngc4321_co10/co10_04p0.moment0.fits"
-imagename_color = "ngc4321_co10/co10_04p0.moment0.fits"
-contour = [0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
-title = "$^{12}$CO (1-0) Integrated Intensity"
-colorscale = "PuBu"
+### R21
+# R21 color + CO(2-1) moment 0 contour
 color_contour = "black"
-color_beam = "black"
-colorlog = True
-colorbar = False
-colorbar_label = "(Jy km s$^{-1}$)"
-output = "eps/ngc4321_12co10_m0.png"
-myim.fits2eps(dir_data = dir_data,
-              imagename_color = imagename_color,
-              imagename_contour = imagename_contour,
-              ra_center = ra_center,
-              dec_center = dec_center,
-              title = title,
-              colorbar_label = colorbar_label,
-              output = output,
-              colorscale = colorscale,
-              colorlog = colorlog,
-              color_contour = color_contour,
-              color_beam = color_beam,
-              colorbar = colorbar,
-              value = value,
-              contour = contour,
-              xlim = xlim,
-              ylim = ylim)
-
-### 12CO(2-1)
-# moment 0 color + moment 0 contour
-imagename_contour = "ngc4321_co21/co21_04p0.moment0.fits"
-imagename_color = "ngc4321_co21/co21_04p0.moment0.fits"
-contour = [0.01, 0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
-title = "$^{12}$CO (2-1) Integrated Intensity"
-colorscale = "OrRd"
-colorlog = True
-colorbar = False
-colorbar_label = "(Jy km s$^{-1}$)"
-output = "eps/ngc4321_12co21_m0.png"
-myim.fits2eps(dir_data = dir_data,
-              imagename_color = imagename_color,
-              imagename_contour = imagename_contour,
-              ra_center = ra_center,
-              dec_center = dec_center,
-              title = title,
-              colorbar_label = colorbar_label,
-              output = output,
-              colorscale = colorscale,
-              colorlog = colorlog,
-              color_contour = color_contour,
-              color_beam = color_beam,
-              colorbar = colorbar,
-              value = value,
-              contour = contour,
-              xlim = xlim,
-              ylim = ylim)
-
-### R21
-# R21 color + CO(2-1) moment 0 contour
-color_contour = "grey"
 color_beam = "grey"
 imagename_contour = "ngc4321_co21/co21_04p0.moment0.fits"
-imagename_color = "ngc4321_r21/r21_04p0.moment0.fits"
+imagename_color = "ngc4321_r21/r21_04p0.moment0.highlowmask.fits"
 contour = [0.01, 0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
-title = "$^{12}$CO Integrated Intensity Ratio"
-colorscale = "jet" #"jet"
+title = "NGC 4321 Line Ratio Mask"
+colorscale = "coolwarm"
 colorlog = False
-colorbar = True
+colorbar = False
 colorbar_label = "Ratio"
-output = "eps/ngc4321_r21.png"
-clim = [0, 1]
-myim.fits2eps(dir_data = dir_data,
-              imagename_color = imagename_color,
-              imagename_contour = imagename_contour,
-              ra_center = ra_center,
-              dec_center = dec_center,
-              title = title,
-              colorbar_label = colorbar_label,
-              output = output,
-              colorscale = colorscale,
-              colorlog = colorlog,
-              color_contour = color_contour,
-              color_beam = color_beam,
-              colorbar = colorbar,
-              value = value,
-              contour = contour,
-              xlim = xlim,
-              ylim = ylim,
-              clim = clim)
-
-### R21
-# R21 color + CO(2-1) moment 0 contour
-color_contour = "grey"
-color_beam = "grey"
-imagename_contour = "ngc4321_co21/co21_04p0.moment0.fits"
-imagename_color = "ngc4321_r21/r21_04p0.moment8.fits"
-contour = [0.005, 0.01, 0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
-title = "$^{12}$CO Peak Temperature Ratio"
-colorscale = "jet"
-colorlog = False
-colorbar = True
-colorbar_label = "Ratio"
-output = "eps/ngc4321_r21_m8.png"
-clim = [0, 1.]
+output = "eps/ngc4321_r21_mask.png"
+clim = [-0.1,0.1]
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
               imagename_contour = imagename_contour,
