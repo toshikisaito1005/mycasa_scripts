@@ -77,7 +77,7 @@ for i in range(len(fits_co21)):
               chans = chans_co21[i],
               outfile = fits_co21[i].replace(".fits",".moment0_tmp"))
 
-    velres = abs(imhead(fits_co21[i].replace(".fits",".image_Jypb"),"list")["cdelt3"])
+    velres = abs(imhead(fits_co10[i].replace(".fits",".image_Jypb"),"list")["cdelt3"])
     velres2 = str(velres*3.e8/115.27120e9)
     os.system("rm -rf " + fits_co21[i].replace(".fits",".regrid"))
     os.system("rm -rf " + fits_co21[i].replace(".fits",".moment0"))
