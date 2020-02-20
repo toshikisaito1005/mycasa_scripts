@@ -30,7 +30,7 @@ gals = ["ngc0628",
 beam = ["13p6",
         "15p0",
         #"8p0",
-        "8p2"]
+        "08p2"]
 scales = [44/1.0,
           52/1.3,
           #130/1.6,
@@ -431,5 +431,5 @@ for i in [0,1,2]:
     plt2.set_yticks(np.arange(0, 0.15 + 0.01, 0.03))
     plt3.set_yticks(np.arange(0, 0.15 + 0.01, 0.03))
 
-    plt.savefig(dir_data+"eps/figure_hists_"+gals[i]+"_wise.png",dpi=100)
+    plt.savefig(dir_data+"eps/figure_hists_"+gals[i]+".png",dpi=100)
 

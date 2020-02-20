@@ -32,6 +32,14 @@ rm -rf $dir_data"ngc4321_scatter_co10_co21.png" $dir_data"ngc4321_scatter_co21_r
 
 
 ### figure 4
+convert -crop 1460x245+170+50 $dir_data"figure_hists_ngc0628.png" $dir_data"figure_hists_ngc0628b.png"
+convert -crop 1460x235+170+60 $dir_data"figure_hists_ngc3627.png" $dir_data"figure_hists_ngc3627b.png"
+convert -crop 1460x235+170+60 /Users/saito/data/phangs/co_ratio/eps/f04_hists_ngc3627.png /Users/saito/data/phangs/co_ratio/eps/f04_hists_ngc3627b.png
+convert -crop 1460x285+170+60 /Users/saito/data/phangs/co_ratio/eps/f04_hists_ngc4321.png /Users/saito/data/phangs/co_ratio/eps/f04_hists_ngc4321b.png
+
+convert -append -border 0x0 /Users/saito/data/phangs/co_ratio/eps/f04_hists_ngc0628b.png /Users/saito/data/phangs/co_ratio/eps/f04_hists_ngc3627b.png /Users/saito/data/phangs/co_ratio/eps/f04_hists_ngc4254b.png /Users/saito/data/phangs/co_ratio/eps/f04_hists_ngc4321b.png eps2:/Users/saito/data/phangs/co_ratio/eps/f04.eps
+
+
 ### figure 5
 
 
