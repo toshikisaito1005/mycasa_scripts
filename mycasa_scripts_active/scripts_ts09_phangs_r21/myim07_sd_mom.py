@@ -16,7 +16,9 @@ fits_co21 = glob.glob(dir_heracles + "*.fits")
 for i in range(len(fits_co10)):
     os.system("rm -rf " + fits_co10[i].replace(".fits",".image"))
     importfits(fitsimage = fits_co10[i],
-               imagename = fits_co10[i].replace(".fits",".image"))
+               imagename = fits_co10[i].replace(".fits",".image"),
+               defaultaxes = True,
+               defaultaxesvalues = ["RA","Dec","Frequency","Stokes"])
 
     os.system("rm -rf " + fits_co10[i].replace(".fits",".image_Jypb"))
     expr = "IM0/1.222e6*25.649*25.649*115.27120*115.27120"
@@ -32,7 +34,7 @@ for i in range(len(fits_co10)):
            hdvalue = "Jy/beam")
 
     imhead(imagename = fits_co10[i].replace(".fits",".image_Jypb"),
-    	   mode = "add",
+    	   mode = "put",
     	   hdkey = "reffreq",
     	   hdvalue = "1.15271000e+11Hz")
 
@@ -69,7 +71,7 @@ for i in range(len(fits_co21)):
            hdvalue = "Jy/beam")
 
     imhead(imagename = fits_co21[i].replace(".fits",".image_Jypb"),
-    	   mode = "add",
+    	   mode = "put",
     	   hdkey = "reffreq",
     	   hdvalue = "2.30538000e+11Hz")
 
