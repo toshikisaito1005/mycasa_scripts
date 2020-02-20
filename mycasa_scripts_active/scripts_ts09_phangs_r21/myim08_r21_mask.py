@@ -9,7 +9,6 @@ import scripts_phangs_r21 as r21
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 galaxy = ["ngc0628", "ngc4321", "ngc4254", "ngc3627"]
-percent = 0.01
 
 
 #####################
@@ -28,6 +27,12 @@ for i in range(len(galaxy)):
     pixvalues = data["data"].flatten()
     pixvalues = pixvalues[abs(pixvalues)!=0]
     median = np.median(pixvalues)
+
+    outfile = r21image + ".highlowmask"
+    os.system("rm -rf " + outfile)
+    immath(imagename = r21image,
+           expr = "iif(IM0>"+str(median)+",1.0,-1.0)",
+           outfile = outfile)
 
 
 os.system("rm -rf *.last")
