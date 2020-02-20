@@ -33,11 +33,6 @@ for i in range(len(fits_co10)):
            hdkey = "bunit",
            hdvalue = "Jy/beam")
 
-    imhead(imagename = fits_co10[i].replace(".fits",".image_Jypb"),
-    	   mode = "put",
-    	   hdkey = "reffreq",
-    	   hdvalue = "1.15271000e+11Hz")
-
     imsmooth(imagename = fits_co10[i].replace(".fits",".image_Jypb"),
              targetres = True,
              major = "33.0arcsec",
@@ -69,11 +64,6 @@ for i in range(len(fits_co21)):
            mode = "put",
            hdkey = "bunit",
            hdvalue = "Jy/beam")
-
-    imhead(imagename = fits_co21[i].replace(".fits",".image_Jypb"),
-    	   mode = "put",
-    	   hdkey = "reffreq",
-    	   hdvalue = "2.30538000e+11Hz")
 
     os.system("rm -rf " + fits_co21[i].replace(".fits",".regrid"))
     imregrid(imagename = fits_co21[i].replace(".fits",".image_Jypb"),
