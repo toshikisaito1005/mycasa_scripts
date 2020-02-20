@@ -40,4 +40,8 @@ for i in range(len(galaxy)):
            outfile = outfile)
     os.system("rm -rf " + outfile + "_tmp")
 
+    os.system("rm -rf " + outfile + ".fits")
+    exportfits(imagename = outfile,
+               fitsimage = outfile + ".fits")
+
 os.system("rm -rf *.last")
