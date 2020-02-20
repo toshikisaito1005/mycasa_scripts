@@ -124,9 +124,7 @@ def import_data(dir_data,
     """
     """
     image = dir_data+line+"_"+suffix+"."+ext
-    txtdata = dir_data+"_f08_"+line+"_"+suffix+"."+ext
-    print(image)
-    print(txtdata)
+    txtdata = dir_data+"f04_"+line+"_"+suffix+"."+txtname+".txt"
     process_fits(image,txtdata,mode,index=index)
     data = np.loadtxt(txtdata)
 
@@ -135,8 +133,10 @@ def import_data(dir_data,
 def check_nchan(dir_data,gal,suffix):
     """
     """
-    imagename = dir_data+gal+"_combine_"+suffix+".mask"
+    imagename = dir_data+line+"_"+suffix+".mask"
     outfile = imagename.replace(".mask",".nchan")
+    print(imagename)
+    print(outfile)
     os.system("rm -rf "+outfile)
     immoments(imagename=imagename,
               moments=[0],
@@ -186,25 +186,23 @@ def weighted_median(data, weights):
 for i in [0,1,2]:
     name_title = gals[i].replace("ngc","NGC ")
     beamfloat = float(beam[i].replace("p","."))
-    d_fits_co10 = dir_data+gals[i]+"_co10/"
-    d_fits_co21 = dir_data+gals[i]+"_co21/"
+    d_fits_co10 = dir_data + gals[i] + "_co10/"
+    d_fits_co21 = dir_data + gals[i] + "_co21/"
 
     # import data
     ra_tmp_ = import_data(d_fits_co10,gals[i],"co10",beam[i],"moment0","coords","ra")
+    dec_tmp_ = import_data(d_fits_co10,gals[i],"co10",beam[i],"moment0","coords","dec",1)
+    Ico10_tmp_ = import_data(d_fits_co10,gals[i],"co10",beam[i],"moment0","data","Ico10")
+    Ico21_tmp_ = import_data(d_fits_co21,gals[i],"co21",beam[i],"moment0","data","Ico21")
 
-
-
-
-    dec_tmp_ = import_data(d_fits,gals[i],"co10",beam[i],
-                           "moment0","coords","dec",1)
-    Ico10_tmp_ = import_data(d_fits,gals[i],"co10",beam[i],
-                             "moment0","data","Ico10")
-    Ico21_tmp_ = import_data(d_fits,gals[i],"co21",beam[i],
-                             "moment0","data","Ico21")
     co10_jy2k = 1.222e6 / beamfloat**2 / 115.27120**2
     co21_jy2k = 1.222e6 / beamfloat**2 / 230.53800**2
 
-    check_nchan(d_fits,gals[i],beam[i])
+    check_nchan(d_fits_co10,gals[i],beam[i])
+
+
+
+
     nchan_tmp_ = import_data(d_fits,gals[i],"combine",beam[i],
                              "nchan","data","nchan")
 
