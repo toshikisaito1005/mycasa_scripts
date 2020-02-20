@@ -44,7 +44,21 @@ rm -rf 1110x215+170+50 $dir_data"figure_hists_ngc4321.png" $dir_data"figure_hist
 
 
 ### figure 5
+convert -crop 790x365+35+0 $dir_data"ngc0628_violin_num.png" $dir_data"ngc0628_violin_numb.png"
+convert -crop 720x365+105+0 $dir_data"ngc0628_violin_co10.png" $dir_data"ngc0628_violin_co10b.png"
+convert -crop 720x365+105+0 $dir_data"ngc0628_violin_co21.png" $dir_data"ngc0628_violin_co21b.png"
+convert -crop 790x338+35+28 $dir_data"ngc3627_violin_num.png" $dir_data"ngc3627_violin_numb.png"
+convert -crop 720x338+105+28 $dir_data"ngc3627_violin_co10.png" $dir_data"ngc3627_violin_co10b.png"
+convert -crop 720x338+105+28 $dir_data"ngc3627_violin_co21.png" $dir_data"ngc3627_violin_co21b.png"
+convert -crop 790x438+35+28 $dir_data"ngc4321_violin_num.png" $dir_data"ngc4321_violin_numb.png"
+convert -crop 720x438+105+28 $dir_data"ngc4321_violin_co10.png" $dir_data"ngc4321_violin_co10b.png"
+convert -crop 720x438+105+28 $dir_data"ngc4321_violin_co21.png" $dir_data"ngc4321_violin_co21b.png"
 
+convert +append -border 0x0 $dir_data"ngc0628_violin_numb.png" $dir_data"ngc0628_violin_co10b.png" $dir_data"ngc0628_violin_co21b.png" $dir_data"f04a.png"
+convert +append -border 0x0 $dir_data"ngc3627_violin_numb.png" $dir_data"ngc3627_violin_co10b.png" $dir_data"ngc3627_violin_co21b.png" $dir_data"f04b.png"
+convert +append -border 0x0 $dir_data"ngc4321_violin_numb.png" $dir_data"ngc4321_violin_co10b.png" $dir_data"ngc4321_violin_co21b.png" $dir_data"f04d.png"
+
+convert -append -border 0x0 $dir_data"f04a.png" $dir_data"f04b.png" $dir_data"f04c.png" $dir_data"f04d.png" eps2:$dir_data"f05.eps"
 
 
 ### figure 6
