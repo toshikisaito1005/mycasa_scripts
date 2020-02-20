@@ -16,9 +16,7 @@ fits_co21 = glob.glob(dir_heracles + "*.fits")
 for i in range(len(fits_co10)):
     os.system("rm -rf " + fits_co10[i].replace(".fits",".image"))
     importfits(fitsimage = fits_co10[i],
-               imagename = fits_co10[i].replace(".fits",".image"),
-               defaultaxes = True,
-               defaultaxesvalues = ["RA","Dec","Frequency","Stokes"])
+               imagename = fits_co10[i].replace(".fits",".image"))
 
     os.system("rm -rf " + fits_co10[i].replace(".fits",".image_Jypb"))
     expr = "IM0/1.222e6*25.649*25.649*115.27120*115.27120"
@@ -51,7 +49,7 @@ for i in range(len(fits_co21)):
     os.system("rm -rf " + fits_co21[i].replace(".fits",".image"))
     importfits(fitsimage = fits_co21[i],
                imagename = fits_co21[i].replace(".fits",".image"))
-        
+
     os.system("rm -rf " + fits_co21[i].replace(".fits",".image_Jypb"))
     expr = "IM0/1.222e6*33.0*33.0*230.53800*230.53800"
     immath(imagename = fits_co21[i].replace(".fits",".image"),
@@ -59,7 +57,7 @@ for i in range(len(fits_co21)):
            expr = expr,
            outfile = fits_co21[i].replace(".fits",".image_Jypb"))
     os.system("rm -rf " + fits_co21[i].replace(".fits",".image"))
-               
+
     imhead(imagename = fits_co21[i].replace(".fits",".image_Jypb"),
            mode = "put",
            hdkey = "bunit",

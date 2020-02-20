@@ -3,6 +3,7 @@ import sys
 import glob
 import matplotlib.cm as cm
 import matplotlib.pyplot as plt
+plt.ioff()
 
 
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/data_other/"
