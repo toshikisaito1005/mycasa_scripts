@@ -33,10 +33,8 @@ rm -rf $dir_data"ngc4321_scatter_co10_co21.png" $dir_data"ngc4321_scatter_co21_r
 
 ### figure 4
 convert -crop 1110x205+170+30 $dir_data"figure_hists_ngc0628.png" $dir_data"figure_hists_ngc0628b.png"
-
-
-convert -crop 1460x235+170+60 $dir_data"figure_hists_ngc3627.png" $dir_data"figure_hists_ngc3627b.png"
-convert -crop 1460x285+170+60 $dir_data"figure_hists_ngc4321.png" $dir_data"figure_hists_ngc4321b.png"
+convert -crop 1110x185+170+50 $dir_data"figure_hists_ngc3627.png" $dir_data"figure_hists_ngc3627b.png"
+convert -crop 1110x215+170+50 $dir_data"figure_hists_ngc4321.png" $dir_data"figure_hists_ngc4321b.png"
 
 convert -append -border 0x0 $dir_data"figure_hists_ngc0628b.png" $dir_data"figure_hists_ngc3627b.png" $dir_data"figure_hists_ngc4321b.png" eps2:$dir_data"f04.eps"
 
