@@ -1,4 +1,11 @@
+dir_data="/Users/saito/data/myproj_published/proj_ts07_iras18293/eps/"
+
+
+
+
 ### figure 1
+convert -crop 700x570+75+20 $dir_data"iras18293_12co10_m0.png" $dir_data"iras18293_12co10_m0b.png"
+
 convert -crop 700x570+75+20 /Users/saito/data/phangs/co_ratio/eps/ngc4321_12co10_m0.png /Users/saito/data/phangs/co_ratio/eps/ngc4321_12co10_m0b.png
 convert -crop 700x570+75+20 /Users/saito/data/phangs/co_ratio/eps/ngc4321_12co21_m0.png /Users/saito/data/phangs/co_ratio/eps/ngc4321_12co21_m0b.png
 convert -crop 700x570+21+20 /Users/saito/data/phangs/co_ratio/eps/ngc4321_r21.png /Users/saito/data/phangs/co_ratio/eps/ngc4321_r21b.png
