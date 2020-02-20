@@ -233,11 +233,11 @@ for i in [0,1,2]:
     plt1 = plt.subplot(gs[1:7,0:4])
     plt2 = plt.subplot(gs[1:7,4:8])
     plt3 = plt.subplot(gs[1:7,8:12])
-    plt4 = plt.subplot(gs[1:7,12:16])
+    #plt4 = plt.subplot(gs[1:7,12:16])
     plt1.grid(axis="x")
     plt2.grid(axis="x")
     plt3.grid(axis="x")
-    plt4.grid(axis="x")
+    #plt4.grid(axis="x")
 
     ## hist 1
     histo1 = np.histogram(r21,bins=bins,range=(xlim),weights=None)
