@@ -122,7 +122,7 @@ def import_data(dir_data,
     """
     """
     image = dir_data+line+"_"+suffix+"."+ext
-    txtdata = dir_data+"f04_"+line+"_"+suffix+"."+txtname+".txt"
+    txtdata = dir_data+"f05_"+line+"_"+suffix+"."+txtname+".txt"
     process_fits(image,txtdata,mode,index=index)
     data = np.loadtxt(txtdata)
 
@@ -182,20 +182,20 @@ yerr2 = []
 for j in range(len(beam[i])):
     name_title = gals[i].replace("ngc","NGC ")
     beamfloat = float(beam[i][j])
-    suffix = str(beam[i][j]).replace(".","p")
+    suffix = str(beam[i][j]).replace(".","p").zfill(4)
     d_fits_co10 = dir_data + gals[i] + "_co10/"
     d_fits_co21 = dir_data + gals[i] + "_co21/"
-    Ico10_tmp_ = import_data(d_fits_co10,gals[i],"co10",beam[i],"moment0","data","Ico10")
-    Ico21_tmp_ = import_data(d_fits_co21,gals[i],"co21",beam[i],"moment0","data","Ico21")
+    Ico10_tmp_ = import_data(d_fits_co10,gals[i],"co10",suffix,"moment0","data","Ico10")
+    Ico21_tmp_ = import_data(d_fits_co21,gals[i],"co21",suffix,"moment0","data","Ico21")
     co10_jy2k = 1.222e6 / beamfloat**2 / 115.27120**2
     co21_jy2k = 1.222e6 / beamfloat**2 / 230.53800**2
     
-    check_nchan(d_fits_co10,gals[i],beam[i],"co10")
-    nchan_tmp_ = import_data(d_fits_co10,gals[i],"co10",beam[i],"nchan","data","nchan")
+    check_nchan(d_fits_co10,gals[i],suffix,"co10")
+    nchan_tmp_ = import_data(d_fits_co10,gals[i],"co10",suffix,"nchan","data","nchan")
 
     # define cut
-    Rco10 = Irms_co10[i]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
-    Rco21 = Irms_co21[i]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
+    Rco10 = Irms_co10[i][j]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
+    Rco21 = Irms_co21[i][j]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
     cut_pos = (ra_tmp_ > 0) & (dec_tmp_ > 0)
     cut_co10 = (Ico10_tmp_ > Rco10)
     cut_co21 = (Ico21_tmp_ > Rco21)
