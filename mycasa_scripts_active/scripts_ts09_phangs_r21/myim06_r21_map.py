@@ -7,7 +7,10 @@ import scripts_phangs_r21 as r21
 ### Parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-galaxy = ["ngc0628", "ngc4321", "ngc4254", "ngc3627"]
+galaxy = ["ngc0628",
+          "ngc4321",
+          #"ngc4254",
+          "ngc3627"]
 percent = 0.01
 
 
