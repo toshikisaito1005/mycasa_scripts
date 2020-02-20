@@ -60,6 +60,17 @@ convert +append -border 0x0 $dir_data"ngc4321_violin_numb.png" $dir_data"ngc4321
 
 convert -append -border 0x0 $dir_data"f04a.png" $dir_data"f04b.png" $dir_data"f04c.png" $dir_data"f04d.png" eps2:$dir_data"f05.eps"
 
+rm -rf $dir_data"ngc0628_violin_num.png" $dir_data"ngc0628_violin_numb.png"
+rm -rf $dir_data"ngc0628_violin_co10.png" $dir_data"ngc0628_violin_co10b.png"
+rm -rf $dir_data"ngc0628_violin_co21.png" $dir_data"ngc0628_violin_co21b.png"
+rm -rf $dir_data"ngc3627_violin_num.png" $dir_data"ngc3627_violin_numb.png"
+rm -rf $dir_data"ngc3627_violin_co10.png" $dir_data"ngc3627_violin_co10b.png"
+rm -rf $dir_data"ngc3627_violin_co21.png" $dir_data"ngc3627_violin_co21b.png"
+rm -rf $dir_data"ngc4321_violin_num.png" $dir_data"ngc4321_violin_numb.png"
+rm -rf $dir_data"ngc4321_violin_co10.png" $dir_data"ngc4321_violin_co10b.png"
+rm -rf $dir_data"ngc4321_violin_co21.png" $dir_data"ngc4321_violin_co21b.png"
+rm -rf $dir_data"f04a.png" $dir_data"f04b.png" $dir_data"f04c.png" $dir_data"f04d.png"
+
 
 ### figure 6
 convert -crop 580x570+75+20 $dir_data"ngc0628_r21_mask.png" $dir_data"ngc0628_r21_maskb.png"

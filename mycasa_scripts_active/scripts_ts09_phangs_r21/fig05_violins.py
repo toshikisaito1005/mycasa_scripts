@@ -16,8 +16,8 @@ plt.ioff()
 #####################
 ### parameters
 #####################
-i = 3   # i != 2
-snr = 2.0
+i = 1   # i != 2
+snr = 2.5
 resolutions = ["13.6","15.0","8.0","8.2"]
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 gals = ["ngc0628", "ngc3627", "ngc4254", "ngc4321"]
