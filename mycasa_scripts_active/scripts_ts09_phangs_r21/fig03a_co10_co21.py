@@ -196,8 +196,8 @@ for j in range(len(beam[i])):
     # define cut
     Rco10 = Irms_co10[i][j]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
     Rco21 = Irms_co21[i][j]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
-    cut_co10 = (Ico10_tmp_ > Rco10)
-    cut_co21 = (Ico21_tmp_ > Rco21)
+    cut_co10 = (Ico10_tmp_ > 0) # Rco10)
+    cut_co21 = (Ico21_tmp_ > 0) # Rco21)
     cut_all = np.where((cut_co10) & (cut_co21))
 
     # cut data
