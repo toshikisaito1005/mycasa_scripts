@@ -133,24 +133,24 @@ i = 0
 plt.errorbar(data_co10_n0628[:,0]*(scales[i]/1000),
              data_co10_n0628[:,1]/sd_co10_n0628,
              yerr=data_co10_n0628[:,1]/sd_co10_n0628*np.sqrt(0.05**2+0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/3.5),label="NGC 0628")
+             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 0628")
 i = 1
 plt.errorbar(data_co10_n3627[:,0]*(scales[i]/1000),
              data_co10_n3627[:,1]/sd_co10_n3627,
              yerr=data_co10_n3627[:,1]/sd_co10_n3627*np.sqrt(0.15**2+0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/3.5),label="NGC 3627")
+             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 3627")
 """
 i = 2
 plt.errorbar(data_co10_n4254[:,0]*(scales[i]/1000),
              data_co10_n4254[:,1]/sd_co10_n4254,
              yerr=data_co10_n4254[:,1]/sd_co10_n4254*np.sqrt(0.10**2+0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/3.5),label="NGC 4254")
+             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 4254")
 """
 i = 3
 plt.errorbar(data_co10_n4321[:,0]*(scales[i]/1000),
              data_co10_n4321[:,1]/sd_co10_n4321,
              yerr=data_co10_n4321[:,1]/sd_co10_n4321*np.sqrt(0.05**2+0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/3.5),label="NGC 4321")
+             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 4321")
 plt.ylim([0,2])
 plt.ylabel("Total CO(1-0) Flux Relative To EMPIRE")
 plt.xlabel("Spatial Resolution (kpc)")
@@ -165,24 +165,24 @@ i = 0
 plt.errorbar(data_co21_n0628[:,0]*(scales[i]/1000),
              data_co21_n0628[:,1]/sd_co21_n0628,
              yerr=data_co21_n0628[:,1]/sd_co21_n0628*np.sqrt(0.1**2+0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/3.5),label="NGC 0628")
+             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 0628")
 i = 1
 plt.errorbar(data_co21_n3627[:,0]*(scales[i]/1000),
              data_co21_n3627[:,1]/sd_co21_n3627,
              yerr=data_co21_n3627[:,1]/sd_co21_n3627*np.sqrt(0.1**2+0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/3.5),label="NGC 3627")
+             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 3627")
 """
 i = 2
 plt.errorbar(data_co21_n4254[:,0]*(scales[i]/1000),
              data_co21_n4254[:,1]/sd_co21_n4254,
              yerr=data_co21_n4254[:,1]/sd_co21_n4254*np.sqrt(0.1**2+0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/3.5),label="NGC 4254")
+             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 4254")
 """
 i = 3
 plt.errorbar(data_co21_n4321[:,0]*(scales[i]/1000),
              data_co21_n4321[:,1]/sd_co21_n4321,
              yerr=data_co21_n4321[:,1]/sd_co21_n4321*np.sqrt(0.1**2+0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/3.5),label="NGC 4321")
+             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 4321")
 plt.ylim([0,2])
 plt.ylabel("Total CO(2-1) Flux Relative To HERACLES")
 plt.xlabel("Spatial Resolution (kpc)")
@@ -197,24 +197,24 @@ i = 0
 y = (data_co21_n0628[:,1]/data_co10_n0628[:,1])/(sd_co21_n0628/sd_co10_n0628)
 plt.errorbar(data_co21_n0628[:,0]*(scales[i]/1000),y,
              yerr=y * np.sqrt(0.05**2 + 0.08**2 + 0.1**2 + 0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/3.5),label="NGC 0628")
+             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 0628")
 i = 1
 y = (data_co21_n3627[:,1]/data_co10_n3627[:,1])/(sd_co21_n3627/sd_co10_n3627)
 plt.errorbar(data_co21_n3627[:,0]*(scales[i]/1000),y,
              yerr=y * np.sqrt(0.15**2 + 0.08**2 + 0.1**2 + 0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/3.5),label="NGC 3627")
+             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 3627")
 """
 i = 2
 y = (data_co21_n4254[:,1]/data_co10_n4254[:,1])/(sd_co21_n4254/sd_co10_n4254)
 plt.errorbar(data_co21_n4254[:,0]*(scales[i]/1000),y,
              yerr=y * np.sqrt(0.10**2 + 0.08**2 + 0.1**2 + 0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/3.5),label="NGC 4254")
+             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 4254")
 """
 i = 3
 y = (data_co21_n4321[:,1]/data_co10_n4321[:,1])/(sd_co21_n4321/sd_co10_n4321)
 plt.errorbar(data_co21_n4321[:,0]*(scales[i]/1000),y,
              yerr=y * np.sqrt(0.05**2 + 0.08**2 + 0.1**2 + 0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/3.5),label="NGC 4321")
+             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 4321")
 plt.ylim([0,2])
 plt.ylabel("Total $R_{21}$ Relative To HERACLES/EMPIRE Ratio")
 plt.xlabel("Spatial Resolution (kpc)")

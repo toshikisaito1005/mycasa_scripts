@@ -258,20 +258,20 @@ for i in [0,1,2]:
 
     # plt1
     plt1.plot(histo1x,y11,"black",lw=5,alpha=0.5)
-    plt1.plot(histo1x,y12,c=cm.brg(i/3.5),ls="dotted",lw=2,alpha=1.0)
-    plt1.plot(histo1x,y13,c=cm.brg(i/3.5),ls="-",lw=5,alpha=0.5)
+    plt1.plot(histo1x,y12,c=cm.brg(i/2.5),ls="dotted",lw=2,alpha=1.0)
+    plt1.plot(histo1x,y13,c=cm.brg(i/2.5),ls="-",lw=5,alpha=0.5)
     plt1.plot(med1, 0.15, ".", markersize=14,c="black")
-    plt1.plot(med2, 0.14, ".", markersize=14,c=cm.brg(i/3.5))
-    plt1.plot(med3, 0.13, ".", markersize=14,c=cm.brg(i/3.5))
+    plt1.plot(med2, 0.14, ".", markersize=14,c=cm.brg(i/2.5))
+    plt1.plot(med3, 0.13, ".", markersize=14,c=cm.brg(i/2.5))
     plt1.plot([histo1x[hist_percent(histo1y,0.157)],
                histo1x[hist_percent(histo1y,0.843)]],
               [0.15,0.15],c="black",lw=3,alpha=0.5)
     plt1.plot([histo2x[hist_percent(histo2y,0.157)],
                histo2x[hist_percent(histo2y,0.843)]],
-              [0.14,0.14],c=cm.brg(i/3.5),lw=3,alpha=1.0,linestyle="dotted")
+              [0.14,0.14],c=cm.brg(i/2.5),lw=3,alpha=1.0,linestyle="dotted")
     plt1.plot([histo3x[hist_percent(histo3y,0.157)],
                histo3x[hist_percent(histo3y,0.843)]],
-              [0.13,0.13],c=cm.brg(i/3.5),lw=3,alpha=0.5)
+              [0.13,0.13],c=cm.brg(i/2.5),lw=3,alpha=0.5)
     
     #plt1.set_yscale("log")
     plt1.set_xlim(xlim)
@@ -297,20 +297,20 @@ for i in [0,1,2]:
     
     # plt2
     plt2.plot(histo1x,y11,"black",lw=5,alpha=0.5)
-    plt2.plot(histo1x,y12,c=cm.brg(i/3.5),ls="dotted",lw=2,alpha=1.0)
-    plt2.plot(histo1x,y13,c=cm.brg(i/3.5),ls="-",lw=5,alpha=0.5)
+    plt2.plot(histo1x,y12,c=cm.brg(i/2.5),ls="dotted",lw=2,alpha=1.0)
+    plt2.plot(histo1x,y13,c=cm.brg(i/2.5),ls="-",lw=5,alpha=0.5)
     plt2.plot(med1, 0.15, ".", markersize=14,c="black")
-    plt2.plot(med2, 0.14, ".", markersize=14,c=cm.brg(i/3.5))
-    plt2.plot(med3, 0.13, ".", markersize=14,c=cm.brg(i/3.5))
+    plt2.plot(med2, 0.14, ".", markersize=14,c=cm.brg(i/2.5))
+    plt2.plot(med3, 0.13, ".", markersize=14,c=cm.brg(i/2.5))
     plt2.plot([histo1x[hist_percent(histo1y,0.157)],
                histo1x[hist_percent(histo1y,0.843)]],
               [0.15,0.15],c="black",lw=3,alpha=0.5)
     plt2.plot([histo2x[hist_percent(histo2y,0.157)],
                histo2x[hist_percent(histo2y,0.843)]],
-              [0.14,0.14],c=cm.brg(i/3.5),lw=3,alpha=1.0,linestyle="dotted")
+              [0.14,0.14],c=cm.brg(i/2.5),lw=3,alpha=1.0,linestyle="dotted")
     plt2.plot([histo3x[hist_percent(histo3y,0.157)],
                histo3x[hist_percent(histo3y,0.843)]],
-              [0.13,0.13],c=cm.brg(i/3.5),lw=3,alpha=0.5)
+              [0.13,0.13],c=cm.brg(i/2.5),lw=3,alpha=0.5)
     
     #plt2.set_yscale("log")
     plt2.set_xlim(xlim)
@@ -336,20 +336,20 @@ for i in [0,1,2]:
 
     # plt3
     plt3.plot(histo1x,y11,"black",lw=5,alpha=0.5)
-    plt3.plot(histo1x,y12,c=cm.brg(i/3.5),ls="dotted",lw=2,alpha=1.0)
-    plt3.plot(histo1x,y13,c=cm.brg(i/3.5),ls="-",lw=5,alpha=0.5)
+    plt3.plot(histo1x,y12,c=cm.brg(i/2.5),ls="dotted",lw=2,alpha=1.0)
+    plt3.plot(histo1x,y13,c=cm.brg(i/2.5),ls="-",lw=5,alpha=0.5)
     plt3.plot(med1, 0.15, ".", markersize=14,c="black")
-    plt3.plot(med2, 0.14, ".", markersize=14,c=cm.brg(i/3.5))
-    plt3.plot(med3, 0.13, ".", markersize=14,c=cm.brg(i/3.5))
+    plt3.plot(med2, 0.14, ".", markersize=14,c=cm.brg(i/2.5))
+    plt3.plot(med3, 0.13, ".", markersize=14,c=cm.brg(i/2.5))
     plt3.plot([histo1x[hist_percent(histo1y,0.157)],
                histo1x[hist_percent(histo1y,0.843)]],
               [0.15,0.15],c="black",lw=3,alpha=0.5)
     plt3.plot([histo2x[hist_percent(histo2y,0.157)],
                histo2x[hist_percent(histo2y,0.843)]],
-              [0.14,0.14],c=cm.brg(i/3.5),lw=3,alpha=1.0,linestyle="dotted")
+              [0.14,0.14],c=cm.brg(i/2.5),lw=3,alpha=1.0,linestyle="dotted")
     plt3.plot([histo3x[hist_percent(histo3y,0.157)],
                histo3x[hist_percent(histo3y,0.843)]],
-              [0.13,0.13],c=cm.brg(i/3.5),lw=3,alpha=0.5)
+              [0.13,0.13],c=cm.brg(i/2.5),lw=3,alpha=0.5)
 
     #plt3.set_yscale("log")
     plt3.set_xlim(xlim)
@@ -376,20 +376,20 @@ for i in [0,1,2]:
 
     # plt4
     plt4.plot(histo1x,y11,"black",lw=5,alpha=0.5)
-    plt4.plot(histo1x,y12,c=cm.brg(i/3.5),ls="dotted",lw=2,alpha=1.0)
-    plt4.plot(histo1x,y13,c=cm.brg(i/3.5),ls="-",lw=5,alpha=0.5)
+    plt4.plot(histo1x,y12,c=cm.brg(i/2.5),ls="dotted",lw=2,alpha=1.0)
+    plt4.plot(histo1x,y13,c=cm.brg(i/2.5),ls="-",lw=5,alpha=0.5)
     plt4.plot(med1, 0.15, ".", markersize=14,c="black")
-    plt4.plot(med2, 0.14, ".", markersize=14,c=cm.brg(i/3.5))
-    plt4.plot(med3, 0.13, ".", markersize=14,c=cm.brg(i/3.5))
+    plt4.plot(med2, 0.14, ".", markersize=14,c=cm.brg(i/2.5))
+    plt4.plot(med3, 0.13, ".", markersize=14,c=cm.brg(i/2.5))
     plt4.plot([histo1x[hist_percent(histo1y,0.157)],
                histo1x[hist_percent(histo1y,0.843)]],
               [0.15,0.15],c="black",lw=3,alpha=0.5)
     plt4.plot([histo2x[hist_percent(histo2y,0.157)],
                histo2x[hist_percent(histo2y,0.843)]],
-              [0.14,0.14],c=cm.brg(i/3.5),lw=3,alpha=1.0,linestyle="dotted")
+              [0.14,0.14],c=cm.brg(i/2.5),lw=3,alpha=1.0,linestyle="dotted")
     plt4.plot([histo3x[hist_percent(histo3y,0.157)],
                histo3x[hist_percent(histo3y,0.843)]],
-              [0.13,0.13],c=cm.brg(i/3.5),lw=3,alpha=0.5)
+              [0.13,0.13],c=cm.brg(i/2.5),lw=3,alpha=0.5)
 
     #plt4.set_yscale("log")
     plt4.set_xlim(xlim)
