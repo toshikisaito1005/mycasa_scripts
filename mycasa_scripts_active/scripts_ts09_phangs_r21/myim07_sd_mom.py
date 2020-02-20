@@ -74,10 +74,10 @@ for i in range(len(fits_co21)):
     os.system("rm -rf " + fits_co21[i].replace(".fits",".moment0_tmp"))
     immoments(imagename = fits_co21[i].replace(".fits",".regrid"),
               moments = [0],
-              chans = chans_co10[i],
+              chans = chans_co21[i],
               outfile = fits_co21[i].replace(".fits",".moment0_tmp"))
 
-    velres = abs(imhead(fits_co10[i].replace(".fits",".image_Jypb"),"list")["cdelt3"])
+    velres = abs(imhead(fits_co21[i].replace(".fits",".image_Jypb"),"list")["cdelt3"])
     velres2 = str(velres*3.e8/115.27120e9)
     os.system("rm -rf " + fits_co21[i].replace(".fits",".regrid"))
     os.system("rm -rf " + fits_co21[i].replace(".fits",".moment0"))
