@@ -27,12 +27,14 @@ co21_output = dir_data.replace("_raw","") + "ngc3627_co21_pbcor_8p0.image"
 r21.stage_cubes(common_beam,co10_fits,co21_fits,co10_output,co21_output)
 
 # ngc4254
+"""
 common_beam = "8.0arcsec"
 co10_fits = dir_data + "ngc4254_co10_8as_k.fits"
 co21_fits = dir_data + "ngc4254_12m+7m+tp_co21_pbcorr_round_k.fits"
 co10_output = dir_data.replace("_raw","") + "ngc4254_co10_pbcor_8p0.image"
 co21_output = dir_data.replace("_raw","") + "ngc4254_co21_pbcor_8p0.image"
 r21.stage_cubes(common_beam,co10_fits,co21_fits,co10_output,co21_output)
+"""
 
 # ngc0628
 common_beam = "4.0arcsec"

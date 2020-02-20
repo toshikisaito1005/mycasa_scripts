@@ -13,15 +13,15 @@ co21names = glob.glob(dir_proj + "ngc*co21*.image")
 co21names.sort()
 noises_co10_byeye = [0.010, # ngc0628
                      0.030, # ngc3627
-                     0.025, # ngc4254
+                     #0.025, # ngc4254
                      0.012] # ngc4321
 noises_co21_byeye = [0.020, # ngc0628
                      0.020, # ngc3627
-                     0.025, # ngc4254
+                     #0.025, # ngc4254
                      0.012] # ngc4321
 beams = ["04p0",
          "08p0",
-         "08p0",
+         #"08p0",
          "04p0"]
 snr_mom = 2.0
 percent = 0.0
