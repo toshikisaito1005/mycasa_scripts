@@ -123,8 +123,10 @@ def import_data(dir_data,
                 index=0):
     """
     """
-    image = dir_data+gal+"_"+line+"_"+suffix+"."+ext
-    txtdata = dir_data+gal+"_"+suffix+"_f08_"+txtname+".txt"
+    image = dir_data+line+"_"+suffix+"."+ext
+    txtdata = dir_data+"_f08_"+line+"_"+suffix+"."+ext
+    print(image)
+    print(txtdata)
     process_fits(image,txtdata,mode,index=index)
     data = np.loadtxt(txtdata)
 
@@ -181,22 +183,24 @@ def weighted_median(data, weights):
 #####################
 
 #for i in range(len(gals)):
-for i in [0,1,2,3]:
+for i in [0,1,2]:
     name_title = gals[i].replace("ngc","NGC ")
     beamfloat = float(beam[i].replace("p","."))
-    d_fits = dir_data+gals[i]+"_wise/"
+    d_fits_co10 = dir_data+gals[i]+"_co10/"
+    d_fits_co21 = dir_data+gals[i]+"_co21/"
 
     # import data
-    ra_tmp_ = import_data(d_fits,gals[i],"co10",beam[i],
-                          "moment0","coords","ra")
+    ra_tmp_ = import_data(d_fits_co10,gals[i],"co10",beam[i],"moment0","coords","ra")
+
+
+
+
     dec_tmp_ = import_data(d_fits,gals[i],"co10",beam[i],
                            "moment0","coords","dec",1)
     Ico10_tmp_ = import_data(d_fits,gals[i],"co10",beam[i],
                              "moment0","data","Ico10")
     Ico21_tmp_ = import_data(d_fits,gals[i],"co21",beam[i],
                              "moment0","data","Ico21")
-    w3_tmp_ = import_data(d_fits,gals[i],"w3",beam[i],
-                          "image","data","w3")
     co10_jy2k = 1.222e6 / beamfloat**2 / 115.27120**2
     co21_jy2k = 1.222e6 / beamfloat**2 / 230.53800**2
 
