@@ -363,7 +363,9 @@ myim.fits2eps(dir_data = dir_data,
               clim = clim)
 
 
+
 ### ngc4254
+"""
 ra_center = "12:18:49.3"
 dec_center = "14.25.01.0"
 xlim = [-120, 120]
@@ -460,7 +462,7 @@ myim.fits2eps(dir_data = dir_data,
               xlim = xlim,
               ylim = ylim,
               clim = clim)
-
+"""
 
 os.system("rm -rf *.last")
 

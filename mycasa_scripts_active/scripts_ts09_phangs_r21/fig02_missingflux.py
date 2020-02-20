@@ -50,6 +50,7 @@ l = np.c_[beam_co10_n3627,int_co10_n3627]
 data_co10_n3627 = l[l[:,0].argsort(), :]
 
 # get ngc4254
+"""
 alma_co10_n4254 = glob.glob(dir_data + "../ngc4254_co10/*co10*.moment0")
 beam_co10_n4254 = []
 int_co10_n4254 = []
@@ -60,6 +61,7 @@ for i in range(len(alma_co10_n4254)):
 
 l = np.c_[beam_co10_n4254,int_co10_n4254]
 data_co10_n4254 = l[l[:,0].argsort(), :]
+"""
 
 # get ngc4321
 alma_co10_n4321 = glob.glob(dir_data + "../ngc4321_co10/*co10*.moment0")
@@ -99,6 +101,7 @@ l = np.c_[beam_co21_n3627,int_co21_n3627]
 data_co21_n3627 = l[l[:,0].argsort(), :]
 
 # get ngc4254
+"""
 alma_co21_n4254 = glob.glob(dir_data + "../ngc4254_co21/*co21*.moment0")
 beam_co21_n4254 = []
 int_co21_n4254 = []
@@ -109,6 +112,7 @@ for i in range(len(alma_co21_n4254)):
 
 l = np.c_[beam_co21_n4254,int_co21_n4254]
 data_co21_n4254 = l[l[:,0].argsort(), :]
+"""
 
 # get ngc4321
 alma_co21_n4321 = glob.glob(dir_data + "../ngc4321_co21/*co21*.moment0")
@@ -135,11 +139,13 @@ plt.errorbar(data_co10_n3627[:,0]*(scales[i]/1000),
              data_co10_n3627[:,1]/sd_co10_n3627,
              yerr=data_co10_n3627[:,1]/sd_co10_n3627*np.sqrt(0.15**2+0.08**2),
              lw=5,alpha=0.4,c=cm.brg(i/3.5),label="NGC 3627")
+"""
 i = 2
 plt.errorbar(data_co10_n4254[:,0]*(scales[i]/1000),
              data_co10_n4254[:,1]/sd_co10_n4254,
              yerr=data_co10_n4254[:,1]/sd_co10_n4254*np.sqrt(0.10**2+0.08**2),
              lw=5,alpha=0.4,c=cm.brg(i/3.5),label="NGC 4254")
+"""
 i = 3
 plt.errorbar(data_co10_n4321[:,0]*(scales[i]/1000),
              data_co10_n4321[:,1]/sd_co10_n4321,
@@ -165,11 +171,13 @@ plt.errorbar(data_co21_n3627[:,0]*(scales[i]/1000),
              data_co21_n3627[:,1]/sd_co21_n3627,
              yerr=data_co21_n3627[:,1]/sd_co21_n3627*np.sqrt(0.1**2+0.08**2),
              lw=5,alpha=0.4,c=cm.brg(i/3.5),label="NGC 3627")
+"""
 i = 2
 plt.errorbar(data_co21_n4254[:,0]*(scales[i]/1000),
              data_co21_n4254[:,1]/sd_co21_n4254,
              yerr=data_co21_n4254[:,1]/sd_co21_n4254*np.sqrt(0.1**2+0.08**2),
              lw=5,alpha=0.4,c=cm.brg(i/3.5),label="NGC 4254")
+"""
 i = 3
 plt.errorbar(data_co21_n4321[:,0]*(scales[i]/1000),
              data_co21_n4321[:,1]/sd_co21_n4321,
@@ -195,11 +203,13 @@ y = (data_co21_n3627[:,1]/data_co10_n3627[:,1])/(sd_co21_n3627/sd_co10_n3627)
 plt.errorbar(data_co21_n3627[:,0]*(scales[i]/1000),y,
              yerr=y * np.sqrt(0.15**2 + 0.08**2 + 0.1**2 + 0.08**2),
              lw=5,alpha=0.4,c=cm.brg(i/3.5),label="NGC 3627")
+"""
 i = 2
 y = (data_co21_n4254[:,1]/data_co10_n4254[:,1])/(sd_co21_n4254/sd_co10_n4254)
 plt.errorbar(data_co21_n4254[:,0]*(scales[i]/1000),y,
              yerr=y * np.sqrt(0.10**2 + 0.08**2 + 0.1**2 + 0.08**2),
              lw=5,alpha=0.4,c=cm.brg(i/3.5),label="NGC 4254")
+"""
 i = 3
 y = (data_co21_n4321[:,1]/data_co10_n4321[:,1])/(sd_co21_n4321/sd_co10_n4321)
 plt.errorbar(data_co21_n4321[:,0]*(scales[i]/1000),y,
