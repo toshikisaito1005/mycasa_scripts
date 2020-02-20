@@ -16,29 +16,28 @@ plt.ioff()
 #####################
 ### parameters
 #####################
-i = 1   # i != 2
+i = 0
 snr = 2.5
 resolutions = ["13.6","15.0","8.0","8.2"]
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-gals = ["ngc0628", "ngc3627", "ngc4254", "ngc4321"]
+gals = ["ngc0628", "ngc3627", "ngc4321"]
 beam = [[4.0,8.0,12.0,16.0,20.0],
         [8.0,12.0,16.0,20.0,24.0],
-        [8.0,12.0,16.0,20.0,24.0],
         [4.0,8.0,12.0,16.0,20.0]]
-scales = [44/1.0, 52/1.3, 130/1.6, 103/1.4]
+scales = [44/1.0, 52/1.3, 103/1.4]
 
-velres = [6.0,10.0,10.0,5.0]
+velres = [6.0,10.0,5.0]
 Irms_co10_n0628 = [0.013,0.032,0.051,0.067,0.080] # Jy/beam
 Irms_co10_n3627 = [0.048,0.060,0.076,0.090,0.107] # Jy/beam
 Irms_co10_n4254 = [0.,0.,0.,0.,0.] # Jy/beam
 Irms_co10_n4321 = [0.015,0.031,0.046,0.056,0.062] # Jy/beam
-Irms_co10 = [Irms_co10_n0628,Irms_co10_n3627,Irms_co10_n4254,Irms_co10_n4321]
+Irms_co10 = [Irms_co10_n0628,Irms_co10_n3627,Irms_co10_n4321]
 
 Irms_co21_n0628 = [0.017,0.029,0.035,0.038,0.041] # Jy/beam
 Irms_co21_n3627 = [0.024,0.027,0.028,0.029,0.032] # Jy/beam
 Irms_co21_n4254 = [0.,0.,0.,0.,0.] # Jy/beam
 Irms_co21_n4321 = [0.017,0.029,0.031,0.030,0.030] # Jy/beam
-Irms_co21 = [Irms_co21_n0628,Irms_co21_n3627,Irms_co21_n4254,Irms_co21_n4321]
+Irms_co21 = [Irms_co21_n0628,Irms_co21_n3627,Irms_co21_n4321]
 
 bins=80
 xlim = [0.01,1.39]
@@ -179,7 +178,7 @@ for j in range(len(beam[i])):
     r21 = r21_tmp2_[r21_tmp2_>0]
 
     num, num2, num3 = violin_wt(ax,r21,beamfloat,bins,xlim,None,step,
-                          cm.brg(i/3.5))
+                          cm.brg(i/2.5))
     medians.append(num)
     yerr.append(num2)
     yerr2.append(num3)
@@ -187,19 +186,19 @@ for j in range(len(beam[i])):
 
 plt.plot(beam[i],
          medians,"o-",
-         color=cm.brg(i/3.5),
+         color=cm.brg(i/2.5),
          markeredgewidth=0,
          markersize=10,
          lw=3)
 plt.plot(beam[i],
          yerr,"--",
-         color=cm.brg(i/3.5),
+         color=cm.brg(i/2.5),
          markeredgewidth=0,
          markersize=10,
          lw=2)
 plt.plot(beam[i],
          yerr2,"--",
-         color=cm.brg(i/3.5),
+         color=cm.brg(i/2.5),
          markeredgewidth=0,
          markersize=10,
          lw=2)
@@ -256,7 +255,7 @@ for j in range(len(beam[i])):
     r21 = r21_tmp2_[r21_tmp2_>0]
 
     num, num2, num3 = violin_wt(ax,r21,beam[i][j],bins,xlim,Ico10,step,
-                          cm.brg(i/3.5))
+                          cm.brg(i/2.5))
     medians.append(num)
     yerr.append(num2)
     yerr2.append(num3)
@@ -264,19 +263,19 @@ for j in range(len(beam[i])):
 
 plt.plot(beam[i],
          medians,"o-",
-         color=cm.brg(i/3.5),
+         color=cm.brg(i/2.5),
          markeredgewidth=0,
          markersize=10,
          lw=3)
 plt.plot(beam[i],
          yerr,"--",
-         color=cm.brg(i/3.5),
+         color=cm.brg(i/2.5),
          markeredgewidth=0,
          markersize=10,
          lw=2)
 plt.plot(beam[i],
          yerr2,"--",
-         color=cm.brg(i/3.5),
+         color=cm.brg(i/2.5),
          markeredgewidth=0,
          markersize=10,
          lw=2)
@@ -331,26 +330,26 @@ for j in range(len(beam[i])):
     r21 = r21_tmp2_[r21_tmp2_>0]
 
     num, num2, num3 = violin_wt(ax,r21,beam[i][j],bins,xlim,Ico21,step,
-                          cm.brg(i/3.5))
+                          cm.brg(i/2.5))
     medians.append(num)
     yerr.append(num2)
     yerr2.append(num3)
 
 plt.plot(beam[i],
          medians,"o-",
-         color=cm.brg(i/3.5),
+         color=cm.brg(i/2.5),
          markeredgewidth=0,
          markersize=10,
          lw=3)
 plt.plot(beam[i],
          yerr,"--",
-         color=cm.brg(i/3.5),
+         color=cm.brg(i/2.5),
          markeredgewidth=0,
          markersize=10,
          lw=2)
 plt.plot(beam[i],
          yerr2,"--",
-         color=cm.brg(i/3.5),
+         color=cm.brg(i/2.5),
          markeredgewidth=0,
          markersize=10,
          lw=2)
