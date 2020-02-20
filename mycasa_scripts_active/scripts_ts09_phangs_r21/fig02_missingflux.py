@@ -17,12 +17,12 @@ fits_sd_co21.sort()
 
 sd_co10_n0628 = imstat(fits_sd_co10[0])["sum"][0]
 sd_co10_n3627 = imstat(fits_sd_co10[1])["sum"][0]
-sd_co10_n4254 = imstat(fits_sd_co10[2])["sum"][0]
-sd_co10_n4321 = imstat(fits_sd_co10[3])["sum"][0]
+#sd_co10_n4254 = imstat(fits_sd_co10[2])["sum"][0]
+sd_co10_n4321 = imstat(fits_sd_co10[2])["sum"][0]
 sd_co21_n0628 = imstat(fits_sd_co21[0])["sum"][0]
 sd_co21_n3627 = imstat(fits_sd_co21[1])["sum"][0]
-sd_co21_n4254 = imstat(fits_sd_co21[2])["sum"][0]
-sd_co21_n4321 = imstat(fits_sd_co21[3])["sum"][0]
+#sd_co21_n4254 = imstat(fits_sd_co21[2])["sum"][0]
+sd_co21_n4321 = imstat(fits_sd_co21[2])["sum"][0]
 
 ### co10
 # get ngc0628
