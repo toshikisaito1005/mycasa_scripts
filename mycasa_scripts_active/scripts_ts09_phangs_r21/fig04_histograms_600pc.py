@@ -130,13 +130,11 @@ def import_data(dir_data,
 
     return data
 
-def check_nchan(dir_data,gal,suffix):
+def check_nchan(dir_data,gal,suffix,line):
     """
     """
-    imagename = dir_data+line+"_"+suffix+".mask"
-    outfile = imagename.replace(".mask",".nchan")
-    print(imagename)
-    print(outfile)
+    imagename = dir_data+line+"_"+suffix+"_mask.image"
+    outfile = imagename.replace("_mask.image",".nchan")
     os.system("rm -rf "+outfile)
     immoments(imagename=imagename,
               moments=[0],
@@ -198,15 +196,12 @@ for i in [0,1,2]:
     co10_jy2k = 1.222e6 / beamfloat**2 / 115.27120**2
     co21_jy2k = 1.222e6 / beamfloat**2 / 230.53800**2
 
-    check_nchan(d_fits_co10,gals[i],beam[i])
-
-
-
-
-    nchan_tmp_ = import_data(d_fits,gals[i],"combine",beam[i],
-                             "nchan","data","nchan")
+    check_nchan(d_fits_co10,gals[i],beam[i],"co10")
+    nchan_tmp_ = import_data(d_fits_co10,gals[i],"co10",beam[i],"nchan","data","nchan")
 
     # define cut
+    Rco10 = Irms_co10[i][j]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
+    Rco21 = Irms_co21[i][j]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
     cut_pos = (ra_tmp_ > 0) & (dec_tmp_ > 0)
     cut_co10 = (Ico10_tmp_>Irms_co10[i]*snr*np.sqrt(nchan_tmp_))
     cut_co21 = (Ico21_tmp_ > Irms_co21[i]*snr*np.sqrt(nchan_tmp_))

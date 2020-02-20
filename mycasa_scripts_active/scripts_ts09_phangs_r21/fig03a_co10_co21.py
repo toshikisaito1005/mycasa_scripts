@@ -100,7 +100,6 @@ def import_data(dir_data,
     """
     """
     image = dir_data+line+"_"+suffix+"."+ext
-    print(image)
     txtdata = dir_data+gal+"_"+suffix+"_f03_"+txtname+".txt"
     process_fits(image,txtdata,mode,index=index)
     data = np.loadtxt(txtdata)
