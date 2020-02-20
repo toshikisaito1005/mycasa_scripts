@@ -11,7 +11,11 @@ convert +append -border 0x0 $dir_data"ngc4321_r21b.png" $dir_data"ngc4321_r21_m8
 
 convert -append -border 0x0 $dir_data"fig01a.png" $dir_data"fig01b.png" eps2:$dir_data"f01.eps"
 
-rm -rf /Users/saito/data/phangs/co_ratio/eps/fig01a.png /Users/saito/data/phangs/co_ratio/eps/fig01b.png
-rm -rf /Users/saito/data/phangs/co_ratio/eps/ngc4321_12co10_m0*.png /Users/saito/data/phangs/co_ratio/eps/ngc4321_12co21_m0*.png
-rm -rf /Users/saito/data/phangs/co_ratio/eps/ngc4321_r21*.png /Users/saito/data/phangs/co_ratio/eps/ngc4321_r21_m8*.png
+rm -rf $dir_data"ngc4321_12co10_m0.png" $dir_data"ngc4321_12co10_m0b.png"
+rm -rf $dir_data"ngc4321_12co21_m0.png" $dir_data"ngc4321_12co21_m0b.png"
+rm -rf $dir_data"ngc4321_r21.png" $dir_data"ngc4321_r21b.png"
+rm -rf $dir_data"ngc4321_r21_m8.png" $dir_data"ngc4321_r21_m8b.png"
+rm -rf $dir_data"fig01a.png" $dir_data"fig01b.png"
 
+### figure 2
+convert +append -border 0x0 $dir_data"missingflux_co10.png" $dir_data"missingflux_co21.png" $dir_data"missingflux_r21.png" eps2:$dir_data"f02.eps"
