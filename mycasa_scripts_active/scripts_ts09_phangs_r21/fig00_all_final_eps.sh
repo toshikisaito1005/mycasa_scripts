@@ -36,4 +36,11 @@ rm -rf $dir_data"ngc4321_scatter_co10_co21.png" $dir_data"ngc4321_scatter_co21_r
 
 
 ### figure 6
-convert -crop 700x570+75+20 $dir_data"ngc4321_12co10_m0.png" $dir_data"ngc4321_12co10_m0b.png"
+convert -crop 590x570+75+20 $dir_data"ngc0628_r21_mask.png" $dir_data"ngc0628_r21_maskb.png"
+convert -crop 600x570+75+20 $dir_data"ngc3627_r21_mask.png" $dir_data"ngc3627_r21_maskb.png"
+convert -crop 600x570+75+20 $dir_data"ngc4254_r21_mask.png" $dir_data"ngc4254_r21_maskb.png"
+convert -crop 600x570+75+20 $dir_data"ngc4321_r21_mask.png" $dir_data"ngc4321_r21_maskb.png"
+
+convert +append -border 0x0 $dir_data"ngc0628_r21_maskb.png" $dir_data"ngc3627_r21_maskb.png" $dir_data"ngc4254_r21_maskb.png" $dir_data"ngc4321_r21_maskb.png" eps2:$dir_data"f06.eps"
+
+
