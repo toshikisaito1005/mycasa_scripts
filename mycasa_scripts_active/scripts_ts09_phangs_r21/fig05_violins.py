@@ -367,3 +367,4 @@ plt.subplots_adjust(bottom=0.15, wspace=0.05)
 plt.plot([resolutions[i],resolutions[i]],[0.0,1.4],linestyle="-",lw=4,c="black",alpha=0.5)
 plt.savefig(dir_data+"eps/"+gals[i]+"_violin_co21.png")
 
+os.system("rm -rf *.last")

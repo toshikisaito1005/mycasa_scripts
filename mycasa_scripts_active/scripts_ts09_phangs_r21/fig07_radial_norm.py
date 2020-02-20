@@ -86,3 +86,5 @@ ax2.spines["bottom"].set_visible(False)
 ax2b.set_ylabel("$R_{21}$/$Med(R_{21})$")
 
 plt.savefig(dir_data+"eps/radial_norm_r21.png",dpi=200)
+
+os.system("rm -rf *.last")
