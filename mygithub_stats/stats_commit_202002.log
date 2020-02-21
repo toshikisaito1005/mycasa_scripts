@@ -1,14 +1,23 @@
       20 - mycasa_scripts_active/scripts_jwu01_ngc6240/myim02_moments.py
-       9 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim03_mom_native.py
+      15 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig00_all_final_eps.sh
+      14 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig03a_co10_co21.py
+      13 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig04_histograms_600pc.py
+      11 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim07_sd_mom.py
+      10 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim03_mom_native.py
+      10 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig05_violins.py
        7 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21.py
+       7 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim08_r21_mask.py
+       7 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig06_r21_mask.py
+       6 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim05_mom_multibeam.py
+       6 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig02_missingflux.py
+       6 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig01_images.py
        5 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21.pyc
-       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim05_mom_multibeam.py
+       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim04_multibeam.py
        5 - mycasa_scripts_active/scripts_jwu01_ngc6240/casa_ngc6240.ann
-       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim04_multibeam.py
-       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig03a_co10_co21.py
-       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig01_images.py
-       2 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig07_radial_norm.py
-       2 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig04_histograms_600pc.py
-       2 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig03b_r21_co21.py
-       2 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig02_missingflux.py
+       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig07_radial_norm.py
+       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig03b_r21_co21.py
+       3 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim09_radial_param.py
+       2 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim06_r21_map.py
+       2 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim02_regrid.py
+       2 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim01_prep.py
        2 - mycasa_scripts_active/.DS_Store
