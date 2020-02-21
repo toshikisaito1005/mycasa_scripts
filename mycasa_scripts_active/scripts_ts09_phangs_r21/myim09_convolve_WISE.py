@@ -91,9 +91,6 @@ for i in range(len(galaxy)):
                      pa = "0deg",
                      outfile = outfile + "_tmp")
 
-            imhead(imagename = outfile + "_tmp",
-                   
-
             r21.gridtemplate(outfile + "_tmp",
                              image_lengths[i],
                              direction_ras[i],

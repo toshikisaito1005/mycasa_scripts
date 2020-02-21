@@ -127,7 +127,7 @@ def gridtemplate(imagename10,image_length,direction_ra,direction_dec):
     num_x_pix = imhead(imagename10,mode="list")["shape"][0]
     num_y_pix = imhead(imagename10,mode="list")["shape"][1]
     pix_radian = imhead(imagename10,mode="list")["cdelt2"]
-    obsfreq = imhead(imagename10,mode="list")["restfreq"][0]/1e9
+    obsfreq = 115.27120 # imhead(imagename10,mode="list")["restfreq"][0]/1e9
     pix_arcsec = round(pix_radian * 3600 * 180 / np.pi, 3)
 
     # create tempalte image
