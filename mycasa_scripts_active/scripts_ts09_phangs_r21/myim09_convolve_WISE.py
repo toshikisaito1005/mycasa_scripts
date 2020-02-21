@@ -32,6 +32,8 @@ originalbeam = 7.5 # arcsec
 #####################
 ### Main
 #####################
+origbeamp = str(originalbeam).replace(".","p")
+
 for i in range(len(galaxy)):
     galname = galaxy[i]
     print("### working on " + galname + " wise")
@@ -42,7 +44,7 @@ for i in range(len(galaxy)):
         os.mkdir(dir_product)
 
     wisefits = glob.glob(dir_proj \
-                   + galname + "*_gauss" + str(originalbeam).replace(".","p") + ".fits")
+                   + galname + "*_gauss" + origbeamp + ".fits")
 
     for j in range(len(beams[i])):
         beamp = str(beams[i][j]).zfill(4).replace(".","p")
@@ -79,4 +81,15 @@ for i in range(len(galaxy)):
                    mode = "put",
                    hdkey = "bunit",
                    hdvalue = "Jy/beam")
+
+            # smooth to the requested beam size
+            outfile = imagename.replace(origbeamp,beamp)
+
+        os.system("rm -rf " + outfile + "_tmp")
+        imsmooth(imagename = co10cube,
+                 targetres = True,
+                 major = str(beams[i][j]) + "arcsec",
+                 minor = str(beams[i][j]) + "arcsec",
+                 pa = "0deg",
+                 outfile = outfile + "_tmp")
 
