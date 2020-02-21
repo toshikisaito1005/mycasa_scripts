@@ -2,6 +2,9 @@ import os
 import glob
 
 
+# WISE data = MJy/sr
+
+
 #####################
 ### Parameters
 #####################
@@ -37,22 +40,15 @@ for i in range(len(galaxy)):
         os.mkdir(dir_product)
 
     wisefits = glob.glob(dir_proj + galname + "*_gauss7p5.fits")
+
     for j in range(len(beams[i])):
         beamp = str(beams[i][j]).zfill(4).replace(".","p")
         print("# working on beam = "+beamp)
-        # w1
-        imagename = dir_product + wisefits[0].split("/")[-1].replace(".fits","./image")
+        
+        for k in range(len(wisefits)):
+            imagename = dir_product + wisefits[k].split("/")[-1].replace(".fits",".image")
+            os.system("rm -rf " + imagename)
+            importfits(fitsimage = wisefits[k],
+                       imagename = imagename)
 
-        outfile = co10cube.replace("_cube","_cube_"+beamp)
-        os.system("rm -rf " + outfile + "_tmp")
-        imsmooth(imagename = co10cube,
-                 targetres = True,
-                 major = str(beams[i][j]) + "arcsec",
-                 minor = str(beams[i][j]) + "arcsec",
-                 pa = "0deg",
-                 outfile = outfile + "_tmp")
-
-        r21.gridtemplate(outfile + "_tmp",
-                         image_lengths[i],
-                         direction_ras[i],
-                         direction_decs[i])
+            imhead()
