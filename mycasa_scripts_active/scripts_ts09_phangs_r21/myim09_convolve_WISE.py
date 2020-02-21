@@ -1,5 +1,6 @@
 import os
 import glob
+from astropy import units as u
 
 
 # WISE data = MJy/sr
@@ -46,9 +47,20 @@ for i in range(len(galaxy)):
         print("# working on beam = "+beamp)
         
         for k in range(len(wisefits)):
+            # import FITS to CASA
             imagename = dir_product + wisefits[k].split("/")[-1].replace(".fits",".image")
-            os.system("rm -rf " + imagename)
+            os.system("rm -rf " + imagename + "_tmp")
             importfits(fitsimage = wisefits[k],
-                       imagename = imagename)
+                       imagename = imagename + "_tmp")
 
-            imhead()
+            imhead(imagename = imagename + "_tmp",
+                   mode = "add",
+                   hdkey = "beammajor",
+                   hdvalue = "7.5arcsec")
+
+            imhead(imagename = imagename + "_tmp",
+                   mode = "put",
+                   hdkey = "beamminor",
+                   hdvalue = "7.5arcsec")
+
+
