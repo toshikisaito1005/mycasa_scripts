@@ -1,9 +1,7 @@
 import os
 import glob
 from astropy import units as u
-
-
-# WISE data = MJy/sr
+import scripts_phangs_r21 as r21
 
 
 #####################
@@ -44,7 +42,7 @@ for i in range(len(galaxy)):
         os.mkdir(dir_product)
 
     wisefits = glob.glob(dir_proj \
-                   + galname + "*_gauss" + origbeamp + ".fits")
+                   + galname + "*_gauss" + origbeamp + ".fits") # unit = MJy/sr
 
     for j in range(len(beams[i])):
         beamp = str(beams[i][j]).zfill(4).replace(".","p")
@@ -85,11 +83,27 @@ for i in range(len(galaxy)):
             # smooth to the requested beam size
             outfile = imagename.replace(origbeamp,beamp)
 
-        os.system("rm -rf " + outfile + "_tmp")
-        imsmooth(imagename = co10cube,
-                 targetres = True,
-                 major = str(beams[i][j]) + "arcsec",
-                 minor = str(beams[i][j]) + "arcsec",
-                 pa = "0deg",
-                 outfile = outfile + "_tmp")
+            os.system("rm -rf " + outfile + "_tmp")
+            imsmooth(imagename = imagename,
+                     targetres = True,
+                     major = str(beams[i][j]) + "arcsec",
+                     minor = str(beams[i][j]) + "arcsec",
+                     pa = "0deg",
+                     outfile = outfile + "_tmp")
 
+            imhead(imagename = outfile + "_tmp",
+                   
+
+            r21.gridtemplate(outfile + "_tmp",
+                             image_lengths[i],
+                             direction_ras[i],
+                             direction_decs[i])
+
+            os.system("rm -rf " + outfile)
+            imregrid(imagename = outfile + "_tmp",
+                     template = "template.image",
+                     output = outfile,
+                     axes = [0,1])
+            os.system("rm -rf " + outfile + "_tmp")
+
+os.system("rm -rf *.last template.fits template.im")
