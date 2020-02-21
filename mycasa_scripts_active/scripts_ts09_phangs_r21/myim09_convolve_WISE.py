@@ -26,6 +26,7 @@ direction_decs = ["15.783deg",
 beams = [[13.6],
          [8.2],
          [15.0]]
+originalbeam = 7.5 # arcsec
 
 
 #####################
@@ -40,14 +41,15 @@ for i in range(len(galaxy)):
     if not done:
         os.mkdir(dir_product)
 
-    wisefits = glob.glob(dir_proj + galname + "*_gauss7p5.fits")
+    wisefits = glob.glob(dir_proj \
+                   + galname + "*_gauss" + str(originalbeam).replace(".","p") + ".fits")
 
     for j in range(len(beams[i])):
         beamp = str(beams[i][j]).zfill(4).replace(".","p")
         print("# working on beam = "+beamp)
         
         for k in range(len(wisefits)):
-            # import FITS to CASA
+            # import FITS to CASA format
             imagename = dir_product + wisefits[k].split("/")[-1].replace(".fits",".image")
             os.system("rm -rf " + imagename + "_tmp")
             importfits(fitsimage = wisefits[k],
@@ -56,11 +58,25 @@ for i in range(len(galaxy)):
             imhead(imagename = imagename + "_tmp",
                    mode = "add",
                    hdkey = "beammajor",
-                   hdvalue = "7.5arcsec")
+                   hdvalue = str(originalbeam) + "arcsec")
 
             imhead(imagename = imagename + "_tmp",
                    mode = "put",
                    hdkey = "beamminor",
-                   hdvalue = "7.5arcsec")
+                   hdvalue = str(originalbeam) + "arcsec")
 
+            # convert MJy/sr to Jy/beam
+            beam = originalbeam * u.arcsec # in arcsec
+            beamarea = (2*np.pi / (8*np.log(2))) * (beam**2).to(u.sr) # in str
+
+            os.system("rm -rf " + imagename)
+            immath(imagename = imagename + "_tmp",
+                   outfile = imagename,
+                   expr = "IM0*1e6*" + str(beamarea.value))
+            os.system("rm -rf " + imagename + "_tmp")
+
+            imhead(imagename = imagename,
+                   mode = "put",
+                   hdkey = "bunit",
+                   hdvalue = "Jy/beam")
 
