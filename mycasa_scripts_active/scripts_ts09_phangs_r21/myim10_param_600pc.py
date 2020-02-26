@@ -17,7 +17,7 @@ plt.ioff()
 ### parameters
 #####################
 snr = 5
-dir_data = "/Users/saito/data/phangs/co_ratio/"
+dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 gals = ["ngc0628", "ngc3627", "ngc4321"]
 beam = [13.6, 15.0, 8.2]
 
@@ -26,46 +26,22 @@ beam = [13.6, 15.0, 8.2]
 #####################
 ### functions
 #####################
-def process_fits(image,txtdata,mode,index=0):
-    """
-    """
-    done = glob.glob(txtdata)
-    if not done:
-        ### import data
-        image_r = imhead(image,mode="list")["shape"][0] - 1
-        image_t = imhead(image,mode="list")["shape"][1] - 1
-        
-        value = imval(image,box="0,0,"+str(image_r)+","+str(image_t))
-        
-        if mode=="coords":
-            value_masked = value[mode][:,:,index]
-        else:
-            value_masked = value[mode]
-    
-        value_masked_1d = value_masked.flatten()
-        
-        np.savetxt(txtdata, value_masked_1d)
-
-def import_data(dir_data,
-                gal,
-                line,
-                suffix,
-                ext,
-                mode,
-                txtname,
-                index=0):
-    """
-    """
-    image = dir_data+line+"_"+suffix+"."+ext
-    txtdata = dir_data+"f04_"+line+"_"+suffix+"."+txtname+".txt"
-    process_fits(image,txtdata,mode,index=index)
-    data = np.loadtxt(txtdata)
-
-    return data
-
 def import_data(
-    imagename):
+    imagename,
+    mode,
+    indnex=0,
+    ):
+    image_r = imhead(imagename,mode="list")["shape"][0] - 1
+    image_t = imhead(imagename,mode="list")["shape"][1] - 1
+    value = imval(imagename,box="0,0,"+str(image_r)+","+str(image_t))
+     if mode=="coords":
+          value_masked = value[mode][:,:,index]
+     else:
+          value_masked = value[mode]
 
+    value_masked_1d = value_masked.flatten()
+
+    return value_masked_1d
 
 
 #####################
@@ -78,7 +54,15 @@ for i in range(len(gals)):
     dir_r21 = dir_data + galname + "_r21/"
     dir_wise = dir_data + galname + "_wise/"
 
+    # imagename
+    image_co21 = glob.glob(dir_co21 + "co21_"+beamp+".moment0")[0]
+    image_r21 = glob.glob(dir_co21 + "r21_"+beamp+".moment0")[0]
+    image_w1 = glob.glob(dir_co21 + "co21_"+beamp+".moment0")[0]
+
     # import data
+    data_ra = import_data(
+        imagename = dir_co21 + )
+
     data_ra = import_data(dir_co21,galname,"co21",beamp,"moment0","coords","ra")
     data_dec = import_data(dir_co21,galname,"co21",beamp,"moment0","coords","dec",1)
 
