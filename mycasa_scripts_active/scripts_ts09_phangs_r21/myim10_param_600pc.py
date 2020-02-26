@@ -29,15 +29,18 @@ beam = [13.6, 15.0, 8.2]
 def import_data(
     imagename,
     mode,
-    indnex=0,
+    index=0,
     ):
+    """
+    """
     image_r = imhead(imagename,mode="list")["shape"][0] - 1
     image_t = imhead(imagename,mode="list")["shape"][1] - 1
     value = imval(imagename,box="0,0,"+str(image_r)+","+str(image_t))
+
     if mode=="coords":
         value_masked = value[mode][:,:,index]
     else:
-          alue_masked = value[mode]
+        value_masked = value[mode]
 
     value_masked_1d = value_masked.flatten()
 
@@ -64,5 +67,11 @@ for i in range(len(gals)):
     # import data
     data_ra = import_data(imagename=image_co21,mode="coords")
     data_dec = import_data(imagename=image_co21,mode="coords",index=1)
+    data_co21 = import_data(imagename=image_co21,mode="data")
+    data_r21 = import_data(imagename=image_r21,mode="data")
+    data_w1 = import_data(imagename=image_w1,mode="data")
+    data_w2 = import_data(imagename=image_w2,mode="data")
+    data_w3 = import_data(imagename=image_w3,mode="data")
+
 
 
