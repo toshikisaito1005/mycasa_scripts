@@ -60,6 +60,7 @@ for i in range(len(gals)):
     # imagename
     image_co21 = glob.glob(dir_co21 + "co21_"+beamp+".moment0")[0]
     image_r21 = glob.glob(dir_r21 + "r21_"+beamp+".moment0")[0]
+    image_r21mask = glob.glob(dir_r21 + "r21_"+beamp+".moment0.highlowmask")[0]
     image_w1 = glob.glob(dir_wise + galname+"_w1_gauss"+beamp+".image")[0]
     image_w2 = glob.glob(dir_wise + galname+"_w2_gauss"+beamp+".image")[0]
     image_w3 = glob.glob(dir_wise + galname+"_w3_gauss"+beamp+".image")[0]
