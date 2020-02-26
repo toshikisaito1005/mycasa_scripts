@@ -18,8 +18,8 @@ plt.ioff()
 #####################
 snr = 5
 dir_data = "/Users/saito/data/phangs/co_ratio/"
-gals = ["ngc0628", "ngc3627", "ngc4254", "ngc4321"]
-beam = [[13.6],[15.0],[8.0],[8.2]]
+gals = ["ngc0628", "ngc3627", "ngc4321"]
+beam = [13.6, 15.0, 8.2]
 
 
 
@@ -63,18 +63,23 @@ def import_data(dir_data,
 
     return data
 
+def import_data(
+    imagename):
+
+
 
 #####################
 ### parameters
 #####################
 for i in range(len(gals)):
     galname = gals[i]
+    beamp = str(beam[i]).replace(".","p").zfill(4)
     dir_co21 = dir_data + galname + "_co21/"
     dir_r21 = dir_data + galname + "_r21/"
-    dir_wise = dir_data + galname + "_co21/"
+    dir_wise = dir_data + galname + "_wise/"
 
-
-
-
+    # import data
+    data_ra = import_data(dir_co21,galname,"co21",beamp,"moment0","coords","ra")
+    data_dec = import_data(dir_co21,galname,"co21",beamp,"moment0","coords","dec",1)
 
 
