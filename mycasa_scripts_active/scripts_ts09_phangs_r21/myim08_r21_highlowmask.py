@@ -8,21 +8,18 @@ import scripts_phangs_r21 as r21
 ### Parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-galaxy = ["ngc0628",
-          "ngc4321",
-          #"ngc4254",
-          "ngc3627"]
+gals = ["ngc0628", "ngc3627", "ngc4321"]
+beam = [13.6, 15.0, 8.2]
 
 
 #####################
 ### Main
 #####################
-for i in range(len(galaxy)):
+for i in range(len(gals)):
     # import data for r21 map
-    galname = galaxy[i]
-    r21images = glob.glob(dir_proj + galname + "_r21/r21*.moment0")
-    r21images.sort()
-    r21image = r21images[0]
+    galname = gals[i]
+    beamp = str(beam[i]).replace(".","p").zfill(4)
+    r21image = glob.glob(dir_proj + galname + "_r21/r21_"+beamp+".moment0")[0]
 
     shape = imhead(r21image,mode="list")["shape"]
     box = "0,0,"+str(shape[0]-1)+","+str(shape[1]-1)
