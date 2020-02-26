@@ -34,10 +34,10 @@ def import_data(
     image_r = imhead(imagename,mode="list")["shape"][0] - 1
     image_t = imhead(imagename,mode="list")["shape"][1] - 1
     value = imval(imagename,box="0,0,"+str(image_r)+","+str(image_t))
-     if mode=="coords":
-          value_masked = value[mode][:,:,index]
-     else:
-          value_masked = value[mode]
+    if mode=="coords":
+        value_masked = value[mode][:,:,index]
+    else:
+          alue_masked = value[mode]
 
     value_masked_1d = value_masked.flatten()
 
@@ -56,14 +56,13 @@ for i in range(len(gals)):
 
     # imagename
     image_co21 = glob.glob(dir_co21 + "co21_"+beamp+".moment0")[0]
-    image_r21 = glob.glob(dir_co21 + "r21_"+beamp+".moment0")[0]
-    image_w1 = glob.glob(dir_co21 + "co21_"+beamp+".moment0")[0]
+    image_r21 = glob.glob(dir_r21 + "r21_"+beamp+".moment0")[0]
+    image_w1 = glob.glob(dir_wise + galname+"_w1_gauss"+beamp+".image")[0]
+    image_w2 = glob.glob(dir_wise + galname+"_w2_gauss"+beamp+".image")[0]
+    image_w3 = glob.glob(dir_wise + galname+"_w3_gauss"+beamp+".image")[0]
 
     # import data
-    data_ra = import_data(
-        imagename = dir_co21 + )
-
-    data_ra = import_data(dir_co21,galname,"co21",beamp,"moment0","coords","ra")
-    data_dec = import_data(dir_co21,galname,"co21",beamp,"moment0","coords","dec",1)
+    data_ra = import_data(imagename=image_co21,mode="coords")
+    data_dec = import_data(imagename=image_co21,mode="coords",index=1)
 
 
