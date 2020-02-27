@@ -104,7 +104,6 @@ for i in range(len(gals)):
     data_w2 = import_data(imagename=image_w2,mode="data")
     data_w3 = import_data(imagename=image_w3,mode="data")
 
-    np.set_printoptions(precision=4)
     data_all = np.c_[
         data_dist,data_r21,data_co21,data_tpeak,data_disp,data_w1,data_w2,data_w3]
 

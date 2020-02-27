@@ -324,7 +324,7 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
     vch = abs(imhead(cubeimage,mode="list")["cdelt4"]) / 115.27120e9 * 299792.458
            
     immath(imagename = cubeimage+".masked",
-           expr = "iif( IM0>0, 1/" + str(vch) + ", 0.0)",
+           expr = "iif( IM0>0, 1.0/" + str(vch) + ", 0.0)",
            outfile = cubeimage+".maskedTF")
 
     immoments(imagename = cubeimage+".maskedTF",
@@ -333,7 +333,7 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
 
     beamarea_pix = tsbeam_area(dir_image+name_line+".moment0.noise_tmp")
     immath(dir_image+name_line+".moment0.noise_tmp",
-           expr = "10*sqrt(IM0)*"+str(noise),#+"/"+str(np.sqrt(beamarea_pix)),
+           expr = str(vch)+"*sqrt(IM0)*"+str(noise),#+"/"+str(np.sqrt(beamarea_pix)),
            outfile = dir_image+name_line+"_"+beamp+".moment0.noise")
 
     immoments(imagename = cubeimage+".masked",
