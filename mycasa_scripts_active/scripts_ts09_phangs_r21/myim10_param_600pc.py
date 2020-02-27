@@ -107,14 +107,18 @@ for i in range(len(gals)):
     data_w3 = import_data(imagename=image_w3,mode="data")
 
     # calc r21 error
-    
+    data_co10snr = import_data(imagename=image_co10_snr,mode="data")
+    data_co21snr = import_data(imagename=image_co21_snr,mode="data")
+    data_r21err = data_r21 \
+        * np.sqrt((1.0/data_co10snr)**2 + (1.0/data_co21snr)**2)
+    data_r21err[np.isnan(data_r21err)] = 0
 
     data_all = np.c_[
-        data_dist,data_r21,data_co21,data_tpeak,data_disp,data_w1,data_w2,data_w3]
+        data_dist,data_r21,data_r21err,data_co21,data_tpeak,data_disp,data_w1,data_w2,data_w3]
 
     np.savetxt(
         galname+"_parameter_600pc.txt",
         data_all,
-        header = "distance(pc) r21 co21(Jy/b.km/s) peak(Jy/b) disp(km/s) w1(Jy/b) w2(Jy/b) w3(Jy/b)"
+        header = "distance(pc) r21 r21err co21(Jy/b.km/s) peak(Jy/b) disp(km/s) w1(Jy/b) w2(Jy/b) w3(Jy/b)"
         )
 
