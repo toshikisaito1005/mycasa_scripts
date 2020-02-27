@@ -137,19 +137,3 @@ for i in range(len(gals)):
     xlabel = "log $\sigma_{CO(2-1)}$ (km s$^{-1}$)"
     plotter(dir_product,galname,parameter,output,xlim,ylim,xlabel)
 
-    # plot; wise3
-    parameter = np.log10(wise3)
-    output = "wise3"
-    xlim = [-3.5,0.0]
-    ylim = [0,0.28]
-    xlabel = "log WISE3 (Jy/b)"
-    plotter(dir_product,galname,parameter,output,xlim,ylim,xlabel)
-
-    # plot; wise3
-    parameter = np.log10(wise3/wise1)
-    output = "wiseratio"
-    xlim = [-1.0,1.0]
-    ylim = [0,0.28]
-    xlabel = "log WISE3 (Jy/b)"
-    plotter(dir_product,galname,parameter,output,xlim,ylim,xlabel)
-
