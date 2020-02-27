@@ -44,6 +44,10 @@ def hist_percent(histo,percent):
 for i in range(len(gals)):
     galname = gals[i]
     data = np.loadtxt(dir_data + galname + "_parameter_600pc.txt")
+      # galactocentric distance
+    distance = data[:,0] # pc
+    dist25_pc = dist25[i] * 60 * scales[i]
+    galdist = distance / dist25_pc
     # median-subtracted r21
     r21 = data[:,1]
     med_r21 = np.median(r21[r21>0])
@@ -57,11 +61,14 @@ for i in range(len(gals)):
     wise3 = data[:,10]
     # r21 mask
     r21mask = data[:,11]
+
     # cut data
     cut_r21 = (r21 > 0)
     cut_co21 = (co21 > co21.max() * percents[i])
     cut_all = np.where((cut_r21) & (cut_co21))
 
+    galdist = galdist[cut_all]
+    r21mask = r21mask[cut_all]
     norm_r21 = norm_r21[cut_all]
     co21 = co21[cut_all]
     wise1 = wise1[cut_all]
@@ -71,10 +78,12 @@ for i in range(len(gals)):
     # plot
     figure = plt.figure(figsize=(9,3))
     plt.rcParams["font.size"] = 16
-    plot.grid(axis = "x")
+    plt.grid(axis = "x")
+    plt.hist(galdist[r21mask==-1])
     
+    plt.savefig(dir_product+"fig10_"+galname+"_dist.png",dpi=200)
 
-
+"""
 ax1.grid(axis = "x")
 ax1.legend(ncol=2, loc="upper right")
 #ax1.set_xlim([0,1])
@@ -87,3 +96,4 @@ ax1.set_title("$R_{21}$/$Med(R_{21})$ vs. WISE1")
 plt.savefig(dir_product+"radial_r21_vs_wise1.png",dpi=200)
 
 os.system("rm -rf *.last")
+"""

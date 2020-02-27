@@ -1,22 +1,13 @@
-       9 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim10_param_600pc.py
+       9 - mycasa_scripts_active/scripts_ts09_phangs_r21/ngc0628_parameter_600pc.txt
+       7 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig00_all_final_eps.sh
        6 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig07a_radial.py
        5 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21.py
-       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/ngc4321_parameter_600pc.txt
-       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/ngc0628_parameter_600pc.txt
+       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim10_extract_param_600pc.py
        5 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig07b_radial_norm.py
-       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig00_all_final_eps.sh
-       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.lock
-       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.info
-       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.f0_TSM0
-       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.f0
-       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.dat
-       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.lock
-       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.info
-       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.f0_TSM0
-       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.f0
-       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.dat
-       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/ngc3627_parameter_600pc.txt
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21.pyc
+       2 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig10_separate_histo.py
+       2 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig09c_r21_vs_wise3.py
+       2 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig09b_r21_vs_wise2.py
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig09a_r21_vs_wise1.py
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig08c_r21_vs_co21_disp.py
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig08b_r21_vs_co21_tpeak.py
