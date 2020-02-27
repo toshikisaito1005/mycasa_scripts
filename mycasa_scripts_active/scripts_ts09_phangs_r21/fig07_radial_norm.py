@@ -47,8 +47,8 @@ ax2b = ax2.twinx()
 plt.rcParams["font.size"] = 16
 
 histdata = []
-#for i in range(len(gals)):
-for i in range(len([0])):
+for i in range(len(gals)):
+#for i in range(len([0])):
     galname = gals[i]
     data = np.loadtxt(dir_data + galname + "_parameter_600pc.txt")
     # galactocentric distance
@@ -68,7 +68,7 @@ for i in range(len([0])):
     cut_r21 = (r21 > 0)
     galdist = galdist[cut_r21]
     norm_r21 = norm_r21[cut_r21] # r21 = r21[cut_r21]
-    norm_r21snr = norm_r21snr[cut_r21]
+    r21snr = r21snr[cut_r21]
     # radial binning
     n, _ = np.histogram(galdist, bins=nbins)
     sy, _ = np.histogram(galdist, bins=nbins, weights=norm_r21)
@@ -76,16 +76,17 @@ for i in range(len([0])):
     mean = sy / n
     std = np.sqrt(sy2/n - mean*mean)
 
+    """
     ax1.plot(
         (_[1:] + _[:-1])/2, mean,
         color=cm.brg(i/2.5), lw=7, alpha=0.5,
         label = galname.replace("ngc","NGC ")
         )
+    """
     ax1.scatter(
-        galdist, norm_r21,
-        c = norm_r21snr, # color=cm.brg(i/2.5),
-        cmap = "PuBu",
-        lw=0, alpha=0.2,
+        galdist[r21snr>5], norm_r21[r21snr>5],
+        color=cm.brg(i/2.5),
+        lw=0, alpha=0.2, s=50,
         label = galname.replace("ngc","NGC "))
 
     histdata.extend(norm_r21.tolist())
@@ -106,12 +107,13 @@ ax2.plot([0,dathist[0].max()*1.25],[range_p,range_p],
 
 ax1.grid()
 ax1.legend(ncol=2)
-ax1.set_ylim([0,5])
+ax1.set_xlim([0,1])
+ax1.set_ylim([0,2])
 ax1.set_xlabel("r/r25")
 ax1.set_ylabel("$R_{21}$/$Med(R_{21})$")
 
-ax2.set_ylim([0,5])
-ax2b.set_ylim([0,5])
+ax2.set_ylim([0,2])
+ax2b.set_ylim([0,2])
 ax2.grid(axis="both")
 ax2.tick_params(labelbottom=False,labelleft=False,labeltop=False)
 ax2b.tick_params(labelbottom=False,labelleft=False,labeltop=False)
