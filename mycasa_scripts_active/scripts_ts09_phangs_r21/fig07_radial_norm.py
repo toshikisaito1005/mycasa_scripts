@@ -86,7 +86,7 @@ for i in range(len([0,1])):
         )
     """
     ax1.scatter(
-        galdist, norm_r21,
+        galdist, r21,
         color=cm.brg(i/2.5),
         lw=0, alpha=0.2, s=50,
         label = galname.replace("ngc","NGC "))
