@@ -87,5 +87,7 @@ rm -rf 600x570+75+20 $dir_data"ngc4321_r21_mask.png" $dir_data"ngc4321_r21_maskb
 
 
 ### figure 7
+convert -crop 1500x1500+70+100 $dir_data"radial_norm_r21.png" $dir_data"radial_norm_r21b.png"
+
 ### figure 8
 
