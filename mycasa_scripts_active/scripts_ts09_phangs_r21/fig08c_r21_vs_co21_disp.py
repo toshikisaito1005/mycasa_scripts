@@ -21,7 +21,7 @@ dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
 dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
-nbins = 5
+nbins = 4
 percents = [0.15,0.025,0.010]
 
 #####################
@@ -53,7 +53,7 @@ for i in range(len(gals)):
     med_r21 = np.median(r21[r21>0])
     norm_r21 = r21 / med_r21
     # co21
-    tpeak = data[:,6]
+    disp = data[:,7]
     co21 = data[:,4]
     co21snr = data[:,5]
     # cut data
@@ -62,11 +62,11 @@ for i in range(len(gals)):
     cut_all = np.where((cut_r21) & (cut_co21))
 
     norm_r21 = norm_r21[cut_all]
-    tpeak = tpeak[cut_all]
+    disp = disp[cut_all]
     # radial binning
-    n, _ = np.histogram(tpeak, bins=nbins)
-    sy, _ = np.histogram(tpeak, bins=nbins, weights=norm_r21)
-    sy2, _ = np.histogram(tpeak, bins=nbins, weights=norm_r21*norm_r21)
+    n, _ = np.histogram(disp, bins=nbins)
+    sy, _ = np.histogram(disp, bins=nbins, weights=norm_r21)
+    sy2, _ = np.histogram(disp, bins=nbins, weights=norm_r21*norm_r21)
     mean = sy / n
     std = np.sqrt(sy2/n - mean*mean)
 
@@ -77,10 +77,9 @@ for i in range(len(gals)):
         )
     """
     ax1.scatter(
-        co21, norm_r21,
+        disp, norm_r21,
         color=cm.brg(i/2.5),
-        lw=0, alpha=0.2, s=50,
-        label = galname.replace("ngc","NGC "))
+        lw=0, alpha=0.2, s=50)
     """
 
 ax1.grid()
