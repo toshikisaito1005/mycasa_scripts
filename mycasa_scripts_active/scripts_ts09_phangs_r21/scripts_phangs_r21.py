@@ -369,7 +369,7 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
            expr = "iif( IM0>=" + str(peak*percent) + ", IM1, 0.0)",
            outfile = dir_image+name_line+"_"+beamp+".moment8")
 
-    immath(imagenname = [dir_image+name_line+"_"+beamp+".moment0",
+    immath(imagename = [dir_image+name_line+"_"+beamp+".moment0",
                          dir_image+name_line+"_"+beamp+".moment0.noise"],
            expr = "IM0/IM1",
            outfile = dir_image+name_line+"_"+beamp+".moment0.snratio")
