@@ -82,6 +82,7 @@ for i in range(len(gals)):
     co21 = data[:,4]
     co21snr = data[:,5]
     tpeak = data[:,6]
+    disp = data[:,7]
     # wise
     wise1 = data[:,8]
     wise2 = data[:,9]
@@ -99,6 +100,7 @@ for i in range(len(gals)):
     norm_r21 = norm_r21[cut_all]
     co21 = co21[cut_all]
     tpeak = tpeak[cut_all]
+    disp = disp[cut_all]
     wise1 = wise1[cut_all]
     wise2 = wise2[cut_all]
     wise3 = wise3[cut_all]
@@ -122,8 +124,16 @@ for i in range(len(gals)):
     # plot; co21 tpeak
     parameter = np.log10(tpeak)
     output = "co21_tpeak"
-    xlim = [-1.0,1.5]
-    ylim = [0,0.25]
+    xlim = [-1.0,1.2]
+    ylim = [0,0.20]
     xlabel = "log $T_{CO(2-1)}$ (currently Jy/b)"
+    plotter(dir_product,galname,parameter,output,xlim,ylim,xlabel)
+
+    # plot; co21 disp
+    parameter = np.log10(disp)
+    output = "co21_disp"
+    xlim = [0.0,2.0]
+    ylim = [0,0.25]
+    xlabel = "log $\sigma_{CO(2-1)}$ (km s$^{-1}$)"
     plotter(dir_product,galname,parameter,output,xlim,ylim,xlabel)
 
