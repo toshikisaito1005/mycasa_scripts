@@ -41,13 +41,14 @@ def hist_percent(histo,percent):
 for i in range(len(gals)):
     galname = gals[i]
     data = np.loadtxt(dir_data + galname + "_parameter_600pc.txt")
-    # r/r25
-    distance = data[;,0]
-
-
-
-    r21 = data[;,1]
-
+    # galactocentric distance
+    distance = data[:,0] # pc
+    dist25_pc = dist25[i] * 60 * scales[i]
+    galdist = distance / dist25_pc
+    #
+    r21 = data[:,1]
+    med_r21 = np.median(r21[r21>0])
+    norm_r21 = r21 - med_r21
 
 
 
