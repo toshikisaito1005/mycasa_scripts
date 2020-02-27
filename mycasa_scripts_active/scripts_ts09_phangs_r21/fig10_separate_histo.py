@@ -133,7 +133,15 @@ for i in range(len(gals)):
     parameter = np.log10(disp)
     output = "co21_disp"
     xlim = [0.0,2.0]
-    ylim = [0,0.25]
+    ylim = [0,0.35]
     xlabel = "log $\sigma_{CO(2-1)}$ (km s$^{-1}$)"
+    plotter(dir_product,galname,parameter,output,xlim,ylim,xlabel)
+
+    # plot; wise3
+    parameter = np.log10(wise3)
+    output = "wise3"
+    xlim = [-3.5,0.0]
+    ylim = [0,0.28]
+    xlabel = "log WISE3 (Jy/b)"
     plotter(dir_product,galname,parameter,output,xlim,ylim,xlabel)
 
