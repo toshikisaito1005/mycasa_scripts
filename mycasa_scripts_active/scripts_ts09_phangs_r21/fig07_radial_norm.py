@@ -48,8 +48,7 @@ ax2b = ax2.twinx()
 plt.rcParams["font.size"] = 16
 
 histdata = []
-for i in range(len(gals)):
-for i in range(len([0])):
+for i in range(len([0,1])):
     galname = gals[i]
     data = np.loadtxt(dir_data + galname + "_parameter_600pc.txt")
     # galactocentric distance
