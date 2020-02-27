@@ -8,10 +8,10 @@ import matplotlib.pyplot as plt
 plt.ioff()
 
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-data_image = glob.glob(dir_data + "*/*_04p0*moment0")
-data_image.extend(glob.glob(dir_data + "*/*_04p0*moment8"))
-data2_image = glob.glob(dir_data + "*/*_08p0*moment0")
-data2_image.extend(glob.glob(dir_data + "*/*_08p0*moment0"))
+data_image = glob.glob(dir_data + "*/*_04p0*moment0_Kelvin")
+data_image.extend(glob.glob(dir_data + "*/*_04p0*moment8_Kelvin"))
+data2_image = glob.glob(dir_data + "*/*_08p0*moment0_Kelvin")
+data2_image.extend(glob.glob(dir_data + "*/*_08p0*moment0_Kelvin"))
 data_image = np.r_[data_image, data2_image]
 data_image.sort()
 
@@ -36,8 +36,8 @@ value = None
 
 ###12CO(1-0)
 # moment 0 color + moment 0 contour
-imagename_contour = "ngc0628_co10/co10_04p0.moment0.fits"
-imagename_color = "ngc0628_co10/co10_04p0.moment0.fits"
+imagename_contour = "ngc0628_co10/co10_04p0.moment0_Kelvin.fits"
+imagename_color = "ngc0628_co10/co10_04p0.moment0_Kelvin.fits"
 contour = [0.08, 0.16, 0.32, 0.64, 0.96]
 title = "$^{12}$CO (1-0) Integrated Intensity"
 colorscale = "PuBu"
@@ -68,8 +68,8 @@ myim.fits2eps(dir_data = dir_data,
 
 ### 12CO(2-1)
 # moment 0 color + moment 0 contour
-imagename_contour = "ngc0628_co21/co21_04p0.moment0.fits"
-imagename_color = "ngc0628_co21/co21_04p0.moment0.fits"
+imagename_contour = "ngc0628_co21/co21_04p0.moment0_Kelvin.fits"
+imagename_color = "ngc0628_co21/co21_04p0.moment0_Kelvin.fits"
 contour = [0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
 title = "$^{12}$CO (2-1) Integrated Intensity"
 colorscale = "OrRd"
@@ -99,7 +99,7 @@ myim.fits2eps(dir_data = dir_data,
 # R21 color + CO(2-1) moment 0 contour
 color_contour = "grey"
 color_beam = "grey"
-imagename_contour = "ngc0628_co21/co21_04p0.moment0.fits"
+imagename_contour = "ngc0628_co21/co21_04p0.moment0_Kelvin.fits"
 imagename_color = "ngc0628_r21/r21_04p0.moment0.fits"
 contour = [0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
 title = "Integrated Intensity Ratio"
@@ -138,8 +138,8 @@ value = None
 
 ###12CO(1-0)
 # moment 0 color + moment 0 contour
-imagename_contour = "ngc4321_co10/co10_04p0.moment0.fits"
-imagename_color = "ngc4321_co10/co10_04p0.moment0.fits"
+imagename_contour = "ngc4321_co10/co10_04p0.moment0_Kelvin.fits"
+imagename_color = "ngc4321_co10/co10_04p0.moment0_Kelvin.fits"
 contour = [0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
 title = "$^{12}$CO (1-0) Integrated Intensity"
 colorscale = "PuBu"
@@ -169,8 +169,8 @@ myim.fits2eps(dir_data = dir_data,
 
 ### 12CO(2-1)
 # moment 0 color + moment 0 contour
-imagename_contour = "ngc4321_co21/co21_04p0.moment0.fits"
-imagename_color = "ngc4321_co21/co21_04p0.moment0.fits"
+imagename_contour = "ngc4321_co21/co21_04p0.moment0_Kelvin.fits"
+imagename_color = "ngc4321_co21/co21_04p0.moment0_Kelvin.fits"
 contour = [0.01, 0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
 title = "$^{12}$CO (2-1) Integrated Intensity"
 colorscale = "OrRd"
@@ -200,7 +200,7 @@ myim.fits2eps(dir_data = dir_data,
 # R21 color + CO(2-1) moment 0 contour
 color_contour = "grey"
 color_beam = "grey"
-imagename_contour = "ngc4321_co21/co21_04p0.moment0.fits"
+imagename_contour = "ngc4321_co21/co21_04p0.moment0_Kelvin.fits"
 imagename_color = "ngc4321_r21/r21_04p0.moment0.fits"
 contour = [0.01, 0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
 title = "$^{12}$CO Integrated Intensity Ratio"
@@ -229,6 +229,7 @@ myim.fits2eps(dir_data = dir_data,
               ylim = ylim,
               clim = clim)
 
+"""
 ### R21
 # R21 color + CO(2-1) moment 0 contour
 color_contour = "grey"
@@ -261,7 +262,7 @@ myim.fits2eps(dir_data = dir_data,
               xlim = xlim,
               ylim = ylim,
               clim = clim)
-
+"""
 
 ### ngc3627
 ra_center = "11:20:15.35"
@@ -272,8 +273,8 @@ value = None
 
 ###12CO(1-0)
 # moment 0 color + moment 0 contour
-imagename_contour = "ngc3627_co10/co10_08p0.moment0.fits"
-imagename_color = "ngc3627_co10/co10_08p0.moment0.fits"
+imagename_contour = "ngc3627_co10/co10_08p0.moment0_Kelvin.fits"
+imagename_color = "ngc3627_co10/co10_08p0.moment0_Kelvin.fits"
 contour = [0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
 title = "$^{12}$CO (1-0) Integrated Intensity"
 colorscale = "PuBu"
@@ -304,8 +305,8 @@ myim.fits2eps(dir_data = dir_data,
 
 ### 12CO(2-1)
 # moment 0 color + moment 0 contour
-imagename_contour = "ngc3627_co21/co21_08p0.moment0.fits"
-imagename_color = "ngc3627_co21/co21_08p0.moment0.fits"
+imagename_contour = "ngc3627_co21/co21_08p0.moment0_Kelvin.fits"
+imagename_color = "ngc3627_co21/co21_08p0.moment0_Kelvin.fits"
 contour = [0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
 title = "$^{12}$CO (2-1) Integrated Intensity"
 colorscale = "OrRd"
@@ -333,7 +334,7 @@ myim.fits2eps(dir_data = dir_data,
 
 ### R21
 # R21 color + CO(2-1) moment 0 contour
-imagename_contour = "ngc3627_co21/co21_08p0.moment0.fits"
+imagename_contour = "ngc3627_co21/co21_08p0.moment0_Kelvin.fits"
 imagename_color = "ngc3627_r21/r21_08p0.moment0.fits"
 contour = [0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
 title = "$^{12}$CO (2-1)/$^{12}$CO (1-0) Line Ratio"
