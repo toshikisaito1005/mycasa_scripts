@@ -77,6 +77,7 @@ for i in range(len(gals)):
 
     # imagename
     image_co21 = glob.glob(dir_co21 + "co21_"+beamp+".moment0")[0]
+    image_tpeak = glob.glob(dir_co21 + "co21_"+beamp+".moment8")[0]
     image_r21 = glob.glob(dir_r21 + "r21_"+beamp+".moment0")[0]
     image_r21mask = glob.glob(dir_r21 + "r21_"+beamp+".moment0.highlowmask")[0]
     image_w1 = glob.glob(dir_wise + galname+"_w1_gauss"+beamp+".image")[0]
@@ -86,14 +87,20 @@ for i in range(len(gals)):
     # import data
     data_ra = import_data(imagename=image_co21,mode="coords")
     data_dec = import_data(imagename=image_co21,mode="coords",index=1)
+    data_dist = distance(
+        data_ra, data_dec, pas[i], incs[i], cnt_ras[i], cnt_decs[i], scales[i])
+
     data_co21 = import_data(imagename=image_co21,mode="data")
+    data_tpeak = import_data(imagename=image_tpeak,mode="data")
+    data_disp = data_co21 / (np.sqrt(2*pi) * data_tpeak)
+    data_disp[np.isnan(data_disp)] = 0
+
     data_r21 = import_data(imagename=image_r21,mode="data")
     data_w1 = import_data(imagename=image_w1,mode="data")
     data_w2 = import_data(imagename=image_w2,mode="data")
     data_w3 = import_data(imagename=image_w3,mode="data")
-    data_dist = distance(
-        data_ra, data_dec, pas[i], incs[i], cnt_ras[i], cnt_decs[i], scales[i])
 
-    data_all = np.c_[data_dist,data_co21]
+    data_all = np.c_[
+        data_dist,data_r21,data_co21,data_tpeak,data_disp,data_w1,data_w2,data_w3]
 
 
