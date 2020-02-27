@@ -20,7 +20,11 @@ snr = 5
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 gals = ["ngc0628", "ngc3627", "ngc4321"]
 beam = [13.6, 15.0, 8.2]
-
+scales = [44/1.0, 52/1.3, 103/1.4]
+cnt_ras = [24.174, 170.063, 185.729]
+cnt_decs = [15.783, 12.9914, 15.8223]
+pas = [180-21.1, 180-172.4, 180-157.8]
+incs = [90-8.7, 90-56.2, 90-35.1]
 
 
 #####################
@@ -87,6 +91,7 @@ for i in range(len(gals)):
     data_w1 = import_data(imagename=image_w1,mode="data")
     data_w2 = import_data(imagename=image_w2,mode="data")
     data_w3 = import_data(imagename=image_w3,mode="data")
-
+    data_dist = distance(
+        data_ra, data_dec, pas[i], incas[i], ra_cnt[i], dec_cnt[i], scales[i])
 
 
