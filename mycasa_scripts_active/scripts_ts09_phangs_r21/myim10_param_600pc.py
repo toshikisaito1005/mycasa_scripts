@@ -42,7 +42,7 @@ def import_data(
     value = imval(imagename,box="0,0,"+str(image_r)+","+str(image_t))
 
     if mode=="coords":
-        value_masked = value[mode][:,:,index]
+        value_masked = value[mode][:,:,index] * 180 / pi
     else:
         value_masked = value[mode]
 
@@ -92,6 +92,8 @@ for i in range(len(gals)):
     data_w2 = import_data(imagename=image_w2,mode="data")
     data_w3 = import_data(imagename=image_w3,mode="data")
     data_dist = distance(
-        data_ra, data_dec, pas[i], incas[i], ra_cnt[i], dec_cnt[i], scales[i])
+        data_ra, data_dec, pas[i], incs[i], cnt_ras[i], cnt_decs[i], scales[i])
+
+    data_all = np.c_[data_dist,data_co21]
 
 
