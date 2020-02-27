@@ -137,10 +137,12 @@ ylim = [100, -100]
 value = None
 
 ###12CO(1-0)
+co10max = imstat(dir_data+"ngc4321_co10/co10_04p0.moment0_Kelvin")["max"][0]
+co21max = imstat(dir_data+"ngc4321_co21/co21_04p0.moment0_Kelvin")["max"][0]
 # moment 0 color + moment 0 contour
 imagename_contour = "ngc4321_co10/co10_04p0.moment0_Kelvin.fits"
 imagename_color = "ngc4321_co10/co10_04p0.moment0_Kelvin.fits"
-contour = [0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
+contour = np.array([0.01, 0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]) / co10max * co21max
 title = "$^{12}$CO (1-0) Integrated Intensity"
 colorscale = "PuBu"
 color_contour = "black"
@@ -272,6 +274,8 @@ ylim = [160, -110]
 value = None
 
 ###12CO(1-0)
+co10max = imstat(dir_data+"ngc3627_co10/co10_08p0.moment0_Kelvin")["max"][0]
+co21max = imstat(dir_data+"ngc3627_co21/co21_08p0.moment0_Kelvin")["max"][0]
 # moment 0 color + moment 0 contour
 imagename_contour = "ngc3627_co10/co10_08p0.moment0_Kelvin.fits"
 imagename_color = "ngc3627_co10/co10_08p0.moment0_Kelvin.fits"
