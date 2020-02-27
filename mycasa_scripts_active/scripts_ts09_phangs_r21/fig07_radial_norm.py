@@ -38,6 +38,14 @@ def hist_percent(histo,percent):
 #####################
 ### main
 #####################
+figure = plt.figure(figsize=(9,9))
+gs = gridspec.GridSpec(nrows=9, ncols=9)
+ax1 = plt.subplot(gs[0:7,0:7])
+ax2 = plt.subplot(gs[0:7,7:9])
+ax2b = ax2.twinx()
+plt.rcParams["font.size"] = 16
+
+histodata = []
 for i in range(len(gals)):
     galname = gals[i]
     data = np.loadtxt(dir_data + galname + "_parameter_600pc.txt")
@@ -45,38 +53,22 @@ for i in range(len(gals)):
     distance = data[:,0] # pc
     dist25_pc = dist25[i] * 60 * scales[i]
     galdist = distance / dist25_pc
-    #
+    # median-subtracted r21
     r21 = data[:,1]
     med_r21 = np.median(r21[r21>0])
     norm_r21 = r21 - med_r21
+    # cut data
+    cut_r21 = (r21 > 0)
+    galdist = galdist[cut_r21]
+    norm_r21 = norm_r21[cut_r21]
+
+    ax1.plot(
+        galdist, norm_r21, color=cm.brg(i/2.5), lw=7, alpha=0.5,
+             label = galname.replace("ngc","NGC "))
+
+    histdata.extend(norm_r21.tolist())
 
 
-
-medians = [0.567146319177,
-           0.694100944171,
-           #0.620322003718,
-           0.438006423556]
-
-
-figure = plt.figure(figsize=(9,9))
-gs = gridspec.GridSpec(nrows=9, ncols=9)
-ax1 = plt.subplot(gs[0:7,0:7])
-ax2 = plt.subplot(gs[0:7,7:9])
-ax2b = ax2.twinx()
-plt.rcParams["font.size"] = 16
-histdata = []
-for i in range(len(gals)):
-    data = np.loadtxt(glob.glob(dir_data + gals[i] + "_wise/radial_r21.txt")[0])
-    dist = data[:,0]
-    r21 = data[:,1] / medians[i]
-    yerr = data[:,2] / medians[i]
-
-    data = np.loadtxt(glob.glob(dir_data + gals[i] + "_wise/radial_r21_rawdata.txt")[0])
-
-    ax1.plot(dist,r21,color=cm.brg(i/3.5),lw=7,alpha=0.5,
-             label = gals[i].replace("ngc","NGC "))
-
-    histdata.extend((data / medians[i]).tolist())
 
 dathist = ax2.hist(histdata,orientation="horizontal",range=[0,2],
                    bins=100,lw=0,color="grey",alpha=0.6)
