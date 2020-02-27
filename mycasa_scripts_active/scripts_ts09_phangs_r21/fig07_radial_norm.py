@@ -17,7 +17,9 @@ plt.ioff()
 ### parameters
 #####################
 dir_data = "/Users/saito/data/mycasa_scripts_active/scripts_ts09_phangs_r21/"
-
+dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
+gals = ["ngc0628","ngc3627","ngc4321"]
+dist25 = []
 
 #####################
 ### functions
@@ -35,13 +37,15 @@ def hist_percent(histo,percent):
 #####################
 ### main
 #####################
+for i in range(len(gals)):
+    galname = gals[i]
+    data = np.loadtxt(dir_data + galname + "_parameter_600pc.txt")
+    distance = data[;,0]
+    r21 = data[;,1]
 
 
 
-gals = ["ngc0628",
-        "ngc3627",
-        #"ngc4254",
-        "ngc4321"]
+
 medians = [0.567146319177,
            0.694100944171,
            #0.620322003718,
