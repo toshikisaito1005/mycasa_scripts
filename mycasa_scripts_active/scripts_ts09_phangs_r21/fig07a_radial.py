@@ -79,9 +79,9 @@ for i in range(len(gals)):
     mean = sy / n
     std = np.sqrt(sy2/n - mean*mean)
 
-    ax1.plot(
-        (_[1:] + _[:-1])/2, mean,
-        color=cm.brg(i/2.5), lw=7, alpha=0.5,
+    ax1.errorbar(
+        (_[1:] + _[:-1])/2, mean, yerr=std,
+        color=cm.brg(i/2.5), lw=7, #alpha=0.5,
         label = galname.replace("ngc","NGC ")
         )
     """

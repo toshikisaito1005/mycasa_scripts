@@ -70,8 +70,8 @@ for i in range(len(gals)):
     std = np.sqrt(sy2/n - mean*mean)
 
     ax1.errorbar(
-        (_[1:] + _[:-1])/2, mean, yerr=std,  
-        color=cm.brg(i/2.5), lw=7, alpha=0.5,
+        (_[1:] + _[:-1])/2, mean, yerr=std,
+        color=cm.brg(i/2.5), lw=7, #alpha=0.5,
         label = galname.replace("ngc","NGC ")
         )
     """
@@ -90,7 +90,7 @@ ax1.set_ylim([0,2])
 ax1.set_xlabel("r/r25")
 ax1.set_ylabel("$R_{21}$/$Med(R_{21})$")
 
-ax1.set_title("Radial $R_{21}$/$Med(R_{21})$ Distribution")
+ax1.set_title("$R_{21}$/$Med(R_{21})$ vs. $I_{CO(2-1)}$")
 plt.savefig(dir_product+"radial_r21_vs_co21_mom0.png",dpi=200)
 
 os.system("rm -rf *.last")
