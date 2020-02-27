@@ -46,6 +46,20 @@ def import_data(
 
     return value_masked_1d
 
+def distance(x, y, pa, inc, ra_cnt, dec_cnt, scale):
+    tilt_cos = math.cos(math.radians(pa))
+    tilt_sin = math.sin(math.radians(pa))
+    
+    x_tmp = x - ra_cnt
+    y_tmp = y - dec_cnt
+    
+    x_new = (x_tmp*tilt_cos - y_tmp*tilt_sin)
+    y_new = (x_tmp*tilt_sin + y_tmp*tilt_cos) * 1/math.sin(math.radians(inc))
+    
+    r = np.sqrt(x_new**2 + y_new**2) * 3600 * scale # arcsec * pc/arcsec
+    
+    return r
+
 
 #####################
 ### parameters
