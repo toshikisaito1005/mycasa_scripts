@@ -22,7 +22,7 @@ gals = ["ngc0628","ngc3627","ngc4321"]
 dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
 nbins = 8
-percents = [0.1,0.01,0.01]
+percents = [0.1,0.02,0.01]
 
 #####################
 ### functions
@@ -48,8 +48,8 @@ ax2b = ax2.twinx()
 plt.rcParams["font.size"] = 16
 
 histdata = []
-#for i in range(len(gals)):
-for i in range(len([0])):
+for i in range(len(gals)):
+#for i in range(len([0])):
     galname = gals[i]
     data = np.loadtxt(dir_data + galname + "_parameter_600pc.txt")
     # galactocentric distance
