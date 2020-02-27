@@ -1,11 +1,11 @@
 
-#execfile("myim03_mom_native.py")
+execfile("myim03_mom_native.py")
 execfile("myim04_multibeam.py")
 execfile("myim05_mom_multibeam.py")
 execfile("myim06_r21_map.py")
 execfile("myim07_sd_mom.py")
+execfile("myim08_r21_highlowmask.py")
+execfile("myim09_convolve_wise.py")
+execfile("myim10_param_600pc.py")
 
-execfile("fig01_images.py")
-execfile("fig02_missingflux.py")
-execfile("fig03a_co10_co21.py")
-execfile("fig03b_co10_co21.py")
+os.system("rm -rf tempalte.image")

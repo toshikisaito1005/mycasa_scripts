@@ -22,7 +22,7 @@ direction_decs = ["15.783deg",
                   "15.8223deg",
                   "12.9914deg"]
 beams = [[13.6],
-         [8.2],
+         [9.0],
          [15.0]]
 originalbeam = 7.5 # arcsec
 

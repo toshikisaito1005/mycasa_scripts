@@ -10,7 +10,7 @@ import scripts_phangs_r21 as r21
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 gals = ["ngc0628", "ngc3627", "ngc4321"]
 #beam = [4.0, 8.0, 4.0]
-beam = [13.6, 15.0, 8.2]
+beam = [13.6, 15.0, 9.0]#8.2]
 
 
 #####################
