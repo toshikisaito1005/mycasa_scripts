@@ -200,8 +200,6 @@ myim.fits2eps(dir_data = dir_data,
 
 ### R21
 # R21 color + CO(2-1) moment 0 contour
-color_contour = "grey"
-color_beam = "grey"
 imagename_contour = "ngc4321_co21/co21_04p0.moment0_Kelvin.fits"
 imagename_color = "ngc4321_r21/r21_04p0.moment0.fits"
 contour = [0.01, 0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
@@ -279,7 +277,7 @@ co21max = imstat(dir_data+"ngc3627_co21/co21_08p0.moment0_Kelvin")["max"][0]
 # moment 0 color + moment 0 contour
 imagename_contour = "ngc3627_co10/co10_08p0.moment0_Kelvin.fits"
 imagename_color = "ngc3627_co10/co10_08p0.moment0_Kelvin.fits"
-contour = [0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
+contour = np.array([0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]) / co10max * co21max
 title = "$^{12}$CO (1-0) Integrated Intensity"
 colorscale = "PuBu"
 color_contour = "black"
