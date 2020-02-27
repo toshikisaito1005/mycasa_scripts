@@ -16,7 +16,6 @@ plt.ioff()
 #####################
 ### parameters
 #####################
-snr = 3
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 gals = ["ngc0628", "ngc3627", "ngc4321"]
 beam = [13.6, 15.0, 9.5]
@@ -26,6 +25,9 @@ cnt_decs = [15.783, 12.9914, 15.8223]
 pas = [180-21.1, 180-172.4, 180-157.8]
 incs = [90-8.7, 90-56.2, 90-35.1]
 
+snr = 3.0
+co10rmss = [0.058,0.072,0.037]
+co21rmss = [0.039,0.028,0.031]
 
 #####################
 ### functions
@@ -72,10 +74,12 @@ for i in range(len(gals)):
     galname = gals[i]
     beamp = str(beam[i]).replace(".","p").zfill(4)
     dir_co21 = dir_data + galname + "_co21/"
+    dir_co10 = dir_data + galname + "_co10/"
     dir_r21 = dir_data + galname + "_r21/"
     dir_wise = dir_data + galname + "_wise/"
 
     # imagename
+    image_co10 = glob.glob(dir_co10 + "co10_"+beamp+".moment0")[0]
     image_co21 = glob.glob(dir_co21 + "co21_"+beamp+".moment0")[0]
     image_tpeak = glob.glob(dir_co21 + "co21_"+beamp+".moment8")[0]
     image_r21 = glob.glob(dir_r21 + "r21_"+beamp+".moment0")[0]
