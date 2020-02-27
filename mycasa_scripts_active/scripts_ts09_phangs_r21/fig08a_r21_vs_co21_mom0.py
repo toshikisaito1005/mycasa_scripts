@@ -87,7 +87,7 @@ ax1.legend(ncol=2, loc="upper right")
 #ax1.set_xlim([0,1])
 ax1.set_xscale("log")
 ax1.set_ylim([0,2])
-ax1.set_xlabel("r/r25")
+ax1.set_xlabel("$I_{CO(2-1)}$ (currently Jy/b, change to K)")
 ax1.set_ylabel("$R_{21}$/$Med(R_{21})$")
 
 ax1.set_title("$R_{21}$/$Med(R_{21})$ vs. $I_{CO(2-1)}$")
