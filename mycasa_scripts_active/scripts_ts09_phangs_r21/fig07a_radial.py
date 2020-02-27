@@ -114,7 +114,7 @@ ax1.legend(ncol=2)
 ax1.set_xlim([0,1])
 ax1.set_ylim([0,2])
 ax1.set_xlabel("r/r25")
-ax1.set_ylabel("$R_{21}$/$Med(R_{21})$")
+ax1.set_ylabel("$R_{21}$")
 
 ax2.set_ylim([0,2])
 ax2b.set_ylim([0,2])

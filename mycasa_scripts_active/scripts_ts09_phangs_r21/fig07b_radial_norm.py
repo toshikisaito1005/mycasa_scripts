@@ -126,6 +126,7 @@ ax2.spines["left"].set_visible(False)
 ax2.spines["bottom"].set_visible(False)
 ax2b.set_ylabel("$R_{21}$/$Med(R_{21})$")
 
+ax1.set_title("Radial $R_{21}$/$Med(R_{21})$ Distribution")
 plt.savefig(dir_product+"radial_norm_r21.png",dpi=200)
 
 os.system("rm -rf *.last")
