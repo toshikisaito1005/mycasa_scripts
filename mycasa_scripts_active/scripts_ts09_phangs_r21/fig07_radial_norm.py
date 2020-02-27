@@ -22,7 +22,7 @@ gals = ["ngc0628","ngc3627","ngc4321"]
 dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
 nbins = 8
-percents = [0.1,0.02,0.01]
+percents = [0.15,0.025,0.01]
 
 #####################
 ### functions
@@ -48,7 +48,7 @@ ax2b = ax2.twinx()
 plt.rcParams["font.size"] = 16
 
 histdata = []
-for i in range(len([0,1])):
+for i in range(len(gals)):
     galname = gals[i]
     data = np.loadtxt(dir_data + galname + "_parameter_600pc.txt")
     # galactocentric distance
@@ -70,7 +70,8 @@ for i in range(len([0,1])):
     cut_co21 = (co21 > co21.max() * percents[i])
     cut_all = np.where((cut_r21) & (cut_co10) & (cut_co21))
     galdist = galdist[cut_all]
-    norm_r21 = norm_r21[cut_all] # r21 = r21[cut_all]
+    norm_r21 = norm_r21[cut_all]
+    r21 = r21[cut_all]
     # radial binning
     n, _ = np.histogram(galdist, bins=nbins)
     sy, _ = np.histogram(galdist, bins=nbins, weights=norm_r21)
@@ -78,7 +79,6 @@ for i in range(len([0,1])):
     mean = sy / n
     std = np.sqrt(sy2/n - mean*mean)
 
-    """
     ax1.plot(
         (_[1:] + _[:-1])/2, mean,
         color=cm.brg(i/2.5), lw=7, alpha=0.5,
@@ -86,11 +86,11 @@ for i in range(len([0,1])):
         )
     """
     ax1.scatter(
-        galdist, r21,
+        galdist, norm_r21,
         color=cm.brg(i/2.5),
         lw=0, alpha=0.2, s=50,
         label = galname.replace("ngc","NGC "))
-
+    """
     histdata.extend(norm_r21.tolist())
 
 dathist = ax2.hist(
@@ -110,12 +110,12 @@ ax2.plot([0,dathist[0].max()*1.25],[range_p,range_p],
 ax1.grid()
 ax1.legend(ncol=2)
 ax1.set_xlim([0,1])
-ax1.set_ylim([0,5])
+ax1.set_ylim([0,2])
 ax1.set_xlabel("r/r25")
 ax1.set_ylabel("$R_{21}$/$Med(R_{21})$")
 
-ax2.set_ylim([0,5])
-ax2b.set_ylim([0,5])
+ax2.set_ylim([0,2])
+ax2b.set_ylim([0,2])
 ax2.grid(axis="both")
 ax2.tick_params(labelbottom=False,labelleft=False,labeltop=False)
 ax2b.tick_params(labelbottom=False,labelleft=False,labeltop=False)
