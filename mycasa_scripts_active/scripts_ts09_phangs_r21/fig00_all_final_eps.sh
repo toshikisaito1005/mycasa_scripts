@@ -95,6 +95,7 @@ convert +append -border 0x0 $dir_data"radial_r21b.png" $dir_data"radial_norm_r21
 rm -rf $dir_data"radial_norm_r21.png" $dir_data"radial_norm_r21b.png"
 rm -rf $dir_data"radial_r21.png" $dir_data"radial_r21b.png"
 
+
 ### figure 8
 convert -crop 1300x1330+70+100 $dir_data"radial_r21_vs_co21_mom0.png" $dir_data"radial_r21_vs_co21_mom0b.png"
 convert -crop 1300x1330+70+100 $dir_data"radial_r21_vs_co21_tpeak.png" $dir_data"radial_r21_vs_co21_tpeakb.png"
@@ -104,5 +105,7 @@ convert +append -border 0x0 $dir_data"radial_r21_vs_co21_mom0b.png" $dir_data"ra
 
 rm -rf $dir_data"radial_r21_vs_co21_mom0.png" $dir_data"radial_r21_vs_co21_mom0b.png"
 rm -rf $dir_data"radial_r21_vs_co21_tpeak.png" $dir_data"radial_r21_vs_co21_tpeakb.png"
-rm -rf $dir_data"radial_r21_vs_co21_disop.png" $dir_data"radial_r21_vs_co21_dispb.png"
+rm -rf $dir_data"radial_r21_vs_co21_disp.png" $dir_data"radial_r21_vs_co21_dispb.png"
 
+
+### figure 9
