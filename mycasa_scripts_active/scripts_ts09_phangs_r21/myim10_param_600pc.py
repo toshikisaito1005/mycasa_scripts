@@ -80,7 +80,9 @@ for i in range(len(gals)):
 
     # imagename
     image_co10 = glob.glob(dir_co10 + "co10_"+beamp+".moment0")[0]
+    image_co10_snr = glob.glob(dir_co10 + "co10_"+beamp+".moment0.snratio")[0]
     image_co21 = glob.glob(dir_co21 + "co21_"+beamp+".moment0")[0]
+    image_co21_snr = glob.glob(dir_co21 + "co21_"+beamp+".moment0.snratio")[0]
     image_tpeak = glob.glob(dir_co21 + "co21_"+beamp+".moment8")[0]
     image_r21 = glob.glob(dir_r21 + "r21_"+beamp+".moment0")[0]
     image_r21mask = glob.glob(dir_r21 + "r21_"+beamp+".moment0.highlowmask")[0]
@@ -103,6 +105,9 @@ for i in range(len(gals)):
     data_w1 = import_data(imagename=image_w1,mode="data")
     data_w2 = import_data(imagename=image_w2,mode="data")
     data_w3 = import_data(imagename=image_w3,mode="data")
+
+    # calc r21 error
+    
 
     data_all = np.c_[
         data_dist,data_r21,data_co21,data_tpeak,data_disp,data_w1,data_w2,data_w3]
