@@ -96,6 +96,7 @@ for i in range(len(gals)):
     data_dist = distance(
         data_ra, data_dec, pas[i], incs[i], cnt_ras[i], cnt_decs[i], scales[i])
 
+    data_co10 = import_data(imagename=image_co10,mode="data")
     data_co21 = import_data(imagename=image_co21,mode="data")
     data_tpeak = import_data(imagename=image_tpeak,mode="data")
     data_disp = data_co21 / (np.sqrt(2*pi) * data_tpeak)
@@ -114,11 +115,11 @@ for i in range(len(gals)):
     data_r21err[np.isnan(data_r21err)] = 0
 
     data_all = np.c_[
-        data_dist,data_r21,data_co21,data_co21snr,data_co10snr,data_tpeak,data_disp,data_w1,data_w2,data_w3]
+        data_dist,data_r21,data_co21,data_co21snr,data_co10,data_co10snr,data_tpeak,data_disp,data_w1,data_w2,data_w3]
 
     np.savetxt(
         galname+"_parameter_600pc.txt",
         data_all,
-        header = "distance(pc) r21 co21(Jy/b.km/s) co21snr co10snr peak(Jy/b) disp(km/s) w1(Jy/b) w2(Jy/b) w3(Jy/b)"
+        header = "distance(pc) r21 co21(Jy/b.km/s) co21snr co21(Jy/b.km/s) co10snr peak(Jy/b) disp(km/s) w1(Jy/b) w2(Jy/b) w3(Jy/b)"
         )
 

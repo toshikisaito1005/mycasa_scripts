@@ -22,6 +22,7 @@ gals = ["ngc0628","ngc3627","ngc4321"]
 dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
 nbins = 8
+percent = 0.01
 
 #####################
 ### functions
@@ -60,13 +61,13 @@ for i in range(len([0])):
     med_r21 = np.median(r21[r21>0])
     norm_r21 = r21 / med_r21
     # co10 and co21 snr
+    co21 = data[:,2]
     co21snr = data[:,3]
     co10snr = data[:,4]
     # cut data
     cut_r21 = (r21 > 0)
-    cut_co10snr = (co10snr > 5)
-    cut_co21snr = (co21snr > 5)
-    cut_all = np.where((cut_r21) & (cut_co10snr) & (cut_co21snr))
+    cut_co21 = (co21 > co21.max() * percent)
+    cut_all = np.where((cut_r21) & (cut_co21))
     galdist = galdist[cut_all]
     norm_r21 = norm_r21[cut_all] # r21 = r21[cut_all]
     # radial binning
