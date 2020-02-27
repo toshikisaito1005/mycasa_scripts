@@ -44,7 +44,7 @@ for i in range(len(galaxy)):
         makemask(mode = "copy",
                  inpimage = outfile + "_tmp",
                  inpmask = outfile + "_tmp",
-                 output = outfile,# + "_tmp_mask:mask0",
+                 output = outfile + ":mask0",# + "_tmp_mask:mask0",
                  overwrite = True)
         """
         makemask(mode = "copy",
