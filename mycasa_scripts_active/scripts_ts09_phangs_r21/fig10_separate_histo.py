@@ -75,15 +75,25 @@ for i in range(len(gals)):
     wise2 = wise2[cut_all]
     wise3 = wise3[cut_all]
 
-    # plot
+    ### plot
     xlim = [0,1]
-    histo = np.histogram(galdist[r21mask==-1],bins=bins,range=(xlim),weights=None)
-    histox,histoy = np.delete(histo1[1],-1),histo1[0]
+    # all
+    histo = np.histogram(galdist,bins=bins,range=(xlim),weights=None)
+    histox,histoy = np.delete(histo[1],-1),histo[0]
+    # high
+    histo_h = np.histogram(galdist[r21mask==1],bins=bins,range=(xlim),weights=None)
+    histo_hx,histo_hy = np.delete(histo_h[1],-1),histo[0]
+    yh = histo_hy/float(sum(histoy))
+    # low
+    histo_l = np.histogram(galdist[r21mask==-1],bins=bins,range=(xlim),weights=None)
+    histo_lx,histo_ly = np.delete(histo_l[1],-1),histo[0]
+    yl = histo_ly/float(sum(histoy))
 
     figure = plt.figure(figsize=(9,3))
     plt.rcParams["font.size"] = 16
     plt.grid(axis = "x")
-    plt.hist(galdist[r21mask==-1],normed=True)
+    plt.plot(histo_hx,yh,"red",lw=5,alpha=0.5)
+    plt.plot(histo_lx,yl,"blue",lw=5,alpha=0.5)
     
     plt.savefig(dir_product+"fig10_"+galname+"_dist.png",dpi=200)
 
