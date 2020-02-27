@@ -1,3 +1,4 @@
+import os
 
 execfile("myim03_mom_native.py")
 execfile("myim04_multibeam.py")
@@ -9,3 +10,4 @@ execfile("myim09_convolve_wise.py")
 execfile("myim10_param_600pc.py")
 
 os.system("rm -rf tempalte.image")
+os.system("rm -rf *.last")
