@@ -13,9 +13,14 @@ import matplotlib.gridspec as gridspec
 plt.ioff()
 
 
-
 #####################
 ### parameters
+#####################
+dir_data = "/Users/saito/data/mycasa_scripts_active/scripts_ts09_phangs_r21/"
+
+
+#####################
+### functions
 #####################
 def hist_percent(histo,percent):
     dat_sum = np.sum(histo)
@@ -26,7 +31,13 @@ def hist_percent(histo,percent):
     
     return i
 
-dir_data = "/Users/saito/data/mycasa_scripts_active/scripts_ts09_phangs_r21/"
+
+#####################
+### main
+#####################
+
+
+
 gals = ["ngc0628",
         "ngc3627",
         #"ngc4254",
