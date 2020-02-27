@@ -322,7 +322,7 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
     #os.system("rm -rf " + mask_use_here)
 
     vch = abs(imhead(cubeimage,mode="list")["cdelt4"]) / 115.27120e9 * 299792.458
-           
+    
     immath(imagename = cubeimage+".masked",
            expr = "iif( IM0>0, 1.0/" + str(vch) + ", 0.0)",
            outfile = cubeimage+".maskedTF")
@@ -368,6 +368,11 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
                         dir_image+name_line+".moment8_tmp"],
            expr = "iif( IM0>=" + str(peak*percent) + ", IM1, 0.0)",
            outfile = dir_image+name_line+"_"+beamp+".moment8")
+
+    immath(imagenname = [dir_image+name_line+"_"+beamp+".moment0",
+                         dir_image+name_line+"_"+beamp+".moment0.noise"],
+           expr = "IM0/IM1",
+           outfile = dir_image+name_line+"_"+beamp+".moment0.snratio")
            
     os.system("rm -rf " + cubeimage+".maskedTF")
     os.system("rm -rf " + dir_image+name_line+".moment0.noise_tmp")
