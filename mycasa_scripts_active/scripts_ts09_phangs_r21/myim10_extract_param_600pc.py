@@ -118,18 +118,18 @@ for i in range(len(gals)):
     data_co21snr[np.isnan(data_co21snr)] = 0
 
     data_all = np.c_[
-        np.round(data_dist,8),    # 0
-        data_r21,     # 1
-        data_co21,    # 2
-        data_co21snr, # 3
-        data_co10,    # 4
-        data_co10snr, # 5
-        data_tpeak,   # 6
-        data_disp,    # 7
-        data_w1,      # 8
-        data_w2,      # 9
-        data_w3,      # 10
-        data_r21mask] # 11
+        data_dist.astype(int),     # 0
+        np.round(data_r21,2),      # 1
+        np.round(data_co21,2),     # 2
+        np.round(data_co21snr,1),  # 3
+        np.round(data_co10,2),     # 4
+        np.round(data_co10snr,1),  # 5
+        np.round(data_tpeak,2),    # 6
+        np.round(data_disp,2),     # 7
+        np.round(data_w1,6),       # 8
+        np.round(data_w2,6),       # 9
+        np.round(data_w3,6),       # 10
+        data_r21mask.astype(int)]  # 11
 
     np.savetxt(
         galname+"_parameter_600pc.txt",
