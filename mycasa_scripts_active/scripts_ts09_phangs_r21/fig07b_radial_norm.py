@@ -106,7 +106,8 @@ ax2.plot([0,dathist[0].max()*1.25],[range_l,range_l],
          lw=5,linestyle="--",alpha=0.8,color="black")
 ax2.plot([0,dathist[0].max()*1.25],[range_p,range_p],
          lw=5,linestyle="--",alpha=0.8,color="black")
-ax2.text(0.6*dathist[0].max()*1.25,range_p,str(range_p))
+ax2.text(0.6*dathist[0].max()*1.25,range_p-0.1,str(range_p))
+ax2.text(0.6*dathist[0].max()*1.25,range_l-0.1,str(range_l))
 
 ax1.grid()
 ax1.legend(ncol=2)
