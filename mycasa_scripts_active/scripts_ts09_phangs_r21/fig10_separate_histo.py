@@ -21,7 +21,7 @@ dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
 dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
-nbins = 4
+bins = 30
 percents = [0.15,0.025,0.010]
 
 #####################
@@ -76,24 +76,16 @@ for i in range(len(gals)):
     wise3 = wise3[cut_all]
 
     # plot
+    xlim = [0,1]
+    histo = np.histogram(galdist[r21mask==-1],bins=bins,range=(xlim),weights=None)
+    histox,histoy = np.delete(histo1[1],-1),histo1[0]
+
     figure = plt.figure(figsize=(9,3))
     plt.rcParams["font.size"] = 16
     plt.grid(axis = "x")
-    plt.hist(galdist[r21mask==-1])
+    plt.hist(galdist[r21mask==-1],normed=True)
     
     plt.savefig(dir_product+"fig10_"+galname+"_dist.png",dpi=200)
 
-"""
-ax1.grid(axis = "x")
-ax1.legend(ncol=2, loc="upper right")
-#ax1.set_xlim([0,1])
-ax1.set_xscale("log")
-ax1.set_ylim([0,2])
-ax1.set_xlabel("WISE1 (currently Jy/b)")
-ax1.set_ylabel("$R_{21}$/$Med(R_{21})$")
 
-ax1.set_title("$R_{21}$/$Med(R_{21})$ vs. WISE1")
-plt.savefig(dir_product+"radial_r21_vs_wise1.png",dpi=200)
 
-os.system("rm -rf *.last")
-"""
