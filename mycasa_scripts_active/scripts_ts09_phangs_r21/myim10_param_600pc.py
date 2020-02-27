@@ -103,4 +103,9 @@ for i in range(len(gals)):
     data_all = np.c_[
         data_dist,data_r21,data_co21,data_tpeak,data_disp,data_w1,data_w2,data_w3]
 
+    np.savetxt(
+        galname+"_parameter_600pc.txt",
+        data_all,
+        header = "distance(pc) r21 co21(Jy/b.km/s) peak(Jy/b) disp(km/s) w1(Jy/b) w2(Jy/b) w3(Jy/b)"
+        )
 
