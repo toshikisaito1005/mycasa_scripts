@@ -46,13 +46,13 @@ for i in range(len(galaxy)):
                  inpmask = outfile + "_tmp",
                  output = outfile + "_tmp_mask:mask0",
                  overwrite = True)
-
+        """
         makemask(mode = "copy",
                  inpimage = outfile + "_tmp_mask",
                  inpmask = outfile + "_tmp_mask:mask0",
                  output = "",
                  overwrite = True)
-
+        """
         immath(imagename = [outfile + "_tmp",
                             outfile + "_tmp_mask"],
                expr = "iif(IM1>=1,IM0,0)",
