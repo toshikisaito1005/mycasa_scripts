@@ -103,6 +103,7 @@ for i in range(len(gals)):
     data_disp[np.isnan(data_disp)] = 0
 
     data_r21 = import_data(imagename=image_r21,mode="data")
+    data_r21mask = import_data(imagename=image_r21mask,mode="data")
     data_w1 = import_data(imagename=image_w1,mode="data")
     data_w2 = import_data(imagename=image_w2,mode="data")
     data_w3 = import_data(imagename=image_w3,mode="data")
@@ -115,11 +116,11 @@ for i in range(len(gals)):
     data_r21err[np.isnan(data_r21err)] = 0
 
     data_all = np.c_[
-        data_dist,data_r21,data_co21,data_co21snr,data_co10,data_co10snr,data_tpeak,data_disp,data_w1,data_w2,data_w3]
+        data_dist,data_r21,data_co21,data_co21snr,data_co10,data_co10snr,data_tpeak,data_disp,data_w1,data_w2,data_w3,data_r21mask]
 
     np.savetxt(
         galname+"_parameter_600pc.txt",
         data_all,
-        header = "distance(pc) r21 co21(Jy/b.km/s) co21snr co21(Jy/b.km/s) co10snr peak(Jy/b) disp(km/s) w1(Jy/b) w2(Jy/b) w3(Jy/b)"
+        header = "distance(pc) r21 co21(Jy/b.km/s) co21snr co21(Jy/b.km/s) co10snr peak(Jy/b) disp(km/s) w1(Jy/b) w2(Jy/b) w3(Jy/b), r21mask"
         )
 

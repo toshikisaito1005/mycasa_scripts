@@ -40,10 +40,6 @@ def hist_percent(histo,percent):
 #####################
 ### main
 #####################
-figure = plt.figure(figsize=(9,9))
-gs = gridspec.GridSpec(nrows=9, ncols=9)
-ax1 = plt.subplot(gs[0:7,0:7])
-plt.rcParams["font.size"] = 16
 
 for i in range(len(gals)):
     galname = gals[i]
@@ -59,6 +55,8 @@ for i in range(len(gals)):
     wise1 = data[:,8]
     wise2 = data[:,9]
     wise3 = data[:,10]
+    # r21 mask
+    r21mask = data[:,11]
     # cut data
     cut_r21 = (r21 > 0)
     cut_co21 = (co21 > co21.max() * percents[i])
@@ -70,9 +68,14 @@ for i in range(len(gals)):
     wise2 = wise2[cut_all]
     wise3 = wise3[cut_all]
 
+    # plot
+    figure = plt.figure(figsize=(9,3))
+    plt.rcParams["font.size"] = 16
+    plot.grid(axis = "x")
+    
 
 
-ax1.grid()
+ax1.grid(axis = "x")
 ax1.legend(ncol=2, loc="upper right")
 #ax1.set_xlim([0,1])
 ax1.set_xscale("log")
