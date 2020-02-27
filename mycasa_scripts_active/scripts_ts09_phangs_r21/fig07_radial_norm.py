@@ -63,10 +63,11 @@ for i in range(len([0])):
     cut_r21 = (r21 > 0)
     galdist = galdist[cut_r21]
     norm_r21 = norm_r21[cut_r21]
+    r21 = r21[cut_r21]
     # radial binning
     n, _ = np.histogram(galdist, bins=nbins)
-    sy, _ = np.histogram(galdist, bins=nbins, weights=norm_r21)
-    sy2, _ = np.histogram(galdist, bins=nbins, weights=norm_r21*norm_r21)
+    sy, _ = np.histogram(galdist, bins=nbins, weights=r21)
+    sy2, _ = np.histogram(galdist, bins=nbins, weights=r21*r21)
     mean = sy / n
     std = np.sqrt(sy2/n - mean*mean)
 
@@ -76,7 +77,7 @@ for i in range(len([0])):
         label = galname.replace("ngc","NGC ")
         )
     ax1.scatter(
-        galdist, norm_r21,
+        galdist, r21,
         color=cm.brg(i/2.5), lw=7, alpha=0.2,
         label = galname.replace("ngc","NGC "))
 

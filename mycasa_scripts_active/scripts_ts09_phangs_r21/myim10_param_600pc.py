@@ -16,7 +16,7 @@ plt.ioff()
 #####################
 ### parameters
 #####################
-snr = 5
+snr = 3
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 gals = ["ngc0628", "ngc3627", "ngc4321"]
 beam = [13.6, 15.0, 9.5]

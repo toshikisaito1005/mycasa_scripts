@@ -23,7 +23,7 @@ beams = ["04p0",
          "08p0",
          #"08p0",
          "04p0"]
-snr_mom = 2.0
+snr_mom = 3.0
 percent = 0.0
 
 done = glob.glob(dir_proj + "../eps/")
