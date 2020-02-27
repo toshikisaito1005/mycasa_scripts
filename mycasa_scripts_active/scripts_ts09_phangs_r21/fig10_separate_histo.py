@@ -77,24 +77,31 @@ for i in range(len(gals)):
 
     ### plot
     xlim = [0,1]
+    ylim = [0,0.15]
+    xlabel = "r/r25"
     # all
     histo = np.histogram(galdist,bins=bins,range=(xlim),weights=None)
     histox,histoy = np.delete(histo[1],-1),histo[0]
+    y = histoy/float(sum(histoy))
     # high
     histo_h = np.histogram(galdist[r21mask==1],bins=bins,range=(xlim),weights=None)
-    histo_hx,histo_hy = np.delete(histo_h[1],-1),histo[0]
+    histo_hx,histo_hy = np.delete(histo_h[1],-1),histo_h[0]
     yh = histo_hy/float(sum(histoy))
     # low
     histo_l = np.histogram(galdist[r21mask==-1],bins=bins,range=(xlim),weights=None)
-    histo_lx,histo_ly = np.delete(histo_l[1],-1),histo[0]
+    histo_lx,histo_ly = np.delete(histo_l[1],-1),histo_l[0]
     yl = histo_ly/float(sum(histoy))
-
+    #
     figure = plt.figure(figsize=(9,3))
     plt.rcParams["font.size"] = 16
     plt.grid(axis = "x")
     plt.plot(histo_hx,yh,"red",lw=5,alpha=0.5)
     plt.plot(histo_lx,yl,"blue",lw=5,alpha=0.5)
-    
+    plt.plot(histox,y,"black",lw=5,alpha=0.5)
+    #
+    plt.xlim(xlim)
+    plt.ylim(ylim)
+    plt.xlabel(xlabel)
     plt.savefig(dir_product+"fig10_"+galname+"_dist.png",dpi=200)
 
 
