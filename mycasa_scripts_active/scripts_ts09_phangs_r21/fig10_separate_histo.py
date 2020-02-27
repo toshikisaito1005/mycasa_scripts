@@ -76,19 +76,21 @@ for i in range(len(gals)):
     wise3 = wise3[cut_all]
 
     ### plot
+    parameter = galdist
+    output = "dist"
     xlim = [0,1]
     ylim = [0,0.15]
     xlabel = "r/r25"
     # all
-    histo = np.histogram(galdist,bins=bins,range=(xlim),weights=None)
+    histo = np.histogram(parameter,bins=bins,range=(xlim),weights=None)
     histox,histoy = np.delete(histo[1],-1),histo[0]
     y = histoy/float(sum(histoy))
     # high
-    histo_h = np.histogram(galdist[r21mask==1],bins=bins,range=(xlim),weights=None)
+    histo_h = np.histogram(parameter[r21mask==1],bins=bins,range=(xlim),weights=None)
     histo_hx,histo_hy = np.delete(histo_h[1],-1),histo_h[0]
     yh = histo_hy/float(sum(histoy))
     # low
-    histo_l = np.histogram(galdist[r21mask==-1],bins=bins,range=(xlim),weights=None)
+    histo_l = np.histogram(parameter[r21mask==-1],bins=bins,range=(xlim),weights=None)
     histo_lx,histo_ly = np.delete(histo_l[1],-1),histo_l[0]
     yl = histo_ly/float(sum(histoy))
     #
@@ -103,22 +105,24 @@ for i in range(len(gals)):
     plt.xlim(xlim)
     plt.ylim(ylim)
     plt.xlabel(xlabel)
-    plt.savefig(dir_product+"fig10_"+galname+"_dist.png",dpi=200)
+    plt.savefig(dir_product+"fig10_"+galname+"_"+output+".png",dpi=200)
 
     ### plot
-    xlim = [0,1]
-    ylim = [0,0.15]
-    xlabel = "$I_{CO(2-1)}$ (currently Jy/b)"
+    parameter = np.log10(co21)
+    output = "co21_mom0"
+    xlim = [-0.5,3.0]
+    ylim = [0,0.25]
+    xlabel = "log $I_{CO(2-1)}$ (currently Jy/b)"
     # all
-    histo = np.histogram(co21,bins=bins,range=(xlim),weights=None)
+    histo = np.histogram(parameter,bins=bins,range=(xlim),weights=None)
     histox,histoy = np.delete(histo[1],-1),histo[0]
     y = histoy/float(sum(histoy))
     # high
-    histo_h = np.histogram(galdist[r21mask==1],bins=bins,range=(xlim),weights=None)
+    histo_h = np.histogram(parameter[r21mask==1],bins=bins,range=(xlim),weights=None)
     histo_hx,histo_hy = np.delete(histo_h[1],-1),histo_h[0]
     yh = histo_hy/float(sum(histoy))
     # low
-    histo_l = np.histogram(galdist[r21mask==-1],bins=bins,range=(xlim),weights=None)
+    histo_l = np.histogram(parameter[r21mask==-1],bins=bins,range=(xlim),weights=None)
     histo_lx,histo_ly = np.delete(histo_l[1],-1),histo_l[0]
     yl = histo_ly/float(sum(histoy))
     #
@@ -133,5 +137,5 @@ for i in range(len(gals)):
     plt.xlim(xlim)
     plt.ylim(ylim)
     plt.xlabel(xlabel)
-    plt.savefig(dir_product+"fig10_"+galname+"_dist.png",dpi=200)
+    plt.savefig(dir_product+"fig10_"+galname+"_"+output+".png",dpi=200)
 
