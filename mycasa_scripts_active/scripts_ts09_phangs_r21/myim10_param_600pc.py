@@ -114,7 +114,7 @@ for i in range(len(gals)):
     data_r21err[np.isnan(data_r21err)] = 0
 
     data_all = np.c_[
-        data_dist,data_r21,data_r21err,data_co21,data_tpeak,data_disp,data_w1,data_w2,data_w3]
+        data_dist,data_r21,data_co21,data_co21snr,data_co10snr,data_tpeak,data_disp,data_w1,data_w2,data_w3]
 
     np.savetxt(
         galname+"_parameter_600pc.txt",
