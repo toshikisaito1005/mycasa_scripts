@@ -111,11 +111,19 @@ for i in range(len(gals)):
     xlabel = "r/r25"
     plotter(dir_product,galname,parameter,output,xlim,ylim,xlabel)
 
-    # plot; co21 mom0-
+    # plot; co21 mom0
     parameter = np.log10(co21)
     output = "co21_mom0"
-    xlim = [0.0,3.0]
-    ylim = [0,0.25]
+    xlim = [0.1,2.7]
+    ylim = [0,0.17]
     xlabel = "log $I_{CO(2-1)}$ (currently Jy/b)"
+    plotter(dir_product,galname,parameter,output,xlim,ylim,xlabel)
+
+    # plot; co21 tpeak
+    parameter = np.log10(tpeak)
+    output = "co21_tpeak"
+    xlim = [-1.0,1.5]
+    ylim = [0,0.25]
+    xlabel = "log $T_{CO(2-1)}$ (currently Jy/b)"
     plotter(dir_product,galname,parameter,output,xlim,ylim,xlabel)
 
