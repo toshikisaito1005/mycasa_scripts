@@ -57,6 +57,9 @@ for i in range(len([0])):
     galdist = distance / dist25_pc
     # median-subtracted r21
     r21 = data[:,1]
+    r21err = data[:,2]
+    r21snr = r21/r21err
+    r21snr[np.isnan(r21snr)] = 0
     med_r21 = np.median(r21[r21>0])
     norm_r21 = r21 / med_r21
     # cut data
@@ -77,7 +80,8 @@ for i in range(len([0])):
         )
     ax1.scatter(
         galdist, r21,
-        color=cm.brg(i/2.5), lw=7, alpha=0.2,
+        color = r21snr # color=cm.brg(i/2.5),
+        lw=7, alpha=0.2,
         label = galname.replace("ngc","NGC "))
 
     histdata.extend(norm_r21.tolist())
@@ -85,7 +89,6 @@ for i in range(len([0])):
 dathist = ax2.hist(
     histdata,orientation="horizontal",range=[0,2],
     bins=100,lw=0,color="grey",alpha=0.6)
-
 
 range_p = dathist[1][hist_percent(dathist[0],0.843)]
 range_l = dathist[1][hist_percent(dathist[0],0.157)]
