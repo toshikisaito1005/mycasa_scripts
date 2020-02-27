@@ -64,8 +64,8 @@ for i in range(len([0])):
     co10snr = data[:,4]
     # cut data
     cut_r21 = (r21 > 0)
-    cut_co10snr = (co10snr > 10)
-    cut_co21snr = (co21snr > 10)
+    cut_co10snr = (co10snr > 5)
+    cut_co21snr = (co21snr > 5)
     cut_all = np.where((cut_r21) & (cut_co10snr) & (cut_co21snr))
     galdist = galdist[cut_all]
     norm_r21 = norm_r21[cut_all] # r21 = r21[cut_all]
