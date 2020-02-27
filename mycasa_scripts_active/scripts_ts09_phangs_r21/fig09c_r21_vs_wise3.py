@@ -70,9 +70,9 @@ for i in range(len(gals)):
     wise2 = wise2[cut_all]
     wise3 = wise3[cut_all]
     # radial binning
-    n, _ = np.histogram(wise2, bins=nbins)
-    sy, _ = np.histogram(wise2, bins=nbins, weights=norm_r21)
-    sy2, _ = np.histogram(wise2, bins=nbins, weights=norm_r21*norm_r21)
+    n, _ = np.histogram(wise3, bins=nbins)
+    sy, _ = np.histogram(wise3, bins=nbins, weights=norm_r21)
+    sy2, _ = np.histogram(wise3, bins=nbins, weights=norm_r21*norm_r21)
     mean = sy / n
     std = np.sqrt(sy2/n - mean*mean)
 
@@ -94,10 +94,10 @@ ax1.legend(ncol=2, loc="upper right")
 #ax1.set_xlim([0,1])
 ax1.set_xscale("log")
 ax1.set_ylim([0,2])
-ax1.set_xlabel("WISE1 (currently Jy/b)")
+ax1.set_xlabel("WISE3 (currently Jy/b)")
 ax1.set_ylabel("$R_{21}$/$Med(R_{21})$")
 
-ax1.set_title("$R_{21}$/$Med(R_{21})$ vs. WISE2")
-plt.savefig(dir_product+"radial_r21_vs_wise2.png",dpi=200)
+ax1.set_title("$R_{21}$/$Med(R_{21})$ vs. WISE3")
+plt.savefig(dir_product+"radial_r21_vs_wise3.png",dpi=200)
 
 os.system("rm -rf *.last")

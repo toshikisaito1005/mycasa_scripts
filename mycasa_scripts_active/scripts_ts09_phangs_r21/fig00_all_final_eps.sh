@@ -109,3 +109,6 @@ rm -rf $dir_data"radial_r21_vs_co21_disp.png" $dir_data"radial_r21_vs_co21_dispb
 
 
 ### figure 9
+convert -crop 1300x1330+70+100 $dir_data
+convert -crop 1300x1330+70+100 $dir_data
+convert -crop 1300x1330+70+100 $dir_data
