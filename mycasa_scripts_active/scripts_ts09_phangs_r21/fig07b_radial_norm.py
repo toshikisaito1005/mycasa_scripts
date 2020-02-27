@@ -21,7 +21,7 @@ dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
 dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
-nbins = 8
+nbins = 5
 percents = [0.15,0.025,0.01]
 
 #####################
@@ -79,9 +79,9 @@ for i in range(len(gals)):
     mean = sy / n
     std = np.sqrt(sy2/n - mean*mean)
 
-    ax1.plot(
-        (_[1:] + _[:-1])/2, mean,
-        color=cm.brg(i/2.5), lw=7, alpha=0.5,
+    ax1.errorbar(
+        (_[1:] + _[:-1])/2, mean, yerr=std,
+        color=cm.brg(i/2.5), lw=4, #alpha=0.5,
         label = galname.replace("ngc","NGC ")
         )
     """
@@ -110,7 +110,7 @@ ax2.text(0.6*dathist[0].max()*1.25,range_p-0.1,str(range_p))
 ax2.text(0.6*dathist[0].max()*1.25,range_l-0.1,str(range_l))
 
 ax1.grid()
-ax1.legend(ncol=2)
+ax1.legend(ncol=2, loc="upper right")
 ax1.set_xlim([0,1])
 ax1.set_ylim([0,2])
 ax1.set_xlabel("r/r25")

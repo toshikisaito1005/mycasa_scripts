@@ -71,7 +71,7 @@ for i in range(len(gals)):
 
     ax1.errorbar(
         (_[1:] + _[:-1])/2, mean, yerr=std,
-        color=cm.brg(i/2.5), lw=7, #alpha=0.5,
+        color=cm.brg(i/2.5), lw=4, #alpha=0.5,
         label = galname.replace("ngc","NGC ")
         )
     """
@@ -83,7 +83,7 @@ for i in range(len(gals)):
     """
 
 ax1.grid()
-ax1.legend(ncol=2)
+ax1.legend(ncol=2, loc="upper right")
 #ax1.set_xlim([0,1])
 ax1.set_xscale("log")
 ax1.set_ylim([0,2])
