@@ -87,7 +87,13 @@ rm -rf 600x570+75+20 $dir_data"ngc4321_r21_mask.png" $dir_data"ngc4321_r21_maskb
 
 
 ### figure 7
-convert -crop 1500x1500+70+100 $dir_data"radial_norm_r21.png" $dir_data"radial_norm_r21b.png"
+convert -crop 1700x1300+70+100 $dir_data"radial_norm_r21.png" $dir_data"radial_norm_r21b.png"
+convert -crop 1700x1300+70+100 $dir_data"radial_r21.png" $dir_data"radial_r21b.png"
+
+convert +append -border 0x0 $dir_data"radial_r21b.png" $dir_data"radial_norm_r21b.png" eps2:$dir_data"f07.eps"
+
+rm -rf $dir_data"radial_norm_r21.png" $dir_data"radial_norm_r21b.png"
+rm -rf $dir_data"radial_r21.png" $dir_data"radial_r21b.png"
 
 ### figure 8
 
