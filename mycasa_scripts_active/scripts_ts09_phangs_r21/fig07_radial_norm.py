@@ -47,7 +47,8 @@ ax2b = ax2.twinx()
 plt.rcParams["font.size"] = 16
 
 histdata = []
-for i in range(len(gals)):
+#for i in range(len(gals)):
+for i in range(len([0])):
     galname = gals[i]
     data = np.loadtxt(dir_data + galname + "_parameter_600pc.txt")
     # galactocentric distance
@@ -69,10 +70,14 @@ for i in range(len(gals)):
     mean = sy / n
     std = np.sqrt(sy2/n - mean*mean)
 
-
     ax1.plot(
-        galdist, norm_r21,
+        (_[1:] + _[:-1])/2, mean,
         color=cm.brg(i/2.5), lw=7, alpha=0.5,
+        label = galname.replace("ngc","NGC ")
+        )
+    ax1.scatter(
+        galdist, norm_r21,
+        color=cm.brg(i/2.5), lw=7, alpha=0.2,
         label = galname.replace("ngc","NGC "))
 
     histdata.extend(norm_r21.tolist())
@@ -94,12 +99,12 @@ ax2.plot([0,dathist[0].max()*1.25],[range_p,range_p],
 
 ax1.grid()
 ax1.legend(ncol=2)
-ax1.set_ylim([0,2])
+ax1.set_ylim([0,5])
 ax1.set_xlabel("r/r25")
 ax1.set_ylabel("$R_{21}$/$Med(R_{21})$")
 
-ax2.set_ylim([0,2])
-ax2b.set_ylim([0,2])
+ax2.set_ylim([0,5])
+ax2b.set_ylim([0,5])
 ax2.grid(axis="both")
 ax2.tick_params(labelbottom=False,labelleft=False,labeltop=False)
 ax2b.tick_params(labelbottom=False,labelleft=False,labeltop=False)
