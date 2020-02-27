@@ -19,7 +19,7 @@ plt.ioff()
 snr = 5
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 gals = ["ngc0628", "ngc3627", "ngc4321"]
-beam = [13.6, 15.0, 9.0]
+beam = [13.6, 15.0, 9.5]
 scales = [44/1.0, 52/1.3, 103/1.4]
 cnt_ras = [24.174, 170.063, 185.729]
 cnt_decs = [15.783, 12.9914, 15.8223]
