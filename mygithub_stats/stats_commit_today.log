@@ -1,4 +1,17 @@
-      10 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig07_radial_norm.py
+      18 - mycasa_scripts_active/scripts_ts09_phangs_r21/fig07_radial_norm.py
+       9 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim10_param_600pc.py
        5 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21.py
-       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim10_param_600pc.py
+       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/ngc4321_parameter_600pc.txt
+       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/ngc0628_parameter_600pc.txt
+       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.lock
+       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.info
+       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.f0_TSM0
+       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.f0
+       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.dat
+       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.lock
+       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.info
+       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.f0_TSM0
+       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.f0
+       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.dat
+       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/ngc3627_parameter_600pc.txt
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21.pyc
