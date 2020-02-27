@@ -21,6 +21,7 @@ dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
 dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
+nbins = 8
 
 #####################
 ### functions
@@ -56,11 +57,18 @@ for i in range(len(gals)):
     # median-subtracted r21
     r21 = data[:,1]
     med_r21 = np.median(r21[r21>0])
-    norm_r21 = r21 - med_r21
+    norm_r21 = r21 / med_r21
     # cut data
     cut_r21 = (r21 > 0)
     galdist = galdist[cut_r21]
     norm_r21 = norm_r21[cut_r21]
+    # radial binning
+    n, _ = np.histogram(galdist, bins=nbins)
+    sy, _ = np.histogram(galdist, bins=nbins, weights=norm_r21)
+    sy2, _ = np.histogram(galdist, bins=nbins, weights=norm_r21*norm_r21)
+    mean = sy / n
+    std = np.sqrt(sy2/n - mean*mean)
+
 
     ax1.plot(
         galdist, norm_r21,
@@ -70,15 +78,15 @@ for i in range(len(gals)):
     histdata.extend(norm_r21.tolist())
 
 dathist = ax2.hist(
-    histdata,orientation="horizontal",range=[-2,2],
+    histdata,orientation="horizontal",range=[0,2],
     bins=100,lw=0,color="grey",alpha=0.6)
 
 
 range_p = dathist[1][hist_percent(dathist[0],0.843)]
 range_l = dathist[1][hist_percent(dathist[0],0.157)]
 
-ax1.plot([0,14],[range_l,range_l],lw=5,linestyle="--",alpha=0.8,color="black")
-ax1.plot([0,14],[range_p,range_p],lw=5,linestyle="--",alpha=0.8,color="black")
+ax1.plot([0,1],[range_l,range_l],lw=5,linestyle="--",alpha=0.8,color="black")
+ax1.plot([0,1],[range_p,range_p],lw=5,linestyle="--",alpha=0.8,color="black")
 ax2.plot([0,dathist[0].max()*1.25],[range_l,range_l],
          lw=5,linestyle="--",alpha=0.8,color="black")
 ax2.plot([0,dathist[0].max()*1.25],[range_p,range_p],
@@ -86,12 +94,12 @@ ax2.plot([0,dathist[0].max()*1.25],[range_p,range_p],
 
 ax1.grid()
 ax1.legend(ncol=2)
-ax1.set_ylim([-2,2])
+ax1.set_ylim([0,2])
 ax1.set_xlabel("r/r25")
 ax1.set_ylabel("$R_{21}$/$Med(R_{21})$")
 
-ax2.set_ylim([-2,2])
-ax2b.set_ylim([-2,2])
+ax2.set_ylim([0,2])
+ax2b.set_ylim([0,2])
 ax2.grid(axis="both")
 ax2.tick_params(labelbottom=False,labelleft=False,labeltop=False)
 ax2b.tick_params(labelbottom=False,labelleft=False,labeltop=False)
