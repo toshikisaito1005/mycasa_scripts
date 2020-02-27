@@ -35,6 +35,7 @@ ylim = [120, -120]
 value = None
 
 ###12CO(1-0)
+imstat(dir_data+"ngc0628_co10/co10_04p0.moment0_Kelvin")
 # moment 0 color + moment 0 contour
 imagename_contour = "ngc0628_co10/co10_04p0.moment0_Kelvin.fits"
 imagename_color = "ngc0628_co10/co10_04p0.moment0_Kelvin.fits"
