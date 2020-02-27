@@ -109,6 +109,12 @@ rm -rf $dir_data"radial_r21_vs_co21_disp.png" $dir_data"radial_r21_vs_co21_dispb
 
 
 ### figure 9
-convert -crop 1300x1330+70+100 $dir_data
-convert -crop 1300x1330+70+100 $dir_data
-convert -crop 1300x1330+70+100 $dir_data
+convert -crop 1300x1330+70+100 $dir_data"radial_r21_vs_wise1.png" $dir_data"radial_r21_vs_wise1b.png"
+convert -crop 1300x1330+70+100 $dir_data"radial_r21_vs_wise2.png" $dir_data"radial_r21_vs_wise2b.png"
+convert -crop 1300x1330+70+100 $dir_data"radial_r21_vs_wise3.png" $dir_data"radial_r21_vs_wise3b.png"
+
+convert +append -border 0x0 $dir_data"radial_r21_vs_wise1b.png" $dir_data"radial_r21_vs_wise2b.png" $dir_data"radial_r21_vs_wise3b.png" eps2:$dir_data"f09.eps"
+
+rm -rf $dir_data"radial_r21_vs_wise1.png" $dir_data"radial_r21_vs_wise1b.png"
+rm -rf $dir_data"radial_r21_vs_wise2.png" $dir_data"radial_r21_vs_wise2b.png"
+rm -rf $dir_data"radial_r21_vs_wise3.png" $dir_data"radial_r21_vs_wise3b.png"
