@@ -44,7 +44,7 @@ for i in range(len(galaxy)):
         makemask(mode = "copy",
                  inpimage = outfile + "_tmp",
                  inpmask = outfile + "_tmp",
-                 output = outfile + "_tmp_mask:mask0",
+                 output = outfile,# + "_tmp_mask:mask0",
                  overwrite = True)
         """
         makemask(mode = "copy",
@@ -52,13 +52,13 @@ for i in range(len(galaxy)):
                  inpmask = outfile + "_tmp_mask:mask0",
                  output = "",
                  overwrite = True)
-        """
+        
         immath(imagename = [outfile + "_tmp",
                             outfile + "_tmp_mask"],
                expr = "iif(IM1>=1,IM0,0)",
                outfile = outfile)
-
+        """
         os.system("rm -rf " + outfile + "_tmp")
-        #os.system("rm -rf " + outfile + "_tmp_mask")
+        os.system("rm -rf " + outfile + "_tmp_mask")
 
 os.system("rm -rf *.last")
