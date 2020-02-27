@@ -45,7 +45,7 @@ ax2 = plt.subplot(gs[0:7,7:9])
 ax2b = ax2.twinx()
 plt.rcParams["font.size"] = 16
 
-histodata = []
+histdata = []
 for i in range(len(gals)):
     galname = gals[i]
     data = np.loadtxt(dir_data + galname + "_parameter_600pc.txt")
@@ -63,15 +63,17 @@ for i in range(len(gals)):
     norm_r21 = norm_r21[cut_r21]
 
     ax1.plot(
-        galdist, norm_r21, color=cm.brg(i/2.5), lw=7, alpha=0.5,
-             label = galname.replace("ngc","NGC "))
+        galdist, norm_r21,
+        color=cm.brg(i/2.5), lw=7, alpha=0.5,
+        label = galname.replace("ngc","NGC "))
 
     histdata.extend(norm_r21.tolist())
 
+dathist = ax2.hist(
+    histdata,orientation="horizontal",range=[-2,2],
+    bins=100,lw=0,color="grey",alpha=0.6)
 
 
-dathist = ax2.hist(histdata,orientation="horizontal",range=[0,2],
-                   bins=100,lw=0,color="grey",alpha=0.6)
 range_p = dathist[1][hist_percent(dathist[0],0.843)]
 range_l = dathist[1][hist_percent(dathist[0],0.157)]
 
@@ -84,12 +86,12 @@ ax2.plot([0,dathist[0].max()*1.25],[range_p,range_p],
 
 ax1.grid()
 ax1.legend(ncol=2)
-ax1.set_ylim([0,2])
-ax1.set_xlabel("Deprojected Distance (kpc)")
+ax1.set_ylim([-2,2])
+ax1.set_xlabel("r/r25")
 ax1.set_ylabel("$R_{21}$/$Med(R_{21})$")
 
-ax2.set_ylim([0,2])
-ax2b.set_ylim([0,2])
+ax2.set_ylim([-2,2])
+ax2b.set_ylim([-2,2])
 ax2.grid(axis="both")
 ax2.tick_params(labelbottom=False,labelleft=False,labeltop=False)
 ax2b.tick_params(labelbottom=False,labelleft=False,labeltop=False)
@@ -98,6 +100,6 @@ ax2.spines["left"].set_visible(False)
 ax2.spines["bottom"].set_visible(False)
 ax2b.set_ylabel("$R_{21}$/$Med(R_{21})$")
 
-plt.savefig(dir_data+"eps/radial_norm_r21.png",dpi=200)
+plt.savefig(dir_product+"radial_norm_r21.png",dpi=200)
 
 os.system("rm -rf *.last")
