@@ -10,6 +10,7 @@ import matplotlib.cm as cm
 import matplotlib.pyplot as plt
 import matplotlib.patches as pat
 import matplotlib.gridspec as gridspec
+import scripts_phangs_r21 as r21
 plt.ioff()
 
 
@@ -28,43 +29,6 @@ incs = [90-8.7, 90-56.2, 90-35.1]
 snr = 3.0
 co10rmss = [0.058,0.072,0.037]
 co21rmss = [0.039,0.028,0.031]
-
-#####################
-### functions
-#####################
-def import_data(
-    imagename,
-    mode,
-    index=0,
-    ):
-    """
-    """
-    image_r = imhead(imagename,mode="list")["shape"][0] - 1
-    image_t = imhead(imagename,mode="list")["shape"][1] - 1
-    value = imval(imagename,box="0,0,"+str(image_r)+","+str(image_t))
-
-    if mode=="coords":
-        value_masked = value[mode][:,:,index] * 180 / pi
-    else:
-        value_masked = value[mode]
-
-    value_masked_1d = value_masked.flatten()
-
-    return value_masked_1d
-
-def distance(x, y, pa, inc, ra_cnt, dec_cnt, scale):
-    tilt_cos = math.cos(math.radians(pa))
-    tilt_sin = math.sin(math.radians(pa))
-    
-    x_tmp = x - ra_cnt
-    y_tmp = y - dec_cnt
-    
-    x_new = (x_tmp*tilt_cos - y_tmp*tilt_sin)
-    y_new = (x_tmp*tilt_sin + y_tmp*tilt_cos) * 1/math.sin(math.radians(inc))
-    
-    r = np.sqrt(x_new**2 + y_new**2) * 3600 * scale # arcsec * pc/arcsec
-    
-    return r
 
 
 #####################
@@ -91,26 +55,26 @@ for i in range(len(gals)):
     image_w3 = glob.glob(dir_wise + galname+"_w3_gauss"+beamp+".image")[0]
 
     # import data
-    data_ra = import_data(imagename=image_co21,mode="coords")
-    data_dec = import_data(imagename=image_co21,mode="coords",index=1)
-    data_dist = distance(
+    data_ra = r21.import_data(imagename=image_co21,mode="coords")
+    data_dec = r21.import_data(imagename=image_co21,mode="coords",index=1)
+    data_dist = r21.distance(
         data_ra, data_dec, pas[i], incs[i], cnt_ras[i], cnt_decs[i], scales[i])
 
-    data_co10 = import_data(imagename=image_co10,mode="data")
-    data_co21 = import_data(imagename=image_co21,mode="data")
-    data_tpeak = import_data(imagename=image_tpeak,mode="data")
+    data_co10 = r21.import_data(imagename=image_co10,mode="data")
+    data_co21 = r21.import_data(imagename=image_co21,mode="data")
+    data_tpeak = r21.import_data(imagename=image_tpeak,mode="data")
     data_disp = data_co21 / (np.sqrt(2*pi) * data_tpeak)
     data_disp[np.isnan(data_disp)] = 0
 
-    data_r21 = import_data(imagename=image_r21,mode="data")
-    data_r21mask = import_data(imagename=image_r21mask,mode="data")
-    data_w1 = import_data(imagename=image_w1,mode="data")
-    data_w2 = import_data(imagename=image_w2,mode="data")
-    data_w3 = import_data(imagename=image_w3,mode="data")
+    data_r21 = r21.import_data(imagename=image_r21,mode="data")
+    data_r21mask = r21.import_data(imagename=image_r21mask,mode="data")
+    data_w1 = r21.import_data(imagename=image_w1,mode="data")
+    data_w2 = r21.import_data(imagename=image_w2,mode="data")
+    data_w3 = r21.import_data(imagename=image_w3,mode="data")
 
     # calc r21 error
-    data_co10snr = import_data(imagename=image_co10_snr,mode="data")
-    data_co21snr = import_data(imagename=image_co21_snr,mode="data")
+    data_co10snr = r21.import_data(imagename=image_co10_snr,mode="data")
+    data_co21snr = r21.import_data(imagename=image_co21_snr,mode="data")
     data_r21err = data_r21 \
         * np.sqrt((1.0/data_co10snr)**2 + (1.0/data_co21snr)**2)
     data_r21err[np.isnan(data_r21err)] = 0

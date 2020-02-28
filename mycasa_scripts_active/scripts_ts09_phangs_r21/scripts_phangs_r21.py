@@ -388,6 +388,7 @@ def import_data(
     index=0,
     ):
     """
+    myim10
     """
     image_r = imhead(imagename,mode="list")["shape"][0] - 1
     image_t = imhead(imagename,mode="list")["shape"][1] - 1
@@ -403,6 +404,9 @@ def import_data(
     return value_masked_1d
 
 def distance(x, y, pa, inc, ra_cnt, dec_cnt, scale):
+    """
+    myim10
+    """
     tilt_cos = math.cos(math.radians(pa))
     tilt_sin = math.sin(math.radians(pa))
     
