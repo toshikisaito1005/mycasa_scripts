@@ -1,5 +1,6 @@
 import os
 import glob
+import math
 import numpy as np
 import matplotlib.pyplot as plt
 from astropy.coordinates import SkyCoord
@@ -395,7 +396,7 @@ def import_data(
     value = imval(imagename,box="0,0,"+str(image_r)+","+str(image_t))
 
     if mode=="coords":
-        value_masked = value[mode][:,:,index] * 180 / pi
+        value_masked = value[mode][:,:,index] * 180 / np.pi
     else:
         value_masked = value[mode]
 

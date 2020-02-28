@@ -19,7 +19,7 @@ plt.ioff()
 #####################
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 gals = ["ngc0628", "ngc3627", "ngc4321"]
-beam = [13.6, 15.0, 9.5]
+beam = [4.0, 8.0, 4.0]
 scales = [44/1.0, 52/1.3, 103/1.4]
 cnt_ras = [24.174, 170.063, 185.729]
 cnt_decs = [15.783, 12.9914, 15.8223]
@@ -101,7 +101,7 @@ for i in range(len(gals)):
         data_r21mask.astype(int)]  # 11
 
     np.savetxt(
-        galname+"_parameter_600pc.txt",
+        galname+"_parameter_matched_res.txt",
         data_all,
         fmt = "%.7e",
         header = "distance(pc) r21 co21(Jy/b.km/s) co21snr co21(Jy/b.km/s) co10snr peak(Jy/b) disp(km/s) w1(Jy/b) w2(Jy/b) w3(Jy/b), r21mask"
