@@ -79,7 +79,7 @@ for i in range(len(gals)):
 
     data_all = np.c_[
         data_dist.astype(int),     # 0
-        np.round(data_r21,2),      # 1
+        data_r21,      # 1
         #
         np.round(data_co21,2),     # 2
         np.round(data_co21snr,1),  # 3
