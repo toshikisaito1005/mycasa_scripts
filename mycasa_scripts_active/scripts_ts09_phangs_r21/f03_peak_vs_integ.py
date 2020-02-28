@@ -53,8 +53,8 @@ for i in range(len(gals)):
 	histo.extend(p21/r21)
 
 a = plt.axes([.55, .15, .3, .2])
-plt.ylim([0,4500])
+plt.ylim([0,2500])
 plt.yticks([])
-plt.hist(histo,range=[0.3,1.5],bins=40,color="grey",lw=0)
+plt.hist(histo,range=[0.4,1.4],bins=40,color="grey",lw=0)
 
 plt.savefig(dir_product+"figure_r21_vs_p21.png",dpi=100)
