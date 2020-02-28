@@ -37,9 +37,12 @@ for i in range(len(gals)):
 	#
 	plt.rcParams["font.size"] = 16
 	plt.grid()
-	plt.xlim([-1.5,1.0])
-	plt.ylim([-1.5,1.0])
+	plt.xlim([-1.2,0.7])
+	plt.ylim([-1.2,0.7])
 	plt.scatter(np.log10(r21), np.log10(p21),
-		c=cm.brg(i/2.5), alpha=0.1, lw=0, s=50)
+		c=cm.brg(i/2.5), alpha=0.1, lw=0, s=20)
+	plt.plot([-1.2,0.7],[-1.2,0.7],"k-",lw=1)
+	plt.plot([-1.2,0.7],[-1.0,0.9],"k--",lw=1)
+	plt.plot([-1.2,0.7],[-1.4,0.5],"k--",lw=1)
 
 plt.savefig(dir_product+"figure_r21_vs_p21.png",dpi=100)
