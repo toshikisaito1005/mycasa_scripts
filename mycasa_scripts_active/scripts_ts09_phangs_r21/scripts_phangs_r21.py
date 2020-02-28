@@ -381,3 +381,37 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
     os.system("rm -rf " + dir_image+name_line+".moment8_tmp")
 
     return mask_use_here
+
+def import_data(
+    imagename,
+    mode,
+    index=0,
+    ):
+    """
+    """
+    image_r = imhead(imagename,mode="list")["shape"][0] - 1
+    image_t = imhead(imagename,mode="list")["shape"][1] - 1
+    value = imval(imagename,box="0,0,"+str(image_r)+","+str(image_t))
+
+    if mode=="coords":
+        value_masked = value[mode][:,:,index] * 180 / pi
+    else:
+        value_masked = value[mode]
+
+    value_masked_1d = value_masked.flatten()
+
+    return value_masked_1d
+
+def distance(x, y, pa, inc, ra_cnt, dec_cnt, scale):
+    tilt_cos = math.cos(math.radians(pa))
+    tilt_sin = math.sin(math.radians(pa))
+    
+    x_tmp = x - ra_cnt
+    y_tmp = y - dec_cnt
+    
+    x_new = (x_tmp*tilt_cos - y_tmp*tilt_sin)
+    y_new = (x_tmp*tilt_sin + y_tmp*tilt_cos) * 1/math.sin(math.radians(inc))
+    
+    r = np.sqrt(x_new**2 + y_new**2) * 3600 * scale # arcsec * pc/arcsec
+    
+    return r
