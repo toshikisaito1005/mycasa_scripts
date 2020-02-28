@@ -27,8 +27,8 @@ pas = [180-21.1, 180-172.4, 180-157.8]
 incs = [90-8.7, 90-56.2, 90-35.1]
 
 snr = 3.0
-co10rmss = [0.058,0.072,0.037]
-co21rmss = [0.039,0.028,0.031]
+co10rmss = [0.013,0.048,0.015]
+co21rmss = [0.017,0.024,0.017]
 
 
 #####################
@@ -47,7 +47,8 @@ for i in range(len(gals)):
     image_co10_snr = glob.glob(dir_co10 + "co10_"+beamp+".moment0.snratio")[0]
     image_co21 = glob.glob(dir_co21 + "co21_"+beamp+".moment0")[0]
     image_co21_snr = glob.glob(dir_co21 + "co21_"+beamp+".moment0.snratio")[0]
-    image_pco10 = glob.glob(dir_co10 + "co10_"+beamp+".moment0")[0]
+    image_pco10 = glob.glob(dir_co10 + "co10_"+beamp+".moment8")[0]
+    image_pco21 = glob.glob(dir_co21 + "co21_"+beamp+".moment8")[0]
     image_tpeak = glob.glob(dir_co21 + "co21_"+beamp+".moment8")[0]
     image_r21 = glob.glob(dir_r21 + "r21_"+beamp+".moment0")[0]
     image_p21 = glob.glob(dir_r21 + "r21_"+beamp+".moment8")[0]
@@ -69,6 +70,9 @@ for i in range(len(gals)):
     data_r21mask = r21.import_data(imagename=image_r21mask,mode="data")
     data_p21 = r21.import_data(imagename=image_p21,mode="data")
 
+    data_pco10 = r21.import_data(imagename=image_pco10,mode="data")
+    data_pco21 = r21.import_data(imagename=image_pco21,mode="data")
+
     # calc r21 error
     data_co10snr = r21.import_data(imagename=image_co10_snr,mode="data")
     data_co21snr = r21.import_data(imagename=image_co21_snr,mode="data")
@@ -77,6 +81,14 @@ for i in range(len(gals)):
     data_r21err[np.isnan(data_r21err)] = 0
     data_co10snr[np.isnan(data_co10snr)] = 0
     data_co21snr[np.isnan(data_co21snr)] = 0
+
+    # calc p21 error
+    data_pco10err = co10rmss[i]
+    data_pco21err = co21rmss[i]
+    data_pco10snr = data_pco10 / data_pco10err
+    data_pco21snr = data_pco21 / data_pco21err
+    data_pco10snr[np.isnan(data_pco10snr)] = 0
+    data_pco21snr[np.isnan(data_pco21snr)] = 0
 
     data_all = np.c_[
         data_dist.astype(int),     # 0
@@ -92,7 +104,11 @@ for i in range(len(gals)):
         np.round(data_disp,2),     # 7
         #
         data_r21mask.astype(int),  # 8
-        data_p21]  # 9
+        data_p21,                  # 9
+        #
+        data_pco10snr,             # 10
+        data_pco21snr              # 11
+        ]
 
     np.savetxt(
         galname+"_parameter_matched_res.txt",
