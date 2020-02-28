@@ -99,7 +99,14 @@ for i in range(len(gals)):
 	p21_all.extend(p21)
 
 correlation = np.corrcoef(r21_all,p21_all)[0,1]
-plt.text(0.03 ,7,'$\\rho$ = ' + str(np.round(correlation, 2)))
+plt.text(0.03 ,2,
+	'$\\rho$ = ' + str(np.round(correlation, 2)) + "\n " \
+	+ "mode = " + "\n " \
+	+ "mean = " + "\n " \
+	+ "16th percentile = " + " (red dashsed line)\n " \
+	+ "median = " + "\n " \
+	+ "84th percentile = " + "\n " \
+	)
 
 a = plt.axes([.56, .18, .3, .2])
 plt.ylim([0,2500])
