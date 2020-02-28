@@ -92,7 +92,7 @@ for i in range(len(gals)):
 	plt.ylabel("log Peak Temperature Ratio")
 	plt.legend(loc = "upper left")
 
-	scipy.stats.pearsonr(r21,p21)
+	correlation = np.corrcoef(r21,p21)[0,1]
 
 	histo.extend(p21/r21)
 
