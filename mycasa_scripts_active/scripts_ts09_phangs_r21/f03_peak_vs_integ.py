@@ -37,6 +37,8 @@ def hist_percent(histo,percent):
 #####################
 figure = plt.figure(figsize=(8,8))
 histo = []
+r21_all = []
+p21_all = []
 for i in range(len(gals)):
 	galname = gals[i]
 	data = np.loadtxt(dir_data + galname + "_parameter_matched_res.txt")
@@ -92,10 +94,11 @@ for i in range(len(gals)):
 	plt.ylabel("log Peak Temperature Ratio")
 	plt.legend(loc = "upper left")
 
-	correlation = np.corrcoef(r21,p21)[0,1]
-	print(correlation)
-
 	histo.extend(p21/r21)
+	r21_all.extend(r21)
+	p21_all.extend(p21)
+
+correlation = np.corrcoef(r21_all,p21_all)[0,1]
 
 a = plt.axes([.56, .18, .3, .2])
 plt.ylim([0,2500])
