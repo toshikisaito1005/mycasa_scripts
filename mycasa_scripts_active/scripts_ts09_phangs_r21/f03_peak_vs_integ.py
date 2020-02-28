@@ -54,15 +54,17 @@ for i in range(len(gals)):
 	#
 	plt.rcParams["font.size"] = 16
 	plt.grid()
-	plt.xlim([-1.2,0.7])
-	plt.ylim([-1.2,0.7])
+	plt.xscale("log")
+	plt.yscale("log")
+	plt.xlim([10**-1.4,10**0.8])
+	plt.ylim([10**-1.4,10**0.8])
 	plt.errorbar(
-		x = np.log10(r21),
+		x = r21,
 		xerr = r21err,
-		y = np.log10(p21),
+		y = p21,
 		yerr = p21err,
 		marker = "s",
-		c="black",
+		c="grey",
 		alpha=0.1,
 		lw=1,
 		)
@@ -76,9 +78,9 @@ for i in range(len(gals)):
 		s=20,
 		)#label = galname.replace("ngc","NGC "))
 	"""
-	plt.plot([-1.2,0.7],[-1.2,0.7],"k-",lw=1)
-	plt.plot([-1.2,0.7],[-1.1,0.8],"k--",lw=1)
-	plt.plot([-1.2,0.7],[-1.3,0.6],"k--",lw=1)
+	#plt.plot([-1.2,0.7],[-1.2,0.7],"k-",lw=1)
+	#plt.plot([-1.2,0.7],[-1.1,0.8],"k--",lw=1)
+	#plt.plot([-1.2,0.7],[-1.3,0.6],"k--",lw=1)
 	plt.xlabel("log Integrated Intensity Ratio")
 	plt.ylabel("log Peak Temperature Ratio")
 	plt.legend(loc = "upper left")
@@ -90,4 +92,4 @@ plt.ylim([0,2500])
 plt.yticks([])
 plt.hist(histo,range=[0.4,1.4],bins=40,color="grey",lw=0)
 
-plt.savefig(dir_product+"figure_r21_vs_p21.png",dpi=100)
+plt.savefig(dir_product+"figure_r21_vs_p21.png",dpi=200)
