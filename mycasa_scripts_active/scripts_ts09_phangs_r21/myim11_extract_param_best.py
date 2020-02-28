@@ -47,6 +47,7 @@ for i in range(len(gals)):
     image_co10_snr = glob.glob(dir_co10 + "co10_"+beamp+".moment0.snratio")[0]
     image_co21 = glob.glob(dir_co21 + "co21_"+beamp+".moment0")[0]
     image_co21_snr = glob.glob(dir_co21 + "co21_"+beamp+".moment0.snratio")[0]
+    image_pco10 = glob.glob(dir_co10 + "co10_"+beamp+".moment0")[0]
     image_tpeak = glob.glob(dir_co21 + "co21_"+beamp+".moment8")[0]
     image_r21 = glob.glob(dir_r21 + "r21_"+beamp+".moment0")[0]
     image_p21 = glob.glob(dir_r21 + "r21_"+beamp+".moment8")[0]

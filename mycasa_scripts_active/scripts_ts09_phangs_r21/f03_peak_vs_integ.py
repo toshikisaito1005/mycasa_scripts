@@ -15,6 +15,9 @@ dir_data = "/Users/saito/data/mycasa_scripts_active/scripts_ts09_phangs_r21/"
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
 percents = [0.15,0.025,0.010]
+co10rmss = [0.013,0.048,0.015]
+co21rmss = [0.017,0.024,0.017]
+
 
 #####################
 ### Main Procedure
@@ -42,6 +45,8 @@ for i in range(len(gals)):
 	p21 = p21[cut_all]
 	co10snr = co10snr[cut_all]
 	co21snr = co21snr[cut_all]
+	r21err = r21 * np.sqrt((1/co10snr)**2 + (1/co21snr)**2)
+	p21err = p21 * np..sqrt((co10rmss[i]/)**2 + ()**2)
 	#
 	plt.rcParams["font.size"] = 16
 	plt.grid()
@@ -50,11 +55,11 @@ for i in range(len(gals)):
 	plt.scatter(
 		np.log10(r21),
 		np.log10(p21),
-		c="glack",#cm.brg(i/2.5),
+		c="black",#cm.brg(i/2.5),
 		alpha=0.1,
 		lw=0,
 		s=20,
-		label = galname.replace("ngc","NGC "))
+		)#label = galname.replace("ngc","NGC "))
 	plt.plot([-1.2,0.7],[-1.2,0.7],"k-",lw=1)
 	plt.plot([-1.2,0.7],[-1.1,0.8],"k--",lw=1)
 	plt.plot([-1.2,0.7],[-1.3,0.6],"k--",lw=1)
