@@ -98,7 +98,10 @@ for i in range(len(gals)):
 	r21_all.extend(r21)
 	p21_all.extend(p21)
 
-a = plt.axes([.56, .18, .3, .2])
+correlation = np.corrcoef(r21_all,p21_all)[0,1]
+plt.text(3,0.03,'$\\rho$ = ' + str(np.round(correlation, 2)))
+
+a = plt.axes([.16, .68, .3, .2])
 plt.ylim([0,2500])
 plt.xlabel("y-axis / x-axis")
 plt.yticks([])
@@ -114,14 +117,13 @@ plt.text(line_84+0.02,2200,str(np.round(line_84,2)),color="red",alpha=0.5,rotati
 plt.text(line_50-0.09,2200,str(np.round(line_50,2)),color="green",alpha=0.5,rotation=90)
 plt.text(line_16-0.09,2200,str(np.round(line_16,2)),color="blue",alpha=0.5,rotation=90)
 
-correlation = np.corrcoef(r21_all,p21_all)[0,1]
-plt.text(-0.5 ,5000,
-	'$\\rho$ = ' + str(np.round(correlation, 2)) + "\n\n " \
-	+ "mode = " + str(scipy.stats.mode(np.round(histo,2))[0][0]) + "\n " \
-	+ "mean = " + str(np.round(np.mean(histo), 2)) + "\n " \
-	+ "16th percentile = " + str(np.round(line_16,2))+ " (red dashsed)\n " \
-	+ "median = " + str(np.round(np.median(histo), 2)) + " (green dashsed)\n " \
-	+ "84th percentile = " + str(np.round(line_84,2)) + " (black dashsed)\n " \
+plt.text(1.45,500,
+	"mode = " + str(scipy.stats.mode(np.round(histo,2))[0][0]) + "\n" \
+	+ "mean = " + str(np.round(np.mean(histo), 2)) + "\n" \
+	+ "16th percentile = " + str(np.round(line_16,2))+ " (red)\n" \
+	+ "median = " + str(np.round(np.median(histo), 2)) + " (green)\n" \
+	+ "84th percentile = " + str(np.round(line_84,2)) + " (blue)" \
 	)
+
 
 plt.savefig(dir_product+"figure_r21_vs_p21.png",dpi=200)
