@@ -83,22 +83,23 @@ for i in range(len(gals)):
 
     data_all = np.c_[
         data_dist.astype(int),     # 0
-        np.round(data_r21,2),      # 1
+        np.round(data_r21,3),      # 1
+        np.round(data_r21err,3),   # 2
         #
-        np.round(data_co21,2),     # 2
-        np.round(data_co21snr,1),  # 3
+        np.round(data_co21,2),     # 3
+        np.round(data_co21snr,1),  # 4
         #
-        np.round(data_co10,2),     # 4
-        np.round(data_co10snr,1),  # 5
+        np.round(data_co10,2),     # 5
+        np.round(data_co10snr,1),  # 6
         #
-        np.round(data_tpeak,2),    # 6
-        np.round(data_disp,2),     # 7
+        np.round(data_tpeak,2),    # 7
+        np.round(data_disp,2),     # 8
         #
-        np.round(data_w1,6),       # 8
-        np.round(data_w2,6),       # 9
-        np.round(data_w3,6),       # 10
+        np.round(data_w1,6),       # 9
+        np.round(data_w2,6),       # 10
+        np.round(data_w3,6),       # 11
         #
-        data_r21mask.astype(int)]  # 11
+        data_r21mask.astype(int)]  # 12
 
     np.savetxt(
         galname+"_parameter_600pc.txt",
