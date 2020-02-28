@@ -99,6 +99,7 @@ for i in range(len(gals)):
 	p21_all.extend(p21)
 
 correlation = np.corrcoef(r21_all,p21_all)[0,1]
+plt.text(0.04 ,7,u"$\rho$ = ")
 
 a = plt.axes([.56, .18, .3, .2])
 plt.ylim([0,2500])
