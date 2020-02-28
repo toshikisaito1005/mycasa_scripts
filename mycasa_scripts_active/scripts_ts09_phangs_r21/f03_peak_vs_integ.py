@@ -99,7 +99,7 @@ for i in range(len(gals)):
 	p21_all.extend(p21)
 
 correlation = np.corrcoef(r21_all,p21_all)[0,1]
-plt.text(3,0.03,'$\\rho$ = ' + str(np.round(correlation, 2)))
+plt.text(4,0.03,'$\\rho$ = ' + str(np.round(correlation, 2)),fontsize=14)
 
 a = plt.axes([.16, .68, .3, .2])
 plt.ylim([0,2500])
@@ -113,16 +113,17 @@ plt.plot([1.0,1.0],[0,2500],"k-",alpha=0.5,lw=1.5)
 plt.plot([line_84,line_84],[0,2500],"--",color="red",alpha=0.5,lw=1)
 plt.plot([line_50,line_50],[0,2500],"--",color="green",alpha=0.5,lw=1)
 plt.plot([line_16,line_16],[0,2500],"--",color="blue",alpha=0.5,lw=1)
-plt.text(line_84+0.02,2200,str(np.round(line_84,2)),color="red",alpha=0.5,rotation=90)
+plt.text(line_84+0.02,2200,"84th",color="red",alpha=0.5,rotation=90)
 plt.text(line_50-0.09,2200,str(np.round(line_50,2)),color="green",alpha=0.5,rotation=90)
 plt.text(line_16-0.09,2200,str(np.round(line_16,2)),color="blue",alpha=0.5,rotation=90)
 
-plt.text(1.45,500,
+plt.text(1.45,700,
 	"mode = " + str(scipy.stats.mode(np.round(histo,2))[0][0]) + "\n" \
 	+ "mean = " + str(np.round(np.mean(histo), 2)) + "\n" \
-	+ "16th percentile = " + str(np.round(line_16,2))+ " (red)\n" \
+	+ "84th = " + str(np.round(line_84,2)) + " (red)" + "\n" \
 	+ "median = " + str(np.round(np.median(histo), 2)) + " (green)\n" \
-	+ "84th percentile = " + str(np.round(line_84,2)) + " (blue)" \
+	+ "16th = " + str(np.round(line_16,2))+ " (blue)\n",
+	fontsize=14
 	)
 
 
