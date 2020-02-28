@@ -48,11 +48,13 @@ for i in range(len(gals)):
 	plt.plot([-1.2,0.7],[-1.3,0.6],"k--",lw=1)
 	plt.xlabel("log Integrated Intensity Ratio")
 	plt.ylabel("log Peak Temperature Ratio")
+	plt.legend(loc = "upper left")
 
 	histo.extend(p21/r21)
 
-a = plt.axes([.65, .6, .2, .2])
-plt.hist(histo, normed=1)
+a = plt.axes([.55, .15, .3, .2])
+plt.ylim([0,4500])
+plt.yticks([])
+plt.hist(histo,range=[0.3,1.5],bins=40,color="grey",lw=0)
 
-plt.legend(loc = "upper left")
 plt.savefig(dir_product+"figure_r21_vs_p21.png",dpi=100)
