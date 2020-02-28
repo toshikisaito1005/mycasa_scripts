@@ -115,9 +115,9 @@ plt.plot([1.0,1.0],[0,2500],"k-",alpha=0.5,lw=1.5)
 plt.plot([line_84,line_84],[0,2500],"--",color="red",alpha=0.5,lw=1)
 plt.plot([line_50,line_50],[0,2500],"--",color="green",alpha=0.5,lw=1)
 plt.plot([line_16,line_16],[0,2500],"--",color="blue",alpha=0.5,lw=1)
-plt.text(line_84+0.02,2100,"84th",color="red",alpha=0.5,rotation=90)
-plt.text(line_50-0.09,2100,"median",color="green",alpha=0.5,rotation=90)
-plt.text(line_16-0.09,2100,"16th",color="blue",alpha=0.5,rotation=90)
+plt.text(line_84+0.02,2100,"84th",color="red",alpha=0.5,rotation=90,fontsize=14)
+plt.text(line_50-0.09,2100,"median",color="green",alpha=0.5,rotation=90,fontsize=14)
+plt.text(line_16-0.09,2100,"16th",color="blue",alpha=0.5,rotation=90,fontsize=14)
 
 plt.text(1.45,700,
 	"mode = " + str(scipy.stats.mode(np.round(histo,2))[0][0]) + "\n" \
