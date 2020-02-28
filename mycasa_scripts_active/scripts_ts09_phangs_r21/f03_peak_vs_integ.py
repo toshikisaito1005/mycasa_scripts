@@ -73,7 +73,7 @@ for i in range(len(gals)):
 	plt.yscale("log")
 	plt.xlim([10**-1.6,10**1.0])
 	plt.ylim([10**-1.6,10**1.0])
-	plt.errorbar(
+	markers, caps, bars = plt.errorbar(
 		x = r21,
 		xerr = r21err,
 		y = p21,
@@ -86,6 +86,7 @@ for i in range(len(gals)):
 		elinewidth=1,
 		capsize=0,
 		)
+	[bar.set_alpha(0.5) for bar in bars]
 	plt.plot([10**-1.6,10**1.0],[10**-1.6,10**1.0],"k-",lw=1.5)
 	plt.plot([10**-1.6,10**1.0],[10**-1.6*0.775,10**1.0*0.775],"--",c="blue",alpha=0.5,lw=1)
 	plt.plot([10**-1.6,10**1.0],[10**-1.6*0.925,10**1.0*0.925],"--",c="green",alpha=0.5,lw=1)
@@ -103,9 +104,10 @@ plt.text(4,0.03,'$\\rho$ = ' + str(np.round(correlation, 2)),fontsize=14)
 
 a = plt.axes([.16, .68, .3, .2])
 plt.ylim([0,2500])
-plt.xlabel("y-axis / x-axis")
+plt.xlabel("y-axis / x-axis" ,fontsize=14)
+plt.xticks(fontsize=14)
 plt.yticks([])
-histodata = plt.hist(histo,range=[0.4,1.4],bins=40,color="gray",lw=0,alpha=1.0)
+histodata = plt.hist(histo,range=[0.4,1.4],bins=40,color="gray",lw=0,alpha=0.5)
 line_84 = histodata[1][hist_percent(histodata[0],0.843)]
 line_50 = histodata[1][hist_percent(histodata[0],0.5)]
 line_16 = histodata[1][hist_percent(histodata[0],0.157)]
@@ -113,9 +115,9 @@ plt.plot([1.0,1.0],[0,2500],"k-",alpha=0.5,lw=1.5)
 plt.plot([line_84,line_84],[0,2500],"--",color="red",alpha=0.5,lw=1)
 plt.plot([line_50,line_50],[0,2500],"--",color="green",alpha=0.5,lw=1)
 plt.plot([line_16,line_16],[0,2500],"--",color="blue",alpha=0.5,lw=1)
-plt.text(line_84+0.02,2200,"84th",color="red",alpha=0.5,rotation=90)
-plt.text(line_50-0.09,2200,str(np.round(line_50,2)),color="green",alpha=0.5,rotation=90)
-plt.text(line_16-0.09,2200,str(np.round(line_16,2)),color="blue",alpha=0.5,rotation=90)
+plt.text(line_84+0.02,2100,"84th",color="red",alpha=0.5,rotation=90)
+plt.text(line_50-0.09,2100,"median",color="green",alpha=0.5,rotation=90)
+plt.text(line_16-0.09,2100,"16th",color="blue",alpha=0.5,rotation=90)
 
 plt.text(1.45,700,
 	"mode = " + str(scipy.stats.mode(np.round(histo,2))[0][0]) + "\n" \
