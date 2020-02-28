@@ -69,8 +69,8 @@ for i in range(len(gals)):
 	plt.grid()
 	plt.xscale("log")
 	plt.yscale("log")
-	plt.xlim([10**-2.0,10**1.0])
-	plt.ylim([10**-2.0,10**1.0])
+	plt.xlim([10**-1.8,10**1.0])
+	plt.ylim([10**-1.8,10**1.0])
 	plt.errorbar(
 		x = r21,
 		xerr = r21err,
@@ -84,18 +84,19 @@ for i in range(len(gals)):
 		elinewidth=1,
 		capsize=0,
 		)
-	plt.plot([10**-2.0,10**1.0],[10**-2.0,10**1.0],"k-",lw=1)
-	plt.plot([10**-2.0,10**1.0],[10**-2.0*0.775,10**1.0*0.775],"--",c="blue",alpha=0.5,lw=1)
-	plt.plot([10**-2.0,10**1.0],[10**-2.0*0.925,10**1.0*0.925],"--",c="green",alpha=0.5,lw=1)
-	plt.plot([10**-2.0,10**1.0],[10**-2.0*1.075,10**1.0*1.075],"--",c="red",alpha=0.5,lw=1)
+	plt.plot([10**-1.8,10**1.0],[10**-1.8,10**1.0],"k-",lw=1)
+	plt.plot([10**-1.8,10**1.0],[10**-1.8*0.775,10**1.0*0.775],"--",c="blue",alpha=0.5,lw=1)
+	plt.plot([10**-1.8,10**1.0],[10**-1.8*0.925,10**1.0*0.925],"--",c="green",alpha=0.5,lw=1)
+	plt.plot([10**-1.8,10**1.0],[10**-1.8*1.075,10**1.0*1.075],"--",c="red",alpha=0.5,lw=1)
 	plt.xlabel("log Integrated Intensity Ratio")
 	plt.ylabel("log Peak Temperature Ratio")
 	plt.legend(loc = "upper left")
 
 	histo.extend(p21/r21)
 
-a = plt.axes([.55, .17, .3, .2])
+a = plt.axes([.55, .18, .3, .2])
 plt.ylim([0,2500])
+plt.xlabel("y-axis / x-axis")
 plt.yticks([])
 histodata = plt.hist(histo,range=[0.4,1.4],bins=40,color="gray",lw=0,alpha=1.0)
 line_84 = histodata[1][hist_percent(histodata[0],0.843)]
@@ -106,5 +107,7 @@ plt.plot([line_84,line_84],[0,2500],"--",color="red",alpha=0.5,lw=1)
 plt.plot([line_50,line_50],[0,2500],"--",color="green",alpha=0.5,lw=1)
 plt.plot([line_16,line_16],[0,2500],"--",color="blue",alpha=0.5,lw=1)
 plt.text(line_84+0.02,2200,str(line_84),color="red",alpha=0.5,rotation=90)
+plt.text(line_50-0.09,2200,str(line_50),color="green",alpha=0.5,rotation=90)
+plt.text(line_16-0.09,2200,str(line_16),color="blue",alpha=0.5,rotation=90)
 
 plt.savefig(dir_product+"figure_r21_vs_p21.png",dpi=200)
