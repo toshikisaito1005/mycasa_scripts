@@ -93,6 +93,7 @@ for i in range(len(gals)):
 	plt.legend(loc = "upper left")
 
 	correlation = np.corrcoef(r21,p21)[0,1]
+	print(correlation)
 
 	histo.extend(p21/r21)
 
