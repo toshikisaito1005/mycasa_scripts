@@ -50,9 +50,6 @@ for i in range(len(gals)):
     image_tpeak = glob.glob(dir_co21 + "co21_"+beamp+".moment8")[0]
     image_r21 = glob.glob(dir_r21 + "r21_"+beamp+".moment0")[0]
     image_r21mask = glob.glob(dir_r21 + "r21_"+beamp+".moment0.highlowmask")[0]
-    image_w1 = glob.glob(dir_wise + galname+"_w1_gauss"+beamp+".image")[0]
-    image_w2 = glob.glob(dir_wise + galname+"_w2_gauss"+beamp+".image")[0]
-    image_w3 = glob.glob(dir_wise + galname+"_w3_gauss"+beamp+".image")[0]
 
     # import data
     data_ra = r21.import_data(imagename=image_co21,mode="coords")
@@ -68,9 +65,6 @@ for i in range(len(gals)):
 
     data_r21 = r21.import_data(imagename=image_r21,mode="data")
     data_r21mask = r21.import_data(imagename=image_r21mask,mode="data")
-    data_w1 = r21.import_data(imagename=image_w1,mode="data")
-    data_w2 = r21.import_data(imagename=image_w2,mode="data")
-    data_w3 = r21.import_data(imagename=image_w3,mode="data")
 
     # calc r21 error
     data_co10snr = r21.import_data(imagename=image_co10_snr,mode="data")
@@ -94,16 +88,12 @@ for i in range(len(gals)):
         np.round(data_tpeak,2),    # 6
         np.round(data_disp,2),     # 7
         #
-        np.round(data_w1,6),       # 8
-        np.round(data_w2,6),       # 9
-        np.round(data_w3,6),       # 10
-        #
-        data_r21mask.astype(int)]  # 11
+        data_r21mask.astype(int)]  # 8
 
     np.savetxt(
         galname+"_parameter_matched_res.txt",
         data_all,
         fmt = "%.7e",
-        header = "distance(pc) r21 co21(Jy/b.km/s) co21snr co21(Jy/b.km/s) co10snr peak(Jy/b) disp(km/s) w1(Jy/b) w2(Jy/b) w3(Jy/b), r21mask"
+        header = "distance(pc) r21 co21(Jy/b.km/s) co21snr co21(Jy/b.km/s) co10snr peak(Jy/b) disp(km/s) r21mask"
         )
 
