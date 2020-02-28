@@ -129,7 +129,7 @@ plt.text(line_84+0.02,2100,"84th",color="red",alpha=0.5,rotation=90,fontsize=14)
 plt.text(line_50-0.09,2100,"median",color="green",alpha=0.5,rotation=90,fontsize=14)
 plt.text(line_16-0.09,2100,"16th",color="blue",alpha=0.5,rotation=90,fontsize=14)
 
-plt.text(0.4,-2600,
+plt.text(1.44,1400,
 	#"mode = " + str(scipy.stats.mode(np.round(histo,2))[0][0]) + "\n" \
 	#+ "mean = " + str(np.round(np.mean(histo), 2)) + "\n" \
 	"84th = " + str(np.round(line_84,2)) + " (red)" + "\n" \
