@@ -86,6 +86,7 @@ for i in range(len(gals)):
 		)
 	plt.plot([10**-2.0,10**1.0],[10**-2.0,10**1.0],"k-",lw=1)
 	plt.plot([10**-2.0,10**1.0],[10**-2.0*0.7,10**1.0*0.7],"--",c="red",alpha=0.5,lw=1)
+	plt.plot([10**-2.0,10**1.0],[10**-2.0*1.05,10**1.0*1.05],"--",c="green",alpha=0.5,lw=1)
 	plt.plot([10**-2.0,10**1.0],[10**-2.0*1.325,10**1.0*1.325],"--",c="blue",alpha=0.5,lw=1)
 	plt.xlabel("log Integrated Intensity Ratio")
 	plt.ylabel("log Peak Temperature Ratio")
@@ -100,6 +101,8 @@ histodata = plt.hist(histo,range=[0.4,1.4],bins=40,color="gray",lw=0,alpha=1.0)
 line_84 = histodata[1][hist_percent(histodata[1],0.843)]
 line_50 = histodata[1][hist_percent(histodata[1],0.5)]
 line_16 = histodata[1][hist_percent(histodata[1],0.157)]
-plt.plot([line_84,line_84],[0,2500])
+plt.plot([line_84,line_84],[0,2500],"--",color="blue",alpha=0.5,lw=1)
+plt.plot([line_50,line_50],[0,2500],"--",color="green",alpha=0.5,lw=1)
+plt.plot([line_16,line_16],[0,2500],"--",color="red",alpha=0.5,lw=1)
 
 plt.savefig(dir_product+"figure_r21_vs_p21.png",dpi=200)
