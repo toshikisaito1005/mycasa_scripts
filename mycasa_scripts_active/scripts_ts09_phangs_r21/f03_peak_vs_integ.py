@@ -39,6 +39,8 @@ figure = plt.figure(figsize=(8,8))
 histo = []
 r21_all = []
 p21_all = []
+r21err_all = []
+p21err_all = []
 for i in range(len(gals)):
 	galname = gals[i]
 	data = np.loadtxt(dir_data + galname + "_parameter_matched_res.txt")
@@ -98,6 +100,13 @@ for i in range(len(gals)):
 	histo.extend(p21/r21)
 	r21_all.extend(r21)
 	p21_all.extend(p21)
+	r21err_all.extend(r21err)
+	p21err_all.extend(p21err)
+
+p2r = np.array(p21_all)/np.array(r21_all)
+r21err_all = np.array(r21err_all)
+p21err_all = np.array(p21err_all)
+p2rerr = p2r * np.sqrt((r21err_all/r21_all)**2 + (p21err_all/p21_all)**2)
 
 correlation = np.corrcoef(r21_all,p21_all)[0,1]
 plt.text(3.7,0.03,'$\\rho$ = ' + str(np.round(correlation, 2)),fontsize=14)
