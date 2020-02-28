@@ -35,6 +35,10 @@ for i in range(len(gals)):
 	co21 = data[:,4]
 	co10snr = data[:,5]
 	co21snr = data[:,3]
+	pco10 = data[:,10]
+	pco10err = data[:,11]
+	pco21 = data[:,12]
+	pco21err = data[:,13]
 	#
 	cut_r21 = (r21 > 0)
 	cut_p21 = (p21 > 0)
@@ -52,6 +56,14 @@ for i in range(len(gals)):
 	plt.grid()
 	plt.xlim([-1.2,0.7])
 	plt.ylim([-1.2,0.7])
+	plt.errorbar(
+		np.log10(r21),
+		np.log10(p21),
+		c="black",
+		alpha=0.1,
+		lw=0,
+		s=20,
+		)
 	plt.scatter(
 		np.log10(r21),
 		np.log10(p21),
