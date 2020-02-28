@@ -102,10 +102,10 @@ correlation = np.corrcoef(r21_all,p21_all)[0,1]
 plt.text(0.03 ,2,
 	'$\\rho$ = ' + str(np.round(correlation, 2)) + "\n " \
 	+ "mode = " + "\n " \
-	+ "mean = " + "\n " \
-	+ "16th percentile = " + " (red dashsed line)\n " \
-	+ "median = " + "\n " \
-	+ "84th percentile = " + "\n " \
+	+ "mean = " + str(np.round(np.mean(histo), 2)) + "\n " \
+	+ "16th percentile = " + " (red dashsed)\n " \
+	+ "median = " + str(np.round(np.median(histo), 2)) + " (green dashsed)\n " \
+	+ "84th percentile = " + " (black dashsed)\n " \
 	)
 
 a = plt.axes([.56, .18, .3, .2])
