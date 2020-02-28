@@ -1,6 +1,7 @@
 import os
 
-execfile("myim03_mom_native.py")
+execfile("myim03a_mom_native.py")
+execfile("myim03b_Jy2Kelvin.py")
 execfile("myim04_multibeam.py")
 execfile("myim05_mom_multibeam.py")
 execfile("myim06_r21_map.py")
