@@ -17,4 +17,5 @@ gals = ["ngc0628","ngc3627","ngc4321"]
 #####################
 for i in range(len(gals)):
 	galname = gals[i]
-	dir_
+	dir_r21 = dir_data + galname + "_r21/"
+	
