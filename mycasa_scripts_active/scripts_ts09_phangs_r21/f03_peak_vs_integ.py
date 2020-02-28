@@ -20,6 +20,19 @@ co21rmss = [0.017,0.024,0.017]
 
 
 #####################
+### functions
+#####################
+def hist_percent(histo,percent):
+    dat_sum = np.sum(histo)
+    dat_sum_from_zero,i = 0,0
+    while dat_sum_from_zero < dat_sum * percent:
+        dat_sum_from_zero += histo[i]
+        i += 1
+    
+    return i
+
+
+#####################
 ### Main Procedure
 #####################
 figure = plt.figure(figsize=(8,8))
@@ -66,14 +79,14 @@ for i in range(len(gals)):
 		marker = ".",
 		markersize = 0,
 		c="gray",
-		alpha=1.0,
+		alpha=0.5,
 		linewidth=0,
 		elinewidth=1,
 		capsize=0,
 		)
-	#plt.plot([-1.2,0.7],[-1.2,0.7],"k-",lw=1)
-	#plt.plot([-1.2,0.7],[-1.1,0.8],"k--",lw=1)
-	#plt.plot([-1.2,0.7],[-1.3,0.6],"k--",lw=1)
+	plt.plot([10**-2.0,10**1.0],[10**-2.0,10**1.0],"k-",lw=1)
+	plt.plot([10**-2.0,10**1.0],[10**-1.9,10**1.1],"--",c="red",alpha=0.5,lw=1)
+	plt.plot([10**-2.0,10**1.0],[10**-2.1,10**0.9],"--",c="blue",alpha=0.5,lw=1)
 	plt.xlabel("log Integrated Intensity Ratio")
 	plt.ylabel("log Peak Temperature Ratio")
 	plt.legend(loc = "upper left")
@@ -83,6 +96,6 @@ for i in range(len(gals)):
 a = plt.axes([.55, .15, .3, .2])
 plt.ylim([0,2500])
 plt.yticks([])
-plt.hist(histo,range=[0.4,1.4],bins=40,color="gray",lw=0,alpha=1.0)
+histodata = plt.hist(histo,range=[0.4,1.4],bins=40,color="gray",lw=0,alpha=1.0)
 
 plt.savefig(dir_product+"figure_r21_vs_p21.png",dpi=200)
