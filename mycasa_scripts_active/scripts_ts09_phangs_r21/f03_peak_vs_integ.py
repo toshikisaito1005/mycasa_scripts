@@ -56,28 +56,21 @@ for i in range(len(gals)):
 	plt.grid()
 	plt.xscale("log")
 	plt.yscale("log")
-	plt.xlim([10**-1.4,10**0.8])
-	plt.ylim([10**-1.4,10**0.8])
+	plt.xlim([10**-2.0,10**1.0])
+	plt.ylim([10**-2.0,10**1.0])
 	plt.errorbar(
 		x = r21,
 		xerr = r21err,
 		y = p21,
 		yerr = p21err,
-		marker = "s",
-		c="grey",
-		alpha=0.1,
-		lw=1,
+		marker = ".",
+		markersize = 0,
+		c="gray",
+		alpha=1.0,
+		linewidth=0,
+		elinewidth=1,
+		capsize=0,
 		)
-	"""
-	plt.scatter(
-		np.log10(r21),
-		np.log10(p21),
-		c="black",#cm.brg(i/2.5),
-		alpha=0.1,
-		lw=0,
-		s=20,
-		)#label = galname.replace("ngc","NGC "))
-	"""
 	#plt.plot([-1.2,0.7],[-1.2,0.7],"k-",lw=1)
 	#plt.plot([-1.2,0.7],[-1.1,0.8],"k--",lw=1)
 	#plt.plot([-1.2,0.7],[-1.3,0.6],"k--",lw=1)
@@ -90,6 +83,6 @@ for i in range(len(gals)):
 a = plt.axes([.55, .15, .3, .2])
 plt.ylim([0,2500])
 plt.yticks([])
-plt.hist(histo,range=[0.4,1.4],bins=40,color="grey",lw=0)
+plt.hist(histo,range=[0.4,1.4],bins=40,color="gray",lw=0,alpha=1.0)
 
 plt.savefig(dir_product+"figure_r21_vs_p21.png",dpi=200)
