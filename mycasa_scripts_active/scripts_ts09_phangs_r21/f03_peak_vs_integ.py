@@ -3,6 +3,9 @@ import re
 import sys
 import glob
 import scipy
+import numpy as np
+import matplotlib.pyplot as plt
+plt.ioff()
 
 
 #####################
@@ -27,6 +30,8 @@ for i in range(len(gals)):
 	p21 = data[:,9]
 	p21[np.isnan(p21)] = 0
 	co21 = data[:,4]
+	co10snr = data[:,5]
+	co21snr = data[:,3]
 	#
 	cut_r21 = (r21 > 0)
 	cut_p21 = (p21 > 0)
@@ -35,13 +40,20 @@ for i in range(len(gals)):
 	#
 	r21 = r21[cut_all]
 	p21 = p21[cut_all]
+	co10snr = co10snr[cut_all]
+	co21snr = co21snr[cut_all]
 	#
 	plt.rcParams["font.size"] = 16
 	plt.grid()
 	plt.xlim([-1.2,0.7])
 	plt.ylim([-1.2,0.7])
-	plt.scatter(np.log10(r21), np.log10(p21),
-		c=cm.brg(i/2.5), alpha=0.1, lw=0, s=20,
+	plt.scatter(
+		np.log10(r21),
+		np.log10(p21),
+		c="glack",#cm.brg(i/2.5),
+		alpha=0.1,
+		lw=0,
+		s=20,
 		label = galname.replace("ngc","NGC "))
 	plt.plot([-1.2,0.7],[-1.2,0.7],"k-",lw=1)
 	plt.plot([-1.2,0.7],[-1.1,0.8],"k--",lw=1)
