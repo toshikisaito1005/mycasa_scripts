@@ -38,3 +38,5 @@ rm -rf $dir_data"fig01a.png" $dir_data"fig01b.png" $dir_data"fig01c.png"
 
 ### figure 3
 convert -crop 1500x0+0+100 $dir_data"figure_r21_vs_p21.png" eps2:$dir_data"fig03.eps"
+
+rm -rf $dir_data"figure_r21_vs_p21.png"
