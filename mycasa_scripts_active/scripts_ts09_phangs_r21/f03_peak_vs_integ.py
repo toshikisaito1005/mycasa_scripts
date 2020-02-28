@@ -94,7 +94,7 @@ for i in range(len(gals)):
 
 	histo.extend(p21/r21)
 
-a = plt.axes([.55, .15, .3, .2])
+a = plt.axes([.55, .17, .3, .2])
 plt.ylim([0,2500])
 plt.yticks([])
 histodata = plt.hist(histo,range=[0.4,1.4],bins=40,color="gray",lw=0,alpha=1.0)
@@ -105,5 +105,6 @@ plt.plot([1.0,1.0],[0,2500],"k-",alpha=0.5,lw=1)
 plt.plot([line_84,line_84],[0,2500],"--",color="red",alpha=0.5,lw=1)
 plt.plot([line_50,line_50],[0,2500],"--",color="green",alpha=0.5,lw=1)
 plt.plot([line_16,line_16],[0,2500],"--",color="blue",alpha=0.5,lw=1)
+plt.text(line_84+0.02,2200,str(line_84),color="red",alpha=0.5,rotation=90)
 
 plt.savefig(dir_product+"figure_r21_vs_p21.png",dpi=200)
