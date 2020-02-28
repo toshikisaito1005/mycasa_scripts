@@ -90,8 +90,8 @@ for i in range(len(gals)):
 	plt.plot([10**-1.6,10**1.0],[10**-1.6*0.775,10**1.0*0.775],"--",c="blue",alpha=0.5,lw=1)
 	plt.plot([10**-1.6,10**1.0],[10**-1.6*0.925,10**1.0*0.925],"--",c="green",alpha=0.5,lw=1)
 	plt.plot([10**-1.6,10**1.0],[10**-1.6*1.075,10**1.0*1.075],"--",c="red",alpha=0.5,lw=1)
-	plt.xlabel("log Integrated Intensity Ratio")
-	plt.ylabel("log Peak Temperature Ratio")
+	plt.xlabel("Integrated Intensity Ratio")
+	plt.ylabel("Peak Temperature Ratio")
 	plt.legend(loc = "upper left")
 
 	histo.extend(p21/r21)
