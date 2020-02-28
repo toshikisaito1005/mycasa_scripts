@@ -35,10 +35,8 @@ for i in range(len(gals)):
 	co21 = data[:,4]
 	co10snr = data[:,5]
 	co21snr = data[:,3]
-	pco10 = data[:,10]
-	pco10err = data[:,11]
-	pco21 = data[:,12]
-	pco21err = data[:,13]
+	pco10snr = data[:,10]
+	pco21snr = data[:,11]
 	#
 	cut_r21 = (r21 > 0)
 	cut_p21 = (p21 > 0)
@@ -49,21 +47,26 @@ for i in range(len(gals)):
 	p21 = p21[cut_all]
 	co10snr = co10snr[cut_all]
 	co21snr = co21snr[cut_all]
-	r21err = r21 * np.sqrt((1/co10snr)**2 + (1/co21snr)**2)
-	p21err = p21 * np..sqrt((co10rmss[i]/)**2 + ()**2)
+	pco10snr = pco10snr[cut_all]
+	pco21snr = pco21snr[cut_all]
+	r21err = r21 * np.sqrt((1./co10snr)**2 + (1./co21snr)**2)
+	p21err = p21 * np.sqrt((1./pco10snr)**2 + (1./pco21snr)**2)
 	#
 	plt.rcParams["font.size"] = 16
 	plt.grid()
 	plt.xlim([-1.2,0.7])
 	plt.ylim([-1.2,0.7])
 	plt.errorbar(
-		np.log10(r21),
-		np.log10(p21),
+		x = np.log10(r21),
+		xerr = r21err,
+		y = np.log10(p21),
+		yerr = p21err,
+		marker = "s",
 		c="black",
 		alpha=0.1,
-		lw=0,
-		s=20,
+		lw=1,
 		)
+	"""
 	plt.scatter(
 		np.log10(r21),
 		np.log10(p21),
@@ -72,6 +75,7 @@ for i in range(len(gals)):
 		lw=0,
 		s=20,
 		)#label = galname.replace("ngc","NGC "))
+	"""
 	plt.plot([-1.2,0.7],[-1.2,0.7],"k-",lw=1)
 	plt.plot([-1.2,0.7],[-1.1,0.8],"k--",lw=1)
 	plt.plot([-1.2,0.7],[-1.3,0.6],"k--",lw=1)

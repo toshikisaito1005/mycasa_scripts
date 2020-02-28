@@ -106,16 +106,14 @@ for i in range(len(gals)):
         data_r21mask.astype(int),  # 8
         data_p21,                  # 9
         #
-        data_pco10,                # 10
-        data_pco10snr,             # 11
-        data_pco21,                # 12
-        data_pco21snr              # 13
+        data_pco10snr,             # 10
+        data_pco21snr              # 11
         ]
 
     np.savetxt(
         galname+"_parameter_matched_res.txt",
         data_all,
         fmt = "%.7e",
-        header = "distance(pc) r21 co21(Jy/b.km/s) co21snr co21(Jy/b.km/s) co10snr peak(Jy/b) disp(km/s) r21mask p21 pco10 pco10err(Jy/b) pco21 pco21err(Jy/b)"
+        header = "distance(pc) r21 co21(Jy/b.km/s) co21snr co21(Jy/b.km/s) co10snr peak(Jy/b) disp(km/s) r21mask p21 pco10snr pco21snr"
         )
 
