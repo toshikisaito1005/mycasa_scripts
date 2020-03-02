@@ -15,8 +15,6 @@ dir_data = "/Users/saito/data/mycasa_scripts_active/scripts_ts09_phangs_r21/"
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
 percents = [0.15,0.025,0.010]
-co10rmss = [0.013,0.048,0.015]
-co21rmss = [0.017,0.024,0.017]
 
 
 #####################
@@ -115,7 +113,7 @@ a = plt.axes([.16, .68, .3, .2])
 plt.plot([0.45,0.45+np.median(p2rerr)],[2200,2200],"k-",lw=2)
 plt.ylim([0,2500])
 plt.xlabel("y-axis / x-axis" ,fontsize=14)
-plt.xticks(fontsize=14)
+plt.xticks([-1,0,1],['a','b','c'],fontsize=14)
 plt.yticks([])
 histodata = plt.hist(histo,range=[0.4,1.4],bins=40,color="gray",lw=0,alpha=0.5)
 line_84 = histodata[1][hist_percent(histodata[0],0.843)]
