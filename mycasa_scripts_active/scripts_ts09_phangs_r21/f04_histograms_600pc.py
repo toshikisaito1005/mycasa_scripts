@@ -25,6 +25,7 @@ def_nucleus = [50*44./1.0,50*52./1.3,50*103/1.4]
 xlim = [0.15,1.2]
 ylim = [0,0.16]
 
+
 #####################
 ### functions
 #####################
@@ -49,6 +50,72 @@ def weighted_median(data, weights):
 
     return w_median
 
+
+def plot_hists_for_nuclear_outer_whole(
+	ax,
+	data,
+	distance,
+	bins,
+	xlim,
+	weights,
+	color,
+	size_nuclear = None,
+	):
+	"""
+	"""
+	# construct histograms
+	histo_all = np.histogram(data,
+							 bins=bins,
+							 range=(xlim),
+							 weights=weights)
+	histo_allx, histo_ally = np.delete(histo_all[1],-1),histo_all[0]
+
+	histo_in = np.histogram(data[distance<size_nuclear],
+							bins=bins,
+							range=(xlim),
+							weights=weights[distance<size_nuclear])
+	_, histo_iny = np.delete(histo_in[1],-1),histo_in[0]
+
+	histo_out = np.histogram(data[distance>size_nuclear],
+							 bins=bins,
+							 range=(xlim),
+							 weights=weights[distance>size_nuclear])
+	_, histo_outy = np.delete(histo_out[1],-1),histo_out[0]
+	#
+	# normalize histograms
+	histo_all_norm = histo_all / float(sum(histo_ally))
+	histo_in_norm = histo_in / float(sum(histo_iny))
+	histo_out_norm = histo_out / float(sum(histo_outy))
+	#
+	# calculate median values
+	median_all = weighted_median(data = data,
+								 weights = weights)
+	median_in = weighted_median(data = data[distance<size_nuclear],
+								weights = weights[distance<size_nuclear])
+	median_out = weighted_median(data = data[distance>size_nuclear],
+								 weights = weights[distance>size_nuclear])
+	#
+	# plot
+	ax.plot(histo_allx,histo_all_norm,"black",lw=5,alpha=0.5)
+	ax.plot(histo_allx,histo_in_norm,c=color,ls="dotted",lw=2,alpha=1.0)
+	ax.plot(histo_allx,histo_out_norm,c=color,ls="-",lw=5,alpha=0.5)
+
+
+
+	# plt1
+	plt1.plot([histo1x[hist_percent(histo1y,0.157)],
+	           histo1x[hist_percent(histo1y,0.843)]],
+	          [0.15,0.15],c="black",lw=3,alpha=0.5)
+	plt1.plot([histo2x[hist_percent(histo2y,0.157)],
+	           histo2x[hist_percent(histo2y,0.843)]],
+	          [0.14,0.14],c=cm.brg(i/2.5),lw=3,alpha=1.0,linestyle="dotted")
+	plt1.plot([histo3x[hist_percent(histo3y,0.157)],
+	           histo3x[hist_percent(histo3y,0.843)]],
+	      [0.13,0.13],c=cm.brg(i/2.5),lw=3,alpha=0.5)
+
+	#plt1.set_yscale("log")
+	plt1.set_xlim(xlim)
+	plt1.set_ylim(ylim)
 
 #####################
 ### Main Procedure
@@ -93,49 +160,9 @@ for i in range(len(gals)):
 	plt3.grid(axis="x")
 	#plt4.grid(axis="x")
 
-def plot_hists_for_nuclear_outer_whole(
-	ax,
-	data,
-	distance,
-	bins,
-	xlim,
-	weights,
-	size_nuclear = None,
-	):
+
+
 	"""
-	"""
-	# construct histograms
-	histo_all = np.histogram(data,
-							 bins=bins,
-							 range=(xlim),
-							 weights=weights)
-	histo_allx,histo_ally = np.delete(histo_all[1],-1),histo_all[0]
-
-	histo_in = np.histogram(data[distance<size_nuclear],
-							bins=bins,
-							range=(xlim),
-							weights=weights[distance<size_nuclear])
-	histo_inx,histo_iny = np.delete(histo_in[1],-1),histo_in[0]
-
-	histo_out = np.histogram(data[distance>size_nuclear],
-							 bins=bins,
-							 range=(xlim),
-							 weights=weights[distance>size_nuclear])
-	histo_outx,histo_outy = np.delete(histo_out[1],-1),histo_out[0]
-	#
-	histo_all_norm = histo_all / float(sum(histo_ally))
-	histo_in_norm = histo_in / float(sum(histo_iny))
-	histo_out_norm = histo_out / float(sum(histo_outy))
-	#
-	median_all = weighted_median(data = data,
-								 weights = weights)
-	median_in = weighted_median(data = data[distance<size_nuclear],
-								weights = weights[distance<size_nuclear])
-
-	med2 = weighted_median(r21[dist<def_nucleus[i]],co10[dist<def_nucleus[i]])
-	med3 = weighted_median(r21[dist>def_nucleus[i]],co10[dist>def_nucleus[i]])
-
-
 	## hist 1
 	histo1 = np.histogram(r21,bins=bins,range=(xlim),weights=None)
 	histo1x,histo1y = np.delete(histo1[1],-1),histo1[0]
@@ -173,6 +200,7 @@ def plot_hists_for_nuclear_outer_whole(
 	#plt1.set_yscale("log")
 	plt1.set_xlim(xlim)
 	plt1.set_ylim(ylim)
+	"""
 
 	## hist 2
 	histo1 = np.histogram(r21,bins=bins,range=(xlim),weights=co10)
