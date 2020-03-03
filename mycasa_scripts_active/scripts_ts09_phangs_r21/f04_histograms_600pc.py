@@ -92,6 +92,25 @@ for i in range(len(gals)):
 	plt3.grid(axis="x")
 	#plt4.grid(axis="x")
 
+def plot_hists_for_nuclear_outer_whole(
+	ax,
+	data,
+	bins,
+	range,
+	weights=None,
+	):
+	"""
+	"""
+	histo_all = np.histogram(data,bins=bins,range=(range),weights=weights)
+	histo_allx,histo_ally = np.delete(histo_all[1],-1),histo_all[0]
+	histo2 = np.histogram(r21[dist<def_nucleus[i]],bins=bins,range=(xlim),weights=None)
+
+	histo2 = np.histogram(r21[dist<def_nucleus[i]],bins=bins,range=(xlim),weights=None)
+	histo2x,histo2y = np.delete(histo2[1],-1),histo2[0]
+	histo3 = np.histogram(r21[dist>def_nucleus[i]],bins=bins,range=(xlim),weights=None)
+	histo3x,histo3y = np.delete(histo3[1],-1),histo3[0]
+
+
 	## hist 1
 	histo1 = np.histogram(r21,bins=bins,range=(xlim),weights=None)
 	histo1x,histo1y = np.delete(histo1[1],-1),histo1[0]
