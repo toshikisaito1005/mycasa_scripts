@@ -22,6 +22,8 @@ dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
 percents = [0.15,0.025,0.010]
 def_nucleus = [50*44./1.0,50*52./1.3,50*103/1.4]
+scales = [44/1.0,52/1.3,103/1.4]
+beam = ["13p6","15p0","08p2"]
 xlim = [0.15,1.2]
 ylim = [0,0.16]
 bins=50
@@ -34,25 +36,28 @@ def weighted_median(
 	data,
 	weights,
 	):
-    """
-    Args:
-        data (list or numpy.array): data
-        weights (list or numpy.array): weights
-    """
-    data, weights = np.array(data).squeeze(), np.array(weights).squeeze()
-    s_data, s_weights = map(np.array, zip(*sorted(zip(data, weights))))
-    midpoint = 0.5 * sum(s_weights)
-    if any(weights > midpoint):
-        w_median = (data[weights == np.max(weights)])[0]
-    else:
-        cs_weights = np.cumsum(s_weights)
-        idx = np.where(cs_weights <= midpoint)[0][-1]
-        if cs_weights[idx] == midpoint:
-            w_median = np.mean(s_data[idx:idx+2])
-        else:
-            w_median = s_data[idx+1]
+	"""
+	Args:
+	    data (list or numpy.array): data
+	    weights (list or numpy.array): weights
+	"""
+	if weights==None:
+		w_median = np.median(data)
+	else:
+		data, weights = np.array(data).squeeze(), np.array(weights).squeeze()
+		s_data, s_weights = map(np.array, zip(*sorted(zip(data, weights))))
+		midpoint = 0.5 * sum(s_weights)
+		if any(weights > midpoint):
+			w_median = (data[weights == np.max(weights)])[0]
+		else:
+			cs_weights = np.cumsum(s_weights)
+			idx = np.where(cs_weights <= midpoint)[0][-1]
+			if cs_weights[idx] == midpoint:
+				w_median = np.mean(s_data[idx:idx+2])
+			else:
+				w_median = s_data[idx+1]
 
-    return w_median
+	return w_median
 
 
 def hist_percent(
@@ -114,6 +119,7 @@ def plot_hists_for_nuclear_outer_whole(
 	histo_out_norm = histo_outy / float(sum(histo_ally))
 	#
 	# calculate median values
+	print()
 	median_all = weighted_median(data=data_all,weights=weights_all)
 	median_in = weighted_median(data=data_in,weights=weights_in)
 	median_out = weighted_median(data=data_out,weights=weights_out)
