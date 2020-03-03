@@ -82,46 +82,48 @@ for i in range(len(gals)):
 	r21err = r21 * np.sqrt((1./co10snr)**2 + (1./co21snr)**2)
 	p21err = p21 * np.sqrt((1./pco10snr)**2 + (1./pco21snr)**2)
 
-    ### plot data
+	### plot data
 	plt.figure(figsize=(18,3))
-    plt.rcParams["font.size"] = 14
-    gs = gridspec.GridSpec(nrows=9, ncols=16)
-    plt1 = plt.subplot(gs[1:7,0:4])
-    plt2 = plt.subplot(gs[1:7,4:8])
-    plt3 = plt.subplot(gs[1:7,8:12])
-    #plt4 = plt.subplot(gs[1:7,12:16])
-    plt1.grid(axis="x")
-    plt2.grid(axis="x")
-    plt3.grid(axis="x")
-    #plt4.grid(axis="x")
+	plt.rcParams["font.size"] = 14
+	gs = gridspec.GridSpec(nrows=9, ncols=16)
+	plt1 = plt.subplot(gs[1:7,0:4])
+	plt2 = plt.subplot(gs[1:7,4:8])
+	plt3 = plt.subplot(gs[1:7,8:12])
+	#plt4 = plt.subplot(gs[1:7,12:16])
+	plt1.grid(axis="x")
+	plt2.grid(axis="x")
+	plt3.grid(axis="x")
+	#plt4.grid(axis="x")
 
-    ## hist 1
-    histo1 = np.histogram(r21,bins=bins,range=(xlim),weights=None)
-    histo1x,histo1y = np.delete(histo1[1],-1),histo1[0]
-    histo2 = np.histogram(r21[dist<def_nucleus[i]],bins=bins,range=(xlim),weights=None)
-    histo2x,histo2y = np.delete(histo2[1],-1),histo2[0]
-    histo3 = np.histogram(r21[dist>def_nucleus[i]],bins=bins,range=(xlim),weights=None)
-    histo3x,histo3y = np.delete(histo3[1],-1),histo3[0]
+	## hist 1
+	histo1 = np.histogram(r21,bins=bins,range=(xlim),weights=None)
+	histo1x,histo1y = np.delete(histo1[1],-1),histo1[0]
+	histo2 = np.histogram(r21[dist<def_nucleus[i]],bins=bins,range=(xlim),weights=None)
+	histo2x,histo2y = np.delete(histo2[1],-1),histo2[0]
+	histo3 = np.histogram(r21[dist>def_nucleus[i]],bins=bins,range=(xlim),weights=None)
+	histo3x,histo3y = np.delete(histo3[1],-1),histo3[0]
 
-    # kernel density estimation
-    y11 = histo1y/float(sum(histo1y))
-    y12 = histo2y/float(sum(histo1y))
-    y13 = histo3y/float(sum(histo1y))
-    med1 = np.median(r21)
-    med2 = np.median(r21[dist<def_nucleus[i]])
-    med3 = np.median(r21[dist>def_nucleus[i]])
-    print(gals[i]+", median = "+str(med1))
+	# kernel density estimation
+	y11 = histo1y/float(sum(histo1y))
+	y12 = histo2y/float(sum(histo1y))
+	y13 = histo3y/float(sum(histo1y))
+	med1 = np.median(r21)
+	med2 = np.median(r21[dist<def_nucleus[i]])
+	med3 = np.median(r21[dist>def_nucleus[i]])
+	print(gals[i]+", median = "+str(med1))
 
-    # plt1
-    plt1.plot(histo1x,y11,"black",lw=5,alpha=0.5)
-    plt1.plot(histo1x,y12,c=cm.brg(i/2.5),ls="dotted",lw=2,alpha=1.0)
-    plt1.plot(histo1x,y13,c=cm.brg(i/2.5),ls="-",lw=5,alpha=0.5)
-    plt1.plot(med1, 0.15, ".", markersize=14,c="black")
-    plt1.plot(med2, 0.14, ".", markersize=14,c=cm.brg(i/2.5))
-    plt1.plot(med3, 0.13, ".", markersize=14,c=cm.brg(i/2.5))
-    plt1.plot([histo1x[hist_percent(histo1y,0.157)],
-               histo1x[hist_percent(histo1y,0.843)]],
-              [0.15,0.15],c="black",lw=3,alpha=0.5)
+
+from here! indent from 4 spaces to 1 tab
+# plt1
+plt1.plot(histo1x,y11,"black",lw=5,alpha=0.5)
+plt1.plot(histo1x,y12,c=cm.brg(i/2.5),ls="dotted",lw=2,alpha=1.0)
+plt1.plot(histo1x,y13,c=cm.brg(i/2.5),ls="-",lw=5,alpha=0.5)
+plt1.plot(med1, 0.15, ".", markersize=14,c="black")
+plt1.plot(med2, 0.14, ".", markersize=14,c=cm.brg(i/2.5))
+plt1.plot(med3, 0.13, ".", markersize=14,c=cm.brg(i/2.5))
+plt1.plot([histo1x[hist_percent(histo1y,0.157)],
+           histo1x[hist_percent(histo1y,0.843)]],
+          [0.15,0.15],c="black",lw=3,alpha=0.5)
     plt1.plot([histo2x[hist_percent(histo2y,0.157)],
                histo2x[hist_percent(histo2y,0.843)]],
               [0.14,0.14],c=cm.brg(i/2.5),lw=3,alpha=1.0,linestyle="dotted")
