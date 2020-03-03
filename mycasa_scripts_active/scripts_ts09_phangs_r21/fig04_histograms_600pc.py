@@ -17,10 +17,30 @@ plt.ioff()
 #####################
 ### parameters
 #####################
-dir_data = "/Users/saito/data/mycasa_scripts_active/scripts_ts09_phangs_r21/"
-dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
+snr = 2.5
+def_nucleus = [2200,2000,3680] # pc [50".0,50".0,,]
+dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 gals = ["ngc0628","ngc3627","ngc4321"]
-percents = [0.15,0.025,0.010]
+beam = ["13p6","15p0","08p2"]
+scales = [44/1.0,52/1.3,103/1.4]
+Irms_co10 = [0.058,
+             0.072,
+             #0.04*sqrt(2.5),
+             0.032]
+Irms_co21 = [0.039,
+             0.028,
+             #0.04*sqrt(2.5),
+             0.029]
+cnt_ras = [24.174, 170.063, 185.729]
+cnt_decs = [15.783, 12.9914, 15.8223]
+pas = [180-21.1, 180-172.4, 180-157.8]
+incs = [90-8.7, 90-56.2, 90-35.1]
+velres = [6.0, 10.0, 5.0]
+
+bins=50
+step=0.03
+xlim = [0.05,1.35]
+ylim = [0,0.16]#[10**-2.9,10**-0.5]
 
 
 #####################
