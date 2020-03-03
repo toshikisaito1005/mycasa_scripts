@@ -55,7 +55,7 @@ def weighted_median(data, weights):
 #####################
 for i in range(len(gals)):
 	galname = gals[i]
-	galname = 
+	galnamelabel = galname.replace("ngc","NGC ")
 	data = np.loadtxt(dir_data + galname + "_parameter_matched_res.txt")
 
 	dist = data[:,0]
@@ -260,7 +260,7 @@ for i in range(len(gals)):
 	bm = float(beam[i].replace("p","."))
 	bm_arc = str(round(bm,1)).replace(".","\".")
 	bm_kpc = str(int(round(bm*scales[i],-1)))+" pc"
-	plt1.text(txt_x,ylim[1]*0.38,galname+"\n"+bm_arc+"\n"+bm_kpc)
+	plt1.text(txt_x,ylim[1]*0.38,galnamelabel+"\n"+bm_arc+"\n"+bm_kpc)
 
 	if gals[i]=="ngc0628":
 	    plt1.text(xlim[0]+(xlim[1]-xlim[0])*0.0,ylim[1]*1.04,"# of Sightlines")
