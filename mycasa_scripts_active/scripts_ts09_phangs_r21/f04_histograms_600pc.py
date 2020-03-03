@@ -84,23 +84,28 @@ def plot_hists_for_nuclear_outer_whole(
 	"""
 	"""
 	# construct histograms
-	if not 
-	histo_all = np.histogram(data,
-							 bins=bins,
-							 range=(xlim),
-							 weights=weights)
+	if weights==None:
+		weights_all = None
+		weights_in = None
+		weights_out = None
+		data_all = data
+		data_in = data
+		data_out = data
+	else:
+		weights_all = weights
+		weights_in = weights[distance<size_nuclear]
+		weights_out = weights[distance>size_nuclear]
+		data_all = data
+		data_in = data[distance<size_nuclear]
+		data_out = data[distance>size_nuclear]
+	#
+	histo_all = np.histogram(data_all,bins=bins,range=(xlim),weights=weights_all)
 	histo_allx, histo_ally = np.delete(histo_all[1],-1),histo_all[0]
 
-	histo_in = np.histogram(data[distance<size_nuclear],
-							bins=bins,
-							range=(xlim),
-							weights=weights[distance<size_nuclear])
+	histo_in = np.histogram(data_in,bins=bins,range=(xlim),weights=weights_in)
 	_, histo_iny = np.delete(histo_in[1],-1),histo_in[0]
 
-	histo_out = np.histogram(data[distance>size_nuclear],
-							 bins=bins,
-							 range=(xlim),
-							 weights=weights[distance>size_nuclear])
+	histo_out = np.histogram(data_out,bins=bins,range=(xlim),weights=weights_out)
 	_, histo_outy = np.delete(histo_out[1],-1),histo_out[0]
 	#
 	# normalize histograms
@@ -109,17 +114,9 @@ def plot_hists_for_nuclear_outer_whole(
 	histo_out_norm = histo_outy / float(sum(histo_ally))
 	#
 	# calculate median values
-	if weights==None:
-		median_all = np.median(data)
-		median_in = np.median(data[distance<size_nuclear])
-		median_out = np.median(data[distance>size_nuclear])
-	else:
-		median_all = weighted_median(data = data,
-									 weights = weights)
-		median_in = weighted_median(data = data[distance<size_nuclear],
-									weights = weights[distance<size_nuclear])
-		median_out = weighted_median(data = data[distance>size_nuclear],
-									 weights = weights[distance>size_nuclear])
+	median_all = weighted_median(data=data_all,weights=weights_all)
+	median_in = weighted_median(data=data_in,weights=weights_in)
+	median_out = weighted_median(data=data_out,weights=weights_out)
 	#
 	# plot histograms
 	ax.plot(histo_allx,histo_all_norm,"black",lw=5,alpha=0.5)
