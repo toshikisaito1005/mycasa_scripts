@@ -61,6 +61,7 @@ for i in range(len(gals)):
 	dist = data[:,0]
 	r21 = data[:,1]
 	r21[np.isnan(r21)] = 0
+	r21[np.isinf(r21)] = 0
 	co21 = data[:,2]
 	co21snr = data[:,3]
 	co10 = data[:,4]
