@@ -88,22 +88,19 @@ def plot_hists_for_nuclear_outer_whole(
 	):
 	"""
 	"""
-	# construct histograms
+	data_all = data
+	data_in = data[distance<size_nuclear]
+	data_out = data[distance>size_nuclear]
 	if weights==None:
 		weights_all = None
 		weights_in = None
 		weights_out = None
-		data_all = data
-		data_in = data
-		data_out = data
 	else:
 		weights_all = weights
 		weights_in = weights[distance<size_nuclear]
 		weights_out = weights[distance>size_nuclear]
-		data_all = data
-		data_in = data[distance<size_nuclear]
-		data_out = data[distance>size_nuclear]
 	#
+	# construct histograms
 	histo_all = np.histogram(data_all,bins=bins,range=(xlim),weights=weights_all)
 	histo_allx, histo_ally = np.delete(histo_all[1],-1),histo_all[0]
 
@@ -123,6 +120,9 @@ def plot_hists_for_nuclear_outer_whole(
 	median_all = weighted_median(data=data_all,weights=weights_all)
 	median_in = weighted_median(data=data_in,weights=weights_in)
 	median_out = weighted_median(data=data_out,weights=weights_out)
+	print(np.median(histo_ally))
+	print(np.median(histo_iny))
+	print(np.median(histo_outy))
 	#
 	# plot histograms
 	ax.plot(histo_allx,histo_all_norm,"black",lw=5,alpha=0.5)
