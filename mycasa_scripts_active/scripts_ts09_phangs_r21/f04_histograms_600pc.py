@@ -26,91 +26,6 @@ percents = [0.15,0.025,0.010]
 #####################
 ### functions
 #####################
-def func1(x, a, b, c):
-    return a*np.exp(-(x-b)**2/(2*c**2))
-
-def fit_func1(func1, data_x, data_y, guess):
-    """
-    fit data with func1
-    """
-    popt, pcov = curve_fit(func1,
-                           data_x, data_y,
-                           p0=guess)
-    best_func = func1(data_x,popt[0],popt[1],popt[2])
-    residual = data_y - best_func
-                           
-    return popt, residual
-
-def hist_percent(histo,percent):
-    dat_sum = np.sum(histo)
-    dat_sum_from_zero,i = 0,0
-    while dat_sum_from_zero < dat_sum * percent:
-        dat_sum_from_zero += histo[i]
-        i += 1
-    
-    return i
-
-def process_fits(image,txtdata,mode,index=0):
-    """
-    """
-    done = glob.glob(txtdata)
-    if not done:
-        ### import data
-        image_r = imhead(image,mode="list")["shape"][0] - 1
-        image_t = imhead(image,mode="list")["shape"][1] - 1
-        
-        value = imval(image,box="0,0,"+str(image_r)+","+str(image_t))
-        
-        if mode=="coords":
-            value_masked = value[mode][:,:,index]
-        else:
-            value_masked = value[mode]
-    
-        value_masked_1d = value_masked.flatten()
-        
-        np.savetxt(txtdata, value_masked_1d)
-
-def import_data(dir_data,
-                gal,
-                line,
-                suffix,
-                ext,
-                mode,
-                txtname,
-                index=0):
-    """
-    """
-    image = dir_data+line+"_"+suffix+"."+ext
-    txtdata = dir_data+"f04_"+line+"_"+suffix+"."+txtname+".txt"
-    process_fits(image,txtdata,mode,index=index)
-    data = np.loadtxt(txtdata)
-
-    return data
-
-def check_nchan(dir_data,gal,suffix,line):
-    """
-    """
-    imagename = dir_data+line+"_"+suffix+"_mask.image"
-    outfile = imagename.replace("_mask.image",".nchan")
-    os.system("rm -rf "+outfile)
-    immoments(imagename=imagename,
-              moments=[0],
-              outfile=outfile)
-
-def distance(x, y, pa, inc, ra_cnt, dec_cnt, scale):
-    tilt_cos = math.cos(math.radians(pa))
-    tilt_sin = math.sin(math.radians(pa))
-    
-    x_tmp = x - ra_cnt
-    y_tmp = y - dec_cnt
-    
-    x_new = (x_tmp*tilt_cos - y_tmp*tilt_sin)
-    y_new = (x_tmp*tilt_sin + y_tmp*tilt_cos) * 1/math.sin(math.radians(inc))
-    
-    r = np.sqrt(x_new**2 + y_new**2) * 3600 * scale # arcsec * pc/arcsec
-    
-    return r
-
 def weighted_median(data, weights):
     """
     Args:
@@ -136,6 +51,11 @@ def weighted_median(data, weights):
 #####################
 ### Main Procedure
 #####################
+for i in range(len(gals)):
+	galname = gals[i]
+	data = np.loadtxt(dir_data + galname + "_parameter_matched_res.txt")
+
+
 
 #for i in range(len(gals)):
 for i in [0,1,2]:
