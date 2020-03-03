@@ -29,7 +29,10 @@ ylim = [0,0.16]
 #####################
 ### functions
 #####################
-def weighted_median(data, weights):
+def weighted_median(
+	data,
+	weights,
+	):
     """
     Args:
         data (list or numpy.array): data
@@ -49,6 +52,21 @@ def weighted_median(data, weights):
             w_median = s_data[idx+1]
 
     return w_median
+
+
+def hist_percent(
+	histo,
+	percent,
+	):
+	"""
+	"""
+    dat_sum = np.sum(histo)
+    dat_sum_from_zero,i = 0,0
+    while dat_sum_from_zero < dat_sum * percent:
+        dat_sum_from_zero += histo[i]
+        i += 1
+    
+    return i
 
 
 def plot_hists_for_nuclear_outer_whole(
@@ -95,24 +113,27 @@ def plot_hists_for_nuclear_outer_whole(
 	median_out = weighted_median(data = data[distance>size_nuclear],
 								 weights = weights[distance>size_nuclear])
 	#
-	# plot
+	# plot histograms
 	ax.plot(histo_allx,histo_all_norm,"black",lw=5,alpha=0.5)
 	ax.plot(histo_allx,histo_in_norm,c=color,ls="dotted",lw=2,alpha=1.0)
 	ax.plot(histo_allx,histo_out_norm,c=color,ls="-",lw=5,alpha=0.5)
-
-
-
-	# plt1
-	plt1.plot([histo1x[hist_percent(histo1y,0.157)],
-	           histo1x[hist_percent(histo1y,0.843)]],
-	          [0.15,0.15],c="black",lw=3,alpha=0.5)
-	plt1.plot([histo2x[hist_percent(histo2y,0.157)],
-	           histo2x[hist_percent(histo2y,0.843)]],
-	          [0.14,0.14],c=cm.brg(i/2.5),lw=3,alpha=1.0,linestyle="dotted")
+	# plot median points
+	ax.plot(median_all, 0.15,".",markersize=14,c="black")
+	ax.plot(median_in, 0.14,".",markersize=14,c=color)
+	ax.plot(median_out, 0.13,".",markersize=14,c=color)
+	# plot sigma ranges
+	ax.plot([histo_allx[hist_percent(histo_ally,0.157)],
+			 histo_allx[hist_percent(histo_ally,0.843)]],
+			[0.15,0.15],
+			c="black",lw=3,alpha=0.5)
+	ax.plot([histo_allx[hist_percent(histo_iny,0.157)],
+	         histo_allx[hist_percent(histo_iny,0.843)]],
+	        [0.14,0.14],
+	        c=color,lw=3,alpha=1.0,linestyle="dotted")
 	plt1.plot([histo3x[hist_percent(histo3y,0.157)],
 	           histo3x[hist_percent(histo3y,0.843)]],
 	      [0.13,0.13],c=cm.brg(i/2.5),lw=3,alpha=0.5)
-
+	
 	#plt1.set_yscale("log")
 	plt1.set_xlim(xlim)
 	plt1.set_ylim(ylim)
