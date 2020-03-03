@@ -150,144 +150,143 @@ for i in range(len(gals)):
 	med1 = weighted_median(r21,Ico10)
 	med2 = weighted_median(r21[dist<def_nucleus[i]],Ico10[dist<def_nucleus[i]])
 	med3 = weighted_median(r21[dist>def_nucleus[i]],Ico10[dist>def_nucleus[i]])
-	
-<TODO>
-    # plt2
-    plt2.plot(histo1x,y11,"black",lw=5,alpha=0.5)
-    plt2.plot(histo1x,y12,c=cm.brg(i/2.5),ls="dotted",lw=2,alpha=1.0)
-    plt2.plot(histo1x,y13,c=cm.brg(i/2.5),ls="-",lw=5,alpha=0.5)
-    plt2.plot(med1, 0.15, ".", markersize=14,c="black")
-    plt2.plot(med2, 0.14, ".", markersize=14,c=cm.brg(i/2.5))
-    plt2.plot(med3, 0.13, ".", markersize=14,c=cm.brg(i/2.5))
-    plt2.plot([histo1x[hist_percent(histo1y,0.157)],
-               histo1x[hist_percent(histo1y,0.843)]],
-              [0.15,0.15],c="black",lw=3,alpha=0.5)
-    plt2.plot([histo2x[hist_percent(histo2y,0.157)],
-               histo2x[hist_percent(histo2y,0.843)]],
-              [0.14,0.14],c=cm.brg(i/2.5),lw=3,alpha=1.0,linestyle="dotted")
-    plt2.plot([histo3x[hist_percent(histo3y,0.157)],
-               histo3x[hist_percent(histo3y,0.843)]],
-              [0.13,0.13],c=cm.brg(i/2.5),lw=3,alpha=0.5)
-    
-    #plt2.set_yscale("log")
-    plt2.set_xlim(xlim)
-    plt2.set_ylim(ylim)
-    
-    ## hist 3
-    histo1 = np.histogram(r21,bins=bins,range=(xlim),weights=Ico21)
-    histo1x,histo1y = np.delete(histo1[1],-1),histo1[0]
-    histo2 = np.histogram(r21[dist<def_nucleus[i]],bins=bins,range=(xlim),
-                          weights=Ico21[dist<def_nucleus[i]])
-    histo2x,histo2y = np.delete(histo2[1],-1),histo2[0]
-    histo3 = np.histogram(r21[dist>def_nucleus[i]],bins=bins,range=(xlim),
-                          weights=Ico21[dist>def_nucleus[i]])
-    histo3x,histo3y = np.delete(histo3[1],-1),histo3[0]
 
-    # kernel density estimation
-    y11 = histo1y/float(sum(histo1y))
-    y12 = histo2y/float(sum(histo1y))
-    y13 = histo3y/float(sum(histo1y))
-    med1 = weighted_median(r21,Ico21)
-    med2 = weighted_median(r21[dist<def_nucleus[i]],Ico21[dist<def_nucleus[i]])
-    med3 = weighted_median(r21[dist>def_nucleus[i]],Ico21[dist>def_nucleus[i]])
+	# plt2
+	plt2.plot(histo1x,y11,"black",lw=5,alpha=0.5)
+	plt2.plot(histo1x,y12,c=cm.brg(i/2.5),ls="dotted",lw=2,alpha=1.0)
+	plt2.plot(histo1x,y13,c=cm.brg(i/2.5),ls="-",lw=5,alpha=0.5)
+	plt2.plot(med1, 0.15, ".", markersize=14,c="black")
+	plt2.plot(med2, 0.14, ".", markersize=14,c=cm.brg(i/2.5))
+	plt2.plot(med3, 0.13, ".", markersize=14,c=cm.brg(i/2.5))
+	plt2.plot([histo1x[hist_percent(histo1y,0.157)],
+	           histo1x[hist_percent(histo1y,0.843)]],
+	          [0.15,0.15],c="black",lw=3,alpha=0.5)
+	plt2.plot([histo2x[hist_percent(histo2y,0.157)],
+	           histo2x[hist_percent(histo2y,0.843)]],
+	          [0.14,0.14],c=cm.brg(i/2.5),lw=3,alpha=1.0,linestyle="dotted")
+	plt2.plot([histo3x[hist_percent(histo3y,0.157)],
+	           histo3x[hist_percent(histo3y,0.843)]],
+	          [0.13,0.13],c=cm.brg(i/2.5),lw=3,alpha=0.5)
 
-    # plt3
-    plt3.plot(histo1x,y11,"black",lw=5,alpha=0.5)
-    plt3.plot(histo1x,y12,c=cm.brg(i/2.5),ls="dotted",lw=2,alpha=1.0)
-    plt3.plot(histo1x,y13,c=cm.brg(i/2.5),ls="-",lw=5,alpha=0.5)
-    plt3.plot(med1, 0.15, ".", markersize=14,c="black")
-    plt3.plot(med2, 0.14, ".", markersize=14,c=cm.brg(i/2.5))
-    plt3.plot(med3, 0.13, ".", markersize=14,c=cm.brg(i/2.5))
-    plt3.plot([histo1x[hist_percent(histo1y,0.157)],
-               histo1x[hist_percent(histo1y,0.843)]],
-              [0.15,0.15],c="black",lw=3,alpha=0.5)
-    plt3.plot([histo2x[hist_percent(histo2y,0.157)],
-               histo2x[hist_percent(histo2y,0.843)]],
-              [0.14,0.14],c=cm.brg(i/2.5),lw=3,alpha=1.0,linestyle="dotted")
-    plt3.plot([histo3x[hist_percent(histo3y,0.157)],
-               histo3x[hist_percent(histo3y,0.843)]],
-              [0.13,0.13],c=cm.brg(i/2.5),lw=3,alpha=0.5)
+	#plt2.set_yscale("log")
+	plt2.set_xlim(xlim)
+	plt2.set_ylim(ylim)
 
-    #plt3.set_yscale("log")
-    plt3.set_xlim(xlim)
-    plt3.set_ylim(ylim)
-    
-    ## hist 4
-    """
-    histo1 = np.histogram(r21,bins=bins,range=(xlim),weights=w3)
-    histo1x,histo1y = np.delete(histo1[1],-1),histo1[0]
-    histo2 = np.histogram(r21[dist<def_nucleus[i]],bins=bins,range=(xlim),
-                          weights=w3[dist<def_nucleus[i]])
-    histo2x,histo2y = np.delete(histo2[1],-1),histo2[0]
-    histo3 = np.histogram(r21[dist>def_nucleus[i]],bins=bins,range=(xlim),
-                          weights=w3[dist>def_nucleus[i]])
-    histo3x,histo3y = np.delete(histo3[1],-1),histo3[0]
+	## hist 3
+	histo1 = np.histogram(r21,bins=bins,range=(xlim),weights=Ico21)
+	histo1x,histo1y = np.delete(histo1[1],-1),histo1[0]
+	histo2 = np.histogram(r21[dist<def_nucleus[i]],bins=bins,range=(xlim),
+	                      weights=Ico21[dist<def_nucleus[i]])
+	histo2x,histo2y = np.delete(histo2[1],-1),histo2[0]
+	histo3 = np.histogram(r21[dist>def_nucleus[i]],bins=bins,range=(xlim),
+	                      weights=Ico21[dist>def_nucleus[i]])
+	histo3x,histo3y = np.delete(histo3[1],-1),histo3[0]
 
-    # kernel density estimation
-    y11 = histo1y/float(sum(histo1y))
-    y12 = histo2y/float(sum(histo1y))
-    y13 = histo3y/float(sum(histo1y))
-    med1 = weighted_median(r21,Ico21)
-    med2 = weighted_median(r21[dist<def_nucleus[i]],Ico21[dist<def_nucleus[i]])
-    med3 = weighted_median(r21[dist>def_nucleus[i]],Ico21[dist>def_nucleus[i]])
+	# kernel density estimation
+	y11 = histo1y/float(sum(histo1y))
+	y12 = histo2y/float(sum(histo1y))
+	y13 = histo3y/float(sum(histo1y))
+	med1 = weighted_median(r21,Ico21)
+	med2 = weighted_median(r21[dist<def_nucleus[i]],Ico21[dist<def_nucleus[i]])
+	med3 = weighted_median(r21[dist>def_nucleus[i]],Ico21[dist>def_nucleus[i]])
 
-    # plt4
-    plt4.plot(histo1x,y11,"black",lw=5,alpha=0.5)
-    plt4.plot(histo1x,y12,c=cm.brg(i/2.5),ls="dotted",lw=2,alpha=1.0)
-    plt4.plot(histo1x,y13,c=cm.brg(i/2.5),ls="-",lw=5,alpha=0.5)
-    plt4.plot(med1, 0.15, ".", markersize=14,c="black")
-    plt4.plot(med2, 0.14, ".", markersize=14,c=cm.brg(i/2.5))
-    plt4.plot(med3, 0.13, ".", markersize=14,c=cm.brg(i/2.5))
-    plt4.plot([histo1x[hist_percent(histo1y,0.157)],
-               histo1x[hist_percent(histo1y,0.843)]],
-              [0.15,0.15],c="black",lw=3,alpha=0.5)
-    plt4.plot([histo2x[hist_percent(histo2y,0.157)],
-               histo2x[hist_percent(histo2y,0.843)]],
-              [0.14,0.14],c=cm.brg(i/2.5),lw=3,alpha=1.0,linestyle="dotted")
-    plt4.plot([histo3x[hist_percent(histo3y,0.157)],
-               histo3x[hist_percent(histo3y,0.843)]],
-              [0.13,0.13],c=cm.brg(i/2.5),lw=3,alpha=0.5)
+	# plt3
+	plt3.plot(histo1x,y11,"black",lw=5,alpha=0.5)
+	plt3.plot(histo1x,y12,c=cm.brg(i/2.5),ls="dotted",lw=2,alpha=1.0)
+	plt3.plot(histo1x,y13,c=cm.brg(i/2.5),ls="-",lw=5,alpha=0.5)
+	plt3.plot(med1, 0.15, ".", markersize=14,c="black")
+	plt3.plot(med2, 0.14, ".", markersize=14,c=cm.brg(i/2.5))
+	plt3.plot(med3, 0.13, ".", markersize=14,c=cm.brg(i/2.5))
+	plt3.plot([histo1x[hist_percent(histo1y,0.157)],
+	           histo1x[hist_percent(histo1y,0.843)]],
+	          [0.15,0.15],c="black",lw=3,alpha=0.5)
+	plt3.plot([histo2x[hist_percent(histo2y,0.157)],
+	           histo2x[hist_percent(histo2y,0.843)]],
+	          [0.14,0.14],c=cm.brg(i/2.5),lw=3,alpha=1.0,linestyle="dotted")
+	plt3.plot([histo3x[hist_percent(histo3y,0.157)],
+	           histo3x[hist_percent(histo3y,0.843)]],
+	          [0.13,0.13],c=cm.brg(i/2.5),lw=3,alpha=0.5)
 
-    #plt4.set_yscale("log")
-    plt4.set_xlim(xlim)
-    plt4.set_ylim(ylim)
-    """
+	#plt3.set_yscale("log")
+	plt3.set_xlim(xlim)
+	plt3.set_ylim(ylim)
 
-    plt1.tick_params(labelbottom=False)
-    plt2.tick_params(labelleft=False,labelbottom=False)
-    plt3.tick_params(labelleft=False,labelbottom=False)
-    #plt4.tick_params(labelleft=False,labelbottom=False)
-    #plt1.set_yticks(np.arange(0.9, ylim[1]+0.01, 0.9))
-    #plt2.set_yticks(np.arange(0.9, ylim[1]+0.01, 0.9))
-    #plt3.set_yticks(np.arange(0.9, ylim[1]+0.01, 0.9))
+	## hist 4
+	"""
+	histo1 = np.histogram(r21,bins=bins,range=(xlim),weights=w3)
+	histo1x,histo1y = np.delete(histo1[1],-1),histo1[0]
+	histo2 = np.histogram(r21[dist<def_nucleus[i]],bins=bins,range=(xlim),
+	                      weights=w3[dist<def_nucleus[i]])
+	histo2x,histo2y = np.delete(histo2[1],-1),histo2[0]
+	histo3 = np.histogram(r21[dist>def_nucleus[i]],bins=bins,range=(xlim),
+	                      weights=w3[dist>def_nucleus[i]])
+	histo3x,histo3y = np.delete(histo3[1],-1),histo3[0]
 
-    txt_x = xlim[0]+(xlim[1]-xlim[0])*0.67
-    bm = float(beam[i].replace("p","."))
-    bm_arc = str(round(bm,1)).replace(".","\".")
-    bm_kpc = str(int(round(bm*scales[i],-1)))+" pc"
-    plt1.text(txt_x,ylim[1]*0.55,name_title+"\n"+bm_arc+"\n"+bm_kpc)
+	# kernel density estimation
+	y11 = histo1y/float(sum(histo1y))
+	y12 = histo2y/float(sum(histo1y))
+	y13 = histo3y/float(sum(histo1y))
+	med1 = weighted_median(r21,Ico21)
+	med2 = weighted_median(r21[dist<def_nucleus[i]],Ico21[dist<def_nucleus[i]])
+	med3 = weighted_median(r21[dist>def_nucleus[i]],Ico21[dist>def_nucleus[i]])
 
-    if gals[i]=="ngc0628":
-        plt1.text(xlim[0]+(xlim[1]-xlim[0])*0.0,ylim[1]*1.04,"# of Sightlines")
-        plt2.text(xlim[0]+(xlim[1]-xlim[0])*0.0,ylim[1]*1.04,"CO(1-0) Flux")
-        plt3.text(xlim[0]+(xlim[1]-xlim[0])*0.0,ylim[1]*1.04,"CO(2-1) Flux")
+	# plt4
+	plt4.plot(histo1x,y11,"black",lw=5,alpha=0.5)
+	plt4.plot(histo1x,y12,c=cm.brg(i/2.5),ls="dotted",lw=2,alpha=1.0)
+	plt4.plot(histo1x,y13,c=cm.brg(i/2.5),ls="-",lw=5,alpha=0.5)
+	plt4.plot(med1, 0.15, ".", markersize=14,c="black")
+	plt4.plot(med2, 0.14, ".", markersize=14,c=cm.brg(i/2.5))
+	plt4.plot(med3, 0.13, ".", markersize=14,c=cm.brg(i/2.5))
+	plt4.plot([histo1x[hist_percent(histo1y,0.157)],
+	           histo1x[hist_percent(histo1y,0.843)]],
+	          [0.15,0.15],c="black",lw=3,alpha=0.5)
+	plt4.plot([histo2x[hist_percent(histo2y,0.157)],
+	           histo2x[hist_percent(histo2y,0.843)]],
+	          [0.14,0.14],c=cm.brg(i/2.5),lw=3,alpha=1.0,linestyle="dotted")
+	plt4.plot([histo3x[hist_percent(histo3y,0.157)],
+	           histo3x[hist_percent(histo3y,0.843)]],
+	          [0.13,0.13],c=cm.brg(i/2.5),lw=3,alpha=0.5)
 
-    if gals[i]=="ngc4321":
-        plt1.set_xlabel("$R_{21}$")
-        plt2.set_xlabel("$R_{21}$")
-        plt3.set_xlabel("$R_{21}$")
-        plt1.tick_params(labelbottom=True)
-        plt2.tick_params(labelleft=False,labelbottom=True)
-        plt3.tick_params(labelleft=False,labelbottom=True)
+	#plt4.set_yscale("log")
+	plt4.set_xlim(xlim)
+	plt4.set_ylim(ylim)
+	"""
 
-    plt1.legend()
-    plt2.legend()
-    plt3.legend()
+	plt1.tick_params(labelbottom=False)
+	plt2.tick_params(labelleft=False,labelbottom=False)
+	plt3.tick_params(labelleft=False,labelbottom=False)
+	#plt4.tick_params(labelleft=False,labelbottom=False)
+	#plt1.set_yticks(np.arange(0.9, ylim[1]+0.01, 0.9))
+	#plt2.set_yticks(np.arange(0.9, ylim[1]+0.01, 0.9))
+	#plt3.set_yticks(np.arange(0.9, ylim[1]+0.01, 0.9))
 
-    plt1.set_yticks(np.arange(0, 0.15 + 0.01, 0.03))
-    plt2.set_yticks(np.arange(0, 0.15 + 0.01, 0.03))
-    plt3.set_yticks(np.arange(0, 0.15 + 0.01, 0.03))
+	txt_x = xlim[0]+(xlim[1]-xlim[0])*0.67
+	bm = float(beam[i].replace("p","."))
+	bm_arc = str(round(bm,1)).replace(".","\".")
+	bm_kpc = str(int(round(bm*scales[i],-1)))+" pc"
+	plt1.text(txt_x,ylim[1]*0.55,name_title+"\n"+bm_arc+"\n"+bm_kpc)
 
-    plt.savefig(dir_data+"eps/figure_hists_"+gals[i]+".png",dpi=100)
+	if gals[i]=="ngc0628":
+	    plt1.text(xlim[0]+(xlim[1]-xlim[0])*0.0,ylim[1]*1.04,"# of Sightlines")
+	    plt2.text(xlim[0]+(xlim[1]-xlim[0])*0.0,ylim[1]*1.04,"CO(1-0) Flux")
+	    plt3.text(xlim[0]+(xlim[1]-xlim[0])*0.0,ylim[1]*1.04,"CO(2-1) Flux")
+
+	if gals[i]=="ngc4321":
+	    plt1.set_xlabel("$R_{21}$")
+	    plt2.set_xlabel("$R_{21}$")
+	    plt3.set_xlabel("$R_{21}$")
+	    plt1.tick_params(labelbottom=True)
+	    plt2.tick_params(labelleft=False,labelbottom=True)
+	    plt3.tick_params(labelleft=False,labelbottom=True)
+
+	plt1.legend()
+	plt2.legend()
+	plt3.legend()
+
+	plt1.set_yticks(np.arange(0, 0.15 + 0.01, 0.03))
+	plt2.set_yticks(np.arange(0, 0.15 + 0.01, 0.03))
+	plt3.set_yticks(np.arange(0, 0.15 + 0.01, 0.03))
+
+	plt.savefig(dir_data+"eps/figure_hists_"+gals[i]+".png",dpi=100)
 
 os.system("rm -rf *.last")
