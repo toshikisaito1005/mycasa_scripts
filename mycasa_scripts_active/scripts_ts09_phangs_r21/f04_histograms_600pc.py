@@ -24,6 +24,7 @@ percents = [0.15,0.025,0.010]
 def_nucleus = [50*44./1.0,50*52./1.3,50*103/1.4]
 xlim = [0.15,1.2]
 ylim = [0,0.16]
+bins=50
 
 
 #####################
@@ -60,13 +61,13 @@ def hist_percent(
 	):
 	"""
 	"""
-    dat_sum = np.sum(histo)
-    dat_sum_from_zero,i = 0,0
-    while dat_sum_from_zero < dat_sum * percent:
-        dat_sum_from_zero += histo[i]
-        i += 1
-    
-    return i
+	dat_sum = np.sum(histo)
+	dat_sum_from_zero,i = 0,0
+	while dat_sum_from_zero < dat_sum * percent:
+		dat_sum_from_zero += histo[i]
+		i += 1
+
+	return i
 
 
 def plot_hists_for_nuclear_outer_whole(
@@ -75,6 +76,7 @@ def plot_hists_for_nuclear_outer_whole(
 	distance,
 	bins,
 	xlim,
+	ylim,
 	weights,
 	color,
 	size_nuclear = None,
@@ -127,16 +129,17 @@ def plot_hists_for_nuclear_outer_whole(
 			[0.15,0.15],
 			c="black",lw=3,alpha=0.5)
 	ax.plot([histo_allx[hist_percent(histo_iny,0.157)],
-	         histo_allx[hist_percent(histo_iny,0.843)]],
-	        [0.14,0.14],
-	        c=color,lw=3,alpha=1.0,linestyle="dotted")
-	plt1.plot([histo3x[hist_percent(histo3y,0.157)],
-	           histo3x[hist_percent(histo3y,0.843)]],
-	      [0.13,0.13],c=cm.brg(i/2.5),lw=3,alpha=0.5)
-	
-	#plt1.set_yscale("log")
-	plt1.set_xlim(xlim)
-	plt1.set_ylim(ylim)
+			 histo_allx[hist_percent(histo_iny,0.843)]],
+			[0.14,0.14],
+			c=color,lw=3,alpha=1.0,linestyle="dotted")
+	ax.plot([histo_allx[hist_percent(histo_outy,0.157)],
+			 histo_allx[hist_percent(histo_outy,0.843)]],
+			[0.13,0.13],
+			c=color,lw=3,alpha=0.5)
+
+	ax.set_xlim(xlim)
+	ax.set_ylim(ylim)
+
 
 #####################
 ### Main Procedure
@@ -145,7 +148,7 @@ for i in range(len(gals)):
 	galname = gals[i]
 	galnamelabel = galname.replace("ngc","NGC ")
 	data = np.loadtxt(dir_data + galname + "_parameter_matched_res.txt")
-
+	#
 	dist = data[:,0]
 	r21 = data[:,1]
 	r21[np.isnan(r21)] = 0
@@ -166,8 +169,7 @@ for i in range(len(gals)):
 	co10snr = co10snr[cut_all]
 	co21snr = co21snr[cut_all]
 	r21err = r21 * np.sqrt((1./co10snr)**2 + (1./co21snr)**2)
-
-
+	#
 	### plot data
 	plt.figure(figsize=(18,3))
 	plt.rcParams["font.size"] = 14
@@ -181,7 +183,17 @@ for i in range(len(gals)):
 	plt3.grid(axis="x")
 	#plt4.grid(axis="x")
 
-
+	plot_hists_for_nuclear_outer_whole(
+		plt1,
+		r21,
+		dist,
+		bins,
+		xlim,
+		ylim,
+		co10/co10,
+		cm.brg(i/2.5),
+		size_nuclear = None,
+		)
 
 	"""
 	## hist 1
