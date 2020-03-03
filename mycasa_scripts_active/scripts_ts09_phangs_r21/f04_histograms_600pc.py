@@ -59,28 +59,22 @@ for i in range(len(gals)):
 	dist = data[:,0]
 	r21 = data[:,1]
 	r21[np.isnan(r21)] = 0
-	p21 = data[:,9]
-	p21[np.isnan(p21)] = 0
-	co21 = data[:,4]
-	co10snr = data[:,5]
+	co21 = data[:,2]
 	co21snr = data[:,3]
-	pco10snr = data[:,10]
-	pco21snr = data[:,11]
+	co10 = data[:,4]
+	co10snr = data[:,5]
 	#
 	cut_r21 = (r21 > 0)
-	cut_p21 = (p21 > 0)
 	cut_co21 = (co21 > co21.max() * percents[i])
-	cut_all = np.where((cut_r21) & (cut_p21) & (cut_co21))
+	cut_all = np.where((cut_r21) & (cut_co21))
 	#
-	dist = dist[ciut_all]
+	dist = dist[cut_all]
 	r21 = r21[cut_all]
-	p21 = p21[cut_all]
+	co10 = co10[cut_all]
+	co21 = co21[cut_all]
 	co10snr = co10snr[cut_all]
 	co21snr = co21snr[cut_all]
-	pco10snr = pco10snr[cut_all]
-	pco21snr = pco21snr[cut_all]
 	r21err = r21 * np.sqrt((1./co10snr)**2 + (1./co21snr)**2)
-	p21err = p21 * np.sqrt((1./pco10snr)**2 + (1./pco21snr)**2)
 
 	### plot data
 	plt.figure(figsize=(18,3))
@@ -134,22 +128,22 @@ for i in range(len(gals)):
 	plt1.set_ylim(ylim)
 
 	## hist 2
-	histo1 = np.histogram(r21,bins=bins,range=(xlim),weights=Ico10)
+	histo1 = np.histogram(r21,bins=bins,range=(xlim),weights=co10)
 	histo1x,histo1y = np.delete(histo1[1],-1),histo1[0]
 	histo2 = np.histogram(r21[dist<def_nucleus[i]],bins=bins,range=(xlim),
-	                      weights=Ico10[dist<def_nucleus[i]])
+	                      weights=co10[dist<def_nucleus[i]])
 	histo2x,histo2y = np.delete(histo2[1],-1),histo2[0]
 	histo3 = np.histogram(r21[dist>def_nucleus[i]],bins=bins,range=(xlim),
-	                      weights=Ico10[dist>def_nucleus[i]])
+	                      weights=co10[dist>def_nucleus[i]])
 	histo3x,histo3y = np.delete(histo3[1],-1),histo3[0]
 
 	# kernel density estimation
 	y11 = histo1y/float(sum(histo1y))
 	y12 = histo2y/float(sum(histo1y))
 	y13 = histo3y/float(sum(histo1y))
-	med1 = weighted_median(r21,Ico10)
-	med2 = weighted_median(r21[dist<def_nucleus[i]],Ico10[dist<def_nucleus[i]])
-	med3 = weighted_median(r21[dist>def_nucleus[i]],Ico10[dist>def_nucleus[i]])
+	med1 = weighted_median(r21,co10)
+	med2 = weighted_median(r21[dist<def_nucleus[i]],co10[dist<def_nucleus[i]])
+	med3 = weighted_median(r21[dist>def_nucleus[i]],co10[dist>def_nucleus[i]])
 
 	# plt2
 	plt2.plot(histo1x,y11,"black",lw=5,alpha=0.5)
@@ -173,22 +167,22 @@ for i in range(len(gals)):
 	plt2.set_ylim(ylim)
 
 	## hist 3
-	histo1 = np.histogram(r21,bins=bins,range=(xlim),weights=Ico21)
+	histo1 = np.histogram(r21,bins=bins,range=(xlim),weights=co21)
 	histo1x,histo1y = np.delete(histo1[1],-1),histo1[0]
 	histo2 = np.histogram(r21[dist<def_nucleus[i]],bins=bins,range=(xlim),
-	                      weights=Ico21[dist<def_nucleus[i]])
+	                      weights=co21[dist<def_nucleus[i]])
 	histo2x,histo2y = np.delete(histo2[1],-1),histo2[0]
 	histo3 = np.histogram(r21[dist>def_nucleus[i]],bins=bins,range=(xlim),
-	                      weights=Ico21[dist>def_nucleus[i]])
+	                      weights=co21[dist>def_nucleus[i]])
 	histo3x,histo3y = np.delete(histo3[1],-1),histo3[0]
 
 	# kernel density estimation
 	y11 = histo1y/float(sum(histo1y))
 	y12 = histo2y/float(sum(histo1y))
 	y13 = histo3y/float(sum(histo1y))
-	med1 = weighted_median(r21,Ico21)
-	med2 = weighted_median(r21[dist<def_nucleus[i]],Ico21[dist<def_nucleus[i]])
-	med3 = weighted_median(r21[dist>def_nucleus[i]],Ico21[dist>def_nucleus[i]])
+	med1 = weighted_median(r21,co21)
+	med2 = weighted_median(r21[dist<def_nucleus[i]],co21[dist<def_nucleus[i]])
+	med3 = weighted_median(r21[dist>def_nucleus[i]],co21[dist>def_nucleus[i]])
 
 	# plt3
 	plt3.plot(histo1x,y11,"black",lw=5,alpha=0.5)
@@ -226,9 +220,9 @@ for i in range(len(gals)):
 	y11 = histo1y/float(sum(histo1y))
 	y12 = histo2y/float(sum(histo1y))
 	y13 = histo3y/float(sum(histo1y))
-	med1 = weighted_median(r21,Ico21)
-	med2 = weighted_median(r21[dist<def_nucleus[i]],Ico21[dist<def_nucleus[i]])
-	med3 = weighted_median(r21[dist>def_nucleus[i]],Ico21[dist>def_nucleus[i]])
+	med1 = weighted_median(r21,co21)
+	med2 = weighted_median(r21[dist<def_nucleus[i]],co21[dist<def_nucleus[i]])
+	med3 = weighted_median(r21[dist>def_nucleus[i]],co21[dist>def_nucleus[i]])
 
 	# plt4
 	plt4.plot(histo1x,y11,"black",lw=5,alpha=0.5)
