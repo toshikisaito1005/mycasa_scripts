@@ -146,6 +146,8 @@ def plot_hists_for_nuclear_outer_whole(
 
 	ax.set_xlim(xlim)
 	ax.set_ylim(ylim)
+	ax.legend()
+	ax.set_yticks(np.arange(0, 0.15 + 0.01, 0.03))
 
 
 #####################
@@ -189,147 +191,30 @@ for i in range(len(gals)):
 	plt1.grid(axis="x")
 	plt2.grid(axis="x")
 	plt3.grid(axis="x")
-	#plt4.grid(axis="x")
 	#
 	# plot no-weight histogram
 	plot_hists_for_nuclear_outer_whole(
-		plt1, r21, dist, bins, xlim, ylim,
-		cm.brg(i/2.5), weights = None, size_nuclear = def_nucleus[i])
+		plt1,
+		r21, dist, bins, xlim, ylim, cm.brg(i/2.5),
+		weights = None, size_nuclear = def_nucleus[i])
 	#
 	# plot co10-weighted histogram
 	plot_hists_for_nuclear_outer_whole(
-		plt1, r21, dist, bins, xlim, ylim,
-		cm.brg(i/2.5), weights = None, size_nuclear = def_nucleus[i])
-
-	"""
-	## hist 2
-	histo1 = np.histogram(r21,bins=bins,range=(xlim),weights=co10)
-	histo1x,histo1y = np.delete(histo1[1],-1),histo1[0]
-	histo2 = np.histogram(r21[dist<def_nucleus[i]],bins=bins,range=(xlim),
-	                      weights=co10[dist<def_nucleus[i]])
-	histo2x,histo2y = np.delete(histo2[1],-1),histo2[0]
-	histo3 = np.histogram(r21[dist>def_nucleus[i]],bins=bins,range=(xlim),
-	                      weights=co10[dist>def_nucleus[i]])
-	histo3x,histo3y = np.delete(histo3[1],-1),histo3[0]
-
-	# kernel density estimation
-	y11 = histo1y/float(sum(histo1y))
-	y12 = histo2y/float(sum(histo1y))
-	y13 = histo3y/float(sum(histo1y))
-	med1 = weighted_median(r21,co10)
-	med2 = weighted_median(r21[dist<def_nucleus[i]],co10[dist<def_nucleus[i]])
-	med3 = weighted_median(r21[dist>def_nucleus[i]],co10[dist>def_nucleus[i]])
-
-	# plt2
-	plt2.plot(histo1x,y11,"black",lw=5,alpha=0.5)
-	plt2.plot(histo1x,y12,c=cm.brg(i/2.5),ls="dotted",lw=2,alpha=1.0)
-	plt2.plot(histo1x,y13,c=cm.brg(i/2.5),ls="-",lw=5,alpha=0.5)
-	plt2.plot(med1, 0.15, ".", markersize=14,c="black")
-	plt2.plot(med2, 0.14, ".", markersize=14,c=cm.brg(i/2.5))
-	plt2.plot(med3, 0.13, ".", markersize=14,c=cm.brg(i/2.5))
-	plt2.plot([histo1x[hist_percent(histo1y,0.157)],
-	           histo1x[hist_percent(histo1y,0.843)]],
-	          [0.15,0.15],c="black",lw=3,alpha=0.5)
-	plt2.plot([histo2x[hist_percent(histo2y,0.157)],
-	           histo2x[hist_percent(histo2y,0.843)]],
-	          [0.14,0.14],c=cm.brg(i/2.5),lw=3,alpha=1.0,linestyle="dotted")
-	plt2.plot([histo3x[hist_percent(histo3y,0.157)],
-	           histo3x[hist_percent(histo3y,0.843)]],
-	          [0.13,0.13],c=cm.brg(i/2.5),lw=3,alpha=0.5)
-
-	#plt2.set_yscale("log")
-	plt2.set_xlim(xlim)
-	plt2.set_ylim(ylim)
-	"""
-
-	## hist 3
-	histo1 = np.histogram(r21,bins=bins,range=(xlim),weights=co21)
-	histo1x,histo1y = np.delete(histo1[1],-1),histo1[0]
-	histo2 = np.histogram(r21[dist<def_nucleus[i]],bins=bins,range=(xlim),
-	                      weights=co21[dist<def_nucleus[i]])
-	histo2x,histo2y = np.delete(histo2[1],-1),histo2[0]
-	histo3 = np.histogram(r21[dist>def_nucleus[i]],bins=bins,range=(xlim),
-	                      weights=co21[dist>def_nucleus[i]])
-	histo3x,histo3y = np.delete(histo3[1],-1),histo3[0]
-
-	# kernel density estimation
-	y11 = histo1y/float(sum(histo1y))
-	y12 = histo2y/float(sum(histo1y))
-	y13 = histo3y/float(sum(histo1y))
-	med1 = weighted_median(r21,co21)
-	med2 = weighted_median(r21[dist<def_nucleus[i]],co21[dist<def_nucleus[i]])
-	med3 = weighted_median(r21[dist>def_nucleus[i]],co21[dist>def_nucleus[i]])
-
-	# plt3
-	plt3.plot(histo1x,y11,"black",lw=5,alpha=0.5)
-	plt3.plot(histo1x,y12,c=cm.brg(i/2.5),ls="dotted",lw=2,alpha=1.0)
-	plt3.plot(histo1x,y13,c=cm.brg(i/2.5),ls="-",lw=5,alpha=0.5)
-	plt3.plot(med1, 0.15, ".", markersize=14,c="black")
-	plt3.plot(med2, 0.14, ".", markersize=14,c=cm.brg(i/2.5))
-	plt3.plot(med3, 0.13, ".", markersize=14,c=cm.brg(i/2.5))
-	plt3.plot([histo1x[hist_percent(histo1y,0.157)],
-	           histo1x[hist_percent(histo1y,0.843)]],
-	          [0.15,0.15],c="black",lw=3,alpha=0.5)
-	plt3.plot([histo2x[hist_percent(histo2y,0.157)],
-	           histo2x[hist_percent(histo2y,0.843)]],
-	          [0.14,0.14],c=cm.brg(i/2.5),lw=3,alpha=1.0,linestyle="dotted")
-	plt3.plot([histo3x[hist_percent(histo3y,0.157)],
-	           histo3x[hist_percent(histo3y,0.843)]],
-	          [0.13,0.13],c=cm.brg(i/2.5),lw=3,alpha=0.5)
-
-	#plt3.set_yscale("log")
-	plt3.set_xlim(xlim)
-	plt3.set_ylim(ylim)
-
-	## hist 4
-	"""
-	histo1 = np.histogram(r21,bins=bins,range=(xlim),weights=w3)
-	histo1x,histo1y = np.delete(histo1[1],-1),histo1[0]
-	histo2 = np.histogram(r21[dist<def_nucleus[i]],bins=bins,range=(xlim),
-	                      weights=w3[dist<def_nucleus[i]])
-	histo2x,histo2y = np.delete(histo2[1],-1),histo2[0]
-	histo3 = np.histogram(r21[dist>def_nucleus[i]],bins=bins,range=(xlim),
-	                      weights=w3[dist>def_nucleus[i]])
-	histo3x,histo3y = np.delete(histo3[1],-1),histo3[0]
-
-	# kernel density estimation
-	y11 = histo1y/float(sum(histo1y))
-	y12 = histo2y/float(sum(histo1y))
-	y13 = histo3y/float(sum(histo1y))
-	med1 = weighted_median(r21,co21)
-	med2 = weighted_median(r21[dist<def_nucleus[i]],co21[dist<def_nucleus[i]])
-	med3 = weighted_median(r21[dist>def_nucleus[i]],co21[dist>def_nucleus[i]])
-
-	# plt4
-	plt4.plot(histo1x,y11,"black",lw=5,alpha=0.5)
-	plt4.plot(histo1x,y12,c=cm.brg(i/2.5),ls="dotted",lw=2,alpha=1.0)
-	plt4.plot(histo1x,y13,c=cm.brg(i/2.5),ls="-",lw=5,alpha=0.5)
-	plt4.plot(med1, 0.15, ".", markersize=14,c="black")
-	plt4.plot(med2, 0.14, ".", markersize=14,c=cm.brg(i/2.5))
-	plt4.plot(med3, 0.13, ".", markersize=14,c=cm.brg(i/2.5))
-	plt4.plot([histo1x[hist_percent(histo1y,0.157)],
-	           histo1x[hist_percent(histo1y,0.843)]],
-	          [0.15,0.15],c="black",lw=3,alpha=0.5)
-	plt4.plot([histo2x[hist_percent(histo2y,0.157)],
-	           histo2x[hist_percent(histo2y,0.843)]],
-	          [0.14,0.14],c=cm.brg(i/2.5),lw=3,alpha=1.0,linestyle="dotted")
-	plt4.plot([histo3x[hist_percent(histo3y,0.157)],
-	           histo3x[hist_percent(histo3y,0.843)]],
-	          [0.13,0.13],c=cm.brg(i/2.5),lw=3,alpha=0.5)
-
-	#plt4.set_yscale("log")
-	plt4.set_xlim(xlim)
-	plt4.set_ylim(ylim)
-	"""
-
+		plt2,
+		r21, dist, bins, xlim, ylim, cm.brg(i/2.5),
+		weights = co10, size_nuclear = def_nucleus[i])
+	#
+	# plot co21-weighted histogram
+	plot_hists_for_nuclear_outer_whole(
+		plt3,
+		r21, dist, bins, xlim, ylim, cm.brg(i/2.5),
+		weights = co21, size_nuclear = def_nucleus[i])
+	#
+	# 
 	plt1.tick_params(labelbottom=False)
 	plt2.tick_params(labelleft=False,labelbottom=False)
 	plt3.tick_params(labelleft=False,labelbottom=False)
-	#plt4.tick_params(labelleft=False,labelbottom=False)
-	#plt1.set_yticks(np.arange(0.9, ylim[1]+0.01, 0.9))
-	#plt2.set_yticks(np.arange(0.9, ylim[1]+0.01, 0.9))
-	#plt3.set_yticks(np.arange(0.9, ylim[1]+0.01, 0.9))
-
+	#
 	txt_x = xlim[0]+(xlim[1]-xlim[0])*0.67
 	bm = float(beam[i].replace("p","."))
 	bm_arc = str(round(bm,1)).replace(".","\".")
@@ -348,14 +233,6 @@ for i in range(len(gals)):
 	    plt1.tick_params(labelbottom=True)
 	    plt2.tick_params(labelleft=False,labelbottom=True)
 	    plt3.tick_params(labelleft=False,labelbottom=True)
-
-	plt1.legend()
-	plt2.legend()
-	plt3.legend()
-
-	plt1.set_yticks(np.arange(0, 0.15 + 0.01, 0.03))
-	plt2.set_yticks(np.arange(0, 0.15 + 0.01, 0.03))
-	plt3.set_yticks(np.arange(0, 0.15 + 0.01, 0.03))
 
 	plt.savefig(dir_product+"figure_hists_"+gals[i]+".png",dpi=100)
 
