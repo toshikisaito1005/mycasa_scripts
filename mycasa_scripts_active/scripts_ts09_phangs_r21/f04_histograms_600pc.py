@@ -95,20 +95,29 @@ for i in range(len(gals)):
 def plot_hists_for_nuclear_outer_whole(
 	ax,
 	data,
+	distance,
 	bins,
-	range,
-	weights=None,
+	xlim,
+	weights = None,
+	size_nuclear = None,
 	):
 	"""
 	"""
-	histo_all = np.histogram(data,bins=bins,range=(range),weights=weights)
+	# construct histograms
+	histo_all = np.histogram(data,bins=bins,range=(xlim),weights=weights)
 	histo_allx,histo_ally = np.delete(histo_all[1],-1),histo_all[0]
-	histo2 = np.histogram(r21[dist<def_nucleus[i]],bins=bins,range=(xlim),weights=None)
-
-	histo2 = np.histogram(r21[dist<def_nucleus[i]],bins=bins,range=(xlim),weights=None)
-	histo2x,histo2y = np.delete(histo2[1],-1),histo2[0]
-	histo3 = np.histogram(r21[dist>def_nucleus[i]],bins=bins,range=(xlim),weights=None)
-	histo3x,histo3y = np.delete(histo3[1],-1),histo3[0]
+	histo_in = np.histogram(data[distance<size_nuclear],bins=bins,range=(xlim),weights=None)
+	histo_inx,histo_iny = np.delete(histo_in[1],-1),histo_in[0]
+	histo_out = np.histogram(data[distance>size_nuclear],bins=bins,range=(xlim),weights=None)
+	histo_outx,histo_outy = np.delete(histo_out[1],-1),histo_out[0]
+	# 
+	histo_all_norm = histo_all/float(sum(histo_ally))
+	histo_in_norm = histo_in/float(sum(histo_iny))
+	histo_out_norm = histo_out/float(sum(histo_outy))
+	#
+	med1 = np.median(data)
+	med2 = np.median(data[distance<size_nuclear])
+	med3 = np.median(data[distance>size_nuclear])
 
 
 	## hist 1
