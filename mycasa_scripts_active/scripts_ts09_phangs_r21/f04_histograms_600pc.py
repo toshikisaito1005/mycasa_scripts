@@ -21,8 +21,8 @@ dir_data = "/Users/saito/data/mycasa_scripts_active/scripts_ts09_phangs_r21/"
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
 percents = [0.15,0.025,0.010]
-def_nucleus = [2000,2000,2000,2000]
-
+def_nucleus = [50*44./1.0,50*52./1.3,50*103/1.4]
+xlim = [0.15,1.2]
 
 #####################
 ### functions
@@ -281,6 +281,6 @@ for i in range(len(gals)):
 	plt2.set_yticks(np.arange(0, 0.15 + 0.01, 0.03))
 	plt3.set_yticks(np.arange(0, 0.15 + 0.01, 0.03))
 
-	plt.savefig(dir_data+"eps/figure_hists_"+gals[i]+".png",dpi=100)
+	plt.savefig(dir_product+"figure_hists_"+gals[i]+".png",dpi=100)
 
 os.system("rm -rf *.last")
