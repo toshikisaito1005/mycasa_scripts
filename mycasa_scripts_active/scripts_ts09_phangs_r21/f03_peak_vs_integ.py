@@ -5,6 +5,7 @@ import glob
 import scipy
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 plt.ioff()
 
 
@@ -91,8 +92,10 @@ for i in range(len(gals)):
 	plt.plot([10**-1.6,10**1.0],[10**-1.6*0.775,10**1.0*0.775],"--",c="blue",alpha=0.5,lw=1)
 	plt.plot([10**-1.6,10**1.0],[10**-1.6*0.925,10**1.0*0.925],"--",c="green",alpha=0.5,lw=1)
 	plt.plot([10**-1.6,10**1.0],[10**-1.6*1.075,10**1.0*1.075],"--",c="red",alpha=0.5,lw=1)
-	plt.xlabel("Integrated Intensity Ratio")
-	plt.ylabel("Peak Temperature Ratio")
+	plt.xlabel("log Integrated Intensity Ratio")
+	plt.ylabel("log Peak Temperature Ratio")
+	plt.xticks([0.1,1,10],[-1,0,1])
+	plt.yticks([0.1,1,10],[-1,0,1])
 	plt.legend(loc = "upper left")
 
 	histo.extend(p21/r21)
@@ -113,7 +116,7 @@ a = plt.axes([.16, .68, .3, .2])
 plt.plot([0.45,0.45+np.median(p2rerr)],[2200,2200],"k-",lw=2)
 plt.ylim([0,2500])
 plt.xlabel("y-axis / x-axis" ,fontsize=14)
-plt.xticks([-1,0,1],['a','b','c'],fontsize=14)
+plt.xticks(fontsize=14)
 plt.yticks([])
 histodata = plt.hist(histo,range=[0.4,1.4],bins=40,color="gray",lw=0,alpha=0.5)
 line_84 = histodata[1][hist_percent(histodata[0],0.843)]
