@@ -143,14 +143,15 @@ for i in range(len(gals)):
 	                      weights=Ico10[dist>def_nucleus[i]])
 	histo3x,histo3y = np.delete(histo3[1],-1),histo3[0]
 
-# kernel density estimation
-y11 = histo1y/float(sum(histo1y))
-    y12 = histo2y/float(sum(histo1y))
-    y13 = histo3y/float(sum(histo1y))
-    med1 = weighted_median(r21,Ico10)
-    med2 = weighted_median(r21[dist<def_nucleus[i]],Ico10[dist<def_nucleus[i]])
-    med3 = weighted_median(r21[dist>def_nucleus[i]],Ico10[dist>def_nucleus[i]])
-    
+	# kernel density estimation
+	y11 = histo1y/float(sum(histo1y))
+	y12 = histo2y/float(sum(histo1y))
+	y13 = histo3y/float(sum(histo1y))
+	med1 = weighted_median(r21,Ico10)
+	med2 = weighted_median(r21[dist<def_nucleus[i]],Ico10[dist<def_nucleus[i]])
+	med3 = weighted_median(r21[dist>def_nucleus[i]],Ico10[dist>def_nucleus[i]])
+	
+<TODO>
     # plt2
     plt2.plot(histo1x,y11,"black",lw=5,alpha=0.5)
     plt2.plot(histo1x,y12,c=cm.brg(i/2.5),ls="dotted",lw=2,alpha=1.0)
