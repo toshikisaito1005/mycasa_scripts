@@ -9,3 +9,4 @@ casa-*.log
 *.aux
 *.out
 *.synctex.gz
+*_parameter_*pc.txt
