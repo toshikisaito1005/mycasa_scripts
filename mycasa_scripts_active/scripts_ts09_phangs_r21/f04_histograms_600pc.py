@@ -78,15 +78,6 @@ for i in range(len(gals)):
 	co21snr = co21snr[cut_all]
 	r21err = r21 * np.sqrt((1./co10snr)**2 + (1./co21snr)**2)
 
-    ### plot data
-def (ax, ):
-
-
-
-	fig = plt.figure()
-	ax1 = fig.add_subplot(1,3,1)
-
-
 	### plot data
 	plt.figure(figsize=(18,3))
 	plt.rcParams["font.size"] = 14
