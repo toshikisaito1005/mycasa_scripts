@@ -21,6 +21,7 @@ dir_data = "/Users/saito/data/mycasa_scripts_active/scripts_ts09_phangs_r21/"
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
 percents = [0.15,0.025,0.010]
+def_nucleus = [2000,2000,2000,2000]
 
 
 #####################
@@ -55,52 +56,34 @@ for i in range(len(gals)):
 	galname = gals[i]
 	data = np.loadtxt(dir_data + galname + "_parameter_matched_res.txt")
 
-
-
-#for i in range(len(gals)):
-for i in [0,1,2]:
-    name_title = gals[i].replace("ngc","NGC ")
-    beamfloat = float(beam[i].replace("p","."))
-    d_fits_co10 = dir_data + gals[i] + "_co10/"
-    d_fits_co21 = dir_data + gals[i] + "_co21/"
-
-    # import data
-    ra_tmp_ = import_data(d_fits_co10,gals[i],"co10",beam[i],"moment0","coords","ra")
-    dec_tmp_ = import_data(d_fits_co10,gals[i],"co10",beam[i],"moment0","coords","dec",1)
-    Ico10_tmp_ = import_data(d_fits_co10,gals[i],"co10",beam[i],"moment0","data","Ico10")
-    Ico21_tmp_ = import_data(d_fits_co21,gals[i],"co21",beam[i],"moment0","data","Ico21")
-
-    co10_jy2k = 1.222e6 / beamfloat**2 / 115.27120**2
-    co21_jy2k = 1.222e6 / beamfloat**2 / 230.53800**2
-
-    check_nchan(d_fits_co10,gals[i],beam[i],"co10")
-    nchan_tmp_ = import_data(d_fits_co10,gals[i],"co10",beam[i],"nchan","data","nchan")
-
-    # define cut
-    Rco10 = Irms_co10[i]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
-    Rco21 = Irms_co21[i]*snr*np.sqrt(nchan_tmp_)*np.sqrt(velres[i]) # Jy/b.km/s
-    cut_pos = (ra_tmp_ > 0) & (dec_tmp_ > 0)
-    cut_co10 = (Ico10_tmp_ > Rco10)
-    cut_co21 = (Ico21_tmp_ > Rco21)
-    cut_all = np.where((cut_pos) & (cut_co10) & (cut_co21))
-
-    # cut data
-    ra = ra_tmp_[cut_all] * 180/pi # deg
-    dec = dec_tmp_[cut_all] * 180/pi # deg
-    Ico21_tmp2_ = Ico21_tmp_[cut_all] * co21_jy2k
-    Ico10_tmp2_ = Ico10_tmp_[cut_all] * co10_jy2k
-    r21_tmp2_ = Ico21_tmp2_/Ico10_tmp2_
-    r21_tmp2_[np.where(np.isnan(r21_tmp2_) & np.isinf(r21_tmp2_))] = 0
-
-    dist_tmp_ = distance(ra,dec,pas[i],incs[i],cnt_ras[i],cnt_decs[i],scales[i])
-    dist = dist_tmp_[r21_tmp2_>0]
-    Ico10 = Ico10_tmp2_[r21_tmp2_>0]
-    Ico21 = Ico21_tmp2_[r21_tmp2_>0]
-    r21 = r21_tmp2_[r21_tmp2_>0]
-    num = float(len(r21))
+	dist = data[:,0]
+	r21 = data[:,1]
+	r21[np.isnan(r21)] = 0
+	p21 = data[:,9]
+	p21[np.isnan(p21)] = 0
+	co21 = data[:,4]
+	co10snr = data[:,5]
+	co21snr = data[:,3]
+	pco10snr = data[:,10]
+	pco21snr = data[:,11]
+	#
+	cut_r21 = (r21 > 0)
+	cut_p21 = (p21 > 0)
+	cut_co21 = (co21 > co21.max() * percents[i])
+	cut_all = np.where((cut_r21) & (cut_p21) & (cut_co21))
+	#
+	dist = dist[ciut_all]
+	r21 = r21[cut_all]
+	p21 = p21[cut_all]
+	co10snr = co10snr[cut_all]
+	co21snr = co21snr[cut_all]
+	pco10snr = pco10snr[cut_all]
+	pco21snr = pco21snr[cut_all]
+	r21err = r21 * np.sqrt((1./co10snr)**2 + (1./co21snr)**2)
+	p21err = p21 * np.sqrt((1./pco10snr)**2 + (1./pco21snr)**2)
 
     ### plot data
-    plt.figure(figsize=(18,3))
+	plt.figure(figsize=(18,3))
     plt.rcParams["font.size"] = 14
     gs = gridspec.GridSpec(nrows=9, ncols=16)
     plt1 = plt.subplot(gs[1:7,0:4])
@@ -272,7 +255,7 @@ for i in [0,1,2]:
     plt1.tick_params(labelbottom=False)
     plt2.tick_params(labelleft=False,labelbottom=False)
     plt3.tick_params(labelleft=False,labelbottom=False)
-    plt4.tick_params(labelleft=False,labelbottom=False)
+    #plt4.tick_params(labelleft=False,labelbottom=False)
     #plt1.set_yticks(np.arange(0.9, ylim[1]+0.01, 0.9))
     #plt2.set_yticks(np.arange(0.9, ylim[1]+0.01, 0.9))
     #plt3.set_yticks(np.arange(0.9, ylim[1]+0.01, 0.9))
