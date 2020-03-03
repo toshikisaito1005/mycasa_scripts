@@ -23,6 +23,7 @@ gals = ["ngc0628","ngc3627","ngc4321"]
 percents = [0.15,0.025,0.010]
 def_nucleus = [50*44./1.0,50*52./1.3,50*103/1.4]
 xlim = [0.15,1.2]
+ylim = [0,0.16]
 
 #####################
 ### functions
@@ -258,7 +259,7 @@ for i in range(len(gals)):
 	bm = float(beam[i].replace("p","."))
 	bm_arc = str(round(bm,1)).replace(".","\".")
 	bm_kpc = str(int(round(bm*scales[i],-1)))+" pc"
-	plt1.text(txt_x,ylim[1]*0.55,name_title+"\n"+bm_arc+"\n"+bm_kpc)
+	plt1.text(txt_x,ylim[1]*0.38,name_title+"\n"+bm_arc+"\n"+bm_kpc)
 
 	if gals[i]=="ngc0628":
 	    plt1.text(xlim[0]+(xlim[1]-xlim[0])*0.0,ylim[1]*1.04,"# of Sightlines")
