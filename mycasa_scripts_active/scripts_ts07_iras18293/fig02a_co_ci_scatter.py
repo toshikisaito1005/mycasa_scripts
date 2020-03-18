@@ -161,6 +161,7 @@ plt.text(np.log10(data2_co*eqn_fl2lum_co).max()-xwidth1,
 cax = fig.add_axes([0.19, 0.52, 0.03, 0.3])
 cbar = plt.colorbar(cscatter, cax=cax)
 cbar.set_label("Distance (kpc)")
+cbar.set_clim([0,3.0])
 plt.savefig(dir_data+"eps/scatter_co_ci.png",dpi=300)
 
 
@@ -226,5 +227,5 @@ ax1.plot([6.0,6.0],
 
 plt.text(np.log10(data2_co*eqn_fl2lum_co).min()+xwidth1*0.5,
          0.54,
-         "(b)", fontsize = 26)
+         "(c)", fontsize = 26)
 plt.savefig(dir_data+"eps/scatter_co_ratio.png",dpi=300)

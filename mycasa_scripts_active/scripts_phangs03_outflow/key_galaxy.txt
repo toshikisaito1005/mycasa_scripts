@@ -1,4 +1,0 @@
-# galname nchan smooth_beam
-ngc0628 0~1 0.0
-ngc6300 80~300 8.0
-ngc7496 0~1 0.0
