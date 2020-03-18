@@ -52,14 +52,14 @@ def distance(x, y, pa, inc, ra_cnt, dec_cnt, scale):
 #####################
 # CI(1-0) observed frequency
 obsfreq = 492.16065100 / (1 + 0.01818)
-obsfreq_co10 = 115.27120 / (1 + 0.01818)
+obsfreq_co10 = 492.16065100 / (1 + 0.01818) # 115.27120 / (1 + 0.01818)
 # flux (Jy.km/s) to luminosity (K.km/spc^2)
 eqn_fl2lum = 1.197e27 * DL**2 / (1 + zspec)**3
 eqn_fl2lum_co = 3.25e+7 / obsfreq_co10**2 * DL**2 / (1 + zspec)**3
 
 # moment-0 maps in Jy/beam.km/s
 data_ci_org = imval(dir_data + "image_b8contin/b8contin.flux",box=box)["data"]
-data_co_org = imval(dir_data + "image_co10/co10.moment0",box=box)["data"]
+data_co_org = imval(dir_data + "image_ci10/ci10.moment0",box=box)["data"]
 data_ci = data_ci_org.flatten()
 data_co = data_co_org.flatten()
 data1_ci = data_ci[data_ci>0]
@@ -152,5 +152,5 @@ ax1.set_xlabel(r"log $L_{\nu}$(609 $\mu$m) (erg s$^{-1}$ Hz$^{-1}$)")
 plt.text(26.85,
          7.1,
          "(c)", fontsize = 26)
-plt.savefig(dir_data+"eps/scatter_co_dust.png",dpi=300)
+plt.savefig(dir_data+"eps/scatter_ci_dust.png",dpi=300)
 
