@@ -197,9 +197,9 @@ ax2.plot([0,histo[0].max()*1.2],[r_median,r_median],"-",color="black",lw=4)
 ax2.plot([0,histo[0].max()*1.2],[r_16,r_16],"--",color="black",lw=2)
 
 # texts
-ax1.text(2.5,r_84+0.05,"84%")
-ax1.text(2.5,r_median+0.05,"median")
-ax1.text(2.5,r_16+0.05,"16%")
+ax1.text(2.45,r_84+0.02,"84%")
+ax1.text(2.22,r_median+0.02,"median")
+ax1.text(2.45,r_16+0.02,"16%")
 
 #ax.set_xlabel(xlabel)
 #ax.set_ylabel("Count")
@@ -246,6 +246,11 @@ ax1.plot(distance_range,[r_16,r_16],"--",color="black",lw=2)
 ax2.plot([0,histo[0].max()*1.2],[r_84,r_84],"--",color="black",lw=2)
 ax2.plot([0,histo[0].max()*1.2],[r_median,r_median],"-",color="black",lw=4)
 ax2.plot([0,histo[0].max()*1.2],[r_16,r_16],"--",color="black",lw=2)
+
+# texts
+ax1.text(2.45,r_84+0.02,"84%")
+ax1.text(2.22,r_median+0.02,"median")
+ax1.text(2.45,r_16-0.08,"16%")
 
 #ax.set_xlabel(xlabel)
 #ax.set_ylabel("Count")
