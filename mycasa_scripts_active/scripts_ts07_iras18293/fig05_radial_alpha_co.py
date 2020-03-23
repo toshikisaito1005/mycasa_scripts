@@ -4,6 +4,7 @@ import glob
 import numpy as np
 import matplotlib.pyplot as plt
 from astropy.coordinates import SkyCoord
+import matplotlib.gridspec as gridspec
 plt.ioff()
 
 dir_data = "/Users/saito/data/myproj_published/proj_ts07_iras18293/"
@@ -148,19 +149,24 @@ mass = gas_mass_from_dust_flux(flux_dust,483.37293,zspec,DL*1e-3,20.0)
 #
 plt.figure(figsize=(8,8))
 plt.rcParams["font.size"] = 16
-plt.subplots_adjust(left=0.15, right=0.90, bottom=0.10, top=0.85)
-ax = plt.subplot(1,1,1)
-ax.plot(dist,np.log10(mass/lum_co),".",c="grey",markersize=10,alpha=1.0)
+gs = gridspec.GridSpec(nrows=9, ncols=9)
+ax1 = plt.subplot(gs[0:6,0:6])
+ax2 = plt.subplot(gs[0:6,7:9])
+
+#ax1.subplots_adjust(left=0.15, right=0.90, bottom=0.10, top=0.85)
+ax1 = plt.subplot(1,1,1)
+ax1.plot(dist,np.log10(mass/lum_co),".",c="grey",markersize=10,alpha=1.0)
 
 #ax.set_xlim()
-ax.set_ylim([-0.5,1.5])
+ax1.set_ylim([-0.5,1.5])
 #ax.set_xlabel(xlabel)
 #ax.set_ylabel("Count")
 #ax.set_title(title)
-ax.grid()
+ax1.grid()
 plt.legend()
 plt.savefig(dir_data+"eps/radial_alpha_co.png",dpi=300)
 
+"""
 #
 plt.figure(figsize=(8,8))
 plt.rcParams["font.size"] = 16
@@ -176,3 +182,4 @@ ax.set_ylim([0.5,2.5])
 ax.grid()
 plt.legend()
 plt.savefig(dir_data+"eps/radial_alpha_ci.png",dpi=300)
+"""
