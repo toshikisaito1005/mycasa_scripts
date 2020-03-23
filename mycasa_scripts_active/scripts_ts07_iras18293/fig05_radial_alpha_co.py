@@ -30,6 +30,15 @@ if not done:
 #####################
 ### def
 #####################
+def hist_percent(histo,percent):
+    dat_sum = np.sum(histo)
+    dat_sum_from_zero,i = 0,0
+    while dat_sum_from_zero < dat_sum * percent:
+        dat_sum_from_zero += histo[i]
+        i += 1
+    
+    return i
+
 def distance(x, y, pa, inc, ra_cnt, dec_cnt, scale):
     tilt_cos = math.cos(math.radians(pa))
     tilt_sin = math.sin(math.radians(pa))
@@ -146,6 +155,7 @@ dist = r[data2_x > x_sncut/beamarea*2.5]
 # gas mass
 mass = gas_mass_from_dust_flux(flux_dust,483.37293,zspec,DL*1e-3,20.0)
 
+
 ### alpha_co
 plt.figure(figsize=(8,8))
 plt.rcParams["font.size"] = 16
@@ -153,9 +163,15 @@ gs = gridspec.GridSpec(nrows=9, ncols=9)
 ax1 = plt.subplot(gs[0:6,0:6])
 ax2 = plt.subplot(gs[0:6,6:8])
 
+# stats
+r_mean = np.mean(np.log10(mass/lum_co))
+r_median = np.median(np.log10(mass/lum_co))
+r_84 = hist_percent(np.log10(mass/lum_co),0.843)
+r_16 = hist_percent(np.log10(mass/lum_co),0.157)
+
 # ax1 scatter
 ax1.plot(dist,np.log10(mass/lum_co),".",c="grey",markersize=10,alpha=1.0)
-ax1.set_xlim([0.001,2.5])
+ax1.set_xlim([0.0,2.5])
 ax1.set_ylim([-0.3,1.7])
 ax1.grid(axis="both")
 ax1.set_xlabel("Distance (kpc)")
@@ -179,6 +195,7 @@ ax2.grid(axis="y")
 plt.legend()
 plt.savefig(dir_data+"eps/radial_alpha_co.png",dpi=300)
 
+
 ### alpha_ci
 plt.figure(figsize=(8,8))
 plt.rcParams["font.size"] = 16
@@ -188,7 +205,7 @@ ax2 = plt.subplot(gs[0:6,6:8])
 
 # ax1 scatter
 ax1.plot(dist,np.log10(mass/lum_ci),".",c="grey",markersize=10,alpha=1.0)
-ax1.set_xlim([0.001,2.5])
+ax1.set_xlim([0.0,2.5])
 ax1.set_ylim([0.5,2.0])
 ax1.grid(axis="both")
 ax1.set_xlabel("Distance (kpc)")
