@@ -159,11 +159,12 @@ ax1.set_xlim([0.001,2.5])
 ax1.set_ylim([-0.5,1.5])
 ax1.grid(axis="both")
 ax1.set_xlabel("Distance (kpc)")
-ax1.set_ylabel("log $M_{mol}$/$L'_{CO(1-0)}$")
+ax1.set_ylabel("log $M_{H_2}$/$L'_{CO(1-0)}$")
 
 # ax2 histogram
-histo = ax2.hist(np.log10(mass/lum_co),range=[-0.5,1.5],bins=40,
-                 orientation="horizontal",lw=0,color="grey",alpha=1.0)
+histo = ax2.hist(np.log10(mass/lum_co),range=[-0.5,1.5],bins=50,
+                 orientation="horizontal",lw=0,color="grey",alpha=1.0,
+                 weights=lum_co)
 ax2.tick_params(labelleft=False,labelbottom=False)
 ax2.tick_params(bottom=False,left=False,right=True,top=False)
 ax2.spines['top'].set_visible(False)
