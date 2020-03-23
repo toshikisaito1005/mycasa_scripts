@@ -86,7 +86,8 @@ def histplotter(
         plt.plot(histox,func1(histox,popt[3],popt[4],popt[5]),"--",c=color,lw=2,alpha=0.5)
 
     # plot
-    ax.step(histox,histoy,"black",lw=4,alpha=0.5)
+    ax.plot
+    #ax.step(histox,histoy,"black",lw=4,alpha=0.5)
 
     # setup plot
     ax.set_xlim(histrange)

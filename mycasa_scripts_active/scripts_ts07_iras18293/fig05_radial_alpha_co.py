@@ -165,7 +165,7 @@ ax1 = plt.subplot(gs[0:6,0:6])
 ax2 = plt.subplot(gs[0:6,6:8])
 
 # ax1 scatter
-ax1.plot(dist,np.log10(mass/lum_co),".",c="grey",markersize=10,alpha=1.0)
+ax1.plot(dist,np.log10(mass/lum_co),".",c="red",markersize=10,alpha=0.5)
 ax1.set_xlim(distance_range)
 ax1.set_ylim([-0.3,1.7])
 ax1.grid(axis="both")
@@ -174,7 +174,7 @@ ax1.set_ylabel("log $M_{H_2}$/$L'_{CO(1-0)}$")
 
 # ax2 histogram
 histo = ax2.hist(np.log10(mass/lum_co),range=[-0.5,1.5],bins=60,
-                 orientation="horizontal",lw=0,color="grey",alpha=1.0,
+                 orientation="horizontal",lw=0,color="red",alpha=0.5,
                  weights=lum_co)
 ax2.tick_params(labelleft=False,labelbottom=False)
 ax2.tick_params(bottom=False,left=False,right=True,top=False)
