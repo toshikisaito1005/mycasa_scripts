@@ -174,7 +174,7 @@ ax1.set_ylabel("log $M_{H_2}$/$L'_{CO(1-0)}$")
 
 # ax2 histogram
 histo = ax2.hist(np.log10(mass/lum_co),range=[-0.5,1.5],bins=60,
-                 orientation="horizontal",lw=0,color="red",alpha=0.5,
+                 orientation="horizontal",lw=4,color="red",alpha=0.5,histtype=u'step',
                  weights=lum_co)
 ax2.tick_params(labelleft=False,labelbottom=False)
 ax2.tick_params(bottom=False,left=False,right=True,top=False)
@@ -220,7 +220,7 @@ ax1.set_ylabel("log $M_{H_2}$/$L'_{[CI](1-0)}$")
 
 # ax2 histogram
 histo = ax2.hist(np.log10(mass/lum_ci),range=[-0.5,1.5],bins=60,
-                 orientation="horizontal",lw=0,color="blue",alpha=0.5,
+                 orientation="horizontal",lw=4,color="blue",alpha=0.5,histtype=u'step',
                  weights=lum_ci)
 ax2.tick_params(labelleft=False,labelbottom=False)
 ax2.tick_params(bottom=False,left=False,right=True,top=False)
