@@ -186,6 +186,9 @@ lum_ci = (data2_y1 * eqn_fl2lum_y1)[data2_x > x_sncut/beamarea*2.5]
 lum_co = (data2_y2 * eqn_fl2lum_y2)[data2_x > x_sncut/beamarea*2.5]
 dist = r[data2_x > x_sncut/beamarea*2.5]
 
+# gas mass
+mass = gas_mass_from_dust_flux(data2_x*1e-3,483.37293,zspec,DL/1e3)
+
 #
 plt.figure(figsize=(8,8))
 plt.rcParams["font.size"] = 16
