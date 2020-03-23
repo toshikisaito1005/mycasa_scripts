@@ -10,6 +10,7 @@ plt.ioff()
 dir_data = "/Users/saito/data/myproj_published/proj_ts07_iras18293/"
 box = "103,115,180,192"
 beamarea = 22.382
+distance_range = [0.0,2.8]
 
 zspec = 0.01818
 DL = 78.2 # Mpc
@@ -165,7 +166,7 @@ ax2 = plt.subplot(gs[0:6,6:8])
 
 # ax1 scatter
 ax1.plot(dist,np.log10(mass/lum_co),".",c="grey",markersize=10,alpha=1.0)
-ax1.set_xlim([0.0,2.5])
+ax1.set_xlim(distance_range)
 ax1.set_ylim([-0.3,1.7])
 ax1.grid(axis="both")
 ax1.set_xlabel("Distance (kpc)")
@@ -188,10 +189,9 @@ r_mean = np.mean(np.log10(mass/lum_co))
 r_median = np.median(np.log10(mass/lum_co))
 r_84 = histo[1][hist_percent(histo[0],0.843)]
 r_16 = histo[1][hist_percent(histo[0],0.157)]
-
-ax1.plot([0.0,2.5],[r_84,r_84],"--",color="black",lw=2)
-ax1.plot([0.0,2.5],[r_median,r_median],"-",color="black",lw=4)
-ax1.plot([0.0,2.5],[r_16,r_16],"--",color="black",lw=2)
+ax1.plot(distance_range,[r_84,r_84],"--",color="black",lw=2)
+ax1.plot(distance_range,[r_median,r_median],"-",color="black",lw=4)
+ax1.plot(distance_range,[r_16,r_16],"--",color="black",lw=2)
 ax2.plot([0,histo[0].max()*1.2],[r_84,r_84],"--",color="black",lw=2)
 ax2.plot([0,histo[0].max()*1.2],[r_median,r_median],"-",color="black",lw=4)
 ax2.plot([0,histo[0].max()*1.2],[r_16,r_16],"--",color="black",lw=2)
@@ -212,7 +212,7 @@ ax2 = plt.subplot(gs[0:6,6:8])
 
 # ax1 scatter
 ax1.plot(dist,np.log10(mass/lum_ci),".",c="grey",markersize=10,alpha=1.0)
-ax1.set_xlim([0.0,2.5])
+ax1.set_xlim(distance_range)
 ax1.set_ylim([0.5,2.0])
 ax1.grid(axis="both")
 ax1.set_xlabel("Distance (kpc)")
@@ -229,6 +229,18 @@ ax2.spines['bottom'].set_visible(False)
 ax2.set_xlim([0,histo[0].max()*1.2])
 ax2.set_ylim([0.5,2.0])
 ax2.grid(axis="y")
+
+# stats
+r_mean = np.mean(np.log10(mass/lum_ci))
+r_median = np.median(np.log10(mass/lum_ci))
+r_84 = histo[1][hist_percent(histo[0],0.843)]
+r_16 = histo[1][hist_percent(histo[0],0.157)]
+ax1.plot(distance_range,[r_84,r_84],"--",color="black",lw=2)
+ax1.plot(distance_range,[r_median,r_median],"-",color="black",lw=4)
+ax1.plot(distance_range,[r_16,r_16],"--",color="black",lw=2)
+ax2.plot([0,histo[0].max()*1.2],[r_84,r_84],"--",color="black",lw=2)
+ax2.plot([0,histo[0].max()*1.2],[r_median,r_median],"-",color="black",lw=4)
+ax2.plot([0,histo[0].max()*1.2],[r_16,r_16],"--",color="black",lw=2)
 
 #ax.set_xlabel(xlabel)
 #ax.set_ylabel("Count")
