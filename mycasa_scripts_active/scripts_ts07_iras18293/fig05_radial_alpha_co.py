@@ -70,9 +70,9 @@ def gas_mass_from_dust_flux(
     """
     eq.16 of Scoville et al. 2016
     assumptions:
-        dust temperature = 25 K
         dust beta        = 1.8
         rest wavelength  > 250 um 
+        alpha850 = 6.7e19
     """
     nu850 = 352.6970094 # GHz
     Sig_rj = sigma_rj(tdust,nuobs,z)
@@ -143,15 +143,20 @@ lum_co = (data2_y2 * eqn_fl2lum_y2)[data2_x > x_sncut/beamarea*2.5]
 dist = r[data2_x > x_sncut/beamarea*2.5]
 
 # gas mass
-mass = gas_mass_from_dust_flux(flux_dust,483.37293,zspec,DL*1e-3,25.0)
+mass_15k = gas_mass_from_dust_flux(flux_dust,483.37293,zspec,DL*1e-3,15.0)
+mass_25k = gas_mass_from_dust_flux(flux_dust,483.37293,zspec,DL*1e-3,25.0)
+mass_35k = gas_mass_from_dust_flux(flux_dust,483.37293,zspec,DL*1e-3,35.0)
 
 #
 plt.figure(figsize=(8,8))
 plt.rcParams["font.size"] = 16
 plt.subplots_adjust(left=0.15, right=0.90, bottom=0.10, top=0.85)
 ax = plt.subplot(1,1,1)
-ax.plot(dist,np.log10(mass/lum_co),".",c="red")
-ax.plot(dist,np.log10(mass/lum_ci),".",c="blue")
+ax.plot(dist,np.log10(mass_15k/lum_co),".",c="red",markersize=20,alpha=0.5)
+ax.plot(dist,np.log10(mass_25k/lum_co),".",c="red",markersize=20,alpha=0.5)
+ax.plot(dist,np.log10(mass_35k/lum_co),".",c="red",markersize=20,alpha=0.5)
+
+#ax.plot(dist,np.log10(mass/lum_ci),".",c="blue")
 
 #ax.set_xlim()
 #ax.set_ylim([0,10])
