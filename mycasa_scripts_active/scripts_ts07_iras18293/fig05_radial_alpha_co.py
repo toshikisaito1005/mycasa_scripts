@@ -189,8 +189,12 @@ r_median = np.median(np.log10(mass/lum_co))
 r_84 = histo[1][hist_percent(histo[0],0.843)]
 r_16 = histo[1][hist_percent(histo[0],0.157)]
 
-ax1.plot([0.0,2.5],[r_84,r_84],"--",color="black")
-ax2.plot([0,histo[0].max()*1.2],[r_84,r_84],"--",color="black")
+ax1.plot([0.0,2.5],[r_84,r_84],"--",color="black",lw=2)
+ax1.plot([0.0,2.5],[r_median,r_median],"-",color="black",lw=4)
+ax1.plot([0.0,2.5],[r_16,r_16],"--",color="black",lw=2)
+ax2.plot([0,histo[0].max()*1.2],[r_84,r_84],"--",color="black",lw=2)
+ax2.plot([0,histo[0].max()*1.2],[r_median,r_median],"-",color="black",lw=4)
+ax2.plot([0,histo[0].max()*1.2],[r_16,r_16],"--",color="black",lw=2)
 
 #ax.set_xlabel(xlabel)
 #ax.set_ylabel("Count")
