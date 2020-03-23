@@ -143,16 +143,14 @@ lum_co = (data2_y2 * eqn_fl2lum_y2)[data2_x > x_sncut/beamarea*2.5]
 dist = r[data2_x > x_sncut/beamarea*2.5]
 
 # gas mass
-mass_15k = gas_mass_from_dust_flux(flux_dust,483.37293,zspec,DL*1e-3,15.0)
-mass_25k = gas_mass_from_dust_flux(flux_dust,483.37293,zspec,DL*1e-3,25.0)
-mass_35k = gas_mass_from_dust_flux(flux_dust,483.37293,zspec,DL*1e-3,35.0)
+mass = gas_mass_from_dust_flux(flux_dust,483.37293,zspec,DL*1e-3,25.0)
 
 #
 plt.figure(figsize=(8,8))
 plt.rcParams["font.size"] = 16
 plt.subplots_adjust(left=0.15, right=0.90, bottom=0.10, top=0.85)
 ax = plt.subplot(1,1,1)
-ax.plot(dist,np.log10(mass_25k/lum_co),".",c="grey",markersize=10,alpha=1.0)
+ax.plot(dist,np.log10(mass/lum_co),".",c="grey",markersize=10,alpha=1.0)
 
 #ax.set_xlim()
 #ax.set_ylim([0,10])
@@ -168,7 +166,7 @@ plt.figure(figsize=(8,8))
 plt.rcParams["font.size"] = 16
 plt.subplots_adjust(left=0.15, right=0.90, bottom=0.10, top=0.85)
 ax = plt.subplot(1,1,1)
-ax.plot(dist,np.log10(mass_25k/lum_ci),".",c="grey",markersize=10,alpha=1.0)
+ax.plot(dist,np.log10(mass/lum_ci),".",c="grey",markersize=10,alpha=1.0)
 
 #ax.set_xlim()
 #ax.set_ylim([0,10])
