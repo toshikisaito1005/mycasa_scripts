@@ -195,10 +195,11 @@ plt.figure(figsize=(8,8))
 plt.rcParams["font.size"] = 16
 plt.subplots_adjust(left=0.15, right=0.90, bottom=0.10, top=0.85)
 ax = plt.subplot(1,1,1)
-ax.plot(dist,mass/lum_co,".")
+ax.plot(dist,np.log10(mass/lum_co),".",c="red")
+ax.plot(dist,np.log10(mass/lum_ci),".",c="blue")
 
 #ax.set_xlim()
-#ax.set_ylim()
+#ax.set_ylim([0,10])
 #ax.set_xlabel(xlabel)
 #ax.set_ylabel("Count")
 #ax.set_title(title)
