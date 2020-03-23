@@ -143,7 +143,7 @@ lum_co = (data2_y2 * eqn_fl2lum_y2)[data2_x > x_sncut/beamarea*2.5]
 dist = r[data2_x > x_sncut/beamarea*2.5]
 
 # gas mass
-mass = gas_mass_from_dust_flux(flux_dust,483.37293,zspec,DL*1e-3,25.0)
+mass = gas_mass_from_dust_flux(flux_dust,483.37293,zspec,DL*1e-3,20.0)
 
 #
 plt.figure(figsize=(8,8))
@@ -153,7 +153,7 @@ ax = plt.subplot(1,1,1)
 ax.plot(dist,np.log10(mass/lum_co),".",c="grey",markersize=10,alpha=1.0)
 
 #ax.set_xlim()
-#ax.set_ylim([0,10])
+ax.set_ylim([-0.5,1.5])
 #ax.set_xlabel(xlabel)
 #ax.set_ylabel("Count")
 #ax.set_title(title)
@@ -169,7 +169,7 @@ ax = plt.subplot(1,1,1)
 ax.plot(dist,np.log10(mass/lum_ci),".",c="grey",markersize=10,alpha=1.0)
 
 #ax.set_xlim()
-#ax.set_ylim([0,10])
+ax.set_ylim([0.5,2.5])
 #ax.set_xlabel(xlabel)
 #ax.set_ylabel("Count")
 #ax.set_title(title)
