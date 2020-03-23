@@ -98,11 +98,13 @@ def sigma_rj(
     eq.6 of Scoville et al. 2016
     """
     # Constants
-    const_h = ? #
-    const_k = ? #
+    const_h = 6.626e-34 # m^2 kg s^-1
+    const_k = 1.38e-23  # m^2 kg s^-2 K^-1
     #
     part = const_h * nuobs * 1e9 * (1+z) / (const_k * tdust)
     function = part / (np.exp(part) - 1)
+
+    return function
 
 def gas_mass_from_dust_flux(
     flux, # mJy
@@ -117,7 +119,7 @@ def gas_mass_from_dust_flux(
         dust beta        = 1.8
         rest wavelength  > 250 um 
     """
-    nu850 = ? # GHz
+    nu850 = 352.6970094 # GHz
     Sig_rj = sigma_rj(25.0,nuobs,z)
     Sig_0 = sigma_rj(25.0,nu850,0)
     mass = 1.78e10 * flux * z**-4.8 * (nu850/nuobs)**3.8 * dist**2 * (Sig_rj/Sig_0)
