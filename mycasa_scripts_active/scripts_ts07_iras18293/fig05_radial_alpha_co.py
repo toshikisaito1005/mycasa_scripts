@@ -163,12 +163,6 @@ gs = gridspec.GridSpec(nrows=9, ncols=9)
 ax1 = plt.subplot(gs[0:6,0:6])
 ax2 = plt.subplot(gs[0:6,6:8])
 
-# stats
-r_mean = np.mean(np.log10(mass/lum_co))
-r_median = np.median(np.log10(mass/lum_co))
-r_84 = hist_percent(np.log10(mass/lum_co),0.843)
-r_16 = hist_percent(np.log10(mass/lum_co),0.157)
-
 # ax1 scatter
 ax1.plot(dist,np.log10(mass/lum_co),".",c="grey",markersize=10,alpha=1.0)
 ax1.set_xlim([0.0,2.5])
@@ -188,6 +182,12 @@ ax2.spines['bottom'].set_visible(False)
 ax2.set_xlim([0,histo[0].max()*1.2])
 ax2.set_ylim([-0.3,1.7])
 ax2.grid(axis="y")
+
+# stats
+r_mean = np.mean(np.log10(mass/lum_co))
+r_median = np.median(np.log10(mass/lum_co))
+r_84 = histo[1][hist_percent(histo[0],0.843)]
+r_16 = histo[1][hist_percent(histo[0],0.157)]
 
 #ax.set_xlabel(xlabel)
 #ax.set_ylabel("Count")
