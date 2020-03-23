@@ -157,10 +157,12 @@ ax2 = plt.subplot(gs[0:6,6:8])
 ax1.plot(dist,np.log10(mass/lum_co),".",c="grey",markersize=10,alpha=1.0)
 ax1.set_xlim([0.001,2.5])
 ax1.set_ylim([-0.5,1.5])
-ax1.grid()
+ax1.grid(axis="both")
+ax1.set_xlabel("Distance (kpc)")
+ax1.set_ylabel("log $M_{mol}$/$L'_{CO(1-0)}$")
 
 # ax2 histogram
-histo = ax2.hist(np.log10(mass/lum_co),range=[-0.5,1.5],bins=20,
+histo = ax2.hist(np.log10(mass/lum_co),range=[-0.5,1.5],bins=40,
                  orientation="horizontal",lw=0,color="grey",alpha=1.0)
 ax2.tick_params(labelleft=False,labelbottom=False)
 ax2.tick_params(bottom=False,left=False,right=True,top=False)
@@ -168,7 +170,7 @@ ax2.spines['top'].set_visible(False)
 ax2.spines['bottom'].set_visible(False)
 ax2.set_xlim([0,histo[0].max()*1.2])
 ax2.set_ylim([-0.5,1.5])
-ax1.grid()
+ax2.grid(axis="y")
 
 #ax.set_xlabel(xlabel)
 #ax.set_ylabel("Count")
