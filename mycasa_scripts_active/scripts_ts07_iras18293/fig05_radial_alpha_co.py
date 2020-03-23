@@ -152,11 +152,9 @@ plt.figure(figsize=(8,8))
 plt.rcParams["font.size"] = 16
 plt.subplots_adjust(left=0.15, right=0.90, bottom=0.10, top=0.85)
 ax = plt.subplot(1,1,1)
-ax.plot(dist,np.log10(mass_15k/lum_co),".",c="red",markersize=20,alpha=0.5)
-ax.plot(dist,np.log10(mass_25k/lum_co),".",c="red",markersize=20,alpha=0.5)
-ax.plot(dist,np.log10(mass_35k/lum_co),".",c="red",markersize=20,alpha=0.5)
-
-#ax.plot(dist,np.log10(mass/lum_ci),".",c="blue")
+#ax.plot(dist,np.log10(mass_15k/lum_co),".",c="blue",markersize=20,alpha=0.5)
+ax.plot(dist,np.log10(mass_25k/lum_co),".",c="green",markersize=20,alpha=0.5)
+#ax.plot(dist,np.log10(mass_35k/lum_co),".",c="red",markersize=20,alpha=0.5)
 
 #ax.set_xlim()
 #ax.set_ylim([0,10])
@@ -165,4 +163,22 @@ ax.plot(dist,np.log10(mass_35k/lum_co),".",c="red",markersize=20,alpha=0.5)
 #ax.set_title(title)
 ax.grid()
 plt.legend()
-plt.savefig(dir_data+"eps/radial_alpha.png",dpi=300)
+plt.savefig(dir_data+"eps/radial_alpha_co.png",dpi=300)
+
+#
+plt.figure(figsize=(8,8))
+plt.rcParams["font.size"] = 16
+plt.subplots_adjust(left=0.15, right=0.90, bottom=0.10, top=0.85)
+ax = plt.subplot(1,1,1)
+ax.plot(dist,np.log10(mass_15k/lum_ci),".",c="blue",markersize=20,alpha=0.5)
+ax.plot(dist,np.log10(mass_25k/lum_ci),".",c="green",markersize=20,alpha=0.5)
+ax.plot(dist,np.log10(mass_35k/lum_ci),".",c="red",markersize=20,alpha=0.5)
+
+#ax.set_xlim()
+#ax.set_ylim([0,10])
+#ax.set_xlabel(xlabel)
+#ax.set_ylabel("Count")
+#ax.set_title(title)
+ax.grid()
+plt.legend()
+plt.savefig(dir_data+"eps/radial_alpha_ci.png",dpi=300)
