@@ -160,11 +160,15 @@ ax1.set_ylim([-0.5,1.5])
 ax1.grid()
 
 # ax2 histogram
-ax2.hist(np.log10(mass/lum_co),range=[-0.5,1.5],bin=20)
+histo = ax2.hist(np.log10(mass/lum_co),range=[-0.5,1.5],bins=20,
+                 orientation="horizontal",lw=0,color="grey",alpha=1.0)
 ax2.tick_params(labelleft=False,labelbottom=False)
 ax2.tick_params(bottom=False,left=False,right=True,top=False)
 ax2.spines['top'].set_visible(False)
 ax2.spines['bottom'].set_visible(False)
+ax2.set_xlim([0,histo[0].max()*1.2])
+ax2.set_ylim([-0.5,1.5])
+ax1.grid()
 
 #ax.set_xlabel(xlabel)
 #ax.set_ylabel("Count")
