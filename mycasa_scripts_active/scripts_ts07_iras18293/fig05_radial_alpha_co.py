@@ -181,20 +181,27 @@ data2b_noise_y1 = data1_noise_y1[data1_y1>0]
 data2_noise_y1 = data2b_noise_y1[data2b_y2>0]
 
 #
+flux_dust = (data2_x * 1e3)[data2_x > x_sncut/beamarea*2.5] # mJy
 lum_dust = (data2_x * eqn_fl2lum_x)[data2_x > x_sncut/beamarea*2.5]
 lum_ci = (data2_y1 * eqn_fl2lum_y1)[data2_x > x_sncut/beamarea*2.5]
 lum_co = (data2_y2 * eqn_fl2lum_y2)[data2_x > x_sncut/beamarea*2.5]
 dist = r[data2_x > x_sncut/beamarea*2.5]
 
 # gas mass
-mass = gas_mass_from_dust_flux(data2_x*1e3,483.37293,zspec,DL*1e-3)
+mass = gas_mass_from_dust_flux(flux_dust,483.37293,zspec,DL*1e-3)
 
 #
 plt.figure(figsize=(8,8))
 plt.rcParams["font.size"] = 16
 plt.subplots_adjust(left=0.15, right=0.90, bottom=0.10, top=0.85)
 ax = plt.subplot(1,1,1)
+ax.plot(dist,mass/lum_co,".")
 
-
-
-
+#ax.set_xlim()
+#ax.set_ylim()
+#ax.set_xlabel(xlabel)
+#ax.set_ylabel("Count")
+#ax.set_title(title)
+ax.grid()
+plt.legend()
+plt.savefig(dir_data+"eps/radial_alpha.png",dpi=300)
