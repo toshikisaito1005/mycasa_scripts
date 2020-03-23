@@ -43,52 +43,6 @@ def distance(x, y, pa, inc, ra_cnt, dec_cnt, scale):
     
     return r
 
-def plotter(
-	ax,
-	data,
-	savefig,
-	title,
-	xlabel,
-	color,
-	weights = None,
-	twogaussfit = False,
-	ylim = [0.0,0.25],
-	histrange = [0.01,0.39],
-	bins = 25,
-	):
-    """
-    """
-    # histogram
-    histo = np.histogram(data,range=histrange,bins=bins,weights=weights)
-    histox,histoy = np.delete(histo[1],-1),histo[0]
-    histoy = histoy/float(sum(histoy))
-
-    # fit
-    if twogaussfit==False:
-        popt, residual = fit_func1(func1,histox,histoy,[0.20,0.15,0.02])
-        label = str(np.round(popt[1],2)) + " $\pm$ " + str(np.round(popt[2],2))
-        plt.plot(histox,func1(histox,*popt),c=color,lw=6,alpha=0.5,
-        	label = label)
-
-    elif twogaussfit==True:
-        popt, residual = fit_func2(func2,histox,histoy,[0.20,0.15,0.02,0.05,0.15,0.20])
-        plt.plot(histox,func2(histox,*popt),c=color,lw=6,alpha=0.5)
-        plt.plot(histox,func1(histox,popt[0],popt[1],popt[2]),"--",c=color,lw=2,alpha=0.5)
-        plt.plot(histox,func1(histox,popt[3],popt[4],popt[5]),"--",c=color,lw=2,alpha=0.5)
-
-    # plot
-    ax.step(histox,histoy,"black",lw=4,alpha=0.5)
-
-    # setup plot
-    ax.set_xlim(histrange)
-    ax.set_ylim(ylim)
-    ax.set_xlabel(xlabel)
-    ax.set_ylabel("Count")
-    ax.set_title(title)
-    ax.grid()
-    plt.legend()
-    plt.savefig(savefig,dpi=300)
-
 def sigma_rj(
     tdust, # Kelvin
     nuobs, # GHz
@@ -111,6 +65,7 @@ def gas_mass_from_dust_flux(
     nuobs, # GHz
     z, # redshift
     dist, # Gpc
+    tdust, # K
     ):
     """
     eq.16 of Scoville et al. 2016
@@ -120,8 +75,8 @@ def gas_mass_from_dust_flux(
         rest wavelength  > 250 um 
     """
     nu850 = 352.6970094 # GHz
-    Sig_rj = sigma_rj(25.0,nuobs,z)
-    Sig_0 = sigma_rj(25.0,nu850,0)
+    Sig_rj = sigma_rj(tdust,nuobs,z)
+    Sig_0 = sigma_rj(tdust,nu850,0)
     mass = 1.78e10 * flux * (1+z)**-4.8 * (nu850/nuobs)**3.8 * dist**2 * (Sig_rj/Sig_0)
 
     return mass
@@ -188,7 +143,7 @@ lum_co = (data2_y2 * eqn_fl2lum_y2)[data2_x > x_sncut/beamarea*2.5]
 dist = r[data2_x > x_sncut/beamarea*2.5]
 
 # gas mass
-mass = gas_mass_from_dust_flux(flux_dust,483.37293,zspec,DL*1e-3)
+mass = gas_mass_from_dust_flux(flux_dust,483.37293,zspec,DL*1e-3,25.0)
 
 #
 plt.figure(figsize=(8,8))
