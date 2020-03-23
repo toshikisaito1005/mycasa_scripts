@@ -153,15 +153,21 @@ gs = gridspec.GridSpec(nrows=9, ncols=9)
 ax1 = plt.subplot(gs[0:6,0:6])
 ax2 = plt.subplot(gs[0:6,6:8])
 
-#ax1.subplots_adjust(left=0.15, right=0.90, bottom=0.10, top=0.85)
+# ax1 scatter
 ax1.plot(dist,np.log10(mass/lum_co),".",c="grey",markersize=10,alpha=1.0)
-ax1.tick_params(labelbottom=False)
-
 ax1.set_xlim([0.001,2.5])
 ax1.set_ylim([-0.5,1.5])
+ax1.grid()
+
+# ax2 histogram
+ax2.hist(np.log10(mass/lum_co),range=[-0.5,1.5],bin=20)
+ax2.tick_params(labelleft=False,labelbottom=False)
+ax2.tick_params(bottom=False,left=False,right=True,top=False)
+ax2.spines['top'].set_visible(False)
+ax2.spines['bottom'].set_visible(False)
+
 #ax.set_xlabel(xlabel)
 #ax.set_ylabel("Count")
 #ax.set_title(title)
-ax1.grid()
 plt.legend()
 plt.savefig(dir_data+"eps/radial_alpha_co.png",dpi=300)
