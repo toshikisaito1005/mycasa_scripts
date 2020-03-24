@@ -296,12 +296,12 @@ list_x = []
 list_q = []
 list_alpha = []
 
-iterate_x = np.arange(1e-5, 5e-5, 1e-6)
-iterate_q = np.arange(1e-5, 5e-5, 1e-6)
+iterate_x = np.linspace(1e-5, 5e-5, 50)
+iterate_q = np.linspace(0.35, 0.45, 50)
 for i in range(len(iterate_x)):
     Xci = iterate_x[i]
-    for j in range(11):
-        Qrot = 0.35 + 0.01*j
+    for j in range(len(iterate_q)):
+        Qrot = iterate_q[j]
         alpha = alpha_catom10(Xci,Qrot,flux_ci.max(),lum_ci.max())
         list_x.append(Xci)
         list_q.append(Qrot)
@@ -312,9 +312,9 @@ ax1 = fig.add_subplot(111)
 plt.rcParams["font.size"] = 16
 plt.subplots_adjust(bottom=0.20, left=0.15, right=0.85, top=0.85)
 
-cscatter = ax1.scatter(list_x,list_q,c=list_alpha,cmap='rainbow',s=1500,lw=0,marker='s')
-ax1.set_xlim([min(list_x)-2.5e-6,max(list_x)+2.5e-6])
-ax1.set_ylim([min(list_q)-0.005,max(list_q)+0.005])
+cscatter = ax1.scatter(list_x,list_q,c=list_alpha,cmap='rainbow',s=55,lw=0,marker='s')
+ax1.set_xlim([min(list_x),max(list_x)])
+ax1.set_ylim([min(list_q),max(list_q)])
 
 #cax = fig.add_axes([0.19, 0.52, 0.03, 0.3])
 cbar = plt.colorbar(cscatter, )#cax=cax)
