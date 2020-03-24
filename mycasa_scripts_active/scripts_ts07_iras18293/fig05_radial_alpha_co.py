@@ -163,6 +163,7 @@ plt.rcParams["font.size"] = 16
 gs = gridspec.GridSpec(nrows=9, ncols=9)
 ax1 = plt.subplot(gs[0:6,0:6])
 ax2 = plt.subplot(gs[0:6,6:8])
+ax3 = ax2.twinx()
 
 # ax1 scatter
 ax1.plot(dist,np.log10(mass/lum_co),".",c="red",markersize=10,alpha=0.5)
@@ -183,7 +184,13 @@ ax2.spines['bottom'].set_visible(False)
 ax2.set_xlim([0,histo[0].max()*1.2])
 ax2.set_ylim([-0.3,1.7])
 ax2.grid(axis="y")
-ax3 = ax2.twinx()
+
+# ax3 label in the right
+ax3.spines["left"].set_visible(False)
+ax3.tick_params(labelleft=False,labelbottom=False)
+ax3.set_ylim([-0.3,1.7])
+ax3.set_ylabel("log $M_{H_2}$/$L'_{CO(1-0)}$")
+
 
 # stats
 r_mean = np.mean(np.log10(mass/lum_co))
