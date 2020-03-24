@@ -283,3 +283,7 @@ plt.legend()
 plt.savefig(dir_data+"eps/radial_alpha_ci.png",dpi=300)
 
 
+# alpha_ci heatmap on T-X plane
+def alpha_ci(T,X):
+    alpha = 4.0*mp.pi*492.16065100**2
+
