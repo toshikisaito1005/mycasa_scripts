@@ -304,9 +304,11 @@ for i in range(9):
         list_q.append(Qrot)
         list_alpha.append(alpha)
 
-plt.figure(figsize=(8,8))
+fig = plt.figure(figsize=(8,8))
+ax1 = fig.add_subplot(111)
 plt.rcParams["font.size"] = 16
-plt.scatter(list_x,list_q,color=list_alpha,cmap='ranbow')
+
+ax1.scatter(list_x,list_q,c=list_alpha,cmap='rainbow',s=1500,lw=0,marker='s')
+ax1.set_xlim([min(list_x)-0.5e-5,max(list_x)+0.5e-5])
 
 plt.savefig(dir_data+"eps/heatmap_alpha_ci.png",dpi=300)
-
