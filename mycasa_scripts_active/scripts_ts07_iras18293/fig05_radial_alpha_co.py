@@ -223,7 +223,7 @@ ax3 = ax2.twinx()
 # ax1 scatter
 ax1.plot(dist,np.log10(mass/lum_ci),".",c="blue",markersize=10,alpha=0.5)
 ax1.set_xlim(distance_range)
-ax1.set_ylim([-0.3,1.7])
+ax1.set_ylim([0.5,2.0])
 ax1.grid(axis="both")
 ax1.set_xlabel("Distance (kpc)")
 ax1.set_ylabel("log $M_{H_2}$/$L'_{[CI](1-0)}$")
@@ -237,13 +237,13 @@ ax2.tick_params(bottom=False,left=False,right=True,top=False)
 ax2.spines['top'].set_visible(False)
 ax2.spines['bottom'].set_visible(False)
 ax2.set_xlim([0,histo[0].max()*1.2])
-ax2.set_ylim([-0.3,1.7])
+ax2.set_ylim([0.5,2.0])
 ax2.grid(axis="y")
 
 # ax3 label in the right
 ax3.spines["left"].set_visible(False)
 ax3.tick_params(labelleft=False,labelbottom=False)
-ax3.set_ylim([-0.3,1.7])
+ax3.set_ylim([0.5,2.0])
 ax3.set_ylabel("log $M_{H_2}$/$L'_{[CI](1-0)}$")
 
 # stats
