@@ -307,6 +307,7 @@ for i in range(9):
 fig = plt.figure(figsize=(8,8))
 ax1 = fig.add_subplot(111)
 plt.rcParams["font.size"] = 16
+plt.subplots_adjust(bottom=0.15, left=0.15, right=0.85, top=0.85)
 
 cscatter = ax1.scatter(list_x,list_q,c=list_alpha,cmap='rainbow',s=1500,lw=0,marker='s')
 ax1.set_xlim([min(list_x)-2.5e-6,max(list_x)+2.5e-6])
