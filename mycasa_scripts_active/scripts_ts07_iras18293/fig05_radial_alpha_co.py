@@ -291,7 +291,12 @@ plt.legend()
 plt.savefig(dir_data+"eps/radial_alpha_ci.png",dpi=300)
 
 
-# alpha_ci heatmap on T-X plane
+# alpha_ci heatmap on Q-X plane
+for i in range(10):
+    Xci = 1e-5 * (i * )
+    for j in range(10):
+        Qrot = 0.35 + 0.01*j
+
 alpha = alpha_catom10(3e-5,0.40,flux_ci.max(),lum_ci.max())
 
 
