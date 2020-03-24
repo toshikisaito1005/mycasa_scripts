@@ -142,7 +142,7 @@ ax1.plot([x_errp,x_errp],
          c = "black",lw = 3)
 
 #
-nbins = 8
+nbins = 4
 n, _ = np.histogram(np.log10(x), bins=nbins)
 sy, _ = np.histogram(np.log10(x), bins=nbins, weights=y1/y2)
 sy2, _ = np.histogram(np.log10(x), bins=nbins, weights=y1/y2*y1/y2)
@@ -154,7 +154,7 @@ plt.errorbar((_[1:] + _[:-1])/2, mean, yerr=std, fmt='k-', lw=5, capsize = 0)
 ywidth1 = 0.1 * (np.log10(data2_y1).max() - np.log10(data2_y1).min())
 xwidth1 = 0.1 * (np.log10(data2_x[data2_y1 > y1_sncut/beamarea*3.0]).max() - np.log10(data2_x).min())
 ax1.set_ylim([-0.05,0.6])
-ax1.set_xlim([np.log10(data2_x[data2_y1 > y1_sncut/beamarea*3.0]*eqn_fl2lum_x).min()-ywidth1,
+ax1.set_xlim([np.log10(data2_x[data2_y1 > y1_sncut/beamarea*3.0]*eqn_fl2lum_x).min()-ywidth1-2.0,
               np.log10(data2_x[data2_y1 > y1_sncut/beamarea*3.0]*eqn_fl2lum_x).max()+ywidth1])
 
 ax1.set_ylabel("$L'_{[C_I](1-0)}$/$L'_{CO(1-0)}$ Ratio")
@@ -163,4 +163,4 @@ ax1.set_xlabel(r"log $L_{\nu}$(609 $\mu$m) (erg s$^{-1}$ Hz$^{-1}$)")
 plt.text(26.85,
          0.54,
          "(d)", fontsize = 26)
-plt.savefig(dir_data+"eps/scatter_cico_dust.png",dpi=300)
+plt.savefig(dir_data+"eps/reply2referee_scatter_cico_dust.png",dpi=300)
