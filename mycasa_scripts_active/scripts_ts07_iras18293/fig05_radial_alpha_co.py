@@ -224,7 +224,7 @@ ax1.text(0.20,ylim[1] - step*1.0, "84% = " + str(np.round(10**r_84,1)))
 ax1.text(0.20,ylim[1] - step*1.5, "median = " + str(np.round(10**r_median,1)))
 ax1.text(0.20,ylim[1] - step*2.0, "16% = " + str(np.round(10**r_16,1)))
 
-ax1.set_title(r"Radial $\alpha_{CO(1-0)}$")
+ax1.set_title(r"(a) Radial $\alpha_{CO(1-0)}$")
 plt.legend()
 plt.savefig(dir_data+"eps/radial_alpha_co.png",dpi=300)
 
@@ -286,7 +286,7 @@ ax1.text(0.20,ylim[1] - step*1.0, "84% = " + str(np.round(10**r_84,1)))
 ax1.text(0.20,ylim[1] - step*1.5, "median = " + str(np.round(10**r_median,1)))
 ax1.text(0.20,ylim[1] - step*2.0, "16% = " + str(np.round(10**r_16,1)))
 
-ax1.set_title(r"Radial $\alpha_{[CI](1-0)}$")
+ax1.set_title(r"(b) Radial $\alpha_{[CI](1-0)}$")
 plt.legend()
 plt.savefig(dir_data+"eps/radial_alpha_ci.png",dpi=300)
 
