@@ -298,8 +298,8 @@ list_alpha = []
 
 iterate_x = np.linspace(1e-5, 5e-5, 50)
 iterate_q = np.linspace(0.35, 0.45, 50)
-iterate_x = np.linspace(1e-5, 8e-5, 50)
-iterate_q = np.linspace(0.15, 0.55, 50)
+#iterate_x = np.linspace(1e-5, 8e-5, 50)
+#iterate_q = np.linspace(0.15, 0.55, 50)
 for j in range(len(iterate_q)):
     Qrot = iterate_q[j]
     for i in range(len(iterate_x)):
