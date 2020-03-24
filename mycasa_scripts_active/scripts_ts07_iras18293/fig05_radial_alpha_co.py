@@ -173,7 +173,7 @@ ax1.set_xlim(distance_range)
 ax1.set_ylim(ylim)
 ax1.grid(axis="both")
 ax1.set_xlabel("Distance (kpc)")
-ax1.set_ylabel("log $M_{H_2}$/$L'_{CO(1-0)}$")
+ax1.set_ylabel(r"log $\alpha_{CO(1-0)}$")
 
 # ax2 histogram
 histo = ax2.hist(np.log10(mass/lum_co),range=[-0.5,1.5],bins=60,
@@ -191,7 +191,7 @@ ax2.grid(axis="y")
 ax3.spines["left"].set_visible(False)
 ax3.tick_params(labelleft=False,labelbottom=False)
 ax3.set_ylim(ylim)
-ax3.set_ylabel("log $M_{H_2}$/$L'_{CO(1-0)}$")
+ax3.set_ylabel(r"log $\alpha_{CO(1-0)}$")
 
 # stats
 r_mean = np.mean(np.log10(mass/lum_co))
@@ -234,7 +234,7 @@ ax1.set_xlim(distance_range)
 ax1.set_ylim(ylim)
 ax1.grid(axis="both")
 ax1.set_xlabel("Distance (kpc)")
-ax1.set_ylabel("log $alpha_{[CI](1-0)}$")
+ax1.set_ylabel(r"log $\alpha_{[CI](1-0)}$")
 
 # ax2 histogram
 histo = ax2.hist(np.log10(mass/lum_ci),range=[-0.5,1.5],bins=60,
@@ -252,7 +252,7 @@ ax2.grid(axis="y")
 ax3.spines["left"].set_visible(False)
 ax3.tick_params(labelleft=False,labelbottom=False)
 ax3.set_ylim(ylim)
-ax3.set_ylabel("log $alpha_{[CI](1-0)}$")
+ax3.set_ylabel(r"log $\alpha_{[CI](1-0)}$")
 
 # stats
 r_mean = np.mean(np.log10(mass/lum_ci))
