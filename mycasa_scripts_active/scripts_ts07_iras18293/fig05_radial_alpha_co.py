@@ -284,6 +284,14 @@ plt.savefig(dir_data+"eps/radial_alpha_ci.png",dpi=300)
 
 
 # alpha_ci heatmap on T-X plane
-def alpha_ci(T,X):
-    alpha = 4.0*mp.pi*492.16065100**2
+def alpha_catom10(Xci,Q10): # Alaghband-Zadeh et al. 2013
+    flux = 
+    luminosity = 
+    A10 = 7.93e-8
+    DL = 78.2 # Mpc
+    zspec = 0.01818
+    MH2 = 1375.8 * DL**2 / (1+zspec) / (Xci/1e-05) / (A10/1e-7) / Q10 * flux
+    alpha = MH2/luminosity
+
+    return MH2
 
