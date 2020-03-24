@@ -307,12 +307,16 @@ for i in range(len(iterate_x)):
         list_q.append(Qrot)
         list_alpha.append(alpha)
 
+map_X, map_Q = np.meshgrid(iterate_x, iterate_q)
+list_x = (np.array(list_x)*1e5).tolist()
+map_alpha = 
+
 fig = plt.figure(figsize=(8,8))
 ax1 = fig.add_subplot(111)
 plt.rcParams["font.size"] = 16
 plt.subplots_adjust(bottom=0.20, left=0.15, right=0.85, top=0.85)
 
-cscatter = ax1.scatter(list_x,list_q,c=list_alpha,cmap='rainbow',s=55,lw=0,marker='s')
+cscatter = ax1.scatter(list_x,list_q,c=list_alpha,cmap='rainbow',s=60,lw=0,marker='s')
 ax1.set_xlim([min(list_x),max(list_x)])
 ax1.set_ylim([min(list_q),max(list_q)])
 
