@@ -191,7 +191,6 @@ ax3.tick_params(labelleft=False,labelbottom=False)
 ax3.set_ylim([-0.3,1.7])
 ax3.set_ylabel("log $M_{H_2}$/$L'_{CO(1-0)}$")
 
-
 # stats
 r_mean = np.mean(np.log10(mass/lum_co))
 r_median = np.median(np.log10(mass/lum_co))
@@ -209,61 +208,5 @@ ax1.text(2.45,r_84+0.02,"84%")
 ax1.text(2.22,r_median+0.02,"median")
 ax1.text(2.45,r_16+0.02,"16%")
 
-#ax.set_xlabel(xlabel)
-#ax.set_ylabel("Count")
-#ax.set_title(title)
 plt.legend()
 plt.savefig(dir_data+"eps/radial_alpha_co.png",dpi=300)
-
-
-
-
-### alpha_ci
-plt.figure(figsize=(8,8))
-plt.rcParams["font.size"] = 16
-gs = gridspec.GridSpec(nrows=9, ncols=9)
-ax1 = plt.subplot(gs[0:6,0:6])
-ax2 = plt.subplot(gs[0:6,6:8])
-
-# ax1 scatter
-ax1.plot(dist,np.log10(mass/lum_ci),".",c="blue",markersize=10,alpha=0.5)
-ax1.set_xlim(distance_range)
-ax1.set_ylim([0.5,2.0])
-ax1.grid(axis="both")
-ax1.set_xlabel("Distance (kpc)")
-ax1.set_ylabel("log $M_{H_2}$/$L'_{[CI](1-0)}$")
-
-# ax2 histogram
-histo = ax2.hist(np.log10(mass/lum_ci),range=[-0.5,1.5],bins=60,
-                 orientation="horizontal",lw=4,color="blue",alpha=0.5,histtype=u'step',
-                 weights=lum_ci)
-ax2.tick_params(labelleft=False,labelbottom=False)
-ax2.tick_params(bottom=False,left=False,right=True,top=False)
-ax2.spines['top'].set_visible(False)
-ax2.spines['bottom'].set_visible(False)
-ax2.set_xlim([0,histo[0].max()*1.2])
-ax2.set_ylim([0.5,2.0])
-ax2.grid(axis="y")
-
-# stats
-r_mean = np.mean(np.log10(mass/lum_ci))
-r_median = np.median(np.log10(mass/lum_ci))
-r_84 = histo[1][hist_percent(histo[0],0.843)]
-r_16 = histo[1][hist_percent(histo[0],0.157)]
-ax1.plot(distance_range,[r_84,r_84],"--",color="black",lw=2)
-ax1.plot(distance_range,[r_median,r_median],"-",color="black",lw=4)
-ax1.plot(distance_range,[r_16,r_16],"--",color="black",lw=2)
-ax2.plot([0,histo[0].max()*1.2],[r_84,r_84],"--",color="black",lw=2)
-ax2.plot([0,histo[0].max()*1.2],[r_median,r_median],"-",color="black",lw=4)
-ax2.plot([0,histo[0].max()*1.2],[r_16,r_16],"--",color="black",lw=2)
-
-# texts
-ax1.text(2.45,r_84+0.02,"84%")
-ax1.text(2.22,r_median+0.02,"median")
-ax1.text(2.45,r_16-0.08,"16%")
-
-#ax.set_xlabel(xlabel)
-#ax.set_ylabel("Count")
-#ax.set_title(title)
-plt.legend()
-plt.savefig(dir_data+"eps/radial_alpha_ci.png",dpi=300)
