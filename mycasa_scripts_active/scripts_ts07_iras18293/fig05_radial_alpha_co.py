@@ -297,7 +297,7 @@ list_q = []
 list_alpha = []
 
 iterate_x = np.linspace(1e-5, 5e-5, 50)
-iterate_q = np.linspace(0.35, 0.45, 50)
+iterate_q = np.linspace(0.35, 0.50, 50)
 #iterate_x = np.linspace(1e-5, 8e-5, 50)
 #iterate_q = np.linspace(0.15, 0.55, 50)
 for j in range(len(iterate_q)):
@@ -324,7 +324,8 @@ cont.clabel(fmt='%1.1f')
 ax1.set_xlim([min(list_x),max(list_x)])
 ax1.set_ylim([min(list_q),max(list_q)])
 ax1.set_xlabel('$X_{CI}$/10$^{-5}$')
+ax1.set_ylabel('$Q_{10}$')
 
 cbar = plt.colorbar(cscatter)#cax=cax)
-cbar.set_clabel("")
+cbar.set_label(r"$\alpha_{[CI](1-0)}$")
 plt.savefig(dir_data+"eps/heatmap_alpha_ci.png",dpi=300)
