@@ -183,6 +183,7 @@ ax2.spines['bottom'].set_visible(False)
 ax2.set_xlim([0,histo[0].max()*1.2])
 ax2.set_ylim([-0.3,1.7])
 ax2.grid(axis="y")
+ax3 = ax2.twinx()
 
 # stats
 r_mean = np.mean(np.log10(mass/lum_co))
@@ -206,6 +207,8 @@ ax1.text(2.45,r_16+0.02,"16%")
 #ax.set_title(title)
 plt.legend()
 plt.savefig(dir_data+"eps/radial_alpha_co.png",dpi=300)
+
+
 
 
 ### alpha_ci
