@@ -153,8 +153,10 @@ lum_ci = (data2_y1 * eqn_fl2lum_y1)[data2_x > x_sncut/beamarea*2.5]
 lum_co = (data2_y2 * eqn_fl2lum_y2)[data2_x > x_sncut/beamarea*2.5]
 dist = r[data2_x > x_sncut/beamarea*2.5]
 
+
 # gas mass
 mass = gas_mass_from_dust_flux(flux_dust,483.37293,zspec,DL*1e-3,20.0)
+
 
 
 ### alpha_co
