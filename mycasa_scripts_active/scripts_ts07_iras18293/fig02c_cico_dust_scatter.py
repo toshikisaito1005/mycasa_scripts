@@ -2,6 +2,7 @@ import os
 import re
 import sys
 import glob
+import math
 import scipy
 import mycasaimaging_tools as myim
 import matplotlib.pyplot as plt
@@ -153,7 +154,7 @@ plt.errorbar((_[1:] + _[:-1])/2, mean, yerr=std, fmt='k-', lw=5, capsize = 0)
 ywidth1 = 0.1 * (np.log10(data2_y1).max() - np.log10(data2_y1).min())
 xwidth1 = 0.1 * (np.log10(data2_x[data2_y1 > y1_sncut/beamarea*3.0]).max() - np.log10(data2_x).min())
 ax1.set_ylim([-0.05,0.6])
-ax1.set_xlim([np.log10(data2_x[data2_y1 > y1_sncut/beamarea*3.0]*eqn_fl2lum_x).min()-ywidth1,
+ax1.set_xlim([np.log10(data2_x[data2_y1 > y1_sncut/beamarea*3.0]*eqn_fl2lum_x).min()-ywidth1-1.5,
               np.log10(data2_x[data2_y1 > y1_sncut/beamarea*3.0]*eqn_fl2lum_x).max()+ywidth1])
 
 ax1.set_ylabel("$L'_{[C_I](1-0)}$/$L'_{CO(1-0)}$ Ratio")
