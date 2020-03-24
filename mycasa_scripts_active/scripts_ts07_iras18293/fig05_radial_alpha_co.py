@@ -210,13 +210,17 @@ ax1.text(2.45,r_84+0.02,"84%")
 ax1.text(2.22,r_median+0.02,"median")
 ax1.text(2.45,r_16+0.02,"16%")
 step = (ylim[1]-ylim[0]) * 0.1
-ax1.text(0.25,ylim[1] - step, "84% = " + str(np.round(10**r_84,2)))
+ax1.text(0.20,ylim[1] - step*1.0, "84% = " + str(np.round(10**r_84,1)))
+ax1.text(0.20,ylim[1] - step*1.5, "median = " + str(np.round(10**r_median,1)))
+ax1.text(0.20,ylim[1] - step*2.0, "16% = " + str(np.round(10**r_16,1)))
 
 plt.legend()
 plt.savefig(dir_data+"eps/radial_alpha_co.png",dpi=300)
 
 
 ### alpha_ci
+ylim = [0.6,2.1]
+
 plt.figure(figsize=(8,8))
 plt.rcParams["font.size"] = 16
 gs = gridspec.GridSpec(nrows=9, ncols=9)
@@ -227,7 +231,7 @@ ax3 = ax2.twinx()
 # ax1 scatter
 ax1.plot(dist,np.log10(mass/lum_ci),".",c="blue",markersize=10,alpha=0.5)
 ax1.set_xlim(distance_range)
-ax1.set_ylim([0.5,2.0])
+ax1.set_ylim(ylim)
 ax1.grid(axis="both")
 ax1.set_xlabel("Distance (kpc)")
 ax1.set_ylabel("log $M_{H_2}$/$L'_{[CI](1-0)}$")
@@ -241,13 +245,13 @@ ax2.tick_params(bottom=False,left=False,right=True,top=False)
 ax2.spines['top'].set_visible(False)
 ax2.spines['bottom'].set_visible(False)
 ax2.set_xlim([0,histo[0].max()*1.2])
-ax2.set_ylim([0.5,2.0])
+ax2.set_ylim(ylim)
 ax2.grid(axis="y")
 
 # ax3 label in the right
 ax3.spines["left"].set_visible(False)
 ax3.tick_params(labelleft=False,labelbottom=False)
-ax3.set_ylim([0.5,2.0])
+ax3.set_ylim(ylim)
 ax3.set_ylabel("log $M_{H_2}$/$L'_{[CI](1-0)}$")
 
 # stats
@@ -266,6 +270,10 @@ ax2.plot([0,histo[0].max()*1.2],[r_16,r_16],"--",color="black",lw=2)
 ax1.text(2.45,r_84+0.02,"84%")
 ax1.text(2.22,r_median+0.02,"median")
 ax1.text(2.45,r_16-0.08,"16%")
+step = (ylim[1]-ylim[0]) * 0.1
+ax1.text(0.20,ylim[1] - step*1.0, "84% = " + str(np.round(10**r_84,1)))
+ax1.text(0.20,ylim[1] - step*1.5, "median = " + str(np.round(10**r_median,1)))
+ax1.text(0.20,ylim[1] - step*2.0, "16% = " + str(np.round(10**r_16,1)))
 
 plt.legend()
 plt.savefig(dir_data+"eps/radial_alpha_ci.png",dpi=300)
