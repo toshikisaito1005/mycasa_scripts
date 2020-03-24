@@ -308,7 +308,10 @@ fig = plt.figure(figsize=(8,8))
 ax1 = fig.add_subplot(111)
 plt.rcParams["font.size"] = 16
 
-ax1.scatter(list_x,list_q,c=list_alpha,cmap='rainbow',s=1500,lw=0,marker='s')
-ax1.set_xlim([min(list_x)-0.5e-5,max(list_x)+0.5e-5])
+cscatter = ax1.scatter(list_x,list_q,c=list_alpha,cmap='rainbow',s=1500,lw=0,marker='s')
+ax1.set_xlim([min(list_x)-2.5e-6,max(list_x)+2.5e-6])
+ax1.set_ylim([min(list_q)-0.005,max(list_q)+0.005])
 
+#cax = fig.add_axes([0.19, 0.52, 0.03, 0.3])
+cbar = plt.colorbar(cscatter, )#cax=cax)
 plt.savefig(dir_data+"eps/heatmap_alpha_ci.png",dpi=300)
