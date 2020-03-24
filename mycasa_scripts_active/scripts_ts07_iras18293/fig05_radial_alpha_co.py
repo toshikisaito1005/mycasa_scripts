@@ -158,6 +158,8 @@ mass = gas_mass_from_dust_flux(flux_dust,483.37293,zspec,DL*1e-3,20.0)
 
 
 ### alpha_co
+ylim = [-0.3,1.7]
+
 plt.figure(figsize=(8,8))
 plt.rcParams["font.size"] = 16
 gs = gridspec.GridSpec(nrows=9, ncols=9)
@@ -168,7 +170,7 @@ ax3 = ax2.twinx()
 # ax1 scatter
 ax1.plot(dist,np.log10(mass/lum_co),".",c="red",markersize=10,alpha=0.5)
 ax1.set_xlim(distance_range)
-ax1.set_ylim([-0.3,1.7])
+ax1.set_ylim(ylim)
 ax1.grid(axis="both")
 ax1.set_xlabel("Distance (kpc)")
 ax1.set_ylabel("log $M_{H_2}$/$L'_{CO(1-0)}$")
@@ -182,13 +184,13 @@ ax2.tick_params(bottom=False,left=False,right=True,top=False)
 ax2.spines['top'].set_visible(False)
 ax2.spines['bottom'].set_visible(False)
 ax2.set_xlim([0,histo[0].max()*1.2])
-ax2.set_ylim([-0.3,1.7])
+ax2.set_ylim(ylim)
 ax2.grid(axis="y")
 
 # ax3 label in the right
 ax3.spines["left"].set_visible(False)
 ax3.tick_params(labelleft=False,labelbottom=False)
-ax3.set_ylim([-0.3,1.7])
+ax3.set_ylim(ylim)
 ax3.set_ylabel("log $M_{H_2}$/$L'_{CO(1-0)}$")
 
 # stats
@@ -207,6 +209,8 @@ ax2.plot([0,histo[0].max()*1.2],[r_16,r_16],"--",color="black",lw=2)
 ax1.text(2.45,r_84+0.02,"84%")
 ax1.text(2.22,r_median+0.02,"median")
 ax1.text(2.45,r_16+0.02,"16%")
+step = (ylim[1]-ylim[0]) * 0.1
+ax1.text(0.25,ylim[1] - step, "84% = " + str(np.round(10**r_84,2)))
 
 plt.legend()
 plt.savefig(dir_data+"eps/radial_alpha_co.png",dpi=300)
