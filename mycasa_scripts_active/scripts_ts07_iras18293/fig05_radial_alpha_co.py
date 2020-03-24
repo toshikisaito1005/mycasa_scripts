@@ -261,7 +261,7 @@ ax2.plot([0,histo[0].max()*1.2],[r_16,r_16],"--",color="black",lw=2)
 # texts
 ax1.text(2.45,r_84+0.02,"84%")
 ax1.text(2.22,r_median+0.02,"median")
-ax1.text(2.45,r_16+0.02,"16%")
+ax1.text(2.45,r_16-0.08,"16%")
 
 plt.legend()
 plt.savefig(dir_data+"eps/radial_alpha_ci.png",dpi=300)
