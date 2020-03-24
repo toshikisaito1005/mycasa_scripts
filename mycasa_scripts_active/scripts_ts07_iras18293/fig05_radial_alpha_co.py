@@ -292,12 +292,21 @@ plt.savefig(dir_data+"eps/radial_alpha_ci.png",dpi=300)
 
 
 # alpha_ci heatmap on Q-X plane
+list_x = []
+list_q = []
+list_alpha = []
 for i in range(9):
     Xci = (i+2) / 2. * 1e-5
     for j in range(11):
         Qrot = 0.35 + 0.01*j
-        alpha = alpha_catom10(3e-5,0.40,flux_ci.max(),lum_ci.max())
+        alpha = alpha_catom10(Xci,Qrot,flux_ci.max(),lum_ci.max())
+        list_x.append(Xci)
+        list_q.append(Qrot)
+        list_alpha.append(alpha)
 
+plt.figure(figsize=(8,8))
+plt.rcParams["font.size"] = 16
+plt.scatter(list_x,list_q,color=list_alpha,cmap='ranbow')
 
-
+plt.savefig(dir_data+"eps/heatmap_alpha_ci.png",dpi=300)
 
