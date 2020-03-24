@@ -295,8 +295,11 @@ plt.savefig(dir_data+"eps/radial_alpha_ci.png",dpi=300)
 list_x = []
 list_q = []
 list_alpha = []
-for i in range(9):
-    Xci = (i+2) / 2. * 1e-5
+
+iterate_x = np.arange(1e-5, 5e-5, 1e-6)
+iterate_q = np.arange(1e-5, 5e-5, 1e-6)
+for i in range(len(iterate_x)):
+    Xci = iterate_x[i]
     for j in range(11):
         Qrot = 0.35 + 0.01*j
         alpha = alpha_catom10(Xci,Qrot,flux_ci.max(),lum_ci.max())
@@ -307,7 +310,7 @@ for i in range(9):
 fig = plt.figure(figsize=(8,8))
 ax1 = fig.add_subplot(111)
 plt.rcParams["font.size"] = 16
-plt.subplots_adjust(bottom=0.15, left=0.15, right=0.85, top=0.85)
+plt.subplots_adjust(bottom=0.20, left=0.15, right=0.85, top=0.85)
 
 cscatter = ax1.scatter(list_x,list_q,c=list_alpha,cmap='rainbow',s=1500,lw=0,marker='s')
 ax1.set_xlim([min(list_x)-2.5e-6,max(list_x)+2.5e-6])
