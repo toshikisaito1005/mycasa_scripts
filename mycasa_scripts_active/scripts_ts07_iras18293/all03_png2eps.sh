@@ -92,3 +92,8 @@ convert +append -border 0x0 $dir_data"radial_alpha_cob.png" $dir_data"radial_alp
 
 rm -rf $dir_data"radial_alpha_co.png" $dir_data"radial_alpha_cob.png"
 rm -rf $dir_data"radial_alpha_ci.png" $dir_data"radial_alpha_cib.png"
+
+# figure 6
+convert -crop 2000x1800+70+300 $dir_data"heatmap_alpha_ci.png" eps2:$dir_data"fig06.eps"
+
+rm -rf $dir_data"heatmap_alpha_ci.png"
