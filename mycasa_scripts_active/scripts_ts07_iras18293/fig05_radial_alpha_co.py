@@ -92,6 +92,14 @@ def gas_mass_from_dust_flux(
 
     return mass
 
+def alpha_catom10(Xci,Q10,flux,luminosity): # Alaghband-Zadeh et al. 2013
+    A10 = 7.93e-8
+    DL = 78.2 # Mpc
+    zspec = 0.01818
+    MH2 = 1375.8 * DL**2 / (1+zspec) / (Xci/1e-05) / (A10/1e-7) / Q10 * flux
+    alpha = MH2/luminosity
+
+    return alpha
 
 #####################
 ### Main Procedure
@@ -284,14 +292,8 @@ plt.savefig(dir_data+"eps/radial_alpha_ci.png",dpi=300)
 
 
 # alpha_ci heatmap on T-X plane
-def alpha_catom10(Xci,Q10): # Alaghband-Zadeh et al. 2013
-    flux = 
-    luminosity = 
-    A10 = 7.93e-8
-    DL = 78.2 # Mpc
-    zspec = 0.01818
-    MH2 = 1375.8 * DL**2 / (1+zspec) / (Xci/1e-05) / (A10/1e-7) / Q10 * flux
-    alpha = MH2/luminosity
+alpha = alpha_catom10(3e-5,0.40,flux_ci.max(),lum_ci.max())
 
-    return MH2
+
+
 
