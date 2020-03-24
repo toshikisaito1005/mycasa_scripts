@@ -85,3 +85,7 @@ convert $dir_data"fig04.png" eps2:$dir_data"fig04.eps"
 rm -rf $dir_data"fig04.png"
 
 
+# figure 5
+convert -crop 2150x1470+70+200 $dir_data"radial_alpha_co.png" $dir_data"radial_alpha_cob.png"
+convert -crop 2150x1470+70+200 $dir_data"radial_alpha_ci.png" $dir_data"radial_alpha_cib.png"
+convert +append -border 0x0 $dir_data"radial_alpha_cob.png" $dir_data"radial_alpha_cib.png" eps2:$dir_data"fig05.eps"
