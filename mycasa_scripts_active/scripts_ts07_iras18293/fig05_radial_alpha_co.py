@@ -88,7 +88,7 @@ def gas_mass_from_dust_flux(
     nu850 = 352.6970094 # GHz
     Sig_rj = sigma_rj(tdust,nuobs,z)
     Sig_0 = sigma_rj(tdust,nu850,0)
-    mass = 1.78e10 * flux * (1+z)**-4.8 * (nu850/nuobs)**3.8 * dist**2 * (Sig_rj/Sig_0)
+    mass = 1.78e10 * flux * (1+z)**-4.8 * (nu850/nuobs)**3.8 * dist**2 * (Sig_0/Sig_rj)
 
     return mass
 
