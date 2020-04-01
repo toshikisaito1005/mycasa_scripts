@@ -186,7 +186,7 @@ ax1.set_xlabel("Distance (kpc)")
 ax1.set_ylabel(r"log $\alpha_{CO(1-0)}$")
 
 # ax2 histogram
-histo = ax2.hist(np.log10(mass/lum_co),range=[-0.5,1.5],bins=60,
+histo = ax2.hist(np.log10(mass/lum_co),range=ylim,bins=60,
                  orientation="horizontal",lw=4,color="red",alpha=0.5,histtype=u'step',
                  weights=None,normed=True)
 ax2.tick_params(labelleft=False,labelbottom=False)
@@ -230,7 +230,7 @@ plt.savefig(dir_data+"eps/radial_alpha_co.png",dpi=300)
 
 
 ### alpha_ci
-ylim = [0.6,2.1]
+ylim = [0.7,2.2]
 
 plt.figure(figsize=(8,8))
 plt.rcParams["font.size"] = 16
@@ -248,7 +248,7 @@ ax1.set_xlabel("Distance (kpc)")
 ax1.set_ylabel(r"log $\alpha_{[CI](1-0)}$")
 
 # ax2 histogram
-histo = ax2.hist(np.log10(mass/lum_ci),range=[-0.5,1.5],bins=60,
+histo = ax2.hist(np.log10(mass/lum_ci),range=ylim,bins=60,
                  orientation="horizontal",lw=4,color="blue",alpha=0.5,histtype=u'step',
                  weights=None,normed=True)
 ax2.tick_params(labelleft=False,labelbottom=False)
