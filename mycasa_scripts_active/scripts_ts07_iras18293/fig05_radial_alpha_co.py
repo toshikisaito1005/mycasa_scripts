@@ -296,7 +296,7 @@ list_x = []
 list_q = []
 list_alpha = []
 
-iterate_x = np.linspace(1e-5, 5e-5, 50)
+iterate_x = np.linspace(0.7e-5, 5e-5, 50)
 iterate_q = np.linspace(0.35, 0.50, 50)
 #iterate_x = np.linspace(1e-5, 8e-5, 50)
 #iterate_q = np.linspace(0.15, 0.55, 50)
@@ -319,9 +319,9 @@ plt.rcParams["font.size"] = 16
 plt.subplots_adjust(bottom=0.20, left=0.15, right=0.85, top=0.85)
 
 cscatter = ax1.scatter(list_x,list_q,c=list_alpha,cmap='rainbow',s=60,lw=0,marker='s')
-cont = ax1.contour(map_X*1e5,map_Q,map_alpha,linewidths=[2,4,2],levels=[10.8,14.0,18.5],colors=['black'])
+cont = ax1.contour(map_X*1e5,map_Q,map_alpha,linewidths=[2,4,2],levels=[15.8,20.7,29.9],colors=['black'])
 cont.clabel(fmt='%1.1f',fontsize=14)
-cont2 = ax1.contour(map_X*1e5,map_Q,map_alpha,linestyles='dashed',linewidths=1,levels=[6,7,8,9,10,24],colors=['black'])
+cont2 = ax1.contour(map_X*1e5,map_Q,map_alpha,linestyles='dashed',linewidths=1,levels=[6,8,10,12],colors=['black'])
 cont2.clabel(fmt='%1.1f',fontsize=14)
 ax1.set_xlim([min(list_x),max(list_x)])
 ax1.set_ylim([min(list_q),max(list_q)])
