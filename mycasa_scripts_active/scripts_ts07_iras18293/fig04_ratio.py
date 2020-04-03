@@ -29,7 +29,7 @@ cliplevel = clip * imstat(co)["max"][0]
 
 os.system("rm -rf " + co + ".complete")
 immath(imagename = co,
-       expr = "iif(IM0 >= " + str(cliplevel) + ", IM0, 0.0)",
+       expr = "iif(IM0 <= " + str(cliplevel) + ", IM0, 0.0)",
        outfile = co + ".complete")
 
 os.system("rm -rf " + dir_data + "image_ci10/ratio.moment0")
@@ -73,5 +73,5 @@ myim.fits2eps(dir_data = dir_data,
               contour = contour,
               xlim = xlim,
               ylim = ylim,
-              clim = [0,0.26])
+              clim = [0.25,0.5])# [0,0.26])
 
