@@ -94,7 +94,7 @@ def import_data(dir_data,
                 ext,
                 mode,
                 txtname,
-                index=0):
+                index=0): # from here!
     """
     """
     image = dir_data+line+"_"+suffix+"."+ext
