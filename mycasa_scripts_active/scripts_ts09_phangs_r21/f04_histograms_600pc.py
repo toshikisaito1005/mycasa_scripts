@@ -121,9 +121,12 @@ os.system("rm -rf *.last")
 
 
 ### statistics
+r21_histo = np.histogram(r21)
 # unweighted
 mean = str(np.round(np.average(r21),3))
 median = str(np.round(np.median(r21),3))
+p84 = plot_r21.hist_percent(r21,0.843)
+r16 =  plot_r21.hist_percent(r21,0.157)
 print("### no-weight")
 print("# mean = " + mean)
 print("# median = " + median)
