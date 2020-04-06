@@ -121,8 +121,22 @@ os.system("rm -rf *.last")
 
 
 ### statistics
+# unweighted
+mean = str(np.round(np.average(r21),3))
+median = str(np.round(np.median(r21),3))
+print("### no-weight")
+print("# mean = " + mean)
+print("# median = " + median)
 # co10-weighted
-mean = np.average(r21,weights=co10)
-median = plot_r21.weighted_median(r21,co10)
-
+mean = str(np.round(np.average(r21,weights=co10),3))
+median = str(np.round(plot_r21.weighted_median(r21,co10),3))
+print("### co10-weight")
+print("# mean = " + mean)
+print("# median = " + median)
+# co21-weighted
+mean = str(np.round(np.average(r21,weights=co21),3))
+median = str(np.round(plot_r21.weighted_median(r21,co21),3))
+print("### co21-weight")
+print("# mean = " + mean)
+print("# median = " + median)
 
