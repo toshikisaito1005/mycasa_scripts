@@ -125,5 +125,7 @@ def integrator(f,data,freq):
     return (f(data[:-1])*freq[:-1]*diffs[:-1]).sum()
 
 # co10-weighted
-#freq_norm = freq/integrator(lambda x:1,r21,co10)
+freq_norm = co10/integrator(lambda x:1,r21,co10)
+mean = integrator(lambda x:x,r21,freq_norm)
+
 
