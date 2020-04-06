@@ -37,7 +37,7 @@ bins=50
 for i in range(len(gals)):
 	galname = gals[i]
 	galnamelabel = galname.replace("ngc","NGC ")
-	data = np.loadtxt(dir_data + galname + "_parameter_matched_res.txt")
+	data = np.loadtxt(dir_data + galname + "_parameter_600pc.txt")
 	#
 	dist = data[:,0]
 	r21 = data[:,1]
@@ -118,3 +118,12 @@ for i in range(len(gals)):
 	plt.savefig(dir_product+"figure_hists_"+gals[i]+".png",dpi=100)
 
 os.system("rm -rf *.last")
+
+# statistics
+def integrator(f,data,freq):
+    diffs = np.roll(data,-1)-data
+    return (f(data[:-1])*freq[:-1]*diffs[:-1]).sum()
+
+# co10-weighted
+#freq_norm = freq/integrator(lambda x:1,r21,co10)
+
