@@ -119,13 +119,10 @@ for i in range(len(gals)):
 
 os.system("rm -rf *.last")
 
-# statistics
-def integrator(f,data,freq):
-    diffs = np.roll(data,-1)-data
-    return (f(data[:-1])*freq[:-1]*diffs[:-1]).sum()
 
+### statistics
 # co10-weighted
-freq_norm = co10/integrator(lambda x:1,r21,co10)
-mean = integrator(lambda x:x,r21,freq_norm)
+mean = np.average(r21,weights=co10)
+median = plot_r21.weighted_median(r21,co10)
 
 
