@@ -12,6 +12,7 @@ data_image = glob.glob(dir_data + "*/*_04p0*moment0_Kelvin")
 data_image.extend(glob.glob(dir_data + "*/*_04p0*moment8_Kelvin"))
 data2_image = glob.glob(dir_data + "*/*_08p0*moment0_Kelvin")
 data2_image.extend(glob.glob(dir_data + "*/*_08p0*moment0_Kelvin"))
+data3_image =  glob.glob(dir_data + "*_r21/*_04p09*moment0")
 data_image = np.r_[data_image, data2_image]
 data_image.sort()
 
