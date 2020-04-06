@@ -1,5 +1,16 @@
+       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.lock
+       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.info
+       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.f0_TSM0
+       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.f0
+       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.dat
+       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.lock
+       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.info
+       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.f0_TSM0
+       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.f0
+       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.dat
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim10_extract_param_600pc.py
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim09_convolve_WISE.py
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim08_r21_highlowmask.py
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim04_multibeam.py
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/f04_histograms_600pc.py
+       2 - mycasa_scripts_active/scripts_ts09_phangs_r21/f02_images.py
