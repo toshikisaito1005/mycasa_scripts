@@ -121,18 +121,19 @@ os.system("rm -rf *.last")
 
 
 ### statistics
-r21_histo = np.histogram(r21)
+r21_histo = np.histogram(r21,range=xlim,bins=bins)
 # unweighted
 mean = str(np.round(np.average(r21),3))
 median = str(np.round(np.median(r21),3))
-p84 = plot_r21.hist_percent(r21,0.843)
-r16 =  plot_r21.hist_percent(r21,0.157)
+p84 = r21_histo[1][plot_r21.hist_percent(r21_histo[0],0.843)]
+r16 =  plot_r21.hist_percent(r21_histo,0.157)
 print("### no-weight")
 print("# mean = " + mean)
 print("# median = " + median)
 # co10-weighted
 mean = str(np.round(np.average(r21,weights=co10),3))
 median = str(np.round(plot_r21.weighted_median(r21,co10),3))
+p84 = plot_r21.weighted_p84(r21,co10)
 print("### co10-weight")
 print("# mean = " + mean)
 print("# median = " + median)
