@@ -21,7 +21,7 @@ import scripts_phangs_r21_plot as plot_r21
 #####################
 dir_data = "/Users/saito/data/mycasa_scripts_active/scripts_ts09_phangs_r21/"
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
-gals = ["ngc0628","ngc3627","ngc4321"]
+gals = ["ngc0628"]#,"ngc3627","ngc4321"]
 percents = [0.15,0.025,0.010]
 def_nucleus = [50*44./1.0,50*52./1.3,50*103/1.4]
 scales = [44/1.0,52/1.3,103/1.4]
@@ -43,10 +43,10 @@ for i in range(len(gals)):
 	r21 = data[:,1]
 	r21[np.isnan(r21)] = 0
 	r21[np.isinf(r21)] = 0
-	co21 = data[:,2]
-	co21snr = data[:,3]
-	co10 = data[:,4]
-	co10snr = data[:,5]
+	co21 = data[:,3]
+	co21snr = data[:,4]
+	co10 = data[:,5]
+	co10snr = data[:,6]
 	#
 	cut_dist = (dist > 0)
 	cut_r21 = (r21 > 0)
