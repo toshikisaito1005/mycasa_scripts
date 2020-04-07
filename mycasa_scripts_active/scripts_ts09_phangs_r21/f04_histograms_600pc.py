@@ -122,28 +122,33 @@ for i in range(len(gals)):
 	r21_histo = np.histogram(r21,range=xlim,bins=bins)
 	r21_histo_wco10 = np.histogram(r21,range=xlim,bins=bins,weights=co10)
 	r21_histo_wco21 = np.histogram(r21,range=xlim,bins=bins,weights=co21)
-	list_stats = []
 	# unweighted
 	p84 = np.round(r21_histo[1][plot_r21.hist_percent(r21_histo[0],0.843)],3)
 	mean = np.round(np.average(r21),3)
 	median = np.round(np.median(r21),3)
 	mode =  np.round(r21_histo[1][np.argmax(r21_histo[0])],3)
 	p16 = np.round(r21_histo[1][plot_r21.hist_percent(r21_histo[0],0.157)],3)
-    list_stats_1 = [p84,mean,median,mode,p16]
+	list_stats = [p84,mean,median,mode,p16]
 
 	# co10-weighted
-	p84 = str(np.round(plot_r21.weighted_p84(r21,co10),3))
-	mean = str(np.round(np.average(r21,weights=co10),3))
-	median = str(np.round(plot_r21.weighted_median(r21,co10),3))
-	mode =  str(np.round(r21_histo_wco10[1][np.argmax(r21_histo_wco10[0])],3))
-	p16 = str(np.round(plot_r21.weighted_p16(r21,co10),3))
+	p84 = np.round(plot_r21.weighted_p84(r21,co10),3)
+	mean = np.round(np.average(r21,weights=co10),3)
+	median = np.round(plot_r21.weighted_median(r21,co10),3)
+	mode =  np.round(r21_histo_wco10[1][np.argmax(r21_histo_wco10[0])],3)
+	p16 = np.round(plot_r21.weighted_p16(r21,co10),3)
+	list_stats_2 = [p84,mean,median,mode,p16]
+	list_stats.extend(list_stats_2)
 
 	# co21-weighted
-	p84 = str(np.round(plot_r21.weighted_p84(r21,co21),3))
-	mean = str(np.round(np.average(r21,weights=co21),3))
-	median = str(np.round(plot_r21.weighted_median(r21,co21),3))
-	mode =  str(np.round(r21_histo_wco21[1][np.argmax(r21_histo_wco21[0])],3))
-	p16 = str(np.round(plot_r21.weighted_p16(r21,co21),3))
+	p84 = np.round(plot_r21.weighted_p84(r21,co21),3)
+	mean = np.round(np.average(r21,weights=co21),3)
+	median = np.round(plot_r21.weighted_median(r21,co21),3)
+	mode =  np.round(r21_histo_wco21[1][np.argmax(r21_histo_wco21[0])],3)
+	p16 = np.round(plot_r21.weighted_p16(r21,co21),3)
+	list_stats_3 = [p84,mean,median,mode,p16]
+	list_stats.extend(list_stats_3)
 
+	os.system("rm -rf " + galname + "_stats_600pc.txt",)
+	np.savetxt(galname + "_stats_600pc.txt",np.c_[np.array(range(15))+1, list_stats])
 
 os.system("rm -rf *.last")
