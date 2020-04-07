@@ -53,7 +53,7 @@ rm -rf 1110x185+170+50 $dir_data"figure_hists_ngc3627.png" $dir_data"figure_hist
 rm -rf 1110x215+170+50 $dir_data"figure_hists_ngc4321.png" $dir_data"figure_hists_ngc4321b.png"
 
 ### figure 5
-convert -crop 0x0+0+00 $dir_data"stats_histo_600pc.png" eps2:$dir_data"fig05.eps"
+convert -crop 5750x0+0+00 $dir_data"stats_histo_600pc.png" eps2:$dir_data"fig05.eps"
 
 rm -rf $dir_data"stats_histo_600pc.png"
 
