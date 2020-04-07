@@ -149,6 +149,7 @@ for i in range(len(gals)):
 	list_stats.extend(list_stats_3)
 
 	os.system("rm -rf " + galname + "_stats_600pc.txt",)
-	np.savetxt(galname + "_stats_600pc.txt",np.c_[np.array(range(15))+1, list_stats])
+	np.savetxt(galname + "_stats_600pc.txt",
+		       np.c_[np.array(range(5)*3)+1+5*i, list_stats])
 
 os.system("rm -rf *.last")
