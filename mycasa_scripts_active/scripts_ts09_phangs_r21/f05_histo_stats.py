@@ -61,12 +61,13 @@ ax1.plot(stats_n4321_wco10[:,0]+2,stats_n4321_wco10[:,1]/stats_n4321_no[2][1],
 ax1.plot(stats_n4321_wco21[:,0]+2,stats_n4321_wco21[:,1]/stats_n4321_no[2][1],
 	'-o',alpha=0.4,c=cm.brg(2/2.5),lw=7)
 
-ax1.text(3,1.42,'NGC 0628',horizontalalignment='center')
-ax1.text(9,1.42,'NGC 3627',horizontalalignment='center')
-ax1.text(15,1.42,'NGC 4321',horizontalalignment='center')
+ax1.text(3,1.52,'NGC 0628',horizontalalignment='center')
+ax1.text(9,1.52,'NGC 3627',horizontalalignment='center')
+ax1.text(15,1.52,'NGC 4321',horizontalalignment='center')
 
 ax1.set_xlim([0.5,17.5])
 ax1.set_ylim([0.7,1.5])
+ax1.set_ylabel("Value / Unweighted Median")
 ax1.plot([0,18],[1,1],'k-',lw=2)
 
 plt.xticks([1,2,3,4,5,7,8,9,10,11,13,14,15,16,17],["84%","Mean","Median","Mode","16%","84%","Mean","Median","Mode","16%","84%","Mean","Median","Mode","16%"])
