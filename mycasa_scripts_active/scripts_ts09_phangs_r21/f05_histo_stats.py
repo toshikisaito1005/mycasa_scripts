@@ -34,7 +34,7 @@ stats_n4321_wco21 = data[10:15]
 
 ### plot
 # setup
-fig = plt.figure(figsize=(8,8))
+fig = plt.figure(figsize=(20,5))
 ax1 = fig.add_subplot(111)
 ax1.grid(which='major',linestyle='--')
 plt.rcParams["font.size"] = 22
