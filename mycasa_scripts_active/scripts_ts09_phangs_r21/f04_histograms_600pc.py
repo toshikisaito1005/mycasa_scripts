@@ -122,26 +122,28 @@ for i in range(len(gals)):
 	r21_histo = np.histogram(r21,range=xlim,bins=bins)
 	r21_histo_wco10 = np.histogram(r21,range=xlim,bins=bins,weights=co10)
 	r21_histo_wco21 = np.histogram(r21,range=xlim,bins=bins,weights=co21)
+	list_stats = []
 	# unweighted
-	p84 = str(np.round(r21_histo[1][plot_r21.hist_percent(r21_histo[0],0.843)],2))
-	mean = str(np.round(np.average(r21),2))
-	median = str(np.round(np.median(r21),2))
-	mode =  str(np.round(r21_histo[1][np.argmax(r21_histo[0])],2))
-	p16 = str(np.round(r21_histo[1][plot_r21.hist_percent(r21_histo[0],0.157)],2))
+	p84 = np.round(r21_histo[1][plot_r21.hist_percent(r21_histo[0],0.843)],3)
+	mean = np.round(np.average(r21),3)
+	median = np.round(np.median(r21),3)
+	mode =  np.round(r21_histo[1][np.argmax(r21_histo[0])],3)
+	p16 = np.round(r21_histo[1][plot_r21.hist_percent(r21_histo[0],0.157)],3)
+    list_stats_1 = [p84,mean,median,mode,p16]
 
 	# co10-weighted
-	mean = str(np.round(np.average(r21,weights=co10),2))
-	median = str(np.round(plot_r21.weighted_median(r21,co10),2))
-	mode =  str(np.round(r21_histo_wco10[1][np.argmax(r21_histo_wco10[0])],2))
-	p84 = str(np.round(plot_r21.weighted_p84(r21,co10),2))
-	p16 = str(np.round(plot_r21.weighted_p16(r21,co10),2))
+	p84 = str(np.round(plot_r21.weighted_p84(r21,co10),3))
+	mean = str(np.round(np.average(r21,weights=co10),3))
+	median = str(np.round(plot_r21.weighted_median(r21,co10),3))
+	mode =  str(np.round(r21_histo_wco10[1][np.argmax(r21_histo_wco10[0])],3))
+	p16 = str(np.round(plot_r21.weighted_p16(r21,co10),3))
 
 	# co21-weighted
-	mean = str(np.round(np.average(r21,weights=co21),2))
-	median = str(np.round(plot_r21.weighted_median(r21,co21),2))
-	mode =  str(np.round(r21_histo_wco21[1][np.argmax(r21_histo_wco21[0])],2))
-	p84 = str(np.round(plot_r21.weighted_p84(r21,co21),2))
-	p16 = str(np.round(plot_r21.weighted_p16(r21,co21),2))
+	p84 = str(np.round(plot_r21.weighted_p84(r21,co21),3))
+	mean = str(np.round(np.average(r21,weights=co21),3))
+	median = str(np.round(plot_r21.weighted_median(r21,co21),3))
+	mode =  str(np.round(r21_histo_wco21[1][np.argmax(r21_histo_wco21[0])],3))
+	p16 = str(np.round(plot_r21.weighted_p16(r21,co21),3))
 
 
 os.system("rm -rf *.last")
