@@ -41,21 +41,21 @@ plt.rcParams["font.size"] = 22
 plt.subplots_adjust(bottom=0.20, left=0.05, right=0.95, top=0.90)
 #
 ax1.plot(stats_n0628_no[:,0],stats_n0628_no[:,1]/stats_n0628_no[2][1],
-	'-o',alpha=0.4,c=cm.brg(0/2.5),lw=1)
+	'-o',alpha=0.4,c="black",lw=2)
 ax1.plot(stats_n0628_wco10[:,0],stats_n0628_wco10[:,1]/stats_n0628_no[2][1],
 	'-o',alpha=0.4,c=cm.brg(0/2.5),lw=4)
 ax1.plot(stats_n0628_wco21[:,0],stats_n0628_wco21[:,1]/stats_n0628_no[2][1],
 	'-o',alpha=0.4,c=cm.brg(0/2.5),lw=7)
 
 ax1.plot(stats_n3627_no[:,0]+1,stats_n3627_no[:,1]/stats_n3627_no[2][1],
-	'-o',alpha=0.4,c=cm.brg(1/2.5),lw=1)
+	'-o',alpha=0.4,c="black",lw=2)
 ax1.plot(stats_n3627_wco10[:,0]+1,stats_n3627_wco10[:,1]/stats_n3627_no[2][1],
 	'-o',alpha=0.4,c=cm.brg(1/2.5),lw=4)
 ax1.plot(stats_n3627_wco21[:,0]+1,stats_n3627_wco21[:,1]/stats_n3627_no[2][1],
 	'-o',alpha=0.4,c=cm.brg(1/2.5),lw=7)
 
 ax1.plot(stats_n4321_no[:,0]+2,stats_n4321_no[:,1]/stats_n4321_no[2][1],
-	'-o',alpha=0.4,c=cm.brg(2/2.5),lw=1)
+	'-o',alpha=0.4,c="black",lw=2)
 ax1.plot(stats_n4321_wco10[:,0]+2,stats_n4321_wco10[:,1]/stats_n4321_no[2][1],
 	'-o',alpha=0.4,c=cm.brg(2/2.5),lw=4)
 ax1.plot(stats_n4321_wco21[:,0]+2,stats_n4321_wco21[:,1]/stats_n4321_no[2][1],
