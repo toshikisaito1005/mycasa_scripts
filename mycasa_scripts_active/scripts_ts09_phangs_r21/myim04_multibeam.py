@@ -27,7 +27,7 @@ beams = [[6.0,8.0,10.0,12.0,13.6,14.0,16.0,18.0,20.0,22.0,33.0],
          [6.0,8.0,8.5,10.0,12.0,14.0,16.0,18.0,20.0,22.0,33.0],
          #[10.0,12.0,14.0,16.0,18.0,20.0,22.0,24.0,26.0,33.0],
          [10.0,12.0,14.0,15.0,16.0,18.0,20.0,22.0,24.0,26.0,33.0]]
-native = [4.0,4.0,8.0]
+native = ["04p0","04p0","08p0"]
 """
 beams = [[6.0,33.0],
          [6.0,33.0],
@@ -47,14 +47,19 @@ for i in range(len(galaxy)):
     data_orig = glob.glob(dir_proj + "data_ready/" + galname + "_co10_*.image")[0]
     data_use = dir_proj + galname + "_co10/co10_cube.image"
     os.system("cp -r " + data_orig + " " + data_use)
+
     os.system("rm -rf " + outfile.replace(".image",".fits"))
-    exportfits(imagename = outfile,
-        fitsimage = outfile.replace(".image",".fits"))
+    exportfits(imagename = data_use,
+        fitsimage = data_use.replace(".image","_"+native[i]+".fits"))
 
     os.mkdir(dir_proj + galname + "_co21/")
     data_orig = glob.glob(dir_proj + "data_ready/" + galname + "_co21_*.image")[0]
     data_use = dir_proj + galname + "_co21/co21_cube.image"
     os.system("cp -r " + data_orig + " " + data_use)
+
+    os.system("rm -rf " + outfile.replace(".image",".fits"))
+    exportfits(imagename = data_use,
+        fitsimage = data_use.replace(".image","_"+native[i]+".fits"))
 
     #
     co10cube = glob.glob(dir_proj + galname + "_co10/*_cube.image")[0]
