@@ -42,11 +42,14 @@ for i in range(len(galaxy)):
     print("### working on " + galname)
     # preparation
     os.mkdir(dir_proj + galname + "_co10/")
-    data_orig = glob.glob(dir_proj + "data_ready/" + galname + "co10_*.image")[0]
-    data_use = dir_proj + galname + "_co10" + 
-    os.system("cp -r " + )
+    data_orig = glob.glob(dir_proj + "data_ready/" + galname + "_co10_*.image")[0]
+    data_use = dir_proj + galname + "_co10/co10_cube.image"
+    os.system("cp -r " + data_orig + " " + data_use)
 
     os.mkdir(dir_proj + galname + "_co21/")
+    data_orig = glob.glob(dir_proj + "data_ready/" + galname + "_co21_*.image")[0]
+    data_use = dir_proj + galname + "_co21/co21_cube.image"
+    os.system("cp -r " + data_orig + " " + data_use)
 
     co10cube = glob.glob(dir_proj + galname + "_co10/*_cube.image")[0]
     co21cube = glob.glob(dir_proj + galname + "_co21/*_cube.image")[0]
@@ -76,7 +79,7 @@ for i in range(len(galaxy)):
 
         os.system("rm -rf " + outfile.replace(".image",".fits"))
         exportfits(imagename = outfile,
-            outfile.replace(".image",".fits")
+            fitsimage = outfile.replace(".image",".fits"))
 
         os.system("rm -rf " + outfile + "_tmp")
 
@@ -98,7 +101,7 @@ for i in range(len(galaxy)):
         os.system("rm -rf template.image")
 
         exportfits(imagename = outfile,
-            outfile.replace(".image",".fits")
+            fitsimage = outfile.replace(".image",".fits"))
 
         os.system("rm -rf " + outfile + "_tmp")
 
