@@ -37,14 +37,19 @@ beams = [[6.0,33.0],
 #####################
 ### Main
 #####################
-
-
-
 for i in range(len(galaxy)):
     galname = galaxy[i]
     print("### working on " + galname)
-    co10cube = glob.glob(dir_proj + galname + "*_co10/*_cube.image")[0]
-    co21cube = glob.glob(dir_proj + galname + "*_co21/*_cube.image")[0]
+    # preparation
+    os.mkdir(dir_proj + galname + "_co10/")
+    data_orig = glob.glob(dir_proj + "data_ready/" + galname + "co10_*.image")[0]
+    data_use = dir_proj + galname + "_co10" + 
+    os.system("cp -r " + )
+
+    os.mkdir(dir_proj + galname + "_co21/")
+
+    co10cube = glob.glob(dir_proj + galname + "_co10/*_cube.image")[0]
+    co21cube = glob.glob(dir_proj + galname + "_co21/*_cube.image")[0]
     for j in range(len(beams[i])):
         beamp = str(beams[i][j]).zfill(4).replace(".","p")
         print("# working on beam = "+beamp)
