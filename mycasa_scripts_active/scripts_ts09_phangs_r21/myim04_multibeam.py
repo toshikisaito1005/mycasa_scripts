@@ -37,6 +37,9 @@ beams = [[6.0,33.0],
 #####################
 ### Main
 #####################
+
+
+
 for i in range(len(galaxy)):
     galname = galaxy[i]
     print("### working on " + galname)
@@ -65,6 +68,11 @@ for i in range(len(galaxy)):
                  template = "template.image",
                  output = outfile,
                  axes = [0,1])
+
+        os.system("rm -rf " + outfile.replace(".image",".fits"))
+        exportfits(imagename = outfile,
+            outfile.replace(".image",".fits")
+
         os.system("rm -rf " + outfile + "_tmp")
 
         # co21
@@ -83,6 +91,10 @@ for i in range(len(galaxy)):
                  output = outfile,
                  axes = [0,1])
         os.system("rm -rf template.image")
+
+        exportfits(imagename = outfile,
+            outfile.replace(".image",".fits")
+
         os.system("rm -rf " + outfile + "_tmp")
 
 os.system("rm -rf *.last template.fits template.im")
