@@ -42,7 +42,6 @@ beams = [[6.0,33.0],
 for i in range(len(galaxy)):
     galname = galaxy[i]
     print("### working on " + galname)
-    """
     # preparation
     os.mkdir(dir_proj + galname + "_co10/")
     data_orig = glob.glob(dir_proj + "data_ready/" + galname + "_co10_*.image")[0]
@@ -61,7 +60,7 @@ for i in range(len(galaxy)):
     os.system("rm -rf " + outfile.replace(".image",".fits"))
     exportfits(imagename = data_use,
         fitsimage = data_use.replace(".image","_"+native[i]+".fits"))
-    """
+
     #
     co10cube = glob.glob(dir_proj + galname + "_co10/*_cube.image")[0]
     co21cube = glob.glob(dir_proj + galname + "_co21/*_cube.image")[0]
