@@ -16,11 +16,11 @@ ax1.grid(which='both',linestyle='--')            # 図にグリッドを表示�
 plt.rcParams["font.size"] = 22                   # 図中の文字サイズの設定
 plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.85)  # 図の余白設定
 
-cscatter = ax1.scatter(np.log10(co10),  # data for x-axis
-                       np.log10(co21),  # data for y-axis
+cscatter = ax1.scatter(np.log10(co10),           # data for x-axis
+                       np.log10(co21),           # data for y-axis
                        lw = 0,                   # 点の輪郭の太さ
-                       c = dist,        # data for colorbar
-                       cmap = "jet",         # color code for c
+                       c = dist,                 # data for colorbar
+                       cmap = "jet",             # color code for c
                        alpha = 0.5,              # 点の透明度
                        s = 40,                   # 点の大きさ
                        norm=Normalize(vmin=0, vmax=7)) # おまじないです
