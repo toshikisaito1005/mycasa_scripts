@@ -26,7 +26,10 @@ historange = [0.001,25.]
 hist_co10 = np.histogram(co10, bins = bins, range = historange)
 hist_co21 = np.histogram(co21, bins = bins, range = historange)
 
-ax1.
+
+ax1.step(np.delete(hist_co10[1],-1),
+	      hist_co10[0]/float(sum(hist_co10[0])),
+	      alpha=0.4)
 
 """
 ax1.hist(co10,
