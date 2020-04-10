@@ -95,9 +95,11 @@ median_r21 = np.median(co21/co10)
 median_r21_wco10 = weighted_percentile(co21/co10,co10,0.5)
 median_r21_wco21 = weighted_percentile(co21/co10,co21,0.5)
 
+p16_r21 = np.percentile(co21/co10,16)
 p16_r21_wco10 = weighted_percentile(co21/co10,co10,0.16)
 p16_r21_wco21 = weighted_percentile(co21/co10,co21,0.16)
 
+p84_r21 = np.percentile(co21/co10,84)
 p84_r21_wco10 = weighted_percentile(co21/co10,co10,0.84)
 p84_r21_wco21 = weighted_percentile(co21/co10,co21,0.84)
 
@@ -105,6 +107,7 @@ ax1.plot([median_r21,median_r21],[0.14,0.14],"o",markersize=7,alpha=0.5,lw=0,col
 ax1.plot([median_r21_wco10,median_r21_wco10],[0.13,0.13],"o",markersize=7,alpha=0.5,lw=0,color="green")
 ax1.plot([median_r21_wco21,median_r21_wco21],[0.12,0.12],"o",markersize=7,alpha=0.5,lw=0,color="red")
 
+ax1.plot([p16_r21,p84_r21],[0.14,0.14],"-",markersize=7,alpha=0.5,lw=2,color="blue")
 ax1.plot([p16_r21_wco10,p84_r21_wco10],[0.13,0.13],"-",markersize=7,alpha=0.5,lw=2,color="green")
 ax1.plot([p16_r21_wco21,p84_r21_wco21],[0.12,0.12],"-",markersize=7,alpha=0.5,lw=2,color="red")
 
@@ -112,19 +115,22 @@ ax1.step(np.delete(hist_r21[1],-1),
 	      hist_r21[0]/float(sum(hist_r21[0])),
 	      alpha=0.4,
 	      lw = 2,
-	      color = "blue")
+	      color = "blue",
+	      label = "unweighted")
 
 ax1.step(np.delete(hist_r21_wco10[1],-1),
 	      hist_r21_wco10[0]/float(sum(hist_r21_wco10[0])),
 	      alpha=0.4,
 	      lw = 2,
-	      color = "green")
+	      color = "green",
+	      label = "CO(1-0)-weighted")
 
 ax1.step(np.delete(hist_r21_wco21[1],-1),
 	      hist_r21_wco21[0]/float(sum(hist_r21_wco21[0])),
 	      alpha=0.4,
 	      lw = 2,
-	      color = "red")
+	      color = "red",
+	      label = "CO(2-1)-weighted")
 
 ax1.set_xlim(historange)                      # xの範囲の指定
 ax1.set_ylim([0,0.15])                        # yの範囲の指定
@@ -132,4 +138,5 @@ ax1.set_ylim([0,0.15])                        # yの範囲の指定
 ax1.set_ylabel("Normlized Count")
 ax1.set_xlabel("Brightness Temperature Ratio")
 
+plt.legend()
 plt.savefig("/Users/saito/Desktop/figure_histo_ratio.png",dpi=300)
