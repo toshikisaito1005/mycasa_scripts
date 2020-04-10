@@ -4,6 +4,29 @@ from matplotlib.colors import Normalize
 plt.ioff()
 
 
+### 重みつけm中央値を計算する関数。
+def weighted_median(data, weights):
+    """
+    Args:
+        data (list or numpy.array): data
+        weights (list or numpy.array): weights
+    """
+    data, weights = np.array(data).squeeze(), np.array(weights).squeeze()
+    s_data, s_weights = map(np.array, zip(*sorted(zip(data, weights))))
+    midpoint = 0.5 * sum(s_weights)
+    if any(weights > midpoint):
+        w_median = (data[weights == np.max(weights)])[0]
+    else:
+        cs_weights = np.cumsum(s_weights)
+        idx = np.where(cs_weights <= midpoint)[0][-1]
+        if cs_weights[idx] == midpoint:
+            w_median = np.mean(s_data[idx:idx+2])
+        else:
+            w_median = s_data[idx+1]
+
+    return w_median
+
+
 ### データを読み込む。
 data = np.loadtxt("n6240_mom8_data.txt")
 dist = data[:,0]
@@ -63,9 +86,16 @@ plt.subplots_adjust(bottom=0.15, left=0.12, right=0.95, top=0.9)  # 図の余白
 # ヒストグラムの準備
 bins = 80
 historange = [0.001,4.]
+
 hist_r21 = np.histogram(co21/co10, bins = bins, range = historange)
 hist_r21_wco10 = np.histogram(co21/co10, bins = bins, range = historange, weights = co10)
 hist_r21_wco21 = np.histogram(co21/co10, bins = bins, range = historange, weights = co21)
+
+median_r21 = np.median(co21/co10)
+median_r21_wco10 = weighted_median(co21/co10,co10)
+median_r21_wco21 = weighted_median(co21/co10,co21)
+
+ax1.plot([median_r21,median_r21],[14,0.14],"o",markersize=5)
 
 
 ax1.step(np.delete(hist_r21[1],-1),
