@@ -5,7 +5,7 @@ plt.ioff()
 
 
 ### 重みつけm中央値を計算する関数。
-def weighted_median(data, weights):
+def weighted_percentile(data, weights, percent):
     """
     Args:
         data (list or numpy.array): data
@@ -13,7 +13,7 @@ def weighted_median(data, weights):
     """
     data, weights = np.array(data).squeeze(), np.array(weights).squeeze()
     s_data, s_weights = map(np.array, zip(*sorted(zip(data, weights))))
-    midpoint = 0.5 * sum(s_weights)
+    midpoint = percent * sum(s_weights)
     if any(weights > midpoint):
         w_median = (data[weights == np.max(weights)])[0]
     else:
@@ -92,11 +92,21 @@ hist_r21_wco10 = np.histogram(co21/co10, bins = bins, range = historange, weight
 hist_r21_wco21 = np.histogram(co21/co10, bins = bins, range = historange, weights = co21)
 
 median_r21 = np.median(co21/co10)
-median_r21_wco10 = weighted_median(co21/co10,co10)
-median_r21_wco21 = weighted_median(co21/co10,co21)
+median_r21_wco10 = weighted_percentile(co21/co10,co10,0.5)
+median_r21_wco21 = weighted_percentile(co21/co10,co21,0.5)
 
-ax1.plot([median_r21,median_r21],[14,0.14],"o",markersize=5)
+p16_r21_wco10 = weighted_percentile(co21/co10,co10,0.16)
+p16_r21_wco21 = weighted_percentile(co21/co10,co21,0.16)
 
+p84_r21_wco10 = weighted_percentile(co21/co10,co10,0.84)
+p84_r21_wco21 = weighted_percentile(co21/co10,co21,0.84)
+
+ax1.plot([median_r21,median_r21],[0.14,0.14],"o",markersize=7,alpha=0.5,lw=0,color="blue")
+ax1.plot([median_r21_wco10,median_r21_wco10],[0.13,0.13],"o",markersize=7,alpha=0.5,lw=0,color="green")
+ax1.plot([median_r21_wco21,median_r21_wco21],[0.12,0.12],"o",markersize=7,alpha=0.5,lw=0,color="red")
+
+ax1.plot([p16_r21_wco10,p84_r21_wco10],[0.13,0.13],"-",markersize=7,alpha=0.5,lw=2,color="green")
+ax1.plot([p16_r21_wco21,p84_r21_wco21],[0.12,0.12],"-",markersize=7,alpha=0.5,lw=2,color="red")
 
 ax1.step(np.delete(hist_r21[1],-1),
 	      hist_r21[0]/float(sum(hist_r21[0])),
