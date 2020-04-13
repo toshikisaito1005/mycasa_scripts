@@ -129,6 +129,11 @@ for i in range(len(gals)):
 	mode =  np.round(r21_histo[1][np.argmax(r21_histo[0])],3)
 	p16 = np.round(r21_histo[1][plot_r21.hist_percent(r21_histo[0],0.157)],3)
 	list_stats = [p84,mean,median,mode,p16]
+	print(str(p84))
+	print(str(mean))
+	print(str(median))
+	print(str(mode))
+	print(str(p16))
 
 	# co10-weighted
 	p84 = np.round(plot_r21.weighted_p84(r21,co10),3)
@@ -138,6 +143,11 @@ for i in range(len(gals)):
 	p16 = np.round(plot_r21.weighted_p16(r21,co10),3)
 	list_stats_2 = [p84,mean,median,mode,p16]
 	list_stats.extend(list_stats_2)
+	print(str(p84))
+	print(str(mean))
+	print(str(median))
+	print(str(mode))
+	print(str(p16))
 
 	# co21-weighted
 	p84 = np.round(plot_r21.weighted_p84(r21,co21),3)
@@ -147,6 +157,11 @@ for i in range(len(gals)):
 	p16 = np.round(plot_r21.weighted_p16(r21,co21),3)
 	list_stats_3 = [p84,mean,median,mode,p16]
 	list_stats.extend(list_stats_3)
+	print(str(p84))
+	print(str(mean))
+	print(str(median))
+	print(str(mode))
+	print(str(p16))
 
 	os.system("rm -rf " + galname + "_stats_600pc.txt",)
 	np.savetxt(galname + "_stats_600pc.txt",
