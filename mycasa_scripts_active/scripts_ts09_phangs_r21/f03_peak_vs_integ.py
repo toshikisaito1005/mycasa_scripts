@@ -118,7 +118,7 @@ plt.ylim([0,2500])
 plt.xlabel("y-axis / x-axis" ,fontsize=14)
 plt.xticks(fontsize=14)
 plt.yticks([])
-histodata = plt.hist(histo,range=[0.4,1.4],bins=40,color="gray",lw=0,alpha=0.5)
+histodata = plt.hist(histo,range=[0.4,1.4],bins=50,color="gray",lw=0,alpha=0.5)
 line_84 = histodata[1][hist_percent(histodata[0],0.843)]
 line_50 = histodata[1][hist_percent(histodata[0],0.5)]
 line_16 = histodata[1][hist_percent(histodata[0],0.157)]
