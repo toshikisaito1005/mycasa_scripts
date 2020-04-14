@@ -58,6 +58,27 @@ def get_percentiles(data):
 
 	return [p84, median, p16]
 
+def plot_scatter(
+	ax,
+	axb,
+	xlim,
+	ylim,
+	xlabel,
+	ylabel,
+	):
+	"""
+	"""
+	# setup ax
+	ax.tick_params(labelbottom=False)
+	ax.set_xlim(xlim)
+	ax.set_ylim(ylim)
+	ax.grid(axis="both")
+	ax.set_ylabel(ylabel)
+	axb.tick_params(labelbottom=False,labelleft=False)
+	axb.set_xlim(xlim)
+	axb.set_ylim(ylim)
+	axb.set_xlabel(xlabel)
+
 
 #####################
 ### Main Procedure
@@ -93,13 +114,16 @@ for i in range(len(gals)):
 		statslist_r21.append(stats_r21)
 
 	### plot
+	# preparation
 	plt.figure(figsize=(8,5))
 	plt.rcParams["font.size"] = 16
 	gs = gridspec.GridSpec(nrows=18, ncols=18)
-	ax1 = plt.subplot(1,1,1)
+	ax1 = plt.subplot(gs[0:9,0:9])
+	ax2 = plt.subplot(gs[0:9,9:18])
+	ax3 = plt.subplot(gs[9:18,0:9])
+	ax1b = ax1.twiny()
+	ax2b = ax2.twinx()
+	# ax1 and ax1b
 
-
-
-
-
+    plt.savefig(dir_data+"eps/"+gals[i]+"_scatter_co10_co21.png",dpi=200)
 
