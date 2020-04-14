@@ -65,11 +65,15 @@ def get_percentiles(data):
 list_co10 = []
 list_co21 = []
 list_r21 = []
-list_stats = []
+statslist_co10 = []
+statslist_co21 = []
+statslist_r21 = []
 for i in range(len(gals)):
+	galname = gals[i].replace("ngc","NGC ")
 	dir_gal = dir_proj + gals[i]
 	for j in range(len(beam[i])):
 		beamname = str(beam[i][j]).replace(".","p").zfill(4)
+		print("# " + galname + " " + beamname)
 		beamfloat = float(beam[i][j])
 		image_co10 = dir_gal + "_co10/co10_" + beamname + ".moment0"
 		image_co21 = dir_gal + "_co21/co21_" + beamname + ".moment0"
@@ -84,11 +88,18 @@ for i in range(len(gals)):
 		list_co10.append(co10)
 		list_co21.append(co21)
 		list_r21.append(r21)
+		statslist_co10.append(stats_co10)
+		statslist_co21.append(stats_co21)
+		statslist_r21.append(stats_r21)
+
+	### plot
+	plt.figure(figsize=(8,5))
+	plt.rcParams["font.size"] = 16
+	gs = gridspec.GridSpec(nrows=18, ncols=18)
+	ax1 = plt.subplot(1,1,1)
 
 
-### plot
-plt.figure(figsize=(8,5))
-plt.rcParams["font.size"] = 16
-plt.subplots_adjust(left=0.15, right=0.90, bottom=0.15, top=0.90)
-ax1 = plt.subplot(1,1,1)
+
+
+
 
