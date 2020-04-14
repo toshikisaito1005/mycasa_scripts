@@ -176,7 +176,7 @@ def plot_scatter(
 				"0.4", fontsize=12)
 		#
 	# set legend
-	ax.legend(bbox_to_anchor=(1.05, -0.05), loc="lower right", ncol=ncol)
+	ax.legend(bbox_to_anchor=(1.05, -0.05), loc="upper left", ncol=ncol)
 
 def plot_hist_right(
 	ax,
@@ -383,7 +383,7 @@ for i in range(len(gals)):
 	plot_scatter(
 		ax1,ax1b,list_co21,list_r21,list_beamname,
 		ylim[i],ylim_r21[i],ylabel,ylabel_r21,text_r21,galname2,
-		ncol=2,annotation="ratio",
+		annotation="ratio",
 		)
 	# ax2 and ax2b
 	plot_hist_right(
