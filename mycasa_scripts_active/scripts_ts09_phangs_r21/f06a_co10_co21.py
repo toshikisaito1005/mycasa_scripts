@@ -130,9 +130,10 @@ def plot_scatter(
 	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
 	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.02, ylim[1]-(ylim[1]-ylim[0])*0.90,
 		"1:1", rotation=45, fontsize=12)
-	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.20, ylim[1]-(ylim[1]-ylim[0])*0.90,
+	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.12, ylim[1]-(ylim[1]-ylim[0])*0.90,
 		"1:0.7", rotation=45, fontsize=12)
-
+	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.21, ylim[1]-(ylim[1]-ylim[0])*0.90,
+		"1:0.4", rotation=45, fontsize=12)
 
 #####################
 ### Main Procedure
