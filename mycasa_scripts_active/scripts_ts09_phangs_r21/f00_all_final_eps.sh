@@ -61,7 +61,16 @@ rm -rf $dir_data"stats_histo_600pc.png"
 
 
 ### figure 6
-convert +append -border 0x0 $dir_data"ngc0628_co10_vs_co21.png" $dir_data"ngc3627_co10_vs_co21.png" $dir_data"ngc4321_co10_vs_co21.png" $dir_data"fig06a.png"
-convert +append -border 0x0 $dir_data"ngc0628_co21_vs_r21.png" $dir_data"ngc3627_co21_vs_r21.png" $dir_data"ngc4321_co21_vs_r21.png" $dir_data"fig06b.png"
-convert -append -border 0x0 $dir_data
+convert +append -border 0x0 $dir_data"ngc0628_co10_vs_co21.png" $dir_data"ngc3627_co10_vs_co21.png" $dir_data"fig06a.png"
+convert -append -border 0x0 $dir_data"fig06a.png" $dir_data"ngc4321_co10_vs_co21.png" eps2:$dir_data"fig06.eps"
+
+rm -rf $dir_data"ngc0628_co10_vs_co21.png" $dir_data"ngc3627_co10_vs_co21.png" $dir_data"fig06a.png"
+rm -rf $dir_data"ngc4321_co10_vs_co21.png"
+
+## figure 7
+convert +append -border 0x0 $dir_data"ngc0628_co21_vs_r21.png" $dir_data"ngc3627_co21_vs_r21.png" $dir_data"fig07a.png"
+convert -append -border 0x0 $dir_data"fig07a.png" $dir_data"ngc4321_co21_vs_r21.png" eps2:$dir_data"fig07.eps"
+
+rm -rf $dir_data"ngc0628_co21_vs_r21.png" $dir_data"ngc3627_co21_vs_r21.png"
+rm -rf $dir_data"ngc4321_co21_vs_r21.png"
 
