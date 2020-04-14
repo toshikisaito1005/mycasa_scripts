@@ -100,12 +100,13 @@ def plot_scatter(
 	ax.set_xlim(xlim)
 	ax.set_ylim(ylim)
 	ax.grid(axis="both")
+	#
 	ax.set_ylabel(ylabel)
-	ax.legend()
 	axb.tick_params(labelbottom=False,labelleft=False)
 	axb.set_xlim(xlim)
 	axb.set_ylim(ylim)
 	axb.set_xlabel(xlabel)
+	#
 	### plot data
 	for i in range(len(list_co10)):
 		# preparation
@@ -114,30 +115,36 @@ def plot_scatter(
 		beam = list_beamname[i].replace("p0","\"")
 		color = cm.gnuplot(i/8.)
 		binrange = [x.min(),x.max()]
+		#
 		# plot
-		ax1.scatter(x, y, color=color, alpha=0.1, s=20, lw=0, label = beam)
+		ax.scatter(x, y, color=color, alpha=0.1, s=20, lw=0, label = beam)
 		if i==0:
 			binx, mean, std = get_binned_dist(x,y,binrange)
-			ax1.errorbar(binx, mean, yerr = std, color = color, ecolor = color)
-
+			ax.errorbar(binx, mean, yerr = std, color = color, ecolor = color)
+	#
 	# plot annotation
-	ax1.plot(xlim, ylim, "--", color="black", lw=3, alpha=0.7)
+	ax.plot(xlim, ylim, "--", color="black", lw=3, alpha=0.7)
+	#
 	x_line2 = [np.log10(1/0.7*10**xlim[0]), xlim[1]]
 	y_line2 = [ylim[0], np.log10(0.7*10**ylim[1])]
-	ax1.plot(x_line2, y_line2, "--", color="grey", lw=1, alpha=0.7)
+	ax.plot(x_line2, y_line2, "--", color="grey", lw=1, alpha=0.9)
+	#
 	x_line3 = [np.log10(1/0.4*10**xlim[0]), xlim[1]]
 	y_line3 = [ylim[0], np.log10(0.4*10**ylim[1])]
-	ax1.plot(x_line3, y_line3 ,"--", color="grey", lw=1, alpha=0.7)
+	ax.plot(x_line3, y_line3 ,"--", color="grey", lw=1, alpha=0.9)
+	#
 	# plot text
-	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
-	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
-	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.02, ylim[1]-(ylim[1]-ylim[0])*0.90,
+	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
+	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
+	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.02, ylim[1]-(ylim[1]-ylim[0])*0.90,
 		"1:1", rotation=45, fontsize=12)
-	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.12, ylim[1]-(ylim[1]-ylim[0])*0.90,
+	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.12, ylim[1]-(ylim[1]-ylim[0])*0.90,
 		"1:0.7", rotation=45, fontsize=12)
-	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.21, ylim[1]-(ylim[1]-ylim[0])*0.90,
+	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.21, ylim[1]-(ylim[1]-ylim[0])*0.90,
 		"1:0.4", rotation=45, fontsize=12)
-
+	#
+	# set legend
+	ax.legend(size=12)
 
 #####################
 ### Main Procedure
