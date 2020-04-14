@@ -305,15 +305,17 @@ def plot_threshold(
 	noisedata,
 	xlim,
 	ylim,
+	list_x,
 	):
 	"""
 	"""
-    data = np.loadtxt(noisedata)
-    beam = data[:,0]
-    co10rms = data[:,1]
-    co21rms = data[:,2]
-    # plot
-    ax.plot([] ,ylim, "--", )
+	data = np.loadtxt(noisedata)
+	beam = data[:,0]
+	co10rms = data[:,1]
+	co21rms = data[:,2]
+	# plot
+	for i in range(len(list_x)):
+		ax.plot([] ,ylim, "--", )
 
 
 #####################
@@ -375,7 +377,7 @@ for i in range(len(gals)):
 		xlim[i], ylim[i], xlabel, ylabel, text, galname2,
 		)
 	plot_threshold(
-		ax1, noisedata[i], xlim[i], ylim[i],
+		ax1, noisedata[i], xlim[i], ylim[i], list_co10,
 		)
 	# ax2 and ax2b
 	plot_hist_right(
