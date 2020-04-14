@@ -4,6 +4,7 @@ dir_data="/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 ### figure 0
 convert +append -border 0x0 $dir_data"noise_ngc0628_co10.png" $dir_data"noise_vs_beam.png" eps2:$dir_data"fig00.eps"
 
+rm -rf $dir_data"noise_ngc0628_co10.png" $dir_data"noise_vs_beam.png"
 
 ### figure 1
 convert +append -border 0x0 $dir_data"missingflux_co10.png" $dir_data"missingflux_co21.png" $dir_data"missingflux_r21.png" eps2:$dir_data"fig01.eps"
