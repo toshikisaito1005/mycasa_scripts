@@ -225,8 +225,27 @@ def plot_hist_bottom(
 	ax.tick_params(top=False,left=False,right=False)
 	ax.set_xlim(xlim)
 	ax.set_ylim([9,0])
-	ax3.grid(axis="x")
-	ax3.set_xlabel(xlabel)
+	ax.grid(axis="x")
+	ax.set_xlabel(xlabel)
+	#
+	# plot data
+	for i in range(len(list_x)):
+		# preparation
+		x = np.log10(list_x[i])
+		beam = list_beamname[i].replace("p0","\"")
+		color = cm.gnuplot(i/8.)
+		#
+		# histogram
+		histo = np.histogram(x, bins=bins, range=xlim)
+		y = np.delete(histo[1],-1)
+		x = histo[0]/(histo[0].max()*1.05)
+		width = (xlim[1]-xlim[0])/bins
+		#
+		# plot
+		ax.plot(y ,x+i, drawstyle="steps-mid", color="grey", lw=0.5)
+		ax.bar(y, x, width=width, lw=0, color=color, alpha=0.4, bottom=i, align="center")
+		#
+		#
 
 
 #####################
@@ -287,6 +306,10 @@ for i in [0]:
 	# ax2 and ax2b
 	plot_hist_right(
 		ax2,ax2b,list_co21,statslist_co21,list_beamname,ylim[i],ylabel
+		)
+	# ax3
+	plot_hist_bottom(
+		ax3,list_co10,statslist_co10,list_beamname,xlim[i],ylabel
 		)
 
 	plt.savefig(dir_proj+"eps/" + galname + "_co10_vs_co21.png",dpi=200)
