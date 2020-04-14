@@ -114,7 +114,7 @@ ax1.set_ylim([10**-3.5,10**0.5])
 ax1.set_ylim([-3.5,0.5])
 ax1.set_xlim([0,37])
 
-plt.title("log rms vs. Beam Size")
+plt.title("(b) log rms vs. Beam Size")
 plt.legend()
 plt.savefig(dir_proj+"eps/noise_vs_beam.png",dpi=300)
 
@@ -131,7 +131,7 @@ co10rms = r21.noisehist_kelvin(co10image,
                         output,
                         logscale=False,
                         plotter=True,
-                        title = "NGC 0628 4.0\" CO(1-0) Cube")
+                        title = "(a) NGC 0628 4.0\" CO(1-0) Cube")
 
 """
 output = dir_proj+"eps/noise_"+galname+"_"+co10image.split("/")[-1].replace(".image","").replace("_cube","")+"_log.png"
