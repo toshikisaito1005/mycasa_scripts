@@ -31,6 +31,9 @@ ylim = [[-1.2,1.7],
 beam = [[4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0],
         [8.0,10.0,12.0,14.0,16.0,18.0,20.0,22.0,24.0],
         [4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0]]
+texts = ["a) log $I_{CO(1-0)}$ vs log $I_{CO(2-1)}$",
+		 "b) log $I_{CO(1-0)}$ vs log $I_{CO(2-1)}$",
+		 "c) log $I_{CO(1-0)}$ vs log $I_{CO(2-1)}$"]
 
 
 #####################
@@ -75,6 +78,7 @@ def plot_scatter(
 	ylim,
 	xlabel,
 	ylabel,
+	text,
 	):
 	"""
 	"""
@@ -98,9 +102,9 @@ def plot_scatter(
 		# plot
 		ax1.scatter(x, y, color=color, alpha=0.1, s=20, lw=0)
 		if i==0:
-			n, _ = np.histogram(x, bins=10, range=)
-			sy, _ = np.histogram(x, bins=10, range=xlim, weights=y)
-			sy2, _ = np.histogram(x, bins=10, range=xlim, weights=y*y)
+			n, _ = np.histogram(x, bins=10, range=binrange)
+			sy, _ = np.histogram(x, bins=10, range=binrange, weights=y)
+			sy2, _ = np.histogram(x, bins=10, range=binrange, weights=y*y)
 			mean = sy / n
 			std = np.sqrt(sy2/n - mean*mean)
 			binx = (_[1:] + _[:-1])/2
@@ -108,6 +112,19 @@ def plot_scatter(
 
 	# plot annotation
 	ax1.plot(xlim, ylim, "--", color="black", lw=3, alpha=0.7)
+	x_line2 = [np.log10(1/0.7*10**xlim[0]), xlim[1]]
+	y_line2 = [ylim[0], np.log10(0.7*10**ylim[1])]
+	ax1.plot(x_line2, y_line2, "--", color="grey", lw=1, alpha=0.7)
+	x_line3 = [np.log10(1/0.4*10**xlim[0]), xlim[1]]
+	y_line3 = [ylim[0], np.log10(0.4*10**ylim[1])]
+	ax1.plot(x_line3, y_line3 ,"--", color="grey", lw=1, alpha=0.7)
+	# plot text
+	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.1,
+    	     ylim[1]-(ylim[1]-ylim[0])*0.08,
+        	 text)
+	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.1,
+    	     ylim[1]-(ylim[1]-ylim[0])*0.16,
+        	 name_title)
 
 
 #####################
@@ -156,7 +173,7 @@ for i in range(len(gals)):
 	ax1b = ax1.twiny()
 	ax2b = ax2.twinx()
 	# ax1 and ax1b
-	plot_scatter(ax1,ax1b,list_co10,list_co21,xlim[i],ylim[i],xlabel,ylabel)
+	plot_scatter(ax1,ax1b,list_co10,list_co21,xlim[i],ylim[i],xlabel,ylabel,text1,text2)
 
 	plt.savefig(dir_proj+"eps/" + galname + "_co10_vs_co21.png",dpi=200)
 
