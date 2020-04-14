@@ -142,9 +142,9 @@ def plot_scatter(
 		ax.plot(x_line3, y_line3 ,"--", color="grey", lw=1, alpha=0.9)
 		#
 		# plot text
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
 		if "628" in galname:
-			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
-			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
 			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.04, ylim[1]-(ylim[1]-ylim[0])*0.89,
 				"1:1", rotation=45, fontsize=12)
 			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.14, ylim[1]-(ylim[1]-ylim[0])*0.89,
@@ -163,9 +163,9 @@ def plot_scatter(
 		ax.plot(x_line3, y_line3 ,"--", color="grey", lw=1, alpha=0.9)
 		#
 		# plot text
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
 		if "628" in galname:
-			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
-			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
 			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.42,
 				"1.0", fontsize=12)
 			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.49,
