@@ -35,8 +35,8 @@ def get_co_intensities(image_co10,image_co21,beamfloat):
 	imshape = imhead(image_co10,mode="list")["shape"]
 	box = "0,0," + str(imshape[0]-1) + "," + str(imshape[1]-1)
 	# imval
-	data_co10_tmp = imval(image_co10,box=box)["data"].flatten().tolist()
-	data_co21_tmp = imval(image_co21,box=box)["data"].flatten().tolist()
+	data_co10_tmp = imval(image_co10,box=box)["data"].flatten()
+	data_co21_tmp = imval(image_co21,box=box)["data"].flatten()
 	# cut pixel = 0
 	cut_data = np.where((data_co10_tmp>0) & (data_co21_tmp>0))
 	data_co10 = data_co10_tmp[cut_data]
@@ -53,6 +53,9 @@ def get_co_intensities(image_co10,image_co21,beamfloat):
 #####################
 ### Main Procedure
 #####################
+list_co10 = []
+list_co21 = []
+list_r21 = []
 for i in range(len(gals)):
 	dir_gal = dir_proj + gals[i]
 	for j in range(len(beam[i])):
@@ -73,7 +76,10 @@ for i in range(len(gals)):
 		median_r21 = np.median(r21)
 		p16_r21 = np.percentile(r21,16)
 		p84_r21 = np.percentile(r21,84)
-
+		# save to list
+		list_co10.append(co10)
+		list_co21.append(co21)
+		list_r21.append(r21)
 
 
 ### plot
