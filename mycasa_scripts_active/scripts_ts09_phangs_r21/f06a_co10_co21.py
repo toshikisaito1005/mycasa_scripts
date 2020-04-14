@@ -78,7 +78,7 @@ def plot_scatter(
 	):
 	"""
 	"""
-	# setup ax
+	### setup ax
 	ax.tick_params(labelbottom=False)
 	ax.set_xlim(xlim)
 	ax.set_ylim(ylim)
@@ -88,14 +88,26 @@ def plot_scatter(
 	axb.set_xlim(xlim)
 	axb.set_ylim(ylim)
 	axb.set_xlabel(xlabel)
-	#
+	### plot data
 	for i in range(len(list_co10)):
+		# preparation
 		x = np.log10(list_co10[i])
 		y = np.log10(list_co21[i])
 		color = cm.gnuplot(i/8.)
-		ax1.scatter(x,y,color=color,alpha=0.1,s=20,lw=0)
+		binrange = [x.min(),x.max()]
+		# plot
+		ax1.scatter(x, y, color=color, alpha=0.1, s=20, lw=0)
 		if i==0:
-			n, _ = np.histogram(np.log10(Ico10),bins=10,range=[0.0,2.5])
+			n, _ = np.histogram(x, bins=10, range=)
+			sy, _ = np.histogram(x, bins=10, range=xlim, weights=y)
+			sy2, _ = np.histogram(x, bins=10, range=xlim, weights=y*y)
+			mean = sy / n
+			std = np.sqrt(sy2/n - mean*mean)
+			binx = (_[1:] + _[:-1])/2
+			ax1.errorbar(binx, mean, yerr = std, color = color, ecolor = color)
+
+	# plot annotation
+	ax1.plot(xlim, ylim, "--", color="black", lw=3, alpha=0.7)
 
 
 #####################
