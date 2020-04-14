@@ -96,6 +96,8 @@ def plot_scatter(
 	ylabel,
 	text,
 	galname,
+	ncol=1,
+	annotation="flux",
 	):
 	"""
 	"""
@@ -127,28 +129,49 @@ def plot_scatter(
 			ax.errorbar(binx, mean, yerr = std, color = color, ecolor = color)
 		#
 	# plot annotation
-	ax.plot(xlim, ylim, "--", color="black", lw=3, alpha=0.7)
-	#
-	x_line2 = [np.log10(1/0.7*10**xlim[0]), xlim[1]]
-	y_line2 = [ylim[0], np.log10(0.7*10**ylim[1])]
-	ax.plot(x_line2, y_line2, "--", color="grey", lw=1, alpha=0.9)
-	#
-	x_line3 = [np.log10(1/0.4*10**xlim[0]), xlim[1]]
-	y_line3 = [ylim[0], np.log10(0.4*10**ylim[1])]
-	ax.plot(x_line3, y_line3 ,"--", color="grey", lw=1, alpha=0.9)
-	#
-	# plot text
-	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
-	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
-	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.04, ylim[1]-(ylim[1]-ylim[0])*0.89,
-		"1:1", rotation=45, fontsize=12)
-	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.14, ylim[1]-(ylim[1]-ylim[0])*0.89,
-		"1:0.7", rotation=45, fontsize=12)
-	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.23, ylim[1]-(ylim[1]-ylim[0])*0.89,
-		"1:0.4", rotation=45, fontsize=12)
-	#
+	if annotation=="flux":
+		ax.plot(xlim, ylim, "--", color="black", lw=3, alpha=0.7)
+		#
+		x_line2 = [np.log10(1/0.7*10**xlim[0]), xlim[1]]
+		y_line2 = [ylim[0], np.log10(0.7*10**ylim[1])]
+		ax.plot(x_line2, y_line2, "--", color="grey", lw=1, alpha=0.9)
+		#
+		x_line3 = [np.log10(1/0.4*10**xlim[0]), xlim[1]]
+		y_line3 = [ylim[0], np.log10(0.4*10**ylim[1])]
+		ax.plot(x_line3, y_line3 ,"--", color="grey", lw=1, alpha=0.9)
+		#
+		# plot text
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.04, ylim[1]-(ylim[1]-ylim[0])*0.89,
+			"1:1", rotation=45, fontsize=12)
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.14, ylim[1]-(ylim[1]-ylim[0])*0.89,
+			"1:0.7", rotation=45, fontsize=12)
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.23, ylim[1]-(ylim[1]-ylim[0])*0.89,
+			"1:0.4", rotation=45, fontsize=12)
+	elif annotation=="ratio":
+		ax.plot(xlim, [1,1], "--", color="black", lw=3, alpha=0.7)
+		#
+		x_line2 = [np.log10(1/0.7*10**xlim[0]), xlim[1]]
+		y_line2 = [ylim[0], np.log10(0.7*10**ylim[1])]
+		ax.plot(x_line2, y_line2, "--", color="grey", lw=1, alpha=0.9)
+		#
+		x_line3 = [np.log10(1/0.4*10**xlim[0]), xlim[1]]
+		y_line3 = [ylim[0], np.log10(0.4*10**ylim[1])]
+		ax.plot(x_line3, y_line3 ,"--", color="grey", lw=1, alpha=0.9)
+		#
+		# plot text
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.04, ylim[1]-(ylim[1]-ylim[0])*0.89,
+			"1.0", rotation=45, fontsize=12)
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.14, ylim[1]-(ylim[1]-ylim[0])*0.89,
+			"0.7", rotation=45, fontsize=12)
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.23, ylim[1]-(ylim[1]-ylim[0])*0.89,
+			"0.4", rotation=45, fontsize=12)
+		#
 	# set legend
-	ax.legend(loc="lower right", ncol=1)
+	ax.legend(loc="lower right", ncol=ncol)
 
 def plot_hist_right(
 	ax,
@@ -322,7 +345,8 @@ for i in [0]:
 	ax2b = ax2.twinx()
 	# ax1 and ax1b
 	plot_scatter(
-		ax1,ax1b,list_co10,list_co21,list_beamname,xlim[i],ylim[i],xlabel,ylabel,text,galname2
+		ax1,ax1b,list_co10,list_co21,list_beamname,
+		xlim[i],ylim[i],xlabel,ylabel,text,galname2,
 		)
 	# ax2 and ax2b
 	plot_hist_right(
@@ -348,7 +372,9 @@ for i in [0]:
 	ax2b = ax2.twinx()
 	# ax1 and ax1b
 	plot_scatter(
-		ax1,ax1b,list_co21,list_r21,list_beamname,ylim[i],ylim_r21[i],ylabel,ylabel_r21,text,galname2
+		ax1,ax1b,list_co21,list_r21,list_beamname,
+		ylim[i],ylim_r21[i],ylabel,ylabel_r21,text,galname2,
+		ncol=2,annotation="ratio",
 		)
 	#
 	plt.savefig(dir_proj+"eps/" + galname + "_co21_vs_r21.png",dpi=200)
