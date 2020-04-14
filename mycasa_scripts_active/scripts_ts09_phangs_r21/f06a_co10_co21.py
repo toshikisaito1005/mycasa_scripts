@@ -35,8 +35,8 @@ def get_co_intensities(image_co10,image_co21,beamfloat):
 	imshape = imhead(image_co10,mode="list")["shape"]
 	box = "0,0," + str(imshape[0]-1) + "," + str(imshape[1]-1)
 	# imval
-	data_co10_tmp = imval(image_co10,box=box)["data"].flatten()
-	data_co21_tmp = imval(image_co21,box=box)["data"].flatten()
+	data_co10_tmp = imval(image_co10,box=box)["data"].flatten().tolist()
+	data_co21_tmp = imval(image_co21,box=box)["data"].flatten().tolist()
 	# cut pixel = 0
 	cut_data = np.where((data_co10_tmp>0) & (data_co21_tmp>0))
 	data_co10 = data_co10_tmp[cut_data]
@@ -64,9 +64,17 @@ for i in range(len(gals)):
 		co10, co21 = get_co_intensities(image_co10,image_co21,beamfloat)
 		r21 = co21/co10
 		# stats
-		median = np.median(co10)
-		p16 = np.percentile(co10,16)
-		p84 = np.percentile(co84,16)
+		median_co10 = np.median(co10)
+		p16_co10 = np.percentile(co10,16)
+		p84_co10 = np.percentile(co10,84)
+		median_co21 = np.median(co21)
+		p16_co21 = np.percentile(co21,16)
+		p84_co21 = np.percentile(co21,84)
+		median_r21 = np.median(r21)
+		p16_r21 = np.percentile(r21,16)
+		p84_r21 = np.percentile(r21,84)
+
+
 
 ### plot
 plt.figure(figsize=(8,5))
