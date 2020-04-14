@@ -197,14 +197,12 @@ def plot_hist_right(
 		#
 	### plot stats
 	stats_step = np.array(stats_step)
-	p84 = np.array(statslist_y)[:,0]
-	p50 = np.array(statslist_y)[:,1]
-	p16 = np.array(statslist_y)[:,2]
-	print(lstats_step)
-	print(p50)
+	p84 = np.log10(np.array(statslist_y)[:,0])
+	p50 = np.log10(np.array(statslist_y)[:,1])
+	p16 = np.log10(np.array(statslist_y)[:,2])
 	#
 	# plot
-	ax.plot(stats_step,p50,"o-",color="grey",markeredgewidth=2,markersize=7,lw=2)
+	ax.plot(stats_step,p50,"o-",color="black",markeredgewidth=2,markersize=7,lw=2)
 
 
 #####################
