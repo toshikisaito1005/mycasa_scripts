@@ -88,24 +88,24 @@ plt.subplots_adjust(bottom=0.10, left=0.19, right=0.99, top=0.90)
 
 ax1.plot(list_0628[:,0], np.log10(list_0628[:,1] * 1.222e6/list_0628[:,0]**2/115.27120**2),
 	"-", color=cm.brg(0/2.5), markeredgewidth=0, markersize = 10,
-  alpha = 0.5, lw=4, label = "NGC 0628 CO(1-0)")
+  alpha = 0.5, lw=7, label = "NGC 0628 CO(1-0)")
 ax1.plot(list_0628[:,0], np.log10(list_0628[:,2] * 1.222e6/list_0628[:,0]**2/230.53800**2),
 	"--", color=cm.brg(0/2.5), markeredgewidth=0, markersize = 10,
-  alpha = 0.5, lw=4, label = "NGC 0628 CO(2-1)")
+  alpha = 0.5, lw=7, label = "NGC 0628 CO(2-1)")
 
 ax1.plot(list_3627[:,0], np.log10(list_3627[:,1] * 1.222e6/list_3627[:,0]**2/115.27120**2),
 	"-", color=cm.brg(1/2.5), markeredgewidth=0, markersize = 10,
-  alpha = 0.5, lw=4, label = "NGC 3627 CO(1-0)")
+  alpha = 0.5, lw=7, label = "NGC 3627 CO(1-0)")
 ax1.plot(list_3627[:,0], np.log10(list_3627[:,2] * 1.222e6/list_3627[:,0]**2/230.53800**2),
 	"--", color=cm.brg(1/2.5), markeredgewidth=0, markersize = 10,
-  alpha = 0.5, lw=4, label = "NGC 3627 CO(2-1)")
+  alpha = 0.5, lw=7, label = "NGC 3627 CO(2-1)")
 
 ax1.plot(list_4321[:,0], np.log10(list_4321[:,1] * 1.222e6/list_4321[:,0]**2/115.27120**2),
 	"-", color=cm.brg(2/2.5), markeredgewidth=0, markersize = 10,
-  alpha = 0.5, lw=4, label = "NGC 4321 CO(1-0)")
+  alpha = 0.5, lw=7, label = "NGC 4321 CO(1-0)")
 ax1.plot(list_4321[:,0], np.log10(list_4321[:,2] * 1.222e6/list_4321[:,0]**2/230.53800**2),
 	"--", color=cm.brg(2/2.5), markeredgewidth=0, markersize = 10,
-  alpha = 0.5, lw=4, label = "NGC 4321 CO(2-1)")
+  alpha = 0.5, lw=7, label = "NGC 4321 CO(2-1)")
 
 #ax1.set_yscale('log')
 ax1.set_xlabel("Beam Size (arcsec)")
@@ -129,7 +129,8 @@ co10rms = r21.noisehist_kelvin(co10image,
                         co10noises[i][j],
                         output,
                         logscale=False,
-                        plotter=True)
+                        plotter=True,
+                        title = "NGC 0628 4.0\" CO(1-0) Cube")
 
 """
 output = dir_proj+"eps/noise_"+galname+"_"+co10image.split("/")[-1].replace(".image","").replace("_cube","")+"_log.png"
