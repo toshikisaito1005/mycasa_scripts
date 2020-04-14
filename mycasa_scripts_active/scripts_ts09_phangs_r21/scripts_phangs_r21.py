@@ -205,7 +205,7 @@ def noisehist(imagename,noises_byeye,output,bins=200,thres=0.0000,logscale=True)
     pixvalues = pixvalues[abs(pixvalues)>thres]
 
     # plot
-    histrange = [0,-pixvalues.min()/1.5+0.02]#[pixvalues.min()/1.5-0.02,-pixvalues.min()/1.5+0.02]
+    histrange = [pixvalues.min()/1.5-0.02,-pixvalues.min()/1.5+0.02]
     plt.figure(figsize=(10,10))
     plt.rcParams["font.size"] = 22
     histdata = plt.hist(pixvalues,
@@ -214,7 +214,14 @@ def noisehist(imagename,noises_byeye,output,bins=200,thres=0.0000,logscale=True)
                         lw=0,
                         log=logscale,
                         color="blue",
-                        alpha=0.5)
+                        alpha=0.3)
+    plt.hist(pixvalues*-1,
+                        bins=bins,
+                        range=histrange,
+                        lw=0,
+                        log=logscale,
+                        color="red",
+                        alpha=0.3)
 
     popt, pcov = curve_fit(func1,
                            histdata[1][2:][histdata[1][2:]<noises_byeye],
@@ -240,7 +247,7 @@ def noisehist(imagename,noises_byeye,output,bins=200,thres=0.0000,logscale=True)
              '--',color='black',lw=2)
 
     #plt.title(imagename.split("/")[-1])
-    plt.xlim(histrange)
+    plt.xlim(0,histrange[1])
     plt.ylim([2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*1.2])#3.0])
     plt.xlabel("Pixel value (Jy beam$^{-1}$)")
     plt.ylabel("Number of pixels")
