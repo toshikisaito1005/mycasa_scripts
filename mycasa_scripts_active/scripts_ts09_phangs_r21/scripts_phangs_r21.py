@@ -239,9 +239,9 @@ def noisehist(imagename,noises_byeye,output,bins=200,thres=0.0000,logscale=True)
              [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
              '--',color='black',lw=2,
              label = "1 sigma = " + str(np.round(popt[1],3)) + " Jy beam$^{-1}$")
-    #plt.plot([popt[1]*2.5,popt[1]*2.5],
-    #         [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
-    #         '--',color='black',lw=4)
+    plt.plot([popt[1]*3.0,popt[1]*3.0],
+             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
+             '--',color='black',lw=4)
     plt.plot([-popt[1],-popt[1]],
              [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
              '--',color='black',lw=2)
