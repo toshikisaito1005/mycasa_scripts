@@ -28,6 +28,9 @@ fontsize_legend = 13
 gals = ["ngc0628",
 		"ngc3627",
 		"ngc4321"]
+noisedata = [dir_proj + "eps/ngc0628_noise.txt",
+			 dir_proj + "eps/ngc3627_noise.txt",
+			 dir_proj + "eps/ngc4321_noise.txt"]
 xlim = [[-1.2,1.8],
 		[-0.7,2.7],
 		[-0.7,2.7]]
@@ -142,6 +145,7 @@ def plot_scatter(
 		x_line3 = [np.log10(1/0.4*10**xlim[0]), xlim[1]]
 		y_line3 = [ylim[0], np.log10(0.4*10**ylim[1])]
 		ax.plot(x_line3, y_line3 ,"--", color="grey", lw=1, alpha=0.9)
+		#
 		#
 		# plot text
 		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
@@ -296,6 +300,12 @@ def plot_hist_bottom(
 	ax.plot(p50,stats_step,"o-",color="black",markeredgewidth=2,markersize=7,lw=2)
 	ax.plot(p16,stats_step,"--",color="black",markeredgewidth=0,markersize=3,lw=2)
 
+def plot_threshold(
+	noisedata,
+	):
+	"""
+	"""
+    
 
 #####################
 ### Main Procedure
@@ -384,6 +394,9 @@ for i in range(len(gals)):
 		ax1,ax1b,list_co21,list_r21,list_beamname,
 		ylim[i],ylim_r21[i],ylabel,ylabel_r21,text_r21,galname2,
 		annotation="ratio",
+		)
+	plot_threshold(
+		noisedata[i],
 		)
 	# ax2 and ax2b
 	plot_hist_right(
