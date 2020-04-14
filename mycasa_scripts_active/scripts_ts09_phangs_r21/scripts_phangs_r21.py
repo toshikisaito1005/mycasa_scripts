@@ -289,7 +289,7 @@ def noisehist_kelvin(imagename,jy2k,noises_byeye,output,bins=200,thres=0.0000,lo
                         log=logscale,
                         color="red",
                         alpha=0.3,
-                        label="reversed negative pixels")
+                        label="negative pixels (reversed)")
 
     popt, pcov = curve_fit(func1,
                            histdata[1][2:][histdata[1][2:]<noises_byeye],
