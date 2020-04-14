@@ -79,10 +79,12 @@ for i in [0,1,2]:
 list_0628 = list_master[0]
 list_3627 = list_master[1]
 list_4321 = list_master[2]
+np.savetxt(dir_proj + "eps/ngc0628_noise.txt", list_0628)
+np.savetxt(dir_proj + "eps/ngc3627_noise.txt", list_3627)
+np.savetxt(dir_proj + "eps/ngc4321_noise.txt", list_4321)
 
 fig = plt.figure(figsize=(10,10))
 ax1 = fig.add_subplot(111)
-#ax1.grid(which='major',linestyle='--')
 plt.rcParams["font.size"] = 22
 plt.subplots_adjust(bottom=0.10, left=0.19, right=0.99, top=0.90)
 
@@ -107,7 +109,6 @@ ax1.plot(list_4321[:,0], np.log10(list_4321[:,2] * 1.222e6/list_4321[:,0]**2/230
 	"--", color=cm.brg(2/2.5), markeredgewidth=0, markersize = 10,
   alpha = 0.5, lw=7, label = "NGC 4321 CO(2-1)")
 
-#ax1.set_yscale('log')
 ax1.set_xlabel("Beam Size (arcsec)")
 ax1.set_ylabel("log rms per pixel (K)")
 ax1.set_ylim([10**-3.5,10**0.5])
