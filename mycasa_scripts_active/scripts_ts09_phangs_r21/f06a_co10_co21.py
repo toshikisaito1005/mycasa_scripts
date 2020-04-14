@@ -28,31 +28,37 @@ beam = [[4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0],
 #####################
 ### functions
 #####################
-def some(image_co10,image_co21):
+def some(image_co10,image_co21,beamfloat):
 	"""
 	"""
 	# get image shape
 	imshape = imhead(image_co10,mode="list")["shape"]
-    box = "0,0,"+str(imshape[0] - 1)+","+str(imshape[1] - 1)
-    # imval
-    data_co10_tmp = imval(image_co10,box=box)["data"].flatten()
-    data_co21_tmp = imval(image_co21,box=box)["data"].flatten()
-    # cut pixel = 0
-    cut_data = np.where((data_co10_tmp==0) & (data_co21_tmp==0))
-    data_co10 = data_co10_tmp[cut_data]
-    data_co21 = data_co21_tmp[cut_data]
+	box = "0,0," + str(imshape[0]-1) + "," + str(imshape[1]-1)
+	# imval
+	data_co10_tmp = imval(image_co10,box=box)["data"].flatten()
+	data_co21_tmp = imval(image_co21,box=box)["data"].flatten()
+	# cut pixel = 0
+	cut_data = np.where((data_co10_tmp==0) & (data_co21_tmp==0))
+	data_co10 = data_co10_tmp[cut_data]
+	data_co21 = data_co21_tmp[cut_data]
+	# Jy-to-K
+	co10_jy2k = 1.222e6 / beamfloat**2 / 115.27120**2
+	co21_jy2k = 1.222e6 / beamfloat**2 / 230.53800**2
+	data_co10_Kelvin = data_co10 * co10_jy2k
+	data_co21_Kelvin = data_co21 * co21_jy2k
+
 
 
 #####################
 ### Main Procedure
 #####################
 for i in range(len(gals)):
-    dir_gal = dir_proj + gals[i]
-    for j in range(len(beam[i])):
-        beamname = str(beam[i][j]).replace(".","p").zfill(4)
-        beamfloat = beam[i][j]
-        image_co10 = dir_gal + "_co10/co10_" + beamname + ".moment0"
-        image_co21 = dir_gal + "_co21/co21_" + beamname + ".moment0"
+	dir_gal = dir_proj + gals[i]
+	for j in range(len(beam[i])):
+		beamname = str(beam[i][j]).replace(".","p").zfill(4)
+		beamfloat = float(beam[i][j])
+		image_co10 = dir_gal + "_co10/co10_" + beamname + ".moment0"
+		image_co21 = dir_gal + "_co21/co21_" + beamname + ".moment0"
 
 
 
