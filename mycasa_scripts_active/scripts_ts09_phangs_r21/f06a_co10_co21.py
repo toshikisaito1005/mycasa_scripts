@@ -78,6 +78,8 @@ def get_binned_dist(x,y,binrange):
 	std = np.sqrt(sy2/n - mean*mean)
 	binx = (_[1:] + _[:-1])/2
 
+	return binx, mean, std
+
 def plot_scatter(
 	ax,
 	axb,
@@ -112,6 +114,7 @@ def plot_scatter(
 		# plot
 		ax1.scatter(x, y, color=color, alpha=0.1, s=20, lw=0)
 		if i==0:
+			binx, mean, std = get_binned_dist(x,y,binrange)
 			ax1.errorbar(binx, mean, yerr = std, color = color, ecolor = color)
 
 	# plot annotation
@@ -123,9 +126,12 @@ def plot_scatter(
 	y_line3 = [ylim[0], np.log10(0.4*10**ylim[1])]
 	ax1.plot(x_line3, y_line3 ,"--", color="grey", lw=1, alpha=0.7)
 	# plot text
-	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.1,ylim[1]-(ylim[1]-ylim[0])*0.08,text)
-	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.1,ylim[1]-(ylim[1]-ylim[0])*0.16,galname)
-
+	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
+	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
+	ax1.text(
+		xlim[0]+(xlim[1]-xlim[0])*0.1,
+		ylim[1]-(ylim[1]-ylim[0])*0.9,
+		"1:1", rotation=45, fontsize=12)
 
 #####################
 ### Main Procedure
