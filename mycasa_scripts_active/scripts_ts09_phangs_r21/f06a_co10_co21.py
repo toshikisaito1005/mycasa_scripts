@@ -65,6 +65,8 @@ for i in range(len(gals)):
 		r21 = co21/co10
 		# stats
 		median = np.median(co10)
+		p16 = np.percentile(co10,16)
+		p84 = np.percentile(co84,16)
 
 ### plot
 plt.figure(figsize=(8,5))
