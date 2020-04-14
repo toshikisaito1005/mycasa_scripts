@@ -1,6 +1,8 @@
 import os
 import glob
 import scripts_phangs_r21 as r21
+import matplotlib.pyplot as plt
+plt.ioff()
 reload(r21)
 
 
@@ -78,6 +80,17 @@ list_3627 = list_master[1]
 list_4321 = list_master[2]
 
 fig = plt.figure(figsize=(8,8))
+ax1 = fig.add_subplot(111)
+ax1.grid(which='major',linestyle='--')
+plt.rcParams["font.size"] = 16
+plt.subplots_adjust(bottom=0.15, left=0.15, right=0.85, top=0.85)
+
+ax1.plot(list_0628[:,0], list_0628[:,1] * 1.222e6/list_0628[:,0]**2/115.27120**2,
+	"-", color="red", alpha = 0.5, lw=2)
+ax1.plot(list_0628[:,0], list_0628[:,2],
+	"--", color="red", alpha = 0.5, lw=2)
+
+plt.savefig(dir_proj+"eps/noise_vs_beam.png",dpi=300)
 
 
 # plot noise histograms
