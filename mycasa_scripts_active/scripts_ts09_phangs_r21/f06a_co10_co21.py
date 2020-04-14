@@ -28,10 +28,19 @@ beam = [[4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0],
 #####################
 ### functions
 #####################
-def some():
+def some(image_co10,image_co21):
 	"""
 	"""
-
+	# get image shape
+	imshape = imhead(image_co10,mode="list")["shape"]
+    box = "0,0,"+str(imshape[0] - 1)+","+str(imshape[1] - 1)
+    # imval
+    data_co10_tmp = imval(image_co10,box=box)["data"].flatten()
+    data_co21_tmp = imval(image_co21,box=box)["data"].flatten()
+    # cut pixel = 0
+    cut_data = np.where((data_co10_tmp==0) & (data_co21_tmp==0))
+    data_co10 = data_co10_tmp[cut_data]
+    data_co21 = data_co21_tmp[cut_data]
 
 
 #####################
@@ -44,12 +53,6 @@ for i in range(len(gals)):
         beamfloat = beam[i][j]
         image_co10 = dir_gal + "_co10/co10_" + beamname + ".moment0"
         image_co21 = dir_gal + "_co21/co21_" + beamname + ".moment0"
-
-        image_reft = imhead(image_co10,mode="list")["shape"][0] - 1
-        image_top = imhead(image_co21,mode="list")["shape"][1] - 1
-        box = "0,0,"+str(image_reft)+","+str(image_top)
-        data_co10 = imval(image_co10,box=box)["data"].flatten()
-        data_co21 = imval(image_co21,box=box)["data"].flatten()
 
 
 
