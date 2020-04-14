@@ -117,7 +117,7 @@ def plot_scatter(
 		binrange = [x.min(),x.max()]
 		#
 		# plot
-		ax.scatter(x, y, color=color, alpha=0.1, s=20, lw=0, label = beam)
+		ax.scatter(x, y, color=color, alpha=0.1, s=20, lw=0) #, label = beam)
 		if i==0:
 			binx, mean, std = get_binned_dist(x,y,binrange)
 			ax.errorbar(binx, mean, yerr = std, color = color, ecolor = color)
@@ -144,7 +144,16 @@ def plot_scatter(
 		"1:0.4", rotation=45, fontsize=12)
 	#
 	# set legend
-	ax.legend(size=12)
+	#ax.legend()
+
+def plot_hist_right(
+	):
+	"""
+	"""
+	### setup ax
+	ax2.tick_params(labelbottom=False,labelleft=False)
+	#
+	ax2b.tick_params(labelbottom=False)
 
 #####################
 ### Main Procedure
@@ -189,6 +198,7 @@ for i in [0]:
 	# preparation
 	plt.figure(figsize=(9,9))
 	plt.rcParams["font.size"] = 14
+	plt.rcParams["legend.fontsize"] = 14
 	gs = gridspec.GridSpec(nrows=18, ncols=18)
 	ax1 = plt.subplot(gs[0:9,0:9])
 	ax2 = plt.subplot(gs[0:9,9:18])
