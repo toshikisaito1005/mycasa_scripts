@@ -129,14 +129,16 @@ def plot_scatter(
 	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
 	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
 	ax1.text(
-		xlim[0]+(xlim[1]-xlim[0])*0.1,
-		ylim[1]-(ylim[1]-ylim[0])*0.9,
+		xlim[0]+(xlim[1]-xlim[0])*0.05,
+		ylim[1]-(ylim[1]-ylim[0])*0.87,
 		"1:1", rotation=45, fontsize=12)
+
 
 #####################
 ### Main Procedure
 #####################
-for i in range(len(gals)):
+#for i in range(len(gals)):
+for i in [0]:
 	### get data points ready for plot
 	# initialize
 	list_co10 = []
