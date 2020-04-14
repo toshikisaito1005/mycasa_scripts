@@ -105,8 +105,8 @@ statslist_co10 = []
 statslist_co21 = []
 statslist_r21 = []
 for i in range(len(gals)):
-	galname = gals[i].replace("ngc","NGC ")
-	dir_gal = dir_proj + gals[i]
+	galname = gals[i]
+	dir_gal = dir_proj + galname
 	for j in range(len(beam[i])):
 		beamname = str(beam[i][j]).replace(".","p").zfill(4)
 		print("# " + galname + " " + beamname)
@@ -130,8 +130,8 @@ for i in range(len(gals)):
 
 	### plot
 	# preparation
-	figure = plt.figure(figsize=(9,9))
-	plt.rcParams["font.size"] = 16
+	plt.figure(figsize=(9,9))
+	plt.rcParams["font.size"] = 14
 	gs = gridspec.GridSpec(nrows=18, ncols=18)
 	ax1 = plt.subplot(gs[0:9,0:9])
 	ax2 = plt.subplot(gs[0:9,9:18])
@@ -141,5 +141,5 @@ for i in range(len(gals)):
 	# ax1 and ax1b
 	plot_scatter(ax1,ax1b,list_co10,list_co21,xlim,ylim,xlabel,ylabel)
 
-	plt.savefig(dir_proj+"eps/scatter_co10_vs_co21.png",dpi=200)
+	plt.savefig(dir_proj+"eps/" + galname + "scatter_co10_vs_co21.png",dpi=200)
 
