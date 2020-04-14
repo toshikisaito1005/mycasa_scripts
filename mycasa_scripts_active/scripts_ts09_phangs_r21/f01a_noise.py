@@ -122,7 +122,8 @@ co10rms = r21.noisehist_kelvin(co10images[j],
                         output,
                         logscale=False,
                         plotter=True)
-"""
+
+
 output = dir_proj+"eps/noise_"+galname+"_"+co10image.split("/")[-1].replace(".image","").replace("_cube","")+"_log.png"
 co10rms = r21.noisehist_kelvin(co10images[j],
                         1.222e6/4.0**2/115.27120**2,
@@ -130,6 +131,6 @@ co10rms = r21.noisehist_kelvin(co10images[j],
                         output,
                         logscale=True,
                         plotter=True)
-"""
+
 
 os.system("rm -rf *.last")
