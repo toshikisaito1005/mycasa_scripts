@@ -229,6 +229,7 @@ def plot_hist_bottom(
 	ax.set_xlabel(xlabel)
 	#
 	# plot data
+	stats_step = []
 	for i in range(len(list_x)):
 		# preparation
 		x = np.log10(list_x[i])
@@ -243,9 +244,24 @@ def plot_hist_bottom(
 		#
 		# plot
 		ax.plot(y ,x+i, drawstyle="steps-mid", color="grey", lw=0.5)
-		ax.bar(y, x, width=width, lw=0, color=color, alpha=0.4, bottom=i, align="center")
+		ax.bar(y, x, width=width,
+			lw=0, color=color, alpha=0.4, bottom=i, align="center")
 		#
+		stats_step.append(i+0.5)
 		#
+	### plot stats
+	stats_step = np.array(stats_step)
+	p84 = np.log10(np.array(statslist_x)[:,0])
+	p50 = np.log10(np.array(statslist_x)[:,1])
+	p16 = np.log10(np.array(statslist_x)[:,2])
+	#
+	# plot
+	ax.plot(p84,stats_step,"--",color="black",markeredgewidth=0,markersize=3,lw=2,
+		label="")
+	ax.plot(p50,stats_step,"o-",color="black",markeredgewidth=2,markersize=7,lw=2)
+	ax.plot(p16,stats_step,"--",color="black",markeredgewidth=0,markersize=3,lw=2)
+	#
+	ax.legend()
 
 
 #####################
