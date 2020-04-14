@@ -316,7 +316,7 @@ def noisehist_kelvin(imagename,jy2k,noises_byeye,output,bins=200,thres=0.0000,lo
     #plt.title(imagename.split("/")[-1])
     plt.xlim(0,histrange[1])
     plt.ylim([2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*1.2])#3.0])
-    plt.xlabel("Pixel value (K)")
+    plt.xlabel("Pixel absolute value (K)")
     plt.ylabel("Number of pixels")
     plt.legend(loc = "upper right")
     if plotter==True:

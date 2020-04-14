@@ -1,6 +1,7 @@
 import os
 import glob
 import scripts_phangs_r21 as r21
+reload(r21)
 
 
 #####################
