@@ -112,7 +112,7 @@ def plot_scatter(
 		# preparation
 		x = np.log10(list_x[i])
 		y = np.log10(list_y[i])
-		beam = list_beamname[i].replace("p0","\"")
+		beam = str(int(float(list_beamname[i].replace("p","."))))+"\""
 		color = cm.gnuplot(i/8.)
 		binrange = [x.min(),x.max()]
 		#
@@ -144,7 +144,7 @@ def plot_scatter(
 		"1:0.4", rotation=45, fontsize=12)
 	#
 	# set legend
-	ax.legend(loc="lower right", ncol=2)
+	ax.legend(loc="lower right", ncol=1)
 
 def plot_hist_right(
 	ax,
@@ -200,8 +200,8 @@ def plot_hist_right(
 	p84 = np.array(statslist_y)[:,0]
 	p50 = np.array(statslist_y)[:,1]
 	p16 = np.array(statslist_y)[:,2]
-	print(len(stats_step))
-	print(len(p50))
+	print(lstats_step)
+	print(p50)
 	#
 	# plot
 	ax.plot(stats_step,p50,"o-",color="grey",markeredgewidth=2,markersize=7,lw=2)
@@ -251,7 +251,7 @@ for i in [0]:
 	# preparation
 	plt.figure(figsize=(9,9))
 	plt.rcParams["font.size"] = 14
-	plt.rcParams["legend.fontsize"] = 14
+	plt.rcParams["legend.fontsize"] = 12
 	gs = gridspec.GridSpec(nrows=18, ncols=18)
 	ax1 = plt.subplot(gs[0:11,0:11])
 	ax2 = plt.subplot(gs[0:11,11:18])
