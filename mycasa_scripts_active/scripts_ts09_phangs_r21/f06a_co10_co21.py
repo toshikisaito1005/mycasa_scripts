@@ -83,8 +83,8 @@ def get_binned_dist(x,y,binrange):
 def plot_scatter(
 	ax,
 	axb,
-	list_co10,
-	list_co21,
+	list_x,
+	list_y,
 	list_beamname,
 	xlim,
 	ylim,
@@ -100,18 +100,18 @@ def plot_scatter(
 	ax.set_xlim(xlim)
 	ax.set_ylim(ylim)
 	ax.grid(axis="both")
-	#
 	ax.set_ylabel(ylabel)
+	#
 	axb.tick_params(labelbottom=False,labelleft=False)
 	axb.set_xlim(xlim)
 	axb.set_ylim(ylim)
 	axb.set_xlabel(xlabel)
 	#
 	### plot data
-	for i in range(len(list_co10)):
+	for i in range(len(list_x)):
 		# preparation
-		x = np.log10(list_co10[i])
-		y = np.log10(list_co21[i])
+		x = np.log10(list_x[i])
+		y = np.log10(list_y[i])
 		beam = list_beamname[i].replace("p0","\"")
 		color = cm.gnuplot(i/8.)
 		binrange = [x.min(),x.max()]
@@ -147,13 +147,36 @@ def plot_scatter(
 	#ax.legend()
 
 def plot_hist_right(
+	ax,
+	axb,
+	list_y,
 	):
 	"""
 	"""
 	### setup ax
-	ax2.tick_params(labelbottom=False,labelleft=False)
+	ax.tick_params(labelbottom=False,labelleft=False)
+	ax.spines["top"].set_visible(False)
+	ax.spines["left"].set_visible(False)
+	ax.spines["bottom"].set_visible(False)
+	ax.tick_params(top=False,left=False,bottom=False)
+	ax.set_ylim(ylim)
+	ax.grid(axis="y")
 	#
-	ax2b.tick_params(labelbottom=False)
+	axb.tick_params(labelbottom=False)
+	axb.spines["top"].set_visible(False)
+	axb.spines["left"].set_visible(False)
+	axb.spines["bottom"].set_visible(False)
+	axb.tick_params(top=False,left=False,bottom=False)
+	axb.set_ylim(ylim)
+	axb.set_ylabel(ylabel)
+	### plot data
+	for i in range(len(list_y)):
+		# preparation
+		y = np.log10(list_y[i])
+		beam = list_beamname[i].replace("p0","\"")
+		color = cm.gnuplot(i/8.)
+		binrange = [x.min(),x.max()]
+
 
 #####################
 ### Main Procedure
@@ -172,6 +195,7 @@ for i in [0]:
 	galname = gals[i]
 	galname2 = gals[i].replace("ngc","for NGC ")
 	dir_gal = dir_proj + galname
+	#
 	for j in range(len(beam[i])):
 		beamname = str(beam[i][j]).replace(".","p").zfill(4)
 		print("# " + galname + " " + beamname)
