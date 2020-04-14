@@ -26,10 +26,10 @@ gals = ["ngc0628",
 		"ngc4321"]
 xlim = [[-1.2,1.8],
 		[-0.7,2.7],
-		[-0.2,2.7]]
+		[-0.7,2.7]]
 ylim = [[-1.2,1.8],
 		[-0.7,2.7],
-		[-0.2,2.7]]
+		[-0.7,2.7]]
 beam = [[4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0],
         [8.0,10.0,12.0,14.0,16.0,18.0,20.0,22.0,24.0],
         [4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0]]
@@ -207,15 +207,26 @@ def plot_hist_right(
 	ax.plot(stats_step,p16,"--",color="black",markeredgewidth=0,markersize=3,lw=2)
 
 def plot_hist_bottom(
+	ax,
+	list_x,
+	statslist_x,
+	list_beamname,
+	xlim,
+	ylabel,
+	bins = 60,
 	):
 	"""
 	"""
 	# setup ax
-	ax3.tick_params(labelleft=False)
-	ax3.spines["top"].set_visible(False)
-	ax3.spines["left"].set_visible(False)
-	ax3.spines["right"].set_visible(False)
-	ax3.tick_params(top=False,left=False,right=False)
+	ax.tick_params(labelleft=False)
+	ax.spines["top"].set_visible(False)
+	ax.spines["left"].set_visible(False)
+	ax.spines["right"].set_visible(False)
+	ax.tick_params(top=False,left=False,right=False)
+	ax.set_xlim(xlim)
+	ax.set_ylim([9,0])
+	ax3.grid(axis="x")
+	ax3.set_xlabel(xlabel)
 
 
 #####################
