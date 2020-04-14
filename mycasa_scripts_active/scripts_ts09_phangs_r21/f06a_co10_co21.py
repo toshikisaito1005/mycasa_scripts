@@ -49,6 +49,15 @@ def get_co_intensities(image_co10,image_co21,beamfloat):
 
 	return data_co10_Kelvin, data_co21_Kelvin
 
+def get_percentiles(data):
+	"""
+	"""
+	median = np.median(data)
+	p16 = np.percentile(data,16)
+	p84 = np.percentile(data,84)
+
+	return [p84, median, p16]
+
 
 #####################
 ### Main Procedure
@@ -56,6 +65,7 @@ def get_co_intensities(image_co10,image_co21,beamfloat):
 list_co10 = []
 list_co21 = []
 list_r21 = []
+list_stats = []
 for i in range(len(gals)):
 	dir_gal = dir_proj + gals[i]
 	for j in range(len(beam[i])):
@@ -67,15 +77,9 @@ for i in range(len(gals)):
 		co10, co21 = get_co_intensities(image_co10,image_co21,beamfloat)
 		r21 = co21/co10
 		# stats
-		median_co10 = np.median(co10)
-		p16_co10 = np.percentile(co10,16)
-		p84_co10 = np.percentile(co10,84)
-		median_co21 = np.median(co21)
-		p16_co21 = np.percentile(co21,16)
-		p84_co21 = np.percentile(co21,84)
-		median_r21 = np.median(r21)
-		p16_r21 = np.percentile(r21,16)
-		p84_r21 = np.percentile(r21,84)
+		stats_co10 = get_percentiles(co10)
+		stats_co21 = get_percentiles(co21)
+		stats_r21 = get_percentiles(r21)
 		# save to list
 		list_co10.append(co10)
 		list_co21.append(co21)
