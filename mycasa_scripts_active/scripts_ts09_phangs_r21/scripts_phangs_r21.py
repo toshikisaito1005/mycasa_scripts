@@ -208,6 +208,7 @@ def noisehist(imagename,noises_byeye,output,bins=200,thres=0.0000,logscale=True)
     histrange = [pixvalues.min()/1.5-0.02,-pixvalues.min()/1.5+0.02]
     plt.figure(figsize=(10,10))
     plt.rcParams["font.size"] = 22
+    plt.subplots_adjust(bottom=0.10, left=0.19, right=0.99, top=0.90)
     histdata = plt.hist(pixvalues,
                         bins=bins,
                         range=histrange,
@@ -241,7 +242,8 @@ def noisehist(imagename,noises_byeye,output,bins=200,thres=0.0000,logscale=True)
              label = "1 sigma = " + str(np.round(popt[1],3)) + " Jy beam$^{-1}$")
     plt.plot([popt[1]*3.0,popt[1]*3.0],
              [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
-             '--',color='black',lw=4)
+             '--',color='black',lw=5,
+             label = "3 sigma = " + str(np.round(popt[1]*3.0,3)) + " Jy beam$^{-1}$")
     plt.plot([-popt[1],-popt[1]],
              [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
              '--',color='black',lw=2)
