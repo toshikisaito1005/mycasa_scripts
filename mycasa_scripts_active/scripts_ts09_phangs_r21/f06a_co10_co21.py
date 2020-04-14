@@ -63,6 +63,8 @@ for i in range(len(gals)):
 		# get values
 		co10, co21 = get_co_intensities(image_co10,image_co21,beamfloat)
 		r21 = co21/co10
+		# stats
+		median = np.median(co10)
 
 ### plot
 plt.figure(figsize=(8,5))
