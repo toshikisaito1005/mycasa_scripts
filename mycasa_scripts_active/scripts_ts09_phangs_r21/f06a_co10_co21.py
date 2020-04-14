@@ -121,7 +121,7 @@ def plot_scatter(
 		if i==0:
 			binx, mean, std = get_binned_dist(x,y,binrange)
 			ax.errorbar(binx, mean, yerr = std, color = color, ecolor = color)
-	#
+		#
 	# plot annotation
 	ax.plot(xlim, ylim, "--", color="black", lw=3, alpha=0.7)
 	#
@@ -144,7 +144,7 @@ def plot_scatter(
 		"1:0.4", rotation=45, fontsize=12)
 	#
 	# set legend
-	ax.legend(loc = "lower right")
+	ax.legend(loc="lower right", ncol=2)
 
 def plot_hist_right(
 	ax,
@@ -182,7 +182,6 @@ def plot_hist_right(
 		y = np.log10(list_y[i])
 		beam = list_beamname[i].replace("p0","\"")
 		color = cm.gnuplot(i/8.)
-		stats_step.append(i+0.5)
 		#
 		# histogram
 		histo = np.histogram(y, bins=bins, range=ylim)
@@ -193,15 +192,19 @@ def plot_hist_right(
 		# plot
 		ax.plot(y+i, x, drawstyle="steps", color="grey", lw=0.5)
 		ax.barh(x, y, height=height, lw=0, color=color, alpha=0.4, left=i)
-	#
+		#
+		stats_step.append(i+0.5)
+		#
 	### plot stats
 	stats_step = np.array(stats_step)
 	p84 = np.array(statslist_y)[:,0]
 	p50 = np.array(statslist_y)[:,1]
 	p16 = np.array(statslist_y)[:,2]
+	print(len(stats_step))
+	print(len(p50))
 	#
 	# plot
-	ax.plot(stats_step,p50,"o-",color="grey",markeredgewidth=0,markersize=7,lw=2)
+	ax.plot(stats_step,p50,"o-",color="grey",markeredgewidth=2,markersize=7,lw=2)
 
 
 #####################
@@ -243,7 +246,7 @@ for i in [0]:
 		statslist_co21.append(stats_co21)
 		statslist_r21.append(stats_r21)
 		list_beamname.append(beamname)
-
+		#
 	### plot
 	# preparation
 	plt.figure(figsize=(9,9))
