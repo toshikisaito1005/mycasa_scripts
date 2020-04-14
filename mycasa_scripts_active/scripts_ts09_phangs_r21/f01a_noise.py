@@ -82,7 +82,7 @@ list_4321 = list_master[2]
 
 fig = plt.figure(figsize=(10,10))
 ax1 = fig.add_subplot(111)
-ax1.grid(which='major',linestyle='--')
+#ax1.grid(which='major',linestyle='--')
 plt.rcParams["font.size"] = 22
 plt.subplots_adjust(bottom=0.10, left=0.19, right=0.99, top=0.90)
 
@@ -114,6 +114,7 @@ ax1.set_ylim([10**-3.5,10**0.5])
 ax1.set_ylim([-3.5,0.5])
 ax1.set_xlim([0,37])
 
+plt.title("log rms vs. Beam Size")
 plt.legend()
 plt.savefig(dir_proj+"eps/noise_vs_beam.png",dpi=300)
 
