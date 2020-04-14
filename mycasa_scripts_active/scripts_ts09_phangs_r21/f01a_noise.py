@@ -71,7 +71,13 @@ for i in [0,1,2]:
     #
     list_gal = np.c_[beam[i],list_co10,list_co21]
     list_master.append(list_gal)
-    # plot
+
+# plot
+list_0628 = list_master[0]
+list_3627 = list_master[1]
+list_4321 = list_master[2]
+
+fig = plt.figure(figsize=(8,8))
 
 
 # plot noise histograms
