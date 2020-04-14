@@ -22,12 +22,12 @@ ylabel = "log $I_{CO(2-1)}$ (K km s$^{-1}$)"
 gals = ["ngc0628",
 		"ngc3627",
 		"ngc4321"]
-xlim = [[-1.2,2.2],
-		[-1.2,2.7],
-		[-1.2,2.7]]
-ylim = [[-1.2,2.2],
-		[-1.2,2.7],
-		[-1.2,2.7]]
+xlim = [[-1.2,1.7],
+		[-0.7,2.7],
+		[-0.2,2.7]]
+ylim = [[-1.2,1.7],
+		[-0.7,2.7],
+		[-0.2,2.7]]
 beam = [[4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0],
         [8.0,10.0,12.0,14.0,16.0,18.0,20.0,22.0,24.0],
         [4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0]]
@@ -90,13 +90,12 @@ def plot_scatter(
 	axb.set_xlabel(xlabel)
 	#
 	for i in range(len(list_co10)):
-		ax1.scatter(
-			np.log10(list_co10[i]),
-			np.log10(list_co21[i]),
-			color=cm.gnuplot(i/8.),
-			alpha=0.1,
-			s=20,
-			lw=0)
+		x = np.log10(list_co10[i])
+		y = np.log10(list_co21[i])
+		color = cm.gnuplot(i/8.)
+		ax1.scatter(x,y,color=color,alpha=0.1,s=20,lw=0)
+		if i==0:
+			n, _ = np.histogram(np.log10(Ico10),bins=10,range=[0.0,2.5])
 
 
 #####################
@@ -145,7 +144,7 @@ for i in range(len(gals)):
 	ax1b = ax1.twiny()
 	ax2b = ax2.twinx()
 	# ax1 and ax1b
-	plot_scatter(ax1,ax1b,list_co10,list_co21,xlim,ylim,xlabel,ylabel)
+	plot_scatter(ax1,ax1b,list_co10,list_co21,xlim[i],ylim[i],xlabel,ylabel)
 
-	plt.savefig(dir_proj+"eps/" + galname + "scatter_co10_vs_co21.png",dpi=200)
+	plt.savefig(dir_proj+"eps/" + galname + "_co10_vs_co21.png",dpi=200)
 
