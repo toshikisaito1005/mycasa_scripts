@@ -320,7 +320,7 @@ def noisehist_kelvin(imagename,jy2k,noises_byeye,output,bins=200,thres=0.0000,lo
     plt.ylabel("Number of pixels")
     plt.legend(loc = "upper right")
     if plotter==True:
-      plt.savefig(output,dpi=100)
+      plt.savefig(output,dpi=300)
 
 def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
                    maskname=None,
