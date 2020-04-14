@@ -126,7 +126,7 @@ def plot_scatter(
 		ax.scatter(x, y, color=color, alpha=0.4, s=20, lw=0, label = beam)
 		if i==0:
 			binx, mean, std = get_binned_dist(x,y,binrange)
-			ax.errorbar(binx, mean, yerr = std, color = color, ecolor = color)
+			ax.errorbar(binx, mean, yerr = std, color = "black", ecolor = "black", lw=4)
 		#
 	# plot annotation
 	if annotation=="flux":
@@ -163,11 +163,11 @@ def plot_scatter(
 		# plot text
 		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
 		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.4,
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.42,
 			"1.0", fontsize=12)
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.5,
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.52,
 			"0.7", fontsize=12)
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.6,
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.61,
 			"0.4", fontsize=12)
 		#
 	# set legend
@@ -296,7 +296,7 @@ def plot_hist_bottom(
 ### Main Procedure
 #####################
 #for i in range(len(gals)):
-for i in [0]:
+for i in [0,1,2]:
 	### get data points ready for plot
 	# initialize
 	list_co10 = []
@@ -331,7 +331,8 @@ for i in [0]:
 		statslist_co21.append(stats_co21)
 		statslist_r21.append(stats_r21)
 		list_beamname.append(beamname)
-		#
+
+
 	### plot: co10 vs co21
 	# preparation
 	print("# plot co10 vs co21")
@@ -359,7 +360,8 @@ for i in [0]:
 		)
 	#
 	plt.savefig(dir_proj+"eps/" + galname + "_co10_vs_co21.png",dpi=200)
-	#
+
+
 	### plot: co21 vs r21
 	# preparation
 	print("# plot co21 vs r21")
@@ -388,5 +390,6 @@ for i in [0]:
 		)
 	#
 	plt.savefig(dir_proj+"eps/" + galname + "_co21_vs_r21.png",dpi=200)
+
 
 os.system("rm -rf *.last")
