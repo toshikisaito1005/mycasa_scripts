@@ -87,20 +87,26 @@ plt.rcParams["font.size"] = 16
 plt.subplots_adjust(bottom=0.15, left=0.15, right=0.85, top=0.85)
 
 ax1.plot(list_0628[:,0], list_0628[:,1] * 1.222e6/list_0628[:,0]**2/115.27120**2,
-	"-", color=cm.brg(0/2.5), alpha = 0.5, lw=4, label = "NGC 0628 CO(1-0)")
+	"o-", color=cm.brg(0/2.5), alpha = 0.5, lw=4, label = "NGC 0628 CO(1-0)")
 ax1.plot(list_0628[:,0], list_0628[:,2] * 1.222e6/list_0628[:,0]**2/230.53800**2,
-	"--", color=cm.brg(0/2.5), alpha = 0.5, lw=4, label = "NGC 0628 CO(2-1)")
+	"o--", color=cm.brg(0/2.5), alpha = 0.5, lw=4, label = "NGC 0628 CO(2-1)")
 
 ax1.plot(list_3627[:,0], list_3627[:,1] * 1.222e6/list_3627[:,0]**2/115.27120**2,
-	"-", color=cm.brg(1/2.5), alpha = 0.5, lw=4, label = "NGC 3627 CO(1-0)")
+	"o-", color=cm.brg(1/2.5), alpha = 0.5, lw=4, label = "NGC 3627 CO(1-0)")
 ax1.plot(list_3627[:,0], list_3627[:,2] * 1.222e6/list_3627[:,0]**2/230.53800**2,
-	"--", color=cm.brg(1/2.5), alpha = 0.5, lw=4, label = "NGC 3627 CO(2-1)")
+	"o--", color=cm.brg(1/2.5), alpha = 0.5, lw=4, label = "NGC 3627 CO(2-1)")
 
 ax1.plot(list_4321[:,0], list_4321[:,1] * 1.222e6/list_4321[:,0]**2/115.27120**2,
-	"-", color=cm.brg(2/2.5), alpha = 0.5, lw=4, label = "NGC 4321 CO(1-0)")
+	"o-", color=cm.brg(2/2.5), alpha = 0.5, lw=4, label = "NGC 4321 CO(1-0)")
 ax1.plot(list_4321[:,0], list_4321[:,2] * 1.222e6/list_4321[:,0]**2/230.53800**2,
-	"--", color=cm.brg(2/2.5), alpha = 0.5, lw=4, label = "NGC 4321 CO(2-1)")
+	"o--", color=cm.brg(2/2.5), alpha = 0.5, lw=4, label = "NGC 4321 CO(2-1)")
 
+ax1.set_yscale('log')
+ax1.set_xlabel("Beam Size (arcsec)")
+ax1.set_ylabel("log rms per pixel (K)")
+ax1.set_ylim([10**-3.5,10**0.5])
+
+plt.legend()
 plt.savefig(dir_proj+"eps/noise_vs_beam.png",dpi=300)
 
 
