@@ -136,11 +136,11 @@ def plot_scatter(
 	# plot text
 	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
 	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
-	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.02, ylim[1]-(ylim[1]-ylim[0])*0.90,
+	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.03, ylim[1]-(ylim[1]-ylim[0])*0.90,
 		"1:1", rotation=45, fontsize=12)
-	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.12, ylim[1]-(ylim[1]-ylim[0])*0.90,
+	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.13, ylim[1]-(ylim[1]-ylim[0])*0.90,
 		"1:0.7", rotation=45, fontsize=12)
-	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.21, ylim[1]-(ylim[1]-ylim[0])*0.90,
+	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.22, ylim[1]-(ylim[1]-ylim[0])*0.90,
 		"1:0.4", rotation=45, fontsize=12)
 	#
 	# set legend
@@ -191,7 +191,8 @@ def plot_hist_right(
 		# plot
 		ax.plot(y+i, x, drawstyle="steps", color="grey", lw=0.5)
 		ax.barh(x, y, height=height, lw=0, color=color, alpha=0.4, left=i)
-
+	#
+	# plot stats
 	p84 = np.array(statslist_y)[:,0]
 	p50 = np.array(statslist_y)[:,1]
 	p16 = np.array(statslist_y)[:,2]
@@ -242,16 +243,16 @@ for i in [0]:
 	plt.rcParams["font.size"] = 14
 	plt.rcParams["legend.fontsize"] = 14
 	gs = gridspec.GridSpec(nrows=18, ncols=18)
-	ax1 = plt.subplot(gs[0:9,0:9])
-	ax2 = plt.subplot(gs[0:9,9:18])
-	ax3 = plt.subplot(gs[9:18,0:9])
+	ax1 = plt.subplot(gs[0:11,0:11])
+	ax2 = plt.subplot(gs[0:11,11:18])
+	ax3 = plt.subplot(gs[11:18,0:11])
 	ax1b = ax1.twiny()
 	ax2b = ax2.twinx()
 	# ax1 and ax1b
 	plot_scatter(
 		ax1,ax1b,list_co10,list_co21,list_beamname,xlim[i],ylim[i],xlabel,ylabel,text,galname2
 		)
-
+	# ax2 and ax2b
 	plot_hist_right(
 		ax2,ax2b,list_co21,statslist_co21,list_beamname,ylim[i],ylabel
 		)
