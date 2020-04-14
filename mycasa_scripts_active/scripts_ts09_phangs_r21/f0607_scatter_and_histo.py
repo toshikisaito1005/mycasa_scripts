@@ -176,7 +176,7 @@ def plot_scatter(
 				"0.4", fontsize=12)
 		#
 	# set legend
-	ax.legend(loc="lower right", ncol=ncol)
+	ax.legend(bbox_to_anchor=(1.05, -0.05), loc="lower right", ncol=ncol)
 
 def plot_hist_right(
 	ax,
