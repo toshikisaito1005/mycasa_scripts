@@ -85,6 +85,7 @@ def plot_scatter(
 	axb,
 	list_co10,
 	list_co21,
+	list_beamname,
 	xlim,
 	ylim,
 	xlabel,
@@ -100,6 +101,7 @@ def plot_scatter(
 	ax.set_ylim(ylim)
 	ax.grid(axis="both")
 	ax.set_ylabel(ylabel)
+	ax.legend()
 	axb.tick_params(labelbottom=False,labelleft=False)
 	axb.set_xlim(xlim)
 	axb.set_ylim(ylim)
@@ -109,10 +111,11 @@ def plot_scatter(
 		# preparation
 		x = np.log10(list_co10[i])
 		y = np.log10(list_co21[i])
+		beam = list_beamname[i].replace("p0","\"")
 		color = cm.gnuplot(i/8.)
 		binrange = [x.min(),x.max()]
 		# plot
-		ax1.scatter(x, y, color=color, alpha=0.1, s=20, lw=0)
+		ax1.scatter(x, y, color=color, alpha=0.1, s=20, lw=0, label = beam)
 		if i==0:
 			binx, mean, std = get_binned_dist(x,y,binrange)
 			ax1.errorbar(binx, mean, yerr = std, color = color, ecolor = color)
@@ -135,6 +138,7 @@ def plot_scatter(
 	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.21, ylim[1]-(ylim[1]-ylim[0])*0.90,
 		"1:0.4", rotation=45, fontsize=12)
 
+
 #####################
 ### Main Procedure
 #####################
@@ -145,6 +149,7 @@ for i in [0]:
 	list_co10 = []
 	list_co21 = []
 	list_r21 = []
+	list_beamname = []
 	statslist_co10 = []
 	statslist_co21 = []
 	statslist_r21 = []
@@ -171,6 +176,7 @@ for i in [0]:
 		statslist_co10.append(stats_co10)
 		statslist_co21.append(stats_co21)
 		statslist_r21.append(stats_r21)
+		list_beamname.append(beamname)
 
 	### plot
 	# preparation
@@ -184,7 +190,7 @@ for i in [0]:
 	ax2b = ax2.twinx()
 	# ax1 and ax1b
 	plot_scatter(
-		ax1,ax1b,list_co10,list_co21,xlim[i],ylim[i],xlabel,ylabel,text,galname2
+		ax1,ax1b,list_co10,list_co21,list_beamname,xlim[i],ylim[i],xlabel,ylabel,text,galname2
 		)
 
 	plt.savefig(dir_proj+"eps/" + galname + "_co10_vs_co21.png",dpi=200)
