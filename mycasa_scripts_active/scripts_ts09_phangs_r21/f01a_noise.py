@@ -72,11 +72,11 @@ j=0
 galname = galaxy[i]
 co10image = glob.glob(dir_proj + galname + "_*/co10*cube.image")[0]
 output = dir_proj+"eps/noise_"+galname+"_"+co10image.split("/")[-1].replace(".image","").replace("_cube","")+"_log.png"
-co10rms = r21.noisehist(co10images[j],
+co10rms = r21.noisehist_kelvin(co10images[j],
                         1.222e6/4.0**2/115.27120**2,
                         co10noises[i][j],
                         output,
-                        logscale=True,
+                        logscale=False,
                         plotter=True)
 
 

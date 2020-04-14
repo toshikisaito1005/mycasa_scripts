@@ -266,7 +266,7 @@ def noisehist_kelvin(imagename,jy2k,noises_byeye,output,bins=200,thres=0.0000,lo
     shape = imhead(imagename,mode="list")["shape"]
     box = "0,0,"+str(shape[0]-1)+","+str(shape[1]-1)
     data = imval(imagename,box=box)
-    pixvalues = data["data"].flatten()
+    pixvalues = data["data"].flatten() * jy2k
     pixvalues = pixvalues[abs(pixvalues)>thres]
 
     # plot
@@ -304,11 +304,11 @@ def noisehist_kelvin(imagename,jy2k,noises_byeye,output,bins=200,thres=0.0000,lo
     plt.plot([popt[1],popt[1]],
              [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
              '--',color='black',lw=2,
-             label = "1 sigma = " + str(np.round(popt[1],3)) + " Jy beam$^{-1}$")
+             label = "1 sigma = " + str(np.round(popt[1],3)) + " K")
     plt.plot([popt[1]*3.0,popt[1]*3.0],
              [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
              '--',color='black',lw=5,
-             label = "3 sigma = " + str(np.round(popt[1]*3.0,3)) + " Jy beam$^{-1}$")
+             label = "3 sigma = " + str(np.round(popt[1]*3.0,3)) + " K")
     plt.plot([-popt[1],-popt[1]],
              [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
              '--',color='black',lw=2)
@@ -316,7 +316,7 @@ def noisehist_kelvin(imagename,jy2k,noises_byeye,output,bins=200,thres=0.0000,lo
     #plt.title(imagename.split("/")[-1])
     plt.xlim(0,histrange[1])
     plt.ylim([2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*1.2])#3.0])
-    plt.xlabel("Pixel value (Jy beam$^{-1}$)")
+    plt.xlabel("Pixel value (K)")
     plt.ylabel("Number of pixels")
     plt.legend(loc = "upper right")
     if plotter==True:
