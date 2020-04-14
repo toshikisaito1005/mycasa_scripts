@@ -21,6 +21,7 @@ xlabel = "log $I_{CO(1-0)}$ (K km s$^{-1}$)"
 ylabel = "log $I_{CO(2-1)}$ (K km s$^{-1}$)"
 ylabel_r21 = "log $R_{21}$"
 text = "log $I_{CO(1-0)}$ vs log $I_{CO(2-1)}$"
+text_r21 = "log $I_{CO(2-1)}$ vs log $R_{21}$"
 
 gals = ["ngc0628",
 		"ngc3627",
@@ -32,8 +33,8 @@ ylim = [[-1.2,1.8],
 		[-0.7,2.7],
 		[-0.7,2.7]]
 ylim_r21 = [[-1.2,0.9],
-			[-1.5,1.0],
-			[-1.5,1.0]]
+			[-0.8,1.0],
+			[-1.0,0.8]]
 beam = [[4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0],
         [8.0,10.0,12.0,14.0,16.0,18.0,20.0,22.0,24.0],
         [4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0]]
@@ -141,14 +142,15 @@ def plot_scatter(
 		ax.plot(x_line3, y_line3 ,"--", color="grey", lw=1, alpha=0.9)
 		#
 		# plot text
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.04, ylim[1]-(ylim[1]-ylim[0])*0.89,
-			"1:1", rotation=45, fontsize=12)
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.14, ylim[1]-(ylim[1]-ylim[0])*0.89,
-			"1:0.7", rotation=45, fontsize=12)
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.23, ylim[1]-(ylim[1]-ylim[0])*0.89,
-			"1:0.4", rotation=45, fontsize=12)
+		if "628" in galname:
+			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
+			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
+			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.04, ylim[1]-(ylim[1]-ylim[0])*0.89,
+				"1:1", rotation=45, fontsize=12)
+			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.14, ylim[1]-(ylim[1]-ylim[0])*0.89,
+				"1:0.7", rotation=45, fontsize=12)
+			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.23, ylim[1]-(ylim[1]-ylim[0])*0.89,
+				"1:0.4", rotation=45, fontsize=12)
 	elif annotation=="ratio":
 		ax.plot(xlim, [0,0], "--", color="black", lw=3, alpha=0.7)
 		#
@@ -161,14 +163,15 @@ def plot_scatter(
 		ax.plot(x_line3, y_line3 ,"--", color="grey", lw=1, alpha=0.9)
 		#
 		# plot text
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.42,
-			"1.0", fontsize=12)
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.49,
-			"0.7", fontsize=12)
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.61,
-			"0.4", fontsize=12)
+		if "628" in galname:
+			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
+			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
+			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.42,
+				"1.0", fontsize=12)
+			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.49,
+				"0.7", fontsize=12)
+			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.61,
+				"0.4", fontsize=12)
 		#
 	# set legend
 	ax.legend(loc="lower right", ncol=ncol)
@@ -377,7 +380,7 @@ for i in range(len(gals)):
 	# ax1 and ax1b
 	plot_scatter(
 		ax1,ax1b,list_co21,list_r21,list_beamname,
-		ylim[i],ylim_r21[i],ylabel,ylabel_r21,text,galname2,
+		ylim[i],ylim_r21[i],ylabel,ylabel_r21,text_r21,galname2,
 		ncol=2,annotation="ratio",
 		)
 	# ax2 and ax2b
