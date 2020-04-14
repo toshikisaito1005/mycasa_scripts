@@ -35,7 +35,8 @@ snr_mom = 3.0 # 3.0
 #####################
 ### Main
 #####################
-for i in range(len(galaxy)):
+#for i in range(len(galaxy)):
+for i in [0]:
     galname = galaxy[i]
     co10images = glob.glob(dir_proj + galname + "_*/co10*cube.image")
     co10images.extend(glob.glob(dir_proj + galname + "_*/co10*cube*p*.image"))
@@ -51,12 +52,12 @@ for i in range(len(galaxy)):
         co10rms = r21.noisehist(co10images[j],
                                  co10noises[i][j],
                                  output,
-                                 logscale=False)
+                                 logscale=True)
         output = dir_proj+"eps/noise_"+galname+"_"+co21images[j].split("/")[-1].replace(".image","").replace("_cube","")+".png"
         co21rms = r21.noisehist(co21images[j],
                                  co21noises[i][j],
                                  output,
-                                 logscale=False)
+                                 logscale=True)
         list_co10.append(co10rms)
         list_co21.append(co21rms)
     #
