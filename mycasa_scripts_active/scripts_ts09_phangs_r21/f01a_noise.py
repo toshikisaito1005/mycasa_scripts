@@ -39,7 +39,8 @@ snr_mom = 3.0 # 3.0
 ### Main
 #####################
 #for i in range(len(galaxy)):
-for i in [0]:
+list_master = []
+for i in [0,1,2]:
     galname = galaxy[i]
     co10images = glob.glob(dir_proj + galname + "_*/co10*cube.image")
     co10images.extend(glob.glob(dir_proj + galname + "_*/co10*cube*p*.image"))
@@ -67,8 +68,10 @@ for i in [0]:
         list_co10.append(co10rms)
         list_co21.append(co21rms)
     #
-    os.system("rm -rf " + galname+"_noise.txt")
-    np.savetxt(galname+"_noise.txt",np.c_[list_co10,list_co21])
+    list_gal = np.c_[beam[i],list_co10,list_co21]
+    list_master.append(list_gal)
+    # plot
+
 
 # plot noise histograms
 i=0
