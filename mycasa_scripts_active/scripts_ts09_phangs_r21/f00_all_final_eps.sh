@@ -41,6 +41,7 @@ convert -crop 1500x0+0+100 $dir_data"figure_r21_vs_p21.png" eps2:$dir_data"fig03
 
 rm -rf $dir_data"figure_r21_vs_p21.png"
 
+
 ### figure 4
 convert -crop 1110x205+170+30 $dir_data"figure_hists_ngc0628.png" $dir_data"figure_hists_ngc0628b.png"
 convert -crop 1110x185+170+50 $dir_data"figure_hists_ngc3627.png" $dir_data"figure_hists_ngc3627b.png"
@@ -52,8 +53,15 @@ rm -rf $dir_data"figure_hists_ngc0628.png" $dir_data"figure_hists_ngc0628b.png"
 rm -rf 1110x185+170+50 $dir_data"figure_hists_ngc3627.png" $dir_data"figure_hists_ngc3627b.png"
 rm -rf 1110x215+170+50 $dir_data"figure_hists_ngc4321.png" $dir_data"figure_hists_ngc4321b.png"
 
+
 ### figure 5
 convert -crop 5750x0+0+00 $dir_data"stats_histo_600pc.png" eps2:$dir_data"fig05.eps"
 
 rm -rf $dir_data"stats_histo_600pc.png"
+
+
+### figure 6
+convert -append -border 0x0 $dir_data"ngc0628_co10_vs_co21.png" $dir_data"ngc3627_co10_vs_co21.png" $dir_data"ngc4321_co10_vs_co21.png" eps2:$dir_data"fig06.eps"
+
+
 

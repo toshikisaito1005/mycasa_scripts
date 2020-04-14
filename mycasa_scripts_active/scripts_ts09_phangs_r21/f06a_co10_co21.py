@@ -126,7 +126,7 @@ def plot_scatter(
 		ax.scatter(x, y, color=color, alpha=0.4, s=20, lw=0, label = beam)
 		if i==0:
 			binx, mean, std = get_binned_dist(x,y,binrange)
-			ax.errorbar(binx, mean, yerr = std, color = "black", ecolor = "black", lw=4)
+			ax.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
 		#
 	# plot annotation
 	if annotation=="flux":
@@ -165,7 +165,7 @@ def plot_scatter(
 		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
 		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.42,
 			"1.0", fontsize=12)
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.52,
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.49,
 			"0.7", fontsize=12)
 		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.61,
 			"0.4", fontsize=12)
@@ -295,8 +295,8 @@ def plot_hist_bottom(
 #####################
 ### Main Procedure
 #####################
-#for i in range(len(gals)):
-for i in [0,1,2]:
+for i in range(len(gals)):
+#for i in [0]:
 	### get data points ready for plot
 	# initialize
 	list_co10 = []
