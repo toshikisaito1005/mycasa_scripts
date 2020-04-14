@@ -71,7 +71,7 @@ i=0
 j=0
 galname = galaxy[i]
 co10image = glob.glob(dir_proj + galname + "_*/co10*cube.image")[0]
-output = dir_proj+"eps/noise_"+galname+"_"+co10image.split("/")[-1].replace(".image","").replace("_cube","")+"_log.png"
+output = dir_proj+"eps/noise_"+galname+"_"+co10image.split("/")[-1].replace(".image","").replace("_cube","")+".png"
 co10rms = r21.noisehist_kelvin(co10images[j],
                         1.222e6/4.0**2/115.27120**2,
                         co10noises[i][j],
@@ -79,6 +79,15 @@ co10rms = r21.noisehist_kelvin(co10images[j],
                         logscale=False,
                         plotter=True)
 
+output = dir_proj+"eps/noise_"+galname+"_"+co10image.split("/")[-1].replace(".image","").replace("_cube","")+"_log.png"
+co10rms = r21.noisehist_kelvin(co10images[j],
+                        1.222e6/4.0**2/115.27120**2,
+                        co10noises[i][j],
+                        output,
+                        logscale=True,
+                        plotter=True)
+
+"""
 co21image = glob.glob(dir_proj + galname + "_*/co21*cube.image")[0]
 output = dir_proj+"eps/noise_"+galname+"_"+co21image.split("/")[-1].replace(".image","").replace("_cube","")+"_log.png"
 co21rms = r21.noisehist_kelvin(co21images[j],
@@ -87,6 +96,6 @@ co21rms = r21.noisehist_kelvin(co21images[j],
                         output,
                         logscale=False,
                         plotter=True)
-
+"""
 
 
