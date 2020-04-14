@@ -17,13 +17,17 @@ plt.ioff()
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-xlim = [-1.2,2.7]
-ylim = [-1.2,2.7]
 xlabel = "log $I_{CO(1-0)}$ (K km s$^{-1}$)"
 ylabel = "log $I_{CO(2-1)}$ (K km s$^{-1}$)"
 gals = ["ngc0628",
-        "ngc3627",
-        "ngc4321"]
+		"ngc3627",
+		"ngc4321"]
+xlim = [[-1.2,2.2],
+		[-1.2,2.7],
+		[-1.2,2.7]]
+ylim = [[-1.2,2.2],
+		[-1.2,2.7],
+		[-1.2,2.7]]
 beam = [[4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0],
         [8.0,10.0,12.0,14.0,16.0,18.0,20.0,22.0,24.0],
         [4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0]]
@@ -98,13 +102,15 @@ def plot_scatter(
 #####################
 ### Main Procedure
 #####################
-list_co10 = []
-list_co21 = []
-list_r21 = []
-statslist_co10 = []
-statslist_co21 = []
-statslist_r21 = []
 for i in range(len(gals)):
+	### get data points ready for plot
+	# initialize
+	list_co10 = []
+	list_co21 = []
+	list_r21 = []
+	statslist_co10 = []
+	statslist_co21 = []
+	statslist_r21 = []
 	galname = gals[i]
 	dir_gal = dir_proj + galname
 	for j in range(len(beam[i])):
