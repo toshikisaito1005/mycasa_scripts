@@ -57,3 +57,7 @@ for i in range(len(galaxy)):
                                  output)
         list_co10.append(co10rms)
         list_co21.append(co21rms)
+    #
+    np.savetxt(galname+"_noise.txt",np.c_[co10rms,co21rms])
+
+
