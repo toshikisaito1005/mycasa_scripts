@@ -150,6 +150,9 @@ def plot_hist_right(
 	ax,
 	axb,
 	list_y,
+	list_beamname,
+	ylim,
+	ylabel,
 	):
 	"""
 	"""
@@ -169,13 +172,23 @@ def plot_hist_right(
 	axb.tick_params(top=False,left=False,bottom=False)
 	axb.set_ylim(ylim)
 	axb.set_ylabel(ylabel)
+	#
 	### plot data
 	for i in range(len(list_y)):
 		# preparation
 		y = np.log10(list_y[i])
 		beam = list_beamname[i].replace("p0","\"")
 		color = cm.gnuplot(i/8.)
-		binrange = [x.min(),x.max()]
+		#
+		# histogram
+		histo = np.histogram(y, bins=bins, range=ylim)
+		x = np.delete(histo[1],-1)
+		y = hist_ax2[0]/(histo[0].max()*1.05)
+		height = (ylim[1]-ylim[0])/bins
+		#
+		# plot
+		ax.plot(y+i, x, drawstyle="steps", color="grey", lw=0.5)
+		ax.barh(x, y, height=height, lw=0, color=color, alpha=0.4, left=i)
 
 
 #####################
@@ -232,6 +245,10 @@ for i in [0]:
 	# ax1 and ax1b
 	plot_scatter(
 		ax1,ax1b,list_co10,list_co21,list_beamname,xlim[i],ylim[i],xlabel,ylabel,text,galname2
+		)
+
+	plot_hist_right(
+		ax2,ax2b,list_co21,list_beamname,ylim[i],ylabel
 		)
 
 	plt.savefig(dir_proj+"eps/" + galname + "_co10_vs_co21.png",dpi=200)
