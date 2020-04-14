@@ -259,6 +259,69 @@ def noisehist(imagename,noises_byeye,output,bins=200,thres=0.0000,logscale=True,
 
     return popt[1]
 
+def noisehist_kelvin(imagename,jy2k,noises_byeye,output,bins=200,thres=0.0000,logscale=True,plotter=True):
+    """
+    myim03
+    """
+    shape = imhead(imagename,mode="list")["shape"]
+    box = "0,0,"+str(shape[0]-1)+","+str(shape[1]-1)
+    data = imval(imagename,box=box)
+    pixvalues = data["data"].flatten()
+    pixvalues = pixvalues[abs(pixvalues)>thres]
+
+    # plot
+    histrange = [pixvalues.min()/1.5-0.02,-pixvalues.min()/1.5+0.02]
+    plt.figure(figsize=(10,10))
+    plt.rcParams["font.size"] = 22
+    plt.subplots_adjust(bottom=0.10, left=0.19, right=0.99, top=0.90)
+    histdata = plt.hist(pixvalues,
+                        bins=bins,
+                        range=histrange,
+                        lw=0,
+                        log=logscale,
+                        color="blue",
+                        alpha=0.3)
+    plt.hist(pixvalues*-1,
+                        bins=bins,
+                        range=histrange,
+                        lw=0,
+                        log=logscale,
+                        color="red",
+                        alpha=0.3)
+
+    popt, pcov = curve_fit(func1,
+                           histdata[1][2:][histdata[1][2:]<noises_byeye],
+                           histdata[0][1:][histdata[1][2:]<noises_byeye],
+                           p0 = [np.max(histdata[0][1:][histdata[1][2:]<noises_byeye]),
+                                 noises_byeye],
+                           maxfev = 10000)
+
+    x = np.linspace(histdata[1][1], histdata[1][-1], 200)
+    plt.plot(x, func1(x, popt[0], popt[1]), '-', c="black", lw=5)
+    plt.plot([0,0],
+             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
+             '-',color='black',lw=2)
+    plt.plot([popt[1],popt[1]],
+             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
+             '--',color='black',lw=2,
+             label = "1 sigma = " + str(np.round(popt[1],3)) + " Jy beam$^{-1}$")
+    plt.plot([popt[1]*3.0,popt[1]*3.0],
+             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
+             '--',color='black',lw=5,
+             label = "3 sigma = " + str(np.round(popt[1]*3.0,3)) + " Jy beam$^{-1}$")
+    plt.plot([-popt[1],-popt[1]],
+             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
+             '--',color='black',lw=2)
+
+    #plt.title(imagename.split("/")[-1])
+    plt.xlim(0,histrange[1])
+    plt.ylim([2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*1.2])#3.0])
+    plt.xlabel("Pixel value (Jy beam$^{-1}$)")
+    plt.ylabel("Number of pixels")
+    plt.legend(loc = "upper right")
+    if plotter==True:
+      plt.savefig(output,dpi=100)
+
 def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
                    maskname=None,
                    myim="03"):
