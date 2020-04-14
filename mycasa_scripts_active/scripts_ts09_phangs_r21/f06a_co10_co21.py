@@ -19,6 +19,7 @@ plt.ioff()
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 xlabel = "log $I_{CO(1-0)}$ (K km s$^{-1}$)"
 ylabel = "log $I_{CO(2-1)}$ (K km s$^{-1}$)"
+ylabel_r21 = "log $R_{21}$"
 text = "log $I_{CO(1-0)}$ vs log $I_{CO(2-1)}$"
 
 gals = ["ngc0628",
@@ -30,6 +31,9 @@ xlim = [[-1.2,1.8],
 ylim = [[-1.2,1.8],
 		[-0.7,2.7],
 		[-0.7,2.7]]
+ylim_r21 = [[-1.5,1.0],
+			[-1.5,1.0],
+			[-1.5,1.0]]
 beam = [[4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0],
         [8.0,10.0,12.0,14.0,16.0,18.0,20.0,22.0,24.0],
         [4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0]]
@@ -268,8 +272,8 @@ def plot_hist_bottom(
 #####################
 ### Main Procedure
 #####################
-for i in range(len(gals)):
-#for i in [0]:
+#for i in range(len(gals)):
+for i in [0]:
 	### get data points ready for plot
 	# initialize
 	list_co10 = []
@@ -305,7 +309,7 @@ for i in range(len(gals)):
 		statslist_r21.append(stats_r21)
 		list_beamname.append(beamname)
 		#
-	### plot
+	### plot: co10 vs co21
 	# preparation
 	plt.figure(figsize=(9,9))
 	plt.rcParams["font.size"] = 14
@@ -328,6 +332,25 @@ for i in range(len(gals)):
 	plot_hist_bottom(
 		ax3,list_co10,statslist_co10,list_beamname,xlim[i],ylabel
 		)
-
+	#
 	plt.savefig(dir_proj+"eps/" + galname + "_co10_vs_co21.png",dpi=200)
+	#
+	### plot: co21 vs r21
+	# preparation
+	plt.figure(figsize=(9,9))
+	plt.rcParams["font.size"] = 14
+	plt.rcParams["legend.fontsize"] = 12
+	gs = gridspec.GridSpec(nrows=18, ncols=18)
+	ax1 = plt.subplot(gs[0:11,0:11])
+	ax2 = plt.subplot(gs[0:11,11:18])
+	ax3 = plt.subplot(gs[11:18,0:11])
+	ax1b = ax1.twiny()
+	ax2b = ax2.twinx()
+	# ax1 and ax1b
+	plot_scatter(
+		ax1,ax1b,list_co21,list_r21,list_beamname,ylim[i],ylim_r21[i],ylabel,ylabel_r21,text,galname2
+		)
+	#
+	plt.savefig(dir_proj+"eps/" + galname + "_co21_vs_r21.png",dpi=200)
 
+os.system("rm -rf *.last")
