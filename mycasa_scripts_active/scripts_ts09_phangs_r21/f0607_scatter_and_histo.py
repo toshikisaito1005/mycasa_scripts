@@ -318,6 +318,9 @@ def plot_threshold(
 		color = cm.gnuplot(i/8.)
 		ax.plot([np.log10(co10rms[i] * 3.0), np.log10(co10rms[i] * 3.0)],
 			ylim, "-", color = color)
+		ax.plot(xlim,
+			[np.log10(co21rms[i] * 3.0), np.log10(co21rms[i] * 3.0)],
+			"-", color = color)
 
 
 #####################
