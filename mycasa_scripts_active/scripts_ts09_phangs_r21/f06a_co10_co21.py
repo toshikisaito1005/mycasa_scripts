@@ -150,9 +150,11 @@ def plot_hist_right(
 	ax,
 	axb,
 	list_y,
+	statslist_y,
 	list_beamname,
 	ylim,
 	ylabel,
+	bins = 60,
 	):
 	"""
 	"""
@@ -183,13 +185,16 @@ def plot_hist_right(
 		# histogram
 		histo = np.histogram(y, bins=bins, range=ylim)
 		x = np.delete(histo[1],-1)
-		y = hist_ax2[0]/(histo[0].max()*1.05)
+		y = histo[0]/(histo[0].max()*1.05)
 		height = (ylim[1]-ylim[0])/bins
 		#
 		# plot
 		ax.plot(y+i, x, drawstyle="steps", color="grey", lw=0.5)
 		ax.barh(x, y, height=height, lw=0, color=color, alpha=0.4, left=i)
 
+	p84 = np.array(statslist_y)[:,0]
+	p50 = np.array(statslist_y)[:,1]
+	p16 = np.array(statslist_y)[:,2]
 
 #####################
 ### Main Procedure
@@ -248,7 +253,7 @@ for i in [0]:
 		)
 
 	plot_hist_right(
-		ax2,ax2b,list_co21,list_beamname,ylim[i],ylabel
+		ax2,ax2b,list_co21,statslist_co21,list_beamname,ylim[i],ylabel
 		)
 
 	plt.savefig(dir_proj+"eps/" + galname + "_co10_vs_co21.png",dpi=200)
