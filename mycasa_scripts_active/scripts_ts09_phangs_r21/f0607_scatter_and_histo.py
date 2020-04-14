@@ -22,6 +22,8 @@ ylabel = "log $I_{CO(2-1)}$ (K km s$^{-1}$)"
 ylabel_r21 = "log $R_{21}$"
 text = "log $I_{CO(1-0)}$ vs log $I_{CO(2-1)}$"
 text_r21 = "log $I_{CO(2-1)}$ vs log $R_{21}$"
+fontsize_general = 15
+fontsize_legend = 13
 
 gals = ["ngc0628",
 		"ngc3627",
@@ -340,8 +342,8 @@ for i in range(len(gals)):
 	# preparation
 	print("# plot co10 vs co21")
 	plt.figure(figsize=(9,9))
-	plt.rcParams["font.size"] = 14
-	plt.rcParams["legend.fontsize"] = 12
+	plt.rcParams["font.size"] = fontsize_general
+	plt.rcParams["legend.fontsize"] = fontsize_legend
 	gs = gridspec.GridSpec(nrows=18, ncols=18)
 	ax1 = plt.subplot(gs[0:11,0:11])
 	ax2 = plt.subplot(gs[0:11,11:18])
@@ -369,8 +371,8 @@ for i in range(len(gals)):
 	# preparation
 	print("# plot co21 vs r21")
 	plt.figure(figsize=(9,9))
-	plt.rcParams["font.size"] = 14
-	plt.rcParams["legend.fontsize"] = 12
+	plt.rcParams["font.size"] = fontsize_general
+	plt.rcParams["legend.fontsize"] = fontsize_legend
 	gs = gridspec.GridSpec(nrows=18, ncols=18)
 	ax1 = plt.subplot(gs[0:11,0:11])
 	ax2 = plt.subplot(gs[0:11,11:18])
