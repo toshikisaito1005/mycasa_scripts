@@ -301,11 +301,20 @@ def plot_hist_bottom(
 	ax.plot(p16,stats_step,"--",color="black",markeredgewidth=0,markersize=3,lw=2)
 
 def plot_threshold(
+	ax,
 	noisedata,
+	xlim,
+	ylim,
 	):
 	"""
 	"""
-    
+    data = np.loadtxt(noisedata)
+    beam = data[:,0]
+    co10rms = data[:,1]
+    co21rms = data[:,2]
+    # plot
+    ax.plot([] ,ylim, "--", )
+
 
 #####################
 ### Main Procedure
@@ -362,8 +371,11 @@ for i in range(len(gals)):
 	ax2b = ax2.twinx()
 	# ax1 and ax1b
 	plot_scatter(
-		ax1,ax1b,list_co10,list_co21,list_beamname,
-		xlim[i],ylim[i],xlabel,ylabel,text,galname2,
+		ax1, ax1b, list_co10, list_co21, list_beamname,
+		xlim[i], ylim[i], xlabel, ylabel, text, galname2,
+		)
+	plot_threshold(
+		ax1, noisedata[i], xlim[i], ylim[i],
 		)
 	# ax2 and ax2b
 	plot_hist_right(
@@ -394,9 +406,6 @@ for i in range(len(gals)):
 		ax1,ax1b,list_co21,list_r21,list_beamname,
 		ylim[i],ylim_r21[i],ylabel,ylabel_r21,text_r21,galname2,
 		annotation="ratio",
-		)
-	plot_threshold(
-		noisedata[i],
 		)
 	# ax2 and ax2b
 	plot_hist_right(
