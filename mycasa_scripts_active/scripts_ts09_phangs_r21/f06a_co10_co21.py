@@ -136,11 +136,11 @@ def plot_scatter(
 	# plot text
 	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
 	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
-	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.03, ylim[1]-(ylim[1]-ylim[0])*0.90,
+	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.04, ylim[1]-(ylim[1]-ylim[0])*0.89,
 		"1:1", rotation=45, fontsize=12)
-	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.13, ylim[1]-(ylim[1]-ylim[0])*0.90,
+	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.14, ylim[1]-(ylim[1]-ylim[0])*0.89,
 		"1:0.7", rotation=45, fontsize=12)
-	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.22, ylim[1]-(ylim[1]-ylim[0])*0.90,
+	ax.text(xlim[0]+(xlim[1]-xlim[0])*0.23, ylim[1]-(ylim[1]-ylim[0])*0.89,
 		"1:0.4", rotation=45, fontsize=12)
 	#
 	# set legend
@@ -202,7 +202,20 @@ def plot_hist_right(
 	p16 = np.log10(np.array(statslist_y)[:,2])
 	#
 	# plot
+	ax.plot(stats_step,p84,"--",color="black",markeredgewidth=0,markersize=3,lw=2)
 	ax.plot(stats_step,p50,"o-",color="black",markeredgewidth=2,markersize=7,lw=2)
+	ax.plot(stats_step,p16,"--",color="black",markeredgewidth=0,markersize=3,lw=2)
+
+def plot_hist_bottom(
+	):
+	"""
+	"""
+	# setup ax
+	ax3.tick_params(labelleft=False)
+	ax3.spines["top"].set_visible(False)
+	ax3.spines["left"].set_visible(False)
+	ax3.spines["right"].set_visible(False)
+	ax3.tick_params(top=False,left=False,right=False)
 
 
 #####################
