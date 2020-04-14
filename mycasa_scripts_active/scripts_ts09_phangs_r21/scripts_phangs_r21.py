@@ -259,7 +259,7 @@ def noisehist(imagename,noises_byeye,output,bins=200,thres=0.0000,logscale=True,
 
     return popt[1]
 
-def noisehist_kelvin(imagename,jy2k,noises_byeye,output,bins=200,thres=0.00000001,logscale=True,plotter=True):
+def noisehist_kelvin(imagename,jy2k,noises_byeye,output,bins=200,thres=0.0001,logscale=True,plotter=True):
     """
     myim03
     """
