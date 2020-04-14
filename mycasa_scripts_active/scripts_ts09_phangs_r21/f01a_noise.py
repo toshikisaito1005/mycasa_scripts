@@ -47,20 +47,31 @@ for i in [0]:
     list_co21 = []
     for j in range(len(co10images)):
         beamp = co10images[j].split("/")[-1].split("_")[-1].replace(".image","")
+        print("# " + galname + " " + beamp)
+        if j==0:
+          plotter=True
+        else:
+          plotter=False
         # measure noise
         output = dir_proj+"eps/noise_"+galname+"_"+co10images[j].split("/")[-1].replace(".image","").replace("_cube","")+".png"
         co10rms = r21.noisehist(co10images[j],
                                  co10noises[i][j],
                                  output,
-                                 logscale=False)
+                                 logscale=False,
+                                 plotter=plotter)
         output = dir_proj+"eps/noise_"+galname+"_"+co21images[j].split("/")[-1].replace(".image","").replace("_cube","")+".png"
         co21rms = r21.noisehist(co21images[j],
                                  co21noises[i][j],
                                  output,
-                                 logscale=False)
+                                 logscale=False,
+                                 plotter=plotter)
         list_co10.append(co10rms)
         list_co21.append(co21rms)
     #
     os.system("rm -rf " + galname+"_noise.txt")
     np.savetxt(galname+"_noise.txt",np.c_[list_co10,list_co21])
+
+j=0
+i=0
+
 

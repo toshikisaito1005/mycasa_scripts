@@ -194,7 +194,7 @@ def tscreatemask(imagename,thres,outmask):
 def func1(x, a, c):
     return a*np.exp(-(x)**2/(2*c**2))
 
-def noisehist(imagename,noises_byeye,output,bins=200,thres=0.0000,logscale=True):
+def noisehist(imagename,noises_byeye,output,bins=200,thres=0.0000,logscale=True,plotter=True):
     """
     myim03
     """
@@ -254,7 +254,8 @@ def noisehist(imagename,noises_byeye,output,bins=200,thres=0.0000,logscale=True)
     plt.xlabel("Pixel value (Jy beam$^{-1}$)")
     plt.ylabel("Number of pixels")
     plt.legend(loc = "upper right")
-    plt.savefig(output,dpi=100)
+    if plotter==True:
+      plt.savefig(output,dpi=100)
 
     return popt[1]
 
