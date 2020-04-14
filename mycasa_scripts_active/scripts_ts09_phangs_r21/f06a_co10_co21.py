@@ -19,21 +19,20 @@ plt.ioff()
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 xlabel = "log $I_{CO(1-0)}$ (K km s$^{-1}$)"
 ylabel = "log $I_{CO(2-1)}$ (K km s$^{-1}$)"
+text = "log $I_{CO(1-0)}$ vs log $I_{CO(2-1)}$"
+
 gals = ["ngc0628",
 		"ngc3627",
 		"ngc4321"]
-xlim = [[-1.2,1.7],
+xlim = [[-1.2,1.8],
 		[-0.7,2.7],
 		[-0.2,2.7]]
-ylim = [[-1.2,1.7],
+ylim = [[-1.2,1.8],
 		[-0.7,2.7],
 		[-0.2,2.7]]
 beam = [[4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0],
         [8.0,10.0,12.0,14.0,16.0,18.0,20.0,22.0,24.0],
         [4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0]]
-texts = ["a) log $I_{CO(1-0)}$ vs log $I_{CO(2-1)}$",
-		 "b) log $I_{CO(1-0)}$ vs log $I_{CO(2-1)}$",
-		 "c) log $I_{CO(1-0)}$ vs log $I_{CO(2-1)}$"]
 
 
 #####################
@@ -69,6 +68,16 @@ def get_percentiles(data):
 
 	return [p84, median, p16]
 
+def get_binned_dist(x,y,binrange):
+	"""
+	"""
+	n, _ = np.histogram(x, bins=10, range=binrange)
+	sy, _ = np.histogram(x, bins=10, range=binrange, weights=y)
+	sy2, _ = np.histogram(x, bins=10, range=binrange, weights=y*y)
+	mean = sy / n
+	std = np.sqrt(sy2/n - mean*mean)
+	binx = (_[1:] + _[:-1])/2
+
 def plot_scatter(
 	ax,
 	axb,
@@ -79,6 +88,7 @@ def plot_scatter(
 	xlabel,
 	ylabel,
 	text,
+	galname,
 	):
 	"""
 	"""
@@ -102,12 +112,6 @@ def plot_scatter(
 		# plot
 		ax1.scatter(x, y, color=color, alpha=0.1, s=20, lw=0)
 		if i==0:
-			n, _ = np.histogram(x, bins=10, range=binrange)
-			sy, _ = np.histogram(x, bins=10, range=binrange, weights=y)
-			sy2, _ = np.histogram(x, bins=10, range=binrange, weights=y*y)
-			mean = sy / n
-			std = np.sqrt(sy2/n - mean*mean)
-			binx = (_[1:] + _[:-1])/2
 			ax1.errorbar(binx, mean, yerr = std, color = color, ecolor = color)
 
 	# plot annotation
@@ -119,12 +123,8 @@ def plot_scatter(
 	y_line3 = [ylim[0], np.log10(0.4*10**ylim[1])]
 	ax1.plot(x_line3, y_line3 ,"--", color="grey", lw=1, alpha=0.7)
 	# plot text
-	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.1,
-    	     ylim[1]-(ylim[1]-ylim[0])*0.08,
-        	 text)
-	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.1,
-    	     ylim[1]-(ylim[1]-ylim[0])*0.16,
-        	 name_title)
+	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.1,ylim[1]-(ylim[1]-ylim[0])*0.08,text)
+	ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.1,ylim[1]-(ylim[1]-ylim[0])*0.16,galname)
 
 
 #####################
@@ -140,6 +140,7 @@ for i in range(len(gals)):
 	statslist_co21 = []
 	statslist_r21 = []
 	galname = gals[i]
+	galname2 = gals[i].replace("ngc","for NGC ")
 	dir_gal = dir_proj + galname
 	for j in range(len(beam[i])):
 		beamname = str(beam[i][j]).replace(".","p").zfill(4)
@@ -173,7 +174,9 @@ for i in range(len(gals)):
 	ax1b = ax1.twiny()
 	ax2b = ax2.twinx()
 	# ax1 and ax1b
-	plot_scatter(ax1,ax1b,list_co10,list_co21,xlim[i],ylim[i],xlabel,ylabel,text1,text2)
+	plot_scatter(
+		ax1,ax1b,list_co10,list_co21,xlim[i],ylim[i],xlabel,ylabel,text,galname2
+		)
 
 	plt.savefig(dir_proj+"eps/" + galname + "_co10_vs_co21.png",dpi=200)
 
