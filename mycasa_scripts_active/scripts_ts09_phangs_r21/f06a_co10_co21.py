@@ -17,6 +17,10 @@ plt.ioff()
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
+xlim = [-1.2,2.7]
+ylim = [-1.2,2.7]
+xlabel = "log $I_{CO(1-0)}$ (K km s$^{-1}$)"
+ylabel = "log $I_{CO(2-1)}$ (K km s$^{-1}$)"
 gals = ["ngc0628",
         "ngc3627",
         "ngc4321"]
@@ -61,6 +65,8 @@ def get_percentiles(data):
 def plot_scatter(
 	ax,
 	axb,
+	list_co10,
+	list_co21,
 	xlim,
 	ylim,
 	xlabel,
@@ -78,6 +84,15 @@ def plot_scatter(
 	axb.set_xlim(xlim)
 	axb.set_ylim(ylim)
 	axb.set_xlabel(xlabel)
+	#
+	for i in range(len(list_co10)):
+		ax1.scatter(
+			np.log10(list_co10[i]),
+			np.log10(list_co21[i]),
+			color=cm.gnuplot(i/8.),
+			alpha=0.1,
+			s=20,
+			lw=0)
 
 
 #####################
@@ -115,7 +130,7 @@ for i in range(len(gals)):
 
 	### plot
 	# preparation
-	plt.figure(figsize=(8,5))
+	figure = plt.figure(figsize=(9,9))
 	plt.rcParams["font.size"] = 16
 	gs = gridspec.GridSpec(nrows=18, ncols=18)
 	ax1 = plt.subplot(gs[0:9,0:9])
@@ -124,6 +139,7 @@ for i in range(len(gals)):
 	ax1b = ax1.twiny()
 	ax2b = ax2.twinx()
 	# ax1 and ax1b
+	plot_scatter(ax1,ax1b,list_co10,list_co21,xlim,ylim,xlabel,ylabel)
 
-    plt.savefig(dir_data+"eps/"+gals[i]+"_scatter_co10_co21.png",dpi=200)
+	plt.savefig(dir_proj+"eps/scatter_co10_vs_co21.png",dpi=200)
 
