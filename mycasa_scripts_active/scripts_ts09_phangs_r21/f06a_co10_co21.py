@@ -31,7 +31,7 @@ xlim = [[-1.2,1.8],
 ylim = [[-1.2,1.8],
 		[-0.7,2.7],
 		[-0.7,2.7]]
-ylim_r21 = [[-1.5,1.0],
+ylim_r21 = [[-1.2,0.9],
 			[-1.5,1.0],
 			[-1.5,1.0]]
 beam = [[4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0],
@@ -163,11 +163,11 @@ def plot_scatter(
 		# plot text
 		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
 		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.04, ylim[1]-(ylim[1]-ylim[0])*0.4,
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.4,
 			"1.0", fontsize=12)
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.04, ylim[1]-(ylim[1]-ylim[0])*0.5,
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.5,
 			"0.7", fontsize=12)
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.04, ylim[1]-(ylim[1]-ylim[0])*0.6,
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.6,
 			"0.4", fontsize=12)
 		#
 	# set legend
@@ -243,7 +243,7 @@ def plot_hist_bottom(
 	statslist_x,
 	list_beamname,
 	xlim,
-	ylabel,
+	xlabel,
 	bins = 60,
 	):
 	"""
@@ -334,6 +334,7 @@ for i in [0]:
 		#
 	### plot: co10 vs co21
 	# preparation
+	print("# plot co10 vs co21")
 	plt.figure(figsize=(9,9))
 	plt.rcParams["font.size"] = 14
 	plt.rcParams["legend.fontsize"] = 12
@@ -354,13 +355,14 @@ for i in [0]:
 		)
 	# ax3
 	plot_hist_bottom(
-		ax3,list_co10,statslist_co10,list_beamname,xlim[i],ylabel,
+		ax3,list_co10,statslist_co10,list_beamname,xlim[i],xlabel,
 		)
 	#
 	plt.savefig(dir_proj+"eps/" + galname + "_co10_vs_co21.png",dpi=200)
 	#
 	### plot: co21 vs r21
 	# preparation
+	print("# plot co21 vs r21")
 	plt.figure(figsize=(9,9))
 	plt.rcParams["font.size"] = 14
 	plt.rcParams["legend.fontsize"] = 12
@@ -379,6 +381,10 @@ for i in [0]:
 	# ax2 and ax2b
 	plot_hist_right(
 		ax2,ax2b,list_r21,statslist_r21,list_beamname,ylim_r21[i],ylabel_r21,
+		)
+	# ax3
+	plot_hist_bottom(
+		ax3,list_co21,statslist_co21,list_beamname,ylim[i],ylabel,
 		)
 	#
 	plt.savefig(dir_proj+"eps/" + galname + "_co21_vs_r21.png",dpi=200)
