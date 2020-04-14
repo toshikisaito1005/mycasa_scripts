@@ -28,7 +28,7 @@ beam = [[4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0],
 #####################
 ### functions
 #####################
-def some(image_co10,image_co21,beamfloat):
+def get_co_intensities(image_co10,image_co21,beamfloat):
 	"""
 	"""
 	# get image shape
@@ -38,7 +38,7 @@ def some(image_co10,image_co21,beamfloat):
 	data_co10_tmp = imval(image_co10,box=box)["data"].flatten()
 	data_co21_tmp = imval(image_co21,box=box)["data"].flatten()
 	# cut pixel = 0
-	cut_data = np.where((data_co10_tmp==0) & (data_co21_tmp==0))
+	cut_data = np.where((data_co10_tmp>0) & (data_co21_tmp>0))
 	data_co10 = data_co10_tmp[cut_data]
 	data_co21 = data_co21_tmp[cut_data]
 	# Jy-to-K
@@ -47,6 +47,7 @@ def some(image_co10,image_co21,beamfloat):
 	data_co10_Kelvin = data_co10 * co10_jy2k
 	data_co21_Kelvin = data_co21 * co21_jy2k
 
+	return data_co10_Kelvin, data_co21_Kelvin
 
 
 #####################
@@ -59,8 +60,9 @@ for i in range(len(gals)):
 		beamfloat = float(beam[i][j])
 		image_co10 = dir_gal + "_co10/co10_" + beamname + ".moment0"
 		image_co21 = dir_gal + "_co21/co21_" + beamname + ".moment0"
-
-
+		# get values
+		co10, co21 = get_co_intensities(image_co10,image_co21,beamfloat)
+		r21 = co21/co10
 
 ### plot
 plt.figure(figsize=(8,5))
