@@ -202,9 +202,13 @@ def plot_hist_right(
 	p16 = np.log10(np.array(statslist_y)[:,2])
 	#
 	# plot
-	ax.plot(stats_step,p84,"--",color="black",markeredgewidth=0,markersize=3,lw=2)
-	ax.plot(stats_step,p50,"o-",color="black",markeredgewidth=2,markersize=7,lw=2)
+	ax.plot(stats_step,p84,"--",color="black",markeredgewidth=0,markersize=3,lw=2,
+		label="84% and 16%")
+	ax.plot(stats_step,p50,"o-",color="black",markeredgewidth=2,markersize=7,lw=2,
+		label="Median")
 	ax.plot(stats_step,p16,"--",color="black",markeredgewidth=0,markersize=3,lw=2)
+	#
+	ax.legend()
 
 def plot_hist_bottom(
 	ax,
@@ -256,19 +260,16 @@ def plot_hist_bottom(
 	p16 = np.log10(np.array(statslist_x)[:,2])
 	#
 	# plot
-	ax.plot(p84,stats_step,"--",color="black",markeredgewidth=0,markersize=3,lw=2,
-		label="")
+	ax.plot(p84,stats_step,"--",color="black",markeredgewidth=0,markersize=3,lw=2)
 	ax.plot(p50,stats_step,"o-",color="black",markeredgewidth=2,markersize=7,lw=2)
 	ax.plot(p16,stats_step,"--",color="black",markeredgewidth=0,markersize=3,lw=2)
-	#
-	ax.legend()
 
 
 #####################
 ### Main Procedure
 #####################
-#for i in range(len(gals)):
-for i in [0]:
+for i in range(len(gals)):
+#for i in [0]:
 	### get data points ready for plot
 	# initialize
 	list_co10 = []
