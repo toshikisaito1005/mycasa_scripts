@@ -3,8 +3,8 @@
 ![stats_commit_today](https://github.com/toshikisaito1005/mycasa_scripts/blob/master/mygithub_stats/stats_commit_today.png)
 ![stats_commit_yesterday](https://github.com/toshikisaito1005/mycasa_scripts/blob/master/mygithub_stats/stats_commit_yesterday.png)
 ![stats_commit_lastweek](https://github.com/toshikisaito1005/mycasa_scripts/blob/master/mygithub_stats/stats_commit_lastweek.png)
-![stats_commit_202002](https://github.com/toshikisaito1005/mycasa_scripts/blob/master/mygithub_stats/stats_commit_202002.png)
-![stats_commit_202001](https://github.com/toshikisaito1005/mycasa_scripts/blob/master/mygithub_stats/stats_commit_202001.png)
+![stats_commit_202004](https://github.com/toshikisaito1005/mycasa_scripts/blob/master/mygithub_stats/stats_commit_202002.png)
+![stats_commit_202003](https://github.com/toshikisaito1005/mycasa_scripts/blob/master/mygithub_stats/stats_commit_202001.png)
 
 sync_github.sh
 ```
