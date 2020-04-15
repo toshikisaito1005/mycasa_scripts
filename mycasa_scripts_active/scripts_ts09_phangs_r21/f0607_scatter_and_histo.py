@@ -144,14 +144,14 @@ def plot_scatter(
 		# plot error bar
 		mean_snr_x = np.mean(snr_x[i])
 		mean_snr_y = np.mean(snr_y[i])
-		posx = 1.4
-		posy = 0.2 - i*0.12
+		posx = 0.6 + i*0.13
+		posy = -0.7
 		bar_right  = np.log10(10**posx + 10**posx/mean_snr_x)
 		bar_left   = np.log10(10**posx - 10**posx/mean_snr_x)
 		bar_top    = np.log10(10**posy + 10**posy/mean_snr_y)
 		bar_bottom = np.log10(10**posy - 10**posy/mean_snr_y)
-		ax.plot([bar_left,bar_right], [posy,posy], color=color)
-		ax.plot([posx,posx], [bar_top,bar_bottom], color=color)
+		ax.plot([bar_left,bar_right], [posy,posy], color=color, lw=2)
+		ax.plot([posx,posx], [bar_top,bar_bottom], color=color, lw=2)
 		#
 	# plot annotation
 	if annotation=="flux":
@@ -427,11 +427,11 @@ for i in [0]:
 		)
 	# ax2 and ax2b
 	plot_hist_right(
-		ax2,ax2b,list_co21,statslist_co21,list_beamname,ylim[i],ylabel,
+		ax2, ax2b, list_co21, statslist_co21, list_beamname, ylim[i], ylabel,
 		)
 	# ax3
 	plot_hist_bottom(
-		ax3,list_co10,statslist_co10,list_beamname,xlim[i],xlabel,
+		ax3, list_co10, statslist_co10, list_beamname, xlim[i], xlabel,
 		)
 	#
 	plt.savefig(dir_proj+"eps/" + galname + "_co10_vs_co21.png",dpi=200)
@@ -451,17 +451,17 @@ for i in [0]:
 	ax2b = ax2.twinx()
 	# ax1 and ax1b
 	plot_scatter(
-		ax1,ax1b,list_co21,list_r21,list_beamname,
-		ylim[i],ylim_r21[i],ylabel,ylabel_r21,text_r21,galname2,
+		ax1,ax1b, list_co21, list_r21, list_snrco21, list_snrr21, list_beamname,
+		ylim[i], ylim_r21[i], ylabel, ylabel_r21, text_r21, galname2,
 		annotation="ratio",
 		)
 	# ax2 and ax2b
 	plot_hist_right(
-		ax2,ax2b,list_r21,statslist_r21,list_beamname,ylim_r21[i],ylabel_r21,
+		ax2, ax2b, list_r21, statslist_r21, list_beamname, ylim_r21[i], ylabel_r21,
 		)
 	# ax3
 	plot_hist_bottom(
-		ax3,list_co21,statslist_co21,list_beamname,ylim[i],ylabel,
+		ax3, list_co21, statslist_co21, list_beamname, ylim[i], ylabel,
 		)
 	#
 	plt.savefig(dir_proj+"eps/" + galname + "_co21_vs_r21.png",dpi=200)
