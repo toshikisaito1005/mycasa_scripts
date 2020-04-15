@@ -31,13 +31,13 @@ gals = ["ngc0628",
 noisedata = [dir_proj + "eps/ngc0628_noise.txt",
 			 dir_proj + "eps/ngc3627_noise.txt",
 			 dir_proj + "eps/ngc4321_noise.txt"]
-xlim = [[-1.2,1.8],
+xlim = [[10**-1.2,10**1.8],
 		[-0.7,2.7],
 		[-0.7,2.7]]
-ylim = [[-1.2,1.8],
+ylim = [[10**-1.2,10**1.8],
 		[-0.7,2.7],
 		[-0.7,2.7]]
-ylim_r21 = [[-1.2,0.9],
+ylim_r21 = [[0,5],
 			[-0.8,1.0],
 			[-1.0,0.8]]
 beam = [[4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0],
@@ -95,6 +95,8 @@ def plot_scatter(
 	axb,
 	list_x,
 	list_y,
+	err_x,
+	err_y,
 	list_beamname,
 	xlim,
 	ylim,
@@ -113,50 +115,63 @@ def plot_scatter(
 	ax.set_ylim(ylim)
 	ax.grid(axis="both")
 	ax.set_ylabel(ylabel)
+	ax.set_xscale("log")
 	#
 	axb.tick_params(labelbottom=False,labelleft=False)
 	axb.set_xlim(xlim)
 	axb.set_ylim(ylim)
 	axb.set_xlabel(xlabel)
+	axb.set_xscale("log")
+	#
+	if annotation=="flux":
+		ax.set_yscale("log")
+		axb.set_yscale("log")
 	#
 	### plot data
 	for i in range(len(list_x)):
 		# preparation
-		x = np.log10(list_x[i])
-		y = np.log10(list_y[i])
+		x = list_x[i] # np.log10(list_x[i])
+		y = list_y[i] # np.log10(list_y[i])
+		ex = err_x[i] # np.log10(err_x[i])
+		ey = err_y[i] # np.log10(err_y[i])
 		beam = str(int(float(list_beamname[i].replace("p","."))))+"\""
 		color = cm.gnuplot(i/8.)
-		binrange = [x.min(),x.max()]
 		#
 		# plot
-		ax.scatter(x, y, color=color, alpha=0.4, s=20, lw=0, label = beam)
-		if i==0:
-			binx, mean, std = get_binned_dist(x,y,binrange)
-			ax.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
+		#ax.scatter(x, y, color=color, alpha=0.4, s=20, lw=0, label = beam)
+		markers, caps, bars = ax.errorbar(
+			x, y, xerr=ex, yerr=ey, capsize=0, color=color, markersize=3,
+			label=beam, fmt="o", markeredgewidth=0, alpha=0.5,
+			)
+		[bar.set_alpha(0.4) for bar in bars]
+		#if i==0: # plot binned distribution for the highest resolution data
+		#   binrange = [x.min(),x.max()]
+		#	binx, mean, std = get_binned_dist(x,y,binrange)
+		#	ax.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
 		#
 	# plot annotation
 	if annotation=="flux":
 		ax.plot(xlim, ylim, "--", color="black", lw=3, alpha=0.7)
 		#
-		x_line2 = [np.log10(1/0.7*10**xlim[0]), xlim[1]]
-		y_line2 = [ylim[0], np.log10(0.7*10**ylim[1])]
+		x_line2 = [1/0.7*xlim[0], xlim[1]]
+		y_line2 = [ylim[0], 0.7*ylim[1]]
 		ax.plot(x_line2, y_line2, "--", color="grey", lw=1, alpha=0.9)
 		#
-		x_line3 = [np.log10(1/0.4*10**xlim[0]), xlim[1]]
-		y_line3 = [ylim[0], np.log10(0.4*10**ylim[1])]
+		x_line3 = [1/0.4*xlim[0], xlim[1]]
+		y_line3 = [ylim[0], 0.4*ylim[1]]
 		ax.plot(x_line3, y_line3 ,"--", color="grey", lw=1, alpha=0.9)
 		#
 		#
 		# plot text
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
+		ax.text(0.1, 0.9, text, transform=ax.transAxes)
+		ax.text(0.1, 0.84, galname, transform=ax.transAxes)
 		if "628" in galname:
-			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.04, ylim[1]-(ylim[1]-ylim[0])*0.89,
-				"1:1", rotation=45, fontsize=12)
-			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.14, ylim[1]-(ylim[1]-ylim[0])*0.89,
-				"1:0.7", rotation=45, fontsize=12)
-			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.23, ylim[1]-(ylim[1]-ylim[0])*0.89,
-				"1:0.4", rotation=45, fontsize=12)
+			ax.text(0.03, 0.1,
+				"1:1", rotation=45, fontsize=12, transform=ax.transAxes)
+			ax.text(0.13, 0.1,
+				"1:0.7", rotation=45, fontsize=12, transform=ax.transAxes)
+			ax.text(0.21, 0.1,
+				"1:0.4", rotation=45, fontsize=12, transform=ax.transAxes)
 	elif annotation=="ratio":
 		ax.plot(xlim, [0,0], "--", color="black", lw=3, alpha=0.7)
 		#
@@ -317,10 +332,10 @@ def plot_threshold(
 	for i in range(len(list_x)):
 		color = cm.gnuplot(i/8.)
 		ax.plot([np.log10(co10rms[i] * 3.0), np.log10(co10rms[i] * 3.0)],
-			ylim, "-", color = color, alpha=0.5)
+			ylim, "-", color = color)
 		ax.plot(xlim,
 			[np.log10(co21rms[i] * 3.0), np.log10(co21rms[i] * 3.0)],
-			"-", color = color, alpha=0.5)
+			"-", color = color)
 
 
 #####################
@@ -333,14 +348,10 @@ for i in [0]:
 	list_co10 = []
 	list_co21 = []
 	list_r21 = []
-	list_errco10 = []
-	list_errco21 = []
-	list_errr21 = []
 	list_beamname = []
 	statslist_co10 = []
 	statslist_co21 = []
 	statslist_r21 = []
-	#
 	galname = gals[i]
 	galname2 = gals[i].replace("ngc","for NGC ")
 	dir_gal = dir_proj + galname
@@ -369,9 +380,6 @@ for i in [0]:
 		list_co10.append(co10)
 		list_co21.append(co21)
 		list_r21.append(r21)
-		list_errco10.append(err_co10)
-		list_errco21.append(err_co21)
-		list_errr21.append(err_r21)
 		statslist_co10.append(stats_co10)
 		statslist_co21.append(stats_co21)
 		statslist_r21.append(stats_r21)
@@ -392,7 +400,7 @@ for i in [0]:
 	ax2b = ax2.twinx()
 	# ax1 and ax1b
 	plot_scatter(
-		ax1, ax1b, list_co10, list_co21, list_beamname,
+		ax1, ax1b, list_co10, list_co21, err_co10, err_co21, list_beamname,
 		xlim[i], ylim[i], xlabel, ylabel, text, galname2,
 		)
 	plot_threshold(
@@ -424,18 +432,18 @@ for i in [0]:
 	ax2b = ax2.twinx()
 	# ax1 and ax1b
 	plot_scatter(
-		ax1,ax1b,list_co21,list_r21,list_beamname,
-		ylim[i],ylim_r21[i],ylabel,ylabel_r21,text_r21,galname2,
+		ax1, ax1b, list_co21, list_r21, err_co21, err_r21, list_beamname,
+		ylim[i], ylim_r21[i], ylabel, ylabel_r21, text_r21,galname2,
 		annotation="ratio",
 		)
 	# ax2 and ax2b
-	plot_hist_right(
-		ax2,ax2b,list_r21,statslist_r21,list_beamname,ylim_r21[i],ylabel_r21,
-		)
+	#plot_hist_right(
+	#	ax2,ax2b,list_r21,statslist_r21,list_beamname,ylim_r21[i],ylabel_r21,
+	#	)
 	# ax3
-	plot_hist_bottom(
-		ax3,list_co21,statslist_co21,list_beamname,ylim[i],ylabel,
-		)
+	#plot_hist_bottom(
+	#	ax3,list_co21,statslist_co21,list_beamname,ylim[i],ylabel,
+	#	)
 	#
 	plt.savefig(dir_proj+"eps/" + galname + "_co21_vs_r21.png",dpi=200)
 
