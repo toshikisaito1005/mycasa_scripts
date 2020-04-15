@@ -31,13 +31,13 @@ gals = ["ngc0628",
 noisedata = [dir_proj + "eps/ngc0628_noise.txt",
 			 dir_proj + "eps/ngc3627_noise.txt",
 			 dir_proj + "eps/ngc4321_noise.txt"]
-xlim = [[-1.2,1.8],
+xlim = [[10**-1.2,10**1.8],
 		[-0.7,2.7],
 		[-0.7,2.7]]
-ylim = [[-1.2,1.8],
+ylim = [[10**-1.2,10**1.8],
 		[-0.7,2.7],
 		[-0.7,2.7]]
-ylim_r21 = [[-1.2,0.9],
+ylim_r21 = [[10**-1.2,10**0.9],
 			[-0.8,1.0],
 			[-1.0,0.8]]
 beam = [[4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0],
@@ -140,7 +140,7 @@ def plot_scatter(
 		#ax.scatter(x, y, color=color, alpha=0.4, s=20, lw=0, label = beam)
 		ax.errorbar(
 			x, y, xerr=ex, yerr=ey, capsize=0, color=color, markersize=0,
-			label=beam,
+			label=beam, fmt="o",
 			)
 		if i==0:
 			binx, mean, std = get_binned_dist(x,y,binrange)
@@ -338,8 +338,8 @@ def plot_threshold(
 #####################
 ### Main Procedure
 #####################
-for i in range(len(gals)):
-#for i in [0]:
+#for i in range(len(gals)):
+for i in [0]:
 	### get data points ready for plot
 	# initialize
 	list_co10 = []
@@ -368,7 +368,7 @@ for i in range(len(gals)):
 		r21 = co21/co10
 		# get err
 		err_co10, err_co21 = get_co_intensities(noise_co10,noise_co21,beamfloat)
-		err_r21 = r21 * np.sqrt()
+		err_r21 = r21 * np.sqrt((err_co10/co10)**2 + (err_co21/co21)**2)
 		# stats
 		stats_co10 = get_percentiles(co10)
 		stats_co21 = get_percentiles(co21)
@@ -434,13 +434,13 @@ for i in range(len(gals)):
 		annotation="ratio",
 		)
 	# ax2 and ax2b
-	plot_hist_right(
-		ax2,ax2b,list_r21,statslist_r21,list_beamname,ylim_r21[i],ylabel_r21,
-		)
+	#plot_hist_right(
+	#	ax2,ax2b,list_r21,statslist_r21,list_beamname,ylim_r21[i],ylabel_r21,
+	#	)
 	# ax3
-	plot_hist_bottom(
-		ax3,list_co21,statslist_co21,list_beamname,ylim[i],ylabel,
-		)
+	#plot_hist_bottom(
+	#	ax3,list_co21,statslist_co21,list_beamname,ylim[i],ylabel,
+	#	)
 	#
 	plt.savefig(dir_proj+"eps/" + galname + "_co21_vs_r21.png",dpi=200)
 
