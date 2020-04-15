@@ -16,5 +16,13 @@ execfile("myim09_convolve_wise.py")
 execfile("myim10_extract_param_600pc.py")
 execfile("myim11_extract_param_best.py")
 
+execfile("f01a_noise.py")
+execfile("f01b_missingflux.py")
+execfile("f02_images.py")
+execfile("f03_peak_vs_integ.py")
+execfile("f04_histograms_600pc.py")
+execfile("f05_histo_stats.py")
+execfile("f0607_scatter_and_histo.py")
+
 os.system("rm -rf tempalte.image")
 os.system("rm -rf *.last")
