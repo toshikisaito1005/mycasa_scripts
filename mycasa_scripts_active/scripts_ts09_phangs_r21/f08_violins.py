@@ -135,8 +135,24 @@ def plot_all_violins(
 #####################
 ### Main Procedure
 #####################
-#for i in range(len(gals)):
-for i in [0]:
+### plot
+plt.subplots(nrows=1,ncols=1,figsize=(9, 7),sharey=True)
+plt.rcParams["font.size"] = fontsize_general
+plt.rcParams["legend.fontsize"] = fontsize_legend
+plt.subplots_adjust(bottom=0.10, left=0.10, right=0.95, top=0.95)
+gs = gridspec.GridSpec(nrows=18, ncols=18)
+ax1 = plt.subplot(gs[0:6,0:18])
+ax2 = plt.subplot(gs[6:12,0:18])
+ax3 = plt.subplot(gs[12:18,0:18])
+ax1.set_ylim(r21range)
+ax2.set_ylim(r21range)
+ax3.set_ylim(r21range)
+ax1.grid(axis="y")
+ax2.grid(axis="y")
+ax3.grid(axis="y")
+
+for i in range(len(gals)):
+#for i in [0]:
 	list_co10 = []
 	list_co21 = []
 	list_r21 = []
@@ -152,37 +168,26 @@ for i in [0]:
 		beamname = str(beam[i][j]).replace(".","p").zfill(4)
 		print("# " + galname + " " + beamname)
 		beamfloat = float(beam[i][j])
+		#
 		# co intensities (K.km/s)
 		image_co10 = dir_gal + "_co10/co10_" + beamname + ".moment0"
 		image_co21 = dir_gal + "_co21/co21_" + beamname + ".moment0"
+		#
 		# get values
 		co10, co21 \
 			= get_co_intensities(image_co10,image_co21,beamfloat)
 		r21 = co21/co10
+		#
 		# save to list
 		list_co10.append(co10)
 		list_co21.append(co21)
 		list_r21.append(r21)
 		list_beam.append(beamname)
-
-
-### plot
-plt.subplots(nrows=1,ncols=1,figsize=(9, 7),sharey=True)
-plt.rcParams["font.size"] = fontsize_general
-plt.rcParams["legend.fontsize"] = fontsize_legend
-plt.subplots_adjust(bottom=0.10, left=0.10, right=0.95, top=0.95)
-gs = gridspec.GridSpec(nrows=18, ncols=18)
-ax1 = plt.subplot(gs[0:6,0:18])
-ax2 = plt.subplot(gs[6:12,0:18])
-ax3 = plt.subplot(gs[12:18,0:18])
-ax1.set_ylim(r21range)
-ax1.grid(axis="y")
-# ngc0628
-i=0
-color = cm.brg(i/2.5)
-plot_all_violins(ax1,list_r21,bins,r21range,list_beam,color,list_co10,list_co21)
-#
+		#
+	# plot
+	color = cm.brg(i/2.5)
+	plot_all_violins(ax1,list_r21[i],bins,r21range,list_beam[i],color,list_co10[i],list_co21[i])
+	#
 plt.savefig(dir_proj+"eps/violin_co21.png")
 
 os.system("rm -rf *.last")
-
