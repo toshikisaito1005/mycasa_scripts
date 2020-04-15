@@ -70,23 +70,26 @@ def plot_one_violin(
 
 def plot_multi_violins(
 	ax,
-	list_beamname,
-	x,
-	color,
+	list_violin,
 	bins,
 	ratiorange,
 	weights,
+	list_beamname,
+	color,
 	):
 	"""
 	"""
 	for j in range(len(list_beamname)):
-		beamsize = float(list_beamname[j].replace("p","."))
-		histo = np.histogram(list_r21[j],bins,range=ratiorange,weights=weights,density=True)
-
+		# make histogram
+		histo = np.histogram(list_violin[j], bins, range=ratiorange, weights=weights, density=True)
+		#
+		# data for plot_one_violin
+		xaxis = float(list_beamname[j].replace("p","."))
 		xhisto = np.delete(histo[1],-1)
 		yhisto = histo[0]/(histo[0].max()*1.05)*2
 		step = (ratiorange[1]-ratiorange[0]) / bins
-		plot_one_violin(ax,beamsize,xhisto,yhisto,step,color)
+		plot_one_violin(ax, xaxis, xhisto, yhisto, step, color)
+
 
 #####################
 ### Main Procedure
@@ -121,12 +124,12 @@ for i in [0]:
 
 ### plot
 fig,ax=plt.subplots(nrows=1,ncols=1,figsize=(9, 4),sharey=True)
-# plot violin
+# preparation
 color = cm.brg(i/2.5)
 weights = None
+# plot violin
+plot_multi_violins(ax,list_r21,bins,ratiorange,weights,list_beamname,color)
 #
-
-
 plt.savefig(dir_proj+"eps/"+gals[i]+"_violin_co21.png")
 
 
