@@ -137,7 +137,7 @@ def plot_multi_violins(
 		for j in range(len(list_violin)):
 			list_median.append(weighted_percentile(list_violin[j],0.5,weights[j]))
 	# plot stats
-	ax.plot(np.array(list_xaxis)+x_absoffset,list_median,"o-")
+	ax.plot(np.array(list_xaxis)+x_absoffset,list_median,"o-",color='grey',markersize=5,markeredgewidth=0,alpha=0.5)
 
 def plot_all_violins(
 	ax,
@@ -153,10 +153,10 @@ def plot_all_violins(
 	"""
 	#
 	weights = None
-	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.7,0.0)
+	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.5,0.0)
 	#
 	weights = weights1
-	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.4,23.0)
+	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.3,23.0)
 	#
 	weights = weights2
 	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.1,46.0)
@@ -205,9 +205,7 @@ ax3.set_yticks([0.3,0.6,0.9,1.2])
 ax4.set_yticks([0.3,0.6,0.9,1.2])
 ax5.set_yticks([0.3,0.6,0.9,1.2])
 ax6.set_yticks([0.3,0.6,0.9,1.2])
-ax3.set_xticks(
-	[4,8,12,16,20],
-	["1","2","3","4","5"])
+ax3.set_xticks([4,8,12,16,20], ["1","2","3","4","5"])
 #
 ax_master = [ax1, ax2, ax3]
 for i in range(len(gals)):
@@ -249,6 +247,6 @@ for i in range(len(gals)):
 		ax_master[i],list_r21,bins,r21range,list_beam,color,list_co10,list_co21,
 		)
 	#
-plt.savefig(dir_proj+"eps/violin_co21.png")
+plt.savefig(dir_proj+"eps/violin_co21.png",dpi=300)
 
 os.system("rm -rf *.last")
