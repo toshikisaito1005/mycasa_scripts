@@ -17,7 +17,7 @@ plt.ioff()
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-bins = 40
+bins = 100
 ratiorange = [0.0,2.0]
 fontsize_general = 15
 fontsize_legend = 13
@@ -68,6 +68,25 @@ def plot_one_violin(
 	ax.barh(xhisto, yhisto, height=step, lw=0, color=color, alpha=0.4, left=x)
 	ax.barh(xhisto, yhisto*-1, height=step, lw=0, color=color, alpha=0.4, left=x)
 
+def plot_multi_violins(
+	ax,
+	list_beamname,
+	x,
+	color,
+	bins,
+	ratiorange,
+	weights,
+	):
+	"""
+	"""
+	for j in range(len(list_beamname)):
+		beamsize = float(list_beamname[j].replace("p","."))
+		histo = np.histogram(list_r21[j],bins,range=ratiorange,weights=weights,density=True)
+
+		xhisto = np.delete(histo[1],-1)
+		yhisto = histo[0]/(histo[0].max()*1.05)*2
+		step = (ratiorange[1]-ratiorange[0]) / bins
+		plot_one_violin(ax,beamsize,xhisto,yhisto,step,color)
 
 #####################
 ### Main Procedure
@@ -99,22 +118,15 @@ for i in [0]:
 		list_r21.append(r21)
 		list_beamname.append(beamname)
 
-weights = None
-beamsize = float(list_beamname[i].replace("p","."))
-
-histo = np.histogram(list_r21[0],bins,range=ratiorange,weights=weights,density=True)
-# import x and y data
-xhisto = np.delete(histo[1],-1)
-yhisto = histo[0]/(histo[0].max()*1.05)*2
 
 ### plot
 fig,ax=plt.subplots(nrows=1,ncols=1,figsize=(9, 4),sharey=True)
 # plot violin
 color = cm.brg(i/2.5)
+weights = None
 #
-for j in range(len(list_beamname)):
-	step = (ratiorange[1]-ratiorange[0]) / bins
-	plot_one_violin(ax,beamsize,xhisto,yhisto,step,color)
+
 
 plt.savefig(dir_proj+"eps/"+gals[i]+"_violin_co21.png")
+
 
