@@ -13,7 +13,7 @@ dir_fits = "/Users/saito/data/myproj_active/proj_santoro01_ngc1365/data_raw/"
 dir_product = "/Users/saito/data/myproj_active/proj_santoro01_ngc1365/products/"
 catalog_fits = "ngc1365_co21_v1p0_props.fits"
 mom0_fits = "ngc1365_12m+7m+tp_co21_broad_mom0.fits"
-output = "ngc1365_cprops_mask_1p38.fits"
+output = "ngc1365_cprops_progressive_mask_1p38.fits" # "ngc1365_cprops_mask_1p38.fits"
 snr = 5.0 # peak signal-to-noise ratio threshold to identify clouds
 scale = 120.0 / 1.378 # parsec / arcsec
 image_ra_cnt = "03:33:36.406"
@@ -35,6 +35,7 @@ gmc_decl_dgr = data["YCTR_DEG"]       # center decl position of the cloud in dec
 gmc_radius_pc = data["RAD_NODC_NOEX"] # the radius without deconvolution or extrapolation in parsecs
 gmc_sn_ratio = data["S2N"]            # the peak signal-to-noise ratio in the cloud
 gmc_pa = data["POSANG"] * 180 / np.pi
+gmc_num = data["CLOUDNUM"]
 
 dx = np.sqrt(2*np.pi/(8*np.log(2)) * data["BEAMMAJ_PC"]**2 / data["PPBEAM"])
 gmc_major = np.sqrt((data['MOMMAJPIX_NOEX'] * dx)**2 - (data['BEAMMAJ_PC']**2/8/np.log(2)))
@@ -78,7 +79,7 @@ for i in range(len(gmc_ra_dgr)):
     minoraxis = str(gmc_minor_arcsec[i] * gmc_radius_arcsec[i]/gmc_major_arcsec[i]) + "arcsec"
     direction = "J2000 " + str(gmc_ra_dgr[i])+"deg " + str(gmc_decl_dgr[i])+"deg"
     cl.addcomponent(dir=direction,
-                    flux=1.0,
+                    flux=1.0, # float(gmc_num[i]),
                     fluxunit="Jy",
                     freq=str(obsfreq)+"GHz",
                     shape="disk",
