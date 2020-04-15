@@ -81,7 +81,7 @@ for i in range(len(gmc_ra_dgr)):
     minoraxis = str(gmc_minor_arcsec[i] * gmc_radius_arcsec[i]/gmc_major_arcsec[i]) + "arcsec"
     direction = "J2000 " + str(gmc_ra_dgr[i])+"deg " + str(gmc_decl_dgr[i])+"deg"
     cl.addcomponent(dir=direction,
-                    flux=float(gmc_num[i]*gmc_npix[i]),
+                    flux=float(gmc_num[i]),
                     # flux=1.0,
                     fluxunit="Jy",
                     freq=str(obsfreq)+"GHz",
