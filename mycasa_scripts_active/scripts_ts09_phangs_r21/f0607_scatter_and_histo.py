@@ -60,9 +60,7 @@ def get_co_intensities(image_co10,image_co21,noise_co10,noise_co21,beamfloat):
 	data_noise_co10_tmp = imval(noise_co10,box=box)["data"].flatten()
 	data_noise_co21_tmp = imval(noise_co21,box=box)["data"].flatten()
 	# cut pixel = 0
-	cut_int = np.where((data_co10_tmp>0) & (data_co21_tmp>0))
-	cut_noise = np.where((data_noise_co10_tmp>0) & (data_noise_co21_tmp>0))
-	cut_data = np.where(cut_int & cut_int)
+	cut_data = np.where((data_co10_tmp>0) & (data_co21_tmp>0) & (data_noise_co10_tmp>0) & (data_noise_co21_tmp>0))
 	data_co10 = data_co10_tmp[cut_data]
 	data_co21 = data_co21_tmp[cut_data]
 	noise_co10 = data_noise_co10_tmp[cut_data]
@@ -103,6 +101,8 @@ def plot_scatter(
 	axb,
 	list_x,
 	list_y,
+	err_x,
+	err_y,
 	list_beamname,
 	xlim,
 	ylim,
@@ -364,8 +364,8 @@ for i in [0]:
 		noise_co10 = dir_gal + "_co10/co10_" + beamname + ".moment0.noise"
 		noise_co21 = dir_gal + "_co21/co21_" + beamname + ".moment0.noise"
 		# get values
-		co10, co21, err_co10, err_co21 = get_co_intensities(
-			image_co10,image_co21,noise_co10,noise_co21,beamfloat)
+		co10, co21, err_co10, err_co21 \
+			= get_co_intensities(image_co10,image_co21,noise_co10,noise_co21,beamfloat)
 		r21 = co21/co10
 		err_r21 = r21 * np.sqrt((err_co10/co10)**2 + (err_co21/co21)**2)
 		# stats
@@ -399,7 +399,7 @@ for i in [0]:
 	ax2b = ax2.twinx()
 	# ax1 and ax1b
 	plot_scatter(
-		ax1, ax1b, list_co10, list_co21, list_beamname,
+		ax1, ax1b, list_co10, list_co21, list_errco10, list_errco21, list_beamname,
 		xlim[i], ylim[i], xlabel, ylabel, text, galname2,
 		)
 	plot_threshold(
