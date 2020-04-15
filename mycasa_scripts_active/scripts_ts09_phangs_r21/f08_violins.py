@@ -17,6 +17,8 @@ plt.ioff()
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
+bins = 40
+ratiorange = [0.0,2.0]
 fontsize_general = 15
 fontsize_legend = 13
 gals = ["ngc0628",
@@ -81,4 +83,12 @@ for i in [0]:
 		list_co21.append(co21)
 		list_r21.append(r21)
 		list_beamname.append(beamname)
+
+weights = None
+beamsize = float(list_beamname[i].replace("p","."))
+
+fig,ax=plt.subplots(nrows=1,ncols=1,figsize=(9, 4),sharey=True)
+histo = np.histogram(list_co10[0],bins,range=ratiorange,weights=weights,density=True)
+
+
 
