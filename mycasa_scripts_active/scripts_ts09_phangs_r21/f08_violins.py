@@ -85,8 +85,7 @@ def plot_multi_medians(
 	list_median,
 	x_absoffset,
 	):
-	ax.plot(list_xaxis,list_median)
-
+	ax.plot(np.median(list_xaxis)+x_absoffset,list_median,"o-")
 
 def plot_multi_violins(
 	ax,
@@ -95,13 +94,13 @@ def plot_multi_violins(
 	ratiorange,
 	weights,
 	list_beam,
+	list_median,
 	color,
 	alpha,
 	x_absoffset,
 	):
 	"""
 	"""
-	list_xaxis = []
 	for i in range(len(list_beam)):
 		# make histogram
 		if weights==None:
@@ -119,9 +118,11 @@ def plot_multi_violins(
 		# plot each violin
 		plot_one_violin(ax, xaxis, x_absoffset, xaxis_histo, yaxis_histo, step_histo, color, alpha)
 		#
-		list_xaxis.append(xaxis)
 	# plot stats
-
+	list_xaxis = [float(s.replace("p",".")) for s in list_beam]
+	print(len(list_xaxis))
+	print(len(list_median))
+	plot_multi_medians(ax, list_xaxis, list_median, x_absoffset)
 
 def plot_all_violins(
 	ax,
@@ -137,14 +138,14 @@ def plot_all_violins(
 	"""
 	#
 	weights = None
-	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.7,0.0)
-	median = [np.median(s) for s in list_r21]
+	list_median = [np.median(s) for s in list_r21]
+	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,list_median,color,0.7,0.0)
 	#
 	weights = weights1
-	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.4,23.0)
+	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,list_median,color,0.4,23.0)
 	#
 	weights = weights2
-	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.1,46.0)
+	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,list_median,color,0.1,46.0)
 
 
 #####################
