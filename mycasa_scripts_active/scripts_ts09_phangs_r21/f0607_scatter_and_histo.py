@@ -161,9 +161,8 @@ def plot_scatter(
 		#
 		#
 		# plot text
-		x_text1 = 
-		ax.text(0, 0, tex)
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
+		ax.text(0.1, 0.9, text, transform=ax.transAxes)
+		ax.text(0.1, 0.8, galname, transform=ax.transAxes)
 		if "628" in galname:
 			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.04, ylim[1]-(ylim[1]-ylim[0])*0.89,
 				"1:1", rotation=45, fontsize=12)
