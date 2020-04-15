@@ -142,12 +142,12 @@ plt.rcParams["font.size"] = fontsize_general
 plt.rcParams["legend.fontsize"] = fontsize_legend
 plt.subplots_adjust(bottom=0.10, left=0.10, right=0.98, top=0.92)
 gs = gridspec.GridSpec(nrows=18, ncols=25)
-ax1 = plt.subplot(gs[0:6,0:15])
-ax2 = plt.subplot(gs[6:12,0:15])
-ax3 = plt.subplot(gs[12:18,0:15])
-ax4 = plt.subplot(gs[0:6,13:25])
-ax5 = plt.subplot(gs[6:12,13:25])
-ax6 = plt.subplot(gs[12:18,13:25])
+ax1 = plt.subplot(gs[0:6,0:14])
+ax2 = plt.subplot(gs[6:12,0:14])
+ax3 = plt.subplot(gs[12:18,0:14])
+ax4 = plt.subplot(gs[0:6,15:25])
+ax5 = plt.subplot(gs[6:12,15:25])
+ax6 = plt.subplot(gs[12:18,15:25])
 ax1.set_ylim(r21range)
 ax2.set_ylim(r21range)
 ax3.set_ylim(r21range)
@@ -160,17 +160,26 @@ ax6.grid(axis="y")
 ax1.set_xlim([0,70])
 ax2.set_xlim([4,74])
 ax3.set_xlim([0,70])
-ax1.set_xlim([2,22])
-ax2.set_xlim([6,26])
-ax3.set_xlim([2,22])
+ax4.set_xlim([2,22])
+ax5.set_xlim([6,26])
+ax6.set_xlim([2,22])
 ax1.tick_params(labelbottom=False)
 ax2.tick_params(labelbottom=False)
 ax4.tick_params(labelbottom=False)
 ax5.tick_params(labelbottom=False)
-ax1.yticks([0.2,0.5,0.8,1.1,1.4])
-ax2.yticks([0.2,0.5,0.8,1.1,1.4])
-ax3.yticks([0.2,0.5,0.8,1.1,1.4])
-ax3.xticks([])
+ax1.set_yticks([0.2,0.5,0.8,1.1,1.4])
+ax2.set_yticks([0.2,0.5,0.8,1.1,1.4])
+ax3.set_yticks([0.2,0.5,0.8,1.1,1.4])
+ax4.set_yticks([0.2,0.5,0.8,1.1,1.4])
+ax5.set_yticks([0.2,0.5,0.8,1.1,1.4])
+ax6.set_yticks([0.2,0.5,0.8,1.1,1.4])
+ax3.set_xticks(
+	[4,8,12,16,20,
+	 4+23,8+23,12+23,16+23,20+23,
+	 4+46,8+46,12+46,16+46,20+46],
+	[1,2,3,4,5,
+	 1,2,3,4,5,
+	 1,2,3,4,5])
 #
 ax_master = [ax1, ax2, ax3]
 for i in range(len(gals)):
