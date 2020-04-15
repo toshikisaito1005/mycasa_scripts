@@ -151,7 +151,7 @@ def plot_scatter(
 		bar_bottom = np.log10(10**posy - 10**posy/mean_snr_y)
 		ax.plot([bar_left,bar_right], [posy,posy], color=color, lw=2, zorder=1)
 		ax.plot([posx,posx], [bar_top,bar_bottom], color=color, lw=2, zorder=1)
-		r = patches.Rectangle(xy=(posx, posy), width=1.0, heights=0.25, ec='#000000')
+		#r = patches.Rectangle(xy=(posx, posy), width=1.0, heights=0.25, ec='#000000')
 		#
 	# plot annotation
 	if annotation=="flux":
