@@ -95,6 +95,8 @@ def plot_scatter(
 	axb,
 	list_x,
 	list_y,
+	err_x,
+	err_y,
 	list_beamname,
 	xlim,
 	ylim,
@@ -129,7 +131,8 @@ def plot_scatter(
 		binrange = [x.min(),x.max()]
 		#
 		# plot
-		ax.scatter(x, y, color=color, alpha=0.4, s=20, lw=0, label = beam)
+		#ax.scatter(x, y, color=color, alpha=0.4, s=20, lw=0, label = beam)
+		ax.errorbar(x, y, )
 		if i==0:
 			binx, mean, std = get_binned_dist(x,y,binrange)
 			ax.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
@@ -345,10 +348,15 @@ for i in range(len(gals)):
 		beamname = str(beam[i][j]).replace(".","p").zfill(4)
 		print("# " + galname + " " + beamname)
 		beamfloat = float(beam[i][j])
+		# co intensities (K.km/s)
 		image_co10 = dir_gal + "_co10/co10_" + beamname + ".moment0"
 		image_co21 = dir_gal + "_co21/co21_" + beamname + ".moment0"
+		# co noise (K.km/s)
+		noise_co10 = dir_gal + "_co10/co10_" + beamname + ".moment0.noise"
+		noise_co21 = dir_gal + "_co21/co21_" + beamname + ".moment0.noise"
 		# get values
 		co10, co21 = get_co_intensities(image_co10,image_co21,beamfloat)
+		err_co10, err_co21 = get_co_intensities(noise_co10,noise_co21,beamfloat)
 		r21 = co21/co10
 		# stats
 		stats_co10 = get_percentiles(co10)
@@ -378,7 +386,7 @@ for i in range(len(gals)):
 	ax2b = ax2.twinx()
 	# ax1 and ax1b
 	plot_scatter(
-		ax1, ax1b, list_co10, list_co21, list_beamname,
+		ax1, ax1b, list_co10, list_co21, err_co10, err_co21, list_beamname,
 		xlim[i], ylim[i], xlabel, ylabel, text, galname2,
 		)
 	plot_threshold(
