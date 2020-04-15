@@ -130,7 +130,7 @@ def plot_scatter(
 		x = np.log10(list_x[i])
 		y = np.log10(list_y[i])
 		beam = str(int(float(list_beamname[i].replace("p","."))))+"\""
-		color = cm.gnuplot(i/8.)
+		color = cm.gnuplot(i/9.)
 		binrange = [x.min(),x.max()]
 		#
 		# plot
@@ -142,11 +142,11 @@ def plot_scatter(
 		mean_snr_x = np.mean(snr_x[i])
 		mean_snr_y = np.mean(snr_y[i])
 		if annotation=="flux":
-			posx = 1.4
+			posx = -0.8
 			posy = 0.9 - i*0.13
 		else:
 			posx = 0.6 + i*0.13
-			posy = -0.9
+			posy = -1.0
 			#
 		bar_right  = np.log10(10**posx + 10**posx/mean_snr_x)
 		bar_left   = np.log10(10**posx - 10**posx/mean_snr_x)
@@ -169,8 +169,8 @@ def plot_scatter(
 		#
 		#
 		# plot text
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text, backgroundcolor="white")
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.14, galname, backgroundcolor="white")
 		if "628" in galname:
 			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.04, ylim[1]-(ylim[1]-ylim[0])*0.89,
 				"1:1", rotation=45, fontsize=12)
@@ -190,8 +190,8 @@ def plot_scatter(
 		ax.plot(x_line3, y_line3 ,"--", color="grey", lw=1, alpha=0.9)
 		#
 		# plot text
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text)
-		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.16, galname)
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.08, text, backgroundcolor="white")
+		ax.text(xlim[0]+(xlim[1]-xlim[0])*0.1, ylim[1]-(ylim[1]-ylim[0])*0.14, galname, backgroundcolor="white")
 		if "628" in galname:
 			ax.text(xlim[0]+(xlim[1]-xlim[0])*0.06, ylim[1]-(ylim[1]-ylim[0])*0.42,
 				"1.0", fontsize=12)
@@ -238,7 +238,7 @@ def plot_hist_right(
 		# preparation
 		y = np.log10(list_y[i])
 		beam = list_beamname[i].replace("p0","\"")
-		color = cm.gnuplot(i/8.)
+		color = cm.gnuplot(i/9.)
 		#
 		# histogram
 		histo = np.histogram(y, bins=bins, range=ylim)
@@ -295,7 +295,7 @@ def plot_hist_bottom(
 		# preparation
 		x = np.log10(list_x[i])
 		beam = list_beamname[i].replace("p0","\"")
-		color = cm.gnuplot(i/8.)
+		color = cm.gnuplot(i/9.)
 		#
 		# histogram
 		histo = np.histogram(x, bins=bins, range=xlim)
@@ -336,7 +336,7 @@ def plot_threshold(
 	for i in range(len(list_x)):
 		noise_x = min(list_noise_x[i]) # np.median(list_noise_x[i])
 		noise_y = min(list_noise_y[i]) # np.median(list_noise_y[i])
-		color = cm.gnuplot(i/8.)
+		color = cm.gnuplot(i/9.)
 		ax.plot([np.log10(noise_x * 3.0), np.log10(noise_x * 3.0)],
 			ylim, "-", color = color, alpha=0.5)
 		if mode=="flux":
@@ -348,8 +348,8 @@ def plot_threshold(
 #####################
 ### Main Procedure
 #####################
-#for i in range(len(gals)):
-for i in [0]:
+for i in range(len(gals)):
+#for i in [0]:
 	### get data points ready for plot
 	# initialize
 	list_co10 = []
