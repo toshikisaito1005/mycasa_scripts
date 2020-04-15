@@ -18,7 +18,7 @@ plt.ioff()
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 bins = 100
-ratiorange = [0.0,2.0]
+r21range = [0.0,1.5]
 fontsize_general = 15
 fontsize_legend = 13
 gals = ["ngc0628",
@@ -84,30 +84,28 @@ def plot_multi_violins(
 	bins,
 	ratiorange,
 	weights,
-	list_beamname,
+	list_beam,
 	color,
 	x_absoffset,
 	):
 	"""
 	"""
-	for i in range(len(list_beamname)):
-		# weights
-		if weights!=None:
-			weights=weights[i]
+	for i in range(len(list_beam)):
 		# make histogram
-		print(len(list_violin[i]))
-		print(weights)
-		histo = np.histogram(list_violin[i], bins, range=ratiorange, weights=weights, density=True)
-		#
+		if weights==None:
+			histo = np.histogram(list_violin[i], bins, range=ratiorange, weights=None, density=True)
+		else:
+			histo = np.histogram(list_violin[i], bins, range=ratiorange, weights=weights[i], density=True)
+			#
 		# data for plot_one_violin
-		xaxis = float(list_beamname[i].replace("p","."))
+		xaxis = float(list_beam[i].replace("p","."))
 		xaxis_histo = np.delete(histo[1],-1)
 		yaxis_histo = histo[0]/(histo[0].max()*1.05)*2
 		step_histo = (ratiorange[1]-ratiorange[0]) / bins
+		#
 		# plot each violin
 		plot_one_violin(ax, xaxis, x_absoffset, xaxis_histo, yaxis_histo, step_histo, color)
 		# plot stats
-
 
 
 #####################
@@ -118,7 +116,7 @@ for i in [0]:
 	list_co10 = []
 	list_co21 = []
 	list_r21 = []
-	list_beamname = []
+	list_beam = []
 	statslist_co10 = []
 	statslist_co21 = []
 	statslist_r21 = []
@@ -141,20 +139,25 @@ for i in [0]:
 		list_co10.append(co10)
 		list_co21.append(co21)
 		list_r21.append(r21)
-		list_beamname.append(beamname)
+		list_beam.append(beamname)
 
 
 ### plot
 fig,ax=plt.subplots(nrows=1,ncols=1,figsize=(9, 4),sharey=True)
 # preparation
 color = cm.brg(i/2.5)
-# unweighted plot violin
-#weights = None
-#x_absoffset = 0
-#plot_multi_violins(ax,list_r21,bins,ratiorange,weights,list_beamname,color,x_absoffset)
+# unweighted
+weights = None
+x_offset = 0
+plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,x_offset)
+# co10-weighted
 weights = list_co10
-x_absoffset = 24.0
-plot_multi_violins(ax,list_r21,bins,ratiorange,weights,list_beamname,color,x_absoffset)
+x_offset = 24.0
+plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,x_offset)
+# co21-weighted
+weights = list_co21
+x_offset = 48.0
+plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,x_offset)
 #
 plt.savefig(dir_proj+"eps/"+gals[i]+"_violin_co21.png")
 
