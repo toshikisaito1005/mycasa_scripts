@@ -148,8 +148,8 @@ def plot_scatter(
 		bar_left   = np.log10(10**posx - 10**posx/mean_snr_x)
 		bar_top    = np.log10(10**posy + 10**posy/mean_snr_y)
 		bar_bottom = np.log10(10**posy - 10**posy/mean_snr_y)
-		ax.plot([bar_left,bar_right], [posy,posy], color=color, lw=2)
-		ax.plot([posx,posx], [bar_top,bar_bottom], color=color, lw=2)
+		ax.plot([bar_left,bar_right], [posy,posy], color=color, lw=, zorder=1)
+		ax.plot([posx,posx], [bar_top,bar_bottom], color=color, lw=2, zorder=1)
 		#
 	# plot annotation
 	if annotation=="flux":
