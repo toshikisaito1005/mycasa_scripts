@@ -79,6 +79,15 @@ def plot_one_violin(
 	ax.barh(xhisto, yhisto, height=step, lw=0, color=color, alpha=alpha, left=x+x_absoffset)
 	ax.barh(xhisto, yhisto*-1, height=step, lw=0, color=color, alpha=alpha, left=x+x_absoffset)
 
+def plot_multi_medians(
+	ax,
+	list_xaxis,
+	list_median,
+	x_absoffset,
+	):
+	ax.plot(list_xaxis,list_median)
+
+
 def plot_multi_violins(
 	ax,
 	list_violin,
@@ -92,6 +101,7 @@ def plot_multi_violins(
 	):
 	"""
 	"""
+	list_xaxis = []
 	for i in range(len(list_beam)):
 		# make histogram
 		if weights==None:
@@ -108,7 +118,10 @@ def plot_multi_violins(
 		#
 		# plot each violin
 		plot_one_violin(ax, xaxis, x_absoffset, xaxis_histo, yaxis_histo, step_histo, color, alpha)
-		# plot stats
+		#
+		list_xaxis.append(xaxis)
+	# plot stats
+
 
 def plot_all_violins(
 	ax,
@@ -125,6 +138,7 @@ def plot_all_violins(
 	#
 	weights = None
 	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.7,0.0)
+	median = [np.median(s) for s in list_r21]
 	#
 	weights = weights1
 	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.4,23.0)
