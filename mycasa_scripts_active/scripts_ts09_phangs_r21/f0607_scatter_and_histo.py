@@ -134,17 +134,19 @@ def plot_scatter(
 		ey = err_y[i] # np.log10(err_y[i])
 		beam = str(int(float(list_beamname[i].replace("p","."))))+"\""
 		color = cm.gnuplot(i/8.)
-		binrange = [x.min(),x.max()]
 		#
 		# plot
 		#ax.scatter(x, y, color=color, alpha=0.4, s=20, lw=0, label = beam)
-		ax.errorbar(
+		markers, caps, bars = ax.errorbar(
 			x, y, xerr=ex, yerr=ey, capsize=0, color=color, markersize=3,
 			label=beam, fmt="o", markeredgewidth=0,
 			)
-		if i==0:
-			binx, mean, std = get_binned_dist(x,y,binrange)
-			ax.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
+		[bar.set_alpha(0.4) for bar in bars]
+		[marker.set_alpha(0.4) for marker in markers]
+		#if i==0: # plot binned distribution for the highest resolution data
+		#   binrange = [x.min(),x.max()]
+		#	binx, mean, std = get_binned_dist(x,y,binrange)
+		#	ax.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
 		#
 	# plot annotation
 	if annotation=="flux":
