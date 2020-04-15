@@ -151,12 +151,12 @@ def plot_scatter(
 	if annotation=="flux":
 		ax.plot(xlim, ylim, "--", color="black", lw=3, alpha=0.7)
 		#
-		x_line2 = [1/0.7*10**xlim[0], xlim[1]]
-		y_line2 = [ylim[0], 0.7*10**ylim[1]]
+		x_line2 = [1/0.7*xlim[0], xlim[1]]
+		y_line2 = [ylim[0], 0.7*ylim[1]]
 		ax.plot(x_line2, y_line2, "--", color="grey", lw=1, alpha=0.9)
 		#
-		x_line3 = [1/0.4*10**xlim[0], xlim[1]]
-		y_line3 = [ylim[0], 0.4*10**ylim[1]]
+		x_line3 = [1/0.4*xlim[0], xlim[1]]
+		y_line3 = [ylim[0], 0.4*ylim[1]]
 		ax.plot(x_line3, y_line3 ,"--", color="grey", lw=1, alpha=0.9)
 		#
 		#
