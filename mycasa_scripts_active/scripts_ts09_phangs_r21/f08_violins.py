@@ -21,6 +21,8 @@ bins = 50
 r21range = [0.05,1.45]
 fontsize_general = 15
 fontsize_legend = 13
+xlabel = "Beam Size (arcsec)"
+ylabel = "$R_{21}$"
 gals = ["ngc0628",
 		"ngc3627",
 		"ngc4321"]
@@ -184,6 +186,8 @@ def plot_all_violins(
 def startup_plot(
 	fontsize_general,
 	fontsize_legend,
+	xlabel,
+	ylabel,
 	r21range,
 	):
 	plt.subplots(nrows=1,ncols=1,figsize=(10, 5),sharey=True)
@@ -225,16 +229,20 @@ def startup_plot(
 	ax4.set_yticks([0.3,0.6,0.9,1.2])
 	ax5.set_yticks([0.3,0.6,0.9,1.2])
 	ax6.set_yticks([0.3,0.6,0.9,1.2])
+	ax2.set_ylabel(ylabel)
+	ax3.set_xlabel(xlabel)
+	ax6.set_xlabel(xlabel)
 	ax3.set_xticks([4,8,12,16,20], ["1","2","3","4","5"])
 
 	return ax1, ax2, ax3, ax4, ax5, ax6
+
 
 #####################
 ### Main Procedure
 #####################
 ### plot
 ax1, ax2, ax3, ax4, ax5, ax6 \
-	= startup_plot(fontsize_general,fontsize_legend,r21range)
+	= startup_plot(fontsize_general,fontsize_legend,xlabel,ylabel,r21range)
 #
 ax_master = [ax1, ax2, ax3]
 for i in range(len(gals)):
@@ -279,10 +287,8 @@ for i in range(len(gals)):
 		#
 	# plot
 	color = cm.brg(i/2.5)
-	plot_all_violins(
-		ax_master[i],list_r21,bins,r21range,list_beam,color,list_co10,list_co21,
-		)
-	plot_stats(statslist_r21)
+	plot_all_violins(ax_master[i], list_r21, bins, r21range, list_beam, color, list_co10, list_co21)
+	#plot_all_stats()
 	#
 plt.savefig(dir_proj+"eps/violin_co21.png",dpi=300)
 
