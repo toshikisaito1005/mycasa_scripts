@@ -53,14 +53,33 @@ def get_co_intensities(image_co10,image_co21,beamfloat):
 
 	return data_co10_Kelvin, data_co21_Kelvin
 
-"""
-def get_percentiles(data,wehgits):
-	median = np.median(data)
-	p16 = np.percentile(data,16)
-	p84 = np.percentile(data,84)
+def weighted_percentile(
+	data,
+	percentile,
+	weights,
+	):
+	"""
+	Args:
+	    data (list or numpy.array): data
+	    weights (list or numpy.array): weights
+	"""
+	if weights==None:
+		w_median = np.median(data)
+	else:
+		data, weights = np.array(data).squeeze(), np.array(weights).squeeze()
+		s_data, s_weights = map(np.array, zip(*sorted(zip(data, weights))))
+		midpoint = percentile * sum(s_weights)
+		if any(weights > midpoint):
+			w_median = (data[weights == np.max(weights)])[0]
+		else:
+			cs_weights = np.cumsum(s_weights)
+			idx = np.where(cs_weights <= midpoint)[0][-1]
+			if cs_weights[idx] == midpoint:
+				w_median = np.mean(s_data[idx:idx+2])
+			else:
+				w_median = s_data[idx+1]
 
-	return [p84, median, p16]
-"""
+	return w_median
 
 def plot_one_violin(
 	ax,
@@ -85,7 +104,7 @@ def plot_multi_medians(
 	list_median,
 	x_absoffset,
 	):
-	ax.plot(np.median(list_xaxis)+x_absoffset,list_median,"o-")
+	ax.plot(np.array(list_xaxis)+x_absoffset,list_median,"o-")
 
 def plot_multi_violins(
 	ax,
@@ -94,7 +113,6 @@ def plot_multi_violins(
 	ratiorange,
 	weights,
 	list_beam,
-	list_median,
 	color,
 	alpha,
 	x_absoffset,
@@ -118,10 +136,13 @@ def plot_multi_violins(
 		# plot each violin
 		plot_one_violin(ax, xaxis, x_absoffset, xaxis_histo, yaxis_histo, step_histo, color, alpha)
 		#
+	# prerare for stats
+	list_xaxis = np.array([float(s.replace("p",".")) for s in list_beam])
+	if weights==None:
+		list_median = [np.median(s) for s in list_violin]
+	else:
+		list_median = [np.median(s) for s in list_violin]
 	# plot stats
-	list_xaxis = [float(s.replace("p",".")) for s in list_beam]
-	print(len(list_xaxis))
-	print(len(list_median))
 	plot_multi_medians(ax, list_xaxis, list_median, x_absoffset)
 
 def plot_all_violins(
@@ -138,14 +159,13 @@ def plot_all_violins(
 	"""
 	#
 	weights = None
-	list_median = [np.median(s) for s in list_r21]
-	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,list_median,color,0.7,0.0)
+	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.7,0.0)
 	#
 	weights = weights1
-	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,list_median,color,0.4,23.0)
+	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.4,23.0)
 	#
 	weights = weights2
-	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,list_median,color,0.1,46.0)
+	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.1,46.0)
 
 
 #####################
