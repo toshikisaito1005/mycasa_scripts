@@ -140,14 +140,14 @@ def plot_all_violins(
 plt.subplots(nrows=1,ncols=1,figsize=(10, 5),sharey=True)
 plt.rcParams["font.size"] = fontsize_general
 plt.rcParams["legend.fontsize"] = fontsize_legend
-plt.subplots_adjust(bottom=0.10, left=0.10, right=0.95, top=0.95)
+plt.subplots_adjust(bottom=0.10, left=0.10, right=0.98, top=0.92)
 gs = gridspec.GridSpec(nrows=18, ncols=18)
 ax1 = plt.subplot(gs[0:6,0:10])
 ax2 = plt.subplot(gs[6:12,0:10])
 ax3 = plt.subplot(gs[12:18,0:10])
-ax4 = plt.subplot(gs[0:6,11:18])
-ax5 = plt.subplot(gs[6:12,11:18])
-ax6 = plt.subplot(gs[12:18,11:18])
+ax4 = plt.subplot(gs[0:6,12:18])
+ax5 = plt.subplot(gs[6:12,12:18])
+ax6 = plt.subplot(gs[12:18,12:18])
 ax1.set_ylim(r21range)
 ax2.set_ylim(r21range)
 ax3.set_ylim(r21range)
