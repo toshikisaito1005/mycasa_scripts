@@ -181,10 +181,16 @@ def plot_all_violins(
 	weights = weights2
 	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.1,46.0)
 
-def setup_plot(
-	gs,
+def startup_plot(
+	fontsize_general,
+	fontsize_legend,
 	r21range,
 	):
+	plt.subplots(nrows=1,ncols=1,figsize=(10, 5),sharey=True)
+	plt.rcParams["font.size"] = fontsize_general
+	plt.rcParams["legend.fontsize"] = fontsize_legend
+	plt.subplots_adjust(bottom=0.10, left=0.10, right=0.98, top=0.92)
+	gs = gridspec.GridSpec(nrows=18, ncols=25)
 	ax1 = plt.subplot(gs[0:6,0:14])
 	ax2 = plt.subplot(gs[6:12,0:14])
 	ax3 = plt.subplot(gs[12:18,0:14])
@@ -221,17 +227,14 @@ def setup_plot(
 	ax6.set_yticks([0.3,0.6,0.9,1.2])
 	ax3.set_xticks([4,8,12,16,20], ["1","2","3","4","5"])
 
+	return ax1, ax2, ax3, ax4, ax5, ax6
 
 #####################
 ### Main Procedure
 #####################
 ### plot
-plt.subplots(nrows=1,ncols=1,figsize=(10, 5),sharey=True)
-plt.rcParams["font.size"] = fontsize_general
-plt.rcParams["legend.fontsize"] = fontsize_legend
-plt.subplots_adjust(bottom=0.10, left=0.10, right=0.98, top=0.92)
-gs = gridspec.GridSpec(nrows=18, ncols=25)
-setup_plot(gs,r21range)
+ax1, ax2, ax3, ax4, ax5, ax6 \
+	= startup_plot(fontsize_general,fontsize_legend,r21range)
 #
 ax_master = [ax1, ax2, ax3]
 for i in range(len(gals)):
@@ -279,6 +282,7 @@ for i in range(len(gals)):
 	plot_all_violins(
 		ax_master[i],list_r21,bins,r21range,list_beam,color,list_co10,list_co21,
 		)
+	plot_stats(statslist_r21)
 	#
 plt.savefig(dir_proj+"eps/violin_co21.png",dpi=300)
 
