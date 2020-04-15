@@ -37,7 +37,7 @@ bins=50
 for i in range(len(gals)):
 	galname = gals[i]
 	galnamelabel = galname.replace("ngc","NGC ")
-	data = np.loadtxt(dir_data + galname + "_parameter_600pc.txt")
+	data = np.loadtxt(dir_product + galname + "_parameter_600pc.txt")
 	#
 	dist = data[:,0]
 	r21 = data[:,1]
@@ -163,8 +163,8 @@ for i in range(len(gals)):
 	print(str(mode))
 	print(str(p16))
 
-	os.system("rm -rf " + galname + "_stats_600pc.txt",)
-	np.savetxt(galname + "_stats_600pc.txt",
+	os.system("rm -rf " + dir_product + galname + "_stats_600pc.txt",)
+	np.savetxt(dir_product + galname + "_stats_600pc.txt",
 		       np.c_[np.array(range(5)*3)+1+5*i, list_stats])
 
 os.system("rm -rf *.last")

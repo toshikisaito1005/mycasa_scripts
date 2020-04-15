@@ -102,7 +102,7 @@ for i in range(len(gals)):
         data_r21mask.astype(int)]  # 12
 
     np.savetxt(
-        galname+"_parameter_600pc.txt",
+        dir_data + "eps/" + galname + "_parameter_600pc.txt",
         data_all,
         fmt = "%.7e",
         header = "distance(pc) r21 co21(Jy/b.km/s) co21snr co21(Jy/b.km/s) co10snr peak(Jy/b) disp(km/s) w1(Jy/b) w2(Jy/b) w3(Jy/b), r21mask"
