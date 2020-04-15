@@ -323,19 +323,21 @@ def plot_threshold(
 	xlim,
 	ylim,
 	list_x,
+	mode="flux",
 	):
 	"""
 	"""
 	# plot
 	for i in range(len(list_x)):
-		noise_x = np.median(list_noise_x[i])
-		noise_y = np.median(list_noise_y[i])
+		noise_x = min(list_noise_x[i]) # np.median(list_noise_x[i])
+		noise_y = min(list_noise_y[i]) # np.median(list_noise_y[i])
 		color = cm.gnuplot(i/8.)
 		ax.plot([np.log10(noise_x * 3.0), np.log10(noise_x * 3.0)],
 			ylim, "-", color = color, alpha=0.5)
-		ax.plot(xlim,
-			[np.log10(noise_y * 3.0), np.log10(noise_y * 3.0)],
-			"-", color = color, alpha=0.5)
+		if mode=="flux":
+			ax.plot(xlim,
+				[np.log10(noise_y * 3.0), np.log10(noise_y * 3.0)],
+				"-", color = color, alpha=0.5)
 
 
 #####################
@@ -413,12 +415,10 @@ for i in [0]:
 	ax3 = plt.subplot(gs[11:18,0:11])
 	ax1b = ax1.twiny()
 	ax2b = ax2.twinx()
-	# ax1 and ax1b
+	# plot
 	plot_scatter(ax1, ax1b, list_co10, list_co21, list_snrco10, list_snrco21, list_beamname,xlim[i], ylim[i], xlabel, ylabel, text, galname2)
 	plot_threshold(ax1, list_errco10, list_errco21, xlim[i], ylim[i], list_co10)
-	# ax2 and ax2b
 	plot_hist_right(ax2, ax2b, list_co21, statslist_co21, list_beamname, ylim[i], ylabel)
-	# ax3
 	plot_hist_bottom(ax3, list_co10, statslist_co10, list_beamname, xlim[i], xlabel)
 	#
 	plt.savefig(dir_proj+"eps/" + galname + "_co10_vs_co21.png",dpi=200)
@@ -436,20 +436,11 @@ for i in [0]:
 	ax3 = plt.subplot(gs[11:18,0:11])
 	ax1b = ax1.twiny()
 	ax2b = ax2.twinx()
-	# ax1 and ax1b
-	plot_scatter(
-		ax1,ax1b, list_co21, list_r21, list_snrco21, list_snrr21, list_beamname,
-		ylim[i], ylim_r21[i], ylabel, ylabel_r21, text_r21, galname2,
-		annotation="ratio",
-		)
-	# ax2 and ax2b
-	plot_hist_right(
-		ax2, ax2b, list_r21, statslist_r21, list_beamname, ylim_r21[i], ylabel_r21,
-		)
-	# ax3
-	plot_hist_bottom(
-		ax3, list_co21, statslist_co21, list_beamname, ylim[i], ylabel,
-		)
+	# plot
+	plot_scatter(ax1,ax1b, list_co21, list_r21, list_snrco21, list_snrr21, list_beamname, ylim[i], ylim_r21[i], ylabel, ylabel_r21, text_r21, galname2, annotation="ratio")
+	plot_threshold(ax1, list_errco21, list_errr21, ylim[i], ylim_r21[i], list_co21, mode="ratio")
+	plot_hist_right(ax2, ax2b, list_r21, statslist_r21, list_beamname, ylim_r21[i], ylabel_r21)
+	plot_hist_bottom(ax3, list_co21, statslist_co21, list_beamname, ylim[i], ylabel)
 	#
 	plt.savefig(dir_proj+"eps/" + galname + "_co21_vs_r21.png",dpi=200)
 
