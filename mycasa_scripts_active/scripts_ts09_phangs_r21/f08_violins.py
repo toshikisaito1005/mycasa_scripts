@@ -53,6 +53,21 @@ def get_co_intensities(image_co10,image_co21,beamfloat):
 
 	return data_co10_Kelvin, data_co21_Kelvin
 
+def plot_one_violin(
+	ax,
+	x,
+	xhisto,
+	yhisto,
+	step,
+	color,
+	):
+	"""
+	"""
+	ax.plot(yhisto+x, xhisto, drawstyle="steps", color=color)
+	ax.plot(yhisto*-1+x, xhisto, drawstyle="steps", color=color)
+	ax.barh(xhisto, yhisto, height=step, lw=0, color=color, alpha=0.4, left=x)
+	ax.barh(xhisto, yhisto*-1, height=step, lw=0, color=color, alpha=0.4, left=x)
+
 
 #####################
 ### Main Procedure
@@ -89,20 +104,17 @@ beamsize = float(list_beamname[i].replace("p","."))
 
 histo = np.histogram(list_r21[0],bins,range=ratiorange,weights=weights,density=True)
 # import x and y data
-x = np.delete(histo[1],-1)
-y = histo[0]/(histo[0].max()*1.05)*2
-xval = 10.
-color = cm.brg(i/2.5)
+xhisto = np.delete(histo[1],-1)
+yhisto = histo[0]/(histo[0].max()*1.05)*2
 
-# plot
+### plot
 fig,ax=plt.subplots(nrows=1,ncols=1,figsize=(9, 4),sharey=True)
-# preparation
-step = (ratiorange[1]-ratiorange[0]) / bins
 # plot violin
-ax.plot(y+xval,x,drawstyle="steps",color=color)
-ax.plot(y*-1+xval,x,drawstyle="steps",color=color)
-ax.barh(x,y,height=step,lw=0,color=color,alpha=0.4,left=xval)
-ax.barh(x,y*-1,height=step,lw=0,color=color,alpha=0.4,left=xval)
+color = cm.brg(i/2.5)
+#
+for j in range(len(list_beamname)):
+	step = (ratiorange[1]-ratiorange[0]) / bins
+	plot_one_violin(ax,beamsize,xhisto,yhisto,step,color)
 
 plt.savefig(dir_proj+"eps/"+gals[i]+"_violin_co21.png")
 
