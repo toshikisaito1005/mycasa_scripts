@@ -64,7 +64,7 @@ def weighted_percentile(
 	    weights (list or numpy.array): weights
 	"""
 	if weights==None:
-		w_median = np.median(data)
+		w_median = np.percentile(data,percentile*100)
 	else:
 		data, weights = np.array(data).squeeze(), np.array(weights).squeeze()
 		s_data, s_weights = map(np.array, zip(*sorted(zip(data, weights))))
@@ -81,7 +81,7 @@ def weighted_percentile(
 
 	return w_median
 
-def get_percentiles(
+def get_stats(
 	data,
 	weights,
 	):
@@ -175,6 +175,46 @@ def plot_all_violins(
 	weights = weights2
 	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.1,46.0)
 
+def setup_plot(
+	gs,
+	r21range,
+	):
+	ax1 = plt.subplot(gs[0:6,0:14])
+	ax2 = plt.subplot(gs[6:12,0:14])
+	ax3 = plt.subplot(gs[12:18,0:14])
+	ax4 = plt.subplot(gs[0:6,15:25])
+	ax5 = plt.subplot(gs[6:12,15:25])
+	ax6 = plt.subplot(gs[12:18,15:25])
+	ax1.set_ylim(r21range)
+	ax2.set_ylim(r21range)
+	ax3.set_ylim(r21range)
+	ax4.set_ylim(r21range)
+	ax5.set_ylim(r21range)
+	ax6.set_ylim(r21range)
+	ax1.grid(axis="y")
+	ax2.grid(axis="y")
+	ax3.grid(axis="y")
+	ax4.grid(axis="y")
+	ax5.grid(axis="y")
+	ax6.grid(axis="y")
+	ax1.set_xlim([0,70])
+	ax2.set_xlim([4,74])
+	ax3.set_xlim([0,70])
+	ax4.set_xlim([2,22])
+	ax5.set_xlim([6,26])
+	ax6.set_xlim([2,22])
+	ax1.tick_params(labelbottom=False)
+	ax2.tick_params(labelbottom=False)
+	ax4.tick_params(labelbottom=False)
+	ax5.tick_params(labelbottom=False)
+	ax1.set_yticks([0.3,0.6,0.9,1.2])
+	ax2.set_yticks([0.3,0.6,0.9,1.2])
+	ax3.set_yticks([0.3,0.6,0.9,1.2])
+	ax4.set_yticks([0.3,0.6,0.9,1.2])
+	ax5.set_yticks([0.3,0.6,0.9,1.2])
+	ax6.set_yticks([0.3,0.6,0.9,1.2])
+	ax3.set_xticks([4,8,12,16,20], ["1","2","3","4","5"])
+
 
 #####################
 ### Main Procedure
@@ -185,41 +225,7 @@ plt.rcParams["font.size"] = fontsize_general
 plt.rcParams["legend.fontsize"] = fontsize_legend
 plt.subplots_adjust(bottom=0.10, left=0.10, right=0.98, top=0.92)
 gs = gridspec.GridSpec(nrows=18, ncols=25)
-ax1 = plt.subplot(gs[0:6,0:14])
-ax2 = plt.subplot(gs[6:12,0:14])
-ax3 = plt.subplot(gs[12:18,0:14])
-ax4 = plt.subplot(gs[0:6,15:25])
-ax5 = plt.subplot(gs[6:12,15:25])
-ax6 = plt.subplot(gs[12:18,15:25])
-ax1.set_ylim(r21range)
-ax2.set_ylim(r21range)
-ax3.set_ylim(r21range)
-ax4.set_ylim(r21range)
-ax5.set_ylim(r21range)
-ax6.set_ylim(r21range)
-ax1.grid(axis="y")
-ax2.grid(axis="y")
-ax3.grid(axis="y")
-ax4.grid(axis="y")
-ax5.grid(axis="y")
-ax6.grid(axis="y")
-ax1.set_xlim([0,70])
-ax2.set_xlim([4,74])
-ax3.set_xlim([0,70])
-ax4.set_xlim([2,22])
-ax5.set_xlim([6,26])
-ax6.set_xlim([2,22])
-ax1.tick_params(labelbottom=False)
-ax2.tick_params(labelbottom=False)
-ax4.tick_params(labelbottom=False)
-ax5.tick_params(labelbottom=False)
-ax1.set_yticks([0.3,0.6,0.9,1.2])
-ax2.set_yticks([0.3,0.6,0.9,1.2])
-ax3.set_yticks([0.3,0.6,0.9,1.2])
-ax4.set_yticks([0.3,0.6,0.9,1.2])
-ax5.set_yticks([0.3,0.6,0.9,1.2])
-ax6.set_yticks([0.3,0.6,0.9,1.2])
-ax3.set_xticks([4,8,12,16,20], ["1","2","3","4","5"])
+setup_plot(gs,r21range)
 #
 ax_master = [ax1, ax2, ax3]
 for i in range(len(gals)):
@@ -250,9 +256,9 @@ for i in range(len(gals)):
 		r21 = co21/co10
 		#
 		# stats
-		stats_r21 = get_percentiles(r21, None)
-		stats_r21_wco10 = get_percentiles(r21, co10)
-		stats_r21_wco21 = get_percentiles(r21, co21)
+		stats_r21 = get_stats(r21, None)
+		stats_r21_wco10 = get_stats(r21, co10)
+		stats_r21_wco21 = get_stats(r21, co21)
 		# save to list
 		list_co10.append(co10)
 		list_co21.append(co21)
