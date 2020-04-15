@@ -84,14 +84,20 @@ def weighted_percentile(
 def get_stats(
 	data,
 	weights,
+	historange,
 	):
 	"""
 	"""
+	# percentiles
 	p84 = weighted_percentile(data,0.84,weights)
 	p50 = weighted_percentile(data,0.50,weights)
 	p16 = weighted_percentile(data,0.16,weights)
+	# mode
+	n, bins = np.histogram(data, weights=weights, range=historange)
+	idx = np.argmax(n)
+	mode = np.mean([bins[idx], bins[idx + 1]])
 
-	return [p84, p50, p16]
+	return [p84, p50, p16, mode]
 
 def plot_one_violin(
 	ax,
@@ -256,15 +262,15 @@ for i in range(len(gals)):
 		r21 = co21/co10
 		#
 		# stats
-		stats_r21 = get_stats(r21, None)
-		stats_r21_wco10 = get_stats(r21, co10)
-		stats_r21_wco21 = get_stats(r21, co21)
+		stats_r21 = get_stats(r21, None, r21range)
+		stats_r21_wco10 = get_stats(r21, co10, r21range)
+		stats_r21_wco21 = get_stats(r21, co21, r21range)
 		# save to list
 		list_co10.append(co10)
 		list_co21.append(co21)
 		list_r21.append(r21)
 		list_beam.append(beamname)
-		statslist_r21.append(stats_r21)
+		statslist_r21.append(stats_r21) # p84 p50 p16 mode
 		statslist_r21_wco10.append(stats_r21_wco10)
 		statslist_r21_wco21.append(stats_r21_wco21)
 		#
