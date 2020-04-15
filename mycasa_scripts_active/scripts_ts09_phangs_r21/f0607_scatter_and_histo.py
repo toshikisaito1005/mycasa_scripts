@@ -139,10 +139,9 @@ def plot_scatter(
 		#ax.scatter(x, y, color=color, alpha=0.4, s=20, lw=0, label = beam)
 		markers, caps, bars = ax.errorbar(
 			x, y, xerr=ex, yerr=ey, capsize=0, color=color, markersize=3,
-			label=beam, fmt="o", markeredgewidth=0,
+			label=beam, fmt="o", markeredgewidth=0, alpha=0.5,
 			)
 		[bar.set_alpha(0.4) for bar in bars]
-		[marker.set_alpha(0.4) for marker in markers]
 		#if i==0: # plot binned distribution for the highest resolution data
 		#   binrange = [x.min(),x.max()]
 		#	binx, mean, std = get_binned_dist(x,y,binrange)
@@ -152,12 +151,12 @@ def plot_scatter(
 	if annotation=="flux":
 		ax.plot(xlim, ylim, "--", color="black", lw=3, alpha=0.7)
 		#
-		x_line2 = [np.log10(1/0.7*10**xlim[0]), xlim[1]]
-		y_line2 = [ylim[0], np.log10(0.7*10**ylim[1])]
+		x_line2 = [1/0.7*10**xlim[0], xlim[1]]
+		y_line2 = [ylim[0], 0.7*10**ylim[1]]
 		ax.plot(x_line2, y_line2, "--", color="grey", lw=1, alpha=0.9)
 		#
-		x_line3 = [np.log10(1/0.4*10**xlim[0]), xlim[1]]
-		y_line3 = [ylim[0], np.log10(0.4*10**ylim[1])]
+		x_line3 = [1/0.4*10**xlim[0], xlim[1]]
+		y_line3 = [ylim[0], 0.4*10**ylim[1]]
 		ax.plot(x_line3, y_line3 ,"--", color="grey", lw=1, alpha=0.9)
 		#
 		#
