@@ -37,6 +37,7 @@ gmc_radius_pc = data["RAD_NODC_NOEX"] # the radius without deconvolution or extr
 gmc_sn_ratio = data["S2N"]            # the peak signal-to-noise ratio in the cloud
 gmc_pa = data["POSANG"] * 180 / np.pi
 gmc_num = data["CLOUDNUM"]
+gmc_npix = data["NPIX"]
 
 dx = np.sqrt(2*np.pi/(8*np.log(2)) * data["BEAMMAJ_PC"]**2 / data["PPBEAM"])
 gmc_major = np.sqrt((data['MOMMAJPIX_NOEX'] * dx)**2 - (data['BEAMMAJ_PC']**2/8/np.log(2)))
@@ -79,9 +80,8 @@ for i in range(len(gmc_ra_dgr)):
     majoraxis = str(gmc_radius_arcsec[i])+"arcsec"
     minoraxis = str(gmc_minor_arcsec[i] * gmc_radius_arcsec[i]/gmc_major_arcsec[i]) + "arcsec"
     direction = "J2000 " + str(gmc_ra_dgr[i])+"deg " + str(gmc_decl_dgr[i])+"deg"
-    area = float(majoraxis.replace("arcsec","")) * float(minoraxis.replace("arcsec","")) * np.pi / pix_size**2
     cl.addcomponent(dir=direction,
-                    flux=float(gmc_num[i])*area,
+                    flux=float(gmc_num[i]*gmc_npix[i]),
                     # flux=1.0,
                     fluxunit="Jy",
                     freq=str(obsfreq)+"GHz",
