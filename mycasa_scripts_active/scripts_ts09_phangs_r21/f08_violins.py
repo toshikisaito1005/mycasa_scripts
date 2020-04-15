@@ -123,13 +123,13 @@ def plot_all_violins(
 	"""
 	#
 	weights = None
-	plot_multi_violins(ax1,list_r21,bins,r21range,weights,list_beam,color,0.7,0.0)
+	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.7,0.0)
 	#
 	weights = weights1
-	plot_multi_violins(ax1,list_r21,bins,r21range,weights,list_beam,color,0.4,23.0)
+	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.4,23.0)
 	#
 	weights = weights2
-	plot_multi_violins(ax1,list_r21,bins,r21range,weights,list_beam,color,0.1,46.0)
+	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.1,46.0)
 
 
 #####################
