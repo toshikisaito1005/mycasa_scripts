@@ -90,15 +90,17 @@ def plot_multi_violins(
 	):
 	"""
 	"""
-	for j in range(len(list_beamname)):
+	for i in range(len(list_beamname)):
 		# weights
 		if weights!=None:
 			weights=weights[i]
 		# make histogram
-		histo = np.histogram(list_violin[j], bins, range=ratiorange, weights=weights, density=True)
+		print(len(list_violin[i]))
+		print(weights)
+		histo = np.histogram(list_violin[i], bins, range=ratiorange, weights=weights, density=True)
 		#
 		# data for plot_one_violin
-		xaxis = float(list_beamname[j].replace("p","."))
+		xaxis = float(list_beamname[i].replace("p","."))
 		xaxis_histo = np.delete(histo[1],-1)
 		yaxis_histo = histo[0]/(histo[0].max()*1.05)*2
 		step_histo = (ratiorange[1]-ratiorange[0]) / bins
@@ -147,9 +149,9 @@ fig,ax=plt.subplots(nrows=1,ncols=1,figsize=(9, 4),sharey=True)
 # preparation
 color = cm.brg(i/2.5)
 # unweighted plot violin
-weights = None
-x_absoffset = 0
-plot_multi_violins(ax,list_r21,bins,ratiorange,weights,list_beamname,color,x_absoffset)
+#weights = None
+#x_absoffset = 0
+#plot_multi_violins(ax,list_r21,bins,ratiorange,weights,list_beamname,color,x_absoffset)
 weights = list_co10
 x_absoffset = 24.0
 plot_multi_violins(ax,list_r21,bins,ratiorange,weights,list_beamname,color,x_absoffset)
