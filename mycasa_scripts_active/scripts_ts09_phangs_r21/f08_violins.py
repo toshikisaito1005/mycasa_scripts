@@ -87,8 +87,22 @@ for i in [0]:
 weights = None
 beamsize = float(list_beamname[i].replace("p","."))
 
+histo = np.histogram(list_r21[0],bins,range=ratiorange,weights=weights,density=True)
+# import x and y data
+x = np.delete(histo[1],-1)
+y = histo[0]/(histo[0].max()*1.05)*2
+xval = 10.
+color = cm.brg(i/2.5)
+
+# plot
 fig,ax=plt.subplots(nrows=1,ncols=1,figsize=(9, 4),sharey=True)
-histo = np.histogram(list_co10[0],bins,range=ratiorange,weights=weights,density=True)
+# preparation
+step = (ratiorange[1]-ratiorange[0]) / bins
+# plot violin
+ax.plot(y+xval,x,drawstyle="steps",color=color)
+ax.plot(y*-1+xval,x,drawstyle="steps",color=color)
+ax.barh(x,y,height=step,lw=0,color=color,alpha=0.4,left=xval)
+ax.barh(x,y*-1,height=step,lw=0,color=color,alpha=0.4,left=xval)
 
-
+plt.savefig(dir_proj+"eps/"+gals[i]+"_violin_co21.png")
 
