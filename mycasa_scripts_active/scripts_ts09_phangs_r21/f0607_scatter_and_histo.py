@@ -116,14 +116,16 @@ def plot_scatter(
 	ax.grid(axis="both")
 	ax.set_ylabel(ylabel)
 	ax.set_xscale("log")
-	ax.set_yscale("log")
 	#
 	axb.tick_params(labelbottom=False,labelleft=False)
 	axb.set_xlim(xlim)
 	axb.set_ylim(ylim)
 	axb.set_xlabel(xlabel)
 	axb.set_xscale("log")
-	axb.set_yscale("log")
+	#
+	if annotation=="flux":
+		ax.set_yscale("log")
+		axb.set_yscale("log")
 	#
 	### plot data
 	for i in range(len(list_x)):
