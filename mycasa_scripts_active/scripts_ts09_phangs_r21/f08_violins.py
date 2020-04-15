@@ -17,7 +17,7 @@ plt.ioff()
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-bins = 100
+bins = 50
 r21range = [0.0,1.5]
 fontsize_general = 15
 fontsize_legend = 13
@@ -113,19 +113,19 @@ def plot_all_violins(
 	bins,
 	r21range,
 	list_beam,
-	color
+	color,
 	):
 	"""
 	"""
-	# unweighted
+	#
 	weights = None
 	plot_multi_violins(ax1,list_r21,bins,r21range,weights,list_beam,color,0.0)
-	# co10-weighted
+	#
 	weights = list_co10
-	plot_multi_violins(ax1,list_r21,bins,r21range,weights,list_beam,color,24.0)
-	# co21-weighted
+	plot_multi_violins(ax1,list_r21,bins,r21range,weights,list_beam,color,23.0)
+	#
 	weights = list_co21
-	plot_multi_violins(ax1,list_r21,bins,r21range,weights,list_beam,color,48.0)
+	plot_multi_violins(ax1,list_r21,bins,r21range,weights,list_beam,color,46.0)
 
 
 #####################
@@ -163,17 +163,20 @@ for i in [0]:
 
 
 ### plot
-plt.subplots(nrows=1,ncols=1,figsize=(9, 6),sharey=True)
+plt.subplots(nrows=1,ncols=1,figsize=(9, 7),sharey=True)
 plt.rcParams["font.size"] = fontsize_general
 plt.rcParams["legend.fontsize"] = fontsize_legend
+plt.subplots_adjust(bottom=0.10, left=0.10, right=0.95, top=0.95)
 gs = gridspec.GridSpec(nrows=18, ncols=18)
 ax1 = plt.subplot(gs[0:6,0:18])
 ax2 = plt.subplot(gs[6:12,0:18])
 ax3 = plt.subplot(gs[12:18,0:18])
 # preparation
+ax.set_ylim(r21range)
 color = cm.brg(i/2.5)
-
+plot_all_violins(ax1,list_r21,bins,r21range,list_beam,color)
 #
-plt.savefig(dir_proj+"eps/"+gals[i]+"_violin_co21.png")
+plt.savefig(dir_proj+"eps/violin_co21.png")
 
+os.system("rm -rf *.last")
 
