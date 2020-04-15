@@ -144,7 +144,14 @@ def plot_scatter(
 		# plot error bar
 		mean_snr_x = np.mean(snr_x)
 		mean_snr_y = np.mean(snr_y)
-		
+		posx = 1.25
+		posy = -0.75
+		bar_right  = np.log10(10**posx + 10**posx/mean_snr_x)
+		bar_left   = np.log10(10**posx - 10**posx/mean_snr_x)
+		bar_top    = np.log10(10**posy + 10**posy/mean_snr_y)
+		bar_bottom = np.log10(10**posy - 10**posy/mean_snr_y)
+
+		ax.plot([bar_left,bar_right],[bar_bottom,bar_top],color=color)
 		#
 	# plot annotation
 	if annotation=="flux":
