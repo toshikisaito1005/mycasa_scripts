@@ -101,8 +101,8 @@ def plot_scatter(
 	axb,
 	list_x,
 	list_y,
-	err_x,
-	err_y,
+	snr_x,
+	snr_y,
 	list_beamname,
 	xlim,
 	ylim,
@@ -141,6 +141,10 @@ def plot_scatter(
 		if i==0:
 			binx, mean, std = get_binned_dist(x,y,binrange)
 			ax.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
+		# plot error bar
+		mean_snr_x = np.mean(snr_x)
+		mean_snr_y = np.mean(snr_y)
+		
 		#
 	# plot annotation
 	if annotation=="flux":
@@ -344,6 +348,9 @@ for i in [0]:
 	list_errco10 = []
 	list_errco21 = []
 	list_errr21 = []
+	list_snrco10 = []
+	list_snrco21 = []
+	list_snrr21 = []
 	list_beamname = []
 	statslist_co10 = []
 	statslist_co21 = []
@@ -368,6 +375,9 @@ for i in [0]:
 			= get_co_intensities(image_co10,image_co21,noise_co10,noise_co21,beamfloat)
 		r21 = co21/co10
 		err_r21 = r21 * np.sqrt((err_co10/co10)**2 + (err_co21/co21)**2)
+		snr_co10 = co10 / err_co10
+		snr_co21 = co21 / err_co21
+		snr_r21 = r21 / err_r21
 		# stats
 		stats_co10 = get_percentiles(co10)
 		stats_co21 = get_percentiles(co21)
@@ -379,6 +389,9 @@ for i in [0]:
 		list_errco10.append(err_co10)
 		list_errco21.append(err_co21)
 		list_errr21.append(err_r21)
+		list_snrco10.append(snr_co10)
+		list_snrco21.append(snr_co21)
+		list_snrr21.append(snr_r21)
 		statslist_co10.append(stats_co10)
 		statslist_co21.append(stats_co21)
 		statslist_r21.append(stats_r21)
@@ -399,7 +412,7 @@ for i in [0]:
 	ax2b = ax2.twinx()
 	# ax1 and ax1b
 	plot_scatter(
-		ax1, ax1b, list_co10, list_co21, list_errco10, list_errco21, list_beamname,
+		ax1, ax1b, list_co10, list_co21, list_snrco10, list_snrco21, list_beamname,
 		xlim[i], ylim[i], xlabel, ylabel, text, galname2,
 		)
 	plot_threshold(
