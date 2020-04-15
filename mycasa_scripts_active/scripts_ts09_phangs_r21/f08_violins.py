@@ -136,7 +136,7 @@ def plot_all_violins(
 ### Main Procedure
 #####################
 ### plot
-plt.subplots(nrows=1,ncols=1,figsize=(9, 7),sharey=True)
+plt.subplots(nrows=1,ncols=1,figsize=(9, 9),sharey=True)
 plt.rcParams["font.size"] = fontsize_general
 plt.rcParams["legend.fontsize"] = fontsize_legend
 plt.subplots_adjust(bottom=0.10, left=0.10, right=0.95, top=0.95)
@@ -150,7 +150,8 @@ ax3.set_ylim(r21range)
 ax1.grid(axis="y")
 ax2.grid(axis="y")
 ax3.grid(axis="y")
-
+#
+ax_master = [ax1, ax2, ax3]
 for i in range(len(gals)):
 #for i in [0]:
 	list_co10 = []
@@ -186,7 +187,9 @@ for i in range(len(gals)):
 		#
 	# plot
 	color = cm.brg(i/2.5)
-	plot_all_violins(ax1,list_r21[i],bins,r21range,list_beam[i],color,list_co10[i],list_co21[i])
+	plot_all_violins(
+		ax_master[i],list_r21,bins,r21range,list_beam,color,list_co10,list_co21,
+		)
 	#
 plt.savefig(dir_proj+"eps/violin_co21.png")
 
