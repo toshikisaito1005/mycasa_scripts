@@ -136,7 +136,7 @@ def plot_all_violins(
 ### Main Procedure
 #####################
 ### plot
-plt.subplots(nrows=1,ncols=1,figsize=(9, 9),sharey=True)
+plt.subplots(nrows=1,ncols=1,figsize=(9, 4),sharey=True)
 plt.rcParams["font.size"] = fontsize_general
 plt.rcParams["legend.fontsize"] = fontsize_legend
 plt.subplots_adjust(bottom=0.10, left=0.10, right=0.95, top=0.95)
