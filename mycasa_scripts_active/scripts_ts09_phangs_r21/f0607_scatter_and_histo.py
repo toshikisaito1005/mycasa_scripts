@@ -28,9 +28,6 @@ fontsize_legend = 13
 gals = ["ngc0628",
 		"ngc3627",
 		"ngc4321"]
-noisedata = [dir_proj + "eps/ngc0628_noise.txt",
-			 dir_proj + "eps/ngc3627_noise.txt",
-			 dir_proj + "eps/ngc4321_noise.txt"]
 xlim = [[-1.2,1.8],
 		[-0.7,2.7],
 		[-0.7,2.7]]
@@ -321,24 +318,23 @@ def plot_hist_bottom(
 
 def plot_threshold(
 	ax,
-	noisedata,
+	list_noise_x,
+	list_noise_y,
 	xlim,
 	ylim,
 	list_x,
 	):
 	"""
 	"""
-	data = np.loadtxt(noisedata)
-	beam = data[:,0]
-	co10rms = data[:,1]
-	co21rms = data[:,2]
 	# plot
 	for i in range(len(list_x)):
+		noise_x = np.median(list_noise_x[i])
+		noise_y = np.median(list_noise_y[i])
 		color = cm.gnuplot(i/8.)
-		ax.plot([np.log10(co10rms[i] * 3.0), np.log10(co10rms[i] * 3.0)],
+		ax.plot([np.log10(noise_x * 3.0), np.log10(noise_x * 3.0)],
 			ylim, "-", color = color, alpha=0.5)
 		ax.plot(xlim,
-			[np.log10(co21rms[i] * 3.0), np.log10(co21rms[i] * 3.0)],
+			[np.log10(noise_y * 3.0), np.log10(noise_y * 3.0)],
 			"-", color = color, alpha=0.5)
 
 
@@ -418,21 +414,12 @@ for i in [0]:
 	ax1b = ax1.twiny()
 	ax2b = ax2.twinx()
 	# ax1 and ax1b
-	plot_scatter(
-		ax1, ax1b, list_co10, list_co21, list_snrco10, list_snrco21, list_beamname,
-		xlim[i], ylim[i], xlabel, ylabel, text, galname2,
-		)
-	plot_threshold(
-		ax1, noisedata[i], xlim[i], ylim[i], list_co10,
-		)
+	plot_scatter(ax1, ax1b, list_co10, list_co21, list_snrco10, list_snrco21, list_beamname,xlim[i], ylim[i], xlabel, ylabel, text, galname2)
+	plot_threshold(ax1, list_errco10, list_errco21, xlim[i], ylim[i], list_co10)
 	# ax2 and ax2b
-	plot_hist_right(
-		ax2, ax2b, list_co21, statslist_co21, list_beamname, ylim[i], ylabel,
-		)
+	plot_hist_right(ax2, ax2b, list_co21, statslist_co21, list_beamname, ylim[i], ylabel)
 	# ax3
-	plot_hist_bottom(
-		ax3, list_co10, statslist_co10, list_beamname, xlim[i], xlabel,
-		)
+	plot_hist_bottom(ax3, list_co10, statslist_co10, list_beamname, xlim[i], xlabel)
 	#
 	plt.savefig(dir_proj+"eps/" + galname + "_co10_vs_co21.png",dpi=200)
 
