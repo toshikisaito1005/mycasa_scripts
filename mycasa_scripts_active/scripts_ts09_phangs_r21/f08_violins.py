@@ -53,6 +53,15 @@ def get_co_intensities(image_co10,image_co21,beamfloat):
 
 	return data_co10_Kelvin, data_co21_Kelvin
 
+def get_percentiles(data,wehgits):
+	"""
+	"""
+	median = np.median(data)
+	p16 = np.percentile(data,16)
+	p84 = np.percentile(data,84)
+
+	return [p84, median, p16]
+
 def plot_one_violin(
 	ax,
 	x,
@@ -67,6 +76,14 @@ def plot_one_violin(
 	ax.plot(yhisto*-1+x, xhisto, drawstyle="steps", color=color)
 	ax.barh(xhisto, yhisto, height=step, lw=0, color=color, alpha=0.4, left=x)
 	ax.barh(xhisto, yhisto*-1, height=step, lw=0, color=color, alpha=0.4, left=x)
+
+def plot_stats_track(
+	ax,
+
+	):
+	"""
+	"""
+
 
 def plot_multi_violins(
 	ax,
@@ -85,10 +102,13 @@ def plot_multi_violins(
 		#
 		# data for plot_one_violin
 		xaxis = float(list_beamname[j].replace("p","."))
-		xhisto = np.delete(histo[1],-1)
-		yhisto = histo[0]/(histo[0].max()*1.05)*2
-		step = (ratiorange[1]-ratiorange[0]) / bins
-		plot_one_violin(ax, xaxis, xhisto, yhisto, step, color)
+		xaxis_histo = np.delete(histo[1],-1)
+		yaxis_histo = histo[0]/(histo[0].max()*1.05)*2
+		step_histo = (ratiorange[1]-ratiorange[0]) / bins
+		# plot each violin
+		plot_one_violin(ax, xaxis, xaxis_histo, yaxis_histo, step_histo, color)
+		# plot stats
+
 
 
 #####################
@@ -100,6 +120,9 @@ for i in [0]:
 	list_co21 = []
 	list_r21 = []
 	list_beamname = []
+	statslist_co10 = []
+	statslist_co21 = []
+	statslist_r21 = []
 	#
 	galname = gals[i]
 	galname2 = gals[i].replace("ngc","for NGC ")
@@ -115,6 +138,10 @@ for i in [0]:
 		co10, co21 \
 			= get_co_intensities(image_co10,image_co21,beamfloat)
 		r21 = co21/co10
+		# stats
+		stats_co10 = get_percentiles(co10)
+		stats_co21 = get_percentiles(co21)
+		stats_r21 = get_percentiles(r21)
 		# save to list
 		list_co10.append(co10)
 		list_co21.append(co21)
