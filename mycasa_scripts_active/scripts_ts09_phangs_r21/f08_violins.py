@@ -22,15 +22,15 @@ fontsize_legend = 13
 gals = ["ngc0628",
 		"ngc3627",
 		"ngc4321"]
-beam = [[4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0],
-        [8.0,10.0,12.0,14.0,16.0,18.0,20.0,22.0,24.0],
-        [4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0]]
+beam = [[4.0,8.0,12.0,16.0,20.0],
+        [8.0,12.0,16.0,20.0,24.0],
+        [4.0,8.0,12.0,16.0,20.0]]
 
 
 #####################
 ### functions
 #####################
-def get_co_intensities(image_co10,image_co21,noise_co10,noise_co21,beamfloat):
+def get_co_intensities(image_co10,image_co21,beamfloat):
 	"""
 	"""
 	# get image shape
@@ -39,34 +39,46 @@ def get_co_intensities(image_co10,image_co21,noise_co10,noise_co21,beamfloat):
 	# imval
 	data_co10_tmp = imval(image_co10,box=box)["data"].flatten()
 	data_co21_tmp = imval(image_co21,box=box)["data"].flatten()
-	data_noise_co10_tmp = imval(noise_co10,box=box)["data"].flatten()
-	data_noise_co21_tmp = imval(noise_co21,box=box)["data"].flatten()
 	# cut pixel = 0
-	cut_data = np.where((data_co10_tmp>0) & (data_co21_tmp>0) & (data_noise_co10_tmp>0) & (data_noise_co21_tmp>0))
+	cut_data = np.where((data_co10_tmp>0) & (data_co21_tmp>0))
 	data_co10 = data_co10_tmp[cut_data]
 	data_co21 = data_co21_tmp[cut_data]
-	noise_co10 = data_noise_co10_tmp[cut_data]
-	noise_co21 = data_noise_co21_tmp[cut_data]
 	# Jy-to-K
 	co10_jy2k = 1.222e6 / beamfloat**2 / 115.27120**2
 	co21_jy2k = 1.222e6 / beamfloat**2 / 230.53800**2
 	data_co10_Kelvin = data_co10 * co10_jy2k
 	data_co21_Kelvin = data_co21 * co21_jy2k
-	data_noise_co10_Kelvin = noise_co10 * co10_jy2k
-	data_noise__Kelvin = noise_co21 * co21_jy2k
 
-	return data_co10_Kelvin, data_co21_Kelvin, data_noise_co10_Kelvin, data_noise__Kelvin
+	return data_co10_Kelvin, data_co21_Kelvin
 
 
 #####################
 ### Main Procedure
 #####################
-for i in range(len(gals)):
+#for i in range(len(gals)):
+for i in [0]:
 	list_co10 = []
 	list_co21 = []
 	list_r21 = []
+	list_beamname = []
+	#
+	galname = gals[i]
+	galname2 = gals[i].replace("ngc","for NGC ")
+	dir_gal = dir_proj + galname
 	for j in range(len(beam[i])):
-
-
-
+		beamname = str(beam[i][j]).replace(".","p").zfill(4)
+		print("# " + galname + " " + beamname)
+		beamfloat = float(beam[i][j])
+		# co intensities (K.km/s)
+		image_co10 = dir_gal + "_co10/co10_" + beamname + ".moment0"
+		image_co21 = dir_gal + "_co21/co21_" + beamname + ".moment0"
+		# get values
+		co10, co21 \
+			= get_co_intensities(image_co10,image_co21,beamfloat)
+		r21 = co21/co10
+		# save to list
+		list_co10.append(co10)
+		list_co21.append(co21)
+		list_r21.append(r21)
+		list_beamname.append(beamname)
 
