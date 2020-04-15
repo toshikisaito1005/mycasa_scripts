@@ -18,7 +18,7 @@ plt.ioff()
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 bins = 50
-r21range = [0.0,1.5]
+r21range = [0.05,1.45]
 fontsize_general = 15
 fontsize_legend = 13
 gals = ["ngc0628",
@@ -70,13 +70,14 @@ def plot_one_violin(
 	yhisto,
 	step,
 	color,
+	alpha,
 	):
 	"""
 	"""
 	ax.plot(yhisto+x+x_absoffset, xhisto, drawstyle="steps", color=color)
 	ax.plot(yhisto*-1+x+x_absoffset, xhisto, drawstyle="steps", color=color)
-	ax.barh(xhisto, yhisto, height=step, lw=0, color=color, alpha=0.4, left=x+x_absoffset)
-	ax.barh(xhisto, yhisto*-1, height=step, lw=0, color=color, alpha=0.4, left=x+x_absoffset)
+	ax.barh(xhisto, yhisto, height=step, lw=0, color=color, alpha=alpha, left=x+x_absoffset)
+	ax.barh(xhisto, yhisto*-1, height=step, lw=0, color=color, alpha=alpha, left=x+x_absoffset)
 
 def plot_multi_violins(
 	ax,
@@ -86,6 +87,7 @@ def plot_multi_violins(
 	weights,
 	list_beam,
 	color,
+	alpha,
 	x_absoffset,
 	):
 	"""
@@ -104,7 +106,7 @@ def plot_multi_violins(
 		step_histo = (ratiorange[1]-ratiorange[0]) / bins
 		#
 		# plot each violin
-		plot_one_violin(ax, xaxis, x_absoffset, xaxis_histo, yaxis_histo, step_histo, color)
+		plot_one_violin(ax, xaxis, x_absoffset, xaxis_histo, yaxis_histo, step_histo, color, alpha)
 		# plot stats
 
 def plot_all_violins(
@@ -114,18 +116,20 @@ def plot_all_violins(
 	r21range,
 	list_beam,
 	color,
+	weights1,
+	weights2,
 	):
 	"""
 	"""
 	#
 	weights = None
-	plot_multi_violins(ax1,list_r21,bins,r21range,weights,list_beam,color,0.0)
+	plot_multi_violins(ax1,list_r21,bins,r21range,weights,list_beam,color,0.7,0.0)
 	#
-	weights = list_co10
-	plot_multi_violins(ax1,list_r21,bins,r21range,weights,list_beam,color,23.0)
+	weights = weights1
+	plot_multi_violins(ax1,list_r21,bins,r21range,weights,list_beam,color,0.4,23.0)
 	#
-	weights = list_co21
-	plot_multi_violins(ax1,list_r21,bins,r21range,weights,list_beam,color,46.0)
+	weights = weights2
+	plot_multi_violins(ax1,list_r21,bins,r21range,weights,list_beam,color,0.1,46.0)
 
 
 #####################
@@ -171,10 +175,12 @@ gs = gridspec.GridSpec(nrows=18, ncols=18)
 ax1 = plt.subplot(gs[0:6,0:18])
 ax2 = plt.subplot(gs[6:12,0:18])
 ax3 = plt.subplot(gs[12:18,0:18])
-# preparation
-ax.set_ylim(r21range)
+ax1.set_ylim(r21range)
+ax1.grid(axis="y")
+# ngc0628
+i=0
 color = cm.brg(i/2.5)
-plot_all_violins(ax1,list_r21,bins,r21range,list_beam,color)
+plot_all_violins(ax1,list_r21,bins,r21range,list_beam,color,list_co10,list_co21)
 #
 plt.savefig(dir_proj+"eps/violin_co21.png")
 
