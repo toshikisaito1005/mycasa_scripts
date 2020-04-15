@@ -74,8 +74,8 @@ def plot_one_violin(
 	):
 	"""
 	"""
-	ax.plot(yhisto+x+x_absoffset, xhisto, drawstyle="steps", color=color)
-	ax.plot(yhisto*-1+x+x_absoffset, xhisto, drawstyle="steps", color=color)
+	ax.plot(yhisto+x+x_absoffset, xhisto, drawstyle="steps", color=color, lw=0.5)
+	ax.plot(yhisto*-1+x+x_absoffset, xhisto, drawstyle="steps", color=color, lw=0.5)
 	ax.barh(xhisto, yhisto, height=step, lw=0, color=color, alpha=alpha, left=x+x_absoffset)
 	ax.barh(xhisto, yhisto*-1, height=step, lw=0, color=color, alpha=alpha, left=x+x_absoffset)
 
@@ -96,6 +96,7 @@ def plot_multi_violins(
 		# make histogram
 		if weights==None:
 			histo = np.histogram(list_violin[i], bins, range=ratiorange, weights=None, density=True)
+
 		else:
 			histo = np.histogram(list_violin[i], bins, range=ratiorange, weights=weights[i], density=True)
 			#
@@ -136,20 +137,24 @@ def plot_all_violins(
 ### Main Procedure
 #####################
 ### plot
-plt.subplots(nrows=1,ncols=1,figsize=(9, 4),sharey=True)
+plt.subplots(nrows=1,ncols=1,figsize=(10, 5),sharey=True)
 plt.rcParams["font.size"] = fontsize_general
 plt.rcParams["legend.fontsize"] = fontsize_legend
 plt.subplots_adjust(bottom=0.10, left=0.10, right=0.95, top=0.95)
 gs = gridspec.GridSpec(nrows=18, ncols=18)
-ax1 = plt.subplot(gs[0:6,0:18])
-ax2 = plt.subplot(gs[6:12,0:18])
-ax3 = plt.subplot(gs[12:18,0:18])
+ax1 = plt.subplot(gs[0:6,0:8])
+ax2 = plt.subplot(gs[6:12,0:8])
+ax3 = plt.subplot(gs[12:18,0:8])
+ax3 = plt.subplot(gs[12:18,0:8])
 ax1.set_ylim(r21range)
 ax2.set_ylim(r21range)
 ax3.set_ylim(r21range)
 ax1.grid(axis="y")
 ax2.grid(axis="y")
 ax3.grid(axis="y")
+ax1.set_xlim([0,70])
+ax2.set_xlim([4,74])
+ax3.set_xlim([0,70])
 #
 ax_master = [ax1, ax2, ax3]
 for i in range(len(gals)):
