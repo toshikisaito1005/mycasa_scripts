@@ -141,7 +141,7 @@ def plot_scatter(
 		# plot error bar
 		mean_snr_x = np.mean(snr_x[i])
 		mean_snr_y = np.mean(snr_y[i])
-		posx = xlim[0]+(xlim[1]-xlim[0])*0.6
+		posx = xlim[0]+(xlim[1]-xlim[0])*0.6 + i*0.13
 		posy = ylim[1]-(ylim[1]-ylim[0])*0.9
 		#
 		bar_right  = np.log10(10**posx + 10**posx/mean_snr_x)

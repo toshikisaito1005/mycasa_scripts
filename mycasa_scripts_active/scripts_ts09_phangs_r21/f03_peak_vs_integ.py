@@ -88,14 +88,14 @@ for i in range(len(gals)):
 		capsize=0,
 		)
 	[bar.set_alpha(0.5) for bar in bars]
-	plt.plot([10**-1.6,10**0.7],[10**-1.6,10**0.7],"k-",lw=1.5)
-	plt.plot([10**-1.6,10**0.7],[10**-1.6*0.775,10**0.7*0.775],"--",c="blue",alpha=0.5,lw=1)
-	plt.plot([10**-1.6,10**0.7],[10**-1.6*0.925,10**0.7*0.925],"--",c="green",alpha=0.5,lw=1)
-	plt.plot([10**-1.6,10**0.7],[10**-1.6*1.075,10**0.7*1.075],"--",c="red",alpha=0.5,lw=1)
+	plt.plot([10**-1.6,10**1.0],[10**-1.6,10**1.0],"k-",lw=1.5)
+	plt.plot([10**-1.6,10**1.0],[10**-1.6*0.775,10**1.0*0.775],"--",c="blue",alpha=0.5,lw=1)
+	plt.plot([10**-1.6,10**1.0],[10**-1.6*0.925,10**1.0*0.925],"--",c="green",alpha=0.5,lw=1)
+	plt.plot([10**-1.6,10**1.0],[10**-1.6*1.075,10**1.0*1.075],"--",c="red",alpha=0.5,lw=1)
 	plt.xlabel("log Integrated Intensity Ratio")
 	plt.ylabel("log Peak Temperature Ratio")
-	plt.xticks([0.1,1,10],[-1,0,1])
-	plt.yticks([0.1,1,10],[-1,0,1])
+	plt.xticks([0.1,1],[-1,0])
+	plt.yticks([0.1,1],[-1,0])
 	plt.legend(loc = "upper left")
 
 	histo.extend(p21/r21)
@@ -110,7 +110,7 @@ p21err_all = np.array(p21err_all)
 p2rerr = p2r * np.sqrt((r21err_all/r21_all)**2 + (p21err_all/p21_all)**2)
 
 correlation = np.corrcoef(r21_all,p21_all)[0,1]
-plt.text(3.7,0.03,'$\\rho$ = ' + str(np.round(correlation, 2)),fontsize=14)
+plt.text(2.5,0.07,'$\\rho$ = ' + str(np.round(correlation, 2)),fontsize=14)
 
 a = plt.axes([.16, .68, .3, .2])
 plt.plot([0.45,0.45+np.median(p2rerr)],[2200,2200],"k-",lw=2)
