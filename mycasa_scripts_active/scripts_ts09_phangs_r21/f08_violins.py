@@ -151,6 +151,9 @@ ax6 = plt.subplot(gs[12:18,15:25])
 ax1.set_ylim(r21range)
 ax2.set_ylim(r21range)
 ax3.set_ylim(r21range)
+ax4.set_ylim(r21range)
+ax5.set_ylim(r21range)
+ax6.set_ylim(r21range)
 ax1.grid(axis="y")
 ax2.grid(axis="y")
 ax3.grid(axis="y")
@@ -167,19 +170,15 @@ ax1.tick_params(labelbottom=False)
 ax2.tick_params(labelbottom=False)
 ax4.tick_params(labelbottom=False)
 ax5.tick_params(labelbottom=False)
-ax1.set_yticks([0.2,0.5,0.8,1.1,1.4])
-ax2.set_yticks([0.2,0.5,0.8,1.1,1.4])
-ax3.set_yticks([0.2,0.5,0.8,1.1,1.4])
-ax4.set_yticks([0.2,0.5,0.8,1.1,1.4])
-ax5.set_yticks([0.2,0.5,0.8,1.1,1.4])
-ax6.set_yticks([0.2,0.5,0.8,1.1,1.4])
+ax1.set_yticks([0.3,0.6,0.9,1.2])
+ax2.set_yticks([0.3,0.6,0.9,1.2])
+ax3.set_yticks([0.3,0.6,0.9,1.2])
+ax4.set_yticks([0.3,0.6,0.9,1.2])
+ax5.set_yticks([0.3,0.6,0.9,1.2])
+ax6.set_yticks([0.3,0.6,0.9,1.2])
 ax3.set_xticks(
-	[4,8,12,16,20,
-	 4+23,8+23,12+23,16+23,20+23,
-	 4+46,8+46,12+46,16+46,20+46],
-	[1,2,3,4,5,
-	 1,2,3,4,5,
-	 1,2,3,4,5])
+	[4,8,12,16,20],
+	["1","2","3","4","5"])
 #
 ax_master = [ax1, ax2, ax3]
 for i in range(len(gals)):
