@@ -98,14 +98,6 @@ def plot_one_violin(
 	ax.barh(xhisto, yhisto, height=step, lw=0, color=color, alpha=alpha, left=x+x_absoffset)
 	ax.barh(xhisto, yhisto*-1, height=step, lw=0, color=color, alpha=alpha, left=x+x_absoffset)
 
-def plot_multi_medians(
-	ax,
-	list_xaxis,
-	list_median,
-	x_absoffset,
-	):
-	ax.plot(np.array(list_xaxis)+x_absoffset,list_median,"o-")
-
 def plot_multi_violins(
 	ax,
 	list_violin,
@@ -141,9 +133,11 @@ def plot_multi_violins(
 	if weights==None:
 		list_median = [np.median(s) for s in list_violin]
 	else:
-		list_median = [np.median(s) for s in list_violin]
+		list_median = []
+		for j in range(len(list_violin)):
+			list_median.append(weighted_percentile(list_violin[j],0.5,weights[j]))
 	# plot stats
-	plot_multi_medians(ax, list_xaxis, list_median, x_absoffset)
+	ax.plot(np.array(list_xaxis)+x_absoffset,list_median,"o-")
 
 def plot_all_violins(
 	ax,
