@@ -81,6 +81,18 @@ def weighted_percentile(
 
 	return w_median
 
+def get_percentiles(
+	data,
+	weights,
+	):
+	"""
+	"""
+	p84 = weighted_percentile(data,0.84,weights)
+	p50 = weighted_percentile(data,0.50,weights)
+	p16 = weighted_percentile(data,0.16,weights)
+
+	return [p84, p50, p16]
+
 def plot_one_violin(
 	ax,
 	x,
@@ -163,11 +175,6 @@ def plot_all_violins(
 	weights = weights2
 	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.1,46.0)
 
-def plot_stats(
-	):
-	"""
-	"""
-	tets
 
 #####################
 ### Main Procedure
@@ -221,9 +228,9 @@ for i in range(len(gals)):
 	list_co21 = []
 	list_r21 = []
 	list_beam = []
-	statslist_co10 = []
-	statslist_co21 = []
 	statslist_r21 = []
+	statslist_r21_wco10 = []
+	statslist_r21_wco21 = []
 	#
 	galname = gals[i]
 	galname2 = gals[i].replace("ngc","for NGC ")
@@ -242,14 +249,18 @@ for i in range(len(gals)):
 			= get_co_intensities(image_co10,image_co21,beamfloat)
 		r21 = co21/co10
 		#
+		# stats
+		stats_r21 = get_percentiles(r21, None)
+		stats_r21_wco10 = get_percentiles(r21, co10)
+		stats_r21_wco21 = get_percentiles(r21, co21)
 		# save to list
 		list_co10.append(co10)
 		list_co21.append(co21)
 		list_r21.append(r21)
 		list_beam.append(beamname)
-		statslist_co10
-		statslist_co21
-		statslist_r21
+		statslist_r21.append(stats_r21)
+		statslist_r21_wco10.append(stats_r21_wco10)
+		statslist_r21_wco21.append(stats_r21_wco21)
 		#
 	# plot
 	color = cm.brg(i/2.5)
