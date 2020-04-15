@@ -42,7 +42,7 @@ r21err_all = []
 p21err_all = []
 for i in range(len(gals)):
 	galname = gals[i]
-	data = np.loadtxt(dir_data + galname + "_parameter_matched_res.txt")
+	data = np.loadtxt(dir_product + galname + "_parameter_matched_res.txt")
 
 	r21 = data[:,1]
 	r21[np.isnan(r21)] = 0
@@ -72,8 +72,8 @@ for i in range(len(gals)):
 	plt.grid()
 	plt.xscale("log")
 	plt.yscale("log")
-	plt.xlim([10**-1.6,10**1.0])
-	plt.ylim([10**-1.6,10**1.0])
+	plt.xlim([10**-1.2,10**0.7])
+	plt.ylim([10**-1.2,10**0.7])
 	markers, caps, bars = plt.errorbar(
 		x = r21,
 		xerr = r21err,
@@ -88,10 +88,10 @@ for i in range(len(gals)):
 		capsize=0,
 		)
 	[bar.set_alpha(0.5) for bar in bars]
-	plt.plot([10**-1.6,10**1.0],[10**-1.6,10**1.0],"k-",lw=1.5)
-	plt.plot([10**-1.6,10**1.0],[10**-1.6*0.775,10**1.0*0.775],"--",c="blue",alpha=0.5,lw=1)
-	plt.plot([10**-1.6,10**1.0],[10**-1.6*0.925,10**1.0*0.925],"--",c="green",alpha=0.5,lw=1)
-	plt.plot([10**-1.6,10**1.0],[10**-1.6*1.075,10**1.0*1.075],"--",c="red",alpha=0.5,lw=1)
+	plt.plot([10**-1.6,10**0.7],[10**-1.6,10**0.7],"k-",lw=1.5)
+	plt.plot([10**-1.6,10**0.7],[10**-1.6*0.775,10**0.7*0.775],"--",c="blue",alpha=0.5,lw=1)
+	plt.plot([10**-1.6,10**0.7],[10**-1.6*0.925,10**0.7*0.925],"--",c="green",alpha=0.5,lw=1)
+	plt.plot([10**-1.6,10**0.7],[10**-1.6*1.075,10**0.7*1.075],"--",c="red",alpha=0.5,lw=1)
 	plt.xlabel("log Integrated Intensity Ratio")
 	plt.ylabel("log Peak Temperature Ratio")
 	plt.xticks([0.1,1,10],[-1,0,1])
