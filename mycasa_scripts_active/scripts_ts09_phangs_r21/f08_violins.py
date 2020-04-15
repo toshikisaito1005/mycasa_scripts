@@ -157,6 +157,10 @@ ax3.grid(axis="y")
 ax1.set_xlim([0,70])
 ax2.set_xlim([4,74])
 ax3.set_xlim([0,70])
+ax1.spines["bottom"].set_color("none")
+ax2.spines["bottom"].set_color("none")
+ax4.spines["bottom"].set_color("none")
+ax5.spines["bottom"].set_color("none")
 #
 ax_master = [ax1, ax2, ax3]
 for i in range(len(gals)):
