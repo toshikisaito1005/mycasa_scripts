@@ -139,8 +139,8 @@ def plot_scatter(
 		# plot
 		#ax.scatter(x, y, color=color, alpha=0.4, s=20, lw=0, label = beam)
 		ax.errorbar(
-			x, y, xerr=ex, yerr=ey, capsize=0, color=color, markersize=0,
-			label=beam, fmt="o",
+			x, y, xerr=ex, yerr=ey, capsize=0, color=color, markersize=3,
+			label=beam, fmt="o", markeredgewidth=0,
 			)
 		if i==0:
 			binx, mean, std = get_binned_dist(x,y,binrange)
