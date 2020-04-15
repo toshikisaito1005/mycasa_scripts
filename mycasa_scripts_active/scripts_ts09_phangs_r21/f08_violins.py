@@ -107,6 +107,26 @@ def plot_multi_violins(
 		plot_one_violin(ax, xaxis, x_absoffset, xaxis_histo, yaxis_histo, step_histo, color)
 		# plot stats
 
+def plot_all_violins(
+	ax,
+	list_r21,
+	bins,
+	r21range,
+	list_beam,
+	color
+	):
+	"""
+	"""
+	# unweighted
+	weights = None
+	plot_multi_violins(ax1,list_r21,bins,r21range,weights,list_beam,color,0.0)
+	# co10-weighted
+	weights = list_co10
+	plot_multi_violins(ax1,list_r21,bins,r21range,weights,list_beam,color,24.0)
+	# co21-weighted
+	weights = list_co21
+	plot_multi_violins(ax1,list_r21,bins,r21range,weights,list_beam,color,48.0)
+
 
 #####################
 ### Main Procedure
@@ -143,21 +163,16 @@ for i in [0]:
 
 
 ### plot
-fig,ax=plt.subplots(nrows=1,ncols=1,figsize=(9, 4),sharey=True)
+plt.subplots(nrows=1,ncols=1,figsize=(9, 6),sharey=True)
+plt.rcParams["font.size"] = fontsize_general
+plt.rcParams["legend.fontsize"] = fontsize_legend
+gs = gridspec.GridSpec(nrows=18, ncols=18)
+ax1 = plt.subplot(gs[0:6,0:18])
+ax2 = plt.subplot(gs[6:12,0:18])
+ax3 = plt.subplot(gs[12:18,0:18])
 # preparation
 color = cm.brg(i/2.5)
-# unweighted
-weights = None
-x_offset = 0
-plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,x_offset)
-# co10-weighted
-weights = list_co10
-x_offset = 24.0
-plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,x_offset)
-# co21-weighted
-weights = list_co21
-x_offset = 48.0
-plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,x_offset)
+
 #
 plt.savefig(dir_proj+"eps/"+gals[i]+"_violin_co21.png")
 
