@@ -115,24 +115,33 @@ def plot_scatter(
 	ax.set_ylim(ylim)
 	ax.grid(axis="both")
 	ax.set_ylabel(ylabel)
+	ax.set_xscale("log")
+	ax.set_yscale("log")
 	#
 	axb.tick_params(labelbottom=False,labelleft=False)
 	axb.set_xlim(xlim)
 	axb.set_ylim(ylim)
 	axb.set_xlabel(xlabel)
+	axb.set_xscale("log")
+	axb.set_yscale("log")
 	#
 	### plot data
 	for i in range(len(list_x)):
 		# preparation
-		x = np.log10(list_x[i])
-		y = np.log10(list_y[i])
+		x = list_x[i] # np.log10(list_x[i])
+		y = list_y[i] # np.log10(list_y[i])
+		ex = err_x[i] # np.log10(err_x[i])
+		ey = err_y[i] # np.log10(err_y[i])
 		beam = str(int(float(list_beamname[i].replace("p","."))))+"\""
 		color = cm.gnuplot(i/8.)
 		binrange = [x.min(),x.max()]
 		#
 		# plot
 		#ax.scatter(x, y, color=color, alpha=0.4, s=20, lw=0, label = beam)
-		ax.errorbar(x, y, )
+		ax.errorbar(
+			x, y, xerr=ex, yerr=ey, capsize=0, color=color, markersize=0,
+			label=beam,
+			)
 		if i==0:
 			binx, mean, std = get_binned_dist(x,y,binrange)
 			ax.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
@@ -356,8 +365,10 @@ for i in range(len(gals)):
 		noise_co21 = dir_gal + "_co21/co21_" + beamname + ".moment0.noise"
 		# get values
 		co10, co21 = get_co_intensities(image_co10,image_co21,beamfloat)
-		err_co10, err_co21 = get_co_intensities(noise_co10,noise_co21,beamfloat)
 		r21 = co21/co10
+		# get err
+		err_co10, err_co21 = get_co_intensities(noise_co10,noise_co21,beamfloat)
+		err_r21 = r21 * np.sqrt()
 		# stats
 		stats_co10 = get_percentiles(co10)
 		stats_co21 = get_percentiles(co21)
@@ -418,8 +429,8 @@ for i in range(len(gals)):
 	ax2b = ax2.twinx()
 	# ax1 and ax1b
 	plot_scatter(
-		ax1,ax1b,list_co21,list_r21,list_beamname,
-		ylim[i],ylim_r21[i],ylabel,ylabel_r21,text_r21,galname2,
+		ax1, ax1b, list_co21, list_r21, err_co21, err_r21, list_beamname,
+		ylim[i], ylim_r21[i], ylabel, ylabel_r21, text_r21,galname2,
 		annotation="ratio",
 		)
 	# ax2 and ax2b
