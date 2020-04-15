@@ -48,7 +48,7 @@ beam = [[4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0],
 #####################
 ### functions
 #####################
-def get_co_intensities(image_co10,image_co21,beamfloat):
+def get_co_intensities(image_co10,image_co21,noise_co10,noise_co21,beamfloat):
 	"""
 	"""
 	# get image shape
@@ -57,17 +57,25 @@ def get_co_intensities(image_co10,image_co21,beamfloat):
 	# imval
 	data_co10_tmp = imval(image_co10,box=box)["data"].flatten()
 	data_co21_tmp = imval(image_co21,box=box)["data"].flatten()
+	data_noise_co10_tmp = imval(noise_co10,box=box)["data"].flatten()
+	data_noise_co21_tmp = imval(noise_co21,box=box)["data"].flatten()
 	# cut pixel = 0
-	cut_data = np.where((data_co10_tmp>0) & (data_co21_tmp>0))
+	cut_int = np.where((data_co10_tmp>0) & (data_co21_tmp>0))
+	cut_noise = np.where((data_noise_co10_tmp>0) & (data_noise_co21_tmp>0))
+	cut_data = np.where(cut_int & cut_int)
 	data_co10 = data_co10_tmp[cut_data]
 	data_co21 = data_co21_tmp[cut_data]
+	noise_co10 = data_noise_co10_tmp[cut_data]
+	noise_co21 = data_noise_co21_tmp[cut_data]
 	# Jy-to-K
 	co10_jy2k = 1.222e6 / beamfloat**2 / 115.27120**2
 	co21_jy2k = 1.222e6 / beamfloat**2 / 230.53800**2
 	data_co10_Kelvin = data_co10 * co10_jy2k
 	data_co21_Kelvin = data_co21 * co21_jy2k
+	data_noise_co10_Kelvin = noise_co10 * co10_jy2k
+	data_noise__Kelvin = noise_co21 * co21_jy2k
 
-	return data_co10_Kelvin, data_co21_Kelvin
+	return data_co10_Kelvin, data_co21_Kelvin, data_noise_co10_Kelvin, data_noise__Kelvin
 
 def get_percentiles(data):
 	"""
@@ -356,10 +364,9 @@ for i in [0]:
 		noise_co10 = dir_gal + "_co10/co10_" + beamname + ".moment0.noise"
 		noise_co21 = dir_gal + "_co21/co21_" + beamname + ".moment0.noise"
 		# get values
-		co10, co21 = get_co_intensities(image_co10,image_co21,beamfloat)
+		co10, co21, err_co10, err_co21 = get_co_intensities(
+			image_co10,image_co21,noise_co10,noise_co21,beamfloat)
 		r21 = co21/co10
-		# get err
-		err_co10, err_co21 = get_co_intensities(noise_co10,noise_co21,beamfloat)
 		err_r21 = r21 * np.sqrt((err_co10/co10)**2 + (err_co21/co21)**2)
 		# stats
 		stats_co10 = get_percentiles(co10)
