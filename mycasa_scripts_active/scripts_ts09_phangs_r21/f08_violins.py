@@ -53,18 +53,19 @@ def get_co_intensities(image_co10,image_co21,beamfloat):
 
 	return data_co10_Kelvin, data_co21_Kelvin
 
+"""
 def get_percentiles(data,wehgits):
-	"""
-	"""
 	median = np.median(data)
 	p16 = np.percentile(data,16)
 	p84 = np.percentile(data,84)
 
 	return [p84, median, p16]
+"""
 
 def plot_one_violin(
 	ax,
 	x,
+	x_absoffset,
 	xhisto,
 	yhisto,
 	step,
@@ -72,18 +73,10 @@ def plot_one_violin(
 	):
 	"""
 	"""
-	ax.plot(yhisto+x, xhisto, drawstyle="steps", color=color)
-	ax.plot(yhisto*-1+x, xhisto, drawstyle="steps", color=color)
-	ax.barh(xhisto, yhisto, height=step, lw=0, color=color, alpha=0.4, left=x)
-	ax.barh(xhisto, yhisto*-1, height=step, lw=0, color=color, alpha=0.4, left=x)
-
-def plot_stats_track(
-	ax,
-
-	):
-	"""
-	"""
-
+	ax.plot(yhisto+x+x_absoffset, xhisto, drawstyle="steps", color=color)
+	ax.plot(yhisto*-1+x+x_absoffset, xhisto, drawstyle="steps", color=color)
+	ax.barh(xhisto, yhisto, height=step, lw=0, color=color, alpha=0.4, left=x+x_absoffset)
+	ax.barh(xhisto, yhisto*-1, height=step, lw=0, color=color, alpha=0.4, left=x+x_absoffset)
 
 def plot_multi_violins(
 	ax,
@@ -93,10 +86,14 @@ def plot_multi_violins(
 	weights,
 	list_beamname,
 	color,
+	x_absoffset,
 	):
 	"""
 	"""
 	for j in range(len(list_beamname)):
+		# weights
+		if weights!=None:
+			weights=weights[i]
 		# make histogram
 		histo = np.histogram(list_violin[j], bins, range=ratiorange, weights=weights, density=True)
 		#
@@ -106,7 +103,7 @@ def plot_multi_violins(
 		yaxis_histo = histo[0]/(histo[0].max()*1.05)*2
 		step_histo = (ratiorange[1]-ratiorange[0]) / bins
 		# plot each violin
-		plot_one_violin(ax, xaxis, xaxis_histo, yaxis_histo, step_histo, color)
+		plot_one_violin(ax, xaxis, x_absoffset, xaxis_histo, yaxis_histo, step_histo, color)
 		# plot stats
 
 
@@ -138,10 +135,6 @@ for i in [0]:
 		co10, co21 \
 			= get_co_intensities(image_co10,image_co21,beamfloat)
 		r21 = co21/co10
-		# stats
-		stats_co10 = get_percentiles(co10)
-		stats_co21 = get_percentiles(co21)
-		stats_r21 = get_percentiles(r21)
 		# save to list
 		list_co10.append(co10)
 		list_co21.append(co21)
@@ -153,9 +146,13 @@ for i in [0]:
 fig,ax=plt.subplots(nrows=1,ncols=1,figsize=(9, 4),sharey=True)
 # preparation
 color = cm.brg(i/2.5)
+# unweighted plot violin
 weights = None
-# plot violin
-plot_multi_violins(ax,list_r21,bins,ratiorange,weights,list_beamname,color)
+x_absoffset = 0
+plot_multi_violins(ax,list_r21,bins,ratiorange,weights,list_beamname,color,x_absoffset)
+weights = list_co10
+x_absoffset = 24.0
+plot_multi_violins(ax,list_r21,bins,ratiorange,weights,list_beamname,color,x_absoffset)
 #
 plt.savefig(dir_proj+"eps/"+gals[i]+"_violin_co21.png")
 
