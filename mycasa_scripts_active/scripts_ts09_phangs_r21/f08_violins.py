@@ -137,7 +137,9 @@ def plot_multi_violins(
 		for j in range(len(list_violin)):
 			list_median.append(weighted_percentile(list_violin[j],0.5,weights[j]))
 	# plot stats
-	ax.plot(np.array(list_xaxis)+x_absoffset,list_median,"o-",color='grey',markersize=5,markeredgewidth=0,alpha=0.5)
+	ax.plot(
+		np.array(list_xaxis)+x_absoffset,list_median,
+		"o-",color='black',markersize=4,markeredgewidth=0,alpha=0.5)
 
 def plot_all_violins(
 	ax,
@@ -161,6 +163,11 @@ def plot_all_violins(
 	weights = weights2
 	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.1,46.0)
 
+def plot_stats(
+	):
+	"""
+	"""
+	tets
 
 #####################
 ### Main Procedure
@@ -240,6 +247,9 @@ for i in range(len(gals)):
 		list_co21.append(co21)
 		list_r21.append(r21)
 		list_beam.append(beamname)
+		statslist_co10
+		statslist_co21
+		statslist_r21
 		#
 	# plot
 	color = cm.brg(i/2.5)
