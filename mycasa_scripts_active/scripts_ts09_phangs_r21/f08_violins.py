@@ -217,9 +217,9 @@ def startup_plot(
 	ax1.set_xlim([0,70])
 	ax2.set_xlim([4,74])
 	ax3.set_xlim([0,70])
-	ax4.set_xlim([2,22])
-	ax5.set_xlim([6,26])
-	ax6.set_xlim([2,22])
+	#ax4.set_xlim([2,22])
+	#ax5.set_xlim([6,26])
+	#ax6.set_xlim([2,22])
 	ax1.tick_params(labelbottom=False)
 	ax2.tick_params(labelbottom=False)
 	ax4.tick_params(labelbottom=False)
@@ -244,6 +244,7 @@ def plot_one_stats(
 	fmt,
 	color,
 	lw,
+	alpha,
 	):
 	"""
 	"""
@@ -251,7 +252,7 @@ def plot_one_stats(
 	for i in range(len(statslist_r21)):
 		xvalue = np.arange(i*6 + 1,i*6 + 6)
 		yvalue = [s[i] for s in statslist_r21]
-		ax.plot(xvalue, yvalue, fmt, lw=lw, color=color, alpha = 0.5)
+		ax.plot(xvalue, yvalue, fmt, lw=lw, color=color, alpha = alpha)
 
 def plot_all_stats(
 	ax,
@@ -262,10 +263,9 @@ def plot_all_stats(
 	):
 	"""
 	"""
-	plot_one_stats(ax, statslist_r21, "-", "black", lw = 1)
-	plot_one_stats(ax, statslist_r21_wco10, "-", color, lw = 3)
-	plot_one_stats(ax, statslist_r21_wco21, "-", color, lw = 5)
-
+	plot_one_stats(ax, statslist_r21, "-", color, lw = 2, alpha = 0.5)
+	plot_one_stats(ax, statslist_r21_wco10, "-", color, lw = 2, alpha = 0.3)
+	plot_one_stats(ax, statslist_r21_wco21, "-", color, lw = 2, alpha = 0.1)
 
 
 #####################
