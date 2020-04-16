@@ -16,6 +16,7 @@ co10pbmasks = glob.glob(dir_data + "ngc*co10*.pbmask")
 co21pbmasks = glob.glob(dir_data + "ngc*co21*.pbmask")
 
 for i in range(len(co10images)):
+	beam = float(co10images[i].split("/")[-1].split("_")[-1].replace(".image","").replace("p","."))
 	# combine mask
 	combinepbmask = co10pbmasks[i] + ".combined"
 	os.system("rm -rf " + combinepbmask + "_tmp")
