@@ -269,9 +269,9 @@ def startup_plot(
     "boxstyle" : "square",
     "linewidth" : 1,
     }
-	ax3.text(12,      -0.13, "# of Sightlines", horizontalalignment="center")
-	ax3.text(12+23.0, -0.13, "CO(1-0) Flux", horizontalalignment="center")
-	ax3.text(12+46.0, -0.13, "CO(2-1) Flux", horizontalalignment="center")
+	ax3.text(12,      -0.11, "# of Sightlines", horizontalalignment="center")
+	ax3.text(12+23.0, -0.11, "CO(1-0) Flux", horizontalalignment="center")
+	ax3.text(12+46.0, -0.11, "CO(2-1) Flux", horizontalalignment="center")
 	ax6.text(3,       0.23, "84%", horizontalalignment="center", rotation=45)
 	ax6.text(9,       0.23, "Mean", horizontalalignment="center", rotation=45)
 	ax6.text(15,      0.23, "Median", horizontalalignment="center", rotation=45)
