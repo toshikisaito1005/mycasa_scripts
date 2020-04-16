@@ -46,6 +46,9 @@ beam = [[4.0,6.0,8.0,10.0,12.0,14.0,16.0,18.0,20.0],
 #####################
 ### functions
 #####################
+def func1(x, a, b):
+    return a*x + b
+
 def get_co_intensities(image_co10,image_co21,noise_co10,noise_co21,beamfloat):
 	"""
 	"""
@@ -136,9 +139,14 @@ def plot_scatter(
 		#
 		# correlation coefficient
 		coeff = str(np.round(np.corrcoef(x, y)[0,1], 2))
+		# fit
+		popt, pcov = curve_fit(func1, x, y,
+                           p0 = [1.0,0.0],
+                           maxfev = 10000)
+		print(beam + ", coeff = " + coeff + ", slope = " + )
 		#
 		# plot
-		ax.scatter(x, y, color=color, alpha=0.4, s=20, lw=0, label = beam + ' ($\\rho$ = ' + coeff + ")")
+		ax.scatter(x, y, color=color, alpha=0.4, s=20, lw=0, label = beam) # + ' ($\\rho$ = ' + coeff + ")")
 		if i==0:
 			binx, mean, std = get_binned_dist(x,y,binrange)
 			ax.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
