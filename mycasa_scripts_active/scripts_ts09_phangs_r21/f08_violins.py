@@ -176,13 +176,13 @@ def plot_all_violins(
 	"""
 	#
 	weights = None
-	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.5,0.0)
+	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.60,0.0)
 	#
 	weights = weights1
-	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.3,23.0)
+	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.35,23.0)
 	#
 	weights = weights2
-	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.1,46.0)
+	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.10,46.0)
 
 def plot_one_stats(
 	ax,
@@ -212,9 +212,9 @@ def plot_all_stats(
 	ymax = np.max([statslist_r21, statslist_r21_wco10, statslist_r21_wco21])
 	ymin = np.min([statslist_r21, statslist_r21_wco10, statslist_r21_wco21])
 	ax.set_ylim([ymin-0.05, ymax+0.05])
-	plot_one_stats(ax, statslist_r21, "-", color, lw = 2, alpha = 0.5)
-	plot_one_stats(ax, statslist_r21_wco10, "-", color, lw = 2, alpha = 0.3)
-	plot_one_stats(ax, statslist_r21_wco21, "-", color, lw = 2, alpha = 0.1)
+	plot_one_stats(ax, statslist_r21, "-", color, lw = 2, alpha = 0.60)
+	plot_one_stats(ax, statslist_r21_wco10, "-", color, lw = 2, alpha = 0.35)
+	plot_one_stats(ax, statslist_r21_wco21, "-", color, lw = 2, alpha = 0.10)
 
 def startup_plot(
 	fontsize_general,
@@ -268,6 +268,10 @@ def startup_plot(
 	ax5.set_yticks([0.3,0.5,0.7,0.9,1.1,1.3])
 	ax6.set_yticks([0.3,0.5,0.7,0.9,1.1,1.3])
 	ax2.set_ylabel(ylabel)
+	ax3.text(12, -0.2, "# of Sightlines", horizontalalignment="center")
+	ax3.text(12+23.0, -0.2, "CO(1-0) Flux", horizontalalignment="center")
+	ax3.text(12+46.0, -0.2, "CO(2-1) Flux", horizontalalignment="center")
+	ax3.text(3, -0.2, "CO(2-1) Flux", horizontalalignment="center")
 
 	return ax1, ax2, ax3, ax4, ax5, ax6
 
