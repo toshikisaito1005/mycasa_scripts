@@ -226,7 +226,7 @@ def startup_plot(
 	plt.subplots(nrows=1,ncols=1,figsize=(10, 5),sharey=True)
 	plt.rcParams["font.size"] = fontsize_general
 	plt.rcParams["legend.fontsize"] = fontsize_legend
-	plt.subplots_adjust(bottom=0.10, left=0.10, right=0.98, top=0.92)
+	plt.subplots_adjust(bottom=0.15, left=0.10, right=0.98, top=0.97)
 	gs = gridspec.GridSpec(nrows=18, ncols=25)
 	ax1 = plt.subplot(gs[0:6,0:14])
 	ax2 = plt.subplot(gs[6:12,0:14])
@@ -276,6 +276,7 @@ def startup_plot(
 	ax6.text(15, 0.2, "Median", horizontalalignment="center", rotation=45)
 	ax6.text(21, 0.2, "Mode", horizontalalignment="center", rotation=45)
 	ax6.text(27, 0.2, "16%", horizontalalignment="center", rotation=45)
+	ax1.text(12+46.0, 1.2, "MGC 0628", backgroundcolor="white")
 
 	return ax1, ax2, ax3, ax4, ax5, ax6
 
