@@ -16,7 +16,7 @@ co10pbmasks = glob.glob(dir_data + "ngc*co10*.pbmask")
 co21pbmasks = glob.glob(dir_data + "ngc*co21*.pbmask")
 
 for i in range(len(co10images)):
-	beam = float(co10images[i].split("/")[-1].split("_")[-1].replace(".image","").replace("p","."))
+	beam = co10images[i].split("/")[-1].split("_")[-1].replace(".image","").replace("p",".")
 	# combine mask
 	combinepbmask = co10pbmasks[i] + ".combined"
 	os.system("rm -rf " + combinepbmask + "_tmp")
@@ -43,6 +43,14 @@ for i in range(len(co10images)):
 		expr = "iif( IM0>=1.0, IM1, 0.0)",
 		outfile = co21images[i] + ".masked",
 		)
+	imhead(imagename = co21images[i] + ".masked",
+		mode = "put",
+		hdkey = "beammajor",
+		hdvalue = beam + "arcsec")
+	imhead(imagename = co21images[i] + ".masked",
+		mode = "put",
+		hdkey = "beamminor",
+		hdvalue = beam + "arcsec")
 	# rename
 	os.system("rm -rf " + co10images[i])
 	os.system("mv " + co10images[i] + ".masked" + " " + co10images[i])
