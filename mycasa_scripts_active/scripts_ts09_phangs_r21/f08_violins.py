@@ -238,6 +238,16 @@ def startup_plot(
 
 	return ax1, ax2, ax3, ax4, ax5, ax6
 
+def plot_one_onstats(
+	ax,
+	statslist_r21,
+	):
+	"""
+	"""
+	# get stats
+	p84 = [s[0] for s in statslist_r21]
+	p84 = [s[0] for s in statslist_r21]
+
 
 #####################
 ### Main Procedure
@@ -283,7 +293,7 @@ for i in range(len(gals)):
 		list_co21.append(co21)
 		list_r21.append(r21)
 		list_beam.append(beamname)
-		statslist_r21.append(stats_r21) # p84 p50 p16 mode
+		statslist_r21.append(stats_r21) # [p84, mean, p50, mode, p16]
 		statslist_r21_wco10.append(stats_r21_wco10)
 		statslist_r21_wco21.append(stats_r21_wco21)
 		#
