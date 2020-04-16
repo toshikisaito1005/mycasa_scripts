@@ -140,10 +140,9 @@ def plot_scatter(
 		# correlation coefficient
 		coeff = str(np.round(np.corrcoef(x, y)[0,1], 2))
 		# fit
-		popt, pcov = curve_fit(func1, x, y,
-                           p0 = [1.0,0.0],
-                           maxfev = 10000)
-		print(beam + ", coeff = " + coeff + ", slope = " + )
+		popt, pcov = curve_fit(func1, x, y, p0 = [1.0,0.0], maxfev = 10000)
+		slope = str(np.round(popt[0],2))
+		print(beam + ", coeff = " + coeff + ", slope = " + slope)
 		#
 		# plot
 		ax.scatter(x, y, color=color, alpha=0.4, s=20, lw=0, label = beam) # + ' ($\\rho$ = ' + coeff + ")")
