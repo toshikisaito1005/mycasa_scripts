@@ -214,14 +214,13 @@ def plot_all_stats(
 	plot_one_stats(ax, statslist_r21_wco21, "-", color, lw=3, alpha=0.20)
 
 def startup_plot(
-	xlabel,
 	ylabel,
 	r21range,
 	):
 	plt.subplots(nrows=1,ncols=1,figsize=(10, 7),sharey=True)
 	plt.rcParams["font.size"] = 14
 	plt.rcParams["legend.fontsize"] = 9
-	plt.subplots_adjust(bottom=0.15, left=0.07, right=0.99, top=0.99)
+	plt.subplots_adjust(bottom=0.1, left=0.07, right=0.99, top=0.99)
 	gs = gridspec.GridSpec(nrows=18, ncols=25)
 	ax1 = plt.subplot(gs[0:6,0:14])
 	ax2 = plt.subplot(gs[6:12,0:14])
@@ -270,14 +269,14 @@ def startup_plot(
     "boxstyle" : "square",
     "linewidth" : 1,
     }
-	ax3.text(12,      -0.16, "# of Sightlines", horizontalalignment="center")
-	ax3.text(12+23.0, -0.16, "CO(1-0) Flux", horizontalalignment="center")
-	ax3.text(12+46.0, -0.16, "CO(2-1) Flux", horizontalalignment="center")
-	ax6.text(3,       0.1, "84%", horizontalalignment="center", rotation=45)
-	ax6.text(9,       0.1, "Mean", horizontalalignment="center", rotation=45)
-	ax6.text(15,      0.1, "Median", horizontalalignment="center", rotation=45)
-	ax6.text(21,      0.1, "Mode", horizontalalignment="center", rotation=45)
-	ax6.text(27,      0.1, "16%", horizontalalignment="center", rotation=45)
+	ax3.text(12,      -0.13, "# of Sightlines", horizontalalignment="center")
+	ax3.text(12+23.0, -0.13, "CO(1-0) Flux", horizontalalignment="center")
+	ax3.text(12+46.0, -0.13, "CO(2-1) Flux", horizontalalignment="center")
+	ax6.text(3,       0.23, "84%", horizontalalignment="center", rotation=45)
+	ax6.text(9,       0.23, "Mean", horizontalalignment="center", rotation=45)
+	ax6.text(15,      0.23, "Median", horizontalalignment="center", rotation=45)
+	ax6.text(21,      0.23, "Mode", horizontalalignment="center", rotation=45)
+	ax6.text(27,      0.23, "16%", horizontalalignment="center", rotation=45)
 	ax1.text(8+46.0,  1.2,  "NGC 0628", bbox=boxdic)
 	ax2.text(12+46.0, 1.2,  "NGC 3627", bbox=boxdic)
 	ax3.text(8+46.0,  1.2,  "NGC 4321", bbox=boxdic) # , backgroundcolor="white")
@@ -311,7 +310,7 @@ def startup_plot(
 #####################
 ### plot
 ax1, ax2, ax3, ax4, ax5, ax6 \
-	= startup_plot(xlabel,ylabel,r21range)
+	= startup_plot(ylabel,r21range)
 #
 ax_violin = [ax1, ax2, ax3]
 ax_stats = [ax4, ax5, ax6]
