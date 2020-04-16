@@ -137,7 +137,6 @@ def plot_multi_violins(
 		# make histogram
 		if weights==None:
 			histo = np.histogram(list_violin[i], bins, range=ratiorange, weights=None, density=True)
-
 		else:
 			histo = np.histogram(list_violin[i], bins, range=ratiorange, weights=weights[i], density=True)
 			#
@@ -234,6 +233,7 @@ def startup_plot(
 	ax2.set_ylabel(ylabel)
 	ax3.set_xlabel(xlabel)
 	ax6.set_xlabel(xlabel)
+	ax3.tick_params(labelbottom=False)
 	ax3.set_xticks([20], ['e'])
 
 	return ax1, ax2, ax3, ax4, ax5, ax6
