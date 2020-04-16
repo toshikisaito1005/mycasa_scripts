@@ -91,15 +91,17 @@ def get_stats(
 	"""
 	"""
 	# percentiles
-	p84 = weighted_percentile(data,0.84,weights)
-	p50 = weighted_percentile(data,0.50,weights)
-	p16 = weighted_percentile(data,0.16,weights)
+	p84 = weighted_percentile(data, 0.84, weights)
+	p50 = weighted_percentile(data, 0.50, weights)
+	p16 = weighted_percentile(data, 0.16, weights)
 	# mode
 	n, bins = np.histogram(data, weights=weights, range=historange)
 	idx = np.argmax(n)
 	mode = np.mean([bins[idx], bins[idx + 1]])
+	# mean
+	mean = np.average(data, weights=weights)
 
-	return [p84, p50, p16, mode]
+	return [p84, mean, p50, mode, p16]
 
 def plot_one_violin(
 	ax,
@@ -232,7 +234,7 @@ def startup_plot(
 	ax2.set_ylabel(ylabel)
 	ax3.set_xlabel(xlabel)
 	ax6.set_xlabel(xlabel)
-	ax3.set_xticks([4,8,12,16,20], ["1","2","3","4","5"])
+	ax3.set_xticks([20], ['e'])
 
 	return ax1, ax2, ax3, ax4, ax5, ax6
 
