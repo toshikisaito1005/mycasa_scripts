@@ -68,10 +68,13 @@ for i in range(len(co10images)):
 		hdvalue = beam + "arcsec")
 	# rename
 	os.system("rm -rf " + co10images[i])
-	os.system("mv " + co10images[i] + ".masked" + " " + co10images[i])
+	os.system("mv " + co10images[i] + ".masked " + co10images[i])
 	os.system("rm -rf " + co21images[i])
-	os.system("mv " + co21images[i] + ".masked" + " " + co21images[i])
+	os.system("mv " + co21images[i] + ".masked " + co21images[i])
 	#
-	os.system("rm -rf " + )
+	os.system("rm -rf " + combinepbmask + "_tmp")
+	os.system("rm -rf " + co10pbmasks[i] + ".combined")
+	os.system("rm -rf " + co10pbmasks[i])
+	os.system("rm -rf " + co21pbmasks[i])
 
 os.system("rm -rf *.last")
