@@ -271,7 +271,11 @@ def startup_plot(
 	ax3.text(12, -0.2, "# of Sightlines", horizontalalignment="center")
 	ax3.text(12+23.0, -0.2, "CO(1-0) Flux", horizontalalignment="center")
 	ax3.text(12+46.0, -0.2, "CO(2-1) Flux", horizontalalignment="center")
-	ax3.text(3, -0.2, "CO(2-1) Flux", horizontalalignment="center")
+	ax6.text(3, 0.2, "84%", horizontalalignment="center", rotation=45)
+	ax6.text(9, 0.2, "Mean", horizontalalignment="center", rotation=45)
+	ax6.text(15, 0.2, "Median", horizontalalignment="center", rotation=45)
+	ax6.text(21, 0.2, "Mode", horizontalalignment="center", rotation=45)
+	ax6.text(27, 0.2, "16%", horizontalalignment="center", rotation=45)
 
 	return ax1, ax2, ax3, ax4, ax5, ax6
 
@@ -308,14 +312,14 @@ for i in range(len(gals)):
 		image_co21 = dir_gal + "_co21/co21_" + beamname + ".moment0"
 		#
 		# get values
-		co10, co21 \
-			= get_co_intensities(image_co10,image_co21,beamfloat)
+		co10, co21 = get_co_intensities(image_co10,image_co21,beamfloat)
 		r21 = co21/co10
 		#
 		# stats
 		stats_r21 = get_stats(r21, None, r21range)
 		stats_r21_wco10 = get_stats(r21, co10, r21range)
 		stats_r21_wco21 = get_stats(r21, co21, r21range)
+		#
 		# save to list
 		list_co10.append(co10)
 		list_co21.append(co21)
