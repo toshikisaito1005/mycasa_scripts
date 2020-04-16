@@ -73,10 +73,15 @@ rm -rf $dir_data"ngc0628_co10_vs_co21.png" $dir_data"ngc3627_co10_vs_co21.png" $
 rm -rf $dir_data"ngc4321_co10_vs_co21.png"
 
 
-## figure 7
+### figure 7
 convert +append -border 0x0 $dir_data"ngc0628_co21_vs_r21.png" $dir_data"ngc3627_co21_vs_r21.png" $dir_data"fig07a.png"
 convert -append -border 0x0 $dir_data"fig07a.png" $dir_data"ngc4321_co21_vs_r21.png" eps2:$dir_data"fig07.eps"
 
 rm -rf $dir_data"ngc0628_co21_vs_r21.png" $dir_data"ngc3627_co21_vs_r21.png" $dir_data"fig07a.png"
 rm -rf $dir_data"ngc4321_co21_vs_r21.png"
 
+
+### figure 8
+convert $dir_data"violin_co21.png" eps2:$dir_data"fig08.eps"
+
+rm -rf $dir_data"violin_co21.png"

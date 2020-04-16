@@ -19,7 +19,6 @@ plt.ioff()
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 bins = 50
 r21range = [0.05,1.45]
-xlabel = "Beam Size (arcsec)"
 ylabel = "$R_{21}$"
 gals = ["ngc0628",
 		"ngc3627",
