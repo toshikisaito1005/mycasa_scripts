@@ -59,10 +59,11 @@ for i in range(len(galnames)):
         os.system("rm -rf " + pbmask + "_tmp")
         #
         os.system("rm -rf " + pbmask)
+        maxval = imstat(pbmask + "_tmp2")["max"][0]
         immath(imagename = pbmask + "_tmp2",
-               expr = "iif( IM0 >=1.0, 0.6, 0.0)",
+               expr = "iif( IM0 >=" + str(maxval*0.6) + ", 1.0, 0.0)",
                outfile = pbmask)
-        #os.system("rm -rf " + pbmask + "_tmp2")
+        os.system("rm -rf " + pbmask + "_tmp2")
 
     os.system("rm -rf template.*")
 
