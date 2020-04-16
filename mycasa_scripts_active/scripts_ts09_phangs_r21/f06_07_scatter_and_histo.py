@@ -144,7 +144,7 @@ def plot_scatter(
 		# fit
 		popt, pcov = curve_fit(func1, x, y, p0 = [1.0,0.0], maxfev = 10000, sigma = sigmay)
 		slope = str(np.round(popt[0], 2))
-		err_slope = str(np.round(np.sqrt(np.diag(pcov)), 4))
+		err_slope = str(np.round(np.sqrt(np.diag(pcov))[0], 4))
 		print(beam+", coeff = "+coeff+"+/-"+err_coeff+", slope = "+slope+"+/-"+err_slope)
 		#
 		# plot
