@@ -256,6 +256,8 @@ def plot_one_stats(
 def plot_all_stats(
 	ax,
 	statslist_r21,
+	statslist_r21_wco10,
+	statslist_r21_wco21,
 	color,
 	):
 	"""
@@ -273,7 +275,8 @@ def plot_all_stats(
 ax1, ax2, ax3, ax4, ax5, ax6 \
 	= startup_plot(fontsize_general,fontsize_legend,xlabel,ylabel,r21range)
 #
-ax_master = [ax1, ax2, ax3]
+ax_violin = [ax1, ax2, ax3]
+ax_stats = [ax4, ax5, ax6]
 for i in range(len(gals)):
 #for i in [0]:
 	list_co10 = []
@@ -316,9 +319,8 @@ for i in range(len(gals)):
 		#
 	# plot
 	color = cm.brg(i/2.5)
-	plot_all_violins(ax_master[i], list_r21, bins, r21range, list_beam, color, list_co10, list_co21)
-	#plot_all_stats
-	plot_all_stats(ax, statslist_r21, color)
+	plot_all_violins(ax_violin[i], list_r21, bins, r21range, list_beam, color, list_co10, list_co21)
+	plot_all_stats(ax_stats[i], statslist_r21, statslist_r21_wco10, statslist_r21_wco21, color)
 	#
 plt.savefig(dir_proj+"eps/violin_co21.png",dpi=300)
 
