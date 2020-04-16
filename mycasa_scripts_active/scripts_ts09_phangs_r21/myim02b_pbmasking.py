@@ -24,8 +24,11 @@ for i in range(len(co10images)):
 		expr = "iif( IM0>=1.0, IM1, 0.0)",
 		outfile = combinepbmask + "_tmp",
 		)
-	r21.tscreatemask(combinepbmask + "_tmp", 1.0, combinepbmask)
-	os.system("rm -rf " + combinepbmask + "_tmp")
+	makemask(mode = "copy",
+		inpimage = combinepbmask + "_tmp",
+		inpmask = combinepbmask + "_tmp",
+		output = combinepbmask + ":mask0",# + "_tmp_mask:mask0",
+		overwrite = True)
 	# mask images
 	os.system("rm -rf " + co10images[i] + ".masked")
 	immath(
