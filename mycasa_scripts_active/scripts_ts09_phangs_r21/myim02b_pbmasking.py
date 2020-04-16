@@ -43,6 +43,21 @@ for i in range(len(co10images)):
 		expr = "iif( IM0>=1.0, IM1, 0.0)",
 		outfile = co21images[i] + ".masked",
 		)
+	# header
+	imhead(imagename = co10images[i] + ".masked",
+		mode = "del",
+		hdkey = "beammajor")
+	imhead(imagename = co10images[i] + ".masked",
+		mode = "put",
+		hdkey = "beammajor",
+		hdvalue = beam + "arcsec")
+	imhead(imagename = co10images[i] + ".masked",
+		mode = "put",
+		hdkey = "beamminor",
+		hdvalue = beam + "arcsec")
+	imhead(imagename = co21images[i] + ".masked",
+		mode = "del",
+		hdkey = "beammajor")
 	imhead(imagename = co21images[i] + ".masked",
 		mode = "put",
 		hdkey = "beammajor",
@@ -56,3 +71,7 @@ for i in range(len(co10images)):
 	os.system("mv " + co10images[i] + ".masked" + " " + co10images[i])
 	os.system("rm -rf " + co21images[i])
 	os.system("mv " + co21images[i] + ".masked" + " " + co21images[i])
+	#
+	os.system("rm -rf " + )
+
+os.system("rm -rf *.last")
