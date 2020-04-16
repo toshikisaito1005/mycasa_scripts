@@ -55,10 +55,16 @@ for i in range(len(galnames)):
                  major = "55.0arcsec",
                  minor = "55.0arcsec",
                  pa = "0deg",
-                 outfile = pbmask)
+                 outfile = pbmask + "_tmp2")
         os.system("rm -rf " + pbmask + "_tmp")
+        #
+        os.system("rm -rf " + pbmask)
+        immath(imagename = pbmask + "_tmp2",
+               expr = "iif( IM0 >=1.0, 1.0, 0.0)",
+               outfile = pbmask)
+        os.system("rm -rf " + pbmask + "_tmp2")
 
     os.system("rm -rf template.*")
 
 os.system("rm -rf *.last")
-os.system("rm -rf " + dir_data)
+#os.system("rm -rf " + dir_data)
