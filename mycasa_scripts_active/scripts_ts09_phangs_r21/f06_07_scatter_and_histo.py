@@ -134,12 +134,15 @@ def plot_scatter(
 		color = cm.gnuplot(i/9.)
 		binrange = [x.min(),x.max()]
 		#
+		# correlation coefficient
+		coeff = str(np.round(np.corrcoef(x, y)[0,1], 2))
+		#
 		# plot
-		ax.scatter(x, y, color=color, alpha=0.4, s=20, lw=0, label = beam)
-		coeff = np.corrcoef(x, y)[0,1]
+		ax.scatter(x, y, color=color, alpha=0.4, s=20, lw=0, label = beam + ' ($\\rho$ = ' + coeff + ")")
 		if i==0:
 			binx, mean, std = get_binned_dist(x,y,binrange)
 			ax.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
+			#
 		# plot error bar
 		mean_snr_x = np.mean(snr_x[i])
 		mean_snr_y = np.mean(snr_y[i])
