@@ -247,9 +247,13 @@ def plot_one_onstats(
 	# get stats
 	j = 0
 	for i in range(len(statslist_r21)):
+		if i==0:
+			j=0
+		else:
+			j=1
+		
 		yvalue = [s[i] for s in statslist_r21]
 		ax.plot()
-		j += 1
 
 
 #####################
