@@ -222,7 +222,7 @@ def startup_plot(
 	plt.subplots(nrows=1,ncols=1,figsize=(10, 5),sharey=True)
 	plt.rcParams["font.size"] = 14
 	plt.rcParams["legend.fontsize"] = 9
-	plt.subplots_adjust(bottom=0.15, left=0.10, right=0.98, top=0.97)
+	plt.subplots_adjust(bottom=0.15, left=0.07, right=0.99, top=0.99)
 	gs = gridspec.GridSpec(nrows=18, ncols=25)
 	ax1 = plt.subplot(gs[0:6,0:14])
 	ax2 = plt.subplot(gs[6:12,0:14])
@@ -297,12 +297,12 @@ def startup_plot(
 	ax3.text(12.4, 0.08, "12\"", fontsize=10)
 	ax3.text(16.4, 0.08, "16\"", fontsize=10)
 	ax3.text(20.4, 0.08, "20\"", fontsize=10)
-	ax4.text(1, 0.75,  "4\"", horizontalalignment="center", fontsize=10)
-	ax4.text(5, 0.68, "20\"", horizontalalignment="center", fontsize=10)
-	ax5.text(1, 0.62,  "8\"", horizontalalignment="center", fontsize=10)
-	ax5.text(5, 0.62, "24\"", horizontalalignment="center", fontsize=10)
-	ax6.text(1, 0.31,  "4\"", horizontalalignment="center", fontsize=10)
-	ax6.text(5, 0.31, "20\"", horizontalalignment="center", fontsize=10)
+	ax4.text(1, 0.73,  "4\"", horizontalalignment="center", fontsize=10)
+	ax4.text(5, 0.65, "20\"", horizontalalignment="center", fontsize=10)
+	ax5.text(1, 0.80,  "8\"", horizontalalignment="center", fontsize=10)
+	ax5.text(5, 0.82, "24\"", horizontalalignment="center", fontsize=10)
+	ax6.text(1, 0.59,  "4\"", horizontalalignment="center", fontsize=10)
+	ax6.text(5, 0.60, "20\"", horizontalalignment="center", fontsize=10)
 
 	return ax1, ax2, ax3, ax4, ax5, ax6
 
