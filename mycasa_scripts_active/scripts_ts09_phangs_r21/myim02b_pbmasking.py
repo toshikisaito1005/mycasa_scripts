@@ -25,8 +25,17 @@ for i in range(len(co10images)):
 		outfile = combinepbmask,
 		)
 	# mask images
+	os.system("rm -rf " + co10images[i] + ".masked")
 	immath(
-		imagename = [co10pbmasks[i], co10images[i]],
+		imagename = [combinepbmask, co10images[i]],
 		expr = "IM0*IM1",
-		outfile = 
+		outfile = co10images[i] + ".masked",
 		)
+	os.system("rm -rf " + co21images[i] + ".masked")
+	immath(
+		imagename = [combinepbmask, co21images[i]],
+		expr = "IM0*IM1",
+		outfile = co21images[i] + ".masked",
+		)
+	# rename
+	os.system("mv ")
