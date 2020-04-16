@@ -43,6 +43,17 @@ for i in range(len(galnames)):
 
         os.system("rm -rf " + output)
 
+        # pbmasking
+        imagename = outfile
+        pbmask = outfile.replace(".image",".pbmask")
+        os.system("rm -rf " + pbmask + "_tmp")
+        immath(imagename = imagename,
+               expr = "iif( IM0 >=-100000000., 1.0, 0.0)",
+               outfile = pbmask + "_tmp")
+
+        imsmooth(imagename = pbmask + "_tmp",
+                 major = "55.0arcsec")
+
     os.system("rm -rf template.*")
 
 os.system("rm -rf *.last")
