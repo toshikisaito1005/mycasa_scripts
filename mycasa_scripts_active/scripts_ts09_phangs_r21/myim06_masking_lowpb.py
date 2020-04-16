@@ -11,6 +11,7 @@ galaxy = ["ngc0628",
           "ngc4321",
           #"ngc4254",
           "ngc3627"]
+pbeam = "55.0" # arcsec
 
 
 #####################
@@ -22,6 +23,11 @@ dir_co10 = dir_proj + galname + "_co10/"
 dir_co21 = dir_proj + galname + "_co21/"
 co10image = glob.glob(dir_co10 + "co10_cube*.image")[0]
 co21image = glob.glob(dir_co21 + "co21_cube*.image")[0]
+
+os.system("rm -rf " + )
+immath(imagename = co10image,
+  expr = "iif( IM0 >=0.0, IM0, 0.0)",
+  )
 
 
 os.system("rm -rf *.last")
