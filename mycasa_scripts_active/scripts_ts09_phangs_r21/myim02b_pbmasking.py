@@ -38,4 +38,5 @@ for i in range(len(co10images)):
 		outfile = co21images[i] + ".masked",
 		)
 	# rename
-	os.system("mv ")
+	os.system("rm -rf " + co10images[i])
+	os.system("mv " + co10images[i] + ".masked" + " " + )
