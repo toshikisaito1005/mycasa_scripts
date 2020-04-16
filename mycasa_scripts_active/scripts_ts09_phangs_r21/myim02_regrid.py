@@ -62,7 +62,7 @@ for i in range(len(galnames)):
         immath(imagename = pbmask + "_tmp2",
                expr = "iif( IM0 >=1.0, 1.0, 0.0)",
                outfile = pbmask)
-        os.system("rm -rf " + pbmask + "_tmp2")
+        #os.system("rm -rf " + pbmask + "_tmp2")
 
     os.system("rm -rf template.*")
 
