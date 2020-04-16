@@ -133,6 +133,7 @@ def plot_scatter(
 		# preparation
 		x = np.log10(list_x[i])
 		y = np.log10(list_y[i])
+		sigmay = np.log10(snr_y[i])
 		beam = str(int(float(list_beamname[i].replace("p","."))))+"\""
 		color = cm.gnuplot(i/9.)
 		binrange = [x.min(),x.max()]
@@ -140,7 +141,7 @@ def plot_scatter(
 		# correlation coefficient
 		coeff = str(np.round(np.corrcoef(x, y)[0,1], 2))
 		# fit
-		popt, pcov = curve_fit(func1, x, y, p0 = [1.0,0.0], maxfev = 10000)
+		popt, pcov = curve_fit(func1, x, y, p0 = [1.0,0.0], maxfev = 10000, sigma = sigmay)
 		slope = str(np.round(popt[0],2))
 		print(beam + ", coeff = " + coeff + ", slope = " + slope)
 		#
