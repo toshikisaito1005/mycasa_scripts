@@ -19,8 +19,6 @@ plt.ioff()
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 bins = 50
 r21range = [0.05,1.45]
-fontsize_general = 15
-fontsize_legend = 13
 xlabel = "Beam Size (arcsec)"
 ylabel = "$R_{21}$"
 gals = ["ngc0628",
@@ -217,15 +215,13 @@ def plot_all_stats(
 	plot_one_stats(ax, statslist_r21_wco21, "-", color, lw = 2, alpha = 0.10)
 
 def startup_plot(
-	fontsize_general,
-	fontsize_legend,
 	xlabel,
 	ylabel,
 	r21range,
 	):
 	plt.subplots(nrows=1,ncols=1,figsize=(10, 5),sharey=True)
-	plt.rcParams["font.size"] = fontsize_general
-	plt.rcParams["legend.fontsize"] = fontsize_legend
+	plt.rcParams["font.size"] = 14
+	plt.rcParams["legend.fontsize"] = 9
 	plt.subplots_adjust(bottom=0.15, left=0.10, right=0.98, top=0.97)
 	gs = gridspec.GridSpec(nrows=18, ncols=25)
 	ax1 = plt.subplot(gs[0:6,0:14])
@@ -269,22 +265,32 @@ def startup_plot(
 	ax6.set_yticks([0.3,0.5,0.7,0.9,1.1,1.3])
 	ax2.set_ylabel(ylabel)
 	# text
-	ax3.text(12, -0.2, "# of Sightlines", horizontalalignment="center")
+	ax3.text(12,      -0.2, "# of Sightlines", horizontalalignment="center")
 	ax3.text(12+23.0, -0.2, "CO(1-0) Flux", horizontalalignment="center")
 	ax3.text(12+46.0, -0.2, "CO(2-1) Flux", horizontalalignment="center")
-	ax6.text(3, 0.18, "84%", horizontalalignment="center", rotation=45)
-	ax6.text(9, 0.18, "Mean", horizontalalignment="center", rotation=45)
+	ax6.text(3,  0.18, "84%", horizontalalignment="center", rotation=45)
+	ax6.text(9,  0.18, "Mean", horizontalalignment="center", rotation=45)
 	ax6.text(15, 0.18, "Median", horizontalalignment="center", rotation=45)
 	ax6.text(21, 0.18, "Mode", horizontalalignment="center", rotation=45)
 	ax6.text(27, 0.18, "16%", horizontalalignment="center", rotation=45)
-	ax1.text(8+46.0, 1.2, "NGC 0628", backgroundcolor="white")
+	ax1.text(8+46.0,  1.2, "NGC 0628", backgroundcolor="white")
 	ax2.text(12+46.0, 1.2, "NGC 3627", backgroundcolor="white")
-	ax3.text(8+46.0, 1.2, "NGC 4321", backgroundcolor="white")
-	ax1.text(4, 0.2, "4\"")
-	ax1.text(8, 0.2, "8\"")
-	ax1.text(12, 0.2, "12\"")
-	ax1.text(16, 0.2, "16\"")
-	ax1.text(20, 0.2, "20\"")
+	ax3.text(8+46.0,  1.2, "NGC 4321", backgroundcolor="white")
+	ax1.text(4,       0.1,  "4\"", fontsize=12)
+	ax1.text(8,       0.1,  "8\"", fontsize=12)
+	ax1.text(12,      0.1, "12\"", fontsize=12)
+	ax1.text(16,      0.1, "16\"", fontsize=12)
+	ax1.text(20,      0.1, "20\"", fontsize=12)
+	ax1.text(4+23.0,  0.1,  "4\"", fontsize=12)
+	ax1.text(8+23.0,  0.1,  "8\"", fontsize=12)
+	ax1.text(12+23.0, 0.1, "12\"", fontsize=12)
+	ax1.text(16+23.0, 0.1, "16\"", fontsize=12)
+	ax1.text(20+23.0, 0.1, "20\"", fontsize=12)
+	ax1.text(4+46.0,  0.1,  "4\"", fontsize=12)
+	ax1.text(8+46.0,  0.1,  "8\"", fontsize=12)
+	ax1.text(12+46.0, 0.1, "12\"", fontsize=12)
+	ax1.text(16+46.0, 0.1, "16\"", fontsize=12)
+	ax1.text(20+46.0, 0.1, "20\"", fontsize=12)
 
 	return ax1, ax2, ax3, ax4, ax5, ax6
 
@@ -294,7 +300,7 @@ def startup_plot(
 #####################
 ### plot
 ax1, ax2, ax3, ax4, ax5, ax6 \
-	= startup_plot(fontsize_general,fontsize_legend,xlabel,ylabel,r21range)
+	= startup_plot(xlabel,ylabel,r21range)
 #
 ax_violin = [ax1, ax2, ax3]
 ax_stats = [ax4, ax5, ax6]
