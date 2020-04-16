@@ -184,6 +184,38 @@ def plot_all_violins(
 	weights = weights2
 	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.1,46.0)
 
+def plot_one_stats(
+	ax,
+	statslist_r21,
+	fmt,
+	color,
+	lw,
+	alpha,
+	):
+	"""
+	"""
+	# get stats
+	for i in range(len(statslist_r21)):
+		xvalue = np.arange(i*6 + 1,i*6 + 6)
+		yvalue = [s[i] for s in statslist_r21]
+		ax.plot(xvalue, yvalue, fmt, lw=lw, color=color, alpha = alpha)
+
+def plot_all_stats(
+	ax,
+	statslist_r21,
+	statslist_r21_wco10,
+	statslist_r21_wco21,
+	color,
+	):
+	"""
+	"""
+	ymax = np.max([statslist_r21, statslist_r21_wco10, statslist_r21_wco21])
+	ymin = np.min([statslist_r21, statslist_r21_wco10, statslist_r21_wco21])
+	ax.set_ylim([ymin-0.05, ymax+0.05])
+	plot_one_stats(ax, statslist_r21, "-", color, lw = 2, alpha = 0.5)
+	plot_one_stats(ax, statslist_r21_wco10, "-", color, lw = 2, alpha = 0.3)
+	plot_one_stats(ax, statslist_r21_wco21, "-", color, lw = 2, alpha = 0.1)
+
 def startup_plot(
 	fontsize_general,
 	fontsize_legend,
@@ -224,12 +256,12 @@ def startup_plot(
 	ax2.tick_params(labelbottom=False)
 	ax4.tick_params(labelbottom=False)
 	ax5.tick_params(labelbottom=False)
-	ax1.set_yticks([0.3,0.6,0.9,1.2])
-	ax2.set_yticks([0.3,0.6,0.9,1.2])
-	ax3.set_yticks([0.3,0.6,0.9,1.2])
-	ax4.set_yticks([0.3,0.6,0.9,1.2])
-	ax5.set_yticks([0.3,0.6,0.9,1.2])
-	ax6.set_yticks([0.3,0.6,0.9,1.2])
+	ax1.set_yticks([0.3,0.6,0.9,1.2,1.5])
+	ax2.set_yticks([0.3,0.6,0.9,1.2,1.5])
+	ax3.set_yticks([0.3,0.6,0.9,1.2,1.5])
+	ax4.set_yticks([0.3,0.5,0.7,0.9,1.1,1.3])
+	ax5.set_yticks([0.3,0.5,0.7,0.9,1.1,1.3])
+	ax6.set_yticks([0.3,0.5,0.7,0.9,1.1,1.3])
 	ax2.set_ylabel(ylabel)
 	ax3.set_xlabel(xlabel)
 	ax6.set_xlabel(xlabel)
@@ -237,35 +269,6 @@ def startup_plot(
 	ax3.set_xticks([20], ['e'])
 
 	return ax1, ax2, ax3, ax4, ax5, ax6
-
-def plot_one_stats(
-	ax,
-	statslist_r21,
-	fmt,
-	color,
-	lw,
-	alpha,
-	):
-	"""
-	"""
-	# get stats
-	for i in range(len(statslist_r21)):
-		xvalue = np.arange(i*6 + 1,i*6 + 6)
-		yvalue = [s[i] for s in statslist_r21]
-		ax.plot(xvalue, yvalue, fmt, lw=lw, color=color, alpha = alpha)
-
-def plot_all_stats(
-	ax,
-	statslist_r21,
-	statslist_r21_wco10,
-	statslist_r21_wco21,
-	color,
-	):
-	"""
-	"""
-	plot_one_stats(ax, statslist_r21, "-", color, lw = 2, alpha = 0.5)
-	plot_one_stats(ax, statslist_r21_wco10, "-", color, lw = 2, alpha = 0.3)
-	plot_one_stats(ax, statslist_r21_wco21, "-", color, lw = 2, alpha = 0.1)
 
 
 #####################
