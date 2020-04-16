@@ -209,9 +209,9 @@ def plot_all_stats(
 	ymax = np.max([statslist_r21, statslist_r21_wco10, statslist_r21_wco21])
 	ymin = np.min([statslist_r21, statslist_r21_wco10, statslist_r21_wco21])
 	ax.set_ylim([ymin-0.05, ymax+0.05])
-	plot_one_stats(ax, statslist_r21, "-", color, lw = 2, alpha = 0.60)
-	plot_one_stats(ax, statslist_r21_wco10, "-", color, lw = 2, alpha = 0.40)
-	plot_one_stats(ax, statslist_r21_wco21, "-", color, lw = 2, alpha = 0.20)
+	plot_one_stats(ax, statslist_r21, "-", color, lw=3, alpha=0.60)
+	plot_one_stats(ax, statslist_r21_wco10, "-", color, lw=3, alpha=0.40)
+	plot_one_stats(ax, statslist_r21_wco21, "-", color, lw=3, alpha=0.20)
 
 def startup_plot(
 	xlabel,
@@ -270,14 +270,14 @@ def startup_plot(
     "boxstyle" : "square",
     "linewidth" : 1,
     }
-	ax3.text(12,      -0.2, "# of Sightlines", horizontalalignment="center")
-	ax3.text(12+23.0, -0.2, "CO(1-0) Flux", horizontalalignment="center")
-	ax3.text(12+46.0, -0.2, "CO(2-1) Flux", horizontalalignment="center")
-	ax6.text(3,       0.18, "84%", horizontalalignment="center", rotation=45)
-	ax6.text(9,       0.18, "Mean", horizontalalignment="center", rotation=45)
-	ax6.text(15,      0.18, "Median", horizontalalignment="center", rotation=45)
-	ax6.text(21,      0.18, "Mode", horizontalalignment="center", rotation=45)
-	ax6.text(27,      0.18, "16%", horizontalalignment="center", rotation=45)
+	ax3.text(12,      -0.16, "# of Sightlines", horizontalalignment="center")
+	ax3.text(12+23.0, -0.16, "CO(1-0) Flux", horizontalalignment="center")
+	ax3.text(12+46.0, -0.16, "CO(2-1) Flux", horizontalalignment="center")
+	ax6.text(3,       0.1, "84%", horizontalalignment="center", rotation=45)
+	ax6.text(9,       0.1, "Mean", horizontalalignment="center", rotation=45)
+	ax6.text(15,      0.1, "Median", horizontalalignment="center", rotation=45)
+	ax6.text(21,      0.1, "Mode", horizontalalignment="center", rotation=45)
+	ax6.text(27,      0.1, "16%", horizontalalignment="center", rotation=45)
 	ax1.text(8+46.0,  1.2,  "NGC 0628", bbox=boxdic)
 	ax2.text(12+46.0, 1.2,  "NGC 3627", bbox=boxdic)
 	ax3.text(8+46.0,  1.2,  "NGC 4321", bbox=boxdic) # , backgroundcolor="white")
