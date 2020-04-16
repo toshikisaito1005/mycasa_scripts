@@ -39,6 +39,13 @@ for i in range(len(co21names)):
     galname = co21names[i].split("/")[-1].split("_")[0]
     print("### working on " + galname)
 
+    # pbcut
+    outfile = co10names[i].replace(".image",".pbmask")
+    os.system("rm -rf " + outfile)
+    immath(imagename = co10names[i],
+          expr = "iif( IM0 >=0.0, 1.0, 0.0)",
+          outfile = outfile)
+
     # measure noise
     output = dir_proj+"../eps/noise_"+co21names[i].split("/")[-1].replace(".image","")+".png"
     co21rms = r21.noisehist(co21names[i],noises_co21_byeye[i],output)
