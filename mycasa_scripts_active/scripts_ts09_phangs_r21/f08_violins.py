@@ -218,7 +218,7 @@ def startup_plot(
 	ylabel,
 	r21range,
 	):
-	plt.subplots(nrows=1,ncols=1,figsize=(10, 5),sharey=True)
+	plt.subplots(nrows=1,ncols=1,figsize=(10, 7),sharey=True)
 	plt.rcParams["font.size"] = 14
 	plt.rcParams["legend.fontsize"] = 9
 	plt.subplots_adjust(bottom=0.15, left=0.07, right=0.99, top=0.99)
