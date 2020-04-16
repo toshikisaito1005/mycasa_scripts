@@ -245,8 +245,11 @@ def plot_one_onstats(
 	"""
 	"""
 	# get stats
-	p84 = [s[0] for s in statslist_r21]
-	p84 = [s[0] for s in statslist_r21]
+	j = 0
+	for i in range(len(statslist_r21)):
+		yvalue = [s[i] for s in statslist_r21]
+		ax.plot()
+		j += 1
 
 
 #####################
