@@ -265,6 +265,12 @@ def startup_plot(
 	ax6.set_yticks([0.3,0.5,0.7,0.9,1.1,1.3])
 	ax2.set_ylabel(ylabel)
 	# text
+	boxdic = {
+    "facecolor" : "white",
+    "edgecolor" : "black",
+    "boxstyle" : "square",
+    "linewidth" : 1,
+    }
 	ax3.text(12,      -0.2, "# of Sightlines", horizontalalignment="center")
 	ax3.text(12+23.0, -0.2, "CO(1-0) Flux", horizontalalignment="center")
 	ax3.text(12+46.0, -0.2, "CO(2-1) Flux", horizontalalignment="center")
@@ -273,9 +279,9 @@ def startup_plot(
 	ax6.text(15,      0.18, "Median", horizontalalignment="center", rotation=45)
 	ax6.text(21,      0.18, "Mode", horizontalalignment="center", rotation=45)
 	ax6.text(27,      0.18, "16%", horizontalalignment="center", rotation=45)
-	ax1.text(8+46.0,  1.2,  "NGC 0628", backgroundcolor="white")
-	ax2.text(12+46.0, 1.2,  "NGC 3627", backgroundcolor="white")
-	ax3.text(8+46.0,  1.2,  "NGC 4321", backgroundcolor="white")
+	ax1.text(8+46.0,  1.2,  "NGC 0628", bbox=boxdic)
+	ax2.text(12+46.0, 1.2,  "NGC 3627", bbox=boxdic)
+	ax3.text(8+46.0,  1.2,  "NGC 4321", bbox=boxdic) # , backgroundcolor="white")
 	ax1.text(4.4,  0.08,  "4\"", fontsize=10)
 	ax1.text(8.4,  0.08,  "8\"", fontsize=10)
 	ax1.text(12.4, 0.08, "12\"", fontsize=10)
@@ -291,12 +297,12 @@ def startup_plot(
 	ax3.text(12.4, 0.08, "12\"", fontsize=10)
 	ax3.text(16.4, 0.08, "16\"", fontsize=10)
 	ax3.text(20.4, 0.08, "20\"", fontsize=10)
-	ax4.text(1, 0.42,  "4\"", horizontalalignment="center", fontsize=10)
-	ax4.text(5, 0.42 , "20\"", horizontalalignment="center", fontsize=10)
-	ax5.text(1, 0.42,  "8\"", horizontalalignment="center", fontsize=10)
-	ax5.text(5, 0.42 , "24\"", horizontalalignment="center", fontsize=10)
-	ax6.text(1, 0.42,  "4\"", horizontalalignment="center", fontsize=10)
-	ax6.text(5, 0.42 , "20\"", horizontalalignment="center", fontsize=10)
+	ax4.text(1, 0.75,  "4\"", horizontalalignment="center", fontsize=10)
+	ax4.text(5, 0.68, "20\"", horizontalalignment="center", fontsize=10)
+	ax5.text(1, 0.62,  "8\"", horizontalalignment="center", fontsize=10)
+	ax5.text(5, 0.62, "24\"", horizontalalignment="center", fontsize=10)
+	ax6.text(1, 0.31,  "4\"", horizontalalignment="center", fontsize=10)
+	ax6.text(5, 0.31, "20\"", horizontalalignment="center", fontsize=10)
 
 	return ax1, ax2, ax3, ax4, ax5, ax6
 
