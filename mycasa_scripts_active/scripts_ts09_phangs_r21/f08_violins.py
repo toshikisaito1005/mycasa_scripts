@@ -176,10 +176,10 @@ def plot_all_violins(
 	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.60,0.0)
 	#
 	weights = weights1
-	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.35,23.0)
+	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.40,23.0)
 	#
 	weights = weights2
-	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.10,46.0)
+	plot_multi_violins(ax,list_r21,bins,r21range,weights,list_beam,color,0.20,46.0)
 
 def plot_one_stats(
 	ax,
@@ -210,8 +210,8 @@ def plot_all_stats(
 	ymin = np.min([statslist_r21, statslist_r21_wco10, statslist_r21_wco21])
 	ax.set_ylim([ymin-0.05, ymax+0.05])
 	plot_one_stats(ax, statslist_r21, "-", color, lw = 2, alpha = 0.60)
-	plot_one_stats(ax, statslist_r21_wco10, "-", color, lw = 2, alpha = 0.35)
-	plot_one_stats(ax, statslist_r21_wco21, "-", color, lw = 2, alpha = 0.10)
+	plot_one_stats(ax, statslist_r21_wco10, "-", color, lw = 2, alpha = 0.40)
+	plot_one_stats(ax, statslist_r21_wco21, "-", color, lw = 2, alpha = 0.20)
 
 def startup_plot(
 	xlabel,
