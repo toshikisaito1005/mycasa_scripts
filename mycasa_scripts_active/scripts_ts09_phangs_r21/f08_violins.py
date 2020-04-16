@@ -249,6 +249,12 @@ def startup_plot(
 	ax1.set_xlim([0,70])
 	ax2.set_xlim([4,74])
 	ax3.set_xlim([0,70])
+	ax1.tick_params(axis="x", length=0)
+	ax2.tick_params(axis="x", length=0)
+	ax3.tick_params(axis="x", length=0)
+	ax4.tick_params(axis="x", length=0)
+	ax5.tick_params(axis="x", length=0)
+	ax6.tick_params(axis="x", length=0)
 	ax1.tick_params(labelbottom=False)
 	ax2.tick_params(labelbottom=False)
 	ax3.tick_params(labelbottom=False)
@@ -262,7 +268,6 @@ def startup_plot(
 	ax5.set_yticks([0.3,0.5,0.7,0.9,1.1,1.3])
 	ax6.set_yticks([0.3,0.5,0.7,0.9,1.1,1.3])
 	ax2.set_ylabel(ylabel)
-	ax1.tick_params(length=0)
 
 	return ax1, ax2, ax3, ax4, ax5, ax6
 
