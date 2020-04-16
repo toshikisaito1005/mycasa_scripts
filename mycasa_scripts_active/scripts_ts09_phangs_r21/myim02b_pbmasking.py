@@ -18,12 +18,14 @@ co21pbmasks = glob.glob(dir_data + "ngc*co21*.pbmask")
 for i in range(len(co10images)):
 	# combine mask
 	combinepbmask = co10pbmasks[i] + ".combined"
-	os.system("rm -rf " + combinepbmask)
+	os.system("rm -rf " + combinepbmask + "_tmp")
 	immath(
 		imagename = [co10pbmasks[i], co21pbmasks[i]],
-		expr = "IM0*IM1",
-		outfile = combinepbmask,
+		expr = "iif( IM0>=1.0, IM1, 0.0)",
+		outfile = combinepbmask + "_tmp",
 		)
+	r21.tscreatemask(combinepbmask + "_tmp", 1.0, combinepbmask)
+	os.system("rm -rf " + combinepbmask + "_tmp")
 	# mask images
 	os.system("rm -rf " + co10images[i] + ".masked")
 	immath(
