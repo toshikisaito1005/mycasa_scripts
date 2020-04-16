@@ -238,9 +238,12 @@ def startup_plot(
 
 	return ax1, ax2, ax3, ax4, ax5, ax6
 
-def plot_one_onstats(
+def plot_one_stats(
 	ax,
 	statslist_r21,
+	fmt,
+	color,
+	lw,
 	):
 	"""
 	"""
@@ -248,7 +251,19 @@ def plot_one_onstats(
 	for i in range(len(statslist_r21)):
 		xvalue = np.arange(i*6 + 1,i*6 + 6)
 		yvalue = [s[i] for s in statslist_r21]
-		ax.plot(xvalue, yvalue, "o-")
+		ax.plot(xvalue, yvalue, fmt, lw=lw, color=color, alpha = 0.5)
+
+def plot_all_stats(
+	ax,
+	statslist_r21,
+	color,
+	):
+	"""
+	"""
+	plot_one_stats(ax, statslist_r21, "-", "black", lw = 1)
+	plot_one_stats(ax, statslist_r21_wco10, "-", color, lw = 3)
+	plot_one_stats(ax, statslist_r21_wco21, "-", color, lw = 5)
+
 
 
 #####################
@@ -302,7 +317,8 @@ for i in range(len(gals)):
 	# plot
 	color = cm.brg(i/2.5)
 	plot_all_violins(ax_master[i], list_r21, bins, r21range, list_beam, color, list_co10, list_co21)
-	#plot_all_stats()
+	#plot_all_stats
+	plot_all_stats(ax, statslist_r21, color)
 	#
 plt.savefig(dir_proj+"eps/violin_co21.png",dpi=300)
 
