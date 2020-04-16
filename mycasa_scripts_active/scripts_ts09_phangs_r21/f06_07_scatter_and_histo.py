@@ -136,6 +136,7 @@ def plot_scatter(
 		#
 		# plot
 		ax.scatter(x, y, color=color, alpha=0.4, s=20, lw=0, label = beam)
+		coeff = np.corrcoef(x, y)[0,1]
 		if i==0:
 			binx, mean, std = get_binned_dist(x,y,binrange)
 			ax.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
