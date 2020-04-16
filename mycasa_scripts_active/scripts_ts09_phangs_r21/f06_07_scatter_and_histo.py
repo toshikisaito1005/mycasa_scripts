@@ -140,7 +140,7 @@ def plot_scatter(
 		#
 		# correlation coefficient
 		coeff = str(np.round(np.corrcoef(x, y)[0,1], 2))
-		err_coeff = str(np.round((1 - coeff**2) / len(x), 2))
+		err_coeff = str(np.round((1 - float(coeff)**2) / float(len(x)), 4))
 		# fit
 		popt, pcov = curve_fit(func1, x, y, p0 = [1.0,0.0], maxfev = 10000, sigma = sigmay)
 		slope = str(np.round(popt[0],2))
