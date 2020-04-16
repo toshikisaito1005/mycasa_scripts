@@ -50,9 +50,13 @@ for i in range(len(galnames)):
         immath(imagename = imagename,
                expr = "iif( IM0 >=-100000000., 1.0, 0.0)",
                outfile = pbmask + "_tmp")
-
+        #
         imsmooth(imagename = pbmask + "_tmp",
-                 major = "55.0arcsec")
+                 major = "55.0arcsec",
+                 minor = "55.0arcsec",
+                 pa = "0deg",
+                 outfile = pbmask)
+        os.system("rm -rf " + pbmask + "_tmp")
 
     os.system("rm -rf template.*")
 
