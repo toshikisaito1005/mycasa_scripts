@@ -143,8 +143,9 @@ def plot_scatter(
 		err_coeff = str(np.round((1 - float(coeff)**2) / float(len(x)), 4))
 		# fit
 		popt, pcov = curve_fit(func1, x, y, p0 = [1.0,0.0], maxfev = 10000, sigma = sigmay)
-		slope = str(np.round(popt[0],2))
-		print(beam+", coeff = "+coeff+"+/-"+err_coeff+", slope = " + slope)
+		slope = str(np.round(popt[0], 2))
+		err_slope = str(np.round(np.sqrt(np.diag(pcov)), 4))
+		print(beam+", coeff = "+coeff+"+/-"+err_coeff+", slope = "+slope+"+/-"+err_slope)
 		#
 		# plot
 		ax.scatter(x, y, color=color, alpha=0.4, s=20, lw=0, label = beam) # + ' ($\\rho$ = ' + coeff + ")")
