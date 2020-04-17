@@ -357,11 +357,11 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
         bmaj = imhead(cubeimage,"list")["beammajor"]["value"]
     	imsmooth(imagename = cubeimage,
                  targetres = True,
-                 major = str(bmaj*1.2) + "arcsec",
-                 minor = str(bmaj*1.2) + "arcsec",
+                 major = str(bmaj*2.0) + "arcsec",#1.2) + "arcsec",
+                 minor = str(bmaj*2.0) + "arcsec",#1.2) + "arcsec",
                  pa = "0deg",
                  outfile = cubesmooth1)
-        
+        """
         cubesmooth2 = cubeimage.replace(".image",".smooth2") # 10 mJy
         imsmooth(imagename = cubeimage,
                  targetres = True,
@@ -369,11 +369,11 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
                  minor = str(bmaj*1.8) + "arcsec",
                  pa = "0deg",
                  outfile = cubesmooth2)
-
+        """
         # create mask
-        tscreatemask(cubeimage,noise*1.*2.,dir_image+name_line+"_mask0.image")
+        #tscreatemask(cubeimage,noise*1.*2.,dir_image+name_line+"_mask0.image")
         tscreatemask(cubesmooth1,noise*2.*3.,dir_image+name_line+"_mask1.image")
-        tscreatemask(cubesmooth2,noise*5.*5.,dir_image+name_line+"_mask2.image")
+        #tscreatemask(cubesmooth2,noise*5.*5.,dir_image+name_line+"_mask2.image")
 
         immath(imagename = [dir_image+name_line+"_mask0.image",
                             dir_image+name_line+"_mask1.image",
