@@ -357,8 +357,8 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
         bmaj = imhead(cubeimage,"list")["beammajor"]["value"]
     	imsmooth(imagename = cubeimage,
                  targetres = True,
-                 major = str(bmaj*5.0) + "arcsec",#1.2) + "arcsec",
-                 minor = str(bmaj*5.0) + "arcsec",#1.2) + "arcsec",
+                 major = str(bmaj*4.0) + "arcsec",#1.2) + "arcsec",
+                 minor = str(bmaj*4.0) + "arcsec",#1.2) + "arcsec",
                  pa = "0deg",
                  outfile = cubesmooth1)
         # noise
