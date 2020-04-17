@@ -280,7 +280,7 @@ def noisehist_kelvin(imagename,jy2k,noises_byeye,output,snr,bins=200,thres=0.000
     pixvalues = pixvalues[abs(pixvalues)>thres]
 
     # plot
-    histrange = [pixvalues.min()/1.5-0.02,-pixvalues.min()/1.5+0.02]
+    histrange = [pixvalues.min()-0.02,-pixvalues.min()+0.02]
     plt.figure(figsize=(10,10))
     plt.rcParams["font.size"] = 22
     plt.subplots_adjust(bottom=0.10, left=0.19, right=0.99, top=0.90)
@@ -331,11 +331,11 @@ def noisehist_kelvin(imagename,jy2k,noises_byeye,output,snr,bins=200,thres=0.000
 
     plt.plot([sigma_percentile,sigma_percentile],
              [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
-             '--',color='black',lw=5,
+             '-',color='black',lw=5,
              label = "|0.003 percentile| = " + str(np.round(sigma_percentile,3)) + " K")
 
     #plt.title(imagename.split("/")[-1])
-    plt.xlim(0,histrange[1]*1.5)
+    plt.xlim(0,histrange[1])
     plt.ylim([2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*1.2])#3.0])
     plt.xlabel("Pixel absolute value (K)")
     plt.ylabel("Number of pixels")
