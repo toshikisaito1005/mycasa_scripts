@@ -94,3 +94,7 @@ convert -crop 600x600+80+30 $dir_data"ngc4321_r21_mask.png" $dir_data"ngc4321_r2
 
 convert +append -border 0x0 $dir_data"ngc0628_r21_maskb.png" $dir_data"ngc3627_r21_maskb.png" $dir_data"ngc4321_r21_maskb.png" eps2:$dir_data"fig09.eps"
 
+rm -rf $dir_data"ngc0628_r21_mask.png" $dir_data"ngc0628_r21_maskb.png"
+rm -rf $dir_data"ngc3627_r21_mask.png" $dir_data"ngc3627_r21_maskb.png"
+rm -rf $dir_data"ngc4321_r21_mask.png" $dir_data"ngc4321_r21_maskb.png"
+
