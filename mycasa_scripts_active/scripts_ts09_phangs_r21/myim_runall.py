@@ -1,5 +1,6 @@
 import os
 
+snr_mom = 4.0
 
 #execfile("myim01_prep.py")
 #execfile("myim02a_regrid.py")
@@ -21,12 +22,6 @@ execfile("myim06_r21_map.py")
 print("### running myim07")
 execfile("myim07_sd_mom.py")
 
-
-print("### running f01")
-execfile("f01a_noise.py")
-execfile("f01b_missingflux.py")
-
-
 print("### running myim08")
 beam = [4.0, 8.0, 4.0]
 execfile("myim08_r21_highlowmask.py")
@@ -42,6 +37,10 @@ execfile("myim10_extract_param_600pc.py")
 print("### running myim11")
 execfile("myim11_extract_param_best.py")
 
+
+print("### running f01")
+execfile("f01a_noise.py")
+execfile("f01b_missingflux.py")
 
 print("### running f02")
 execfile("f02_images.py")
