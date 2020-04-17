@@ -61,12 +61,14 @@ for i in [0,1,2]:
         co10rms = r21.noisehist(co10images[j],
                                  co10noises[i][j],
                                  output,
+                                 snr_mom,
                                  logscale=False,
                                  plotter=False)
         output = dir_proj+"eps/noise_"+galname+"_"+co21images[j].split("/")[-1].replace(".image","").replace("_cube","")+".png"
         co21rms = r21.noisehist(co21images[j],
                                  co21noises[i][j],
                                  output,
+                                 snr_mom,
                                  logscale=False,
                                  plotter=False)
         list_co10.append(co10rms)
