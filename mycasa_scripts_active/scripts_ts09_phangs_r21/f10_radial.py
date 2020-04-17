@@ -82,7 +82,7 @@ for i in range(len(gals)):
     histdata.extend(r21.tolist())
 
 dathist = ax2.hist(
-    histdata,orientation="horizontal",range=[0,2],
+    histdata,orientation="horizontal",range=[0,3],
     bins=100,lw=0,color="grey",alpha=0.6)
 
 range_p = dathist[1][hist_percent(dathist[0],0.843)]

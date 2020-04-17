@@ -63,7 +63,11 @@ execfile("f08_violins.py")
 print("### running f09")
 execfile("f09_r21_highlowmask.py")
 
+print("### running f10")
+execfile("f10_radial.py")
 
+print("### running f11")
+execfile("f11_radial_norm.py")
 
 print("### cleanup")
 os.system("rm -rf tempalte.image")
