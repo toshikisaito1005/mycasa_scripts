@@ -250,13 +250,13 @@ def noisehist(imagename,noises_byeye,output,snr,bins=200,thres=0.0001,logscale=T
              '--',color='black',lw=2)
 
     # percentile
-    percentile = (1 - scipy.special.erf(snr/np.sqrt(2))) * 100.
-    sigma_percentile = np.percentile(pixvalues,percentile)
+    percentile = (0.5-scipy.special.erf(snr/np.sqrt(2))/2.) * 100.
+    sigma_percentile = np.percentile(pixvalues,percentile) * -1
 
     plt.plot([sigma_percentile,sigma_percentile],
              [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
              '--',color='black',lw=5,
-             label = str(snr) + " sigma (histogram) = " + str(np.round(sigma_percentile,3)) + " Jy beam$^{-1}$")
+             label = str(snr) + " 0.003% = " + str(np.round(sigma_percentile,3)) + " Jy beam$^{-1}$")
 
     #plt.title(imagename.split("/")[-1])
     plt.xlim(0,histrange[1])
@@ -332,7 +332,7 @@ def noisehist_kelvin(imagename,jy2k,noises_byeye,output,snr,bins=200,thres=0.000
     plt.plot([sigma_percentile,sigma_percentile],
              [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
              '--',color='black',lw=5,
-             label = "0.003 percentile = " + str(np.round(sigma_percentile,3)) + " K")
+             label = "|0.003 percentile| = " + str(np.round(sigma_percentile,3)) + " K")
 
     #plt.title(imagename.split("/")[-1])
     plt.xlim(0,histrange[1])
