@@ -3,7 +3,7 @@ import os
 #execfile("myim01_prep.py")
 #execfile("myim02a_regrid.py")
 #execfile("myim02b_pbmasking.py")
-execfile("myim03a_mom_native.py")
+#execfile("myim03a_mom_native.py")
 execfile("myim03b_Jy2Kelvin.py")
 execfile("myim04_multibeam.py")
 execfile("myim05_mom_multibeam.py")
