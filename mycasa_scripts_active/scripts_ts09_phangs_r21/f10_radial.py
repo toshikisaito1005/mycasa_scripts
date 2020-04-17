@@ -53,18 +53,17 @@ for i in [0]:
     data = np.loadtxt(dir_product + galname + "_parameter_600pc.txt")
     # galactocentric distance
     distance = data[:,0] # pc
+    dist25_pc = dist25[i] * 60 * scales[i]
+    galdist = distance / dist25_pc
+    # median-subtracted r21
+    r21 = data[:,1][data[:,1]>0]
+    med_r21 = np.median(r21)
+    norm_r21 = r21 / med_r21
 
 
 histdata = []
 for i in range(len(gals)):
 
-    distance = data[:,0] # pc
-    dist25_pc = dist25[i] * 60 * scales[i]
-    galdist = distance / dist25_pc
-    # median-subtracted r21
-    r21 = data[:,1]
-    med_r21 = np.median(r21[r21>0])
-    norm_r21 = r21 / med_r21
     # co10 and co21
     co21 = data[:,2]
     co21snr = data[:,3]
