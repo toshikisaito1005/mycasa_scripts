@@ -83,13 +83,11 @@ for i in range(len(gals)):
         color=cm.brg(i/2.5), lw=4, #alpha=0.5,
         label = galname.replace("ngc","NGC ")
         )
-    """
     ax1.scatter(
         galdist, norm_r21,
         color=cm.brg(i/2.5),
         lw=0, alpha=0.2, s=50,
         label = galname.replace("ngc","NGC "))
-    """
     histdata.extend(norm_r21.tolist())
 
 dathist = ax2.hist(

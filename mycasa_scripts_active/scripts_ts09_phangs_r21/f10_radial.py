@@ -46,11 +46,18 @@ ax2 = plt.subplot(gs[0:7,7:9])
 ax2b = ax2.twinx()
 plt.rcParams["font.size"] = 16
 
-histdata = []
-for i in range(len(gals)):
+
+#for i in range(len(gals)):
+for i in [0]:
     galname = gals[i]
     data = np.loadtxt(dir_product + galname + "_parameter_600pc.txt")
     # galactocentric distance
+    distance = data[:,0] # pc
+
+
+histdata = []
+for i in range(len(gals)):
+
     distance = data[:,0] # pc
     dist25_pc = dist25[i] * 60 * scales[i]
     galdist = distance / dist25_pc
@@ -83,13 +90,12 @@ for i in range(len(gals)):
         color=cm.brg(i/2.5), lw=4, #alpha=0.5,
         label = galname.replace("ngc","NGC ")
         )
-    """
     ax1.scatter(
         galdist, norm_r21,
         color=cm.brg(i/2.5),
         lw=0, alpha=0.2, s=50,
         label = galname.replace("ngc","NGC "))
-    """
+
     histdata.extend(r21.tolist())
 
 dathist = ax2.hist(
