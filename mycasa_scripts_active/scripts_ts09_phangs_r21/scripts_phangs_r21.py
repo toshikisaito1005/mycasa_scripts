@@ -335,7 +335,7 @@ def noisehist_kelvin(imagename,jy2k,noises_byeye,output,snr,bins=200,thres=0.000
              label = "|0.003 percentile| = " + str(np.round(sigma_percentile,3)) + " K")
 
     #plt.title(imagename.split("/")[-1])
-    plt.xlim(0,histrange[1])
+    plt.xlim(0,histrange[1]*1.5)
     plt.ylim([2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*1.2])#3.0])
     plt.xlabel("Pixel absolute value (K)")
     plt.ylabel("Number of pixels")
