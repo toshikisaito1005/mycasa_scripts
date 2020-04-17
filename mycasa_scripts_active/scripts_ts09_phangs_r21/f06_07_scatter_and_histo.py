@@ -150,7 +150,13 @@ def plot_scatter(
 		err_inter = str(np.round(np.sqrt(np.diag(pcov))[1], 2))
 		# beam, coeff, slope, err_slope, inter, err_inter
 		print(beam+", coeff = "+coeff+", slope = "+slope+" $\pm$ "+err_slope+", inter = "+inter+" $\pm$ "+err_inter)
-		list_output.append([list_beamname[i], coeff, slope, err_slope, inter, err_inter])
+		list_output.append(
+			[float(list_beamname[i].replace("p",".")),
+			np.round(np.corrcoef(x, y)[0,1], 2),
+			np.round(popt[0], 2),
+			np.round(np.sqrt(np.diag(pcov))[0], 2),
+			np.round(popt[1], 2),
+			np.round(np.sqrt(np.diag(pcov))[1], 2)])
 		#
 		# plot
 		ax.scatter(x, y, color=color, alpha=0.4, s=20, lw=0, label = beam) # + ' ($\\rho$ = ' + coeff + ")")
