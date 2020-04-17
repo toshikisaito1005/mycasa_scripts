@@ -1,17 +1,17 @@
-      16 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.f0_TSM0
-      16 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.f0
-      16 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.dat
-      16 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.f0_TSM0
-      16 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.f0
-      12 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21.py
-      10 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.lock
-      10 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.info
-      10 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.lock
-      10 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.info
-      10 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.dat
-      10 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim_runall.py
+      18 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.f0_TSM0
+      18 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.f0
+      18 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.dat
+      18 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.f0_TSM0
+      18 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.f0
+      13 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21.py
+      12 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.lock
+      12 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.info
+      12 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.lock
+      12 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.info
+      12 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.dat
+      12 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim_runall.py
+       8 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21.pyc
        8 - mycasa_scripts_active/scripts_ts09_phangs_r21/f10_radial.py
-       7 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21.pyc
        5 - mycasa_scripts_active/scripts_ts09_phangs_r21/f11_radial_norm.py
        3 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim06_r21_map.py
        3 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim05_mom_multibeam.py

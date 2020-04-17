@@ -129,6 +129,7 @@ def plot_scatter(
 	axb.set_xlabel(xlabel)
 	#
 	### plot data
+	list_output = []
 	for i in range(len(list_x)):
 		# preparation
 		x = np.log10(list_x[i])
@@ -147,7 +148,9 @@ def plot_scatter(
 		inter = str(np.round(popt[1], 2))
 		err_slope = str(np.round(np.sqrt(np.diag(pcov))[0], 2))
 		err_inter = str(np.round(np.sqrt(np.diag(pcov))[1], 2))
+		# beam, coeff, slope, err_slope, inter, err_inter
 		print(beam+", coeff = "+coeff+", slope = "+slope+" $\pm$ "+err_slope+", inter = "+inter+" $\pm$ "+err_inter)
+		list_output.append([beam, coeff, slope, err_slope, inter, err_inter])
 		#
 		# plot
 		ax.scatter(x, y, color=color, alpha=0.4, s=20, lw=0, label = beam) # + ' ($\\rho$ = ' + coeff + ")")
@@ -216,6 +219,7 @@ def plot_scatter(
 		#
 	# set legend
 	ax.legend(bbox_to_anchor=(1.05, -0.05), loc="upper left", ncol=ncol)
+	np.savetxt(galname.replace("NGC ","ngc")+"", np.array(list_output)
 
 def plot_hist_right(
 	ax,
