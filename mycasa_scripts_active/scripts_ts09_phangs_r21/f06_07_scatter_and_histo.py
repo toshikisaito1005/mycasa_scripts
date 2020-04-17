@@ -225,9 +225,12 @@ def plot_scatter(
 		#
 	# set legend
 	ax.legend(bbox_to_anchor=(1.05, -0.05), loc="upper left", ncol=ncol)
+	# save txt
+	os.system("rm -rf " + "table3_"+galname.replace("for NGC ","ngc")+".txt")
 	np.savetxt(
 		"table3"+galname.replace("for NGC ","ngc")+"_.txt",
 		np.array(list_output),
+		fmt='%.2f',
 		)
 
 def plot_hist_right(
