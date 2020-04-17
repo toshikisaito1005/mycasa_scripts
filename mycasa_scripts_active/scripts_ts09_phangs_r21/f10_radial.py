@@ -47,6 +47,7 @@ ax2b = ax2.twinx()
 plt.rcParams["font.size"] = 16
 
 
+histdata = []
 #for i in range(len(gals)):
 for i in [0]:
     galname = gals[i]
@@ -55,34 +56,18 @@ for i in [0]:
     distance = data[:,0] # pc
     dist25_pc = dist25[i] * 60 * scales[i]
     galdist = distance / dist25_pc
-    # median-subtracted r21
+    # values
     r21 = data[:,1][data[:,1]>0]
+    galdist = galdist[data[:,1]>0]
     med_r21 = np.median(r21)
     norm_r21 = r21 / med_r21
-
-
-histdata = []
-for i in range(len(gals)):
-
-    # co10 and co21
-    co21 = data[:,2]
-    co21snr = data[:,3]
-    co10 = data[:,4]
-    co10snr = data[:,5]
-    # cut data
-    cut_r21 = (r21 > 0)
-    cut_co10 = (co10 > co10.max() * percents[i])
-    cut_co21 = (co21 > co21.max() * percents[i])
-    cut_all = np.where((cut_r21) & (cut_co10) & (cut_co21))
-    galdist = galdist[cut_all]
-    norm_r21 = norm_r21[cut_all]
-    r21 = r21[cut_all]
-    # radial binning
+    # binning
     n, _ = np.histogram(galdist, bins=nbins)
-    sy, _ = np.histogram(galdist, bins=nbins, weights=norm_r21)
-    sy2, _ = np.histogram(galdist, bins=nbins, weights=norm_r21*norm_r21)
+    sy, _ = np.histogram(galdist, bins=nbins, weights=r21)
+    sy2, _ = np.histogram(galdist, bins=nbins, weights=r21*r21)
     mean = sy / n
     std = np.sqrt(sy2/n - mean*mean)
+
 
     ax1.errorbar(
         (_[1:] + _[:-1])/2, mean, yerr=std,
@@ -96,6 +81,8 @@ for i in range(len(gals)):
         label = galname.replace("ngc","NGC "))
 
     histdata.extend(r21.tolist())
+
+
 
 dathist = ax2.hist(
     histdata,orientation="horizontal",range=[0,2],
