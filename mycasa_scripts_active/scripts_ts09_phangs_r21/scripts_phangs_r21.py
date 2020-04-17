@@ -378,7 +378,7 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
         #tscreatemask(cubesmooth2,noise*5.*5.,dir_image+name_line+"_mask2.image")
 
         immath(imagename = dir_image+name_line+"_mask1.image",#[dir_image+name_line+"_mask0.image",dir_image+name_line+"_mask1.image",dir_image+name_line+"_mask2.image"],
-               expr = "iif(IM0+IM1+IM2 >= 2.0, 1.0, 0.0)",
+               expr = "iif(IM0 >= 1.0, 1.0, 0.0)",#"iif(IM0+IM1+IM2 >= 2.0, 1.0, 0.0)",
                outfile = dir_image+name_line+"_"+beamp+"_mask.image")
 
         os.system("rm -rf "+cubesmooth1)
