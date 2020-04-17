@@ -1,6 +1,7 @@
 import os
 import glob
 import math
+import scipy
 import numpy as np
 import matplotlib.pyplot as plt
 from astropy.coordinates import SkyCoord
@@ -247,6 +248,9 @@ def noisehist(imagename,noises_byeye,output,snr,bins=200,thres=0.0001,logscale=T
     plt.plot([-popt[1],-popt[1]],
              [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
              '--',color='black',lw=2)
+
+    # percentile
+    
 
     #plt.title(imagename.split("/")[-1])
     plt.xlim(0,histrange[1])

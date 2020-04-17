@@ -21,7 +21,7 @@ gals = ["ngc0628","ngc3627","ngc4321"]
 dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
 nbins = 8
-percents = [0.0,0.00,0.00]
+percents = [0.01,0.01,0.01]
 
 #####################
 ### functions
