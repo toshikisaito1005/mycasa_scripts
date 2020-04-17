@@ -228,7 +228,7 @@ def plot_scatter(
 	# save txt
 	os.system("rm -rf " + "table3_"+galname.replace("for NGC ","ngc")+".txt")
 	np.savetxt(
-		"table3"+galname.replace("for NGC ","ngc")+"_.txt",
+		"table3_"+galname.replace("for NGC ","ngc")+".txt",
 		np.array(list_output),
 		fmt='%.2f',
 		)
