@@ -5,6 +5,7 @@ import glob
 import scipy
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
 import matplotlib.ticker as ticker
 plt.ioff()
 
@@ -81,7 +82,7 @@ for i in range(len(gals)):
 		yerr = p21err,
 		marker = ".",
 		markersize = 0,
-		c="gray",
+		c=cm.brg(i/2.5), # "gray",
 		alpha=0.5,
 		linewidth=0,
 		elinewidth=1,
