@@ -26,6 +26,7 @@ for i in range(len(gals)):
     box = "0,0,"+str(shape[0]-1)+","+str(shape[1]-1)
     data = imval(r21image,box=box)
     pixvalues = data["data"].flatten()
+    pixvalues[np.isinf(pixvalues)]=0
     pixvalues = pixvalues[abs(pixvalues)!=0]
     median = np.median(pixvalues)
 
