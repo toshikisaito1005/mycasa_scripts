@@ -61,6 +61,10 @@ execfile("f06_07_scatter_and_histo.py")
 print("### running f08")
 execfile("f08_violins.py")
 
+print("### running f09")
+execfile("f09_r21_highlowmask.py")
+
+
 
 print("### cleanup")
 os.system("rm -rf tempalte.image")
