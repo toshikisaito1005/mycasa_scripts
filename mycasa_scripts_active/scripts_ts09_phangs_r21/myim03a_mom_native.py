@@ -23,7 +23,7 @@ beams = ["04p0",
          "08p0",
          #"08p0",
          "04p0"]
-snr_mom = 5.0 # 3.0
+snr_mom = 3.0
 #percents = [0.01,0.01,0.01] # [0.15,0.025,0.010]
 percents = [0,0,0]
 
@@ -41,10 +41,10 @@ for i in range(len(co21names)):
 
     # measure noise
     output = dir_proj+"../eps/noise_"+co21names[i].split("/")[-1].replace(".image","")+".png"
-    co21rms = r21.noisehist(co21names[i],noises_co21_byeye[i],output)
+    co21rms = r21.noisehist(co21names[i],noises_co21_byeye[i],output,snr_mom)
     
     output = dir_proj+"../eps/noise_"+co10names[i].split("/")[-1].replace(".image","")+".png"
-    co10rms = r21.noisehist(co10names[i],noises_co10_byeye[i],output)
+    co10rms = r21.noisehist(co10names[i],noises_co10_byeye[i],output,snr_mom)
 
     # moment map creation
     maskname = \

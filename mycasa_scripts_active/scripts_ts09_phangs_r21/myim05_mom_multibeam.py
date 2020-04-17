@@ -29,7 +29,7 @@ co21noises = [[0.025,0.055], # ngc0628
               #[0.028,0.060], # ngc4254
               [0.023,0.040]] # ngc3627
 """
-snr_mom = 5.0 # 3.0
+snr_mom = 3.0
 #percents = [0.15,0.010,0.025]
 percents = [0.00,0.00,0.00]
 
@@ -49,11 +49,13 @@ for i in range(len(galaxy)):
         output = dir_proj+"eps/noise_"+galname+"_"+co10images[j].split("/")[-1].replace(".image","").replace("_cube","")+".png"
         co10rms = r21.noisehist(co10images[j],
                                  co10noises[i][j],
-                                 output)
+                                 output,
+                                 snr_mom)
         output = dir_proj+"eps/noise_"+galname+"_"+co21images[j].split("/")[-1].replace(".image","").replace("_cube","")+".png"
         co21rms = r21.noisehist(co21images[j],
                                  co21noises[i][j],
-                                 output)
+                                 output,
+                                 snr_mom)
             
         # moment map creation
         maskname = r21.eazy_immoments(dir_proj + galname + "_co21/",

@@ -194,7 +194,7 @@ def tscreatemask(imagename,thres,outmask):
 def func1(x, a, c):
     return a*np.exp(-(x)**2/(2*c**2))
 
-def noisehist(imagename,noises_byeye,output,bins=200,thres=0.0001,logscale=True,plotter=True):
+def noisehist(imagename,noises_byeye,output,snr,bins=200,thres=0.0001,logscale=True,plotter=True):
     """
     myim03
     """
@@ -243,7 +243,7 @@ def noisehist(imagename,noises_byeye,output,bins=200,thres=0.0001,logscale=True,
     plt.plot([popt[1]*3.0,popt[1]*3.0],
              [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
              '--',color='black',lw=5,
-             label = "5 sigma = " + str(np.round(popt[1]*5.0,3)) + " Jy beam$^{-1}$")
+             label = str(snr) + " sigma = " + str(np.round(popt[1]*snr.0,3)) + " Jy beam$^{-1}$")
     plt.plot([-popt[1],-popt[1]],
              [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
              '--',color='black',lw=2)
@@ -259,7 +259,7 @@ def noisehist(imagename,noises_byeye,output,bins=200,thres=0.0001,logscale=True,
 
     return popt[1]
 
-def noisehist_kelvin(imagename,jy2k,noises_byeye,output,bins=200,thres=0.0000,logscale=True,plotter=True,title="test"):
+def noisehist_kelvin(imagename,jy2k,noises_byeye,output,snr,bins=200,thres=0.0000,logscale=True,plotter=True,title="test"):
     """
     myim03
     """
@@ -310,7 +310,7 @@ def noisehist_kelvin(imagename,jy2k,noises_byeye,output,bins=200,thres=0.0000,lo
     plt.plot([popt[1]*3.0,popt[1]*3.0],
              [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
              '--',color='black',lw=5,
-             label = "5 sigma = " + str(np.round(popt[1]*5.0,3)) + " K")
+             label = str(snr) + " sigma = " + str(np.round(popt[1]*snr.0,3)) + " K")
     plt.plot([-popt[1],-popt[1]],
              [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
              '--',color='black',lw=2)
@@ -357,8 +357,8 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
         bmaj = imhead(cubeimage,"list")["beammajor"]["value"]
     	imsmooth(imagename = cubeimage,
                  targetres = True,
-                 major = str(bmaj*2.0) + "arcsec",#1.2) + "arcsec",
-                 minor = str(bmaj*2.0) + "arcsec",#1.2) + "arcsec",
+                 major = str(bmaj*5.0) + "arcsec",#1.2) + "arcsec",
+                 minor = str(bmaj*5.0) + "arcsec",#1.2) + "arcsec",
                  pa = "0deg",
                  outfile = cubesmooth1)
         # noise
