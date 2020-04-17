@@ -357,32 +357,31 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
         bmaj = imhead(cubeimage,"list")["beammajor"]["value"]
     	imsmooth(imagename = cubeimage,
                  targetres = True,
-                 major = str(bmaj*4.0) + "arcsec",#1.2) + "arcsec",
-                 minor = str(bmaj*4.0) + "arcsec",#1.2) + "arcsec",
+                 major = str(bmaj*3.0) + "arcsec",#1.2) + "arcsec",
+                 minor = str(bmaj*3.0) + "arcsec",#1.2) + "arcsec",
                  pa = "0deg",
                  outfile = cubesmooth1)
-        # noise
-        noisesmooth1 = noisehist(cubesmooth1,0.02,"test",3.0,bins=200,thres=0.0001,plotter=False)
-        """
         cubesmooth2 = cubeimage.replace(".image",".smooth2") # 10 mJy
         imsmooth(imagename = cubeimage,
                  targetres = True,
-                 major = str(bmaj*1.8) + "arcsec",
-                 minor = str(bmaj*1.8) + "arcsec",
+                 major = str(bmaj*5.0) + "arcsec",
+                 minor = str(bmaj*5.0) + "arcsec",
                  pa = "0deg",
                  outfile = cubesmooth2)
-        """
+        # noise
+        noisesmooth1 = noisehist(cubesmooth1,0.02,"test",4.0,bins=200,thres=0.0001,plotter=False)
+        noisesmooth2 = noisehist(cubesmooth2,0.02,"test",4.0,bins=200,thres=0.0001,plotter=False)
         # create mask
         #tscreatemask(cubeimage,noise*1.*2.,dir_image+name_line+"_mask0.image")
-        tscreatemask(cubesmooth1,noisesmooth1*5.0,dir_image+name_line+"_mask1.image")
-        #tscreatemask(cubesmooth2,noise*5.*5.,dir_image+name_line+"_mask2.image")
+        tscreatemask(cubesmooth1,noisesmooth1*4.0,dir_image+name_line+"_mask1.image")
+        tscreatemask(cubesmooth2,noisesmooth2*4.0,dir_image+name_line+"_mask2.image")
 
-        immath(imagename = dir_image+name_line+"_mask1.image",#[dir_image+name_line+"_mask0.image",dir_image+name_line+"_mask1.image",dir_image+name_line+"_mask2.image"],
-               expr = "iif(IM0 >= 1.0, 1.0, 0.0)",#"iif(IM0+IM1+IM2 >= 2.0, 1.0, 0.0)",
+        immath(imagename = [dir_image+name_line+"_mask1.image", dir_image+name_line+"_mask2.image"],
+               expr = "iif(IM0+IM1 >= 2.0, 1.0, 0.0)",
                outfile = dir_image+name_line+"_"+beamp+"_mask.image")
 
         os.system("rm -rf "+cubesmooth1)
-        #os.system("rm -rf "+cubesmooth2)
+        os.system("rm -rf "+cubesmooth2)
         os.system("rm -rf "+dir_image+name_line+"_mask0.image")
         os.system("rm -rf "+dir_image+name_line+"_mask1.image")
         os.system("rm -rf "+dir_image+name_line+"_mask2.image")
