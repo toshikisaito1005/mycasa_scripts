@@ -150,7 +150,7 @@ def plot_scatter(
 		err_inter = str(np.round(np.sqrt(np.diag(pcov))[1], 2))
 		# beam, coeff, slope, err_slope, inter, err_inter
 		print(beam+", coeff = "+coeff+", slope = "+slope+" $\pm$ "+err_slope+", inter = "+inter+" $\pm$ "+err_inter)
-		list_output.append([beam, coeff, slope, err_slope, inter, err_inter])
+		list_output.append([list_beamname[i], coeff, slope, err_slope, inter, err_inter])
 		#
 		# plot
 		ax.scatter(x, y, color=color, alpha=0.4, s=20, lw=0, label = beam) # + ' ($\\rho$ = ' + coeff + ")")
@@ -219,7 +219,7 @@ def plot_scatter(
 		#
 	# set legend
 	ax.legend(bbox_to_anchor=(1.05, -0.05), loc="upper left", ncol=ncol)
-	np.savetxt(galname.replace("NGC ","ngc")+"", np.array(list_output)
+	np.savetxt(galname.replace("NGC ","ngc")+"_table3.txt", np.array(list_output))
 
 def plot_hist_right(
 	ax,
