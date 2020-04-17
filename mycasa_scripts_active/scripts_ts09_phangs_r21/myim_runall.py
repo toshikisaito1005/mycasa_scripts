@@ -15,7 +15,7 @@ beam = [13.6, 15.0, 8.5]
 execfile("myim08_r21_highlowmask.py")
 execfile("myim09_convolve_wise.py")
 execfile("myim10_extract_param_600pc.py")
-#execfile("myim11_extract_param_best.py")
+execfile("myim11_extract_param_best.py")
 
 execfile("f01a_noise.py")
 execfile("f01b_missingflux.py")
