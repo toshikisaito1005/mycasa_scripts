@@ -241,7 +241,7 @@ def noisehist(imagename,noises_byeye,output,snr,bins=200,thres=0.0001,logscale=T
              [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
              '--',color='black',lw=2,
              label = "1 sigma = " + str(np.round(popt[1],3)) + " Jy beam$^{-1}$")
-    plt.plot([popt[1]*3.0,popt[1]*3.0],
+    plt.plot([popt[1]*snr,popt[1]*snr],
              [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
              '--',color='black',lw=5,
              label = str(snr) + " sigma = " + str(np.round(popt[1]*snr,3)) + " Jy beam$^{-1}$")
@@ -250,7 +250,13 @@ def noisehist(imagename,noises_byeye,output,snr,bins=200,thres=0.0001,logscale=T
              '--',color='black',lw=2)
 
     # percentile
-    
+    percentile = (1 - scipy.special.erf(snr/np.sqrt(2))) * 100.
+    sigma_percentile = np.percentile(pixvalues,percentile)
+
+    plt.plot([sigma_percentile,sigma_percentile],
+             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
+             '--',color='black',lw=5,
+             label = str(snr) + " sigma (histogram) = " + str(np.round(sigma_percentile,3)) + " Jy beam$^{-1}$")
 
     #plt.title(imagename.split("/")[-1])
     plt.xlim(0,histrange[1])
@@ -311,13 +317,22 @@ def noisehist_kelvin(imagename,jy2k,noises_byeye,output,snr,bins=200,thres=0.000
              [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
              '--',color='black',lw=2,
              label = "1 sigma = " + str(np.round(popt[1],3)) + " K")
-    plt.plot([popt[1]*3.0,popt[1]*3.0],
+    plt.plot([popt[1]*snr,popt[1]*snr],
              [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
              '--',color='black',lw=5,
              label = str(snr) + " sigma = " + str(np.round(popt[1]*snr,3)) + " K")
     plt.plot([-popt[1],-popt[1]],
              [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
              '--',color='black',lw=2)
+    #
+    # percentile
+    percentile = (1 - scipy.special.erf(snr/np.sqrt(2))) * 100.
+    sigma_percentile = np.percentile(pixvalues,percentile)
+
+    plt.plot([sigma_percentile,sigma_percentile],
+             [2e1,np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])*3.0],
+             '--',color='black',lw=5,
+             label = "corresponding percentile = " + str(np.round(sigma_percentile,3)) + " Jy beam$^{-1}$")
 
     #plt.title(imagename.split("/")[-1])
     plt.xlim(0,histrange[1])
