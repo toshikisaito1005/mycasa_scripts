@@ -41,9 +41,15 @@ for i in range(len(galaxy)):
                expr = "iif(IM0>0,IM0/IM1/4.0,0)",
                outfile = outfile + "_tmp")
 
+        os.system("rm -rf " + outfile + "_tmp2")
+        immath(imagename = [outfile + "_tmp",
+                            co10images[j]],
+               expr = "iif(IM0>1,IM1,0)",
+               outfile = outfile + "_tmp2")
+
         makemask(mode = "copy",
-                 inpimage = outfile + "_tmp",
-                 inpmask = outfile + "_tmp",
+                 inpimage = outfile + "_tmp2",
+                 inpmask = outfile + "_tmp2",
                  output = outfile + ":mask0",# + "_tmp_mask:mask0",
                  overwrite = True)
         """
