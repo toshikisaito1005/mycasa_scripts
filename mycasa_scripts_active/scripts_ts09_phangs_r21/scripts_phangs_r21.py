@@ -382,7 +382,7 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
                outfile = dir_image+name_line+"_"+beamp+"_mask.image")
 
         os.system("rm -rf "+cubesmooth1)
-        os.system("rm -rf "+cubesmooth2)
+        #os.system("rm -rf "+cubesmooth2)
         os.system("rm -rf "+dir_image+name_line+"_mask0.image")
         os.system("rm -rf "+dir_image+name_line+"_mask1.image")
         os.system("rm -rf "+dir_image+name_line+"_mask2.image")
