@@ -44,7 +44,7 @@ for i in range(len(galaxy)):
         os.system("rm -rf " + outfile + "_tmp2")
         immath(imagename = [outfile + "_tmp",
                             co10images[j]],
-               expr = "iif(IM0>1,IM1,0)",
+               expr = "iif(IM1>0,IM0,0)",
                outfile = outfile + "_tmp2")
 
         makemask(mode = "copy",
@@ -65,6 +65,7 @@ for i in range(len(galaxy)):
                outfile = outfile)
         """
         os.system("rm -rf " + outfile + "_tmp")
+        os.system("rm -rf " + outfile + "_tmp2")
         os.system("rm -rf " + outfile + "_tmp_mask")
 
 os.system("rm -rf *.last")
