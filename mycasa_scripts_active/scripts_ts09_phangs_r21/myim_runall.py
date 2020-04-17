@@ -1,10 +1,15 @@
 import os
 
+
 snr_mom = 4.0
 
-#execfile("myim01_prep.py")
-#execfile("myim02a_regrid.py")
-#execfile("myim02b_pbmasking.py")
+
+"""
+execfile("myim01_prep.py")
+execfile("myim02a_regrid.py")
+execfile("myim02b_pbmasking.py")
+"""
+
 
 """
 print("### running myim03")
@@ -22,7 +27,6 @@ execfile("myim06_r21_map.py")
 
 print("### running myim07")
 execfile("myim07_sd_mom.py")
-"""
 
 print("### running myim08")
 beam = [4.0, 8.0, 4.0]
@@ -38,6 +42,7 @@ execfile("myim10_extract_param_600pc.py")
 
 print("### running myim11")
 execfile("myim11_extract_param_best.py")
+"""
 
 
 print("### running f01")
