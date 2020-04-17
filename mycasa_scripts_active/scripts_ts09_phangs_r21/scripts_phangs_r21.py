@@ -362,7 +362,7 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
                  pa = "0deg",
                  outfile = cubesmooth1)
         # noise
-        noisesmooth1 = noisehist(cubesmooth1,0.02,"test",bins=200,thres=0.0001,plotter=False)
+        noisesmooth1 = noisehist(cubesmooth1,0.02,"test",3.0,bins=200,thres=0.0001,plotter=False)
         """
         cubesmooth2 = cubeimage.replace(".image",".smooth2") # 10 mJy
         imsmooth(imagename = cubeimage,
