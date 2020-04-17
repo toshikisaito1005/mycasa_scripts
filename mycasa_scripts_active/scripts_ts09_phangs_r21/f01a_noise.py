@@ -130,6 +130,7 @@ co10rms = r21.noisehist_kelvin(co10image,
                         1.222e6/4.0**2/115.27120**2,
                         co10noises[i][j],
                         output,
+                        snr_mom,
                         logscale=False,
                         plotter=True,
                         title = "(a) NGC 0628 4.0\" CO(1-0) Cube")
