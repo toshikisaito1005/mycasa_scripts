@@ -16,7 +16,6 @@ plt.ioff()
 #####################
 ### parameters
 #####################
-dir_data = "/Users/saito/data/mycasa_scripts_active/scripts_ts09_phangs_r21/"
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
 dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
@@ -50,7 +49,7 @@ plt.rcParams["font.size"] = 16
 histdata = []
 for i in range(len(gals)):
     galname = gals[i]
-    data = np.loadtxt(dir_data + galname + "_parameter_600pc.txt")
+    data = np.loadtxt(dir_product + galname + "_parameter_600pc.txt")
     # galactocentric distance
     distance = data[:,0] # pc
     dist25_pc = dist25[i] * 60 * scales[i]
@@ -74,8 +73,8 @@ for i in range(len(gals)):
     r21 = r21[cut_all]
     # radial binning
     n, _ = np.histogram(galdist, bins=nbins)
-    sy, _ = np.histogram(galdist, bins=nbins, weights=r21)
-    sy2, _ = np.histogram(galdist, bins=nbins, weights=r21*r21)
+    sy, _ = np.histogram(galdist, bins=nbins, weights=norm_r21)
+    sy2, _ = np.histogram(galdist, bins=nbins, weights=norm_r21*norm_r21)
     mean = sy / n
     std = np.sqrt(sy2/n - mean*mean)
 
