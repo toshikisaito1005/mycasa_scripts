@@ -392,8 +392,8 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
         noisesmooth2 = noisehist(cubesmooth2,0.02,"test",4.0,bins=200,thres=0.0001,plotter=False)
         # create mask
         #tscreatemask(cubeimage,noise*1.*2.,dir_image+name_line+"_mask0.image")
-        tscreatemask(cubesmooth1,noisesmooth1*4.0,dir_image+name_line+"_mask1.image")
-        tscreatemask(cubesmooth2,noisesmooth2*4.0,dir_image+name_line+"_mask2.image")
+        tscreatemask(cubesmooth1,noisesmooth1*2.0,dir_image+name_line+"_mask1.image")
+        tscreatemask(cubesmooth2,noisesmooth2*2.0,dir_image+name_line+"_mask2.image")
 
         immath(imagename = [dir_image+name_line+"_mask1.image", dir_image+name_line+"_mask2.image"],
                expr = "iif(IM0+IM1 >= 2.0, 1.0, 0.0)",
