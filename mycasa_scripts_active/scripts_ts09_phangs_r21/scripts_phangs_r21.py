@@ -267,7 +267,7 @@ def noisehist(imagename,noises_byeye,output,snr,bins=200,thres=0.0001,logscale=T
     if plotter==True:
       plt.savefig(output,dpi=100)
 
-    return popt[1]
+    return sigma_percentile/float(snr) # popt[1]
 
 def noisehist_kelvin(imagename,jy2k,noises_byeye,output,snr,bins=200,thres=0.0000,logscale=True,plotter=True,title="test"):
     """
