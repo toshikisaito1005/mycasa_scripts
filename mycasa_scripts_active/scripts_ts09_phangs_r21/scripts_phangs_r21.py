@@ -376,33 +376,33 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
         bmaj = imhead(cubeimage,"list")["beammajor"]["value"]
     	imsmooth(imagename = cubeimage,
                  targetres = True,
-                 major = str(bmaj*2.0) + "arcsec",#1.2) + "arcsec",
-                 minor = str(bmaj*2.0) + "arcsec",#1.2) + "arcsec",
+                 major = str(bmaj*3.0) + "arcsec",#1.2) + "arcsec",
+                 minor = str(bmaj*3.0) + "arcsec",#1.2) + "arcsec",
                  pa = "0deg",
                  outfile = cubesmooth1)
         cubesmooth2 = cubeimage.replace(".image",".smooth2") # 10 mJy
         imsmooth(imagename = cubeimage,
                  targetres = True,
-                 major = str(bmaj*4.0) + "arcsec",
-                 minor = str(bmaj*4.0) + "arcsec",
+                 major = str(bmaj*5.0) + "arcsec",
+                 minor = str(bmaj*5.0) + "arcsec",
                  pa = "0deg",
                  outfile = cubesmooth2)
         cubesmooth3 = cubeimage.replace(".image",".smooth3") # 10 mJy
         imsmooth(imagename = cubeimage,
                  targetres = True,
-                 major = str(bmaj*6.0) + "arcsec",
-                 minor = str(bmaj*6.0) + "arcsec",
+                 major = str(bmaj*7.0) + "arcsec",
+                 minor = str(bmaj*7.0) + "arcsec",
                  pa = "0deg",
                  outfile = cubesmooth3)
         # noise
-        noisesmooth1 = noisehist(cubesmooth1,0.02,"test",5.0,bins=200,thres=0.0001,plotter=False)
-        noisesmooth2 = noisehist(cubesmooth2,0.02,"test",5.0,bins=200,thres=0.0001,plotter=False)
-        noisesmooth3 = noisehist(cubesmooth3,0.02,"test",5.0,bins=200,thres=0.0001,plotter=False)
+        noisesmooth1 = noisehist(cubesmooth1,0.02,"test",4.0,bins=200,thres=0.0001,plotter=False)
+        noisesmooth2 = noisehist(cubesmooth2,0.02,"test",4.0,bins=200,thres=0.0001,plotter=False)
+        noisesmooth3 = noisehist(cubesmooth3,0.02,"test",4.0,bins=200,thres=0.0001,plotter=False)
         # create mask
         #tscreatemask(cubeimage,noise*1.*2.,dir_image+name_line+"_mask0.image")
-        tscreatemask(cubesmooth1,noisesmooth1*5.0,dir_image+name_line+"_mask1.image")
-        tscreatemask(cubesmooth2,noisesmooth2*5.0,dir_image+name_line+"_mask2.image")
-        tscreatemask(cubesmooth3,noisesmooth3*5.0,dir_image+name_line+"_mask3.image")
+        tscreatemask(cubesmooth1,noisesmooth1*4.0,dir_image+name_line+"_mask1.image")
+        tscreatemask(cubesmooth2,noisesmooth2*4.0,dir_image+name_line+"_mask2.image")
+        tscreatemask(cubesmooth3,noisesmooth3*4.0,dir_image+name_line+"_mask3.image")
 
         immath(imagename = [dir_image+name_line+"_mask1.image", dir_image+name_line+"_mask2.image", dir_image+name_line+"_mask3.image"],
                expr = "iif(IM0+IM1 >= 2.0, 1.0, 0.0)",
