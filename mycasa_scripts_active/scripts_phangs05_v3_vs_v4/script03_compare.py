@@ -54,7 +54,9 @@ for i in range(len(v4_image)):
 	plt.xlabel("Channel")
 	plt.ylabel("Diffference")
 	plt.title(title)
-	plt.savefig(dir_product+"test.png")
+	plt.savefig(output.replace(".txt",".png"), dpi=300)
+	#
+	np.savetxt(output, np.c_[yaxis_v3, yaxis_v4])
 
 os.system("rm -rf *.last")
 
