@@ -25,6 +25,7 @@ v3_image = glob.glob(dir_data + "ngc4303_7m_co21_v3.*")
 v4_image = glob.glob(dir_data + "ngc4303_7m_co21_v4.*")
 v3_image.sort()
 v4_image.sort()
+# regrid v3 and move to the ready directory
 for i in range(len(v4_image)):
 	# get names
 	imagename = v4_image[i]
@@ -34,5 +35,11 @@ for i in range(len(v4_image)):
 	os.system("rm -rf " + output)
 	imregrid(imagename=imagename, template=template, output=output)
 
+# move v3 to the ready directory
+for i in range(len(v3_image)):
+	imagename = v3_image[i]
+	output = dir_ready + imagename.split("/")[-1]
+	os.system("rm -rf " + output)
+	shutil.copytree(imagename, output)
 
 os.system("rm -rf *.last")
