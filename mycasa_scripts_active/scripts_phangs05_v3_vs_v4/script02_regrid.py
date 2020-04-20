@@ -1,4 +1,5 @@
 import os, sys, glob
+import shutil
 
 
 dir_data = "/Users/saito/data/phangs/compare_v3p4_v4/data/"
@@ -10,16 +11,28 @@ dir_ready = "/Users/saito/data/phangs/compare_v3p4_v4/data_ready/"
 # v3 imsize = [255, 255,   0, 274]
 # v4 imsize = [255, 255,   0, 312]
 
+
 ####################
 ### main
 ####################
+# mkdir
 done = glob.glob(dir_ready)
 if not done:
 	os.mkdir(dir_ready)
 
-v3_image = glob.glob(dir_data + "ngc4303_7m_co21_v4.*")
-
-
+# get v4 CASA files
+v3_image = glob.glob(dir_data + "ngc4303_7m_co21_v3.*")
+v4_image = glob.glob(dir_data + "ngc4303_7m_co21_v4.*")
+v3_image.sort()
+v4_image.sort()
+for i in range(len(v4_image)):
+	# get names
+	imagename = v4_image[i]
+	template = v3_image[i]
+	output = dir_ready + v4_image[i].split("/")[-1]
+	# imregrid
+	os.system("rm -rf " + output)
+	imregrid(imagename=imagename, template=template, output=output)
 
 
 os.system("rm -rf *.last")
