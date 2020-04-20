@@ -53,12 +53,15 @@ for i in range(len(v4_image)):
 		xaxis = range(len(np.loadtxt(output)[:,0]))
 		yaxis_v3 = np.loadtxt(output)[:,0]
 		yaxis_v4 = np.loadtxt(output)[:,1]
+		#
 	# plot
 	plt.figure(figsize=(8,3))
 	plt.grid()
 	plt.subplots_adjust(left=0.15, right=0.95, top=0.90, bottom=0.15)
 	plt.rcParams["font.size"] = 14
+	yaxis = yaxis_v4-yaxis_v3
 	plt.scatter(xaxis, yaxis_v4-yaxis_v3, lw=0)
+
 	plt.xlabel("Channel")
 	plt.ylabel("Diffference")
 	plt.title(title)
@@ -67,4 +70,3 @@ for i in range(len(v4_image)):
 	np.savetxt(output, np.c_[yaxis_v3, yaxis_v4], fmt="%.10f", header="v3sum v4sum")
 
 os.system("rm -rf *.last")
-
