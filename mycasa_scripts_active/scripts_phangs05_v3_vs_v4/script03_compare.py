@@ -24,6 +24,10 @@ for i in range(len(v4_image)):
 	# get names
 	v4image = v4_image[i]
 	v3image = v3_image[i]
-	# imregrid
+	# get shape for imval
+    shape = imhead(v4image,mode="list")["shape"]
+    box = "0,0,"+str(shape[0]-1)+","+str(shape[1]-1)
+    v3data = imval(v3image, box=box)
+    v4data = imval(v4image, box=box)
 
 os.system("rm -rf *.last")

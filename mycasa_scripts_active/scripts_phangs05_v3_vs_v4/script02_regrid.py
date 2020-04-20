@@ -79,6 +79,8 @@ imsmooth(imagename=imagename,targetres=True,major=targetbeam,minor=targetbeam,pa
 
 # cleanup
 print("### cleanup")
-os.system("rm -rf " + dir_ready + "ngc4303_7m_co21_v3.psf")
+os.system("rm -rf " + dir_ready + "ngc4303_7m_co21_v?.image")
+os.system("rm -rf " + dir_ready + "ngc4303_7m_co21_v?.residual")
 os.system("rm -rf " + dir_ready + "ngc4303_7m_co21_v?.mask")
+os.system("rm -rf " + dir_ready + "ngc4303_7m_co21_v?.psf")
 os.system("rm -rf *.last")
