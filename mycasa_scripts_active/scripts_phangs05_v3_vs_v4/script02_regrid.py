@@ -42,5 +42,14 @@ for i in range(len(v3_image)):
 	os.system("rm -rf " + output)
 	shutil.copytree(imagename, output)
 
+# smooth v3
+targetbeam = "9.0arcsec"
+imagename = dir_ready + "ngc4303_7m_co21_v3.image"
+outfile = dir_ready + "ngc4303_7m_co21_v3.smooth"
+os.system("rm -rf " + outfile)
+imsmooth(imagename=imagename,targetres=True,major=targetbeam,minor=targetbeam,pa="0deg",outfile=outfile)
+
+
 os.system("rm -rf " + dir_ready + "ngc4303_7m_co21_v3.psf")
+os.system("rm -rf " + dir_ready + "ngc4303_7m_co21_v?.mask")
 os.system("rm -rf *.last")
