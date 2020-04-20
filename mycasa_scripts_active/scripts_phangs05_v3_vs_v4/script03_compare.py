@@ -22,7 +22,7 @@ v3_image.sort()
 v4_image.sort()
 
 # get shape for imval
-shape = imhead(v4image,mode="list")["shape"]
+shape = imhead(v4_image[0],mode="list")["shape"]
 box = "0,0,"+str(shape[0]-1)+","+str(shape[1]-1)
 
 # regrid v3 and move to the ready directory
