@@ -56,7 +56,7 @@ for i in range(len(v4_image)):
 	plt.title(title)
 	plt.savefig(output.replace(".txt",".png"), dpi=300)
 	#
-	np.savetxt(output, np.c_[yaxis_v3, yaxis_v4])
+	np.savetxt(output, np.c_[yaxis_v3, yaxis_v4], fmt="%.10f", header="v3sum v4sum")
 
 os.system("rm -rf *.last")
 
