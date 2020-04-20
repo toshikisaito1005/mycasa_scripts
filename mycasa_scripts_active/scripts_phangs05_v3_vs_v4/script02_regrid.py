@@ -42,4 +42,5 @@ for i in range(len(v3_image)):
 	os.system("rm -rf " + output)
 	shutil.copytree(imagename, output)
 
+os.system("rm -rf " + dir_ready + "ngc4303_7m_co21_v3.psf")
 os.system("rm -rf *.last")
