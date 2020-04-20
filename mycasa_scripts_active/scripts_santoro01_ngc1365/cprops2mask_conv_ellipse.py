@@ -83,7 +83,7 @@ for i in range(len(gmc_ra_dgr)):
     cl.addcomponent(dir=direction,
                     flux=float(gmc_num[i]),
                     # flux=1.0,
-                    fluxunit="Jy",
+                    fluxunit="Jy/pixel",
                     freq=str(obsfreq)+"GHz",
                     shape="disk",
                     majoraxis=majoraxis,
