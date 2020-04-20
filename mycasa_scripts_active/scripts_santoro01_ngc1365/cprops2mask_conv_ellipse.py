@@ -80,9 +80,9 @@ for i in range(len(gmc_ra_dgr)):
     majoraxis = str(gmc_radius_arcsec[i])+"arcsec"
     minoraxis = str(gmc_minor_arcsec[i] * gmc_radius_arcsec[i]/gmc_major_arcsec[i]) + "arcsec"
     direction = "J2000 " + str(gmc_ra_dgr[i])+"deg " + str(gmc_decl_dgr[i])+"deg"
-    area = float(majoraxis.replace("arcsec","")) * float(minoraxis.replace("arcsec","")) * np.pi * (4*np.log(2) * 4.007)
+    area = float(majoraxis.replace("arcsec","")) * float(minoraxis.replace("arcsec","")) * np.pi * (4*np.log(2) * 4.007484905673586)
     cl.addcomponent(dir=direction,
-                    flux=float(gmc_num[i])*area,
+                    flux=int(gmc_num[i])*area,
                     # flux=1.0,
                     fluxunit="Jy",
                     freq=str(obsfreq)+"GHz",
