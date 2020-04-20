@@ -7,7 +7,8 @@ plt.ioff()
 
 dir_ready = "/Users/saito/data/phangs/compare_v3p4_v4/data/"
 dir_product = "/Users/saito/data/phangs/compare_v3p4_v4/product/"
-galname = "ngc4303"
+casalog_v3 = ""
+casalog_v4 = ""
 
 
 ####################
@@ -17,6 +18,15 @@ galname = "ngc4303"
 done = glob.glob(dir_product)
 if not done:
 	os.mkdir(dir_product)
+
+
+# read v3 CASA log
+with open(casalog_v3) as f:
+    lines = f.readlines()
+
+lines_strip = [line.strip() for line in lines]
+[line for line in lines_strip if "tclean(" in line]
+
 
 
 """
