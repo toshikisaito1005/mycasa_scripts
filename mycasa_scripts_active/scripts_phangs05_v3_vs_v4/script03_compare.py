@@ -16,36 +16,41 @@ done = glob.glob(dir_product)
 if not done:
 	os.mkdir(dir_product)
 
+
 # get v4 CASA files
 v3_image = glob.glob(dir_ready + "ngc4303_7m_co21_v3.*")
 v4_image = glob.glob(dir_ready + "ngc4303_7m_co21_v4.*")
 v3_image.sort()
 v4_image.sort()
 
+
 # get shape for imval
 shape = imhead(v4_image[0],mode="list")["shape"]
 box = "0,0,"+str(shape[0]-1)+","+str(shape[1]-1)
+
 
 # regrid v3 and move to the ready directory
 for i in range(len(v4_image)):
 	# get names
 	v4image = v4_image[i]
 	v3image = v3_image[i]
-	outputtag = v3image.split("ngc4303")[-1].split(".")[-1]
-	output = dir_product + galname + "_" + outputtag + ".txt"
+	outputtag = v3image.split("ngc4303")[-1].split("v3.")[-1]
+	output = dir_product + galname + "_diff_" + outputtag + ".txt"
+	title = "Difference " + outputtag
 	# imval
 	print("### imval v3 " + outputtag)
 	v3data = imval(v3image, box=box)
 	print("### imval v4 " + outputtag)
 	v4data = imval(v4image, box=box)
-
-
-plt.figure()
-plt.subplots_adjust(left=0.05, right=0.95)
+	# plot
+plt.figure(figsize=(8,4))
+plt.grid()
+plt.subplots_adjust(left=0.15, right=0.95, top=0.95, bottom=0.15)
 plt.rcParams["font.size"] = 14
 xaxis = range( np.shape(v3data['data'])[2])
-yaxis = np.sum(v3data['data'],axis=2)
+yaxis = v3data['data'].sum(axis=0).sum(axis=0)
 plt.scatter(xaxis, yaxis)
 plt.savefig(dir_product+"test.png")
 
 os.system("rm -rf *.last")
+
