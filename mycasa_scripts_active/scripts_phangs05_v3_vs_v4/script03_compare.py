@@ -63,9 +63,10 @@ for i in range(len(v4_image)):
 	plt.rcParams["font.size"] = 14
 	xaxis = np.array(xaxis)
 	yaxis = np.array(yaxis_v4 - yaxis_v3)
-	ypercent = np.array(yaxis_v4-yaxis_v3)/np.array(yaxis_v4)
-	plt.scatter(xaxis[abs(yaxis)>=0.10], yaxis[abs(yaxis)>=0.10], lw=0, color="red")
-	plt.scatter(xaxis[abs(yaxis)<0.10], yaxis[abs(yaxis)<0.10], lw=0, color="blue")
+	#ypercent = np.array(yaxis_v4-yaxis_v3)/np.array(yaxis_v4)
+	plt.scatter(xaxis[abs(yaxis)!=0.0], yaxis[abs(yaxis)!=0.00], lw=0, color="red")
+	if np.sum([abs(yaxis)==0.00])>0:
+		plt.scatter(xaxis[abs(yaxis)==0.00], yaxis[abs(yaxis)==0.00], lw=0, color="blue")
 	#
 	plt.xlim(min(xaxis)-10,max(xaxis)+10)
 	plt.xlabel("Channel")
