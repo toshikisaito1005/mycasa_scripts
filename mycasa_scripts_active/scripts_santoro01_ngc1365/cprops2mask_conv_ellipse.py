@@ -118,9 +118,9 @@ exportfits(imagename=dir_product+output.replace(".fits",".im2"),
 os.system("rm -rf " + dir_product + output.replace(".fits",".im"))
 os.system("rm -rf " + dir_product + output.replace(".fits",".im2"))
 
-cl.close()
+#cl.close()
 #cl.done()
-cs.done()
-ia.close()
+#cs.done()
+#a.close()
 
 os.system("rm -rf *.last")
