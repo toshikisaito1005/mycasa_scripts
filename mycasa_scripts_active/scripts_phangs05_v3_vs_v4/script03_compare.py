@@ -38,18 +38,26 @@ for i in range(len(v4_image)):
 	output = dir_product + galname + "_diff_" + outputtag + ".txt"
 	title = "Difference " + outputtag
 	# imval
-	print("### imval v3 " + outputtag)
-	v3data = imval(v3image, box=box)
-	print("### imval v4 " + outputtag)
-	v4data = imval(v4image, box=box)
+	done = glob.glob(output)
+	if not done:
+		print("### imval v3 " + outputtag)
+		v3data = imval(v3image, box=box)
+		print("### imval v4 " + outputtag)
+		v4data = imval(v4image, box=box)
+		#
+		xaxis = range(np.shape(v3data['data']))[2]
+		yaxis_v3 = v3data['data'].sum(axis=0).sum(axis=0)
+		yaxis_v4 = v4data['data'].sum(axis=0).sum(axis=0)
+	else:
+		print("### skip imval")
+		xaxis = range(len(np.loadtxt(output)[:,0]))
+		yaxis_v3 = np.loadtxt(output)[:,0]
+		yaxis_v4 = np.loadtxt(output)[:,1]
 	# plot
 	plt.figure(figsize=(8,3))
 	plt.grid()
 	plt.subplots_adjust(left=0.15, right=0.95, top=0.90, bottom=0.15)
 	plt.rcParams["font.size"] = 14
-	xaxis = range( np.shape(v3data['data'])[2])
-	yaxis_v3 = v3data['data'].sum(axis=0).sum(axis=0)
-	yaxis_v4 = v4data['data'].sum(axis=0).sum(axis=0)
 	plt.scatter(xaxis, yaxis_v4-yaxis_v3, lw=0)
 	plt.xlabel("Channel")
 	plt.ylabel("Diffference")
