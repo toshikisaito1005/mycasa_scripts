@@ -31,6 +31,7 @@ box = "0,0,"+str(shape[0]-1)+","+str(shape[1]-1)
 
 # regrid v3 and move to the ready directory
 for i in range(len(v4_image)):
+#for i in [1]:
 	# get names
 	v4image = v4_image[i]
 	v3image = v3_image[i]
@@ -48,8 +49,9 @@ for i in range(len(v4_image)):
 		xaxis = range(np.shape(v3data['data']))[2]
 		yaxis_v3 = v3data['data'].sum(axis=0).sum(axis=0)
 		yaxis_v4 = v4data['data'].sum(axis=0).sum(axis=0)
+		np.savetxt(output, np.c_[yaxis_v3, yaxis_v4], fmt="%.10f", header="v3sum v4sum")
 	else:
-		print("### skip imval")
+		print("### skip imval " + outputtag)
 		xaxis = range(len(np.loadtxt(output)[:,0]))
 		yaxis_v3 = np.loadtxt(output)[:,0]
 		yaxis_v4 = np.loadtxt(output)[:,1]
@@ -60,14 +62,16 @@ for i in range(len(v4_image)):
 	plt.subplots_adjust(left=0.15, right=0.95, top=0.90, bottom=0.15)
 	plt.rcParams["font.size"] = 14
 	xaxis = np.array(xaxis)
-	yaxis = np.array(yaxis_v4-yaxis_v3)/np.array(yaxis_v4) * 100.
-	plt.scatter(xaxis[abs(yaxis)>=10], yaxis[abs(yaxis)>=10], lw=0, color="red")
-	plt.scatter(xaxis[abs(yaxis)<10], yaxis[abs(yaxis)<10], lw=0, color="blue")
+	yaxis = np.array(yaxis_v4 - yaxis_v3)
+	ypercent = np.array(yaxis_v4-yaxis_v3)/np.array(yaxis_v4)
+	plt.scatter(xaxis[abs(yaxis)>=0.10], yaxis[abs(yaxis)>=0.10], lw=0, color="red")
+	plt.scatter(xaxis[abs(yaxis)<0.10], yaxis[abs(yaxis)<0.10], lw=0, color="blue")
+	#
+	plt.xlim(min(xaxis)-10,max(xaxis)+10)
 	plt.xlabel("Channel")
-	plt.ylabel("Diffference (%)")
+	plt.ylabel("Diffference v4 - v3p4")
 	plt.title(title)
 	plt.savefig(output.replace(".txt",".png"), dpi=300)
 	#
-	np.savetxt(output, np.c_[yaxis_v3, yaxis_v4], fmt="%.10f", header="v3sum v4sum")
 
 os.system("rm -rf *.last")
