@@ -1,6 +1,7 @@
 import os, sys, glob
 import shutil
-
+import matplotlib.pyplot as plt
+plt.ioff()
 
 dir_ready = "/Users/saito/data/phangs/compare_v3p4_v4/data_ready/"
 dir_product = "/Users/saito/data/phangs/compare_v3p4_v4/product/"
@@ -38,5 +39,13 @@ for i in range(len(v4_image)):
 	print("### imval v4 " + outputtag)
 	v4data = imval(v4image, box=box)
 
+
+plt.figure()
+plt.subplots_adjust(left=0.05, right=0.95)
+plt.rcParams["font.size"] = 14
+xaxis = range( np.shape(v3data['data'])[2])
+yaxis = np.sum(v3data['data'],axis=2)
+plt.scatter(xaxis, yaxis)
+plt.savefig(dir_product+"test.png")
 
 os.system("rm -rf *.last")
