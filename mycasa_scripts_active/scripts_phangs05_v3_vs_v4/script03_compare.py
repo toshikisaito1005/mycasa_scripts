@@ -59,9 +59,11 @@ for i in range(len(v4_image)):
 	plt.grid()
 	plt.subplots_adjust(left=0.15, right=0.95, top=0.90, bottom=0.15)
 	plt.rcParams["font.size"] = 14
-	yaxis = yaxis_v4-yaxis_v3
-	plt.scatter(xaxis, yaxis_v4-yaxis_v3, lw=0)
-
+	xaxis = np.array(xaxis)
+	yaxis = np.array(yaxis_v4-yaxis_v3)
+	plt.scatter(xaxis[abs(yaxis)>0], yaxis[abs(yaxis)>0], lw=0, color="red")
+	if True in yaxis==0:
+		plt.scatter(xaxis[abs(yaxis)==0], yaxis[abs(yaxis)==0], lw=0, color="blue")
 	plt.xlabel("Channel")
 	plt.ylabel("Diffference")
 	plt.title(title)
