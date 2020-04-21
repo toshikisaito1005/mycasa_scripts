@@ -37,7 +37,7 @@ for i in range(len(v4_image)):
 	v3image = v3_image[i]
 	outputtag = v3image.split("ngc4303")[-1].split("v3.")[-1]
 	output = dir_product + galname + "_diff_" + outputtag + ".txt"
-	title = "Difference " + outputtag
+	title = "v4 sum - v3p4 sum (" + outputtag + ")"
 	# imval
 	done = glob.glob(output)
 	if not done:
@@ -70,7 +70,7 @@ for i in range(len(v4_image)):
 	#
 	plt.xlim(min(xaxis)-10,max(xaxis)+10)
 	plt.xlabel("Channel")
-	plt.ylabel("Diffference v4 - v3p4")
+	plt.ylabel("v4 sum - v3p4 sum")
 	plt.title(title)
 	plt.savefig(output.replace(".txt",".png"), dpi=300)
 	#

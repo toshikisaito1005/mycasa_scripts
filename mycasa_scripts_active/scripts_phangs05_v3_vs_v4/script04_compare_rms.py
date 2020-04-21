@@ -36,8 +36,8 @@ for i in range(len(v4_image)):
 	v4image = v4_image[i]
 	v3image = v3_image[i]
 	outputtag = v3image.split("ngc4303")[-1].split("v3.")[-1]
-	output = dir_product + galname + "_diff_" + outputtag + ".txt"
-	title = "Difference " + outputtag
+	output = dir_product + galname + "_diff_rms_" + outputtag + ".txt"
+	title = "v4 rms - v3p4 rms (" + outputtag + ")"
 	# imval
 	done = glob.glob(output)
 	if not done:
@@ -47,14 +47,16 @@ for i in range(len(v4_image)):
 		v4data = imval(v4image, box=box)
 		#
 		xaxis = range(np.shape(v3data['data']))[2]
-		yaxis_v3 = v3data['data'].sum(axis=0).sum(axis=0)
-		yaxis_v4 = v4data['data'].sum(axis=0).sum(axis=0)
-		np.savetxt(output, np.c_[yaxis_v3, yaxis_v4], fmt="%.10f", header="v3sum v4sum")
+		yaxis_v3 = np.array(v3data['data'].sum(axis=0))
+		yaxis_v4 = np.array(v4data['data'].sum(axis=0))
+		yaxis_v3 = np.sqrt(np.mean(yaxis_v3**2))
+		yaxis_v4 = np.sqrt(np.mean(yaxis_v4**2))
+		np.savetxt(output, np.c_[yaxis_v3, yaxis_v4], fmt="%.10f", header="v3rms v4rms")
 	else:
 		print("### skip imval " + outputtag)
 		xaxis = range(len(np.loadtxt(output)[:,0]))
-		yaxis_v3 = np.loadtxt(output)[:,0]
-		yaxis_v4 = np.loadtxt(output)[:,1]
+		yaxis_v3 = np.array(np.loadtxt(output)[:,0])
+		yaxis_v4 = np.array(np.loadtxt(output)[:,1])
 		#
 	# plot
 	plt.figure(figsize=(8,3))
@@ -70,7 +72,7 @@ for i in range(len(v4_image)):
 	#
 	plt.xlim(min(xaxis)-10,max(xaxis)+10)
 	plt.xlabel("Channel")
-	plt.ylabel("Diffference v4 - v3p4")
+	plt.ylabel("v4 rms - v3p4 rms")
 	plt.title(title)
 	plt.savefig(output.replace(".txt",".png"), dpi=300)
 	#
