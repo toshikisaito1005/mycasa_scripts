@@ -29,7 +29,7 @@ v3_image.sort()
 v4_image.sort()
 
 
-# regrid v3 and move to the ready directory
+# regrid v4 and move to the ready directory
 print("### regrid v4 and mv")
 for i in range(len(v4_image)):
 	# get names

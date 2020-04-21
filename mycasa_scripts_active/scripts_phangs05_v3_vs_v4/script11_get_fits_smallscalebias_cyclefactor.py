@@ -1,19 +1,36 @@
 import os, sys, glob
 import shutil
 
-dir_v3 = "/data/beegfs/astro-storage/groups/schinnerer/PHANGS/ALMA/Compare_v3p4_v4/ngc4303_v3p4/"
-dir_v4_bias_cycf = "/data/beegfs/astro-storage/groups/schinnerer/PHANGS/ALMA/Compare_v3p4_v4/ngc4303_v4_bias_cycf/"
 
-v3_image = glob.glob(dir_v3 + "ngc4303_7m_co21.image")[0]
-v4_b6_c1 = glob.glob(dir_v4_bias_cycf + "ngc4303_7m_co21_bias0p6_cycf1p0.image")[0]
-v4_b6_c3 = glob.glob(dir_v4_bias_cycf + "ngc4303_7m_co21_bias0p6_cycf3p0.image")[0]
-v4_b9_c1 = glob.glob(dir_v4_bias_cycf + "ngc4303_7m_co21_bias0p9_cycf1p0.image")[0]
-v4_b9_c3 = glob.glob(dir_v4_bias_cycf + "ngc4303_7m_co21_bias0p9_cycf3p0.image")[0]
-v3_products = [v3_image, v4_b6_c1, v4_b6_c3, v4_b9_c1, v4_b9_c3]
+dir_data = "/Users/saito/data/phangs/compare_v3p4_v4/data/"
+dir_ready = "/Users/saito/data/phangs/compare_v3p4_v4/data_ready_bias_cycf/"
+targetbeam = "9.0arcsec"
 
 
-for i in range(len(v3_products)):
-    imagename = v3_products[i]
-    output = "./" + imagename.split("/")[-1].replace("_7m_co21","_7m_co21_v3")
-    os.system("rm -rf " + output)
-    shutil.copytree(imagename, output)
+####################
+### main
+####################
+# mkdir
+done = glob.glob(dir_ready)
+if not done:
+	os.mkdir(dir_ready)
+
+
+# get v4 CASA files
+v3_image = glob.glob(dir_data + "ngc4303_7m_co21_v3.image")
+v4_image = glob.glob(dir_data + "ngc4303_7m_co21_bias*.image")
+v3_image.sort()
+v4_image.sort()
+
+
+# regrid v4 and move to the ready directory
+print("### regrid v4 and mv")
+for i in range(len(v4_image)):
+	# get names
+	imagename = v4_image[i]
+	template = v3_image[i]
+	output = dir_ready + v4_image[i].split("/")[-1]
+	# imregrid
+	os.system("rm -rf " + output)
+	imregrid(imagename=imagename, template=template, output=output)
+
