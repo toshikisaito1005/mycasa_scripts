@@ -46,7 +46,7 @@ for i in range(len(v4_image)):
 		print("### imval v4 " + outputtag)
 		v4data = imval(v4image, box=box)
 		#
-		xaxis = range(np.shape(v3data['data']))[2]
+		xaxis = range(np.shape(v3data['data'])[2])
 		yaxis_v3 = np.array(v3data['data'].sum(axis=0))
 		yaxis_v4 = np.array(v4data['data'].sum(axis=0))
 		yaxis_v3 = np.sqrt(np.mean(yaxis_v3**2))
