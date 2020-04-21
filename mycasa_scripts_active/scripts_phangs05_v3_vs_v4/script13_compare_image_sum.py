@@ -18,8 +18,8 @@ if not done:
 
 
 # get v4 CASA files
-v3_image = glob.glob(dir_ready + "ngc4303_7m_co21_v3.*.smooth")
-v4_image = glob.glob(dir_ready + "ngc4303_7m_co21_v4*.smooth")
+v3_image = glob.glob(dir_ready + "ngc4303_7m_co21_v3.*.iamge.smooth")
+v4_image = glob.glob(dir_ready + "ngc4303_7m_co21_v4*.image.smooth")
 v3_image.sort()
 v4_image.sort()
 
@@ -41,7 +41,7 @@ for i in range(len(v4_image)):
 	v4image = v4_image[i]
 	v3image = v3_image[0]
 	outputtag = v3image.split("ngc4303")[-1].split("v3.")[-1]
-	output = dir_product + galname + "_diff_" + outputtag + ".txt"
+	output = dir_product + galname + "_diff_bias_cycf_" + outputtag + ".txt"
 	title = "v4 sum - v3p4 sum (" + outputtag + ")"
 	# imval
 	done = glob.glob(output)
@@ -66,14 +66,15 @@ for i in range(len(v4_image)):
 	yaxis = np.array(yaxis_v4 - yaxis_v3)
 	#ypercent = np.array(yaxis_v4-yaxis_v3)/np.array(yaxis_v4)
 	label = v4_image[i].split("/")[-1].replace("ngc4303_7m_co21_","").replace(".image","")
-	plt.scatter(xaxis, yaxis, lw=0,
-		label=label.replace("bias","smallscalebias = "))
+	label2 = label.replace("bias","smallscalebias = ").replace("_cycf",", cyclefactor = ")
+	plt.scatter(xaxis, yaxis, lw=0, label=label2.replace("p","."))
 	#
 	plt.xlim(min(xaxis)-10,max(xaxis)+10)
 	plt.xlabel("Channel")
 	plt.ylabel("v4 sum - v3p4 sum")
 	plt.title(title)
 	#
+plt.legend()
 plt.savefig(output.replace(".txt",".png"), dpi=300)
 
 
