@@ -16,7 +16,6 @@
       19 - mycasa_scripts_active/scripts_ts09_phangs_r21/f04_histograms_600pc.py
       17 - mycasa_scripts_active/scripts_ts09_phangs_r21/f06_07_scatter_and_histo.py
       16 - mycasa_scripts_active/scripts_ts09_phangs_r21/f05_histo_stats.py
-      15 - mycasa_scripts_active/scripts_phangs05_v3_vs_v4/script03_compare.py
       14 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim03a_mom_native.py
       14 - mycasa_scripts_active/scripts_santoro01_ngc1365/cprops2mask_conv_ellipse.py
       13 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim02b_pbmasking.py
@@ -24,22 +23,26 @@
       12 - mycasa_scripts_active/scripts_ts09_phangs_r21/f00_all_final_eps.sh
        9 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim05_mom_multibeam.py
        9 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim04_multibeam.py
+       9 - mycasa_scripts_active/scripts_phangs05_v3_vs_v4/script02_regrid.py
        8 - mycasa_scripts_active/scripts_ts09_phangs_r21/table3_ngc0628.txt
        8 - mycasa_scripts_active/scripts_ts09_phangs_r21/f10_radial.py
-       8 - mycasa_scripts_active/scripts_phangs05_v3_vs_v4/script02_regrid.py
        7 - mycasa_scripts_active/scripts_ts09_phangs_r21/table3_ngc4321.txt
        7 - mycasa_scripts_active/scripts_ts09_phangs_r21/table3_ngc3627.txt
        5 - mycasa_scripts_active/scripts_ts09_phangs_r21/f11_radial_norm.py
        4 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim10_extract_param_600pc.py
        4 - mycasa_scripts_active/scripts_ts09_phangs_r21/f03_peak_vs_integ.py
+       4 - mycasa_scripts_active/scripts_phangs05_v3_vs_v4/script11_get_fits_smallscalebias_cyclefactor.py
        3 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim08_r21_highlowmask.py
        3 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim06_r21_map.py
        3 - mycasa_scripts_active/scripts_ts09_phangs_r21/f02_images.py
        3 - mycasa_scripts_active/scripts_ts07_iras18293/fig05_radial_alpha_co.py
+       3 - mycasa_scripts_active/scripts_phangs05_v3_vs_v4/script04_compare_rms.py
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21_plot.py
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim11_extract_param_best.py
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim09_convolve_WISE.py
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim03b_Jy2Kelvin.py
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim02a_regrid.py
        2 - mycasa_scripts_active/scripts_ts07_iras18293/fig04_ratio.py
+       2 - mycasa_scripts_active/scripts_phangs05_v3_vs_v4/script12_check_beamsize.py
+       2 - mycasa_scripts_active/scripts_phangs05_v3_vs_v4/script03_compare_sum.py
        2 - mycasa_scripts_active/scripts_jwu01_ngc6240/fig01_scatter_mom8.py
