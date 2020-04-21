@@ -28,7 +28,7 @@ print("### regrid v4 and mv")
 for i in range(len(v4_image)):
 	# get names
 	imagename = v4_image[i]
-	template = v3_image[i]
+	template = v3_image[0]
 	output = dir_ready + v4_image[i].split("/")[-1].replace("ngc4303_7m_co21","ngc4303_7m_co21_v4")
 	# imregrid
 	os.system("rm -rf " + output)
@@ -38,7 +38,7 @@ for i in range(len(v4_image)):
 # move v3 to the ready directory
 print("### mv v3")
 for i in range(len(v3_image)):
-	imagename = v3_image[i]
+	imagename = v3_image[0]
 	output = dir_ready + imagename.split("/")[-1]
 	os.system("rm -rf " + output)
 	shutil.copytree(imagename, output)
@@ -65,8 +65,8 @@ outfile = dir_ready + "ngc4303_7m_co21_v4_bias0p6_cycf3p0.image.smooth"
 os.system("rm -rf " + outfile)
 imsmooth(imagename=imagename,targetres=True,major=targetbeam,minor=targetbeam,pa="0deg",outfile=outfile)
 
-imagename = dir_ready + "ngc4303_7m_co21_v4_bias0p9_cycf3p0.image"
-outfile = dir_ready + "ngc4303_7m_co21_v4_bias0p9_cycf3p0.image.smooth"
+imagename = dir_ready + "ngc4303_7m_co21_v4_bias0p9_cycf1p0.image"
+outfile = dir_ready + "ngc4303_7m_co21_v4_bias0p9_cycf1p0.image.smooth"
 os.system("rm -rf " + outfile)
 imsmooth(imagename=imagename,targetres=True,major=targetbeam,minor=targetbeam,pa="0deg",outfile=outfile)
 
