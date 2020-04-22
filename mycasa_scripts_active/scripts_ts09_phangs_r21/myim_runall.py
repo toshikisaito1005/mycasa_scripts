@@ -27,7 +27,6 @@ execfile("myim06_r21_map.py")
 print("### running myim07")
 execfile("myim07_sd_mom.py")
 """
-
 print("### running myim08")
 beam = [4.0, 8.0, 4.0]
 execfile("myim08_r21_highlowmask.py")
