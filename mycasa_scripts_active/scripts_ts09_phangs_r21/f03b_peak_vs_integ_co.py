@@ -64,19 +64,22 @@ for i in range(len(gals)):
 	p21err = data[:,12]
 	#
 	r21mask = data[:,13]
+	#
+	co10disp = co10 / (np.sqrt(2*np.pi) * pco10)
+	co21disp = co10 / (np.sqrt(2*np.pi) * pco10)
 
 	# plot
 	plt.rcParams["font.size"] = 16
 	plt.grid()
 	plt.xscale("log")
 	plt.yscale("log")
-	plt.xlim([10**-1.2,10**0.7])
-	plt.ylim([10**-1.2,10**0.7])
+	#plt.xlim([10**-1.2,10**0.7])
+	#plt.ylim([10**-1.2,10**0.7])
 	markers, caps, bars = plt.errorbar(
-		x = co21,
-		xerr = co21err,
-		y = pco21,
-		yerr = pco21err,
+		x = co21disp,#co21,
+		xerr = 0.1,#co21err,
+		y = co10disp,#pco21,
+		yerr = 0.1,#pco21err,
 		marker = ".",
 		markersize = 0,
 		c=cm.brg(i/2.5), # "gray",
@@ -86,6 +89,7 @@ for i in range(len(gals)):
 		capsize=0,
 		)
 	[bar.set_alpha(0.5) for bar in bars]
+	"""
 	plt.plot([10**-1.6,10**1.0],[10**-1.6,10**1.0],"k-",lw=1.5)
 	plt.plot([10**-1.6,10**1.0],[10**-1.6*0.775,10**1.0*0.775],"--",c="blue",alpha=0.5,lw=1)
 	plt.plot([10**-1.6,10**1.0],[10**-1.6*0.925,10**1.0*0.925],"--",c="green",alpha=0.5,lw=1)
@@ -95,6 +99,7 @@ for i in range(len(gals)):
 	plt.xticks([0.1,1],[-1,0])
 	plt.yticks([0.1,1],[-1,0])
 	plt.legend(loc = "upper left")
+	"""
 
 	histo.extend(p21/r21)
 	r21_all.extend(r21)
@@ -110,6 +115,7 @@ p2rerr = p2r * np.sqrt((r21err_all/r21_all)**2 + (p21err_all/p21_all)**2)
 correlation = np.corrcoef(r21_all,p21_all)[0,1]
 plt.text(2.5,0.07,'$\\rho$ = ' + str(np.round(correlation, 2)),fontsize=14)
 
+"""
 a = plt.axes([.16, .68, .3, .2])
 plt.plot([0.45,0.45+np.median(p2rerr)],[2200,2200],"k-",lw=2)
 #plt.ylim([0,2500])
@@ -134,6 +140,6 @@ plt.text(1.44,1400,
 	+ "16th = " + str(np.round(line_16,2))+ " (blue)\n",
 	fontsize=14
 	)
-
+"""
 
 plt.savefig(dir_product+"figure_peak_vs_integ_co.png",dpi=200)
