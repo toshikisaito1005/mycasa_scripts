@@ -44,35 +44,9 @@ for i in range(len(gals)):
 	galname = gals[i]
 	data = np.loadtxt(dir_product + galname + "_parameter_matched_res.txt")
 
-	r21 = data[:,1]
-	r21[np.isnan(r21)] = 0
-	p21 = data[:,9]
-	p21[np.isnan(p21)] = 0
-	co10 = data[:,4]
-	co21 = data[:,2]
-	co10err = data[:,5]
-	co21err = data[:,3]
-	pco10 = data[:,12]
-	pco21 = data[:,13]
-	pco10snr = data[:,10]
-	pco21snr = data[:,11]
-	#
-	cut_r21 = (r21 > 0)
-	cut_p21 = (p21 > 0)
-	cut_all = np.where((cut_r21) & (cut_p21))
-	#
-	r21 = r21[cut_all]
-	p21 = p21[cut_all]
-	co10 = co10[cut_all]
-	co21 = co21[cut_all]
-	co10err = co10err[cut_all]
-	co21err = co21err[cut_all]
-	pco10 = pco10[cut_all]
-	pco21 = pco21[cut_all]
-	pco10err = pco10/pco10snr[cut_all]
-	pco21err = pco21/pco21snr[cut_all]
-	r21err = r21 * np.sqrt((co10err/co10)**2 + (co21err/co21)**2)
-	p21err = p21 * np.sqrt((pco10err/pco10)**2 + (pco21err/pco21)**2)
+	# get data
+	data_dist = data[:,0]
+
 	#
 	plt.rcParams["font.size"] = 16
 	plt.grid()

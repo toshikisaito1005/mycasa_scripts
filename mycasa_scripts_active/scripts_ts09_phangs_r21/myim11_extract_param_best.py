@@ -86,8 +86,8 @@ for i in range(len(gals)):
     data_r21mask = data_r21mask[cut_all]
 
     # rms per channel
-    data_pco10err = co10rmss[i]
-    data_pco21err = co21rmss[i]
+    data_pco10err = co10rmss[i] * np.ones(len(data_pco10))
+    data_pco21err = co21rmss[i] * np.ones(len(data_pco10))
 
     # calc parameters
     data_dist = r21.distance(data_ra, data_dec, pas[i], incs[i], cnt_ras[i], cnt_decs[i], scales[i])
@@ -103,32 +103,22 @@ for i in range(len(gals)):
 
 
     data_all = np.c_[
-        data_dist.astype(int),     # 0
-        data_r21,                  # 1
-        #
-        np.round(data_co21,2),     # 2
-        np.round(data_co21snr,1),  # 3
-        #
-        np.round(data_co10,2),     # 4
-        np.round(data_co10snr,1),  # 5
-        #
-        np.round(data_tpeak,2),    # 6
-        np.round(data_disp,2),     # 7
-        #
-        data_r21mask.astype(int),  # 8
-        data_p21,                  # 9
-        #
-        data_pco10snr,             # 10
-        data_pco21snr,             # 11
-        #
-        data_pco10,                # 12
-        data_pco21,                # 13
+        data_dist.astype(int), # 0
+        data_co10,             # 1
+        data_co10err,          # 2
+        data_co21,             # 3
+        data_co21err,          # 4
+        data_r21,              # 5
+        data_r21err,           # 6
+        data_p21,              # 7
+        data_p21err,           # 8
+        data_r21mask,          # 9
         ]
 
     np.savetxt(
         dir_data + "eps/" + galname + "_parameter_matched_res.txt",
         data_all,
         fmt = "%.5f",
-        header = "distance(pc) r21 co21(Jy/b.km/s) co21snr co10(Jy/b.km/s) co10snr peak(Jy/b) disp(km/s) r21mask p21 pco10snr pco21snr"
+        header = "distance(pc) co10(Jy/b.km/s) co10err co21(Jy/b.km/s) co21err r21 r21err p21 p21err"
         )
 
