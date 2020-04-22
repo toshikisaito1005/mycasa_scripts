@@ -73,11 +73,30 @@ for i in range(len(gals)):
     cut_all = np.where((cut_co10) & (cut_co21) * (cut_pco10) & (cut_pco21))
 
     # cut data
-    
+    data_ra = data_ra[cut_all]
+    data_dec = data_dec[cut_all]
+    data_co10 = data_co10[cut_all]
+    data_co10snr = data_co10snr[cut_all]
+    data_co21 = data_co21[cut_all]
+    data_co21snr = data_co21snr[cut_all]
+    data_pco10 = data_pco10[cut_all]
+    data_pco21 = data_pco21[cut_all]
+    data_r21 = data_r21[cut_all]
+    data_p21 = data_p21[cut_all]
+    data_r21mask = data_r21mask[cut_all]
+
+    # p rms
+    data_pco10err = co10rmss[i]
+    data_pco21err = co21rmss[i]
 
     # calc parameters
     data_dist = r21.distance(data_ra, data_dec, pas[i], incs[i], cnt_ras[i], cnt_decs[i], scales[i])
-    
+    data_co10err = data_co10 / data_co10snr
+    data_co21err = data_co21 / data_co21snr
+    data_r21err = datar21 * np.sqrt((1.0/data_co10snr)**2 + (1.0/data_co21snr)**2)
+    data_p21err = datar21 * np.sqrt((1.0/data_pco10snr)**2 + (1.0/data_pco21snr)**2)
+
+
 
 
     # calc r21 error
@@ -124,7 +143,7 @@ for i in range(len(gals)):
     np.savetxt(
         dir_data + "eps/" + galname + "_parameter_matched_res.txt",
         data_all,
-        fmt = "%.7e",
+        fmt = "%.5f",
         header = "distance(pc) r21 co21(Jy/b.km/s) co21snr co10(Jy/b.km/s) co10snr peak(Jy/b) disp(km/s) r21mask p21 pco10snr pco21snr"
         )
 
