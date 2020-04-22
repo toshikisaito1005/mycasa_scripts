@@ -1,5 +1,15 @@
        9 - mycasa_scripts_active/scripts_ts09_phangs_r21/f03b_peak_vs_integ_co.py
        8 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim11_extract_param_best.py
-       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim_runall.py
+       6 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.f0_TSM0
+       6 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.f0
+       6 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.dat
+       6 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.f0_TSM0
+       6 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.f0
+       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim_runall.py
+       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.lock
+       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.info
+       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.lock
+       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.info
+       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.dat
        2 - mycasa_scripts_active/scripts_ts07_iras18293/fig04_ratio.py
        2 - mycasa_scripts_active/scripts_phangs05_v3_vs_v4/script21_get_fits_nocommonbeam.py
