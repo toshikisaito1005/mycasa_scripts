@@ -32,7 +32,7 @@ beam = [4.0, 8.0, 4.0]
 execfile("myim08_r21_highlowmask.py")
 beam = [13.6, 15.0, 8.5]
 execfile("myim08_r21_highlowmask.py")
-"""
+
 print("### running myim09")
 execfile("myim09_convolve_wise.py")
 
@@ -41,7 +41,7 @@ execfile("myim10_extract_param_600pc.py")
 
 print("### running myim11")
 execfile("myim11_extract_param_best.py")
-
+"""
 
 print("### running f01")
 execfile("f01a_noise.py")
