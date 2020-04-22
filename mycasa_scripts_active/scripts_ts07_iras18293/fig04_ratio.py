@@ -25,7 +25,7 @@ if not done:
 #####################
 ci = dir_data + "image_ci10/ci10.moment0"
 co = dir_data + "image_co10/co10.moment0"
-cliplevel = clip * imstat(co)["max"][0]
+cliplevel = clip * imstat(co)["max"][0] * 100000.
 
 os.system("rm -rf " + co + ".complete")
 immath(imagename = co,
@@ -73,5 +73,5 @@ myim.fits2eps(dir_data = dir_data,
               contour = contour,
               xlim = xlim,
               ylim = ylim,
-              clim = [0.15,0.5])# [0,0.26])
+              clim = [0.0,0.5])# [0,0.26])
 
