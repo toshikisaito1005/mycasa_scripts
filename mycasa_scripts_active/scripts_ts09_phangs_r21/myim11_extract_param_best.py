@@ -93,8 +93,8 @@ for i in range(len(gals)):
     data_dist = r21.distance(data_ra, data_dec, pas[i], incs[i], cnt_ras[i], cnt_decs[i], scales[i])
     data_co10err = data_co10 / data_co10snr
     data_co21err = data_co21 / data_co21snr
-    data_r21err = datar21 * np.sqrt((1.0/data_co10snr)**2 + (1.0/data_co21snr)**2)
-    data_p21err = datar21 * np.sqrt((data_pco10err/data_pco10)**2 + (data_pco21err/data_pco21)**2)
+    data_r21err = data_r21 * np.sqrt((1.0/data_co10snr)**2 + (1.0/data_co21snr)**2)
+    data_p21err = data_r21 * np.sqrt((data_pco10err/data_pco10)**2 + (data_pco21err/data_pco21)**2)
 
 
 
@@ -108,11 +108,15 @@ for i in range(len(gals)):
         data_co10err,          # 2
         data_co21,             # 3
         data_co21err,          # 4
-        data_r21,              # 5
-        data_r21err,           # 6
-        data_p21,              # 7
-        data_p21err,           # 8
-        data_r21mask,          # 9
+        data_pco10,            # 5
+        data_pco10err,         # 6
+        data_pco21,            # 7
+        data_pco21err,         # 8
+        data_r21,              # 9
+        data_r21err,           # 10
+        data_p21,              # 11
+        data_p21err,           # 12
+        data_r21mask,          # 13
         ]
 
     np.savetxt(

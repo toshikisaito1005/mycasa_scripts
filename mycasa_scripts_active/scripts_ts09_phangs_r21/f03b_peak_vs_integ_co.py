@@ -45,9 +45,27 @@ for i in range(len(gals)):
 	data = np.loadtxt(dir_product + galname + "_parameter_matched_res.txt")
 
 	# get data
-	data_dist = data[:,0]
-
+	dist = data[:,0]
 	#
+	co10 = data[:,1]
+	co10err = data[:,2]
+	co21 = data[:,3]
+	co21err = data[:,4]
+	#
+	pco10 = data[:,5]
+	pco10err = data[:,6]
+	pco21 = data[:,7]
+	pco21err = data[:,8]
+	#
+	r21 = data[:,9]
+	r21err = data[:,10]
+	#
+	p21 = data[:,11]
+	p21err = data[:,12]
+	#
+	r21mask = data[:,13]
+
+	# plot
 	plt.rcParams["font.size"] = 16
 	plt.grid()
 	plt.xscale("log")
