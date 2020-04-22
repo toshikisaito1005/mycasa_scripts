@@ -122,7 +122,7 @@ for i in range(len(gals)):
     np.savetxt(
         dir_data + "eps/" + galname + "_parameter_matched_res.txt",
         data_all,
-        fmt = "%.5f",
+        fmt = "%.7f",
         header = "distance(pc) co10(Jy/b.km/s) co10err co21(Jy/b.km/s) co21err r21 r21err p21 p21err"
         )
 
