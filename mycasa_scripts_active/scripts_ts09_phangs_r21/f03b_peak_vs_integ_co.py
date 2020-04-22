@@ -16,7 +16,6 @@ plt.ioff()
 dir_data = "/Users/saito/data/mycasa_scripts_active/scripts_ts09_phangs_r21/"
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
-percents = [0.00,0.00,0.00]
 
 
 #####################
@@ -49,31 +48,27 @@ for i in range(len(gals)):
 	r21[np.isnan(r21)] = 0
 	p21 = data[:,9]
 	p21[np.isnan(p21)] = 0
-	co10 = data[:,2]
+	co10 = data[:,4]
 	co21 = data[:,2]
-	co10snr = data[:,5]
-	co21snr = data[:,3]
-	pco10snr = data[:,10]
-	pco21snr = data[:,11]
+	co10err = data[:,5]
+	co21err = data[:,3]
 	pco10 = data[:,12]
 	pco21 = data[:,13]
 	#
 	cut_r21 = (r21 > 0)
 	cut_p21 = (p21 > 0)
-	cut_co21 = (co21 > co21.max() * percents[i])
-	cut_all = np.where((cut_r21) & (cut_p21) & (cut_co21))
+	cut_all = np.where((cut_r21) & (cut_p21))
 	#
 	r21 = r21[cut_all]
 	p21 = p21[cut_all]
+	co10 = co10[cut_all]
 	co21 = co21[cut_all]
-	co10snr = co10snr[cut_all]
-	co21snr = co21snr[cut_all]
-	pco10snr = pco10snr[cut_all]
-	pco21snr = pco21snr[cut_all]
+	co10err = co10err[cut_all]
+	co21err = co21err[cut_all]
 	pco10 = pco10[cut_all]
 	pco21 = pco21[cut_all]
-	r21err = r21 * np.sqrt((1./co10snr)**2 + (1./co21snr)**2)
-	p21err = p21 * np.sqrt((1./pco10snr)**2 + (1./pco21snr)**2)
+	r21err = r21 * np.sqrt((co10err/co10)**2 + (co21err/co21)**2)
+	p21err = p21 * np.sqrt((pco10err/pco10)**2 + (pco21err/pco21)**2)
 	#
 	plt.rcParams["font.size"] = 16
 	plt.grid()
@@ -82,10 +77,10 @@ for i in range(len(gals)):
 	plt.xlim([10**-1.2,10**0.7])
 	plt.ylim([10**-1.2,10**0.7])
 	markers, caps, bars = plt.errorbar(
-		x = r21,
-		xerr = r21err,
-		y = p21,
-		yerr = p21err,
+		x = co21,
+		xerr = co21err,
+		y = pco21,
+		yerr = pco21err,
 		marker = ".",
 		markersize = 0,
 		c=cm.brg(i/2.5), # "gray",
