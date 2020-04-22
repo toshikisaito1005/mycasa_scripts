@@ -76,12 +76,12 @@ for i in range(len(gals)):
 	#plt.xlim([10**-1.2,10**0.7])
 	#plt.ylim([10**-1.2,10**0.7])
 	markers, caps, bars = plt.errorbar(
-		x = co21disp,#co21,
-		xerr = 0.001,#co21err,
-		y = co10disp,#pco21,
-		yerr = 0.001,#pco21err,
+		x = r21,
+		xerr = 0.01*r21err,
+		y = p21,
+		yerr = 0.01*p21err,
 		marker = ".",
-		markersize = 10,
+		markersize = 0,
 		c=cm.brg(i/2.5), # "gray",
 		alpha=0.5,
 		linewidth=0,
@@ -89,8 +89,8 @@ for i in range(len(gals)):
 		capsize=0,
 		)
 	[bar.set_alpha(0.5) for bar in bars]
-	plt.xlabel("log co21 effective linewdith")
-	plt.ylabel("log co10 effective linewdith")
+	plt.xlabel("log co21 mom-8")
+	plt.ylabel("log co10 mom-8")
 	plt.plot([1,100],[1,100],"k-",lw=1.5)
 	"""
 	plt.plot([10**-1.6,10**1.0],[10**-1.6,10**1.0],"k-",lw=1.5)
@@ -143,4 +143,4 @@ plt.text(1.44,1400,
 	)
 """
 
-plt.savefig(dir_product+"figure_peak_vs_integ_co.png",dpi=200)
+plt.savefig(dir_product+"figure_r21_vs_p21.png",dpi=200)
