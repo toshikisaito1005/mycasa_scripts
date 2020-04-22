@@ -16,7 +16,7 @@ plt.ioff()
 dir_data = "/Users/saito/data/mycasa_scripts_active/scripts_ts09_phangs_r21/"
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
-percents = [0.15,0.025,0.010]
+percents = [0.00,0.00,0.00]
 
 
 #####################
@@ -132,8 +132,6 @@ plt.text(line_50-0.09,2100,"median",color="green",alpha=0.5,rotation=90,fontsize
 plt.text(line_16-0.09,2100,"16th",color="blue",alpha=0.5,rotation=90,fontsize=14)
 
 plt.text(1.44,1400,
-	#"mode = " + str(scipy.stats.mode(np.round(histo,2))[0][0]) + "\n" \
-	#+ "mean = " + str(np.round(np.mean(histo), 2)) + "\n" \
 	"84th = " + str(np.round(line_84,2)) + " (red)" + "\n" \
 	+ "median = " + str(np.round(np.median(histo), 2)) + " (green)\n" \
 	+ "16th = " + str(np.round(line_16,2))+ " (blue)\n",

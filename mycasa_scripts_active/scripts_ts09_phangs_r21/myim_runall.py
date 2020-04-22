@@ -1,7 +1,7 @@
 import os
 
 
-snr_mom = 7.0
+snr_mom = 3.0
 
 
 """
