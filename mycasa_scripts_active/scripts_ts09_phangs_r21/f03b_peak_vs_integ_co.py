@@ -54,6 +54,8 @@ for i in range(len(gals)):
 	co21err = data[:,3]
 	pco10 = data[:,12]
 	pco21 = data[:,13]
+	pco10snr = data[:,10]
+	pco21snr = data[:,11]
 	#
 	cut_r21 = (r21 > 0)
 	cut_p21 = (p21 > 0)
@@ -67,6 +69,8 @@ for i in range(len(gals)):
 	co21err = co21err[cut_all]
 	pco10 = pco10[cut_all]
 	pco21 = pco21[cut_all]
+	pco10err = pco10/pco10snr[cut_all]
+	pco21err = pco21/pco21snr[cut_all]
 	r21err = r21 * np.sqrt((co10err/co10)**2 + (co21err/co21)**2)
 	p21err = p21 * np.sqrt((pco10err/pco10)**2 + (pco21err/pco21)**2)
 	#
@@ -116,7 +120,7 @@ plt.text(2.5,0.07,'$\\rho$ = ' + str(np.round(correlation, 2)),fontsize=14)
 
 a = plt.axes([.16, .68, .3, .2])
 plt.plot([0.45,0.45+np.median(p2rerr)],[2200,2200],"k-",lw=2)
-plt.ylim([0,2500])
+#plt.ylim([0,2500])
 plt.xlabel("y-axis / x-axis" ,fontsize=14)
 plt.xticks(fontsize=14)
 plt.yticks([])

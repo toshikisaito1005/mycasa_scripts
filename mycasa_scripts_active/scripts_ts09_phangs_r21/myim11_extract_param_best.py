@@ -48,7 +48,6 @@ for i in range(len(gals)):
     image_co21_snr = glob.glob(dir_co21 + "co21_"+beamp+".moment0.snratio")[0]
     image_pco10 = glob.glob(dir_co10 + "co10_"+beamp+".moment8")[0]
     image_pco21 = glob.glob(dir_co21 + "co21_"+beamp+".moment8")[0]
-    image_tpeak = glob.glob(dir_co21 + "co21_"+beamp+".moment8")[0]
     image_r21 = glob.glob(dir_r21 + "r21_"+beamp+".moment0")[0]
     image_p21 = glob.glob(dir_r21 + "r21_"+beamp+".moment8")[0]
     image_r21mask = glob.glob(dir_r21 + "r21_"+beamp+".moment0.highlowmask")[0]
@@ -61,9 +60,7 @@ for i in range(len(gals)):
 
     data_co10 = r21.import_data(imagename=image_co10,mode="data")
     data_co21 = r21.import_data(imagename=image_co21,mode="data")
-    data_tpeak = r21.import_data(imagename=image_tpeak,mode="data")
-    data_disp = data_co21 / (np.sqrt(2*np.pi) * data_tpeak)
-    data_disp[np.isnan(data_disp)] = 0
+
 
     data_r21 = r21.import_data(imagename=image_r21,mode="data")
     data_r21mask = r21.import_data(imagename=image_r21mask,mode="data")
@@ -88,6 +85,9 @@ for i in range(len(gals)):
     data_pco21snr = data_pco21 / data_pco21err
     data_pco10snr[np.isnan(data_pco10snr)] = 0
     data_pco21snr[np.isnan(data_pco21snr)] = 0
+
+
+
 
     data_all = np.c_[
         data_dist.astype(int),     # 0
