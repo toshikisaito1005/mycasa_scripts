@@ -26,8 +26,8 @@ cnt_decs = [15.783, 12.9914, 15.8223]
 pas = [180-21.1, 180-172.4, 180-157.8]
 incs = [90-8.7, 90-56.2, 90-35.1]
 
-co10rmss = [0.013,0.048,0.015]
-co21rmss = [0.017,0.024,0.017]
+co10rmss = [0.012,0.041,0.015]
+co21rmss = [0.016,0.023,0.016]
 
 
 #####################
@@ -55,23 +55,32 @@ for i in range(len(gals)):
     # import data
     data_ra = r21.import_data(imagename=image_co21,mode="coords")
     data_dec = r21.import_data(imagename=image_co21,mode="coords",index=1)
-    data_dist = r21.distance(
-        data_ra, data_dec, pas[i], incs[i], cnt_ras[i], cnt_decs[i], scales[i])
-
     data_co10 = r21.import_data(imagename=image_co10,mode="data")
+    data_co10snr = r21.import_data(imagename=image_co10_snr,mode="data")
     data_co21 = r21.import_data(imagename=image_co21,mode="data")
-
-
-    data_r21 = r21.import_data(imagename=image_r21,mode="data")
-    data_r21mask = r21.import_data(imagename=image_r21mask,mode="data")
-    data_p21 = r21.import_data(imagename=image_p21,mode="data")
-
+    data_co21snr = r21.import_data(imagename=image_co21_snr,mode="data")
     data_pco10 = r21.import_data(imagename=image_pco10,mode="data")
     data_pco21 = r21.import_data(imagename=image_pco21,mode="data")
+    data_r21 = r21.import_data(imagename=image_r21,mode="data")
+    data_p21 = r21.import_data(imagename=image_p21,mode="data")
+    data_r21mask = r21.import_data(imagename=image_r21mask,mode="data")
+
+    # masking
+    cut_co10 = (data_co10 > 0)
+    cut_co21 = (data_co21 > 0)
+    cut_pco10 = (data_pco10 > 0)
+    cut_pco21 = (data_pco21 > 0)
+    cut_all = np.where((cut_co10) & (cut_co21) * (cut_pco10) & (cut_pco21))
+
+    # cut data
+    
+
+    # calc parameters
+    data_dist = r21.distance(data_ra, data_dec, pas[i], incs[i], cnt_ras[i], cnt_decs[i], scales[i])
+    
+
 
     # calc r21 error
-    data_co10snr = r21.import_data(imagename=image_co10_snr,mode="data")
-    data_co21snr = r21.import_data(imagename=image_co21_snr,mode="data")
     data_r21err = data_r21 \
         * np.sqrt((1.0/data_co10snr)**2 + (1.0/data_co21snr)**2)
     data_r21err[np.isnan(data_r21err)] = 0
