@@ -66,7 +66,7 @@ for i in range(len(gals)):
 	r21mask = data[:,13]
 	#
 	co10disp = co10 / (np.sqrt(2*np.pi) * pco10)
-	co21disp = co10 / (np.sqrt(2*np.pi) * pco10)
+	co21disp = co21 / (np.sqrt(2*np.pi) * pco21)
 
 	# plot
 	plt.rcParams["font.size"] = 16
@@ -77,11 +77,11 @@ for i in range(len(gals)):
 	#plt.ylim([10**-1.2,10**0.7])
 	markers, caps, bars = plt.errorbar(
 		x = co21disp,#co21,
-		xerr = 0.1,#co21err,
+		xerr = 0.001,#co21err,
 		y = co10disp,#pco21,
-		yerr = 0.1,#pco21err,
+		yerr = 0.001,#pco21err,
 		marker = ".",
-		markersize = 0,
+		markersize = 10,
 		c=cm.brg(i/2.5), # "gray",
 		alpha=0.5,
 		linewidth=0,
@@ -89,13 +89,14 @@ for i in range(len(gals)):
 		capsize=0,
 		)
 	[bar.set_alpha(0.5) for bar in bars]
+	plt.xlabel("log co21 effective linewdith")
+	plt.ylabel("log co10 effective linewdith")
+	plt.plot([1,100],[1,100],"k-",lw=1.5)
 	"""
 	plt.plot([10**-1.6,10**1.0],[10**-1.6,10**1.0],"k-",lw=1.5)
 	plt.plot([10**-1.6,10**1.0],[10**-1.6*0.775,10**1.0*0.775],"--",c="blue",alpha=0.5,lw=1)
 	plt.plot([10**-1.6,10**1.0],[10**-1.6*0.925,10**1.0*0.925],"--",c="green",alpha=0.5,lw=1)
 	plt.plot([10**-1.6,10**1.0],[10**-1.6*1.075,10**1.0*1.075],"--",c="red",alpha=0.5,lw=1)
-	plt.xlabel("log Integrated Intensity Ratio")
-	plt.ylabel("log Peak Temperature Ratio")
 	plt.xticks([0.1,1],[-1,0])
 	plt.yticks([0.1,1],[-1,0])
 	plt.legend(loc = "upper left")
