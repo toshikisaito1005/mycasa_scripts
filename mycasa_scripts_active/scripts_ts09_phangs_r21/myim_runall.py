@@ -10,7 +10,7 @@ execfile("myim02a_regrid.py")
 execfile("myim02b_pbmasking.py")
 """
 
-
+"""
 print("### running myim03")
 execfile("myim03a_mom_native.py")
 execfile("myim03b_Jy2Kelvin.py")
@@ -26,6 +26,7 @@ execfile("myim06_r21_map.py")
 
 print("### running myim07")
 execfile("myim07_sd_mom.py")
+"""
 
 print("### running myim08")
 beam = [4.0, 8.0, 4.0]
