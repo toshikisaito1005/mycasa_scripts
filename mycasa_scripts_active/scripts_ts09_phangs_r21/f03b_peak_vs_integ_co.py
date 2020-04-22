@@ -49,11 +49,14 @@ for i in range(len(gals)):
 	r21[np.isnan(r21)] = 0
 	p21 = data[:,9]
 	p21[np.isnan(p21)] = 0
-	co21 = data[:,4]
+	co10 = data[:,2]
+	co21 = data[:,2]
 	co10snr = data[:,5]
 	co21snr = data[:,3]
 	pco10snr = data[:,10]
 	pco21snr = data[:,11]
+	pco10 = data[:,12]
+	pco21 = data[:,13]
 	#
 	cut_r21 = (r21 > 0)
 	cut_p21 = (p21 > 0)
@@ -62,10 +65,13 @@ for i in range(len(gals)):
 	#
 	r21 = r21[cut_all]
 	p21 = p21[cut_all]
+	co21 = co21[cut_all]
 	co10snr = co10snr[cut_all]
 	co21snr = co21snr[cut_all]
 	pco10snr = pco10snr[cut_all]
 	pco21snr = pco21snr[cut_all]
+	pco10 = pco10[cut_all]
+	pco21 = pco21[cut_all]
 	r21err = r21 * np.sqrt((1./co10snr)**2 + (1./co21snr)**2)
 	p21err = p21 * np.sqrt((1./pco10snr)**2 + (1./pco21snr)**2)
 	#
