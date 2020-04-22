@@ -85,7 +85,7 @@ for i in range(len(gals)):
     data_p21 = data_p21[cut_all]
     data_r21mask = data_r21mask[cut_all]
 
-    # p rms
+    # rms per channel
     data_pco10err = co10rmss[i]
     data_pco21err = co21rmss[i]
 
@@ -94,25 +94,10 @@ for i in range(len(gals)):
     data_co10err = data_co10 / data_co10snr
     data_co21err = data_co21 / data_co21snr
     data_r21err = datar21 * np.sqrt((1.0/data_co10snr)**2 + (1.0/data_co21snr)**2)
-    data_p21err = datar21 * np.sqrt((1.0/data_pco10snr)**2 + (1.0/data_pco21snr)**2)
+    data_p21err = datar21 * np.sqrt((data_pco10err/data_pco10)**2 + (data_pco21err/data_pco21)**2)
 
 
 
-
-    # calc r21 error
-    data_r21err = data_r21 \
-        * np.sqrt((1.0/data_co10snr)**2 + (1.0/data_co21snr)**2)
-    data_r21err[np.isnan(data_r21err)] = 0
-    data_co10snr[np.isnan(data_co10snr)] = 0
-    data_co21snr[np.isnan(data_co21snr)] = 0
-
-    # calc p21 error
-    data_pco10err = co10rmss[i]
-    data_pco21err = co21rmss[i]
-    data_pco10snr = data_pco10 / data_pco10err
-    data_pco21snr = data_pco21 / data_pco21err
-    data_pco10snr[np.isnan(data_pco10snr)] = 0
-    data_pco21snr[np.isnan(data_pco21snr)] = 0
 
 
 
