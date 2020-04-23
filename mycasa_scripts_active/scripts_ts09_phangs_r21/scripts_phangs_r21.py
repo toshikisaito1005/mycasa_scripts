@@ -485,16 +485,27 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
     immath(imagename = [dir_image+name_line+".moment0_tmp",
                         dir_image+name_line+".moment8_tmp"],
            expr = "iif( IM0>=" + str(peak*percent) + ", IM1, 0.0)",
+           outfile = dir_image+name_line+"_"+beamp+".moment8_tmp2")
+    
+    immath(imagename = [dir_image+name_line+".moment8_tmp2",
+                        dir_image+name_line+".moment0.noise_tmp"],
+           expr = "iif( IM1>=1, IM0, 0.0)",
            outfile = dir_image+name_line+"_"+beamp+".moment8")
 
     #
     immath(imagename = [dir_image+name_line+"_"+beamp+".moment0",
                          dir_image+name_line+"_"+beamp+".moment0.noise"],
            expr = "IM0/IM1",
-           outfile = dir_image+name_line+"_"+beamp+".moment0.snratio")
+           outfile = dir_image+name_line+"_"+beamp+".moment0.snratio_tmp")
     
+    immath(imagename = [dir_image+name_line+"_"+beamp+".moment0.snratio_tmp",
+                        dir_image+name_line+".moment0.noise_tmp"],
+           expr = "iif( IM1>=1, IM0, 0.0)",
+           outfile = dir_image+name_line+"_"+beamp+".moment0.snratio")
+
     os.system("rm -rf " + cubeimage+".maskedTF")
     os.system("rm -rf " + dir_image+name_line+".moment0.noise_tmp")
+    os.system("rm -rf " + dir_image+name_line+"_"+beamp+".moment0.snratio_tmp")
     os.system("rm -rf " + dir_image+name_line+".moment0_tmp")
     os.system("rm -rf " + dir_image+name_line+".moment1_tmp")
     os.system("rm -rf " + dir_image+name_line+".moment8_tmp")
