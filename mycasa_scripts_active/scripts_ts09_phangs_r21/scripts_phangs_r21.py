@@ -467,7 +467,7 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
     
     immath(imagename = [dir_image+name_line+"_"+beamp+".moment0_tmp2",
                         dir_image+name_line+".moment0.noise_tmp"],
-           expr = "iif( IM1>=1, IM0, 0.0)",
+           expr = "iif( IM1>=2, IM0, 0.0)",
            outfile = dir_image+name_line+"_"+beamp+".moment0")
 
     #
@@ -478,7 +478,7 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
     
     immath(imagename = [dir_image+name_line+"_"+beamp+".moment1_tmp2",
                         dir_image+name_line+".moment0.noise_tmp"],
-           expr = "iif( IM1>=1, IM0, 0.0)",
+           expr = "iif( IM1>=2, IM0, 0.0)",
            outfile = dir_image+name_line+"_"+beamp+".moment1")
 
     #      
@@ -489,7 +489,7 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
     
     immath(imagename = [dir_image+name_line+"_"+beamp+".moment8_tmp2",
                         dir_image+name_line+".moment0.noise_tmp"],
-           expr = "iif( IM1>=1, IM0, 0.0)",
+           expr = "iif( IM1>=2, IM0, 0.0)",
            outfile = dir_image+name_line+"_"+beamp+".moment8")
 
     #
@@ -500,7 +500,7 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
     
     immath(imagename = [dir_image+name_line+"_"+beamp+".moment0.snratio_tmp",
                         dir_image+name_line+".moment0.noise_tmp"],
-           expr = "iif( IM1>=1, IM0, 0.0)",
+           expr = "iif( IM1>=2, IM0, 0.0)",
            outfile = dir_image+name_line+"_"+beamp+".moment0.snratio")
 
     os.system("rm -rf " + cubeimage+".maskedTF")
@@ -509,9 +509,9 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
     os.system("rm -rf " + dir_image+name_line+".moment0_tmp")
     os.system("rm -rf " + dir_image+name_line+".moment1_tmp")
     os.system("rm -rf " + dir_image+name_line+".moment8_tmp")
-    os.system("rm -rf " + dir_image+name_line+".moment0_tmp2")
-    os.system("rm -rf " + dir_image+name_line+".moment1_tmp2")
-    os.system("rm -rf " + dir_image+name_line+".moment8_tmp2")
+    os.system("rm -rf " + dir_image+name_line+"_"+beamp+".moment0_tmp2")
+    os.system("rm -rf " + dir_image+name_line+"_"+beamp+".moment1_tmp2")
+    os.system("rm -rf " + dir_image+name_line+"_"+beamp+".moment8_tmp2")
 
     return mask_use_here
 
