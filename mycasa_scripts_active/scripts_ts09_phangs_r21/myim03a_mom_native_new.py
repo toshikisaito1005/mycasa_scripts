@@ -1,6 +1,7 @@
 import os
 import glob
 import scripts_phangs_r21 as r21
+reload(r21)
 
 
 #####################
@@ -42,17 +43,14 @@ for i in range(len(co21names)):
 
     # measure noise
     output = dir_proj+"../eps/noise_"+co21names[i].split("/")[-1].replace(".image","")+".png"
-    co21rms = r21.noisehist(co21name,noises_co21_byeye[i],output,snr_mom)
+    co21rms = r21.noisehist(co21image,noises_co21_byeye[i],output,snr_mom)
     
     output = dir_proj+"../eps/noise_"+co10names[i].split("/")[-1].replace(".image","")+".png"
-    co10rms = r21.noisehist(co10name,noises_co10_byeye[i],output,snr_mom)
-
+    co10rms = r21.noisehist(co10image,noises_co10_byeye[i],output,snr_mom)
 
     # moment map creation
-    maskname = r21.eazy_immoments(dir_proj,co21name,galname,co21rms,beams[i],snr_mom,percents[i])
-
-    r21.eazy_immoments(dir_proj,co10names[i],galname,co10rms,beams[i],snr_mom,percents[i],
-                       maskname=maskname)
+    maskname = r21.eazy_immoments(dir_proj,co21image,galname,co21rms,beams[i],snr_mom,percents[i])
+    r21.eazy_immoments(dir_proj,co10image,galname,co10rms,beams[i],snr_mom,percents[i],maskname=maskname)
 
 
 os.system("rm -rf *.last")

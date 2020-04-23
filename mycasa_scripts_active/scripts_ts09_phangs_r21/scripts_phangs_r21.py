@@ -480,7 +480,7 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
            outfile = dir_image+name_line+"_"+beamp+".moment0.snratio")
     
     os.system("rm -rf " + cubeimage+".maskedTF")
-    os.system("rm -rf " + dir_image+name_line+".moment0.noise_tmp")
+    #os.system("rm -rf " + dir_image+name_line+".moment0.noise_tmp")
     os.system("rm -rf " + dir_image+name_line+".moment0_tmp")
     os.system("rm -rf " + dir_image+name_line+".moment1_tmp")
     os.system("rm -rf " + dir_image+name_line+".moment8_tmp")
