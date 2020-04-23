@@ -10,7 +10,7 @@ execfile("myim02a_regrid.py")
 execfile("myim02b_pbmasking.py")
 """
 
-"""
+
 print("### running myim03")
 execfile("myim03a_mom_native.py")
 execfile("myim03b_Jy2Kelvin.py")
@@ -41,7 +41,7 @@ execfile("myim10_extract_param_600pc.py")
 
 print("### running myim11")
 execfile("myim11_extract_param_best.py")
-"""
+
 
 print("### running f01")
 execfile("f01a_noise.py")
