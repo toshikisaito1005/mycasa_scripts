@@ -21,6 +21,7 @@ co21noises = [[0.025,0.030,0.035,0.037,0.060,0.060,0.039,0.040,0.042,0.043,0.055
               [0.023,0.025,0.027,0.027,0.027,0.028,0.029,0.030,0.031,0.033,0.040]] # ngc3627
 #snr_mom = 3.0
 percents = [0.00,0.00,0.00]
+#nchans = [2.0,3.0,3.0]
 
 #####################
 ### Main
@@ -54,6 +55,7 @@ for i in range(len(galaxy)):
                                       beamp,
                                       snr_mom,
                                       percents[i],
+                                      nchans[i],
                                       myim="05")
                                  
         r21.eazy_immoments(dir_proj + galname + "_co10/",
@@ -63,6 +65,7 @@ for i in range(len(galaxy)):
                            beamp,
                            snr_mom,
                            percents[i],
+                           nchans[i],
                            maskname=maskname,
                            myim="05")
 

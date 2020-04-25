@@ -25,6 +25,7 @@ beams = ["04p0",
          "04p0"]
 #snr_mom = 3.0
 percents = [0,0,0]
+#nchans = [2.0,3.0,3.0]
 
 done = glob.glob(dir_proj + "../eps/")
 if not done:
@@ -47,9 +48,9 @@ for i in range(len(co21names)):
 
     # moment map creation
     maskname = \
-        r21.eazy_immoments(dir_proj,co21names[i],galname,co21rms,beams[i],snr_mom,percents[i])
+        r21.eazy_immoments(dir_proj,co21names[i],galname,co21rms,beams[i],snr_mom,percents[i],nchans[i])
 
-    r21.eazy_immoments(dir_proj,co10names[i],galname,co10rms,beams[i],snr_mom,percents[i],
+    r21.eazy_immoments(dir_proj,co10names[i],galname,co10rms,beams[i],snr_mom,percents[i],nchans[i],
                        maskname=maskname)
 
 

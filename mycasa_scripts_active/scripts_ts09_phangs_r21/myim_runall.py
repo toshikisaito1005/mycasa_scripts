@@ -1,7 +1,8 @@
 import os
 
 
-snr_mom = 1.5
+snr_mom = 2.5
+nchans = [2.0,3.0,3.0] # ngc0628, ngc3627, ngc4321
 
 
 """
