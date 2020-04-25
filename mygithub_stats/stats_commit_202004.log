@@ -1,45 +1,53 @@
-      98 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.f0_TSM0
-      98 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.f0
-      98 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.dat
-      98 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.f0_TSM0
-      98 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.f0
-      75 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.lock
-      75 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.info
-      75 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.lock
-      75 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.info
-      75 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.dat
+     101 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.f0_TSM0
+     101 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.f0
+     101 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.dat
+     101 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.f0_TSM0
+     101 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.f0
+      77 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.lock
+      77 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/table.info
+      77 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.lock
+      77 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.info
+      77 - mycasa_scripts_active/scripts_ts09_phangs_r21/template.image/mask0/table.dat
       64 - mycasa_scripts_active/scripts_ts09_phangs_r21/f08_violins.py
-      54 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21.py
-      43 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21.pyc
-      37 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim_runall.py
+      56 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21.py
+      44 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21.pyc
+      38 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim_runall.py
       31 - mycasa_scripts_active/scripts_ts09_phangs_r21/f01a_noise.py
+      20 - mycasa_scripts_active/scripts_ts09_phangs_r21/f06_07_scatter_and_histo.py
       19 - mycasa_scripts_active/scripts_ts09_phangs_r21/f04_histograms_600pc.py
-      17 - mycasa_scripts_active/scripts_ts09_phangs_r21/f06_07_scatter_and_histo.py
-      16 - mycasa_scripts_active/scripts_ts09_phangs_r21/table3_ngc0628.txt
       16 - mycasa_scripts_active/scripts_ts09_phangs_r21/f05_histo_stats.py
-      15 - mycasa_scripts_active/scripts_ts09_phangs_r21/table3_ngc4321.txt
-      15 - mycasa_scripts_active/scripts_ts09_phangs_r21/table3_ngc3627.txt
-      14 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim03a_mom_native.py
+      15 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim03a_mom_native.py
+      15 - mycasa_scripts_active/scripts_ts09_phangs_r21/f03_peak_vs_integ.py
+      14 - mycasa_scripts_active/scripts_ts07_iras18293/fig04_ratio.py
       14 - mycasa_scripts_active/scripts_santoro01_ngc1365/cprops2mask_conv_ellipse.py
       13 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim02b_pbmasking.py
       13 - mycasa_scripts_active/scripts_jwu01_ngc6240/fig02_histograms.py
+      12 - mycasa_scripts_active/scripts_ts09_phangs_r21/f99_table03.py
       12 - mycasa_scripts_active/scripts_ts09_phangs_r21/f00_all_final_eps.sh
+      11 - mycasa_scripts_active/scripts_ts09_phangs_r21/f03b_peak_vs_integ_co.py
       10 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim11_extract_param_best.py
-       9 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim05_mom_multibeam.py
+      10 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim05_mom_multibeam.py
        9 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim04_multibeam.py
-       9 - mycasa_scripts_active/scripts_ts09_phangs_r21/f03b_peak_vs_integ_co.py
        9 - mycasa_scripts_active/scripts_phangs05_v3_vs_v4/script02_regrid.py
        8 - mycasa_scripts_active/scripts_ts09_phangs_r21/f10_radial.py
        5 - mycasa_scripts_active/scripts_ts09_phangs_r21/f11_radial_norm.py
-       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/f03_peak_vs_integ.py
        4 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim10_extract_param_600pc.py
-       4 - mycasa_scripts_active/scripts_ts07_iras18293/fig04_ratio.py
        4 - mycasa_scripts_active/scripts_phangs05_v3_vs_v4/script11_get_fits_smallscalebias_cyclefactor.py
        3 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim08_r21_highlowmask.py
        3 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim06_r21_map.py
        3 - mycasa_scripts_active/scripts_ts09_phangs_r21/f02_images.py
+       3 - mycasa_scripts_active/scripts_ts09_phangs_r21/.DS_Store
+       3 - mycasa_scripts_active/scripts_ts07_iras18293/figures/radial_flux.png
+       3 - mycasa_scripts_active/scripts_ts07_iras18293/figures/iras18293_ci10_m0.png
+       3 - mycasa_scripts_active/scripts_ts07_iras18293/figures/iras18293_b8contin.png
+       3 - mycasa_scripts_active/scripts_ts07_iras18293/figures/iras18293_12co10_m0.png
+       3 - mycasa_scripts_active/scripts_ts07_iras18293/figures/histo_ci_dust_weight.png
+       3 - mycasa_scripts_active/scripts_ts07_iras18293/figures/histo_ci_dust.png
+       3 - mycasa_scripts_active/scripts_ts07_iras18293/figures/histo_ci_co_weight.png
+       3 - mycasa_scripts_active/scripts_ts07_iras18293/figures/histo_ci_co.png
        3 - mycasa_scripts_active/scripts_ts07_iras18293/fig05_radial_alpha_co.py
        3 - mycasa_scripts_active/scripts_phangs05_v3_vs_v4/script04_compare_rms.py
+       2 - mycasa_scripts_active/scripts_ts09_phangs_r21/table03.txt
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21_plot.py
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim09_convolve_WISE.py
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim03b_Jy2Kelvin.py
