@@ -23,6 +23,7 @@ if not done:
 #####################
 ### Main Procedure
 #####################
+# ci co ratio
 ci = dir_data + "image_ci10/ci10.moment0"
 co = dir_data + "image_co10/co10.moment0"
 cliplevel = clip * imstat(co)["max"][0] * 100000.
@@ -42,6 +43,23 @@ for i in range(len(imagenames)):
     os.system("rm -rf " + imagenames[i] + ".fits")
     exportfits(imagename = imagenames[i],
                fitsimage = imagenames[i] + ".fits")
+
+
+# ci dust ratio
+ci = dir_data + "image_ci10/ci10.moment0"
+dust = dir_data + "image_co10/co10.moment0"
+cliplevel = clip * imstat(co)["max"][0] * 100000.
+
+os.system("rm -rf " + co + ".complete")
+immath(imagename = co,
+       expr = "iif(IM0 <= " + str(cliplevel) + ", IM0, 0.0)",
+       outfile = co + ".complete")
+
+os.system("rm -rf " + dir_data + "image_ci10/ratio.moment0")
+immath(imagename = [ci,co + ".complete"],
+       expr = "iif(IM0 >= 0, IM0/IM1*"+str(freq_factor)+", 0.0)",
+       outfile = dir_data + "image_ci10/ratio.moment0")
+
 
 ###12CO(1-0)
 # moment 0 color + moment 0 contour
