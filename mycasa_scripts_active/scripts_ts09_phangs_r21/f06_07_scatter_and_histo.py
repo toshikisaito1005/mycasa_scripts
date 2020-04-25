@@ -227,7 +227,7 @@ def plot_scatter(
 	# set legend
 	ax.legend(bbox_to_anchor=(1.05, -0.05), loc="upper left", ncol=ncol)
 	# save txt
-	os.system("rm -rf " + "table3_"+galname.replace("for NGC ","ngc")+".txt")
+	os.system("rm -rf " + txtfile)
 	np.savetxt(
 		txtfile,
 		np.array(list_output),
@@ -452,7 +452,7 @@ for i in range(len(gals)):
 	ax1b = ax1.twiny()
 	ax2b = ax2.twinx()
 	# plot
-	plot_scatter(ax1, ax1b, list_co10, list_co21, list_snrco10, list_snrco21, list_beamname,xlim[i], ylim[i], xlabel, ylabel, text, galname2, "table06_"+galname+"_co10vsco21.txt")
+	plot_scatter(ax1, ax1b, list_co10, list_co21, list_snrco10, list_snrco21, list_beamname,xlim[i], ylim[i], xlabel, ylabel, text, galname2, "table03_"+galname+"_co10vsco21.txt")
 	plot_threshold(ax1, list_errco10, list_errco21, xlim[i], ylim[i], list_co10)
 	plot_hist_right(ax2, ax2b, list_co21, statslist_co21, list_beamname, ylim[i], ylabel)
 	plot_hist_bottom(ax3, list_co10, statslist_co10, list_beamname, xlim[i], xlabel)
@@ -473,7 +473,7 @@ for i in range(len(gals)):
 	ax1b = ax1.twiny()
 	ax2b = ax2.twinx()
 	# plot
-	plot_scatter(ax1,ax1b, list_co21, list_r21, list_snrco21, list_snrr21, list_beamname, ylim[i], ylim_r21[i], ylabel, ylabel_r21, text_r21, galname2, annotation="ratio")
+	plot_scatter(ax1,ax1b, list_co21, list_r21, list_snrco21, list_snrr21, list_beamname, ylim[i], ylim_r21[i], ylabel, ylabel_r21, text_r21, galname2, "table03_"+galname+"_co21vsr21.txt", annotation="ratio")
 	plot_threshold(ax1, list_errco21, list_errr21, ylim[i], ylim_r21[i], list_co21, mode="ratio")
 	plot_hist_right(ax2, ax2b, list_r21, statslist_r21, list_beamname, ylim_r21[i], ylabel_r21)
 	plot_hist_bottom(ax3, list_co21, statslist_co21, list_beamname, ylim[i], ylabel)
