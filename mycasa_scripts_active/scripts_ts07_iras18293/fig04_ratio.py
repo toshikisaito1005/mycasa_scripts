@@ -28,11 +28,11 @@ if not done:
 # ci co ratio
 ci = dir_data + "image_ci10/ci10.moment0"
 co = dir_data + "image_co10/co10.moment0"
-cliplevel = clip * imstat(co)["max"][0] * 100000.
+cliplevel = clip * imstat(co)["max"][0]
 
 os.system("rm -rf " + co + ".complete")
 immath(imagename = co,
-       expr = "iif(IM0 <= " + str(cliplevel) + ", IM0, 0.0)",
+       expr = "iif(IM0 >= " + str(cliplevel) + ", IM0, 0.0)",
        outfile = co + ".complete")
 
 os.system("rm -rf " + dir_data + "image_ci10/ratio.moment0")
@@ -47,7 +47,7 @@ dust = dir_data + "image_b8contin/b8contin.flux"
 
 os.system("rm -rf " + dust + ".complete")
 immath(imagename = [dust,co],
-       expr = "iif(IM1 <= " + str(cliplevel) + ", IM0, 0.0)",
+       expr = "iif(IM1 >= " + str(cliplevel) + ", IM0, 0.0)",
        outfile = dust + ".complete")
 
 #
@@ -57,7 +57,7 @@ eqn_fl2lum_ci = 3.25e+7 / obsfreq_ci**2 * DL**2 / (1 + zspec)**3
 cidust_factor = eqn_fl2lum_ci / eqn_fl2lum_dust
 #cliplevel = clip * imstat(co)["max"][0] * 100000.
 
-os.system("rm -rf " + dir_data + "image_ci10/ratio.moment0")
+os.system("rm -rf " + dir_data + "image_b8contin/ratio.moment0")
 immath(imagename = [ci,dust + ".complete"],
        expr = "iif(IM0 >= 0, IM0/IM1*"+str(cidust_factor)+", 0.0)",
        outfile = dir_data + "image_b8contin/ratio.moment0")
@@ -129,4 +129,5 @@ myim.fits2eps(dir_data = dir_data,
               value = value,
               contour = contour,
               xlim = xlim,
-              ylim = ylim)# [0,0.26])
+              ylim = ylim,
+              clim = [0.0,0.26])# [0,0.26])
