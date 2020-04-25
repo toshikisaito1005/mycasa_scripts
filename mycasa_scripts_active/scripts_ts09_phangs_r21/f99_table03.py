@@ -12,16 +12,22 @@ txtfile2 = glob.glob("table03_*_co21vsr21.txt")
 #####################
 ### functions
 #####################
-def table03_galname(txtfile1,txtfile2):
+def table03_galname(galname,txtfile1,txtfile2):
 	"""
 	"""
+	table = []
 	for i in range(len(txtfile1)):
 		txtdata1 = np.loadtxt(txtfile1[i],dtype="str")
 		txtdata2 = np.loadtxt(txtfile2[i],dtype="str")
 		for j in range(len(txtdata1)):
-			onerow = extract_onerow(txtdata1[j],txtdata2[j])
-			print(onerow)
+			onerow_tmp = extract_onerow(txtdata1[j],txtdata2[j])
+			if j==0:
+				onerow = galname + " & " + onerow_tmp
+			else:
+				onerow = " & " + onerow_tmp
+			table.append(onerow)
 
+	return table
 
 def extract_onerow(txtdata1,txtdata2):
 	"""
@@ -74,8 +80,8 @@ def extract_onerow(txtdata1,txtdata2):
 #####################
 ### main
 #####################
+table03 = []
 for i in range(len(txtfile1)):
 	galname = txtfile1[i].split("_")[1].replace("ngc","NGC ")
-	table03_galname(txtfile1,txtfile2)
-
-
+	table = table03_galname(galname, txtfile1, txtfile2)
+	table03.append(table)
