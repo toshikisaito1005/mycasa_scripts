@@ -16,16 +16,15 @@ def table03_galname(galname,txtfile1,txtfile2):
 	"""
 	"""
 	table = []
-	for i in range(len(txtfile1)):
-		txtdata1 = np.loadtxt(txtfile1[i],dtype="str")
-		txtdata2 = np.loadtxt(txtfile2[i],dtype="str")
-		for j in range(len(txtdata1)):
-			onerow_tmp = extract_onerow(txtdata1[j],txtdata2[j])
-			if j==0:
-				onerow = galname + " & " + onerow_tmp
-			else:
-				onerow = " & " + onerow_tmp
-			table.append(onerow)
+	txtdata1 = np.loadtxt(txtfile1,dtype="str")
+	txtdata2 = np.loadtxt(txtfile2,dtype="str")
+	for j in range(len(txtdata1)):
+		onerow_tmp = extract_onerow(txtdata1[j],txtdata2[j])
+		if j==0:
+			onerow = galname + " & " + onerow_tmp + " \\\\ \n"
+		else:
+			onerow = " & " + onerow_tmp + " \\\\ \n"
+		table.append(onerow)
 
 	return table
 
@@ -83,5 +82,8 @@ def extract_onerow(txtdata1,txtdata2):
 table03 = []
 for i in range(len(txtfile1)):
 	galname = txtfile1[i].split("_")[1].replace("ngc","NGC ")
-	table = table03_galname(galname, txtfile1, txtfile2)
+	galname2 = txtfile1[i].split("_")[1]
+	table = table03_galname(galname, txtfile1[i], txtfile2[i])
 	table03.append(table)
+
+np.savetxt("table03.txt",table03,fmt="%s")
