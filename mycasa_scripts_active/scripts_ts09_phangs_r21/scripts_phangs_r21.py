@@ -343,7 +343,7 @@ def noisehist_kelvin(imagename,jy2k,noises_byeye,output,snr,bins=200,thres=0.000
     if plotter==True:
       plt.savefig(output,dpi=300)
 
-def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
+def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,nchan,
                    maskname=None,
                    myim="03"):
     """
@@ -466,7 +466,7 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
     
     immath(imagename = [dir_image+name_line+"_"+beamp+".moment0_tmp2",
                         dir_image+name_line+".moment0.noise_tmp"],
-           expr = "iif( IM1>=3, IM0, 0.0)",
+           expr = "iif( IM1>="+str(nchan)+", IM0, 0.0)",
            outfile = dir_image+name_line+"_"+beamp+".moment0")
 
     #
@@ -477,7 +477,7 @@ def eazy_immoments(dir_proj,imagename,galname,noise,beamp,snr_mom,percent,
     
     immath(imagename = [dir_image+name_line+"_"+beamp+".moment1_tmp2",
                         dir_image+name_line+".moment0.noise_tmp"],
-           expr = "iif( IM1>=3, IM0, 0.0)",
+           expr = "iif( IM1>="+str(nchan)+", IM0, 0.0)",
            outfile = dir_image+name_line+"_"+beamp+".moment1")
 
     #      
