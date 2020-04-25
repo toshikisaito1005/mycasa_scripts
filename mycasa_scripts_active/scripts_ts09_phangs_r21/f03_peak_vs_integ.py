@@ -102,9 +102,10 @@ for i in range(len(gals)):
 	plt.legend(loc = "upper left")
 
 	# contour
-	H, xedges, yedges = np.histogram2d(p21,r21,bins=80,range=([10**-1.2,10**0.7],[10**-1.2,10**0.7]))
+	H, xedges, yedges = np.histogram2d(p21,r21,bins=100,range=([10**-1.2,10**0.7],[10**-1.2,10**0.7]))
 	extent = [xedges[0],xedges[-1],yedges[0],yedges[-1]]
-	plt.contour(H,extent=extent,colors=[cm.brg(i/2.5)],zorder=1,linewidths=3,alpha=0.8)
+	plt.contour(H/H.max()*100,levels=[8,16,32,64,96],extent=extent,
+		colors=[cm.brg(i/2.5)],zorder=1,linewidths=2,alpha=1.0)
 
 	histo.extend(p21/r21)
 	r21_all.extend(r21)
