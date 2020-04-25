@@ -15,7 +15,7 @@ ylim = [10, -10]
 value = None
 clip = 0.10027554936773037 # 10**6.0
 freq_factor = 115.27120*115.27120/492.16065100/492.16065100
-cliplevel_dust = 0.0012 * 4.
+cliplevel_dust = 0.00075 * 2.5
 zspec = 0.01818
 DL = 78.2 # Mpc
 
@@ -46,17 +46,23 @@ immath(imagename = [ci,co + ".complete"],
 ci = dir_data + "image_ci10/ci10.moment0"
 dust = dir_data + "image_b8contin/b8contin.flux"
 
-os.system("rm -rf " + dust + ".complete")
-immath(imagename = dust,
-       expr = "iif(IM0 >= " + str(cliplevel_dust) + ", IM0, 0.0)",
-       outfile = dust + ".complete")
-
 #
 obsfreq_ci = 492.16065100 / (1 + 0.01818)
 eqn_fl2lum_dust = 1.197e27 * DL**2 / (1 + zspec)**3 * 10**-20.8
 eqn_fl2lum_ci = 3.25e+7 / obsfreq_ci**2 * DL**2 / (1 + zspec)**3
 cidust_factor = eqn_fl2lum_ci / eqn_fl2lum_dust
 #cliplevel = clip * imstat(co)["max"][0] * 100000.
+cliplevel_ci = 4.37 / eqn_fl2lum_ci
+
+os.system("rm -rf " + dust + ".complete")
+immath(imagename = dust,
+       expr = "iif(IM0 >= " + str(cliplevel_dust) + ", IM0, 0.0)",
+       outfile = dust + ".complete")
+
+os.system("rm -rf " + dust + ".complete2")
+immath(imagename = [dust + ".complete",ci],
+       expr = "iif(IM1 >= " + str(cliplevel_ci) + ", IM0, 0.0)",
+       outfile = dust + ".complete2")
 
 os.system("rm -rf " + dir_data + "image_b8contin/ratio.moment0")
 immath(imagename = [ci,dust + ".complete"],
