@@ -100,6 +100,9 @@ for i in range(len(gals)):
 	plt.yticks([0.1,1],[-1,0])
 	plt.legend(loc = "upper left")
 
+	# contour
+
+
 	histo.extend(p21/r21)
 	r21_all.extend(r21)
 	p21_all.extend(p21)
