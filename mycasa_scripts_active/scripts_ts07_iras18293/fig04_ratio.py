@@ -52,7 +52,7 @@ eqn_fl2lum_dust = 1.197e27 * DL**2 / (1 + zspec)**3 * 10**-20.8
 eqn_fl2lum_ci = 3.25e+7 / obsfreq_ci**2 * DL**2 / (1 + zspec)**3
 cidust_factor = eqn_fl2lum_ci / eqn_fl2lum_dust
 #cliplevel = clip * imstat(co)["max"][0] * 100000.
-cliplevel_ci = 4.37 / eqn_fl2lum_ci
+cliplevel_ci = 10**4.37 / eqn_fl2lum_ci
 
 os.system("rm -rf " + dust + ".complete")
 immath(imagename = dust,
@@ -65,7 +65,7 @@ immath(imagename = [dust + ".complete",ci],
        outfile = dust + ".complete2")
 
 os.system("rm -rf " + dir_data + "image_b8contin/ratio.moment0")
-immath(imagename = [ci,dust + ".complete"],
+immath(imagename = [ci,dust + ".complete2"],
        expr = "iif(IM0 >= 0, IM0/IM1*"+str(cidust_factor)+", 0.0)",
        outfile = dir_data + "image_b8contin/ratio.moment0")
 
