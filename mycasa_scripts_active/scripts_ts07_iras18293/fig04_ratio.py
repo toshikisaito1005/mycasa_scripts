@@ -15,9 +15,9 @@ ylim = [10, -10]
 value = None
 clip = 0.10027554936773037 # 10**6.0
 freq_factor = 115.27120*115.27120/492.16065100/492.16065100
-cliplevel_dust = 0.00075 * 2.5
 zspec = 0.01818
 DL = 78.2 # Mpc
+beamarea = 22.382
 
 done = glob.glob(dir_data + "eps/")
 if not done:
@@ -52,7 +52,10 @@ eqn_fl2lum_dust = 1.197e27 * DL**2 / (1 + zspec)**3 * 10**-20.8
 eqn_fl2lum_ci = 3.25e+7 / obsfreq_ci**2 * DL**2 / (1 + zspec)**3
 cidust_factor = eqn_fl2lum_ci / eqn_fl2lum_dust
 #cliplevel = clip * imstat(co)["max"][0] * 100000.
-cliplevel_ci = 10**4.37 / eqn_fl2lum_ci
+
+#
+cliplevel_dust = 0.00075 * 5.0
+cliplevel_ci = 10**4.37 / eqn_fl2lum_ci * beamarea
 
 os.system("rm -rf " + dust + ".complete")
 immath(imagename = dust,
@@ -137,4 +140,4 @@ myim.fits2eps(dir_data = dir_data,
               contour = contour,
               xlim = xlim,
               ylim = ylim,
-              clim = [0.0,0.26])# [0,0.26])
+              clim = [0.0,0.50])# [0,0.26])
