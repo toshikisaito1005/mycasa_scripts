@@ -50,12 +50,12 @@ def extract_onerow(txtdata1,txtdata2):
 	# l2
 	t2 = l2
 	# l3
-	t3 = l3a + " \pm " + l3b
+	t3 = l3a + " $\pm$ " + l3b
 	# l4
 	if "-" in l4a:
-		t4 = l4a.replace("-","$-$") + " \pm " + l4b
+		t4 = l4a.replace("-","$-$") + " $\pm$ " + l4b
 	else:
-		t4 = "\phantom{$-$}" + l4a + " \pm " + l4b
+		t4 = "\phantom{$-$}" + l4a + " $\pm$ " + l4b
 	# l5
 	if "-" in l5:
 		t5 = l5.replace("-","$-$")
@@ -63,14 +63,14 @@ def extract_onerow(txtdata1,txtdata2):
 		t5 = "\phantom{$-$}" + l5
 	# l6
 	if "-" in l6a:
-		t6 = l6a.replace("-","$-$") + " \pm " + l6b
+		t6 = l6a.replace("-","$-$") + " $\pm$ " + l6b
 	else:
-		t6 = "\phantom{$-$}" + l6a + " \pm " + l6b
+		t6 = "\phantom{$-$}" + l6a + " $\pm$ " + l6b
 	# l7
 	if "-" in l7a:
-		t7 = l7a.replace("-","$-$") + " \pm " + l7b
+		t7 = l7a.replace("-","$-$") + " $\pm$ " + l7b
 	else:
-		t7 = "\phantom{$-$}" + l7a + " \pm " + l7b
+		t7 = "\phantom{$-$}" + l7a + " $\pm$ " + l7b
 
 	onerow = t1+" & "+t2+" & "+t3+" & "+t4+" && "+t5+" & "+t6+" & "+t7
 	return onerow
@@ -85,5 +85,6 @@ for i in range(len(txtfile1)):
 	galname2 = txtfile1[i].split("_")[1]
 	table = table03_galname(galname, txtfile1[i], txtfile2[i])
 	table03.append(table)
+	os.system("rm -rf " + txtfile1[i] + " " + txtfile2[i])
 
 np.savetxt("table03.txt",table03,fmt="%s")
