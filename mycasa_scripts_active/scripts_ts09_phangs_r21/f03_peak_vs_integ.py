@@ -45,29 +45,30 @@ for i in range(len(gals)):
 	galname = gals[i]
 	data = np.loadtxt(dir_product + galname + "_parameter_matched_res.txt")
 
-	r21 = data[:,1]
-	r21[np.isnan(r21)] = 0
-	p21 = data[:,9]
-	p21[np.isnan(p21)] = 0
-	co21 = data[:,4]
-	co10snr = data[:,5]
-	co21snr = data[:,3]
-	pco10snr = data[:,10]
-	pco21snr = data[:,11]
+	# get data
+	dist = data[:,0]
 	#
-	cut_r21 = (r21 > 0)
-	cut_p21 = (p21 > 0)
-	cut_co21 = (co21 > co21.max() * percents[i])
-	cut_all = np.where((cut_r21) & (cut_p21) & (cut_co21))
+	co10 = data[:,1]
+	co10err = data[:,2]
+	co21 = data[:,3]
+	co21err = data[:,4]
 	#
-	r21 = r21[cut_all]
-	p21 = p21[cut_all]
-	co10snr = co10snr[cut_all]
-	co21snr = co21snr[cut_all]
-	pco10snr = pco10snr[cut_all]
-	pco21snr = pco21snr[cut_all]
-	r21err = r21 * np.sqrt((1./co10snr)**2 + (1./co21snr)**2)
-	p21err = p21 * np.sqrt((1./pco10snr)**2 + (1./pco21snr)**2)
+	pco10 = data[:,5]
+	pco10err = data[:,6]
+	pco21 = data[:,7]
+	pco21err = data[:,8]
+	#
+	r21 = data[:,9]
+	r21err = data[:,10]
+	#
+	p21 = data[:,11]
+	p21err = data[:,12]
+	#
+	r21mask = data[:,13]
+	#
+	co10disp = co10 / (np.sqrt(2*np.pi) * pco10)
+	co21disp = co21 / (np.sqrt(2*np.pi) * pco21)
+
 	#
 	plt.rcParams["font.size"] = 16
 	plt.grid()
@@ -81,11 +82,11 @@ for i in range(len(gals)):
 		y = p21,
 		yerr = p21err,
 		marker = ".",
-		markersize = 0,
+		markersize = 5,#0,
 		c=cm.brg(i/2.5), # "gray",
 		alpha=0.5,
 		linewidth=0,
-		elinewidth=1,
+		elinewidth=0,#1,
 		capsize=0,
 		)
 	[bar.set_alpha(0.5) for bar in bars]
