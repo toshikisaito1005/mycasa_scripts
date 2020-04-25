@@ -15,7 +15,8 @@ ylim = [10, -10]
 value = None
 clip = 0.10027554936773037 # 10**6.0
 freq_factor = 115.27120*115.27120/492.16065100/492.16065100
-cidust_factor = 1.
+zspec = 0.01818
+DL = 78.2 # Mpc
 
 done = glob.glob(dir_data + "eps/")
 if not done:
@@ -43,7 +44,18 @@ immath(imagename = [ci,co + ".complete"],
 # ci dust ratio
 ci = dir_data + "image_ci10/ci10.moment0"
 dust = dir_data + "image_b8contin/b8contin.flux"
+
+#
+obsfreq_ci = 492.16065100 / (1 + 0.01818)
+eqn_fl2lum_dust = 1.197e27 * DL**2 / (1 + zspec)**3 * 10**-20.8
+eqn_fl2lum_ci = 3.25e+7 / obsfreq_ci**2 * DL**2 / (1 + zspec)**3
+cidust_factor = eqn_fl2lum_ci / eqn_fl2lum_dust
 #cliplevel = clip * imstat(co)["max"][0] * 100000.
+
+os.system("rm -rf " + dust + ".complete")
+immath(imagename = dust,
+       expr = "iif(IM0 <= " + str(cliplevel) + ", IM0, 0.0)",
+       outfile = dust + ".complete")
 
 os.system("rm -rf " + dir_data + "image_ci10/ratio.moment0")
 immath(imagename = [ci,dust],
