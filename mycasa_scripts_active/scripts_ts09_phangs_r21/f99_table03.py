@@ -5,15 +5,21 @@ import numpy as np
 #####################
 ### parameters
 #####################
-data_co10vsco21 = np.loadtxt("table03_ngc0628_co10vsco21.txt",dtype="str")
-data_co21vsr21 = np.loadtxt("table03_ngc0628_co21vsr21.txt",dtype="str")
-
+txtfile1 = glob.glob("table03_*_co10vsco21.txt")
+txtfile2 = glob.glob("table03_*_co21vsr21.txt")
 
 
 #####################
 ### functions
 #####################
-def table03_builder():
+def table03_galname(txtfile1,txtfile2):
+	"""
+	"""
+	txtdata1 = np.loadtxt(txtfile1,dtype="str")
+	txtdata2 = np.loadtxt(txtfile2,dtype="str")
+	
+
+def extract_onerow(txtdata1,txtdata2):
 	"""
 	"""
 	l1  = [s.replace("00","0") for s in txtdata1[:,0]]
@@ -27,7 +33,7 @@ def table03_builder():
 	l6b = txtdata2[:,3]
 	l7a = txtdata2[:,4]
 	l7b = txtdata2[:,5]
-
+	#
 	for i in range(len(l1)):
 		# l1
 		if len(l1[i])==3:
@@ -60,5 +66,14 @@ def table03_builder():
 			t7 = "\phantom{$-$}" + l7a[i] + " \pm " + l7b[i]
 
 		onerow = t1+" & "+t2+" & "+t3+" & "+t4+" && "+t5+" & "+t6+" & "+t7
+
+		return onerow
+
+
+#####################
+### main
+#####################
+for i in range(len(txtfile1)):
+	galname = txtfile1[i].split("_")[1].replace("ngc","NGC ")
 
 
