@@ -140,4 +140,4 @@ myim.fits2eps(dir_data = dir_data,
               contour = contour,
               xlim = xlim,
               ylim = ylim,
-              clim = [0.0,0.50])# [0,0.26])
+              clim = [0.0,0.26])# [0,0.26])
