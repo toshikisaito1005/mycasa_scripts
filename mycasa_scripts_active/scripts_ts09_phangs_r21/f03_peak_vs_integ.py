@@ -84,11 +84,11 @@ for i in range(len(gals)):
 		marker = ".",
 		markersize = 10,#0,
 		c="gray", #cm.brg(i/2.5),
-		alpha=0.5,
+		alpha=0.3,
 		linewidth=0,
 		elinewidth=0,#1,
 		capsize=0,
-		zorder=2,
+		zorder=0,
 		)
 	[bar.set_alpha(0.5) for bar in bars]
 	plt.plot([10**-1.6,10**1.0],[10**-1.6,10**1.0],"k-",lw=1.5)
@@ -102,9 +102,9 @@ for i in range(len(gals)):
 	plt.legend(loc = "upper left")
 
 	# contour
-	H, xedges, yedges = np.histogram2d(p21,r21,bins=100,range=([10**-1.2,10**0.7],[10**-1.2,10**0.7]))
+	H, xedges, yedges = np.histogram2d(p21,r21,bins=80,range=([10**-1.2,10**0.7],[10**-1.2,10**0.7]))
 	extent = [xedges[0],xedges[-1],yedges[0],yedges[-1]]
-	plt.contour(H,extent=extent,c=cm.brg(i/2.5),zorder=0)
+	plt.contour(H,extent=extent,colors=[cm.brg(i/2.5)],zorder=1,linewidths=3,alpha=0.8)
 
 	histo.extend(p21/r21)
 	r21_all.extend(r21)
