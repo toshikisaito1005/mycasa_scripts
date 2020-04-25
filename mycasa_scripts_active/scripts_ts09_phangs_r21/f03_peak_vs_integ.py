@@ -82,7 +82,7 @@ for i in range(len(gals)):
 		y = p21,
 		yerr = p21err,
 		marker = ".",
-		markersize = 5,#0,
+		markersize = 10,#0,
 		c=cm.brg(i/2.5), # "gray",
 		alpha=0.5,
 		linewidth=0,
