@@ -104,7 +104,7 @@ for i in range(len(gals)):
 	plt.legend(loc = "upper left")
 
 	# contour
-	H, xedges, yedges = np.histogram2d(r21,p21,bins=100)
+	H, xedges, yedges = np.histogram2d(r21,p21,bins=20,range=([10**-1.2,10**0.7],[10**-1.2,10**0.7]))
 	extent = [xedges[0],xedges[-1],yedges[0],yedges[-1]]
 	plt.contour(H,extent=extent,c=cm.brg(i/2.5),zorder=0)
 
