@@ -111,6 +111,7 @@ def plot_scatter(
 	ylabel,
 	text,
 	galname,
+	txtfile,
 	ncol=1,
 	annotation="flux",
 	):
@@ -228,7 +229,7 @@ def plot_scatter(
 	# save txt
 	os.system("rm -rf " + "table3_"+galname.replace("for NGC ","ngc")+".txt")
 	np.savetxt(
-		"table3_"+galname.replace("for NGC ","ngc")+".txt",
+		txtfile,
 		np.array(list_output),
 		fmt='%.2f',
 		)
@@ -451,7 +452,7 @@ for i in range(len(gals)):
 	ax1b = ax1.twiny()
 	ax2b = ax2.twinx()
 	# plot
-	plot_scatter(ax1, ax1b, list_co10, list_co21, list_snrco10, list_snrco21, list_beamname,xlim[i], ylim[i], xlabel, ylabel, text, galname2)
+	plot_scatter(ax1, ax1b, list_co10, list_co21, list_snrco10, list_snrco21, list_beamname,xlim[i], ylim[i], xlabel, ylabel, text, galname2, "table06_"+galname+"_co10vsco21.txt")
 	plot_threshold(ax1, list_errco10, list_errco21, xlim[i], ylim[i], list_co10)
 	plot_hist_right(ax2, ax2b, list_co21, statslist_co21, list_beamname, ylim[i], ylabel)
 	plot_hist_bottom(ax3, list_co10, statslist_co10, list_beamname, xlim[i], xlabel)
