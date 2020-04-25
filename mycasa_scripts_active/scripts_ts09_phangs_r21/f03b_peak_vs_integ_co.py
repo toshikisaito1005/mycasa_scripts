@@ -16,7 +16,6 @@ plt.ioff()
 dir_data = "/Users/saito/data/mycasa_scripts_active/scripts_ts09_phangs_r21/"
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
-percents = [0.00,0.00,0.00]
 
 
 #####################
@@ -69,44 +68,39 @@ for i in range(len(gals)):
 	co10disp = co10 / (np.sqrt(2*np.pi) * pco10)
 	co21disp = co21 / (np.sqrt(2*np.pi) * pco21)
 
-	#
+	# plot
 	plt.rcParams["font.size"] = 16
 	plt.grid()
 	plt.xscale("log")
 	plt.yscale("log")
-	plt.xlim([10**-1.2,10**0.7])
-	plt.ylim([10**-1.2,10**0.7])
-	"""
+	#plt.xlim([10**-1.2,10**0.7])
+	#plt.ylim([10**-1.2,10**0.7])
 	markers, caps, bars = plt.errorbar(
 		x = r21,
-		xerr = r21err,
+		xerr = 0.1*r21err,
 		y = p21,
-		yerr = p21err,
+		yerr = 0.1*p21err,
 		marker = ".",
-		markersize = 10,#0,
-		c="gray", #cm.brg(i/2.5),
+		markersize = 0,
+		c=cm.brg(i/2.5), # "gray",
 		alpha=0.5,
 		linewidth=0,
-		elinewidth=0,#1,
+		elinewidth=1,
 		capsize=0,
-		zorder=2,
 		)
 	[bar.set_alpha(0.5) for bar in bars]
+	plt.xlabel("log co21 mom-8")
+	plt.ylabel("log co10 mom-8")
+	plt.plot([1,100],[1,100],"k-",lw=1.5)
 	"""
 	plt.plot([10**-1.6,10**1.0],[10**-1.6,10**1.0],"k-",lw=1.5)
 	plt.plot([10**-1.6,10**1.0],[10**-1.6*0.775,10**1.0*0.775],"--",c="blue",alpha=0.5,lw=1)
 	plt.plot([10**-1.6,10**1.0],[10**-1.6*0.925,10**1.0*0.925],"--",c="green",alpha=0.5,lw=1)
 	plt.plot([10**-1.6,10**1.0],[10**-1.6*1.075,10**1.0*1.075],"--",c="red",alpha=0.5,lw=1)
-	plt.xlabel("log Integrated Intensity Ratio")
-	plt.ylabel("log Peak Temperature Ratio")
 	plt.xticks([0.1,1],[-1,0])
 	plt.yticks([0.1,1],[-1,0])
 	plt.legend(loc = "upper left")
-
-	# contour
-	H, xedges, yedges = np.histogram2d(r21,p21,bins=100)
-	extent = [xedges[0],xedges[-1],yedges[0],yedges[-1]]
-	plt.contour(H,extent=extent,c=cm.brg(i/2.5),zorder=0)
+	"""
 
 	histo.extend(p21/r21)
 	r21_all.extend(r21)
@@ -122,9 +116,10 @@ p2rerr = p2r * np.sqrt((r21err_all/r21_all)**2 + (p21err_all/p21_all)**2)
 correlation = np.corrcoef(r21_all,p21_all)[0,1]
 plt.text(2.5,0.07,'$\\rho$ = ' + str(np.round(correlation, 2)),fontsize=14)
 
+"""
 a = plt.axes([.16, .68, .3, .2])
 plt.plot([0.45,0.45+np.median(p2rerr)],[2200,2200],"k-",lw=2)
-plt.ylim([0,2500])
+#plt.ylim([0,2500])
 plt.xlabel("y-axis / x-axis" ,fontsize=14)
 plt.xticks(fontsize=14)
 plt.yticks([])
@@ -146,6 +141,6 @@ plt.text(1.44,1400,
 	+ "16th = " + str(np.round(line_16,2))+ " (blue)\n",
 	fontsize=14
 	)
-
+"""
 
 plt.savefig(dir_product+"figure_r21_vs_p21.png",dpi=200)
