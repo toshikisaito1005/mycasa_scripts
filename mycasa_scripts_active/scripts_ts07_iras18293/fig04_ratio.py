@@ -15,6 +15,7 @@ ylim = [10, -10]
 value = None
 clip = 0.10027554936773037 # 10**6.0
 freq_factor = 115.27120*115.27120/492.16065100/492.16065100
+cliplevel_dust = 0.0012 * 4.
 zspec = 0.01818
 DL = 78.2 # Mpc
 
@@ -46,8 +47,8 @@ ci = dir_data + "image_ci10/ci10.moment0"
 dust = dir_data + "image_b8contin/b8contin.flux"
 
 os.system("rm -rf " + dust + ".complete")
-immath(imagename = [dust,co],
-       expr = "iif(IM1 >= " + str(cliplevel) + ", IM0, 0.0)",
+immath(imagename = dust,
+       expr = "iif(IM0 >= " + str(cliplevel_dust) + ", IM0, 0.0)",
        outfile = dust + ".complete")
 
 #
