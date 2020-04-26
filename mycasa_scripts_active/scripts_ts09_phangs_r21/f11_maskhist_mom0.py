@@ -19,8 +19,10 @@ gals = ["ngc0628","ngc3627","ngc4321"]
 dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
 bins = 40
-xlim = [0,3.32115133461]
-xlabel = "log $I_{CO(2-1)}$ (K km s$^{-1}$)"
+xlim1 = [0,3.01922848601*1.1]
+xlim2 = [0,1.97644168938*1.1]
+xlabel1 = "log $I_{CO(2-1)}$ (K km s$^{-1}$)"
+xlabel2 = "log $\sigma_{CO(2-1)}$ (km s$^{-1}$)"
 
 
 #####################
@@ -63,7 +65,6 @@ def get_data(txtdata,col,bins,xlim):
 
 def startup_plot(
 	xlim,
-	ylim,
 	xlabel,
 	):
     """
@@ -117,7 +118,7 @@ def plotter(
 ### main
 #####################
 # prepare for plot
-axlist = startup_plot(xlim,ylim,xlabel)
+axlist = startup_plot(xlim1,xlabel1)
 #
 histmaxs = []
 for i in range(len(gals)):
@@ -126,7 +127,7 @@ for i in range(len(gals)):
     galnamelabel = galname.replace("ngc","NGC ")
     # get data
     histmax, hist_low, hist_mid, hist_high = \
-    	get_data(dir_product+galname+"_parameter_600pc.txt",3,bins,xlim)
+    	get_data(dir_product+galname+"_parameter_600pc.txt",3,bins,xlim1)
     #
     plotter(ax,hist_low,hist_mid,hist_high)
     #
@@ -136,5 +137,23 @@ print(np.max(histmaxs))
 plt.savefig(dir_product+"maskhist_mom0.png",dpi=200)
 
 
+# prepare for plot
+axlist = startup_plot(xlim2,xlabel2)
+#
+histmaxs = []
+for i in range(len(gals)):
+    ax = axlist[i]
+    galname = gals[i]
+    galnamelabel = galname.replace("ngc","NGC ")
+    # get data
+    histmax, hist_low, hist_mid, hist_high = \
+    	get_data(dir_product+galname+"_parameter_600pc.txt",8,bins,xlim2)
+    #
+    plotter(ax,hist_low,hist_mid,hist_high)
+    #
+    histmaxs.append(histmax)
+    #
+print(np.max(histmaxs))
+plt.savefig(dir_product+"maskhist_disp.png",dpi=200)
 
 
