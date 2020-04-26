@@ -42,12 +42,12 @@ for i in range(len(txtfile)):
 	list_l3.append(l3)
 	list_l4.append(l4)
 	list_l5.append(l5)
+	os.system("rm -rf " + txtfile[i])
 
-np.r_["84\% & "   + " && ".join(list_l1) + " \\\\ \n",
-	  "Mean & "   + " && ".join(list_l2) + " \\\\ \n",
-	  "Median & " + " && ".join(list_l3) + " \\\\ \n",
-	  "Mode & "   + " && ".join(list_l4) + " \\\\ \n",
-	  "16\% & "   + " && ".join(list_l5)]
+table02 = ["84\% & "   + " && ".join(list_l1) + " \\\\",
+		   "Mean & "   + " && ".join(list_l2) + " \\\\",
+		   "Median & " + " && ".join(list_l3) + " \\\\",
+		   "Mode & "   + " && ".join(list_l4) + " \\\\",
+		   "16\% & "   + " && ".join(list_l5)]
 
-
-np.savetxt("table03.txt",table03,fmt="%s")
+np.savetxt("table02.txt",table02,fmt="%s")
