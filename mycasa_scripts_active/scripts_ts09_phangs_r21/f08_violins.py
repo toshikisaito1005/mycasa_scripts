@@ -17,7 +17,7 @@ plt.ioff()
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-bins = 100
+bins = 70
 r21range = [0.05,1.45]
 ylabel = "$R_{21}$"
 gals = ["ngc0628",
@@ -157,7 +157,7 @@ def plot_multi_violins(
 	# plot stats
 	ax.plot(
 		np.array(list_xaxis)+x_absoffset,list_median,
-		"o-",color='black',markersize=4,markeredgewidth=0,alpha=0.5)
+		"o-",color='black',markersize=12,markeredgewidth=0,alpha=0.5)
 
 def plot_all_violins(
 	ax,
