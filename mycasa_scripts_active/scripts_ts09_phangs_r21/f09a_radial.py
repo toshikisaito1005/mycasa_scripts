@@ -75,15 +75,15 @@ for i in range(len(gals)):
         )
     """
     # contour
-    H, xedges, yedges = np.histogram2d(r21,galdist,bins=40,range=([0,2],[0,2]))
+    H, xedges, yedges = np.histogram2d(r21,galdist,bins=30,range=([0,2],[0,2]))
     extent = [xedges[0],xedges[-1],yedges[0],yedges[-1]]
     ax1.contour(H/H.max()*100,levels=[16,32,64,96],extent=extent,
-        colors=[cm.brg(i/2.5)],zorder=2,linewidths=2.5,alpha=0.1,labels=galname.replace("ngc","NGC "))
+        colors=[cm.brg(i/2.5)],zorder=2,linewidths=2.5,alpha=1.0,labels=galname.replace("ngc","NGC "))
     # plot
     ax1.scatter(
         galdist, r21,
         color="grey",#cm.brg(i/2.5),
-        lw=0, alpha=0.1, s=50)
+        lw=0, alpha=0.3, s=30)
 
     histdata.extend(r21.tolist())
 
@@ -92,15 +92,20 @@ dathist = ax2.hist(
     bins=100,lw=0,color="grey",alpha=0.6)
 
 range_p = dathist[1][hist_percent(dathist[0],0.843)]
+range_median = dathist[1][hist_percent(dathist[0],0.50)]
 range_l = dathist[1][hist_percent(dathist[0],0.157)]
 
-ax1.plot([0,1],[range_l,range_l],lw=5,linestyle="--",alpha=0.8,color="black")
-ax1.plot([0,1],[range_p,range_p],lw=5,linestyle="--",alpha=0.8,color="black")
+ax1.plot([0,1],[range_l,range_l],lw=3,linestyle="--",alpha=0.8,color="black")
+ax1.plot([0,1],[range_median,range_median],lw=5,linestyle="-",alpha=0.8,color="black")
+ax1.plot([0,1],[range_p,range_p],lw=3,linestyle="--",alpha=0.8,color="black")
 ax2.plot([0,dathist[0].max()*1.25],[range_l,range_l],
-         lw=5,linestyle="--",alpha=0.8,color="black")
+         lw=3,linestyle="--",alpha=0.8,color="black")
+ax2.plot([0,dathist[0].max()*1.25],[range_median,range_median],
+         lw=5,linestyle="-",alpha=0.8,color="black")
 ax2.plot([0,dathist[0].max()*1.25],[range_p,range_p],
-         lw=5,linestyle="--",alpha=0.8,color="black")
+         lw=3,linestyle="--",alpha=0.8,color="black")
 ax2.text(0.6*dathist[0].max()*1.25,range_p-0.1,str(range_p))
+ax2.text(0.6*dathist[0].max()*1.25,range_median-0.1,str(range_median))
 ax2.text(0.6*dathist[0].max()*1.25,range_l-0.1,str(range_l))
 
 ax1.grid()
