@@ -19,6 +19,7 @@ gals = ["ngc0628","ngc3627","ngc4321"]
 dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
 bins = 40
+xlim = [0,3.32115133461]
 ylim = [0.0005,0.2]
 xlabel = "log $I_{CO(2-1)}$ (K km s$^{-1}$)"
 
@@ -26,7 +27,7 @@ xlabel = "log $I_{CO(2-1)}$ (K km s$^{-1}$)"
 #####################
 ### functions
 #####################
-def get_data(txtdata,col,bins):
+def get_data(txtdata,col,bins,xlim):
     """
     """
     data = np.loadtxt(txtdata)
@@ -57,10 +58,12 @@ def get_data(txtdata,col,bins):
     hist_low  = np.histogram(data_low, bins=bins, range=xlim, weights=np.log10(co21_low))
     hist_mid  = np.histogram(data_mid, bins=bins, range=xlim, weights=np.log10(co21_mid))
     hist_high = np.histogram(data_high, bins=bins, range=xlim, weights=np.log10(co21_high))
+    histmax = np.max([])
 
-    return xlim, hist_low, hist_mid, hist_high
+    return histmax, hist_low, hist_mid, hist_high
 
 def startup_plot(
+	xlim,
 	ylim,
 	xlabel,
 	):
@@ -74,6 +77,9 @@ def startup_plot(
     ax1 = plt.subplot(gs[0:6,0:25])
     ax2 = plt.subplot(gs[6:12,0:25])
     ax3 = plt.subplot(gs[12:18,0:25])
+    ax1.set_xlim(xlim)
+    ax2.set_xlim(xlim)
+    ax3.set_xlim(xlim)
     ax1.set_ylim(ylim)
     ax2.set_ylim(ylim)
     ax3.set_ylim(ylim)
@@ -94,15 +100,16 @@ def startup_plot(
 ### main
 #####################
 # prepare for plot
-axlist = startup_plot(ylim,xlabel)
+axlist = startup_plot(xlim,ylim,xlabel)
 #
+xlims = []
 for i in range(len(gals)):
     ax = axlist[i]
     galname = gals[i]
     galnamelabel = galname.replace("ngc","NGC ")
     # get data
     hist_low, hist_mid, hist_high = \
-    	get_data(dir_product+galname+"_parameter_600pc.txt",3,bins)
+    	get_data(dir_product+galname+"_parameter_600pc.txt",3,bins,xlim)
     #
     x, y_low = np.delete(hist_low[1],-1), hist_low[0]
     y_low = y_low / float(sum(y_low))
@@ -114,8 +121,10 @@ for i in range(len(gals)):
     ax.step(x, y_low, color="blue", lw=3, alpha=0.7)
     ax.step(x, y_mid, color="green", lw=3, alpha=0.7)
     ax.step(x, y_high, color="red", lw=3, alpha=0.7)
-    ax.set_xlim(xlim)
     #
+    xlims.extend(xlim)
+    #
+print(np.max(xlims))
 plt.savefig(dir_product+"maskhist_mom0.png",dpi=200)
 
 
