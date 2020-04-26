@@ -44,7 +44,30 @@ def get_beam_intensities(images,freq):
 ### co10
 plt.figure(figsize=(10,10))
 plt.rcParams["font.size"] = 22
-plt.ylim([0.7,1.1])
+plt.ylim([0.0,1.2])
+plt.ylabel("CO(1-0) Flux Recovery")
+plt.xlabel("Spatial Resolution (kpc)")
+plt.legend(loc = "lower right")
+plt.grid(color="grey")
+#
+for i in range(len(gals)):
+    # get data
+    galanme = gals[i].replace("ngc","NGC ")
+    images_co10 = glob.glob(dir_data + gals[i] + "_co10/co10*.moment0")
+    freq = 115.27120 # GHz
+    data = get_beam_intensities(images_co10,freq)
+    # plot
+    plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "o", markersize=15, markeredgewidth=0, lw=0, c=cm.brg(i/2.5), label=galanme)
+    plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "-", lw=5, c=cm.brg(i/2.5), alpha=0.5)
+    #
+plt.legend(loc="lower right")
+plt.savefig(dir_data + "eps/missingflux_co10.png", dpi=100)
+
+
+### co21
+plt.figure(figsize=(10,10))
+plt.rcParams["font.size"] = 22
+plt.ylim([0.0,1.2])
 plt.ylabel("CO(1-0) Flux Recovery")
 plt.xlabel("Spatial Resolution (kpc)")
 plt.legend(loc = "lower right")
@@ -65,39 +88,6 @@ plt.savefig(dir_data + "eps/missingflux_co10.png", dpi=100)
 
 
 
-
-
-## co21 plot
-plt.figure(figsize=(10,10))
-plt.rcParams["font.size"] = 22
-i = 0
-plt.errorbar(data_co21_n0628[:,0]*(scales[i]/1000),
-             data_co21_n0628[:,1]/sd_co21_n0628,
-             yerr=data_co21_n0628[:,1]/sd_co21_n0628*np.sqrt(0.1**2+0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 0628")
-i = 1
-plt.errorbar(data_co21_n3627[:,0]*(scales[i]/1000),
-             data_co21_n3627[:,1]/sd_co21_n3627,
-             yerr=data_co21_n3627[:,1]/sd_co21_n3627*np.sqrt(0.1**2+0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 3627")
-"""
-i = 2
-plt.errorbar(data_co21_n4254[:,0]*(scales[i]/1000),
-             data_co21_n4254[:,1]/sd_co21_n4254,
-             yerr=data_co21_n4254[:,1]/sd_co21_n4254*np.sqrt(0.1**2+0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 4254")
-"""
-i = 3
-plt.errorbar(data_co21_n4321[:,0]*(scales[i]/1000),
-             data_co21_n4321[:,1]/sd_co21_n4321,
-             yerr=data_co21_n4321[:,1]/sd_co21_n4321*np.sqrt(0.1**2+0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 4321")
-plt.ylim([0,2])
-plt.ylabel("Total CO(2-1) Flux Relative To HERACLES")
-plt.xlabel("Spatial Resolution (kpc)")
-plt.legend(loc = "lower right")
-plt.grid(color="grey")
-plt.savefig(dir_data + "../eps/missingflux_co21.png", dpi=100)
 
 ## R21 plot
 plt.figure(figsize=(10,10))
