@@ -161,9 +161,11 @@ def plot_multi_violins(
 			list_p84.append(weighted_percentile(list_violin[j],0.84,weights[j]))
 			list_p16.append(weighted_percentile(list_violin[j],0.16,weights[j]))
 	# plot medians
-	ax.plot(np.array(list_xaxis)+x_absoffset,list_median,"-",color='black',alpha=0.5)
-	ax.plot(np.array(list_xaxis)+x_absoffset,list_median,"o",color='black',markersize=8,markeredgewidth=0)
-	# plot 84%
+	ax.plot(np.array(list_xaxis)+x_absoffset,list_median,"-",color='black',alpha=1.0,lw=2)
+	ax.plot(np.array(list_xaxis)+x_absoffset,list_median,"o",color='black',markersize=8,markeredgewidth=0,lw=2)
+	# plot percentiles
+	ax.plot(np.array(list_xaxis)+x_absoffset,list_p84,"--",color='black',alpha=1.0,lw=2)
+	ax.plot(np.array(list_xaxis)+x_absoffset,list_p16,"--",color='black',alpha=1.0,lw=2)
 
 def plot_all_violins(
 	ax,
