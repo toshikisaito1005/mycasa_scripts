@@ -96,6 +96,9 @@ for i in range(len(gals)):
 	plt1.tick_params(labelbottom=False)
 	plt2.tick_params(labelleft=False,labelbottom=False)
 	plt3.tick_params(labelleft=False,labelbottom=False)
+	plt1.tick_params(axis="y", length=0)
+	plt2.tick_params(axis="y", length=0)
+	plt3.tick_params(axis="y", length=0)
 	#
 	txt_x = xlim[0]+(xlim[1]-xlim[0])*0.67
 	bm = float(beam[i].replace("p","."))

@@ -71,7 +71,7 @@ def startup_plot(
     plt.subplots(nrows=1,ncols=1,figsize=(7, 7),sharey=True)
     plt.rcParams["font.size"] = 14
     plt.rcParams["legend.fontsize"] = 9
-    plt.subplots_adjust(bottom=0.1, left=0.15, right=0.99, top=0.99)
+    plt.subplots_adjust(bottom=0.1, left=0.10, right=0.99, top=0.99)
     gs = gridspec.GridSpec(nrows=18, ncols=25)
     ax1 = plt.subplot(gs[0:6,0:25])
     ax2 = plt.subplot(gs[6:12,0:25])
@@ -79,18 +79,39 @@ def startup_plot(
     ax1.set_xlim(xlim)
     ax2.set_xlim(xlim)
     ax3.set_xlim(xlim)
-    ax1.grid(axis="y")
-    ax2.grid(axis="y")
-    ax3.grid(axis="y")
-    ax1.tick_params(axis="x", length=0)
-    ax2.tick_params(axis="x", length=0)
-    ax3.tick_params(axis="x", length=0)
+    ax1.grid(axis="x")
+    ax2.grid(axis="x")
+    ax3.grid(axis="x")
+    ax1.tick_params(axis="y", length=0)
+    ax2.tick_params(axis="y", length=0)
+    ax3.tick_params(axis="y", length=0)
     ax1.tick_params(labelbottom=False)
     ax2.tick_params(labelbottom=False)
     #ax3.tick_params(labelbottom=False)
     ax3.set_xlabel(xlabel)
 
     return ax1, ax2, ax3
+
+def plotter(
+    ax,
+    hist_low,
+    hist_mid,
+    hist_high,
+    ):
+    """
+    """
+    x, y_low = np.delete(hist_low[1],-1), hist_low[0]
+    y_low = y_low / float(sum(y_low))
+    _, y_mid = np.delete(hist_mid[1],-1), hist_mid[0]
+    y_mid = y_mid / float(sum(y_mid))
+    _, y_high = np.delete(hist_high[1],-1), hist_high[0]
+    y_high = y_high / float(sum(y_high))
+    #
+    ax.step(x, y_low, color="blue", lw=3, alpha=0.7)
+    ax.step(x, y_mid, color="green", lw=3, alpha=0.7)
+    ax.step(x, y_high, color="red", lw=3, alpha=0.7)
+    ax.set_ylim(0.0005,np.max([y_low,y_mid,y_high])*1.4)
+
 
 #####################
 ### main
@@ -107,17 +128,7 @@ for i in range(len(gals)):
     histmax, hist_low, hist_mid, hist_high = \
     	get_data(dir_product+galname+"_parameter_600pc.txt",3,bins,xlim)
     #
-    x, y_low = np.delete(hist_low[1],-1), hist_low[0]
-    y_low = y_low / float(sum(y_low))
-    _, y_mid = np.delete(hist_mid[1],-1), hist_mid[0]
-    y_mid = y_mid / float(sum(y_mid))
-    _, y_high = np.delete(hist_high[1],-1), hist_high[0]
-    y_high = y_high / float(sum(y_high))
-    #
-    ax.step(x, y_low, color="blue", lw=3, alpha=0.7)
-    ax.step(x, y_mid, color="green", lw=3, alpha=0.7)
-    ax.step(x, y_high, color="red", lw=3, alpha=0.7)
-    ax.set_ylim(0.0005,np.max([y_low,y_mid,y_high])*1.4)
+    plotter(ax,hist_low,hist_mid,hist_high)
     #
     histmaxs.append(histmax)
     #
