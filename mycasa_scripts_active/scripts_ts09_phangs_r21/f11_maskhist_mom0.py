@@ -18,11 +18,13 @@ dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
 dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
-bins = 50
+bins = 40
 xlim1 = [0,3.01922848601*1.1]
 xlim2 = [0,1.97644168938*1.1]
 xlabel1 = "log $I_{CO(2-1)}$ (K km s$^{-1}$)"
 xlabel2 = "log $\sigma_{CO(2-1)}$ (km s$^{-1}$)"
+title1 = "log $I_{CO(2-1)}$ Histograms"
+title2 = "log $\sigma_{CO(2-1)}$ Histograms"
 
 
 #####################
@@ -56,27 +58,31 @@ def get_data(txtdata,col,bins,xlim):
     data_low  = data4use[mask==-1][data4use[mask==-1]>0]
     data_mid  = data4use[mask==0][data4use[mask==0]>0]
     data_high = data4use[mask==1][data4use[mask==1]>0]
-    hist_low  = np.histogram(data_low, bins=bins, range=xlim, weights=np.log10(co21_low))
-    hist_mid  = np.histogram(data_mid, bins=bins, range=xlim, weights=np.log10(co21_mid))
-    hist_high = np.histogram(data_high, bins=bins, range=xlim, weights=np.log10(co21_high))
+    weights_low = np.log10(co21_low)
+    weights_mid = np.log10(co21_mid)
+    weights_high = np.log10(co21_high)
+    hist_low  = np.histogram(data_low, bins=bins, range=xlim, weights=weights_low)
+    hist_mid  = np.histogram(data_mid, bins=bins, range=xlim, weights=weights_mid)
+    hist_high = np.histogram(data_high, bins=bins, range=xlim, weights=weights_high)
     histmax = np.max(data4use)
     #
-    stats_low = [weighted_percentile(data_low,0.84),weighted_percentile(data_low,0.50),weighted_percentile(data_low,0.16)]
-    stats_mid = [weighted_percentile(data_mid,0.84),weighted_percentile(data_mid,0.50),weighted_percentile(data_mid,0.16)]
-    stats_high = [weighted_percentile(data_high,0.84),weighted_percentile(data_high,0.50),weighted_percentile(data_high,0.16)]
+    stats_low = [weighted_percentile(data_low,0.84,weights_low),   weighted_percentile(data_low,0.50,weights_low),  weighted_percentile(data_low,0.16,weights_low)]
+    stats_mid = [weighted_percentile(data_mid,0.84,weights_mid),   weighted_percentile(data_mid,0.50,weights_mid),  weighted_percentile(data_mid,0.16,weights_mid)]
+    stats_high = [weighted_percentile(data_high,0.84,weights_high),weighted_percentile(data_high,0.50,weights_high),weighted_percentile(data_high,0.16,weights_high)]
 
     return histmax, hist_low, hist_mid, hist_high, stats_low, stats_mid, stats_high
 
 def startup_plot(
 	xlim,
 	xlabel,
+    title,
 	):
     """
     """
     plt.subplots(nrows=1,ncols=1,figsize=(7, 7),sharey=True)
     plt.rcParams["font.size"] = 14
     plt.rcParams["legend.fontsize"] = 9
-    plt.subplots_adjust(bottom=0.08, left=0.08, right=0.99, top=0.99)
+    plt.subplots_adjust(bottom=0.08, left=0.08, right=0.99, top=0.95)
     gs = gridspec.GridSpec(nrows=18, ncols=25)
     ax1 = plt.subplot(gs[0:6,0:25])
     ax2 = plt.subplot(gs[6:12,0:25])
@@ -94,6 +100,7 @@ def startup_plot(
     ax2.tick_params(labelbottom=False)
     #ax3.tick_params(labelbottom=False)
     ax3.set_xlabel(xlabel)
+    ax1.set_title(title)
 
     return ax1, ax2, ax3
 
@@ -165,7 +172,7 @@ def weighted_percentile(
 ### main
 #####################
 # prepare for plot
-axlist = startup_plot(xlim1,xlabel1)
+axlist = startup_plot(xlim1,xlabel1,title1)
 #
 histmaxs = []
 for i in range(len(gals)):
@@ -185,7 +192,7 @@ plt.savefig(dir_product+"maskhist_mom0.png",dpi=200)
 
 
 # prepare for plot
-axlist = startup_plot(xlim2,xlabel2)
+axlist = startup_plot(xlim2,xlabel2,title2)
 #
 histmaxs = []
 for i in range(len(gals)):
