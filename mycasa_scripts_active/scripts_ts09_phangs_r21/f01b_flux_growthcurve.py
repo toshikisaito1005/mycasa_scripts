@@ -52,14 +52,12 @@ plt.grid(color="grey")
 #
 for i in range(len(gals)):
     # get data
-    images_co10 = glob.glob(dir_data + gals[i] + "_co10/*co10*.moment0")
-    print(images_co10)
+    images_co10 = glob.glob(dir_data + gals[i] + "_co10/co10*.moment0")
     freq = 115.27120 # GHz
     data = get_beam_intensities(images_co10,freq)
     # plot
-    markers, bars = plt.plot(
-        data[:,0]*(scales[i]/1000), data[:,2], "o-", markersize=20, lw=5, c=cm.brg(i/2.5), label="NGC 0628")
-    [bar.set_alpha(0.5) for bar in bars]
+    plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "o", markersize=15, markeredgewidth=0, lw=0, c=cm.brg(i/2.5), label="NGC 0628")
+    plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "-", lw=5, c=cm.brg(i/2.5), alpha=0.5)
     #
 plt.savefig(dir_data + "eps/missingflux_co10.png", dpi=100)
 
