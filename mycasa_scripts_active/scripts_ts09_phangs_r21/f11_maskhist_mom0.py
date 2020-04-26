@@ -25,16 +25,10 @@ ylim = [0.0005,0.2]
 #####################
 ### functions
 #####################
-
-
-
-#####################
-### main
-#####################
-for i in range(len(gals)):
-    galname = gals[i]
-    galnamelabel = galname.replace("ngc","NGC ")
-    data = np.loadtxt(dir_product + galname + "_parameter_600pc.txt")
+def get_data(txtdata,col,bins):
+	"""
+	"""
+    data = np.loadtxt(txtdata)
     #
     dist = data[:,0]
     r21 = data[:,1]
@@ -50,7 +44,7 @@ for i in range(len(gals)):
     w3 = data[:,11]
     mask = data[:,12]
     #
-    data4use = np.log10(co21)
+    data4use = np.log10(data[:,col])
     xlim = [0,data4use.max()*1.1]
     #
     co21_low  = co21[mask==-1][co21[mask==-1]>0]
@@ -62,6 +56,17 @@ for i in range(len(gals)):
     hist_low  = np.histogram(data_low, bins=bins, range=xlim, weights=np.log10(co21_low))
     hist_mid  = np.histogram(data_mid, bins=bins, range=xlim, weights=np.log10(co21_mid))
     hist_high = np.histogram(data_high, bins=bins, range=xlim, weights=np.log10(co21_high))
+
+    return hist_low, hist_mid, hist_high
+
+#####################
+### main
+#####################
+for i in range(len(gals)):
+    galname = gals[i]
+    galnamelabel = galname.replace("ngc","NGC ")
+    #
+    get_data(dir_product+galname+"_parameter_600pc.txt",3,bins)
     #
     figure = plt.figure(figsize=(8,8))
     x, y_low = np.delete(hist_low[1],-1), hist_low[0]
