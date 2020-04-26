@@ -14,6 +14,7 @@ import matplotlib.gridspec as gridspec
 plt.ioff()
 
 import scripts_phangs_r21_plot as plot_r21
+reload(plot_r21)
 
 
 #####################

@@ -162,9 +162,9 @@ def plot_hists_for_nuclear_outer_whole(
 	median_out = weighted_median(data=data_out,weights=weights_out)
 	#
 	# plot histograms
-	ax.plot(histo_allx,histo_all_norm,"black",lw=5,alpha=0.5)
-	ax.plot(histo_allx,histo_in_norm,c=color,ls="dotted",lw=2,alpha=1.0)
-	ax.plot(histo_allx,histo_out_norm,c=color,ls="-",lw=5,alpha=0.5)
+	ax.step(histo_allx,histo_all_norm,"black",lw=3,alpha=0.5)
+	ax.step(histo_allx,histo_in_norm,c=color,ls="dotted",lw=2,alpha=1.0)
+	ax.step(histo_allx,histo_out_norm,c=color,ls="-",lw=2,alpha=0.5)
 	# plot median points
 	ax.plot(median_all, 0.15,".",markersize=14,c="black")
 	ax.plot(median_in, 0.14,".",markersize=14,c=color)
