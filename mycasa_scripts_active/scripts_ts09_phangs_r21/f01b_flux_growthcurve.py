@@ -12,6 +12,7 @@ plt.ioff()
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 gals = ["ngc0628", "ngc3627", "ngc4321"]
 scales = [44/1.0, 52/1.3, 103/1.4]
+ylim = [0,1.4]
 
 
 #####################
@@ -64,7 +65,7 @@ def get_beam_ratios(co10images,co21images):
 ### co10
 plt.figure(figsize=(10,10))
 plt.rcParams["font.size"] = 22
-plt.ylim([0.0,1.2])
+plt.ylim(ylim)
 plt.ylabel("CO(1-0) Flux Recovery")
 plt.xlabel("Spatial Resolution (kpc)")
 plt.legend(loc = "lower right")
@@ -87,7 +88,7 @@ plt.savefig(dir_data + "eps/missingflux_co10.png", dpi=100)
 ### co21
 plt.figure(figsize=(10,10))
 plt.rcParams["font.size"] = 22
-plt.ylim([0.0,1.2])
+plt.ylim(ylim)
 plt.ylabel("CO(2-1) Flux Recovery")
 plt.xlabel("Spatial Resolution (kpc)")
 plt.legend(loc = "lower right")
@@ -110,7 +111,7 @@ plt.savefig(dir_data + "eps/missingflux_co21.png", dpi=100)
 ### r21
 plt.figure(figsize=(10,10))
 plt.rcParams["font.size"] = 22
-plt.ylim([0.0,1.2])
+plt.ylim(ylim)
 plt.ylabel("Line Ratio Recovery")
 plt.xlabel("Spatial Resolution (kpc)")
 plt.legend(loc = "lower right")
