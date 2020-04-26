@@ -19,7 +19,7 @@ gals = ["ngc0628","ngc3627","ngc4321"]
 dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
 bins = 40
-ylim = [0,0.2]
+ylim = [0.0005,0.2]
 
 
 #####################
@@ -59,9 +59,9 @@ for i in range(len(gals)):
     data_low  = data4use[mask==-1][data4use[mask==-1]>0]
     data_mid  = data4use[mask==0][data4use[mask==0]>0]
     data_high = data4use[mask==1][data4use[mask==1]>0]
-    hist_low  = np.histogram(data_low, bins=bins, range=xlim, weights=co21_low)
-    hist_mid  = np.histogram(data_mid, bins=bins, range=xlim, weights=co21_mid)
-    hist_high = np.histogram(data_high, bins=bins, range=xlim, weights=co21_high)
+    hist_low  = np.histogram(data_low, bins=bins, range=xlim, weights=np.log10(co21_low))
+    hist_mid  = np.histogram(data_mid, bins=bins, range=xlim, weights=np.log10(co21_mid))
+    hist_high = np.histogram(data_high, bins=bins, range=xlim, weights=np.log10(co21_high))
     #
     figure = plt.figure(figsize=(8,8))
     x, y_low = np.delete(hist_low[1],-1), hist_low[0]
@@ -76,7 +76,8 @@ for i in range(len(gals)):
     plt.step(x, y_high, color="red", lw=4, alpha=0.5)
     #
     plt.ylim(ylim)
-    plt.savefig(dir_product+"maskhist_mom0.png",dpi=200)
+    plt.title(galnamelabel)
+    plt.savefig(dir_product+"maskhist_"+galname+"_mom0.png",dpi=200)
 
 
 
