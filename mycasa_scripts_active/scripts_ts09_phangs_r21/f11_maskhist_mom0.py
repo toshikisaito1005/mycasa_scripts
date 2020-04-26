@@ -108,10 +108,12 @@ def plotter(
     _, y_high = np.delete(hist_high[1],-1), hist_high[0]
     y_high = y_high / float(sum(y_high))
     #
-    ax.step(x, y_low, color="blue", lw=3, alpha=0.7)
-    ax.step(x, y_mid, color="green", lw=3, alpha=0.7)
-    ax.step(x, y_high, color="red", lw=3, alpha=0.7)
-    ax.bar(x, y_low)
+    ax.step(x, y_low, color="blue", lw=1, where="mid")
+    ax.step(x, y_mid, color="green", lw=1, where="mid")
+    ax.step(x, y_high, color="red", lw=1, where="mid")
+    ax.bar(x, y_low, lw=0, color="blue", alpha=0.2, width=x[1]-x[0], align="center")
+    ax.bar(x, y_mid, lw=0, color="green", alpha=0.2, width=x[1]-x[0], align="center")
+    ax.bar(x, y_high, lw=0, color="red", alpha=0.2, width=x[1]-x[0], align="center")
     ax.set_ylim(0.0005,np.max([y_low,y_mid,y_high])*1.4)
 
 
