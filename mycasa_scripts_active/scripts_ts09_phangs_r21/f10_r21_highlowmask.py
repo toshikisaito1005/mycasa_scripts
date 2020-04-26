@@ -121,7 +121,7 @@ value = None
 # R21 color + CO(2-1) moment 0 contour
 imagename_contour = "ngc3627_co21/co21_08p0.moment0.fits"
 imagename_color = "ngc3627_r21/r21_08p0.moment0.highlowmask.fits"
-contour = [0.018,0.020,0.022]#[0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
+contour = [0.0197,0.020,0.0203]#[0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
 title = "NGC 3627 Line Ratio Mask"
 colorscale = "rainbow"
 colorlog = False

@@ -76,8 +76,7 @@ for i in range(len(gals)):
     ax1.scatter(
         galdist, norm_r21,
         color="grey",#cm.brg(i/2.5),
-        lw=0, alpha=0.2, s=50,
-        label = galname.replace("ngc","NGC "))
+        lw=0, alpha=0.2, s=50)
 
     histdata.extend(norm_r21.tolist())
 

@@ -61,18 +61,25 @@ for i in range(len(gals)):
     galdist = galdist[data[:,1]>0]
     med_r21 = np.median(r21)
     norm_r21 = r21 / med_r21
+    """
     # binning
     n, _ = np.histogram(galdist, bins=nbins)
     sy, _ = np.histogram(galdist, bins=nbins, weights=r21)
     sy2, _ = np.histogram(galdist, bins=nbins, weights=r21*r21)
     mean = sy / n
     std = np.sqrt(sy2/n - mean*mean)
-    # plot
     ax1.errorbar(
         (_[1:] + _[:-1])/2, mean, yerr=std,
         color=cm.brg(i/2.5), lw=4, #alpha=0.5,
         label = galname.replace("ngc","NGC ")
         )
+    """
+    # contour
+    H, xedges, yedges = np.histogram2d(galdist,r21,bins=100,range=([0,1],[0,2]))
+    extent = [xedges[0],xedges[-1],yedges[0],yedges[-1]]
+    ax1.contour(H/H.max()*100,levels=[8,16,32,64,96],extent=extent,
+        colors=[cm.brg(i/2.5)],zorder=1,linewidths=2.5,alpha=1.0,label=galname.replace("ngc","NGC "))
+    # plot
     ax1.scatter(
         galdist, r21,
         color="grey",#cm.brg(i/2.5),
