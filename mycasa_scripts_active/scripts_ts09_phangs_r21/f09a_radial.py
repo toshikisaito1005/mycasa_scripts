@@ -105,6 +105,9 @@ ax2.plot([0,dathist[0].max()*1.25],[range_median,range_median],
          lw=5,linestyle="-",alpha=0.8,color="black")
 ax2.plot([0,dathist[0].max()*1.25],[range_p,range_p],
          lw=3,linestyle="--",alpha=0.8,color="black")
+ax1.text(0.98,range_p+0.05,"84%",horizontalalignment="right")
+ax1.text(0.98,range_median+0.05,"Median",horizontalalignment="right")
+ax1.text(0.98,range_l-0.1,"16%",horizontalalignment="right")
 ax2.text(0.6*dathist[0].max()*1.25,range_p+0.05,str(range_p))
 ax2.text(0.6*dathist[0].max()*1.25,range_median+0.05,str(range_median)+"0")
 ax2.text(0.6*dathist[0].max()*1.25,range_l-0.1,str(range_l))
@@ -118,7 +121,7 @@ ax1.set_ylabel("$R_{21}$")
 
 ax2.set_ylim([0,2.5])
 ax2b.set_ylim([0,2.5])
-ax2.grid(axis="both")
+ax2.grid(axis="y")
 ax2.tick_params(labelbottom=False,labelleft=False,labeltop=False)
 ax2b.tick_params(labelbottom=False,labelleft=False,labeltop=False)
 ax2.spines["top"].set_visible(False)
