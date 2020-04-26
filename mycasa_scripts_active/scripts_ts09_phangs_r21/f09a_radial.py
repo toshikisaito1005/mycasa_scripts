@@ -75,15 +75,15 @@ for i in range(len(gals)):
         )
     """
     # contour
-    H, xedges, yedges = np.histogram2d(galdist,r21,bins=100,range=([0,1],[0,2]))
+    H, xedges, yedges = np.histogram2d(r21,galdist,bins=40,range=([0,2],[0,2]))
     extent = [xedges[0],xedges[-1],yedges[0],yedges[-1]]
-    ax1.contour(H/H.max()*100,levels=[8,16,32,64,96],extent=extent,
-        colors=[cm.brg(i/2.5)],zorder=1,linewidths=2.5,alpha=1.0,label=galname.replace("ngc","NGC "))
+    ax1.contour(H/H.max()*100,levels=[16,32,64,96],extent=extent,
+        colors=[cm.brg(i/2.5)],zorder=2,linewidths=2.5,alpha=0.1,labels=galname.replace("ngc","NGC "))
     # plot
     ax1.scatter(
         galdist, r21,
         color="grey",#cm.brg(i/2.5),
-        lw=0, alpha=0.2, s=50)
+        lw=0, alpha=0.1, s=50)
 
     histdata.extend(r21.tolist())
 

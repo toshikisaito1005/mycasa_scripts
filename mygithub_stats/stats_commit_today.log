@@ -1,4 +1,10 @@
       13 - mycasa_scripts_active/scripts_ts09_phangs_r21/f01b_flux_growthcurve.py
        5 - mycasa_scripts_active/scripts_ts09_phangs_r21/f99_table02.py
        5 - mycasa_scripts_active/scripts_ts09_phangs_r21/f08_violins.py
+       3 - mycasa_scripts_active/scripts_ts09_phangs_r21/f10_r21_highlowmask.py
+       3 - mycasa_scripts_active/scripts_ts09_phangs_r21/f09b_radial_norm.py
+       3 - mycasa_scripts_active/scripts_ts09_phangs_r21/f09a_radial.py
+       3 - mycasa_scripts_active/scripts_ts09_phangs_r21/f00_all_final_eps.sh
+       2 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim08_r21_highlowmask.py
+       2 - mycasa_scripts_active/scripts_ts09_phangs_r21/f04_histograms_600pc.py
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/f03_peak_vs_integ.py
