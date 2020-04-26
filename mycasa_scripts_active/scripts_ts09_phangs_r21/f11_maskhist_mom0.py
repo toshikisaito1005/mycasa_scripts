@@ -20,6 +20,7 @@ dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
 bins = 40
 ylim = [0.0005,0.2]
+xlabel = "log $I_{CO(2-1)}$ (K km s$^{-1}$)"
 
 
 #####################
@@ -61,14 +62,14 @@ def get_data(txtdata,col,bins):
 
 def startup_plot(
 	ylim,
-	xlim,
+	xlabel,
 	):
     """
     """
-    plt.subplots(nrows=1,ncols=1,figsize=(10, 7),sharey=True)
+    plt.subplots(nrows=1,ncols=1,figsize=(7, 7),sharey=True)
     plt.rcParams["font.size"] = 14
     plt.rcParams["legend.fontsize"] = 9
-    plt.subplots_adjust(bottom=0.1, left=0.07, right=0.99, top=0.99)
+    plt.subplots_adjust(bottom=0.1, left=0.15, right=0.99, top=0.99)
     gs = gridspec.GridSpec(nrows=18, ncols=25)
     ax1 = plt.subplot(gs[0:6,0:25])
     ax2 = plt.subplot(gs[6:12,0:25])
@@ -79,15 +80,13 @@ def startup_plot(
     ax1.grid(axis="y")
     ax2.grid(axis="y")
     ax3.grid(axis="y")
-    ax1.set_xlim(xlim)
-    ax2.set_xlim(xlim)
-    ax3.set_xlim(xlim)
     ax1.tick_params(axis="x", length=0)
     ax2.tick_params(axis="x", length=0)
     ax3.tick_params(axis="x", length=0)
     ax1.tick_params(labelbottom=False)
     ax2.tick_params(labelbottom=False)
-    ax3.tick_params(labelbottom=False)
+    #ax3.tick_params(labelbottom=False)
+    ax3.set_xlabel(xlabel)
 
     return ax1, ax2, ax3
 
@@ -95,14 +94,14 @@ def startup_plot(
 ### main
 #####################
 # prepare for plot
-axlist = startup_plot(xlim,ylim)
+axlist = startup_plot(ylim,xlabel)
 #
 for i in range(len(gals)):
-	ax = axlist[i]
+    ax = axlist[i]
     galname = gals[i]
     galnamelabel = galname.replace("ngc","NGC ")
     # get data
-    xlim, hist_low, hist_mid, hist_high = \
+    hist_low, hist_mid, hist_high = \
     	get_data(dir_product+galname+"_parameter_600pc.txt",3,bins)
     #
     x, y_low = np.delete(hist_low[1],-1), hist_low[0]
@@ -115,6 +114,7 @@ for i in range(len(gals)):
     ax.step(x, y_low, color="blue", lw=3, alpha=0.7)
     ax.step(x, y_mid, color="green", lw=3, alpha=0.7)
     ax.step(x, y_high, color="red", lw=3, alpha=0.7)
+    ax.set_xlim(xlim)
     #
 plt.savefig(dir_product+"maskhist_mom0.png",dpi=200)
 
