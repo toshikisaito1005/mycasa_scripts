@@ -55,12 +55,16 @@ def get_data(txtdata,col,bins,xlim):
     data4use = np.log10(data[:,col])
     #xlim = [0,data4use.max()*1.1]
     #
-    co21_low  = co21[mask==-1][co21[mask==-1]>0]
-    co21_mid  = co21[mask==0][co21[mask==0]>0]
-    co21_high = co21[mask==1][co21[mask==1]>0]
-    data_low  = data4use[mask==-1][co21[mask==-1]>0]
-    data_mid  = data4use[mask==0][co21[mask==0]>0]
-    data_high = data4use[mask==1][co21[mask==1]>0]
+    cut_co21 = (co21 > 0)
+    cut_4use = (data4use > 0)
+    cut_all = np.where((cut_co21) & (cut_4use))
+    #
+    data_low  = data4use[mask[cut_all]==-1]
+    data_mid  = data4use[mask[cut_all]==0]
+    data_high = data4use[mask[cut_all]==1]
+    co21_low  = co21[mask[cut_all]==-1]
+    co21_mid  = co21[mask[cut_all]==0]
+    co21_high = co21[mask[cut_all]==1]
     weights_low = np.log10(co21_low)
     weights_mid = np.log10(co21_mid)
     weights_high = np.log10(co21_high)
