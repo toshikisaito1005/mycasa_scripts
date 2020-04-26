@@ -17,31 +17,33 @@ scales = [44/1.0, 52/1.3, 103/1.4]
 #####################
 ### def
 #####################
-def t():
+def get_beam_intensities(images,freq):
     """
     """
     beams = []
-    fluxes = []
+    intensities = []
     for i in range(len(images)):
         # beam
         beamint = images[i].split("_")[-1].split(".")[0]
         beamfloat = float(beamint.replace("p","."))
         beams.append(beamfloat)
         # flux
-        flux = imstat(images[i])["sum"][0]
-        intensity = 
-        fluxes.append(flux)
+        flux = imstat(images[i])["sum"][0] # Jy/beam.km/s
+        intensity = 1.222e6 / beamfloat**2 / freq**2 * flux # K.km/s
+        intensities.append(intensity)
 
-    l = np.c_[beams, fluxes]
+    l = np.c_[beams, intensities]
     data = l[l[:,0].argsort(), :]
 
     return data
+
 
 #####################
 ### Main Procedure
 #####################
 images_co10 = glob.glob(dir_data + gals[i] + "_co10/*co10*.moment0")
-
+freq = 115.27120 # GHz
+data = get_beam_intensities(images_co10,freq)
 
 
 
