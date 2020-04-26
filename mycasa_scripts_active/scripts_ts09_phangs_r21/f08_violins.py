@@ -150,14 +150,20 @@ def plot_multi_violins(
 	list_xaxis = np.array([float(s.replace("p",".")) for s in list_beam])
 	if weights==None:
 		list_median = [np.median(s) for s in list_violin]
+		list_p84 = [weighted_percentile(s,0.84,None) for s in list_violin]
+		list_p16 = [weighted_percentile(s,0.16,None) for s in list_violin]
 	else:
 		list_median = []
+		list_p84 = []
+		list_p16 = []
 		for j in range(len(list_violin)):
 			list_median.append(weighted_percentile(list_violin[j],0.5,weights[j]))
-	# plot stats
-	ax.plot(
-		np.array(list_xaxis)+x_absoffset,list_median,
-		"o-",color='black',markersize=12,markeredgewidth=0,alpha=0.5)
+			list_p84.append(weighted_percentile(list_violin[j],0.84,weights[j]))
+			list_p16.append(weighted_percentile(list_violin[j],0.16,weights[j]))
+	# plot medians
+	ax.plot(np.array(list_xaxis)+x_absoffset,list_median,"-",color='black',alpha=0.5)
+	ax.plot(np.array(list_xaxis)+x_absoffset,list_median,"o",color='black',markersize=8,markeredgewidth=0)
+	# plot 84%
 
 def plot_all_violins(
 	ax,
