@@ -87,7 +87,7 @@ convert $dir_data"violin_co21.png" eps2:$dir_data"fig08.eps"
 rm -rf $dir_data"violin_co21.png"
 
 
-### figure 9
+### figure 10
 convert -crop 600x600+80+30 $dir_data"ngc0628_r21_mask.png" $dir_data"ngc0628_r21_maskb.png"
 convert -crop 600x600+80+30 $dir_data"ngc3627_r21_mask.png" $dir_data"ngc3627_r21_maskb.png"
 convert -crop 600x600+80+30 $dir_data"ngc4321_r21_mask.png" $dir_data"ngc4321_r21_maskb.png"
