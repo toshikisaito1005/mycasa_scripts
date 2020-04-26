@@ -19,11 +19,11 @@ gals = ["ngc0628","ngc3627","ngc4321"]
 dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
 bins = 40
-xlim1 = [0,3.01922848601*1.1]
-xlim2 = [0,1.97644168938*1.1]
-xlim3 = [-3.78251605579*1.1,-0.522595098867*0.9]
-xlim4 = [-4.07058107429*1.1,-0.703168142831*0.9]
-xlim5 = [-3.50584540598*1.1,-0.50584540598*0.9]
+xlim1 = [0, 3.01922848601+0.1]
+xlim2 = [0, 1.97644168938+0.1]
+xlim3 = [-3.78251605579-0.1, -0.522595098867+0.1]
+xlim4 = [-4.07058107429-0.1, -0.703168142831+0.1]
+xlim5 = [-3.50584540598-0.1, -0.583068396622+0.1]
 xlabel1 = "log $I_{CO(2-1)}$ (K km s$^{-1}$)"
 xlabel2 = "log $\sigma_{CO(2-1)}$ (km s$^{-1}$)"
 xlabel3 = "log W1 (Jy beam$^{-1}$)"
@@ -84,7 +84,7 @@ def get_data(txtdata,col,bins,xlim):
     hist_low  = np.histogram(data_low, bins=bins, range=xlim, weights=weights_low)
     hist_mid  = np.histogram(data_mid, bins=bins, range=xlim, weights=weights_mid)
     hist_high = np.histogram(data_high, bins=bins, range=xlim, weights=weights_high)
-    histmax = np.max(data4use)
+    histmax = np.max(data4use[data4use!=0])
     #
     stats_low  = [weighted_percentile(data_low,0.84,weights_low),   weighted_percentile(data_low,0.50,weights_low),   weighted_percentile(data_low,0.16,weights_low)]
     stats_mid  = [weighted_percentile(data_mid,0.84,weights_mid),   weighted_percentile(data_mid,0.50,weights_mid),   weighted_percentile(data_mid,0.16,weights_mid)]
