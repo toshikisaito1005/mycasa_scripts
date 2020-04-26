@@ -164,8 +164,8 @@ def plot_multi_violins(
 	ax.plot(np.array(list_xaxis)+x_absoffset,list_median,"-",color='black',alpha=1.0,lw=2)
 	ax.plot(np.array(list_xaxis)+x_absoffset,list_median,"o",color='black',markersize=8,markeredgewidth=0,lw=2)
 	# plot percentiles
-	ax.plot(np.array(list_xaxis)+x_absoffset,list_p84,"--",color='black',alpha=1.0,lw=2)
-	ax.plot(np.array(list_xaxis)+x_absoffset,list_p16,"--",color='black',alpha=1.0,lw=2)
+	ax.plot(np.array(list_xaxis)+x_absoffset,list_p84,"--",color='black',alpha=1.0,lw=1)
+	ax.plot(np.array(list_xaxis)+x_absoffset,list_p16,"--",color='black',alpha=1.0,lw=1)
 
 def plot_all_violins(
 	ax,
@@ -262,9 +262,9 @@ def startup_plot(
 	ax3.text(12,      -0.11, "# of Sightlines", horizontalalignment="center")
 	ax3.text(12+23.0, -0.11, "CO(1-0) Flux", horizontalalignment="center")
 	ax3.text(12+46.0, -0.11, "CO(2-1) Flux", horizontalalignment="center")
-	ax1.text(8+46.0,  1.2,  "NGC 0628", bbox=boxdic)
-	ax2.text(12+46.0, 1.2,  "NGC 3627", bbox=boxdic)
-	ax3.text(8+46.0,  1.2,  "NGC 4321", bbox=boxdic) # , backgroundcolor="white")
+	ax1.text(8+7+46.0,  1.25,  "NGC 0628", bbox=boxdic)
+	ax2.text(12+7+46.0, 1.25,  "NGC 3627", bbox=boxdic)
+	ax3.text(8+7+46.0,  1.25,  "NGC 4321", bbox=boxdic) # , backgroundcolor="white")
 	ax1.text(4.4,  0.08,  "4\"", fontsize=10)
 	ax1.text(8.4,  0.08,  "8\"", fontsize=10)
 	ax1.text(12.4, 0.08, "12\"", fontsize=10)
