@@ -61,22 +61,30 @@ for i in range(len(gals)):
     galdist = galdist[data[:,1]>0]
     med_r21 = np.median(r21)
     norm_r21 = r21 / med_r21
+
     # binning
     n, _ = np.histogram(galdist, bins=nbins)
     sy, _ = np.histogram(galdist, bins=nbins, weights=norm_r21)
     sy2, _ = np.histogram(galdist, bins=nbins, weights=norm_r21*norm_r21)
     mean = sy / n
     std = np.sqrt(sy2/n - mean*mean)
-    # plot
     ax1.errorbar(
         (_[1:] + _[:-1])/2, mean, yerr=std,
         color=cm.brg(i/2.5), lw=4, #alpha=0.5,
         label = galname.replace("ngc","NGC ")
         )
+    """
+    # contour
+    H, xedges, yedges = np.histogram2d(norm_r21,galdist,bins=30,range=([0,2],[0,2]))
+    extent = [xedges[0],xedges[-1],yedges[0],yedges[-1]]
+    ax1.contour(H/H.max()*100,levels=[16,32,64,96],extent=extent,
+        colors=[cm.brg(i/2.5)],zorder=2,linewidths=2.5,alpha=1.0,labels=galname.replace("ngc","NGC "))
+        """
+    # plot
     ax1.scatter(
         galdist, norm_r21,
         color="grey",#cm.brg(i/2.5),
-        lw=0, alpha=0.2, s=50)
+        lw=0, alpha=0.3, s=30)
 
     histdata.extend(norm_r21.tolist())
 
@@ -85,15 +93,20 @@ dathist = ax2.hist(
     bins=100,lw=0,color="grey",alpha=0.6)
 
 range_p = dathist[1][hist_percent(dathist[0],0.843)]
+range_median = dathist[1][hist_percent(dathist[0],0.50)]
 range_l = dathist[1][hist_percent(dathist[0],0.157)]
 
-ax1.plot([0,1],[range_l,range_l],lw=5,linestyle="--",alpha=0.8,color="black")
-ax1.plot([0,1],[range_p,range_p],lw=5,linestyle="--",alpha=0.8,color="black")
+ax1.plot([0,1],[range_l,range_l],lw=3,linestyle="--",alpha=0.8,color="black")
+ax1.plot([0,1],[range_median,range_median],lw=5,linestyle="-",alpha=0.8,color="black")
+ax1.plot([0,1],[range_p,range_p],lw=3,linestyle="--",alpha=0.8,color="black")
 ax2.plot([0,dathist[0].max()*1.25],[range_l,range_l],
-         lw=5,linestyle="--",alpha=0.8,color="black")
+         lw=3,linestyle="--",alpha=0.8,color="black")
+ax2.plot([0,dathist[0].max()*1.25],[range_median,range_median],
+         lw=5,linestyle="-",alpha=0.8,color="black")
 ax2.plot([0,dathist[0].max()*1.25],[range_p,range_p],
-         lw=5,linestyle="--",alpha=0.8,color="black")
-ax2.text(0.6*dathist[0].max()*1.25,range_p-0.1,str(range_p))
+         lw=3,linestyle="--",alpha=0.8,color="black")
+ax2.text(0.6*dathist[0].max()*1.25,range_p+0.05,str(range_p))
+ax2.text(0.6*dathist[0].max()*1.25,range_median+0.05,str(range_median))
 ax2.text(0.6*dathist[0].max()*1.25,range_l-0.1,str(range_l))
 
 ax1.grid()
@@ -114,6 +127,6 @@ ax2.spines["bottom"].set_visible(False)
 ax2b.set_ylabel("$R_{21}$")
 
 ax1.set_title("Radial $R_{21}$ Distribution")
-plt.savefig(dir_product+"radial_r21_norm.png",dpi=200)
+plt.savefig(dir_product+"radial_r21_normed.png",dpi=200)
 
 os.system("rm -rf *.last")
