@@ -53,6 +53,8 @@ def get_data(txtdata,col,bins,xlim):
     mask = data[:,12]
     #
     data4use = np.log10(data[:,col])
+    data4use[np.isinf(data4use)] = 0
+    data4use[np.isnan(data4use)] = 0
     #xlim = [0,data4use.max()*1.1]
     #
     cut_co21 = (co21 > 0)
@@ -78,9 +80,10 @@ def get_data(txtdata,col,bins,xlim):
     hist_high = np.histogram(data_high, bins=bins, range=xlim, weights=weights_high)
     histmax = np.max(data4use)
     #
-    stats_low = [weighted_percentile(data_low,0.84,weights_low),   weighted_percentile(data_low,0.50,weights_low),  weighted_percentile(data_low,0.16,weights_low)]
-    stats_mid = [weighted_percentile(data_mid,0.84,weights_mid),   weighted_percentile(data_mid,0.50,weights_mid),  weighted_percentile(data_mid,0.16,weights_mid)]
-    stats_high = [weighted_percentile(data_high,0.84,weights_high),weighted_percentile(data_high,0.50,weights_high),weighted_percentile(data_high,0.16,weights_high)]
+    print(data_low)
+    stats_low  = [weighted_percentile(data_low,0.84,weights_low),   weighted_percentile(data_low,0.50,weights_low),   weighted_percentile(data_low,0.16,weights_low)]
+    stats_mid  = [weighted_percentile(data_mid,0.84,weights_mid),   weighted_percentile(data_mid,0.50,weights_mid),   weighted_percentile(data_mid,0.16,weights_mid)]
+    stats_high = [weighted_percentile(data_high,0.84,weights_high), weighted_percentile(data_high,0.50,weights_high), weighted_percentile(data_high,0.16,weights_high)]
 
     return histmax, hist_low, hist_mid, hist_high, stats_low, stats_mid, stats_high
 
@@ -183,6 +186,7 @@ def weighted_percentile(
 #####################
 ### main
 #####################
+"""
 # co21 mom-0
 axlist = startup_plot(xlim1,xlabel1,title1)
 #
@@ -221,7 +225,7 @@ for i in range(len(gals)):
     #
 #print(np.max(histmaxs))
 plt.savefig(dir_product+"maskhist_disp.png",dpi=200)
-
+"""
 
 # co21 disp
 axlist = startup_plot(xlim3,xlabel3,title3)
