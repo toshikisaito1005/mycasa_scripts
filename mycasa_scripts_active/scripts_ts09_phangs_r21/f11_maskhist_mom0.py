@@ -102,6 +102,9 @@ def plotter(
     hist_low,
     hist_mid,
     hist_high,
+    stats_low,
+    stats_mid,
+    stats_high,
     ):
     """
     """
@@ -118,18 +121,13 @@ def plotter(
     ax.bar(x, y_low, lw=0, color="blue", alpha=0.2, width=x[1]-x[0], align="center")
     ax.bar(x, y_mid, lw=0, color="green", alpha=0.2, width=x[1]-x[0], align="center")
     ax.bar(x, y_high, lw=0, color="red", alpha=0.2, width=x[1]-x[0], align="center")
+    ylim_top = np.max([y_low,y_mid,y_high])*1.4
     ax.set_ylim(0.0005,np.max([y_low,y_mid,y_high])*1.4)
-
-def plotter_stats(
-    ax,
-    stats_low,
-    stats_mid,
-    stats_high,
-    ):
-    """
-    """
-    ax.lot
-
+    # plot medians
+    ylim_width = ylim_top - 0.0005
+    ax.plot([stats_low[1],stats_low[1]], [ylim_top-ylim_width*0.05,ylim_top-ylim_width*0.05], "o", color="blue", markeredgewidth=0)
+    ax.plot([stats_mid[1],stats_mid[1]], [ylim_top-ylim_width*0.10,ylim_top-ylim_width*0.10], "o", color="green", markeredgewidth=0)
+    ax.plot([stats_high[1],stats_high[1]], [ylim_top-ylim_width*0.15,ylim_top-ylim_width*0.15], "o", color="red", markeredgewidth=0)
 
 def weighted_percentile(
     data,
@@ -175,7 +173,7 @@ for i in range(len(gals)):
     histmax, hist_low, hist_mid, hist_high, stats_low, stats_mid, stats_high = \
     	get_data(dir_product+galname+"_parameter_600pc.txt",3,bins,xlim1)
     #
-    plotter(ax,hist_low,hist_mid,hist_high)
+    plotter(ax,hist_low,hist_mid,hist_high,stats_low,stats_mid,stats_high)
     #
     histmaxs.append(histmax)
     #
@@ -195,7 +193,7 @@ for i in range(len(gals)):
     histmax, hist_low, hist_mid, hist_high, stats_low, stats_mid, stats_high = \
     	get_data(dir_product+galname+"_parameter_600pc.txt",8,bins,xlim2)
     #
-    plotter(ax,hist_low,hist_mid,hist_high)
+    plotter(ax,hist_low,hist_mid,hist_high,stats_low,stats_mid,stats_high)
     #
     histmaxs.append(histmax)
     #
