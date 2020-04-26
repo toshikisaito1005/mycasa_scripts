@@ -61,7 +61,7 @@ for i in range(len(gals)):
     galdist = galdist[data[:,1]>0]
     med_r21 = np.median(r21)
     norm_r21 = r21 / med_r21
-    """
+
     # binning
     n, _ = np.histogram(galdist, bins=nbins)
     sy, _ = np.histogram(galdist, bins=nbins, weights=r21)
@@ -79,6 +79,7 @@ for i in range(len(gals)):
     extent = [xedges[0],xedges[-1],yedges[0],yedges[-1]]
     ax1.contour(H/H.max()*100,levels=[16,32,64,96],extent=extent,
         colors=[cm.brg(i/2.5)],zorder=2,linewidths=2.5,alpha=1.0,labels=galname.replace("ngc","NGC "))
+        """
     # plot
     ax1.scatter(
         galdist, r21,
@@ -111,12 +112,12 @@ ax2.text(0.6*dathist[0].max()*1.25,range_l-0.1,str(range_l))
 ax1.grid()
 ax1.legend(ncol=2, loc="upper right")
 ax1.set_xlim([0,1])
-ax1.set_ylim([0,2])
+ax1.set_ylim([0,2.5])
 ax1.set_xlabel("r/r25")
 ax1.set_ylabel("$R_{21}$")
 
-ax2.set_ylim([0,2])
-ax2b.set_ylim([0,2])
+ax2.set_ylim([0,2.5])
+ax2b.set_ylim([0,2.5])
 ax2.grid(axis="both")
 ax2.tick_params(labelbottom=False,labelleft=False,labeltop=False)
 ax2b.tick_params(labelbottom=False,labelleft=False,labeltop=False)

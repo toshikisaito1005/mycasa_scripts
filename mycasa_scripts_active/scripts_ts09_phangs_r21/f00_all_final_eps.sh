@@ -87,6 +87,16 @@ convert $dir_data"violin_co21.png" eps2:$dir_data"fig08.eps"
 rm -rf $dir_data"violin_co21.png"
 
 
+### figure 9
+convert -crop 1700x1300+80+100 $dir_data"radial_r21.png" $dir_data"radial_r21b.png"
+convert -crop 1700x1300+80+100 $dir_data"radial_r21_normed.png" $dir_data"radial_r21_normedb.png"
+
+convert +append -border 0x0 $dir_data"radial_r21b.png" $dir_data"radial_r21_normedb.png" eps2:$dir_data"fig09.eps"
+
+rm -rf $dir_data"radial_r21.png" $dir_data"radial_r21b.png"
+rm -rf $dir_data"radial_r21_normed.png" $dir_data"radial_r21_normedb.png"
+
+
 ### figure 10
 convert -crop 600x600+80+30 $dir_data"ngc0628_r21_mask.png" $dir_data"ngc0628_r21_maskb.png"
 convert -crop 600x600+80+30 $dir_data"ngc3627_r21_mask.png" $dir_data"ngc3627_r21_maskb.png"
