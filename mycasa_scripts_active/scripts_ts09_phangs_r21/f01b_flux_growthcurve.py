@@ -132,12 +132,12 @@ plt.figure(figsize=(10,10))
 plt.rcParams["font.size"] = 22
 i = 0
 plt.errorbar(data_co10_n0628[:,0]*(scales[i]/1000),
-             data_co10_n0628[:,1]/max(data_co10_n0628[:,1]),#data_co10_n0628[:,1]/sd_co10_n0628,
+             data_co10_n0628[:,1]/sd_co10_n0628,
              yerr=data_co10_n0628[:,1]/sd_co10_n0628*np.sqrt(0.05**2+0.08**2),
              lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 0628")
 i = 1
 plt.errorbar(data_co10_n3627[:,0]*(scales[i]/1000),
-             data_co10_n3627[:,1]/max(data_co10_n3627[:,1]),#data_co10_n3627[:,1]/sd_co10_n3627,
+             data_co10_n3627[:,1]/sd_co10_n3627,
              yerr=data_co10_n3627[:,1]/sd_co10_n3627*np.sqrt(0.15**2+0.08**2),
              lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 3627")
 """
