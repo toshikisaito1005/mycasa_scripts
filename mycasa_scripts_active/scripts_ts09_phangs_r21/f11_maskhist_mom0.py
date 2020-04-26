@@ -18,7 +18,7 @@ dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
 dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
-bins = 40
+bins = 50
 xlim1 = [0,3.01922848601*1.1]
 xlim2 = [0,1.97644168938*1.1]
 xlabel1 = "log $I_{CO(2-1)}$ (K km s$^{-1}$)"
@@ -76,7 +76,7 @@ def startup_plot(
     plt.subplots(nrows=1,ncols=1,figsize=(7, 7),sharey=True)
     plt.rcParams["font.size"] = 14
     plt.rcParams["legend.fontsize"] = 9
-    plt.subplots_adjust(bottom=0.1, left=0.10, right=0.99, top=0.99)
+    plt.subplots_adjust(bottom=0.08, left=0.08, right=0.99, top=0.99)
     gs = gridspec.GridSpec(nrows=18, ncols=25)
     ax1 = plt.subplot(gs[0:6,0:25])
     ax2 = plt.subplot(gs[6:12,0:25])
@@ -125,9 +125,12 @@ def plotter(
     ax.set_ylim(0.0005,np.max([y_low,y_mid,y_high])*1.4)
     # plot medians
     ylim_width = ylim_top - 0.0005
-    ax.plot([stats_low[1],stats_low[1]], [ylim_top-ylim_width*0.05,ylim_top-ylim_width*0.05], "o", color="blue", markeredgewidth=0)
+    ax.plot([stats_low[1],stats_low[1]], [ylim_top-ylim_width*0.15,ylim_top-ylim_width*0.15], "o", color="blue", markeredgewidth=0)
     ax.plot([stats_mid[1],stats_mid[1]], [ylim_top-ylim_width*0.10,ylim_top-ylim_width*0.10], "o", color="green", markeredgewidth=0)
-    ax.plot([stats_high[1],stats_high[1]], [ylim_top-ylim_width*0.15,ylim_top-ylim_width*0.15], "o", color="red", markeredgewidth=0)
+    ax.plot([stats_high[1],stats_high[1]], [ylim_top-ylim_width*0.05,ylim_top-ylim_width*0.05], "o", color="red", markeredgewidth=0)
+    ax.plot([stats_low[2],stats_low[0]], [ylim_top-ylim_width*0.15,ylim_top-ylim_width*0.15], "-", color="blue", lw=3, alpha=0.4)
+    ax.plot([stats_mid[2],stats_mid[0]], [ylim_top-ylim_width*0.10,ylim_top-ylim_width*0.10], "-", color="green", lw=3, alpha=0.4)
+    ax.plot([stats_high[2],stats_high[0]], [ylim_top-ylim_width*0.05,ylim_top-ylim_width*0.05], "-", color="red", lw=3, alpha=0.4)
 
 def weighted_percentile(
     data,
