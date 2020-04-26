@@ -15,24 +15,37 @@ scales = [44/1.0, 52/1.3, 103/1.4]
 
 
 #####################
+### def
+#####################
+def t():
+    """
+    """
+    beams = []
+    fluxes = []
+    for i in range(len(images)):
+        # beam
+        beamint = images[i].split("_")[-1].split(".")[0]
+        beamfloat = float(beamint.replace("p","."))
+        beams.append(beamfloat)
+        # flux
+        flux = imstat(images[i])["sum"][0]
+        intensity = 
+        fluxes.append(flux)
+
+    l = np.c_[beams, fluxes]
+    data = l[l[:,0].argsort(), :]
+
+    return data
+
+#####################
 ### Main Procedure
 #####################
-co10images = glob.glob(dir_data + gals[i] + "_co10/*co10*.moment0")
-co21images = glob.glob(dir_data + gals[i] + "_co21/*co21*.moment0")
+images_co10 = glob.glob(dir_data + gals[i] + "_co10/*co10*.moment0")
 
 
 
 
-alma_co10_n0628 = glob.glob(dir_data + "../ngc0628_co10/*co10*.moment0")
-beam_co10_n0628 = []
-int_co10_n0628 = []
-for i in range(len(alma_co10_n0628)):
-    beamint = alma_co10_n0628[i].split("_")[-1].split(".")[0]
-    beam_co10_n0628.append(float(beamint.replace("p",".")))
-    int_co10_n0628.append(imstat(alma_co10_n0628[i])["sum"][0])
 
-l = np.c_[beam_co10_n0628,int_co10_n0628]
-data_co10_n0628 = l[l[:,0].argsort(), :]
 
 
 
