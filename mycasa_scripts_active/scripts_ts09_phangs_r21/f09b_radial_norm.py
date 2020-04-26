@@ -75,7 +75,7 @@ for i in range(len(gals)):
         )
     ax1.scatter(
         galdist, norm_r21,
-        color=cm.brg(i/2.5),
+        color="grey",#cm.brg(i/2.5),
         lw=0, alpha=0.2, s=50,
         label = galname.replace("ngc","NGC "))
 
@@ -100,12 +100,12 @@ ax2.text(0.6*dathist[0].max()*1.25,range_l-0.1,str(range_l))
 ax1.grid()
 ax1.legend(ncol=2, loc="upper right")
 ax1.set_xlim([0,1])
-ax1.set_ylim([0,3])
+ax1.set_ylim([0,2])
 ax1.set_xlabel("r/r25")
 ax1.set_ylabel("$R_{21}$")
 
-ax2.set_ylim([0,3])
-ax2b.set_ylim([0,3])
+ax2.set_ylim([0,2])
+ax2b.set_ylim([0,2])
 ax2.grid(axis="both")
 ax2.tick_params(labelbottom=False,labelleft=False,labeltop=False)
 ax2b.tick_params(labelbottom=False,labelleft=False,labeltop=False)
