@@ -28,9 +28,15 @@ def table03_galname(galname,txtfile1,txtfile2):
 
 	return table
 
-def extract_onerow(txtdata1):
+def extract_onegal(txtdata):
 	"""
 	"""
+	txtdata = np.loadtxt(txtfile,dtype="str")[:,1]
+	l1 = txtdata[0] + " & " + txtdata[5] + " & " + txtdata[10]
+	l2 = txtdata[1] + " & " + txtdata[6] + " & " + txtdata[11]
+	l3 = txtdata[2] + " & " + txtdata[7] + " & " + txtdata[12]
+	l4 = txtdata[3] + " & " + txtdata[8] + " & " + txtdata[13]
+	l5 = txtdata[4] + " & " + txtdata[9] + " & " + txtdata[14]
 
 
 
