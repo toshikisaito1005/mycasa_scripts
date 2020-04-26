@@ -22,13 +22,13 @@ bins = 40
 xlim1 = [0,3.01922848601*1.1]
 xlim2 = [0,1.97644168938*1.1]
 xlim3 = [-3.78251605579*1.1,-0.522595098867*0.9]
-xlim4 = [-3.78251605579*1.1,-0.522595098867*0.9]
-xlim5 = [-3.78251605579*1.1,-0.522595098867*0.9]
+xlim4 = [-4.07058107429*1.1,-0.703168142831*0.9]
+xlim5 = [-3.50584540598*1.1,-0.50584540598*0.9]
 xlabel1 = "log $I_{CO(2-1)}$ (K km s$^{-1}$)"
 xlabel2 = "log $\sigma_{CO(2-1)}$ (km s$^{-1}$)"
 xlabel3 = "log W1 (Jy beam$^{-1}$)"
-xlabel3 = "log W2 (Jy beam$^{-1}$)"
-xlabel3 = "log W3 (Jy beam$^{-1}$)"
+xlabel4 = "log W2 (Jy beam$^{-1}$)"
+xlabel5 = "log W3 (Jy beam$^{-1}$)"
 title1 = "$I_{CO(2-1)}$ Histograms"
 title2 = "$\sigma_{CO(2-1)}$ Histograms"
 title3 = "W1 Histograms"
@@ -252,7 +252,7 @@ plt.savefig(dir_product+"maskhist_w1.png",dpi=200)
 
 
 # wise2
-axlist = startup_plot(xlim3,xlabel3,title3)
+axlist = startup_plot(xlim4,xlabel4,title4)
 #
 histmaxs = []
 for i in range(len(gals)):
@@ -261,12 +261,31 @@ for i in range(len(gals)):
     galnamelabel = galname.replace("ngc","NGC ")
     # get data
     histmax, hist_low, hist_mid, hist_high, stats_low, stats_mid, stats_high = \
-        get_data(dir_product+galname+"_parameter_600pc.txt",9,bins,xlim3)
+        get_data(dir_product+galname+"_parameter_600pc.txt",10,bins,xlim4)
     #
     plotter(ax,hist_low,hist_mid,hist_high,stats_low,stats_mid,stats_high)
     #
     histmaxs.append(histmax)
     #
 print(np.max(histmaxs))
-plt.savefig(dir_product+"maskhist_w1.png",dpi=200)
+plt.savefig(dir_product+"maskhist_w2.png",dpi=200)
 
+
+# wise3
+axlist = startup_plot(xlim5,xlabel5,title5)
+#
+histmaxs = []
+for i in range(len(gals)):
+    ax = axlist[i]
+    galname = gals[i]
+    galnamelabel = galname.replace("ngc","NGC ")
+    # get data
+    histmax, hist_low, hist_mid, hist_high, stats_low, stats_mid, stats_high = \
+        get_data(dir_product+galname+"_parameter_600pc.txt",11,bins,xlim5)
+    #
+    plotter(ax,hist_low,hist_mid,hist_high,stats_low,stats_mid,stats_high)
+    #
+    histmaxs.append(histmax)
+    #
+print(np.max(histmaxs))
+plt.savefig(dir_product+"maskhist_w3.png",dpi=200)
