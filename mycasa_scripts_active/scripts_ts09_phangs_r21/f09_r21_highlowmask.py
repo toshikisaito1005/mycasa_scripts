@@ -28,6 +28,10 @@ if not done:
 #####################
 ### Main Procedure
 #####################
+# common
+clim = [-1.2,1.2]
+color_contour = "grey" # "grey"
+
 # ngc0628
 ra_center = "01:36:41.8"
 dec_center = "15.47.0.0"
@@ -37,7 +41,6 @@ value = None
 
 ### R21
 # R21 color + CO(2-1) moment 0 contour
-color_contour = "black" # "grey"
 color_beam = "grey"
 imagename_contour = "ngc0628_co21/co21_04p0.moment0.fits"
 imagename_color = "ngc0628_r21/r21_04p0.moment0.highlowmask.fits"
@@ -48,7 +51,6 @@ colorlog = False
 colorbar = False
 colorbar_label = "Line Ratio"
 output = "eps/ngc0628_r21_mask.png"
-clim = [-1.7,1.7]
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
               imagename_contour = imagename_contour,
@@ -78,7 +80,6 @@ value = None
 
 ### R21
 # R21 color + CO(2-1) moment 0 contour
-color_contour = "black"
 color_beam = "grey"
 imagename_contour = "ngc4321_co21/co21_04p0.moment0.fits"
 imagename_color = "ngc4321_r21/r21_04p0.moment0.highlowmask.fits"
@@ -89,7 +90,6 @@ colorlog = False
 colorbar = False
 colorbar_label = "Ratio"
 output = "eps/ngc4321_r21_mask.png"
-clim = [-1.7,1.7]
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
               imagename_contour = imagename_contour,
@@ -128,7 +128,6 @@ colorlog = False
 colorbar = False
 colorbar_label = "Line Ratio"
 output = "eps/ngc3627_r21_mask.png"
-clim = [-1.7,1.7]
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
               imagename_contour = imagename_contour,
