@@ -82,9 +82,9 @@ for i in range(len(gals)):
 		y = p21,
 		yerr = p21err,
 		marker = ".",
-		markersize = 10,#0,
+		markersize = 8,#0,
 		c="gray", #cm.brg(i/2.5),
-		alpha=0.3,
+		alpha=0.1,
 		linewidth=0,
 		elinewidth=0,#1,
 		capsize=0,
@@ -105,7 +105,7 @@ for i in range(len(gals)):
 	H, xedges, yedges = np.histogram2d(p21,r21,bins=100,range=([10**-1.2,10**0.7],[10**-1.2,10**0.7]))
 	extent = [xedges[0],xedges[-1],yedges[0],yedges[-1]]
 	plt.contour(H/H.max()*100,levels=[8,16,32,64,96],extent=extent,
-		colors=[cm.brg(i/2.5)],zorder=1,linewidths=2,alpha=1.0)
+		colors=[cm.brg(i/2.5)],zorder=1,linewidths=2.5,alpha=1.0,label=galname.replace("ngc","NGC "))
 
 	histo.extend(p21/r21)
 	r21_all.extend(r21)
@@ -119,7 +119,7 @@ p21err_all = np.array(p21err_all)
 p2rerr = p2r * np.sqrt((r21err_all/r21_all)**2 + (p21err_all/p21_all)**2)
 
 correlation = np.corrcoef(r21_all,p21_all)[0,1]
-plt.text(2.5,0.07,'$\\rho$ = ' + str(np.round(correlation, 2)),fontsize=14)
+plt.text(2.5,0.37,'$r$ = ' + str(np.round(correlation, 2)),fontsize=14)
 
 a = plt.axes([.16, .68, .3, .2])
 plt.plot([0.45,0.45+np.median(p2rerr)],[2200,2200],"k-",lw=2)
@@ -146,5 +146,5 @@ plt.text(1.44,1400,
 	fontsize=14
 	)
 
-
+plt.legend(low="lower right")
 plt.savefig(dir_product+"figure_r21_vs_p21.png",dpi=200)
