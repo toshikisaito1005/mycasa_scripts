@@ -18,7 +18,8 @@ dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
 dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
-bins = 100
+bins = 40
+ylim = [0,0.2]
 
 
 #####################
@@ -49,15 +50,18 @@ for i in range(len(gals)):
     w3 = data[:,11]
     mask = data[:,12]
     #
-    data4use = co21
-    xlim = [0,data4use.max()]
+    data4use = np.log10(co21)
+    xlim = [0,data4use.max()*1.1]
     #
+    co21_low  = co21[mask==-1][co21[mask==-1]>0]
+    co21_mid  = co21[mask==0][co21[mask==0]>0]
+    co21_high = co21[mask==1][co21[mask==1]>0]
     data_low  = data4use[mask==-1][data4use[mask==-1]>0]
     data_mid  = data4use[mask==0][data4use[mask==0]>0]
     data_high = data4use[mask==1][data4use[mask==1]>0]
-    hist_low  = np.histogram(data_low, bins=bins, range=xlim)
-    hist_mid  = np.histogram(data_mid, bins=bins, range=xlim)
-    hist_high  = np.histogram(data_high, bins=bins, range=xlim)
+    hist_low  = np.histogram(data_low, bins=bins, range=xlim, weights=co21_low)
+    hist_mid  = np.histogram(data_mid, bins=bins, range=xlim, weights=co21_mid)
+    hist_high = np.histogram(data_high, bins=bins, range=xlim, weights=co21_high)
     #
     figure = plt.figure(figsize=(8,8))
     x, y_low = np.delete(hist_low[1],-1), hist_low[0]
@@ -67,10 +71,11 @@ for i in range(len(gals)):
     _, y_high = np.delete(hist_high[1],-1), hist_high[0]
     y_high = y_high / float(sum(y_high))
     #
-    plt.step(x, y_low, color="blue", lw=2, alpha=0.5)
-    plt.step(x, y_mid, color="green", lw=2, alpha=0.5)
-    plt.step(x, y_high, color="red", lw=2, alpha=0.5)
+    plt.step(x, y_low, color="blue", lw=4, alpha=0.5)
+    plt.step(x, y_mid, color="green", lw=4, alpha=0.5)
+    plt.step(x, y_high, color="red", lw=4, alpha=0.5)
     #
+    plt.ylim(ylim)
     plt.savefig(dir_product+"maskhist_mom0.png",dpi=200)
 
 
