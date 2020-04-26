@@ -6,24 +6,36 @@ import matplotlib.pyplot as plt
 plt.ioff()
 
 
-dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/data_other/"
-dir_empire = dir_data + "empire_co10/"
-dir_heracles = dir_data + "heracles_co21/"
-scales = [44/1.0, 52/1.3, 130/1.6, 103/1.4]
+#####################
+### parameters
+#####################
+dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
+gals = ["ngc0628", "ngc3627", "ngc4321"]
+scales = [44/1.0, 52/1.3, 103/1.4]
 
-fits_sd_co10 = glob.glob(dir_empire + "*.moment0.regrid")
-fits_sd_co10.sort()
-fits_sd_co21 = glob.glob(dir_heracles + "*.moment0.regrid")
-fits_sd_co21.sort()
 
-sd_co10_n0628 = imstat(fits_sd_co10[0])["sum"][0]
-sd_co10_n3627 = imstat(fits_sd_co10[1])["sum"][0]
-#sd_co10_n4254 = imstat(fits_sd_co10[2])["sum"][0]
-sd_co10_n4321 = imstat(fits_sd_co10[2])["sum"][0]
-sd_co21_n0628 = imstat(fits_sd_co21[0])["sum"][0]
-sd_co21_n3627 = imstat(fits_sd_co21[1])["sum"][0]
-#sd_co21_n4254 = imstat(fits_sd_co21[2])["sum"][0]
-sd_co21_n4321 = imstat(fits_sd_co21[2])["sum"][0]
+#####################
+### Main Procedure
+#####################
+co10images = glob.glob(dir_data + gals[i] + "_co10/*co10*.moment0")
+co21images = glob.glob(dir_data + gals[i] + "_co21/*co21*.moment0")
+
+
+
+
+alma_co10_n0628 = glob.glob(dir_data + "../ngc0628_co10/*co10*.moment0")
+beam_co10_n0628 = []
+int_co10_n0628 = []
+for i in range(len(alma_co10_n0628)):
+    beamint = alma_co10_n0628[i].split("_")[-1].split(".")[0]
+    beam_co10_n0628.append(float(beamint.replace("p",".")))
+    int_co10_n0628.append(imstat(alma_co10_n0628[i])["sum"][0])
+
+l = np.c_[beam_co10_n0628,int_co10_n0628]
+data_co10_n0628 = l[l[:,0].argsort(), :]
+
+
+
 
 ### co10
 # get ngc0628
