@@ -21,7 +21,7 @@ def get_beam_intensities(images,freq):
     """
     """
     beams = []
-    intensities = []
+    fluxes = []
     for i in range(len(images)):
         # beam
         beamint = images[i].split("_")[-1].split(".")[0]
@@ -29,10 +29,10 @@ def get_beam_intensities(images,freq):
         beams.append(beamfloat)
         # flux
         flux = imstat(images[i])["sum"][0] # Jy/beam.km/s
-        intensity = 1.222e6 / beamfloat**2 / freq**2 * flux # K.km/s
-        intensities.append(intensity)
+        #intensity = 1.222e6 / beamfloat**2 / freq**2 * flux # K.km/s
+        fluxes.append(flux)
 
-    l = np.c_[beams, intensities]
+    l = np.c_[beams, fluxes]
     data = l[l[:,0].argsort(), :]
 
     return data
