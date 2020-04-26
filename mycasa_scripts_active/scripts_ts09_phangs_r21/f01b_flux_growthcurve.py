@@ -41,18 +41,18 @@ def get_beam_ratios(co10images,co21images):
     """
     """
     beams = []
-    fluxes = []
-    for i in range(len(images)):
+    ratios = []
+    for i in range(len(co10images)):
         # beam
-        beamint = images[i].split("_")[-1].split(".")[0]
+        beamint = co10images[i].split("_")[-1].split(".")[0]
         beamfloat = float(beamint.replace("p","."))
         beams.append(beamfloat)
         # flux
         co10flux = imstat(co10images[i])["sum"][0] # Jy/beam.km/s
         co21flux = imstat(co21images[i])["sum"][0] # Jy/beam.km/s
-        ratio.append(co21flux/co10flux/4.)
+        ratios.append(co21flux/co10flux/4.)
 
-    l = np.c_[beams, ratio, ratio/ratio[-1]]
+    l = np.c_[beams, ratios, ratios/ratios[-1]]
     data = l[l[:,0].argsort(), :]
 
     return data
@@ -111,7 +111,7 @@ plt.savefig(dir_data + "eps/missingflux_co21.png", dpi=100)
 plt.figure(figsize=(10,10))
 plt.rcParams["font.size"] = 22
 plt.ylim([0.0,1.2])
-plt.ylabel("CO(2-1) Flux Recovery")
+plt.ylabel("Line Ratio Recovery")
 plt.xlabel("Spatial Resolution (kpc)")
 plt.legend(loc = "lower right")
 plt.grid(color="grey")
@@ -127,6 +127,6 @@ for i in range(len(gals)):
     plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "-", lw=5, c=cm.brg(i/2.5), alpha=0.5)
     #
 plt.legend(loc="lower right")
-plt.savefig(dir_data + "eps/missingflux_co21.png", dpi=100)
+plt.savefig(dir_data + "eps/missingflux_r21.png", dpi=100)
 
 
