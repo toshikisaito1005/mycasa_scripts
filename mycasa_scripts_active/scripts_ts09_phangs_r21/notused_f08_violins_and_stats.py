@@ -17,7 +17,7 @@ plt.ioff()
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-bins = 100
+bins = 50
 r21range = [0.05,1.45]
 ylabel = "$R_{21}$"
 gals = ["ngc0628",
@@ -222,27 +222,45 @@ def startup_plot(
 	plt.rcParams["legend.fontsize"] = 9
 	plt.subplots_adjust(bottom=0.1, left=0.07, right=0.99, top=0.99)
 	gs = gridspec.GridSpec(nrows=18, ncols=25)
-	ax1 = plt.subplot(gs[0:6,0:25])
-	ax2 = plt.subplot(gs[6:12,0:25])
-	ax3 = plt.subplot(gs[12:18,0:25])
+	ax1 = plt.subplot(gs[0:6,0:14])
+	ax2 = plt.subplot(gs[6:12,0:14])
+	ax3 = plt.subplot(gs[12:18,0:14])
+	ax4 = plt.subplot(gs[0:6,15:25])
+	ax5 = plt.subplot(gs[6:12,15:25])
+	ax6 = plt.subplot(gs[12:18,15:25])
 	ax1.set_ylim(r21range)
 	ax2.set_ylim(r21range)
 	ax3.set_ylim(r21range)
+	ax4.set_ylim(r21range)
+	ax5.set_ylim(r21range)
+	ax6.set_ylim(r21range)
 	ax1.grid(axis="y")
 	ax2.grid(axis="y")
 	ax3.grid(axis="y")
+	ax4.grid(axis="y")
+	ax5.grid(axis="y")
+	ax6.grid(axis="y")
 	ax1.set_xlim([0,70])
 	ax2.set_xlim([4,74])
 	ax3.set_xlim([0,70])
 	ax1.tick_params(axis="x", length=0)
 	ax2.tick_params(axis="x", length=0)
 	ax3.tick_params(axis="x", length=0)
+	ax4.tick_params(axis="x", length=0)
+	ax5.tick_params(axis="x", length=0)
+	ax6.tick_params(axis="x", length=0)
 	ax1.tick_params(labelbottom=False)
 	ax2.tick_params(labelbottom=False)
 	ax3.tick_params(labelbottom=False)
+	ax4.tick_params(labelbottom=False)
+	ax5.tick_params(labelbottom=False)
+	ax6.tick_params(labelbottom=False)
 	ax1.set_yticks([0.3,0.6,0.9,1.2])
 	ax2.set_yticks([0.3,0.6,0.9,1.2])
 	ax3.set_yticks([0.3,0.6,0.9,1.2])
+	ax4.set_yticks([0.3,0.5,0.7,0.9,1.1,1.3])
+	ax5.set_yticks([0.3,0.5,0.7,0.9,1.1,1.3])
+	ax6.set_yticks([0.3,0.5,0.7,0.9,1.1,1.3])
 	ax2.set_ylabel(ylabel)
 	# text
 	boxdic = {
@@ -254,6 +272,11 @@ def startup_plot(
 	ax3.text(12,      -0.11, "# of Sightlines", horizontalalignment="center")
 	ax3.text(12+23.0, -0.11, "CO(1-0) Flux", horizontalalignment="center")
 	ax3.text(12+46.0, -0.11, "CO(2-1) Flux", horizontalalignment="center")
+	ax6.text(3,       0.23, "84%", horizontalalignment="center", rotation=45)
+	ax6.text(9,       0.23, "Mean", horizontalalignment="center", rotation=45)
+	ax6.text(15,      0.23, "Median", horizontalalignment="center", rotation=45)
+	ax6.text(21,      0.23, "Mode", horizontalalignment="center", rotation=45)
+	ax6.text(27,      0.23, "16%", horizontalalignment="center", rotation=45)
 	ax1.text(8+46.0,  1.2,  "NGC 0628", bbox=boxdic)
 	ax2.text(12+46.0, 1.2,  "NGC 3627", bbox=boxdic)
 	ax3.text(8+46.0,  1.2,  "NGC 4321", bbox=boxdic) # , backgroundcolor="white")
@@ -272,17 +295,25 @@ def startup_plot(
 	ax3.text(12.4, 0.08, "12\"", fontsize=10)
 	ax3.text(16.4, 0.08, "16\"", fontsize=10)
 	ax3.text(20.4, 0.08, "20\"", fontsize=10)
+	ax4.text(1, 0.73,  "4\"", horizontalalignment="center", fontsize=10)
+	ax4.text(5, 0.65, "20\"", horizontalalignment="center", fontsize=10)
+	ax5.text(1, 0.80,  "8\"", horizontalalignment="center", fontsize=10)
+	ax5.text(5, 0.82, "24\"", horizontalalignment="center", fontsize=10)
+	ax6.text(1, 0.59,  "4\"", horizontalalignment="center", fontsize=10)
+	ax6.text(5, 0.60, "20\"", horizontalalignment="center", fontsize=10)
 
-	return ax1, ax2, ax3
+	return ax1, ax2, ax3, ax4, ax5, ax6
 
 
 #####################
 ### Main Procedure
 #####################
 ### plot
-ax1, ax2, ax3 = startup_plot(ylabel,r21range)
+ax1, ax2, ax3, ax4, ax5, ax6 \
+	= startup_plot(ylabel,r21range)
 #
 ax_violin = [ax1, ax2, ax3]
+ax_stats = [ax4, ax5, ax6]
 for i in range(len(gals)):
 #for i in [0]:
 	list_co10 = []
@@ -326,7 +357,7 @@ for i in range(len(gals)):
 	# plot
 	color = cm.brg(i/2.5)
 	plot_all_violins(ax_violin[i], list_r21, bins, r21range, list_beam, color, list_co10, list_co21)
-	#plot_all_stats(ax_stats[i], statslist_r21, statslist_r21_wco10, statslist_r21_wco21, color)
+	plot_all_stats(ax_stats[i], statslist_r21, statslist_r21_wco10, statslist_r21_wco21, color)
 	#
 plt.savefig(dir_proj+"eps/violin_co21.png",dpi=300)
 
