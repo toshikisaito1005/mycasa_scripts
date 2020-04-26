@@ -20,7 +20,6 @@ dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
 bins = 40
 xlim = [0,3.32115133461]
-ylim = [0.0005,0.2]
 xlabel = "log $I_{CO(2-1)}$ (K km s$^{-1}$)"
 
 
@@ -47,7 +46,7 @@ def get_data(txtdata,col,bins,xlim):
     mask = data[:,12]
     #
     data4use = np.log10(data[:,col])
-    xlim = [0,data4use.max()*1.1]
+    #xlim = [0,data4use.max()*1.1]
     #
     co21_low  = co21[mask==-1][co21[mask==-1]>0]
     co21_mid  = co21[mask==0][co21[mask==0]>0]
@@ -58,7 +57,7 @@ def get_data(txtdata,col,bins,xlim):
     hist_low  = np.histogram(data_low, bins=bins, range=xlim, weights=np.log10(co21_low))
     hist_mid  = np.histogram(data_mid, bins=bins, range=xlim, weights=np.log10(co21_mid))
     hist_high = np.histogram(data_high, bins=bins, range=xlim, weights=np.log10(co21_high))
-    histmax = np.max([])
+    histmax = np.max(data4use)
 
     return histmax, hist_low, hist_mid, hist_high
 
@@ -80,9 +79,6 @@ def startup_plot(
     ax1.set_xlim(xlim)
     ax2.set_xlim(xlim)
     ax3.set_xlim(xlim)
-    ax1.set_ylim(ylim)
-    ax2.set_ylim(ylim)
-    ax3.set_ylim(ylim)
     ax1.grid(axis="y")
     ax2.grid(axis="y")
     ax3.grid(axis="y")
@@ -102,13 +98,13 @@ def startup_plot(
 # prepare for plot
 axlist = startup_plot(xlim,ylim,xlabel)
 #
-xlims = []
+histmaxs = []
 for i in range(len(gals)):
     ax = axlist[i]
     galname = gals[i]
     galnamelabel = galname.replace("ngc","NGC ")
     # get data
-    hist_low, hist_mid, hist_high = \
+    histmax, hist_low, hist_mid, hist_high = \
     	get_data(dir_product+galname+"_parameter_600pc.txt",3,bins,xlim)
     #
     x, y_low = np.delete(hist_low[1],-1), hist_low[0]
@@ -121,10 +117,11 @@ for i in range(len(gals)):
     ax.step(x, y_low, color="blue", lw=3, alpha=0.7)
     ax.step(x, y_mid, color="green", lw=3, alpha=0.7)
     ax.step(x, y_high, color="red", lw=3, alpha=0.7)
+    ax.set_ylim(0.0005,np.max([y_low,y_mid,y_high])*1.4)
     #
-    xlims.extend(xlim)
+    histmaxs.append(histmax)
     #
-print(np.max(xlims))
+print(np.max(histmaxs))
 plt.savefig(dir_product+"maskhist_mom0.png",dpi=200)
 
 
