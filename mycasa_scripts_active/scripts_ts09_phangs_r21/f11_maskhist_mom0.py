@@ -56,9 +56,9 @@ def get_data(txtdata,col,bins,xlim):
     data_low  = data4use[mask==-1][data4use[mask==-1]>0]
     data_mid  = data4use[mask==0][data4use[mask==0]>0]
     data_high = data4use[mask==1][data4use[mask==1]>0]
-    hist_low  = np.histogram(data_low, bins=bins, range=xlim, weights=np.log10(co21_low))
-    hist_mid  = np.histogram(data_mid, bins=bins, range=xlim, weights=np.log10(co21_mid))
-    hist_high = np.histogram(data_high, bins=bins, range=xlim, weights=np.log10(co21_high))
+    hist_low  = np.histogram(data_low, bins=bins, range=xlim, weights=None)#=np.log10(co21_low))
+    hist_mid  = np.histogram(data_mid, bins=bins, range=xlim, weights=None)#=np.log10(co21_mid))
+    hist_high = np.histogram(data_high, bins=bins, range=xlim, weights=None)#=np.log10(co21_high))
     histmax = np.max(data4use)
 
     return histmax, hist_low, hist_mid, hist_high
