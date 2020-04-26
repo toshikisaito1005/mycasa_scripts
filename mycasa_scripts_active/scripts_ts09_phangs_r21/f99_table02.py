@@ -28,13 +28,26 @@ def extract_onegal(txtdata):
 #####################
 ### main
 #####################
-table02 = []
+list_l1 = []
+list_l2 = []
+list_l3 = []
+list_l4 = []
+list_l5 = []
 for i in range(len(txtfile)):
 	galname = txtfile[i].split("/")[-1].split("_")[0].replace("ngc","NGC ")
 	galname2 = txtfile[i].split("/")[-1].split("_")[0]
 	l1,l2,l3,l4,l5 = extract_onegal(txtfile[i])
+	list_l1.append(l1)
+	list_l2.append(l2)
+	list_l3.append(l3)
+	list_l4.append(l4)
+	list_l5.append(l5)
 
-	table03.append(table)
-	os.system("rm -rf " + txtfile1[i] + " " + txtfile2[i])
+np.r_["84\% & "   + " && ".join(list_l1) + " \\\\ \n",
+	  "Mean & "   + " && ".join(list_l2) + " \\\\ \n",
+	  "Median & " + " && ".join(list_l3) + " \\\\ \n",
+	  "Mode & "   + " && ".join(list_l4) + " \\\\ \n",
+	  "16\% & "   + " && ".join(list_l5)]
+
 
 np.savetxt("table03.txt",table03,fmt="%s")
