@@ -29,16 +29,18 @@ for i in range(len(gals)):
     pixvalues[np.isinf(pixvalues)]=0
     pixvalues = pixvalues[abs(pixvalues)!=0]
     median = np.median(pixvalues)
+    p84 = np.percentile(pixvalues,84)
+    p16 = np.percentile(pixvalues,16)
 
     outfile = r21image + ".highlowmask"
     os.system("rm -rf " + outfile + "_tmp")
     immath(imagename = r21image,
-           expr = "iif(IM0>"+str(median)+",1.0,-1.0)",
+           expr = "iif(IM0>"+str(p84)+",1.0,0.0)",
            outfile = outfile + "_tmp")
 
     os.system("rm -rf " + outfile)
     immath(imagename = [r21image, outfile+"_tmp"],
-           expr = "iif(IM0>0.0,IM1,0)",
+           expr = "iif(IM0<"+str(p16)+",-1.0,IM1)",
            outfile = outfile)
     os.system("rm -rf " + outfile + "_tmp")
 
