@@ -60,8 +60,12 @@ def get_data(txtdata,col,bins,xlim):
     hist_mid  = np.histogram(data_mid, bins=bins, range=xlim, weights=np.log10(co21_mid))
     hist_high = np.histogram(data_high, bins=bins, range=xlim, weights=np.log10(co21_high))
     histmax = np.max(data4use)
+    #
+    stats_low = [weighted_percentile(data_low,0.84),weighted_percentile(data_low,0.50),weighted_percentile(data_low,0.16)]
+    stats_mid = [weighted_percentile(data_mid,0.84),weighted_percentile(data_mid,0.50),weighted_percentile(data_mid,0.16)]
+    stats_high = [weighted_percentile(data_high,0.84),weighted_percentile(data_high,0.50),weighted_percentile(data_high,0.16)]
 
-    return histmax, hist_low, hist_mid, hist_high
+    return histmax, hist_low, hist_mid, hist_high, stats_low, stats_mid, stats_high
 
 def startup_plot(
 	xlim,
@@ -118,11 +122,42 @@ def plotter(
 
 def plotter_stats(
     ax,
-    txtdata,
+    stats_low,
+    stats_mid,
+    stats_high,
     ):
     """
     """
-    p84
+    ax.lot
+
+
+def weighted_percentile(
+    data,
+    percentile,
+    weights=None,
+    ):
+    """
+    Args:
+        data (list or numpy.array): data
+        weights (list or numpy.array): weights
+    """
+    if weights==None:
+        w_median = np.percentile(data,percentile*100)
+    else:
+        data, weights = np.array(data).squeeze(), np.array(weights).squeeze()
+        s_data, s_weights = map(np.array, zip(*sorted(zip(data, weights))))
+        midpoint = percentile * sum(s_weights)
+        if any(weights > midpoint):
+            w_median = (data[weights == np.max(weights)])[0]
+        else:
+            cs_weights = np.cumsum(s_weights)
+            idx = np.where(cs_weights <= midpoint)[0][-1]
+            if cs_weights[idx] == midpoint:
+                w_median = np.mean(s_data[idx:idx+2])
+            else:
+                w_median = s_data[idx+1]
+
+    return w_median
 
 
 #####################
@@ -137,7 +172,7 @@ for i in range(len(gals)):
     galname = gals[i]
     galnamelabel = galname.replace("ngc","NGC ")
     # get data
-    histmax, hist_low, hist_mid, hist_high = \
+    histmax, hist_low, hist_mid, hist_high, stats_low, stats_mid, stats_high = \
     	get_data(dir_product+galname+"_parameter_600pc.txt",3,bins,xlim1)
     #
     plotter(ax,hist_low,hist_mid,hist_high)
@@ -157,7 +192,7 @@ for i in range(len(gals)):
     galname = gals[i]
     galnamelabel = galname.replace("ngc","NGC ")
     # get data
-    histmax, hist_low, hist_mid, hist_high = \
+    histmax, hist_low, hist_mid, hist_high, stats_low, stats_mid, stats_high = \
     	get_data(dir_product+galname+"_parameter_600pc.txt",8,bins,xlim2)
     #
     plotter(ax,hist_low,hist_mid,hist_high)
