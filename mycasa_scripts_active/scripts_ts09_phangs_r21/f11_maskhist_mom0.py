@@ -21,10 +21,13 @@ scales = [44/1.0, 52/1.3, 103/1.4]
 bins = 40
 xlim1 = [0,3.01922848601*1.1]
 xlim2 = [0,1.97644168938*1.1]
+xlim3 = [-3.78251605579*1.1,-0.522595098867*0.9]
 xlabel1 = "log $I_{CO(2-1)}$ (K km s$^{-1}$)"
 xlabel2 = "log $\sigma_{CO(2-1)}$ (km s$^{-1}$)"
+xlabel3 = "log W1"
 title1 = "log $I_{CO(2-1)}$ Histograms"
 title2 = "log $\sigma_{CO(2-1)}$ Histograms"
+title3 = "log W1 test"
 
 
 #####################
@@ -55,9 +58,9 @@ def get_data(txtdata,col,bins,xlim):
     co21_low  = co21[mask==-1][co21[mask==-1]>0]
     co21_mid  = co21[mask==0][co21[mask==0]>0]
     co21_high = co21[mask==1][co21[mask==1]>0]
-    data_low  = data4use[mask==-1][data4use[mask==-1]>0]
-    data_mid  = data4use[mask==0][data4use[mask==0]>0]
-    data_high = data4use[mask==1][data4use[mask==1]>0]
+    data_low  = data4use[mask==-1][co21[mask==-1]>0]
+    data_mid  = data4use[mask==0][co21[mask==0]>0]
+    data_high = data4use[mask==1][co21[mask==1]>0]
     weights_low = np.log10(co21_low)
     weights_mid = np.log10(co21_mid)
     weights_high = np.log10(co21_high)
@@ -82,7 +85,7 @@ def startup_plot(
     plt.subplots(nrows=1,ncols=1,figsize=(7, 7),sharey=True)
     plt.rcParams["font.size"] = 14
     plt.rcParams["legend.fontsize"] = 9
-    plt.subplots_adjust(bottom=0.08, left=0.08, right=0.99, top=0.95)
+    plt.subplots_adjust(bottom=0.08, left=0.08, right=0.97, top=0.95)
     gs = gridspec.GridSpec(nrows=18, ncols=25)
     ax1 = plt.subplot(gs[0:6,0:25])
     ax2 = plt.subplot(gs[6:12,0:25])
@@ -171,7 +174,7 @@ def weighted_percentile(
 #####################
 ### main
 #####################
-# prepare for plot
+# co21 mom-0
 axlist = startup_plot(xlim1,xlabel1,title1)
 #
 histmaxs = []
@@ -187,11 +190,11 @@ for i in range(len(gals)):
     #
     histmaxs.append(histmax)
     #
-print(np.max(histmaxs))
+#print(np.max(histmaxs))
 plt.savefig(dir_product+"maskhist_mom0.png",dpi=200)
 
 
-# prepare for plot
+# co21 disp
 axlist = startup_plot(xlim2,xlabel2,title2)
 #
 histmaxs = []
@@ -207,7 +210,26 @@ for i in range(len(gals)):
     #
     histmaxs.append(histmax)
     #
-print(np.max(histmaxs))
+#print(np.max(histmaxs))
 plt.savefig(dir_product+"maskhist_disp.png",dpi=200)
 
+
+# co21 disp
+axlist = startup_plot(xlim3,xlabel3,title3)
+#
+histmaxs = []
+for i in range(len(gals)):
+    ax = axlist[i]
+    galname = gals[i]
+    galnamelabel = galname.replace("ngc","NGC ")
+    # get data
+    histmax, hist_low, hist_mid, hist_high, stats_low, stats_mid, stats_high = \
+        get_data(dir_product+galname+"_parameter_600pc.txt",9,bins,xlim3)
+    #
+    plotter(ax,hist_low,hist_mid,hist_high,stats_low,stats_mid,stats_high)
+    #
+    histmaxs.append(histmax)
+    #
+print(np.max(histmaxs))
+plt.savefig(dir_product+"maskhist_w1.png",dpi=200)
 
