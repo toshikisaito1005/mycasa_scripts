@@ -156,7 +156,6 @@ def plot_hists_for_nuclear_outer_whole(
 	histo_out_norm = histo_outy / float(sum(histo_ally))
 	#
 	# calculate median values
-	print()
 	median_all = weighted_median(data=data_all,weights=weights_all)
 	median_in = weighted_median(data=data_in,weights=weights_in)
 	median_out = weighted_median(data=data_out,weights=weights_out)

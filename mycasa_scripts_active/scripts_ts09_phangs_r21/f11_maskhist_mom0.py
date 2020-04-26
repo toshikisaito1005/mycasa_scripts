@@ -19,7 +19,7 @@ gals = ["ngc0628","ngc3627","ngc4321"]
 dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
 bins = 20
-ratiorange = [0.0,2.0]
+ratiorange = [0.0,2.5]
 
 
 #####################
@@ -56,4 +56,19 @@ for i in range(len(gals)):
     #
     figure = plt.figure(figsize=(8,8))
     hist_low  = np.histogram(r21_low, bins=bins, range=ratiorange)
+    x, y_low = np.delete(hist_low[1],-1), hist_low[0]
+    y_low = y_low / float(sum(y_low))
+    _, y_mid = np.delete(hist_mid[1],-1), hist_mid[0]
+    y_mid = y_mid / float(sum(y_mid))
+    _, y_high = np.delete(hist_high[1],-1), hist_high[0]
+    y_high = y_high / float(sum(y_high))
+    #
+    plt.step(x, y_low, color="blue", lw=0, alpha=0.5)
+    plt.step(x, y_mid, color="green", lw=0, alpha=0.5)
+    plt.step(x, y_high, color="red", lw=0, alpha=0.5)
+    #
+    plt.savefig(dir_product+"maskhist_mom0.png",dpi=200)
+
+
+
 
