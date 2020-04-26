@@ -59,17 +59,12 @@ def get_data(txtdata,col,bins):
 
     return xlim, hist_low, hist_mid, hist_high
 
-
-#####################
-### main
-#####################
-for i in range(len(gals)):
-    galname = gals[i]
-    galnamelabel = galname.replace("ngc","NGC ")
-    # get data
-    xlim, hist_low, hist_mid, hist_high = \
-    	get_data(dir_product+galname+"_parameter_600pc.txt",3,bins)
-    # prepare for plot
+def startup_plot(
+	ylim,
+	xlim,
+	):
+    """
+    """
     plt.subplots(nrows=1,ncols=1,figsize=(10, 7),sharey=True)
     plt.rcParams["font.size"] = 14
     plt.rcParams["legend.fontsize"] = 9
@@ -87,6 +82,28 @@ for i in range(len(gals)):
     ax1.set_xlim(xlim)
     ax2.set_xlim(xlim)
     ax3.set_xlim(xlim)
+    ax1.tick_params(axis="x", length=0)
+    ax2.tick_params(axis="x", length=0)
+    ax3.tick_params(axis="x", length=0)
+    ax1.tick_params(labelbottom=False)
+    ax2.tick_params(labelbottom=False)
+    ax3.tick_params(labelbottom=False)
+
+    return ax1, ax2, ax3
+
+#####################
+### main
+#####################
+# prepare for plot
+axlist = startup_plot(xlim,ylim)
+#
+for i in range(len(gals)):
+	ax = axlist[i]
+    galname = gals[i]
+    galnamelabel = galname.replace("ngc","NGC ")
+    # get data
+    xlim, hist_low, hist_mid, hist_high = \
+    	get_data(dir_product+galname+"_parameter_600pc.txt",3,bins)
     #
     x, y_low = np.delete(hist_low[1],-1), hist_low[0]
     y_low = y_low / float(sum(y_low))
@@ -95,11 +112,10 @@ for i in range(len(gals)):
     _, y_high = np.delete(hist_high[1],-1), hist_high[0]
     y_high = y_high / float(sum(y_high))
     #
-    ax1.step(x, y_low, color="blue", lw=2, alpha=0.5)
-    ax1.step(x, y_mid, color="green", lw=2, alpha=0.5)
-    ax1.step(x, y_high, color="red", lw=2, alpha=0.5)
+    ax.step(x, y_low, color="blue", lw=3, alpha=0.7)
+    ax.step(x, y_mid, color="green", lw=3, alpha=0.7)
+    ax.step(x, y_high, color="red", lw=3, alpha=0.7)
     #
-plt.title(galnamelabel)
 plt.savefig(dir_product+"maskhist_mom0.png",dpi=200)
 
 
