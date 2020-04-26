@@ -113,13 +113,15 @@ for i in range(len(gals)):
 	r21err_all.extend(r21err)
 	p21err_all.extend(p21err)
 
+plt.legend(low="lower right")
+
 p2r = np.array(p21_all)/np.array(r21_all)
 r21err_all = np.array(r21err_all)
 p21err_all = np.array(p21err_all)
 p2rerr = p2r * np.sqrt((r21err_all/r21_all)**2 + (p21err_all/p21_all)**2)
 
 correlation = np.corrcoef(r21_all,p21_all)[0,1]
-plt.text(2.5,0.37,'$r$ = ' + str(np.round(correlation, 2)),fontsize=14)
+plt.text(2.5,0.07,'$r$ = ' + str(np.round(correlation, 2)),fontsize=14)
 
 a = plt.axes([.16, .68, .3, .2])
 plt.plot([0.45,0.45+np.median(p2rerr)],[2200,2200],"k-",lw=2)
@@ -146,5 +148,4 @@ plt.text(1.44,1400,
 	fontsize=14
 	)
 
-plt.legend(low="lower right")
 plt.savefig(dir_product+"figure_r21_vs_p21.png",dpi=200)
