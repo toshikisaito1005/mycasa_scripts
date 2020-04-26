@@ -37,6 +37,26 @@ def get_beam_intensities(images,freq):
 
     return data
 
+def get_beam_ratios(co10images,co21images):
+    """
+    """
+    beams = []
+    fluxes = []
+    for i in range(len(images)):
+        # beam
+        beamint = images[i].split("_")[-1].split(".")[0]
+        beamfloat = float(beamint.replace("p","."))
+        beams.append(beamfloat)
+        # flux
+        co10flux = imstat(co10images[i])["sum"][0] # Jy/beam.km/s
+        co21flux = imstat(co21images[i])["sum"][0] # Jy/beam.km/s
+        ratio.append(co21flux/co10flux/4.)
+
+    l = np.c_[beams, ratio, ratio/ratio[-1]]
+    data = l[l[:,0].argsort(), :]
+
+    return data
+
 
 #####################
 ### Main Procedure
@@ -68,7 +88,30 @@ plt.savefig(dir_data + "eps/missingflux_co10.png", dpi=100)
 plt.figure(figsize=(10,10))
 plt.rcParams["font.size"] = 22
 plt.ylim([0.0,1.2])
-plt.ylabel("CO(1-0) Flux Recovery")
+plt.ylabel("CO(2-1) Flux Recovery")
+plt.xlabel("Spatial Resolution (kpc)")
+plt.legend(loc = "lower right")
+plt.grid(color="grey")
+#
+for i in range(len(gals)):
+    # get data
+    galanme = gals[i].replace("ngc","NGC ")
+    images_co21 = glob.glob(dir_data + gals[i] + "_co21/co21*.moment0")
+    freq = 230.53800 # GHz
+    data = get_beam_intensities(images_co21,freq)
+    # plot
+    plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "o", markersize=15, markeredgewidth=0, lw=0, c=cm.brg(i/2.5), label=galanme)
+    plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "-", lw=5, c=cm.brg(i/2.5), alpha=0.5)
+    #
+plt.legend(loc="lower right")
+plt.savefig(dir_data + "eps/missingflux_co21.png", dpi=100)
+
+
+### r21
+plt.figure(figsize=(10,10))
+plt.rcParams["font.size"] = 22
+plt.ylim([0.0,1.2])
+plt.ylabel("CO(2-1) Flux Recovery")
 plt.xlabel("Spatial Resolution (kpc)")
 plt.legend(loc = "lower right")
 plt.grid(color="grey")
@@ -77,46 +120,13 @@ for i in range(len(gals)):
     # get data
     galanme = gals[i].replace("ngc","NGC ")
     images_co10 = glob.glob(dir_data + gals[i] + "_co10/co10*.moment0")
-    freq = 115.27120 # GHz
-    data = get_beam_intensities(images_co10,freq)
+    images_co21 = glob.glob(dir_data + gals[i] + "_co21/co21*.moment0")
+    data = get_beam_ratios(images_co10,images_co21)
     # plot
     plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "o", markersize=15, markeredgewidth=0, lw=0, c=cm.brg(i/2.5), label=galanme)
     plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "-", lw=5, c=cm.brg(i/2.5), alpha=0.5)
     #
 plt.legend(loc="lower right")
-plt.savefig(dir_data + "eps/missingflux_co10.png", dpi=100)
+plt.savefig(dir_data + "eps/missingflux_co21.png", dpi=100)
 
 
-
-
-## R21 plot
-plt.figure(figsize=(10,10))
-plt.rcParams["font.size"] = 22
-i = 0
-y = (data_co21_n0628[:,1]/data_co10_n0628[:,1])/(sd_co21_n0628/sd_co10_n0628)
-plt.errorbar(data_co21_n0628[:,0]*(scales[i]/1000),y,
-             yerr=y * np.sqrt(0.05**2 + 0.08**2 + 0.1**2 + 0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 0628")
-i = 1
-y = (data_co21_n3627[:,1]/data_co10_n3627[:,1])/(sd_co21_n3627/sd_co10_n3627)
-plt.errorbar(data_co21_n3627[:,0]*(scales[i]/1000),y,
-             yerr=y * np.sqrt(0.15**2 + 0.08**2 + 0.1**2 + 0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 3627")
-"""
-i = 2
-y = (data_co21_n4254[:,1]/data_co10_n4254[:,1])/(sd_co21_n4254/sd_co10_n4254)
-plt.errorbar(data_co21_n4254[:,0]*(scales[i]/1000),y,
-             yerr=y * np.sqrt(0.10**2 + 0.08**2 + 0.1**2 + 0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 4254")
-"""
-i = 3
-y = (data_co21_n4321[:,1]/data_co10_n4321[:,1])/(sd_co21_n4321/sd_co10_n4321)
-plt.errorbar(data_co21_n4321[:,0]*(scales[i]/1000),y,
-             yerr=y * np.sqrt(0.05**2 + 0.08**2 + 0.1**2 + 0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 4321")
-plt.ylim([0,2])
-plt.ylabel("Total $R_{21}$ Relative To HERACLES/EMPIRE Ratio")
-plt.xlabel("Spatial Resolution (kpc)")
-plt.legend(loc = "lower right")
-plt.grid(color="grey")
-plt.savefig(dir_data + "../eps/missingflux_r21.png", dpi=100)
