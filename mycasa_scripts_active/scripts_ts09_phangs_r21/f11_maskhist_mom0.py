@@ -26,8 +26,8 @@ ylim = [0.0005,0.2]
 ### functions
 #####################
 def get_data(txtdata,col,bins):
-	"""
-	"""
+    """
+    """
     data = np.loadtxt(txtdata)
     #
     dist = data[:,0]
@@ -57,7 +57,8 @@ def get_data(txtdata,col,bins):
     hist_mid  = np.histogram(data_mid, bins=bins, range=xlim, weights=np.log10(co21_mid))
     hist_high = np.histogram(data_high, bins=bins, range=xlim, weights=np.log10(co21_high))
 
-    return hist_low, hist_mid, hist_high
+    return xlim, hist_low, hist_mid, hist_high
+
 
 #####################
 ### main
@@ -65,10 +66,28 @@ def get_data(txtdata,col,bins):
 for i in range(len(gals)):
     galname = gals[i]
     galnamelabel = galname.replace("ngc","NGC ")
+    # get data
+    xlim, hist_low, hist_mid, hist_high = \
+    	get_data(dir_product+galname+"_parameter_600pc.txt",3,bins)
+    # prepare for plot
+    plt.subplots(nrows=1,ncols=1,figsize=(10, 7),sharey=True)
+    plt.rcParams["font.size"] = 14
+    plt.rcParams["legend.fontsize"] = 9
+    plt.subplots_adjust(bottom=0.1, left=0.07, right=0.99, top=0.99)
+    gs = gridspec.GridSpec(nrows=18, ncols=25)
+    ax1 = plt.subplot(gs[0:6,0:25])
+    ax2 = plt.subplot(gs[6:12,0:25])
+    ax3 = plt.subplot(gs[12:18,0:25])
+    ax1.set_ylim(ylim)
+    ax2.set_ylim(ylim)
+    ax3.set_ylim(ylim)
+    ax1.grid(axis="y")
+    ax2.grid(axis="y")
+    ax3.grid(axis="y")
+    ax1.set_xlim(xlim)
+    ax2.set_xlim(xlim)
+    ax3.set_xlim(xlim)
     #
-    get_data(dir_product+galname+"_parameter_600pc.txt",3,bins)
-    #
-    figure = plt.figure(figsize=(8,8))
     x, y_low = np.delete(hist_low[1],-1), hist_low[0]
     y_low = y_low / float(sum(y_low))
     _, y_mid = np.delete(hist_mid[1],-1), hist_mid[0]
@@ -76,13 +95,12 @@ for i in range(len(gals)):
     _, y_high = np.delete(hist_high[1],-1), hist_high[0]
     y_high = y_high / float(sum(y_high))
     #
-    plt.step(x, y_low, color="blue", lw=4, alpha=0.5)
-    plt.step(x, y_mid, color="green", lw=4, alpha=0.5)
-    plt.step(x, y_high, color="red", lw=4, alpha=0.5)
+    ax1.step(x, y_low, color="blue", lw=2, alpha=0.5)
+    ax1.step(x, y_mid, color="green", lw=2, alpha=0.5)
+    ax1.step(x, y_high, color="red", lw=2, alpha=0.5)
     #
-    plt.ylim(ylim)
-    plt.title(galnamelabel)
-    plt.savefig(dir_product+"maskhist_"+galname+"_mom0.png",dpi=200)
+plt.title(galnamelabel)
+plt.savefig(dir_product+"maskhist_mom0.png",dpi=200)
 
 
 
