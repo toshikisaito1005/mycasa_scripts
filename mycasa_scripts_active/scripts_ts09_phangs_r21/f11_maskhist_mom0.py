@@ -57,17 +57,22 @@ def get_data(txtdata,col,bins,xlim):
     #
     cut_co21 = (co21 > 0)
     cut_4use = (data4use > 0)
-    cut_all = np.where((cut_co21) & (cut_4use))
+    cut_low = (mask==-1)
+    cut_mid = (mask==0)
+    cut_high = (mask==1)
+    cut_low = np.where((cut_co21) & (cut_4use) & (cut_low))
+    cut_mid = np.where((cut_co21) & (cut_4use) & (cut_mid))
+    cut_high = np.where((cut_co21) & (cut_4use) & (cut_high))
     #
-    data_low  = data4use[mask[cut_all]==-1]
-    data_mid  = data4use[mask[cut_all]==0]
-    data_high = data4use[mask[cut_all]==1]
-    co21_low  = co21[mask[cut_all]==-1]
-    co21_mid  = co21[mask[cut_all]==0]
-    co21_high = co21[mask[cut_all]==1]
-    weights_low = np.log10(co21_low)
-    weights_mid = np.log10(co21_mid)
-    weights_high = np.log10(co21_high)
+    data_low  = data4use[cut_low]
+    data_mid  = data4use[cut_mid]
+    data_high = data4use[cut_high]
+    co21_low  = co21[cut_low]
+    co21_mid  = co21[cut_mid]
+    co21_high = co21[cut_high]
+    weights_low = None#np.log10(co21_low)
+    weights_mid = None#np.log10(co21_mid)
+    weights_high = None#np.log10(co21_high)
     hist_low  = np.histogram(data_low, bins=bins, range=xlim, weights=weights_low)
     hist_mid  = np.histogram(data_mid, bins=bins, range=xlim, weights=weights_mid)
     hist_high = np.histogram(data_high, bins=bins, range=xlim, weights=weights_high)
