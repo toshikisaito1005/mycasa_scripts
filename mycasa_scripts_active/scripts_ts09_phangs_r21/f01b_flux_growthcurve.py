@@ -32,7 +32,7 @@ def get_beam_intensities(images,freq):
         #intensity = 1.222e6 / beamfloat**2 / freq**2 * flux # K.km/s
         fluxes.append(flux)
 
-    l = np.c_[beams, fluxes]
+    l = np.c_[beams, fluxes, fluxes/fluxes[-1]]
     data = l[l[:,0].argsort(), :]
 
     return data
@@ -41,149 +41,25 @@ def get_beam_intensities(images,freq):
 #####################
 ### Main Procedure
 #####################
-images_co10 = glob.glob(dir_data + gals[i] + "_co10/*co10*.moment0")
-freq = 115.27120 # GHz
-data = get_beam_intensities(images_co10,freq)
-
-
-
-
-
-
-
-
 ### co10
-# get ngc0628
-alma_co10_n0628 = glob.glob(dir_data + "../ngc0628_co10/*co10*.moment0")
-beam_co10_n0628 = []
-int_co10_n0628 = []
-for i in range(len(alma_co10_n0628)):
-    beamint = alma_co10_n0628[i].split("_")[-1].split(".")[0]
-    beam_co10_n0628.append(float(beamint.replace("p",".")))
-    int_co10_n0628.append(imstat(alma_co10_n0628[i])["sum"][0])
-
-l = np.c_[beam_co10_n0628,int_co10_n0628]
-data_co10_n0628 = l[l[:,0].argsort(), :]
-
-# get ngc3627
-alma_co10_n3627 = glob.glob(dir_data + "../ngc3627_co10/*co10*.moment0")
-beam_co10_n3627 = []
-int_co10_n3627 = []
-for i in range(len(alma_co10_n3627)):
-    beamint = alma_co10_n3627[i].split("_")[-1].split(".")[0]
-    beam_co10_n3627.append(float(beamint.replace("p",".")))
-    int_co10_n3627.append(imstat(alma_co10_n3627[i])["sum"][0])
-
-l = np.c_[beam_co10_n3627,int_co10_n3627]
-data_co10_n3627 = l[l[:,0].argsort(), :]
-
-# get ngc4254
-"""
-alma_co10_n4254 = glob.glob(dir_data + "../ngc4254_co10/*co10*.moment0")
-beam_co10_n4254 = []
-int_co10_n4254 = []
-for i in range(len(alma_co10_n4254)):
-    beamint = alma_co10_n4254[i].split("_")[-1].split(".")[0]
-    beam_co10_n4254.append(float(beamint.replace("p",".")))
-    int_co10_n4254.append(imstat(alma_co10_n4254[i])["sum"][0])
-
-l = np.c_[beam_co10_n4254,int_co10_n4254]
-data_co10_n4254 = l[l[:,0].argsort(), :]
-"""
-
-# get ngc4321
-alma_co10_n4321 = glob.glob(dir_data + "../ngc4321_co10/*co10*.moment0")
-beam_co10_n4321 = []
-int_co10_n4321 = []
-for i in range(len(alma_co10_n4321)):
-    beamint = alma_co10_n4321[i].split("_")[-1].split(".")[0]
-    beam_co10_n4321.append(float(beamint.replace("p",".")))
-    int_co10_n4321.append(imstat(alma_co10_n4321[i])["sum"][0])
-
-l = np.c_[beam_co10_n4321,int_co10_n4321]
-data_co10_n4321 = l[l[:,0].argsort(), :]
-
-### co21
-# get ngc0628
-alma_co21_n0628 = glob.glob(dir_data + "../ngc0628_co21/*co21*.moment0")
-beam_co21_n0628 = []
-int_co21_n0628 = []
-for i in range(len(alma_co21_n0628)):
-    beamint = alma_co21_n0628[i].split("_")[-1].split(".")[0]
-    beam_co21_n0628.append(float(beamint.replace("p",".")))
-    int_co21_n0628.append(imstat(alma_co21_n0628[i])["sum"][0])
-
-l = np.c_[beam_co21_n0628,int_co21_n0628]
-data_co21_n0628 = l[l[:,0].argsort(), :]
-
-# get ngc3627
-alma_co21_n3627 = glob.glob(dir_data + "../ngc3627_co21/*co21*.moment0")
-beam_co21_n3627 = []
-int_co21_n3627 = []
-for i in range(len(alma_co21_n3627)):
-    beamint = alma_co21_n3627[i].split("_")[-1].split(".")[0]
-    beam_co21_n3627.append(float(beamint.replace("p",".")))
-    int_co21_n3627.append(imstat(alma_co21_n3627[i])["sum"][0])
-
-l = np.c_[beam_co21_n3627,int_co21_n3627]
-data_co21_n3627 = l[l[:,0].argsort(), :]
-
-# get ngc4254
-"""
-alma_co21_n4254 = glob.glob(dir_data + "../ngc4254_co21/*co21*.moment0")
-beam_co21_n4254 = []
-int_co21_n4254 = []
-for i in range(len(alma_co21_n4254)):
-    beamint = alma_co21_n4254[i].split("_")[-1].split(".")[0]
-    beam_co21_n4254.append(float(beamint.replace("p",".")))
-    int_co21_n4254.append(imstat(alma_co21_n4254[i])["sum"][0])
-
-l = np.c_[beam_co21_n4254,int_co21_n4254]
-data_co21_n4254 = l[l[:,0].argsort(), :]
-"""
-
-# get ngc4321
-alma_co21_n4321 = glob.glob(dir_data + "../ngc4321_co21/*co21*.moment0")
-beam_co21_n4321 = []
-int_co21_n4321 = []
-for i in range(len(alma_co21_n4321)):
-    beamint = alma_co21_n4321[i].split("_")[-1].split(".")[0]
-    beam_co21_n4321.append(float(beamint.replace("p",".")))
-    int_co21_n4321.append(imstat(alma_co21_n4321[i])["sum"][0])
-
-l = np.c_[beam_co21_n4321,int_co21_n4321]
-data_co21_n4321 = l[l[:,0].argsort(), :]
-
-## co10 plot
 plt.figure(figsize=(10,10))
 plt.rcParams["font.size"] = 22
-i = 0
-plt.errorbar(data_co10_n0628[:,0]*(scales[i]/1000),
-             data_co10_n0628[:,1]/sd_co10_n0628,
-             yerr=data_co10_n0628[:,1]/sd_co10_n0628*np.sqrt(0.05**2+0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 0628")
-i = 1
-plt.errorbar(data_co10_n3627[:,0]*(scales[i]/1000),
-             data_co10_n3627[:,1]/sd_co10_n3627,
-             yerr=data_co10_n3627[:,1]/sd_co10_n3627*np.sqrt(0.15**2+0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 3627")
-"""
-i = 2
-plt.errorbar(data_co10_n4254[:,0]*(scales[i]/1000),
-             data_co10_n4254[:,1]/sd_co10_n4254,
-             yerr=data_co10_n4254[:,1]/sd_co10_n4254*np.sqrt(0.10**2+0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 4254")
-"""
-i = 3
-plt.errorbar(data_co10_n4321[:,0]*(scales[i]/1000),
-             data_co10_n4321[:,1]/sd_co10_n4321,
-             yerr=data_co10_n4321[:,1]/sd_co10_n4321*np.sqrt(0.05**2+0.08**2),
-             lw=5,alpha=0.4,c=cm.brg(i/2.5),label="NGC 4321")
 plt.ylim([0,2])
 plt.ylabel("Total CO(1-0) Flux Relative To EMPIRE")
 plt.xlabel("Spatial Resolution (kpc)")
 plt.legend(loc = "lower right")
 plt.grid(color="grey")
+#
+for i in range(len(gals)):
+    # get data
+    images_co10 = glob.glob(dir_data + gals[i] + "_co10/*co10*.moment0")
+    freq = 115.27120 # GHz
+    data = get_beam_intensities(images_co10,freq)
+    # plot
+    plt.plot(data[:,0]*(scales[i]/1000), data[:,2], size=10, lw=5, alpha=0.4, c=cm.brg(i/2.5), label="NGC 0628")
+
+
+
 plt.savefig(dir_data + "../eps/missingflux_co10.png", dpi=100)
 
 ## co21 plot
