@@ -318,6 +318,7 @@ ax1.set_title(r"(b) Radial $\alpha_{[CI](1-0)}$")
 plt.legend()
 plt.savefig(dir_data+"eps/radial_alpha_ci_varying_a850.png",dpi=300)
 
+print("### total gas mass = " + str(np.round(np.log10(sum(mass)),3)))
 
 """
 # alpha_ci heatmap on Q-X plane
