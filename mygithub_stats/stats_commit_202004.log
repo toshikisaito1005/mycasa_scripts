@@ -20,25 +20,18 @@
        9 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim04_multibeam.py
        9 - mycasa_scripts_active/scripts_phangs05_v3_vs_v4/script02_regrid.py
        8 - mycasa_scripts_active/scripts_ts09_phangs_r21/f09a_radial.py
+       6 - mycasa_scripts_active/scripts_ts07_iras18293/fig06_radial_alpha_co_varying_alpha_850um.py
        5 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim08_r21_highlowmask.py
        5 - mycasa_scripts_active/scripts_ts09_phangs_r21/f99_table02.py
        4 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21_plot.py
        4 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim10_extract_param_600pc.py
        4 - mycasa_scripts_active/scripts_ts09_phangs_r21/.DS_Store
+       4 - mycasa_scripts_active/scripts_ts07_iras18293/fig05_radial_alpha_co.py
        4 - mycasa_scripts_active/scripts_phangs05_v3_vs_v4/script11_get_fits_smallscalebias_cyclefactor.py
        3 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim06_r21_map.py
        3 - mycasa_scripts_active/scripts_ts09_phangs_r21/f10_r21_highlowmask.py
        3 - mycasa_scripts_active/scripts_ts09_phangs_r21/f09b_radial_normed.py
        3 - mycasa_scripts_active/scripts_ts09_phangs_r21/f02_images.py
-       3 - mycasa_scripts_active/scripts_ts07_iras18293/figures/radial_flux.png
-       3 - mycasa_scripts_active/scripts_ts07_iras18293/figures/iras18293_ci10_m0.png
-       3 - mycasa_scripts_active/scripts_ts07_iras18293/figures/iras18293_b8contin.png
-       3 - mycasa_scripts_active/scripts_ts07_iras18293/figures/iras18293_12co10_m0.png
-       3 - mycasa_scripts_active/scripts_ts07_iras18293/figures/histo_ci_dust_weight.png
-       3 - mycasa_scripts_active/scripts_ts07_iras18293/figures/histo_ci_dust.png
-       3 - mycasa_scripts_active/scripts_ts07_iras18293/figures/histo_ci_co_weight.png
-       3 - mycasa_scripts_active/scripts_ts07_iras18293/figures/histo_ci_co.png
-       3 - mycasa_scripts_active/scripts_ts07_iras18293/fig05_radial_alpha_co.py
        3 - mycasa_scripts_active/scripts_phangs05_v3_vs_v4/script04_compare_rms.py
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/table03.txt
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim09_convolve_WISE.py
@@ -47,4 +40,5 @@
        2 - mycasa_scripts_active/scripts_phangs05_v3_vs_v4/script21_get_fits_nocommonbeam.py
        2 - mycasa_scripts_active/scripts_phangs05_v3_vs_v4/script12_check_beamsize.py
        2 - mycasa_scripts_active/scripts_phangs05_v3_vs_v4/script03_compare_sum.py
+       2 - mycasa_scripts_active/scripts_jwu01_ngc6240/fig03_noise.py
        2 - mycasa_scripts_active/scripts_jwu01_ngc6240/fig01_scatter_mom8.py
