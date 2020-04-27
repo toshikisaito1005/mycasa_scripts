@@ -120,5 +120,5 @@ title = "CO(2-1) Datacube Noise Histogram"
 co21snr_value = noisehist(imageco21, 0.001, output, snr_mom, title)
 
 ### print results
-print("### CO(1-0) datacube 3sigma level = " + str(np.round(co10snr_value)*1000., 2) + " mJy/beam")
-print("### CO(2-1) datacube 3sigma level = " + str(np.round(co21snr_value)*1000., 2) + " mJy/beam")
+print("### CO(1-0) datacube "+str(snr_mom)+" sigma level = " + str(np.round(co10snr_value*1000., 2)) + " mJy/beam")
+print("### CO(2-1) datacube "+str(snr_mom)+" sigma level = " + str(np.round(co21snr_value*1000., 2)) + " mJy/beam")
