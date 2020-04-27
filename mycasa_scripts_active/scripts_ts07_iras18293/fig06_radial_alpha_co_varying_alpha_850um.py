@@ -85,10 +85,14 @@ def gas_mass_from_dust_flux(
         rest wavelength  > 250 um 
         alpha850 = 6.7e19
     """
+    #
     nu850 = 352.6970094 # GHz
     Sig_rj = sigma_rj(tdust,nuobs,z)
     Sig_0 = sigma_rj(tdust,nu850,0)
-    mass = 1.78e10 * flux * (1+z)**-4.8 * (nu850/nuobs)**3.8 * dist**2 * (Sig_0/Sig_rj)
+    #
+    alpha850 = 6.7e19
+    #
+    mass = 1.78e10 * flux * (1+z)**-4.8 * (nu850/nuobs)**3.8 * dist**2 * (6.7e19/alpha850) * (Sig_0/Sig_rj)
 
     return mass
 
@@ -101,14 +105,18 @@ def gas_mass_from_dust_flux_Hughes17(
     ):
     """
     eq.5 of T. M. Hughes et al. 2016
+    and
+    eq.16 of Scoville et al. 2016
     """
     #
     nu850 = 352.6970094 # GHz
     Sig_rj = sigma_rj(tdust,nuobs,z)
     Sig_0 = sigma_rj(tdust,nu850,0)
     #
-    alpha850 = 6.7e19
-    mass = 1.78e10 * flux * (1+z)**-4.8 * (nu850/nuobs)**3.8 * dist**2 * (6.7e19/alpha850) * (Sig_0/Sig_rj)
+    L850 = 1.78e10 * flux * (1+z)**-4.8 * (nu850/nuobs)**3.8 * dist**2 * 6.7e19 * (Sig_0/Sig_rj)
+    #
+    log_mass = 0.93 * np.log10(L850) - 17.74
+    mass = 10**log_mass
 
     return mass
 
@@ -183,7 +191,7 @@ dist = r[data2_x > x_sncut/beamarea*2.5]
 flux_ci = data2_y1[data2_x > x_sncut/beamarea*2.5]
 
 # gas mass
-mass = gas_mass_from_dust_flux(flux_dust,483.37293,zspec,DL*1e-3,20.0)
+mass = gas_mass_from_dust_flux_Hughes17(flux_dust,483.37293,zspec,DL*1e-3,20.0)
 
 
 
@@ -246,7 +254,7 @@ ax1.text(0.20,ylim[1] - step*2.0, "16% = " + str(np.round(10**r_16,1)))
 
 ax1.set_title(r"(a) Radial $\alpha_{CO(1-0)}$")
 plt.legend()
-plt.savefig(dir_data+"eps/radial_alpha_co.png",dpi=300)
+plt.savefig(dir_data+"eps/radial_alpha_co_varying_a850.png",dpi=300)
 
 
 ### alpha_ci
@@ -308,9 +316,10 @@ ax1.text(0.20,ylim[1] - step*2.0, "16% = " + str(np.round(10**r_16,1)))
 
 ax1.set_title(r"(b) Radial $\alpha_{[CI](1-0)}$")
 plt.legend()
-plt.savefig(dir_data+"eps/radial_alpha_ci.png",dpi=300)
+plt.savefig(dir_data+"eps/radial_alpha_ci_varying_a850.png",dpi=300)
 
 
+"""
 # alpha_ci heatmap on Q-X plane
 list_x = []
 list_q = []
@@ -350,4 +359,5 @@ ax1.set_ylabel('$Q_{10}$')
 
 cbar = plt.colorbar(cscatter)#cax=cax)
 cbar.set_label(r"$\alpha_{[CI](1-0)}$")
-plt.savefig(dir_data+"eps/heatmap_alpha_ci.png",dpi=300)
+plt.savefig(dir_data+"eps/heatmap_alpha_ci_varying_a850.png",dpi=300)
+"""
