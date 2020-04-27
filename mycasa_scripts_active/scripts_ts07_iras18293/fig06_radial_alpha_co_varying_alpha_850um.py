@@ -92,6 +92,23 @@ def gas_mass_from_dust_flux(
 
     return mass
 
+def gas_mass_from_dust_flux_Hughes17(
+    flux, # mJy
+    nuobs, # GHz
+    z, # redshift
+    dist, # Gpc
+    tdust, # K
+    ):
+    """
+    eq.5 of T. M. Hughes et al. 2016
+    """
+    nu850 = 352.6970094 # GHz
+    Sig_rj = sigma_rj(tdust,nuobs,z)
+    Sig_0 = sigma_rj(tdust,nu850,0)
+    mass = 1.78e10 * flux * (1+z)**-4.8 * (nu850/nuobs)**3.8 * dist**2 * (Sig_0/Sig_rj)
+
+    return mass
+
 def alpha_catom10(Xci,Q10,flux,luminosity): # Alaghband-Zadeh et al. 2013
     A10 = 7.93e-8
     DL = 78.2 # Mpc
