@@ -118,7 +118,7 @@ def gas_mass_from_dust_flux_Hughes17(
     log_mass = 0.93 * np.log10(L850) - 17.74
     mass = 10**log_mass
 
-    return mass
+    return mass, L850
 
 def alpha_catom10(Xci,Q10,flux,luminosity): # Alaghband-Zadeh et al. 2013
     A10 = 7.93e-8
@@ -191,7 +191,7 @@ dist = r[data2_x > x_sncut/beamarea*2.5]
 flux_ci = data2_y1[data2_x > x_sncut/beamarea*2.5]
 
 # gas mass
-mass = gas_mass_from_dust_flux_Hughes17(flux_dust,483.37293,zspec,DL*1e-3,20.0)
+mass, L850 = gas_mass_from_dust_flux_Hughes17(flux_dust,483.37293,zspec,DL*1e-3,20.0)
 
 
 
@@ -319,6 +319,9 @@ plt.legend()
 plt.savefig(dir_data+"eps/radial_alpha_ci_varying_a850.png",dpi=300)
 
 print("### total gas mass = " + str(np.round(np.log10(sum(mass)),3)))
+
+alpha_850 = L850/mass
+print("### alpha_850 = " + str(min(alpha_850)) + " " + str(np.median(alpha_850)) + " " + str(max(alpha_850)))
 
 """
 # alpha_ci heatmap on Q-X plane
