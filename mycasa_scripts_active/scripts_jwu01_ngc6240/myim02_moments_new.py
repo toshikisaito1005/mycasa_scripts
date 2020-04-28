@@ -135,7 +135,7 @@ def eazy_immoments(
     ):
     """
     """
-    ### create mask
+    ### create signal-to-noise mask
     # get name
     smcube1 = imagename + ".smooth1"
     smcube2 = imagename + ".smooth2"
@@ -173,21 +173,19 @@ def eazy_immoments(
     os.system("rm -rf " + smcube2 + "*")
     os.system("rm -rf " + smcube3 + "*")
 
-    ### masking cube
+    ### nchan mask
+    nchanmask = imagename + ".nchanmask"
+    os.system("rm -rf " + nchanmask + "*")
+    immath(imagename=imagename, expr="iif(IM0>=0, 1.0, 0.0)", outfile=nchanmask + "_tmp")
+    immoments(imagename=nchanmask + "_tmp", moments=[0], outfile=nchanmask + "_tmp2")
+    tscreatemask(nchanmask + "_tmp", nchan, nchanmask)
 
 
 
 
 
-    immath(imagename = [cubeimage,mask_use_here],
-           expr = "iif( IM0>=" + str(noise*snr_mom) + ", IM0*IM1, 0.0)",
-           outfile = cubeimage+".masked")
 
-
-
-
-    vch = abs(imhead(cubeimage,mode="list")["cdelt4"]) / 115.27120e9 * 299792.458
-    
+  
     immath(imagename = cubeimage+".masked",
            expr = "iif( IM0>0, 1.0/" + str(vch) + ", 0.0)",
            outfile = cubeimage+".maskedTF")
