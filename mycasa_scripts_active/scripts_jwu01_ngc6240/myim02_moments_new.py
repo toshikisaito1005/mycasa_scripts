@@ -131,7 +131,7 @@ def eazy_immoments(
     nchan,
     outputname,
     snr_mom,
-    snr_mask=2..5,
+    snr_mask=2.5,
     ):
     """
     """
@@ -148,49 +148,43 @@ def eazy_immoments(
     smbeam = str(imhead(smcube1, mode="list")["beammajor"]["value"] * 2.0) + "arcsec"
     imsmooth(imagename=imagename, targetres=True, major=smbeam, minor=smbeam, pa="0deg", outfile=smcube1)
     smnoise1 = noisehist(smcube1, 0.02, "", snr_mom, plotter=False)
-    tscreatemask(smcube1, smnoise1 * 2.5, smcube1 + ".mask")
+    tscreatemask(smcube1, smnoise1 * snr_mask, smcube1+".mask")
     #
     # smooth2
     smbeam = str(imhead(smcube2, mode="list")["beammajor"]["value"] * 4.0) + "arcsec"
     imsmooth(imagename=imagename, targetres=True, major=smbeam, minor=smbeam, pa="0deg", outfile=smcube2)
     smnoise2 = noisehist(smcube2, 0.02, "", snr_mom, plotter=False)
-    tscreatemask(smcube2, smnoise2 * 2.5, smcube2 + ".mask")
+    tscreatemask(smcube2, smnoise2 * snr_mask, smcube2+".mask")
     #
     # smooth3
     smbeam = str(imhead(smcube3, mode="list")["beammajor"]["value"] * 6.0) + "arcsec"
     imsmooth(imagename=imagename, targetres=True, major=smbeam, minor=smbeam, pa="0deg", outfile=smcube3)
     smnoise3 = noisehist(smcube3, 0.02, "", snr_mom, plotter=False)
-    tscreatemask(smcube3, smnoise3 * 3.0, smcube3 + ".mask")
+    tscreatemask(smcube3, smnoise3 * snr_mask, smcube3+".mask")
     #
+    # combine mask
+    immath(imagename = [smcube1 + ".mask",
+                        smcube2 + ".mask",
+                        smcube3 + ".mask"],
+               expr = "iif(IM0+IM1+IM2>=2.0, 1.0, 0.0)",
+               outfile = imagename + ".mask")
+    # cleanup
+    os.system("rm -rf " + smcube1 + "*")
+    os.system("rm -rf " + smcube2 + "*")
+    os.system("rm -rf " + smcube3 + "*")
+
+    ### masking cube
 
 
 
 
-        tscreatemask(cubesmooth1,noisesmooth1*0.0,dir_image+name_line+"_mask1.image")
-        tscreatemask(cubesmooth2,noisesmooth2*0.0,dir_image+name_line+"_mask2.image")
-        tscreatemask(cubesmooth3,noisesmooth3*0.0,dir_image+name_line+"_mask3.image")
-
-        immath(imagename = [dir_image+name_line+"_mask1.image", dir_image+name_line+"_mask2.image", dir_image+name_line+"_mask3.image"],
-               expr = "iif(IM0+IM1 >= 2.0, 1.0, 0.0)",
-               outfile = dir_image+name_line+"_"+beamp+"_mask.image")
-
-        os.system("rm -rf "+cubesmooth1)
-        os.system("rm -rf "+cubesmooth2)
-        os.system("rm -rf "+cubesmooth3)
-        os.system("rm -rf "+dir_image+name_line+"_mask0.image")
-        os.system("rm -rf "+dir_image+name_line+"_mask1.image")
-        os.system("rm -rf "+dir_image+name_line+"_mask2.image")
-
-        mask_use_here = dir_image+name_line+"_"+beamp+"_mask.image"
-
-    else:
-        mask_use_here = dir_image+name_line+"_"+beamp+"_mask.image"
-        os.system("cp -r " + maskname + " " + mask_use_here)
 
     immath(imagename = [cubeimage,mask_use_here],
            expr = "iif( IM0>=" + str(noise*snr_mom) + ", IM0*IM1, 0.0)",
            outfile = cubeimage+".masked")
-    #os.system("rm -rf " + mask_use_here)
+
+
+
 
     vch = abs(imhead(cubeimage,mode="list")["cdelt4"]) / 115.27120e9 * 299792.458
     
