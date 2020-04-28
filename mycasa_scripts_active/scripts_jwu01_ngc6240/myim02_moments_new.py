@@ -17,6 +17,22 @@ snr_mom = 3.0
 ##################################################
 ### define some functions
 ##################################################
+def tscreatemask(
+    imagename,
+    thres,
+    outmask):
+    """
+    myim03
+    """
+    os.system("rm -rf " + outmask)
+    immath(imagename = imagename,
+           mode = "evalexpr",
+           expr = "iif(IM0 >= " + str(thres) + ", 1.0, 0.0)",
+           outfile = outmask)
+    imhead(imagename = outmask,
+           mode = "del",
+           hdkey = "beammajor")
+
 def func1(x, a, c):
     return a * np.exp(-(x)**2/(2*c**2))
 
@@ -112,8 +128,10 @@ def noisehist(
 
 def eazy_immoments(
     imagename,
-    snr_mom,
     nchan,
+    outputname,
+    snr_mom,
+    snr_mask=2..5,
     ):
     """
     """
@@ -123,22 +141,31 @@ def eazy_immoments(
     smcube2 = imagename + ".smooth2"
     smcube3 = imagename + ".smooth3"
     # cleanup
-    os.system("rm -rf " + smoothcube1)
-    os.system("rm -rf " + smoothcube2)
-    os.system("rm -rf " + smoothcube3)
+    os.system("rm -rf " + smcube1)
+    os.system("rm -rf " + smcube2)
+    os.system("rm -rf " + smcube3)
     # smooth1
-    smbeam = str(imhead(smoothcube1, mode="list")["beammajor"]["value"] * 2.0) + "arcsec"
-    imsmooth(imagename=imagename, targetres=True, major=smbeam, minor=smbeam, pa="0deg", outfile=smoothcube1)
+    smbeam = str(imhead(smcube1, mode="list")["beammajor"]["value"] * 2.0) + "arcsec"
+    imsmooth(imagename=imagename, targetres=True, major=smbeam, minor=smbeam, pa="0deg", outfile=smcube1)
+    smnoise1 = noisehist(smcube1, 0.02, "", snr_mom, plotter=False)
+    tscreatemask(smcube1, smnoise1 * 2.5, smcube1 + ".mask")
+    #
+    # smooth2
+    smbeam = str(imhead(smcube2, mode="list")["beammajor"]["value"] * 4.0) + "arcsec"
+    imsmooth(imagename=imagename, targetres=True, major=smbeam, minor=smbeam, pa="0deg", outfile=smcube2)
+    smnoise2 = noisehist(smcube2, 0.02, "", snr_mom, plotter=False)
+    tscreatemask(smcube2, smnoise2 * 2.5, smcube2 + ".mask")
+    #
+    # smooth3
+    smbeam = str(imhead(smcube3, mode="list")["beammajor"]["value"] * 6.0) + "arcsec"
+    imsmooth(imagename=imagename, targetres=True, major=smbeam, minor=smbeam, pa="0deg", outfile=smcube3)
+    smnoise3 = noisehist(smcube3, 0.02, "", snr_mom, plotter=False)
+    tscreatemask(smcube3, smnoise3 * 3.0, smcube3 + ".mask")
+    #
 
 
 
 
-        # noise
-        noisesmooth1 = noisehist(cubesmooth1,0.02,"test",3.0,bins=200,thres=0.0001,plotter=False)
-        noisesmooth2 = noisehist(cubesmooth2,0.02,"test",3.0,bins=200,thres=0.0001,plotter=False)
-        noisesmooth3 = noisehist(cubesmooth3,0.02,"test",3.0,bins=200,thres=0.0001,plotter=False)
-        # create mask
-        #tscreatemask(cubeimage,noise*1.*2.,dir_image+name_line+"_mask0.image")
         tscreatemask(cubesmooth1,noisesmooth1*0.0,dir_image+name_line+"_mask1.image")
         tscreatemask(cubesmooth2,noisesmooth2*0.0,dir_image+name_line+"_mask2.image")
         tscreatemask(cubesmooth3,noisesmooth3*0.0,dir_image+name_line+"_mask3.image")
