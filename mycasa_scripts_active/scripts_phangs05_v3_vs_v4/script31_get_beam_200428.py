@@ -1,30 +1,27 @@
-import os, sys, glob
-import shutil
-
+import os, sys
 
 dir_data = "/Users/saito/data/phangs/compare_v3p4_v4/data/"
 dir_product = "/Users/saito/data/phangs/compare_v3p4_v4/product/"
+imgaename = "ngc4303_7m_co21_dirty_200428.image"
 
 
 ####################
 ### main
 ####################
 # mkdir
-done = glob.glob(dir_ready)
+done = glob.glob(dir_product)
 if not done:
-	os.mkdir(dir_ready)
+	os.mkdir(dir_product)
 
 
 # get CASA files
-v3_image = glob.glob(dir_data + "ngc4303_7m_co21_v3_nocommonbeam_dirty.psf")[0]
-v4_image = glob.glob(dir_data + "ngc4303_7m_co21_v4_nocommonbeam_dirty.psf")[0]
+imgaename = dir_data + imgaename
 
 
-# move to the ready directory
-output = dir_ready + v3_image.split("/")[-1]
-os.system("rm -rf " + output)
-shutil.copytree(v3_image, output)
+# get beam
+data = imhead(imgaename, mode="list")["perplanebeams"]
 
-output = dir_ready + v4_image.split("/")[-1]
-os.system("rm -rf " + output)
-shutil.copytree(v3_image, output)
+list_bmaj = []
+for i in range(len(data)-3):
+	bmaj = data["*"+str(i)]["major"]["value"]
+	list_bmaj.append(bmaj)
