@@ -114,45 +114,25 @@ def eazy_immoments(
     imagename,
     snr_mom,
     nchan,
-    maskname=None,
     ):
     """
     """
     ### create mask
-    smoothcube1 = imagename + ".smooth1"
-    smoothcube2 = imagename + ".smooth2"
-    smoothcube3 = imagename + ".smooth3"
+    # get name
+    smcube1 = imagename + ".smooth1"
+    smcube2 = imagename + ".smooth2"
+    smcube3 = imagename + ".smooth3"
+    # cleanup
+    os.system("rm -rf " + smoothcube1)
+    os.system("rm -rf " + smoothcube2)
+    os.system("rm -rf " + smoothcube3)
+    # smooth1
+    smbeam = str(imhead(smoothcube1, mode="list")["beammajor"]["value"] * 2.0) + "arcsec"
+    imsmooth(imagename=imagename, targetres=True, major=smbeam, minor=smbeam, pa="0deg", outfile=smoothcube1)
 
 
 
-    if maskname==None:
-        os.system("rm -rf " + cubeimage+".masked")
-        #os.system("rm -rf " + dir_image+"*.noise")
-        os.system("rm -rf " + dir_image+"*.mask*")
-    
-        # imsmooth
-        cubesmooth1 = cubeimage.replace(".image",".smooth1") # 4.0 mJy
-        bmaj = imhead(cubeimage,"list")["beammajor"]["value"]
-        imsmooth(imagename = cubeimage,
-                 targetres = True,
-                 major = str(bmaj*3.0) + "arcsec",#1.2) + "arcsec",
-                 minor = str(bmaj*3.0) + "arcsec",#1.2) + "arcsec",
-                 pa = "0deg",
-                 outfile = cubesmooth1)
-        cubesmooth2 = cubeimage.replace(".image",".smooth2") # 10 mJy
-        imsmooth(imagename = cubeimage,
-                 targetres = True,
-                 major = str(bmaj*5.0) + "arcsec",
-                 minor = str(bmaj*5.0) + "arcsec",
-                 pa = "0deg",
-                 outfile = cubesmooth2)
-        cubesmooth3 = cubeimage.replace(".image",".smooth3") # 10 mJy
-        imsmooth(imagename = cubeimage,
-                 targetres = True,
-                 major = str(bmaj*7.0) + "arcsec",
-                 minor = str(bmaj*7.0) + "arcsec",
-                 pa = "0deg",
-                 outfile = cubesmooth3)
+
         # noise
         noisesmooth1 = noisehist(cubesmooth1,0.02,"test",3.0,bins=200,thres=0.0001,plotter=False)
         noisesmooth2 = noisehist(cubesmooth2,0.02,"test",3.0,bins=200,thres=0.0001,plotter=False)
