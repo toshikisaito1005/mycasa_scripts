@@ -142,9 +142,9 @@ def plotter(
     _, y_high = np.delete(hist_high[1],-1), hist_high[0]
     y_high = y_high / float(sum(y_high))
     #
-    ax.step(x, y_low, color="blue", lw=1.5, where="mid")
-    ax.step(x, y_mid, color="green", lw=1.5, where="mid")
-    ax.step(x, y_high, color="red", lw=1.5, where="mid")
+    ax.step(x, y_low, color="blue", lw=0.5, where="mid")
+    ax.step(x, y_mid, color="green", lw=0.5, where="mid")
+    ax.step(x, y_high, color="red", lw=0.5, where="mid")
     ax.bar(x, y_low, lw=0, color="blue", alpha=0.2, width=x[1]-x[0], align="center")
     ax.bar(x, y_mid, lw=0, color="green", alpha=0.2, width=x[1]-x[0], align="center")
     ax.bar(x, y_high, lw=0, color="red", alpha=0.2, width=x[1]-x[0], align="center")
@@ -155,9 +155,9 @@ def plotter(
     ax.plot([stats_low[1],stats_low[1]], [ylim_top-ylim_width*0.15,ylim_top-ylim_width*0.15], "o", color="blue", markeredgewidth=0)
     ax.plot([stats_mid[1],stats_mid[1]], [ylim_top-ylim_width*0.10,ylim_top-ylim_width*0.10], "o", color="green", markeredgewidth=0)
     ax.plot([stats_high[1],stats_high[1]], [ylim_top-ylim_width*0.05,ylim_top-ylim_width*0.05], "o", color="red", markeredgewidth=0)
-    ax.plot([stats_low[2],stats_low[0]], [ylim_top-ylim_width*0.15,ylim_top-ylim_width*0.15], "-", color="blue", lw=3, alpha=0.4)
-    ax.plot([stats_mid[2],stats_mid[0]], [ylim_top-ylim_width*0.10,ylim_top-ylim_width*0.10], "-", color="green", lw=3, alpha=0.4)
-    ax.plot([stats_high[2],stats_high[0]], [ylim_top-ylim_width*0.05,ylim_top-ylim_width*0.05], "-", color="red", lw=3, alpha=0.4)
+    ax.plot([stats_low[2],stats_low[0]], [ylim_top-ylim_width*0.15,ylim_top-ylim_width*0.15], "-", color="blue", lw=1.5, alpha=0.4)
+    ax.plot([stats_mid[2],stats_mid[0]], [ylim_top-ylim_width*0.10,ylim_top-ylim_width*0.10], "-", color="green", lw=1.5, alpha=0.4)
+    ax.plot([stats_high[2],stats_high[0]], [ylim_top-ylim_width*0.05,ylim_top-ylim_width*0.05], "-", color="red", lw=1.5, alpha=0.4)
 
 def weighted_percentile(
     data,
