@@ -150,7 +150,6 @@ def eazy_immoments(
     snr_mom,
     obsfreq_GHz,
     maskimage=None,
-    maskcube=None,
     nchan=3.0,
     snr_mask=6.0,
     clipbox="",
@@ -282,16 +281,16 @@ def eazy_immoments(
     os.system("rm -rf " + nchanmask+"*")
     #os.system("rm -rf " + imagename+".mask")
 
-    return outfile_mom0+".mask", maskcube, noise_mJy
+    return outfile_mom0+".mask", noise_mJy
 
 
 #####################
 ### Main Procedure
 #####################
-co10mask, co10maskcube, noise_co10_mJy = \
+co10mask, noise_co10_mJy = \
     eazy_immoments(imagename=imageco10, outputname=dir_data+"n6240_co10", snr_mom=snr_mom, obsfreq_GHz=115.27120/(1+redshift), clipbox=clipbox)
-_, _, noise_co21_mJy = \
-    eazy_immoments(imagename=imageco21, outputname=dir_data+"n6240_co21", snr_mom=snr_mom, obsfreq_GHz=230.53800/(1+redshift), clipbox=clipbox, maskimage=co10mask, maskcube=co10maskcube)
+_, noise_co21_mJy = \
+    eazy_immoments(imagename=imageco21, outputname=dir_data+"n6240_co21", snr_mom=snr_mom, obsfreq_GHz=230.53800/(1+redshift), clipbox=clipbox, maskimage=co10mask)
 
 print("### 1sigma of the input co10 datacube = " + noise_co10_mJy + " mJy/beam")
 print("### 1sigma of the input co21 datacube = " + noise_co21_mJy + " mJy/beam")
