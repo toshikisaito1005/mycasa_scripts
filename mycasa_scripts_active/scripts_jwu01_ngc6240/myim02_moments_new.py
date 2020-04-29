@@ -230,11 +230,19 @@ def eazy_immoments(
     #
     #
     #
+    ### export mask
+    os.system("rm -rf " + outfile_mom0 + ".mask")
+    immath(imagename=[outfile_mom0+"_tmp",nchanmask], expr="IM0*IM1", outfile=outfile_mom0+"_tmp2")
+    tscreatemask(outfile_mom0+"_tmp2", 0.000000001, outfile_mom0+".mask")
+    #
+    immath(imagename=[imagename+".masked",outfile_mom0+".mask"],expr="IM0*IM1",outfifle=imagename+".masked2")
+    #
     ### moments
+    cube_for_moment = imagename+".masked2"
     # mom-0
     outfile_mom0 = outputname+"_mom0.image"
     os.system("rm -rf " + outfile_mom0 + "*")
-    immoments(imagename=imagename+".masked", moments=[0], includepix=[0.,1e11], outfile=outfile_mom0+"_tmp")
+    immoments(imagename=cube_for_moment, moments=[0], includepix=[0.,1e11], outfile=outfile_mom0+"_tmp")
     imagenames = [outfile_mom0+"_tmp",nchanmask]
     expr = "IM0*IM1"
     immath(imagename=imagenames, expr=expr, outfile=outfile_mom0, box=clipbox)
@@ -242,7 +250,7 @@ def eazy_immoments(
     # mom-1
     outfile_mom1 = outputname+"_mom1.image"
     os.system("rm -rf " + outfile_mom1 + "*")
-    immoments(imagename=imagename+".masked", moments=[1], includepix=[0.,1e11], outfile=outfile_mom1+"_tmp")
+    immoments(imagename=cube_for_moment, moments=[1], includepix=[0.,1e11], outfile=outfile_mom1+"_tmp")
     imagenames = [outfile_mom1+"_tmp",nchanmask]
     expr = "IM0*IM1"
     immath(imagename=imagenames, expr=expr, outfile=outfile_mom1, box=clipbox)
@@ -250,7 +258,7 @@ def eazy_immoments(
     # mom-2
     outfile_mom2 = outputname+"_mom2.image"
     os.system("rm -rf " + outfile_mom2 + "*")
-    immoments(imagename=imagename+".masked", moments=[2], includepix=[0.,1e11], outfile=outfile_mom2+"_tmp")
+    immoments(imagename=cube_for_moment, moments=[2], includepix=[0.,1e11], outfile=outfile_mom2+"_tmp")
     imagenames = [outfile_mom2+"_tmp",nchanmask]
     expr = "IM0*IM1"
     immath(imagename=imagenames, expr=expr, outfile=outfile_mom2, box=clipbox)
@@ -258,7 +266,7 @@ def eazy_immoments(
     # mom-8
     outfile_mom8 = outputname+"_mom8.image"
     os.system("rm -rf " + outfile_mom8 + "*")
-    immoments(imagename=imagename+".masked", moments=[8], includepix=[0.,1e11], outfile=outfile_mom8+"_tmp")
+    immoments(imagename=cube_for_moment, moments=[8], includepix=[0.,1e11], outfile=outfile_mom8+"_tmp")
     imagenames = [outfile_mom8+"_tmp",nchanmask]
     expr = "IM0*IM1"
     immath(imagename=imagenames, expr=expr, outfile=outfile_mom8, box=clipbox)
@@ -272,11 +280,6 @@ def eazy_immoments(
     imhead(outfile_mom8, mode="put", hdkey="beammajor", hdvalue=str(bmaj)+"arcsec")
     imhead(outfile_mom8, mode="put", hdkey="beamminor", hdvalue=str(bmaj)+"arcsec")
     Jy2Kelvin(outfile_mom8, obsfreq_GHz, "K")
-    #
-    ### export mask
-    os.system("rm -rf " + outfile_mom0 + ".mask")
-    immath(imagename=[outfile_mom0+"_tmp",nchanmask], expr="IM0*IM1", outfile=outfile_mom0+"_tmp2")
-    tscreatemask(outfile_mom0+"_tmp2", 0.000000001, outfile_mom0+".mask")
     #
     # noise
     noise_mJy = str(np.round(noise*1000., 2))
