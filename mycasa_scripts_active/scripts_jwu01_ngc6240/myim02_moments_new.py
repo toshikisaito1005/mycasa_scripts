@@ -231,6 +231,7 @@ def eazy_immoments(
     #
     #
     ### export mask
+    outfile_mom0 = outputname+"_mom0.image"
     os.system("rm -rf " + outfile_mom0 + ".mask")
     immath(imagename=[outfile_mom0+"_tmp",nchanmask], expr="IM0*IM1", outfile=outfile_mom0+"_tmp2")
     tscreatemask(outfile_mom0+"_tmp2", 0.000000001, outfile_mom0+".mask")
