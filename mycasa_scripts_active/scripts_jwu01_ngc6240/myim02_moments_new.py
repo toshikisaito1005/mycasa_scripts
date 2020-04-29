@@ -131,7 +131,7 @@ def Jy2Kelvin(
     bmaj = imhead(imagename, mode="list")["beammajor"]["value"]
     bmin = imhead(imagename, mode="list")["beamminor"]["value"]
     J2K = 1.222e6 / bmaj / bmin / restfreq_GHz**2
-    immath(imagename=imagename, expr="IM0*"+str(J2K), outfile=imagename.replace(".image","_Kelvin.image"))
+    immath(imagename=imagename, expr="IM0*"+str(J2K), outfile=imagename.replace(".image","") + "_Kelvin.image")
 
 def eazy_immoments(
     imagename,
@@ -236,7 +236,7 @@ def eazy_immoments(
     momentmaps = [outfile_mom0, outfile_mom1, outfile_mom2, outfile_mom8]
     for i in range(len(momentmaps)):
         imhead(momentmaps[i], mode="put", hdkey="beammajor", hdvalue=str(bmaj)+"arcsec")
-        imhead(momentmaps[i], mode="add", hdkey="beamminor", hdvalue=str(bmin)+"arcsec")
+        imhead(momentmaps[i], mode="add", hdkey="beamminor", hdvalue=str(bmaj)+"arcsec")
         Jy2Kelvin(momentmaps[i], restfreq_GHz)
     #
     # cleanup
