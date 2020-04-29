@@ -12,7 +12,7 @@ imageco10 = dir_data + "co10_cube.image"
 imageco21 = dir_data + "co21_cube.image"
 
 snr_mom = 2.5   # clip signal-to-noise ratio level for immoments
-
+redshift = 
 
 #####################
 ### define some functions
@@ -129,20 +129,20 @@ def noisehist(
 
 def Jy2Kelvin(
     imagename,
-    restfreq_GHz,
+    obsfreq_GHz,
     ):
     """
     """
     bmaj = imhead(imagename, mode="list")["beammajor"]["value"]
     bmin = imhead(imagename, mode="list")["beamminor"]["value"]
-    J2K = 1.222e6 / bmaj / bmin / restfreq_GHz**2
+    J2K = 1.222e6 / bmaj / bmin / obsfreq_GHz**2
     immath(imagename=imagename, expr="IM0*"+str(J2K), outfile=imagename.replace(".image","") + "_Kelvin.image")
 
 def eazy_immoments(
     imagename,
     outputname,
     snr_mom,
-    restfreq_GHz,
+    obsfreq_GHz,
     maskimage=None,
     nchan=3.0,
     snr_mask=4.0,
@@ -242,11 +242,11 @@ def eazy_immoments(
     immath(imagename=[outfile_mom8+"_tmp",nchanmask], expr="IM0*IM1", outfile=outfile_mom8)
     #
     # add beam header
-    momentmaps = [outfile_mom0, outfile_mom1, outfile_mom2, outfile_mom8]
+    momentmaps = [outfile_mom0, outfile_mom8]
     for i in range(len(momentmaps)):
         imhead(momentmaps[i], mode="put", hdkey="beammajor", hdvalue=str(bmaj)+"arcsec")
         imhead(momentmaps[i], mode="put", hdkey="beamminor", hdvalue=str(bmaj)+"arcsec")
-        Jy2Kelvin(momentmaps[i], restfreq_GHz)
+        Jy2Kelvin(momentmaps[i], obsfreq_GHz)
     #
     # cleanup
     os.system("rm -rf " + outfile_mom0 + "_tmp")
@@ -271,8 +271,8 @@ def eazy_immoments(
 #####################
 ### Main Procedure
 #####################
-co10mask, noise_co10_mJy = eazy_immoments(imagename=imageco10, outputname=dir_data+"n6240_co10", snr_mom=snr_mom, restfreq_GHz=115.27120)
-_, noise_co21_mJy = eazy_immoments(imagename=imageco21, outputname=dir_data+"n6240_co21", snr_mom=snr_mom, restfreq_GHz=230.53800, maskimage = co10mask)
+co10mask, noise_co10_mJy = eazy_immoments(imagename=imageco10, outputname=dir_data+"n6240_co10", snr_mom=snr_mom, obsfreq_GHz=115.27120/(1+0.02448))
+_, noise_co21_mJy = eazy_immoments(imagename=imageco21, outputname=dir_data+"n6240_co21", snr_mom=snr_mom, obsfreq_GHz=230.53800/(1+0.02448), maskimage = co10mask)
 
 print("### 1sigma of the input co10 datacube = " + noise_co10_mJy + " mJy/beam")
 print("### 1sigma of the input co21 datacube = " + noise_co21_mJy + " mJy/beam")
