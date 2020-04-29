@@ -150,6 +150,7 @@ def eazy_immoments(
     snr_mom,
     obsfreq_GHz,
     maskimage=None,
+    maskcube=None,
     nchan=3.0,
     snr_mask=6.0,
     clipbox="",
@@ -223,7 +224,7 @@ def eazy_immoments(
     if maskimage==None:
         tscreatemask(nchanmask+"_tmp2", nchan, nchanmask)
     else:
-        immath(imagename=[nchanmask+"_tmp2",maskimage], expr="iif(IM1>=1.0,IM0,0.0)", outfile=nchanmask+"_tmp3")
+        immath(imagename=[nchanmask+"_tmp2",maskimage], expr="IM0*IM1", outfile=nchanmask+"_tmp3")
         tscreatemask(nchanmask+"_tmp3", nchan, nchanmask)
     #
     #
@@ -279,7 +280,7 @@ def eazy_immoments(
     os.system("rm -rf " + imagename+".masked_tmp")
     os.system("rm -rf " + imagename+".masked")
     os.system("rm -rf " + nchanmask+"*")
-    #os.system("rm -rf " + imagename+".mask")
+    os.system("rm -rf " + imagename+".mask")
 
     return outfile_mom0+".mask", noise_mJy
 
