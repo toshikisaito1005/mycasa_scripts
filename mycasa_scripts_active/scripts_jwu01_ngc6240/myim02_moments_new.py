@@ -149,6 +149,7 @@ def eazy_immoments(
     snr_mom,
     obsfreq_GHz,
     maskimage=None,
+    maskcube=None,
     nchan=3.0,
     snr_mask=6.0,
     ):
@@ -203,22 +204,23 @@ def eazy_immoments(
     #
     ### nchan mom mask
     # measure noise
-    noise = noisehist(imagename, 0.02, "", snr_mom, plotter=False)
-    #
-    # mask cube
-    os.system("rm -rf " + imagename+".masked")
-    immath(imagename=[imagename,imagename+".mask"], expr="iif(IM1>=1.0,IM0,0.0)", outfile=imagename+".masked")
-    #
-    nchanmask = imagename + ".nchanmask"
-    os.system("rm -rf " + nchanmask + "*")
-    immath(imagename=imagename+".masked", expr="iif(IM0>="+str(noise*snr_mom)+",1.0/10.,0.0)", outfile=nchanmask+"_tmp") # 10. is the channel width in km/s.
-    immoments(imagename=nchanmask+"_tmp", moments=[0], outfile=nchanmask+"_tmp2")
-    # hybrid nchanmask and input maskimage
-    if maskimage==None:
-        tscreatemask(nchanmask+"_tmp2", nchan, nchanmask)
-    else:
-        immath(imagename=[nchanmask+"_tmp2",maskimage], expr="iif(IM1>=1.0,IM0,0.0)", outfile=nchanmask+"_tmp3")
-        tscreatemask(nchanmask+"_tmp3", nchan, nchanmask)
+    if maskcube==None:
+        noise = noisehist(imagename, 0.02, "", snr_mom, plotter=False)
+        #
+        # mask cube
+        os.system("rm -rf " + imagename+".masked")
+        immath(imagename=[imagename,imagename+".mask"], expr="iif(IM1>=1.0,IM0,0.0)", outfile=imagename+".masked")
+        #
+        nchanmask = imagename + ".nchanmask"
+        os.system("rm -rf " + nchanmask + "*")
+        immath(imagename=imagename+".masked", expr="iif(IM0>="+str(noise*snr_mom)+",1.0/10.,0.0)", outfile=nchanmask+"_tmp") # 10. is the channel width in km/s.
+        immoments(imagename=nchanmask+"_tmp", moments=[0], outfile=nchanmask+"_tmp2")
+        # hybrid nchanmask and input maskimage
+        if maskimage==None:
+            tscreatemask(nchanmask+"_tmp2", nchan, nchanmask)
+        else:
+            immath(imagename=[nchanmask+"_tmp2",maskimage], expr="iif(IM1>=1.0,IM0,0.0)", outfile=nchanmask+"_tmp3")
+            tscreatemask(nchanmask+"_tmp3", nchan, nchanmask)
 
     #
     ### moments
