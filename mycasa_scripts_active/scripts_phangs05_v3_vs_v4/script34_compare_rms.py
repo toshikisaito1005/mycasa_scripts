@@ -6,6 +6,7 @@ plt.ioff()
 dir_ready = "/Users/saito/data/phangs/compare_v3p4_v4/data_ready_200428/"
 dir_product = "/Users/saito/data/phangs/compare_v3p4_v4/product/"
 galname = "ngc4303"
+sol_kms = 299792.458 # km/s
 
 
 ####################
@@ -62,6 +63,12 @@ for i in range(len(xaxis_v4)):
 		rms = np.sqrt(np.mean(data_clipped**2))
 		yaxis_v4.append(rms)
 
+# get velres
+width_v3 = imhead(v3_image,mode="list")["cdelt4"]/1e9 # GHz
+chan_v3 = width_v3 / 230.53800 * sol_kms # km/s
+#
+width_v4 = imhead(v4_image,mode="list")["cdelt4"]/1e9 # GHz
+chan_v4 = width_v4 / 230.53800 * sol_kms # km/s
 
 ### v3 data
 # get shape for imval
@@ -89,8 +96,8 @@ for i in range(len(xaxis_v3)):
 # average rms
 rms_v3 = np.round((np.mean(yaxis_v3[10:60])+np.mean(yaxis_v3[210:260]))/2.0, 4)
 rms_v4 = np.round((np.mean(yaxis_v4[10:60])+np.mean(yaxis_v4[210:260]))/2.0, 4)
-print("### rms_v3 = " + str(rms_v3) + " mJy/beam")
-print("### rms_v4 = " + str(rms_v4) + " mJy/beam")
+print("### rms_v3 = " + str(rms_v3) + " mJy/beam at 2.50 km/s width")
+print("### rms_v4 = " + str(rms_v4) + " mJy/beam at 2.50 km/s width")
 
 
 # plot
