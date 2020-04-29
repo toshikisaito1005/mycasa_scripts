@@ -3,15 +3,20 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 plt.ioff()
 
+
+#####################
+### Define Parameters
+#####################
 dir_data = "/Users/saito/Desktop/"
 imageco10 = dir_data + "co10_cube.image"
 imageco21 = dir_data + "co21_cube.image"
 
 snr_mom = 2.5   # clip signal-to-noise ratio level for immoments
 
-##################################################
+
+#####################
 ### define some functions
-##################################################
+#####################
 def tscreatemask(
     imagename,
     thres,
@@ -263,9 +268,9 @@ def eazy_immoments(
     return outfile_mom0+".mask", noise_mJy
 
 
-##################################################
-### main part
-##################################################
+#####################
+### Main Procedure
+#####################
 co10mask, noise_co10_mJy = eazy_immoments(imagename=imageco10, outputname=dir_data+"n6240_co10", snr_mom=snr_mom, restfreq_GHz=115.27120)
 _, noise_co21_mJy = eazy_immoments(imagename=imageco21, outputname=dir_data+"n6240_co21", snr_mom=snr_mom, restfreq_GHz=230.53800, maskimage = co10mask)
 

@@ -13,7 +13,6 @@ imagenames = glob.glob(dir_data + "*.smooth")
 imagenames.extend(glob.glob(dir_data + "*.pb"))
 
 
-
 #####################
 ### Main Procedure
 #####################
@@ -69,7 +68,6 @@ exportfits(imagename="template.im",
 
 importfits(fitsimage="template.fits",
            imagename="template.image")
-
 
 # regrid
 os.system("rm -rf " + dir_data.replace("data_raw","data"))
