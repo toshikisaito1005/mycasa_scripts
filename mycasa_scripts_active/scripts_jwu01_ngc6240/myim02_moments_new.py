@@ -220,12 +220,8 @@ def eazy_immoments(
     os.system("rm -rf " + nchanmask + "*")
     immath(imagename=imagename+".masked", expr="iif(IM0>="+str(noise*snr_mom)+",1.0/10.,0.0)", outfile=nchanmask+"_tmp") # 10. is the channel width in km/s.
     immoments(imagename=nchanmask+"_tmp", moments=[0], outfile=nchanmask+"_tmp2")
-    # hybrid nchanmask and input maskimage
-    if maskimage==None:
-        tscreatemask(nchanmask+"_tmp2", nchan, nchanmask)
-    else:
-        immath(imagename=[nchanmask+"_tmp2",maskimage], expr="IM0*IM1", outfile=nchanmask+"_tmp3")
-        tscreatemask(nchanmask+"_tmp3", nchan, nchanmask)
+    # make nchanmask
+    tscreatemask(nchanmask+"_tmp2", nchan, nchanmask)
     #
     #
     #
@@ -234,48 +230,32 @@ def eazy_immoments(
     outfile_mom0 = outputname+"_mom0.image"
     os.system("rm -rf " + outfile_mom0 + "*")
     immoments(imagename=imagename+".masked", moments=[0], outfile=outfile_mom0+"_tmp")
-    if maskimage==None:
-        imagenames = [outfile_mom0+"_tmp",nchanmask]
-        expr = "IM0*IM1"
-    else:
-        imagenames = [outfile_mom0+"_tmp",nchanmask,maskimage]
-        expr = "IM0*IM1*IM2"
-    immath(imagename=imagenames, expr=expr, outfile=outfile_mom0, box=clipbox) # iif(IM1>="+str(nchan)+",IM0,0.0)
+    imagenames = [outfile_mom0+"_tmp",nchanmask]
+    expr = "IM0*IM1"
+    immath(imagename=imagenames, expr=expr, outfile=outfile_mom0, box=clipbox)
     #
     # mom-1
     outfile_mom1 = outputname+"_mom1.image"
     os.system("rm -rf " + outfile_mom1 + "*")
     immoments(imagename=imagename+".masked", moments=[1], outfile=outfile_mom1+"_tmp")
-    if maskimage==None:
-        imagenames = [outfile_mom1+"_tmp",nchanmask]
-        expr = "IM0*IM1"
-    else:
-        imagenames = [outfile_mom1+"_tmp",nchanmask,maskimage]
-        expr = "IM0*IM1*IM2"
+    imagenames = [outfile_mom1+"_tmp",nchanmask]
+    expr = "IM0*IM1"
     immath(imagename=imagenames, expr=expr, outfile=outfile_mom1, box=clipbox)
     #
     # mom-2
     outfile_mom2 = outputname+"_mom2.image"
     os.system("rm -rf " + outfile_mom2 + "*")
     immoments(imagename=imagename+".masked", moments=[2], outfile=outfile_mom2+"_tmp")
-    if maskimage==None:
-        imagenames = [outfile_mom2+"_tmp",nchanmask]
-        expr = "IM0*IM1"
-    else:
-        imagenames = [outfile_mom2+"_tmp",nchanmask,maskimage]
-        expr = "IM0*IM1*IM2"
+    imagenames = [outfile_mom2+"_tmp",nchanmask]
+    expr = "IM0*IM1"
     immath(imagename=imagenames, expr=expr, outfile=outfile_mom2, box=clipbox)
     #
     # mom-8
     outfile_mom8 = outputname+"_mom8.image"
     os.system("rm -rf " + outfile_mom8 + "*")
     immoments(imagename=imagename+".masked", moments=[8], outfile=outfile_mom8+"_tmp")
-    if maskimage==None:
-        imagenames = [outfile_mom8+"_tmp",nchanmask]
-        expr = "IM0*IM1"
-    else:
-        imagenames = [outfile_mom8+"_tmp",nchanmask,maskimage]
-        expr = "IM0*IM1*IM2"
+    imagenames = [outfile_mom8+"_tmp",nchanmask]
+    expr = "IM0*IM1"
     immath(imagename=imagenames, expr=expr, outfile=outfile_mom8, box=clipbox)
     #
     # add header to mom0
