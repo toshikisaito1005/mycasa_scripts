@@ -27,12 +27,11 @@ v4_image = glob.glob(dir_ready + "ngc4303_7m_co21_v4.image")[0]
 shape = imhead(v4_image,mode="list")["shape"]
 box = "0,0,"+str(shape[0]-1)+","+str(shape[1]-1)
 # imval
-data = imval(v3_image, box=box)
+data = imval(v4_image, box=box)
 # xaxis
 xaxis_v4 = range(np.shape(data['data'])[2])
 # yaxis
 num_pixel_per_chan = np.shape(data['data'])[0]*np.shape(data['data'])[1]
-
 yaxis_v4 = []
 for i in range(len(xaxis_v4)):
 	data_thischan = data['data'][:,:,i]
@@ -45,11 +44,26 @@ for i in range(len(xaxis_v4)):
 		yaxis_v4.append(rms)
 
 
-
-
-print(len(np.sum(np.sum(data_v4**2,axis=0),axis=0)))
-yaxis_v4 = np.sum(np.sum(data_v4**2,axis=0),axis=0)/float(num_pixel_per_chan)
-
+### v3 data
+# get shape for imval
+shape = imhead(v3_image,mode="list")["shape"]
+box = "0,0,"+str(shape[0]-1)+","+str(shape[1]-1)
+# imval
+data = imval(v3_image, box=box)
+# xaxis
+xaxis_v3 = range(np.shape(data['data'])[2])
+# yaxis
+num_pixel_per_chan = np.shape(data['data'])[0]*np.shape(data['data'])[1]
+yaxis_v3 = []
+for i in range(len(xaxis_v3)):
+	data_thischan = data['data'][:,:,i]
+	data_clipped = data_thischan[data_thischan>0.00000001]
+	if len(data_clipped)==0:
+		rms = 0
+		yaxis_v3.append(rms)
+	else:
+		rms = np.sqrt(np.mean(data_clipped**2))
+		yaxis_v3.append(rms)
 
 
 

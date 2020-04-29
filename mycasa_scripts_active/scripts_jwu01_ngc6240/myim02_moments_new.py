@@ -279,7 +279,6 @@ def eazy_immoments(
     os.system("rm -rf " + outfile_mom1 + "_tmp")
     os.system("rm -rf " + outfile_mom2 + "_tmp")
     os.system("rm -rf " + outfile_mom8 + "_tmp")
-    os.system("rm -rf " + imagename+".masked")
     os.system("rm -rf " + imagename+".masked_tmp")
     os.system("rm -rf " + nchanmask+"*")
     os.system("rm -rf " + imagename+".mask")
