@@ -131,6 +131,7 @@ def noisehist(
 def Jy2Kelvin(
     imagename,
     obsfreq_GHz,
+    hdvalue="K.km/s",
     ):
     """
     """
@@ -141,8 +142,7 @@ def Jy2Kelvin(
     outfile = imagename.replace(".image","") + "_Kelvin.image"
     os.system("rm -rf " + outfile)
     immath(imagename=imagename, expr="IM0*"+str(J2K), outfile=outfile)
-
-    return outfile
+    imhead(outfile, mode="put", hdkey="bunit", hdvalue=hdvalue)
 
 def eazy_immoments(
     imagename,
@@ -257,14 +257,12 @@ def eazy_immoments(
     # add header to mom0
     imhead(outfile_mom0, mode="put", hdkey="beammajor", hdvalue=str(bmaj)+"arcsec")
     imhead(outfile_mom0, mode="put", hdkey="beamminor", hdvalue=str(bmaj)+"arcsec")
-    outfile = Jy2Kelvin(outfile_mom0, obsfreq_GHz)
-    imhead(outfile, mode="put", hdkey="bunit", hdvalue="K.km/s")
+    Jy2Kelvin(outfile_mom0, obsfreq_GHz, "K.km/s")
     #
     # add header to mom8
     imhead(outfile_mom8, mode="put", hdkey="beammajor", hdvalue=str(bmaj)+"arcsec")
     imhead(outfile_mom8, mode="put", hdkey="beamminor", hdvalue=str(bmaj)+"arcsec")
-    outfile = Jy2Kelvin(outfile_mom8, obsfreq_GHz)
-    imhead(outfile, mode="put", hdkey="bunit", hdvalue="K")
+    Jy2Kelvin(outfile_mom8, obsfreq_GHz, "K")
     #
     ### export mask
     os.system("rm -rf " + outfile_mom0 + ".mask")
