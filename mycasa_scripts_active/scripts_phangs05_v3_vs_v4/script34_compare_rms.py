@@ -71,12 +71,13 @@ plt.figure(figsize=(8,3))
 plt.grid()
 plt.subplots_adjust(left=0.15, right=0.95, top=0.90, bottom=0.15)
 plt.rcParams["font.size"] = 14
-plt.scatter(xaxis_v3, yaxis_v3, lw=0, color="red")
-plt.scatter(xaxis_v4, yaxis_v4, lw=0, color="blue")
+plt.scatter(xaxis_v3, yaxis_v3, lw=0, color="red", label="v3p4")
+plt.scatter(xaxis_v4, yaxis_v4, lw=0, color="blue", label="v4")
 plt.xlim(min(xaxis_v4)-10,max(xaxis_v4)+10)
 plt.xlabel("Channel")
 plt.ylabel("rms per pixel (Jy beam$^{-1}$)")
-plt.savefig(dir_product + "rms_200429.png", dpi=300)
+plt.legend()
+plt.savefig(dir_product + "ngc4303_rms_200429.png", dpi=300)
 #
 
 os.system("rm -rf *.last")
