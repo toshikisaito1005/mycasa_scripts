@@ -214,7 +214,7 @@ def eazy_immoments(
     #
     # mask cube
     os.system("rm -rf " + imagename+".masked")
-    immath(imagename=[imagename,imagename+".mask"], expr="iif(IM1>=1.0,IM0,0.0)", outfile=imagename+".masked")
+    immath(imagename=[imagename,maskcube], expr="iif(IM1>=1.0,IM0,0.0)", outfile=imagename+".masked")
     #
     nchanmask = imagename + ".nchanmask"
     os.system("rm -rf " + nchanmask + "*")
@@ -280,8 +280,9 @@ def eazy_immoments(
     os.system("rm -rf " + outfile_mom2 + "_tmp")
     os.system("rm -rf " + outfile_mom8 + "_tmp")
     os.system("rm -rf " + imagename+".masked_tmp")
+    os.system("rm -rf " + imagename+".masked")
     os.system("rm -rf " + nchanmask+"*")
-    os.system("rm -rf " + imagename+".mask")
+    #os.system("rm -rf " + imagename+".mask")
 
     return outfile_mom0+".mask", maskcube, noise_mJy
 
