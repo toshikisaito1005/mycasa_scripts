@@ -206,6 +206,11 @@ def eazy_immoments(
     else:
         maskcube = maskcube
     #
+    if maskimage!=None:
+        maskcube_pre = maskcube
+        maskcube = imagename+".mask2"
+        immath(imagename=[maskcube_pre,maskimage], expr="IM0*IM1", outfile=maskcube)
+    #
     #
     #
     ### nchan mom mask
