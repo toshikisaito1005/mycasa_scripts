@@ -136,7 +136,12 @@ def Jy2Kelvin(
     bmaj = imhead(imagename, mode="list")["beammajor"]["value"]
     bmin = imhead(imagename, mode="list")["beamminor"]["value"]
     J2K = 1.222e6 / bmaj / bmin / obsfreq_GHz**2
-    immath(imagename=imagename, expr="IM0*"+str(J2K), outfile=imagename.replace(".image","") + "_Kelvin.image")
+    #
+    outfile = imagename.replace(".image","") + "_Kelvin.image"
+    os.system("rm -rf " + outfile)
+    immath(imagename=imagename, expr="IM0*"+str(J2K), outfile=)
+
+    return outfile
 
 def eazy_immoments(
     imagename,
@@ -223,6 +228,11 @@ def eazy_immoments(
     immoments(imagename=imagename+".masked", moments=[0], outfile=outfile_mom0+"_tmp")
     immath(imagename=[outfile_mom0+"_tmp",nchanmask], expr="IM0*IM1", outfile=outfile_mom0) # iif(IM1>="+str(nchan)+",IM0,0.0)
     #
+    imhead(outfile_mom0, mode="put", hdkey="beammajor", hdvalue=str(bmaj)+"arcsec")
+    imhead(outfile_mom0, mode="put", hdkey="beamminor", hdvalue=str(bmaj)+"arcsec")
+    outfile = Jy2Kelvin(outfile_mom0, obsfreq_GHz)
+    imhead(outfile, mode="put", hdkey="bunit", hdvalue="K.km/s")
+    #
     # mom-1
     outfile_mom1 = outputname+"_mom1.image"
     os.system("rm -rf " + outfile_mom1 + "*")
@@ -241,12 +251,17 @@ def eazy_immoments(
     immoments(imagename=imagename+".masked", moments=[8], outfile=outfile_mom8+"_tmp")
     immath(imagename=[outfile_mom8+"_tmp",nchanmask], expr="IM0*IM1", outfile=outfile_mom8)
     #
-    # add beam header
-    momentmaps = [outfile_mom0, outfile_mom8]
-    for i in range(len(momentmaps)):
-        imhead(momentmaps[i], mode="put", hdkey="beammajor", hdvalue=str(bmaj)+"arcsec")
-        imhead(momentmaps[i], mode="put", hdkey="beamminor", hdvalue=str(bmaj)+"arcsec")
-        Jy2Kelvin(momentmaps[i], obsfreq_GHz)
+    # add header to mom0
+    imhead(outfile_mom0, mode="put", hdkey="beammajor", hdvalue=str(bmaj)+"arcsec")
+    imhead(outfile_mom0, mode="put", hdkey="beamminor", hdvalue=str(bmaj)+"arcsec")
+    outfile = Jy2Kelvin(outfile_mom0, obsfreq_GHz)
+    imhead(outfile, mode="put", hdkey="bunit", hdvalue="K.km/s")
+    #
+    # add header to mom8
+    imhead(outfile_mom8, mode="put", hdkey="beammajor", hdvalue=str(bmaj)+"arcsec")
+    imhead(outfile_mom8, mode="put", hdkey="beamminor", hdvalue=str(bmaj)+"arcsec")
+    outfile = Jy2Kelvin(outfile_mom8, obsfreq_GHz)
+    imhead(outfile, mode="put", hdkey="bunit", hdvalue="K")
     #
     # cleanup
     os.system("rm -rf " + outfile_mom0 + "_tmp")
