@@ -17,18 +17,19 @@ if not done:
 	os.mkdir(dir_product)
 
 
-# get v4 CASA files
-v3_image = glob.glob(dir_ready + "ngc4303_7m_co21_v3.image")
-v4_image = glob.glob(dir_ready + "ngc4303_7m_co21_v4.image")
-v3_image.sort()
-v4_image.sort()
+# get CASA files
+v3_image = glob.glob(dir_ready + "ngc4303_7m_co21_v3.image")[0]
+v4_image = glob.glob(dir_ready + "ngc4303_7m_co21_v4.image")[0]
 
 
+### v4 data
 # get shape for imval
-shape = imhead(v4_image[0],mode="list")["shape"]
+shape = imhead(v4_image,mode="list")["shape"]
 box = "0,0,"+str(shape[0]-1)+","+str(shape[1]-1)
-
-
+# imval
+data = imval(v3_image, box=box)
+data_v4 = range(np.shape(data['data'])[2])
+#
 
 
 # plot
