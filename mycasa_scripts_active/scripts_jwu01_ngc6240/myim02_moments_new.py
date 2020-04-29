@@ -234,7 +234,7 @@ def eazy_immoments(
     outfile_mom0 = outputname+"_mom0.image"
     os.system("rm -rf " + outfile_mom0 + ".mask")
     os.system("rm -rf " + outfile_mom0 + "*")
-    immoments(imagename=cube_for_moment, moments=[0], includepix=[0.,1e11], outfile=outfile_mom0+"_tmp")
+    immoments(imagename=imagename, moments=[0], includepix=[0.,1e11], outfile=outfile_mom0+"_tmp")
     immath(imagename=[outfile_mom0+"_tmp",nchanmask], expr="IM0*IM1", outfile=outfile_mom0+"_tmp2")
     tscreatemask(outfile_mom0+"_tmp2", 0.000000001, outfile_mom0+".mask")
     #
