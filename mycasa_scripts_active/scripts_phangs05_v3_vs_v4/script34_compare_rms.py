@@ -21,12 +21,24 @@ if not done:
 v3_image = glob.glob(dir_ready + "ngc4303_7m_co21_v3.image")[0]
 v4_image = glob.glob(dir_ready + "ngc4303_7m_co21_v4.image")[0]
 
+
 # smooth
 imsmooth(imagename=v3_image,
 	targetres=True,
 	major="9.0arcsec",
 	minor="9.0arcsec",
+	pa="0deg",
 	outfile=v3_image+".smooth")
+v3_image = v3_image + ".smooth"
+
+imsmooth(imagename=v4_image,
+	targetres=True,
+	major="9.0arcsec",
+	minor="9.0arcsec",
+	pa="0deg",
+	outfile=v4_image+".smooth")
+v4_image = v4_image + ".smooth"
+
 
 ### v4 data
 # get shape for imval
@@ -85,6 +97,8 @@ plt.xlim(min(xaxis_v4)-10,max(xaxis_v4)+10)
 plt.xlabel("Channel")
 plt.ylabel("rms per pixel (Jy beam$^{-1}$)")
 plt.legend()
+
+plt.ylim([0.02,0.20])
 plt.savefig(dir_product + "ngc4303_rms_200429.png", dpi=300)
 #
 
