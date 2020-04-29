@@ -1,5 +1,6 @@
 import os, glob
 import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
 plt.ioff()
 
 dir_data = "/Users/saito/Desktop/"
@@ -239,7 +240,7 @@ def eazy_immoments(
     momentmaps = [outfile_mom0, outfile_mom1, outfile_mom2, outfile_mom8]
     for i in range(len(momentmaps)):
         imhead(momentmaps[i], mode="put", hdkey="beammajor", hdvalue=str(bmaj)+"arcsec")
-        imhead(momentmaps[i], mode="add", hdkey="beamminor", hdvalue=str(bmaj)+"arcsec")
+        imhead(momentmaps[i], mode="put", hdkey="beamminor", hdvalue=str(bmaj)+"arcsec")
         Jy2Kelvin(momentmaps[i], restfreq_GHz)
     #
     # cleanup
@@ -265,8 +266,8 @@ def eazy_immoments(
 ##################################################
 ### main part
 ##################################################
-co10mask, noise_co10_mJy = eazy_immoments(imagename=imageco10, outputname="n6240_co10", snr_mom=snr_mom, restfreq_GHz=115.27120)
-_, noise_co21_mJy = eazy_immoments(imagename=imageco21, outputname="n6240_co21", snr_mom=snr_mom, restfreq_GHz=230.53800, maskimage = co10mask)
+co10mask, noise_co10_mJy = eazy_immoments(imagename=imageco10, outputname=dir_data+"n6240_co10", snr_mom=snr_mom, restfreq_GHz=115.27120)
+_, noise_co21_mJy = eazy_immoments(imagename=imageco21, outputname=dir_data+"n6240_co21", snr_mom=snr_mom, restfreq_GHz=230.53800, maskimage = co10mask)
 
 print("### 1sigma of the input co10 datacube = " + noise_co10_mJy + " mJy/beam")
 print("### 1sigma of the input co21 datacube = " + noise_co21_mJy + " mJy/beam")
