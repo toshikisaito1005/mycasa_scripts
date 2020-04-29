@@ -1,16 +1,16 @@
-      13 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim_runall.py
-      13 - mycasa_scripts_active/scripts_ts09_phangs_r21/f03_peak_vs_integ.py
+      32 - mycasa_scripts_active/scripts_jwu01_ngc6240/myim02_moments_new.py
+      20 - mycasa_scripts_active/scripts_phangs05_v3_vs_v4/script34_compare_rms.py
       13 - mycasa_scripts_active/scripts_ts09_phangs_r21/f01b_flux_growthcurve.py
-      12 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21.py
       12 - mycasa_scripts_active/scripts_ts09_phangs_r21/f99_table03.py
-      12 - mycasa_scripts_active/scripts_ts07_iras18293/fig04_ratio.py
-      10 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21.pyc
-       8 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim11_extract_param_best.py
+      12 - mycasa_scripts_active/scripts_ts09_phangs_r21/f03_peak_vs_integ.py
+      11 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21.py
+      10 - mycasa_scripts_active/scripts_ts07_iras18293/fig04_ratio.py
+       9 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21.pyc
+       8 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim_runall.py
        8 - mycasa_scripts_active/scripts_ts09_phangs_r21/f09a_radial.py
        6 - mycasa_scripts_active/scripts_ts07_iras18293/fig06_radial_alpha_co_varying_alpha_850um.py
        5 - mycasa_scripts_active/scripts_ts09_phangs_r21/f99_table02.py
        5 - mycasa_scripts_active/scripts_ts09_phangs_r21/f08_violins.py
-       5 - mycasa_scripts_active/scripts_phangs05_v3_vs_v4/script31_get_beam_200428.py
        4 - mycasa_scripts_active/scripts_ts09_phangs_r21/f00_all_final_eps.sh
        3 - mycasa_scripts_active/scripts_ts09_phangs_r21/f10_r21_highlowmask.py
        3 - mycasa_scripts_active/scripts_ts09_phangs_r21/f09b_radial_normed.py
@@ -21,5 +21,5 @@
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/scripts_phangs_r21_plot.py
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim08_r21_highlowmask.py
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/f11_maskhist.py
-       2 - mycasa_scripts_active/scripts_phangs05_v3_vs_v4/script21_get_fits_nocommonbeam.py
+       2 - mycasa_scripts_active/scripts_phangs05_v3_vs_v4/script32_get_fits.py
        2 - mycasa_scripts_active/scripts_jwu01_ngc6240/fig03_noise.py
