@@ -236,7 +236,7 @@ def eazy_immoments(
     immath(imagename=[outfile_mom0+"_tmp",nchanmask], expr="IM0*IM1", outfile=outfile_mom0+"_tmp2")
     tscreatemask(outfile_mom0+"_tmp2", 0.000000001, outfile_mom0+".mask")
     #
-    immath(imagename=[imagename+".masked",outfile_mom0+".mask"],expr="IM0*IM1",outfifle=imagename+".masked2")
+    immath(imagename=[imagename+".masked",outfile_mom0+".mask"],expr="IM0*IM1",outfile=imagename+".masked2")
     #
     ### moments
     cube_for_moment = imagename+".masked2"
