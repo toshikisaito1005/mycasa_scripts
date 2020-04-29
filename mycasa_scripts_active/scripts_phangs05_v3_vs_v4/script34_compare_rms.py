@@ -87,8 +87,8 @@ for i in range(len(xaxis_v3)):
 
 
 # average rms
-rms_v3 = np.round(np.mean(yaxis_v3[10:60]),3)
-rms_v4 = np.round(np.mean(yaxis_v4[10:60]),3)
+rms_v3 = np.round((np.mean(yaxis_v3[10:60])+np.mean(yaxis_v3[210:260]))/2.0, 4)
+rms_v4 = np.round((np.mean(yaxis_v4[10:60])+np.mean(yaxis_v4[210:260]))/2.0, 4)
 print("### rms_v3 = " + str(rms_v3) + " mJy/beam")
 print("### rms_v4 = " + str(rms_v4) + " mJy/beam")
 
