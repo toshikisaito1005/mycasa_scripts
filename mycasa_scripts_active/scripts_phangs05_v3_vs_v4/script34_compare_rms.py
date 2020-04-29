@@ -28,7 +28,8 @@ shape = imhead(v4_image,mode="list")["shape"]
 box = "0,0,"+str(shape[0]-1)+","+str(shape[1]-1)
 # imval
 data = imval(v3_image, box=box)
-data_v4 = range(np.shape(data['data'])[2])
+xaxis_v4 = range(np.shape(data['data'])[2])
+yaxis_v4 = 
 #
 
 

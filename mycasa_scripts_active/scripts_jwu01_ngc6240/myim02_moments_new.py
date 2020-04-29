@@ -162,65 +162,68 @@ def eazy_immoments(
     """
     print("### moment map creation for " + imagename)
     ### create signal-to-noise mask
-    # get name
-    smcube1 = imagename + ".smooth1"
-    smcube2 = imagename + ".smooth2"
-    smcube3 = imagename + ".smooth3"
-    #
-    # cleanup
-    os.system("rm -rf " + smcube1)
-    os.system("rm -rf " + smcube2)
-    os.system("rm -rf " + smcube3)
-    #
-    # smooth1 cube mask
-    bmaj = imhead(imagename, mode="list")["beammajor"]["value"]
-    smbeam = str(bmaj * 2.0) + "arcsec"
-    imsmooth(imagename=imagename, targetres=True, major=smbeam, minor=smbeam, pa="0deg", outfile=smcube1)
-    smnoise1 = noisehist(smcube1, 0.02, "", snr_mom, plotter=False)
-    tscreatemask(smcube1, smnoise1 * snr_mask, smcube1+".mask")
-    #
-    # smooth2 cube mask
-    smbeam = str(bmaj * 4.0) + "arcsec"
-    imsmooth(imagename=imagename, targetres=True, major=smbeam, minor=smbeam, pa="0deg", outfile=smcube2)
-    smnoise2 = noisehist(smcube2, 0.02, "", snr_mom, plotter=False)
-    tscreatemask(smcube2, smnoise2 * snr_mask, smcube2+".mask")
-    #
-    # smooth3 cube mask
-    smbeam = str(bmaj * 6.0) + "arcsec"
-    imsmooth(imagename=imagename, targetres=True, major=smbeam, minor=smbeam, pa="0deg", outfile=smcube3)
-    smnoise3 = noisehist(smcube3, 0.02, "", snr_mom, plotter=False)
-    tscreatemask(smcube3, smnoise3 * snr_mask, smcube3+".mask")
-    #
-    # combined cube mask
-    os.system("rm -rf " + imagename+".mask")
-    maskimages = [smcube1+".mask", smcube2+".mask", smcube3+".mask"]
-    immath(imagename=maskimages, expr="iif(IM0+IM1+IM2>=2.0,1.0,0.0)", outfile=imagename+".mask")
-    # cleanup
-    os.system("rm -rf " + smcube1 + "*")
-    os.system("rm -rf " + smcube2 + "*")
-    os.system("rm -rf " + smcube3 + "*")
+    if maskcube==None:
+        # get name
+        smcube1 = imagename + ".smooth1"
+        smcube2 = imagename + ".smooth2"
+        smcube3 = imagename + ".smooth3"
+        #
+        # cleanup
+        os.system("rm -rf " + smcube1)
+        os.system("rm -rf " + smcube2)
+        os.system("rm -rf " + smcube3)
+        #
+        # smooth1 cube mask
+        bmaj = imhead(imagename, mode="list")["beammajor"]["value"]
+        smbeam = str(bmaj * 2.0) + "arcsec"
+        imsmooth(imagename=imagename, targetres=True, major=smbeam, minor=smbeam, pa="0deg", outfile=smcube1)
+        smnoise1 = noisehist(smcube1, 0.02, "", snr_mom, plotter=False)
+        tscreatemask(smcube1, smnoise1 * snr_mask, smcube1+".mask")
+        #
+        # smooth2 cube mask
+        smbeam = str(bmaj * 4.0) + "arcsec"
+        imsmooth(imagename=imagename, targetres=True, major=smbeam, minor=smbeam, pa="0deg", outfile=smcube2)
+        smnoise2 = noisehist(smcube2, 0.02, "", snr_mom, plotter=False)
+        tscreatemask(smcube2, smnoise2 * snr_mask, smcube2+".mask")
+        #
+        # smooth3 cube mask
+        smbeam = str(bmaj * 6.0) + "arcsec"
+        imsmooth(imagename=imagename, targetres=True, major=smbeam, minor=smbeam, pa="0deg", outfile=smcube3)
+        smnoise3 = noisehist(smcube3, 0.02, "", snr_mom, plotter=False)
+        tscreatemask(smcube3, smnoise3 * snr_mask, smcube3+".mask")
+        #
+        # combined cube mask
+        os.system("rm -rf " + imagename+".mask")
+        maskimages = [smcube1+".mask", smcube2+".mask", smcube3+".mask"]
+        immath(imagename=maskimages, expr="iif(IM0+IM1+IM2>=2.0,1.0,0.0)", outfile=imagename+".mask")
+        # cleanup
+        os.system("rm -rf " + smcube1 + "*")
+        os.system("rm -rf " + smcube2 + "*")
+        os.system("rm -rf " + smcube3 + "*")
+        maskcube = imagename+".mask"
+    else:
+        maskcube = maskcube
     #
     #
     #
     ### nchan mom mask
     # measure noise
-    if maskcube==None:
-        noise = noisehist(imagename, 0.02, "", snr_mom, plotter=False)
-        #
-        # mask cube
-        os.system("rm -rf " + imagename+".masked")
-        immath(imagename=[imagename,imagename+".mask"], expr="iif(IM1>=1.0,IM0,0.0)", outfile=imagename+".masked")
-        #
-        nchanmask = imagename + ".nchanmask"
-        os.system("rm -rf " + nchanmask + "*")
-        immath(imagename=imagename+".masked", expr="iif(IM0>="+str(noise*snr_mom)+",1.0/10.,0.0)", outfile=nchanmask+"_tmp") # 10. is the channel width in km/s.
-        immoments(imagename=nchanmask+"_tmp", moments=[0], outfile=nchanmask+"_tmp2")
-        # hybrid nchanmask and input maskimage
-        if maskimage==None:
-            tscreatemask(nchanmask+"_tmp2", nchan, nchanmask)
-        else:
-            immath(imagename=[nchanmask+"_tmp2",maskimage], expr="iif(IM1>=1.0,IM0,0.0)", outfile=nchanmask+"_tmp3")
-            tscreatemask(nchanmask+"_tmp3", nchan, nchanmask)
+    noise = noisehist(imagename, 0.02, "", snr_mom, plotter=False)
+    #
+    # mask cube
+    os.system("rm -rf " + imagename+".masked")
+    immath(imagename=[imagename,imagename+".mask"], expr="iif(IM1>=1.0,IM0,0.0)", outfile=imagename+".masked")
+    #
+    nchanmask = imagename + ".nchanmask"
+    os.system("rm -rf " + nchanmask + "*")
+    immath(imagename=imagename+".masked", expr="iif(IM0>="+str(noise*snr_mom)+",1.0/10.,0.0)", outfile=nchanmask+"_tmp") # 10. is the channel width in km/s.
+    immoments(imagename=nchanmask+"_tmp", moments=[0], outfile=nchanmask+"_tmp2")
+    # hybrid nchanmask and input maskimage
+    if maskimage==None:
+        tscreatemask(nchanmask+"_tmp2", nchan, nchanmask)
+    else:
+        immath(imagename=[nchanmask+"_tmp2",maskimage], expr="iif(IM1>=1.0,IM0,0.0)", outfile=nchanmask+"_tmp3")
+        tscreatemask(nchanmask+"_tmp3", nchan, nchanmask)
 
     #
     ### moments
@@ -276,14 +279,14 @@ def eazy_immoments(
     os.system("rm -rf " + nchanmask+"*")
     os.system("rm -rf " + imagename+".mask")
 
-    return outfile_mom0+".mask", noise_mJy
+    return outfile_mom0+".mask", maskcube, noise_mJy
 
 
 #####################
 ### Main Procedure
 #####################
-co10mask, noise_co10_mJy = eazy_immoments(imagename=imageco10, outputname=dir_data+"n6240_co10", snr_mom=snr_mom, obsfreq_GHz=115.27120/(1+redshift))
-_, noise_co21_mJy = eazy_immoments(imagename=imageco21, outputname=dir_data+"n6240_co21", snr_mom=snr_mom, obsfreq_GHz=230.53800/(1+redshift), maskimage = co10mask)
+co10mask, co10maskcube, noise_co10_mJy = eazy_immoments(imagename=imageco10, outputname=dir_data+"n6240_co10", snr_mom=snr_mom, obsfreq_GHz=115.27120/(1+redshift))
+_, _, noise_co21_mJy = eazy_immoments(imagename=imageco21, outputname=dir_data+"n6240_co21", snr_mom=snr_mom, obsfreq_GHz=230.53800/(1+redshift), maskimage = co10mask, maskcube = co10maskcube)
 
 print("### 1sigma of the input co10 datacube = " + noise_co10_mJy + " mJy/beam")
 print("### 1sigma of the input co21 datacube = " + noise_co21_mJy + " mJy/beam")
