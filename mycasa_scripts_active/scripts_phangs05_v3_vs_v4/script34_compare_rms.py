@@ -28,9 +28,14 @@ shape = imhead(v4_image,mode="list")["shape"]
 box = "0,0,"+str(shape[0]-1)+","+str(shape[1]-1)
 # imval
 data = imval(v3_image, box=box)
-xaxis_v4 = range(np.shape(data['data'])[2])
-yaxis_v4 = 
-#
+data_v4 = data["data"][data["data"]>0]
+# xaxis
+xaxis_v4 = range(np.shape(data_v4['data'])[2])
+yaxis_v4 = data['data']*data_v4['data']
+# yaxis
+num_pixel_per_chan = np.shape(data_v4)[0]*np.shape(data_v4)[1]
+
+len(np.sum(np.sum(data_v4**2,axis=0),axis=0))
 
 
 # plot
