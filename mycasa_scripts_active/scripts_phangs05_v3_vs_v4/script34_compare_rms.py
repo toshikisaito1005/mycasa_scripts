@@ -21,6 +21,12 @@ if not done:
 v3_image = glob.glob(dir_ready + "ngc4303_7m_co21_v3.image")[0]
 v4_image = glob.glob(dir_ready + "ngc4303_7m_co21_v4.image")[0]
 
+# smooth
+imsmooth(imagename=v3_image,
+	targetres=True,
+	major="9.0arcsec",
+	minor="9.0arcsec",
+	outfile=v3_image+".smooth")
 
 ### v4 data
 # get shape for imval
