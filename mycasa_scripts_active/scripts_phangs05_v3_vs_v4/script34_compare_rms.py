@@ -33,16 +33,17 @@ xaxis_v4 = range(np.shape(data['data'])[2])
 # yaxis
 num_pixel_per_chan = np.shape(data['data'])[0]*np.shape(data['data'])[1]
 
+yaxis_v4 = []
 for i in range(len(xaxis_v4)):
 	data_thischan = data['data'][:,:,i]
-	if len(data_thischan[data_thischan>0])==0:
+	data_clipped = data_thischan[data_thischan>0.00000001]
+	if len(data_clipped)==0:
 		rms = 0
+		yaxis_v4.append(rms)
 	else:
+		rms = np.sqrt(np.mean(data_clipped**2))
+		yaxis_v4.append(rms)
 
-
-
-
-data['data']**2
 
 
 
