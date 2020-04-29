@@ -24,6 +24,7 @@ v4_image = glob.glob(dir_ready + "ngc4303_7m_co21_v4.image")[0]
 
 ### v4 data
 # get shape for imval
+print("### get v4 data")
 shape = imhead(v4_image,mode="list")["shape"]
 box = "0,0,"+str(shape[0]-1)+","+str(shape[1]-1)
 # imval
@@ -46,6 +47,7 @@ for i in range(len(xaxis_v4)):
 
 ### v3 data
 # get shape for imval
+print("### get v3 data")
 shape = imhead(v3_image,mode="list")["shape"]
 box = "0,0,"+str(shape[0]-1)+","+str(shape[1]-1)
 # imval
@@ -71,8 +73,8 @@ plt.figure(figsize=(8,3))
 plt.grid()
 plt.subplots_adjust(left=0.15, right=0.95, top=0.90, bottom=0.15)
 plt.rcParams["font.size"] = 14
-plt.scatter(xaxis_v3, yaxis_v3, lw=0, color="red", label="v3p4")
-plt.scatter(xaxis_v4, yaxis_v4, lw=0, color="blue", label="v4")
+plt.scatter(xaxis_v3, yaxis_v3, lw=0, color="red", alpha=0.5, label="v3p4")
+plt.scatter(xaxis_v4, yaxis_v4, lw=0, color="blue", alpha=0.5, label="v4")
 plt.xlim(min(xaxis_v4)-10,max(xaxis_v4)+10)
 plt.xlabel("Channel")
 plt.ylabel("rms per pixel (Jy beam$^{-1}$)")
