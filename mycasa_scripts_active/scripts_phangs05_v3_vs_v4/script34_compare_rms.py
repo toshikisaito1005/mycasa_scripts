@@ -66,24 +66,17 @@ for i in range(len(xaxis_v3)):
 		yaxis_v3.append(rms)
 
 
-
 # plot
 plt.figure(figsize=(8,3))
 plt.grid()
 plt.subplots_adjust(left=0.15, right=0.95, top=0.90, bottom=0.15)
 plt.rcParams["font.size"] = 14
-xaxis = np.array(xaxis)
-yaxis = np.array(yaxis_v4 - yaxis_v3)
-#ypercent = np.array(yaxis_v4-yaxis_v3)/np.array(yaxis_v4)
-plt.scatter(xaxis[abs(yaxis)!=0.0], yaxis[abs(yaxis)!=0.00], lw=0, color="red")
-if np.sum([abs(yaxis)==0.00])>0:
-	plt.scatter(xaxis[abs(yaxis)==0.00], yaxis[abs(yaxis)==0.00], lw=0, color="blue")
-#
-plt.xlim(min(xaxis)-10,max(xaxis)+10)
+plt.scatter(xaxis_v3, yaxis_v3, lw=0, color="red")
+plt.scatter(xaxis_v4, yaxis_v4, lw=0, color="blue")
+plt.xlim(min(xaxis_v4)-10,max(xaxis_v4)+10)
 plt.xlabel("Channel")
-plt.ylabel("v4 rms - v3p4 rms")
-plt.title(title)
-plt.savefig(output.replace(".txt",".png"), dpi=300)
+plt.ylabel("rms per pixel (Jy beam$^{-1}$)")
+plt.savefig(dir_product + "rms_200429.png", dpi=300)
 #
 
 os.system("rm -rf *.last")
