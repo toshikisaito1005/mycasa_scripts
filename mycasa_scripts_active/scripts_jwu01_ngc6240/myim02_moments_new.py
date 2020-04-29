@@ -12,7 +12,7 @@ imageco10 = dir_data + "co10_cube.image"
 imageco21 = dir_data + "co21_cube.image"
 
 snr_mom = 2.5   # clip signal-to-noise ratio level for immoments
-redshift = 
+redshift = 0.02448
 
 #####################
 ### define some functions
@@ -139,7 +139,7 @@ def Jy2Kelvin(
     #
     outfile = imagename.replace(".image","") + "_Kelvin.image"
     os.system("rm -rf " + outfile)
-    immath(imagename=imagename, expr="IM0*"+str(J2K), outfile=)
+    immath(imagename=imagename, expr="IM0*"+str(J2K), outfile=outfile)
 
     return outfile
 
@@ -150,7 +150,7 @@ def eazy_immoments(
     obsfreq_GHz,
     maskimage=None,
     nchan=3.0,
-    snr_mask=4.0,
+    snr_mask=6.0,
     ):
     """
     step 1: create a "cube" mask for the input cube
@@ -217,7 +217,7 @@ def eazy_immoments(
     if maskimage==None:
         tscreatemask(nchanmask+"_tmp2", nchan, nchanmask)
     else:
-        immath(imagename=[nchanmask+"_tmp2",maskimage], expr="iif(IM1>=1.0,IM0,0.0)", outfile=nchanmask+"_tmp2")
+        immath(imagename=[nchanmask+"_tmp2",maskimage], expr="iif(IM1>=1.0,IM0,0.0)", outfile=nchanmask+"_tmp3")
         tscreatemask(nchanmask+"_tmp3", nchan, nchanmask)
 
     #
@@ -227,11 +227,6 @@ def eazy_immoments(
     os.system("rm -rf " + outfile_mom0 + "*")
     immoments(imagename=imagename+".masked", moments=[0], outfile=outfile_mom0+"_tmp")
     immath(imagename=[outfile_mom0+"_tmp",nchanmask], expr="IM0*IM1", outfile=outfile_mom0) # iif(IM1>="+str(nchan)+",IM0,0.0)
-    #
-    imhead(outfile_mom0, mode="put", hdkey="beammajor", hdvalue=str(bmaj)+"arcsec")
-    imhead(outfile_mom0, mode="put", hdkey="beamminor", hdvalue=str(bmaj)+"arcsec")
-    outfile = Jy2Kelvin(outfile_mom0, obsfreq_GHz)
-    imhead(outfile, mode="put", hdkey="bunit", hdvalue="K.km/s")
     #
     # mom-1
     outfile_mom1 = outputname+"_mom1.image"
@@ -263,18 +258,17 @@ def eazy_immoments(
     outfile = Jy2Kelvin(outfile_mom8, obsfreq_GHz)
     imhead(outfile, mode="put", hdkey="bunit", hdvalue="K")
     #
-    # cleanup
-    os.system("rm -rf " + outfile_mom0 + "_tmp")
-    os.system("rm -rf " + outfile_mom1 + "_tmp")
-    os.system("rm -rf " + outfile_mom2 + "_tmp")
-    os.system("rm -rf " + outfile_mom8 + "_tmp")
-    # export mask
+    ### export mask
     os.system("rm -rf " + outfile_mom0 + ".mask")
     tscreatemask(outfile_mom0, 0.000000001, outfile_mom0+".mask")
     #
     # noise
     noise_mJy = str(np.round(noise*1000., 2))
-    #
+    # cleanup
+    os.system("rm -rf " + outfile_mom0 + "_tmp")
+    os.system("rm -rf " + outfile_mom1 + "_tmp")
+    os.system("rm -rf " + outfile_mom2 + "_tmp")
+    os.system("rm -rf " + outfile_mom8 + "_tmp")
     os.system("rm -rf " + imagename+".masked")
     os.system("rm -rf " + imagename+".masked_tmp")
     os.system("rm -rf " + nchanmask+"*")
@@ -286,8 +280,8 @@ def eazy_immoments(
 #####################
 ### Main Procedure
 #####################
-co10mask, noise_co10_mJy = eazy_immoments(imagename=imageco10, outputname=dir_data+"n6240_co10", snr_mom=snr_mom, obsfreq_GHz=115.27120/(1+0.02448))
-_, noise_co21_mJy = eazy_immoments(imagename=imageco21, outputname=dir_data+"n6240_co21", snr_mom=snr_mom, obsfreq_GHz=230.53800/(1+0.02448), maskimage = co10mask)
+co10mask, noise_co10_mJy = eazy_immoments(imagename=imageco10, outputname=dir_data+"n6240_co10", snr_mom=snr_mom, obsfreq_GHz=115.27120/(1+redshift))
+_, noise_co21_mJy = eazy_immoments(imagename=imageco21, outputname=dir_data+"n6240_co21", snr_mom=snr_mom, obsfreq_GHz=230.53800/(1+redshift), maskimage = co10mask)
 
 print("### 1sigma of the input co10 datacube = " + noise_co10_mJy + " mJy/beam")
 print("### 1sigma of the input co21 datacube = " + noise_co21_mJy + " mJy/beam")
