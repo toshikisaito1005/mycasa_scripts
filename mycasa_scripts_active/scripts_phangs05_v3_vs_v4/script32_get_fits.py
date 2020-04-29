@@ -41,3 +41,5 @@ for i in range(len(v4_products)):
     output = dir_output + imagename.split("/")[-1].replace("_7m_co21","_7m_co21_v4")
     os.system("rm -rf " + output)
     shutil.copytree(imagename, output)
+
+os.system("rm -rf *.last")
