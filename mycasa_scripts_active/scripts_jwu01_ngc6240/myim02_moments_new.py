@@ -13,6 +13,7 @@ imageco21 = dir_data + "co21_cube.image"
 
 snr_mom = 2.5   # clip signal-to-noise ratio level for immoments
 redshift = 0.02448
+clipbox = "93,93,278,278"
 
 #####################
 ### define some functions
@@ -152,6 +153,7 @@ def eazy_immoments(
     maskcube=None,
     nchan=3.0,
     snr_mask=6.0,
+    clipbox="",
     ):
     """
     step 1: create a "cube" mask for the input cube
