@@ -7,9 +7,11 @@ plt.ioff()
 #####################
 ### Define Parameters
 #####################
-dir_data = "/Users/saito/Desktop/"
-imageco10 = dir_data + "co10_cube.image"
-imageco21 = dir_data + "co21_cube.image"
+dir_data = "/Users/saito/data/myproj_active/proj_jwu01_ngc6240/data/"
+imageco10 = dir_data + "ngc6240_co10_12m7m_na.smooth.regrid"
+pbco10 = dir_data + "ngc6240_co10_12m7m_na.pb.regrid"
+imageco21 = dir_data + "ngc6240_co21_12m7m_natpr.smooth.regrid"
+pbco21 = dir_data + "ngc6240_co21_12m7m_natpr.pb.regrid"
 
 snr_mom = 2.5   # clip signal-to-noise ratio level for immoments
 redshift = 0.02448
@@ -294,7 +296,7 @@ def eazy_immoments(
     os.system("rm -rf " + imagename+".masked_tmp")
     os.system("rm -rf " + imagename+".masked")
     os.system("rm -rf " + nchanmask+"*")
-    os.system("rm -rf " + imagename+".mask")
+    os.system("rm -rf " + imagename+".mask*")
 
     return outfile_mom0+".mask", noise_mJy
 
