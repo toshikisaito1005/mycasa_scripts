@@ -17,6 +17,18 @@ dir_co21 = "/Users/saito/data/myproj_active/proj_jwu01_ngc6240/image_co21/"
 imageco21 = dir_data + "ngc6240_co21_12m7m_natpr.smooth.regrid"
 pbco21 = dir_data + "ngc6240_co21_12m7m_natpr.pb.regrid"
 #
+dir_cs21 = "/Users/saito/data/myproj_active/proj_jwu01_ngc6240/image_cs21/"
+imagecs21 = dir_data + "ngc6240_cs32_12m_l30_na.pb.regrid"
+pbcs21 = dir_data + "ngc6240_cs21_12m_l30_na.pb.regrid"
+#
+dir_hcn10 = "/Users/saito/data/myproj_active/proj_jwu01_ngc6240/image_hcn10/"
+imagehcn10 = dir_data + "ngc6240_hcn10_12m_l50_na.pb.regrid"
+pbhcn10 = dir_data + "ngc6240_hcn10_12m_l50_na.smooth.regrid"
+#
+dir_hcop10 = "/Users/saito/data/myproj_active/proj_jwu01_ngc6240/image_hcop10/"
+imagehcop10 = dir_data + "ngc6240_hcop10_12m_l50_na.pb.regrid"
+pbhcop10 = dir_data + "ngc6240_hcop10_12m_l50_na.smooth.regrid"
+#
 snr_mom = 2.5   # clip signal-to-noise ratio level for immoments
 redshift = 0.02448
 clipbox = "93,93,278,278"
