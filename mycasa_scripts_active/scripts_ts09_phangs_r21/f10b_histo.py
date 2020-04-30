@@ -28,7 +28,10 @@ data = data.flatten()
 data_low = data[mask==-1]
 data_mid = data[mask==0]
 data_high = data[mask==1]
-num_low = int(lne(data_low)/float(len(data)*100)
+#
+line_high = np.percentile(data,50+33.3/2)
+line_low = np.percentile(data,50-33.3/2)
+
 
 
 ###
@@ -36,8 +39,9 @@ plt.figure(figsize=(8,8))#figsize=(10,10))
 plt.rcParams["font.size"] = 14
 plt.grid(axis="x")
 
-plt.hist(data_low,range=[0,1.5],bins=bins,color="blue",lw=0,alpha=0.5,label="Low (" + ")")
-plt.hist(data_mid,range=[0,1.5],bins=bins,color="green",lw=0,alpha=0.5)
-plt.hist(data_high,range=[0,1.5],bins=bins,color="red",lw=0,alpha=0.5)
+plt.hist(data_low,range=[0,1.5],bins=bins,color="blue",lw=0,alpha=0.5,label="Low")
+plt.hist(data_mid,range=[0,1.5],bins=bins,color="green",lw=0,alpha=0.5,label="Mid ")
+plt.hist(data_high,range=[0,1.5],bins=bins,color="red",lw=0,alpha=0.5,label="high")
 
+plt.legend()
 plt.savefig(dir_data+"../eps/fig_mask_histo.png",dpi=100)
