@@ -8,14 +8,19 @@ plt.ioff()
 ### Define Parameters
 #####################
 dir_data = "/Users/saito/data/myproj_active/proj_jwu01_ngc6240/data/"
+#
+dir_co10 = "/Users/saito/data/myproj_active/proj_jwu01_ngc6240/image_co10/"
 imageco10 = dir_data + "ngc6240_co10_12m7m_na.smooth.regrid"
 pbco10 = dir_data + "ngc6240_co10_12m7m_na.pb.regrid"
+#
+dir_co21 = "/Users/saito/data/myproj_active/proj_jwu01_ngc6240/image_co21/"
 imageco21 = dir_data + "ngc6240_co21_12m7m_natpr.smooth.regrid"
 pbco21 = dir_data + "ngc6240_co21_12m7m_natpr.pb.regrid"
-
+#
 snr_mom = 2.5   # clip signal-to-noise ratio level for immoments
 redshift = 0.02448
 clipbox = "93,93,278,278"
+
 
 #####################
 ### define some functions
@@ -148,6 +153,7 @@ def Jy2Kelvin(
 
 def eazy_immoments(
     imagename,
+    pbimage,
     outputname,
     snr_mom,
     obsfreq_GHz,
@@ -232,11 +238,15 @@ def eazy_immoments(
     #
     #
     #
+    ### pbcorr
+    os.system("rm -rf " + imagename + ".pbcor")
+    impbcor(imagename=imagename, pbimage=pbimage, outfile=imagename+".pbcor", cutoff=0.5)
+    #
     ### export mask
     outfile_mom0 = outputname+"_mom0.image"
     os.system("rm -rf " + outfile_mom0 + ".mask")
     os.system("rm -rf " + outfile_mom0 + "*")
-    immoments(imagename=imagename, moments=[0], includepix=[0.,1e11], outfile=outfile_mom0+"_tmp")
+    immoments(imagename=imagename+".pbcor", moments=[0], includepix=[0.,1e11], outfile=outfile_mom0+"_tmp")
     immath(imagename=[outfile_mom0+"_tmp",nchanmask], expr="IM0*IM1", outfile=outfile_mom0+"_tmp2")
     tscreatemask(outfile_mom0+"_tmp2", 0.000000001, outfile_mom0+".mask")
     #
@@ -304,10 +314,19 @@ def eazy_immoments(
 #####################
 ### Main Procedure
 #####################
+#
+done = glob.glob(dir_co10)
+if not done:
+    os.mkdir(dir_co10)
+#
+done = glob.glob(dir_co21)
+if not done:
+    os.mkdir(dir_co21)
+#
 co10mask, noise_co10_mJy = \
-    eazy_immoments(imagename=imageco10, outputname=dir_data+"n6240_co10", snr_mom=snr_mom, obsfreq_GHz=115.27120/(1+redshift), clipbox=clipbox)
+    eazy_immoments(imagename=imageco10, pbimage=pbco10, outputname=dir_co10+"n6240_co10", snr_mom=snr_mom, obsfreq_GHz=115.27120/(1+redshift), clipbox=clipbox)
 _, noise_co21_mJy = \
-    eazy_immoments(imagename=imageco21, outputname=dir_data+"n6240_co21", snr_mom=snr_mom, obsfreq_GHz=230.53800/(1+redshift), clipbox=clipbox, maskimage=co10mask)
+    eazy_immoments(imagename=imageco21, pbimage=pbco21, outputname=dir_co21+"n6240_co21", snr_mom=snr_mom, obsfreq_GHz=230.53800/(1+redshift), clipbox=clipbox, maskimage=co10mask)
 
 print("### 1sigma of the input co10 datacube = " + noise_co10_mJy + " mJy/beam")
 print("### 1sigma of the input co21 datacube = " + noise_co21_mJy + " mJy/beam")
