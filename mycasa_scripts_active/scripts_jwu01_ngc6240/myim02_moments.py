@@ -337,12 +337,17 @@ done = glob.glob(dir_co21)
 if not done:
     os.mkdir(dir_co21)
 #
-co10mask, noise_co10_mJy = \
-    eazy_immoments(imagename=imageco10, pbimage=pbco10, outputname=dir_co10+"n6240_co10", snr_mom=snr_mom, obsfreq_GHz=115.27120/(1+redshift), pblimit=0.5, clipbox=clipbox)
-_, noise_co21_mJy = \
-    eazy_immoments(imagename=imageco21, pbimage=pbco21, outputname=dir_co21+"n6240_co21", snr_mom=snr_mom, obsfreq_GHz=230.53800/(1+redshift), pblimit=0.3, clipbox=clipbox, maskimage=co10mask)
+#co10mask, noise_co10_mJy = eazy_immoments(imagename=imageco10, pbimage=pbco10, outputname=dir_co10+"n6240_co10", snr_mom=snr_mom, obsfreq_GHz=115.27120/(1+redshift), pblimit=0.5, clipbox=clipbox)
+#_, noise_co21_mJy = eazy_immoments(imagename=imageco21, pbimage=pbco21, outputname=dir_co21+"n6240_co21", snr_mom=snr_mom, obsfreq_GHz=230.53800/(1+redshift), pblimit=0.3, clipbox=clipbox, maskimage=co10mask)
+_, noise_cs21_mJy = eazy_immoments(imagename=imagecs21, pbimage=pbcs21, outputname=dir_cs21+"n6240_cs21", snr_mom=snr_mom, obsfreq_GHz=230.53800/(1+redshift), pblimit=0.5, clipbox=clipbox)
+_, noise_hcn10_mJy = eazy_immoments(imagename=imagehcn10, pbimage=pbhcn10, outputname=dir_hcn10+"n6240_hcn10", snr_mom=snr_mom, obsfreq_GHz=230.53800/(1+redshift), pblimit=0.5, clipbox=clipbox)
+_, noise_hcop10_mJy = eazy_immoments(imagename=imagehcop10, pbimage=pbhcop10, outputname=dir_hcop10+"n6240_hcop10", snr_mom=snr_mom, obsfreq_GHz=230.53800/(1+redshift), pblimit=0.5, clipbox=clipbox)
 
-print("### 1sigma of the input co10 datacube = " + noise_co10_mJy + " mJy/beam")
-print("### 1sigma of the input co21 datacube = " + noise_co21_mJy + " mJy/beam")
+#
+#print("### 1sigma of the input co10 datacube = " + noise_co10_mJy + " mJy/beam")
+#print("### 1sigma of the input co21 datacube = " + noise_co21_mJy + " mJy/beam")
+print("### 1sigma of the input cs21 datacube = " + noise_cs21_mJy + " mJy/beam")
+print("### 1sigma of the input hcn10 datacube = " + noise_hcn10_mJy + " mJy/beam")
+print("### 1sigma of the input hcop10 datacube = " + noise_hcop10_mJy + " mJy/beam")
 
 os.system("rm -rf *.last")
