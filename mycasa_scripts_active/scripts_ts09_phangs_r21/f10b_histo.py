@@ -39,15 +39,18 @@ plt.figure(figsize=(8,8))#figsize=(10,10))
 plt.rcParams["font.size"] = 16
 plt.grid(axis="x")
 
-plt.hist(data_low,range=[0,1.5],bins=bins,color="blue",lw=0,alpha=0.5,label="Low")
-plt.hist(data_mid,range=[0,1.5],bins=bins,color="green",lw=0,alpha=0.5,label="Mid ")
-plt.hist(data_high,range=[0,1.5],bins=bins,color="red",lw=0,alpha=0.5,label="high")
+plt.hist(data_low,range=[0,1.5],bins=bins,color="blue",lw=0,alpha=0.4,label="Low")
+plt.hist(data_mid,range=[0,1.5],bins=bins,color="green",lw=0,alpha=0.4,label="Mid")
+plt.hist(data_high,range=[0,1.5],bins=bins,color="red",lw=0,alpha=0.4,label="High")
 
 plt.plot([line_high,line_high],[0,400],"--",lw=3,color="black")
 plt.plot([line_low,line_low],[0,400],"--",lw=3,color="black")
 
-plt.text(line_high+0.02,380,"66.7%")
-plt.text(line_low-0.15,380,"33.3%")
+plt.text(line_high+0.03,380,"66.7%")
+plt.text(line_low-0.20,380,"33.3%")
+
+plt.xlabel("$R_{21}$")
+plt.ylabel("Number of Pixel")
 
 plt.legend()
 plt.savefig(dir_data+"../eps/fig_mask_histo.png",dpi=100)
