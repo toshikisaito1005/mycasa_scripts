@@ -78,7 +78,12 @@ def noisehist(
     pixvalues = pixvalues[abs(pixvalues)>thres]
     ### plot
     # get plot range
-    histrange = [pixvalues.min()/1.5 - 0.02, -pixvalues.min()/1.5 + 0.02]
+    range_l = pixvalues.min()/1.5 - 0.02
+    range_r = -pixvalues.min()/1.5 + 0.02
+    if range_r>range_l:
+        histrange = [range_l, range_r]
+    else:
+        histrange = [range_r, range_l]
     # prepare for plot
     plt.figure(figsize=(10,10))
     plt.rcParams["font.size"] = 22
@@ -336,6 +341,18 @@ if not done:
 done = glob.glob(dir_co21)
 if not done:
     os.mkdir(dir_co21)
+#
+done = glob.glob(dir_cs21)
+if not done:
+    os.mkdir(dir_cs21)
+#
+done = glob.glob(dir_hcn10)
+if not done:
+    os.mkdir(dir_hcn10)
+#
+done = glob.glob(dir_hcop10)
+if not done:
+    os.mkdir(dir_hcop10)
 #
 #co10mask, noise_co10_mJy = eazy_immoments(imagename=imageco10, pbimage=pbco10, outputname=dir_co10+"n6240_co10", snr_mom=snr_mom, obsfreq_GHz=115.27120/(1+redshift), pblimit=0.5, clipbox=clipbox)
 #_, noise_co21_mJy = eazy_immoments(imagename=imageco21, pbimage=pbco21, outputname=dir_co21+"n6240_co21", snr_mom=snr_mom, obsfreq_GHz=230.53800/(1+redshift), pblimit=0.3, clipbox=clipbox, maskimage=co10mask)
