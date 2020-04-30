@@ -5,6 +5,8 @@ plt.ioff()
 
 #
 data = np.loadtxt("n6240_mom8_data.txt")
+dir_product = "/Users/saito/data/myproj_active/proj_jwu01_ngc6240/eps/"
+#
 dist = data[:,0]
 co10 = data[:,1]
 co21 = data[:,2]
@@ -37,4 +39,4 @@ ax1.set_xlabel("CO(1-0) Brightness Temperature (K)") #
 ax1.set_ylabel("CO(2-1) Brightness Temperature (K)") #
 cbar.set_label("Distance (kpc)")                 #
 
-plt.savefig("figure_co21_vs_co10.png",dpi=300)
+plt.savefig(dir_product + "figure_co21_vs_co10.png",dpi=300)

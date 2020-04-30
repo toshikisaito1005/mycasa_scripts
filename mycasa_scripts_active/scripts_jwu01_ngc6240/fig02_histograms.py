@@ -4,7 +4,10 @@ from matplotlib.colors import Normalize
 plt.ioff()
 
 
-### 重みつけ中央値を計算する関数。
+dir_product = "/Users/saito/data/myproj_active/proj_jwu01_ngc6240/eps/"
+
+
+###
 def weighted_percentile(data, weights, percent):
     """
     Args:
@@ -27,30 +30,30 @@ def weighted_percentile(data, weights, percent):
     return w_median
 
 
-### データを読み込む。
+###
 data = np.loadtxt("n6240_mom8_data.txt")
 dist = data[:,0]
 co10 = data[:,1]
 co21 = data[:,2]
 
 
-### 輝度温度のヒストグラム
-# plotに向けての下準備です。
-fig = plt.figure(figsize=(10,5))             # 図の大きさの設定
-ax1 = fig.add_subplot(111)                   # これはおまじないです
-ax1.grid(axis="x",linestyle='--')            # 図にグリッドを表示させます
-plt.rcParams["font.size"] = 20               # 図中の文字サイズの設定
-plt.subplots_adjust(bottom=0.15, left=0.12, right=0.95, top=0.9)  # 図の余白設定
+###
+#
+fig = plt.figure(figsize=(10,5))             #
+ax1 = fig.add_subplot(111)                   #
+ax1.grid(axis="x",linestyle='--')            #
+plt.rcParams["font.size"] = 20               #
+plt.subplots_adjust(bottom=0.15, left=0.12, right=0.95, top=0.9)  #
 
 
-# ヒストグラムの準備
-bins = 80                                    # ヒストグラムのステップの個数の設定
-historange = [0.001,25.]                     # ヒストグラムのステップを作る範囲の設定
+#
+bins = 80                                    #
+historange = [0.001,25.]                     #
 
-hist_co10 = np.histogram(co10, bins = bins, range = historange) # co10輝度温度のヒストグラム
-hist_co21 = np.histogram(co21, bins = bins, range = historange) # co21輝度温度のヒストグラム
+hist_co10 = np.histogram(co10, bins = bins, range = historange, weights = co10) #
+hist_co21 = np.histogram(co21, bins = bins, range = historange, weights = co21) #
 
-# normalized co10 histogramをプロット。
+#
 ax1.step(np.delete(hist_co10[1],-1),
 	      hist_co10[0]/float(sum(hist_co10[0])),
 	      alpha=0.4,
@@ -58,7 +61,7 @@ ax1.step(np.delete(hist_co10[1],-1),
 	      color = "blue",
 	      label = "CO(1-0)")
 
-# normalized co21 histogramをプロット。
+#
 ax1.step(np.delete(hist_co21[1],-1),
 	      hist_co21[0]/float(sum(hist_co21[0])),
 	      alpha=0.4,
@@ -66,59 +69,59 @@ ax1.step(np.delete(hist_co21[1],-1),
 	      color = "red",
 	      label = "CO(2-1)")
 
-ax1.set_xlim(historange)                     # xの範囲の指定
-ax1.set_ylim([0,0.25])                       # yの範囲の指定
+ax1.set_xlim(historange)                     #
+ax1.set_ylim([0,0.25])                       #
 
-ax1.set_ylabel("Normlized Count")            # xラベルの指定
-ax1.set_xlabel("Brightness Temperature (K)") # yラベルの指定
+ax1.set_ylabel("Normlized Count")            #
+ax1.set_xlabel("Brightness Temperature (K)") #
 
-plt.legend()                                 # ラベルを表示する
-plt.savefig("figure_histo_temp.png",dpi=300)
-
-
-### 比のヒストグラム
-# plotに向けての下準備です。
-fig = plt.figure(figsize=(10,5))             # 図の大きさの設定
-ax1 = fig.add_subplot(111)                   # これはおまじないです
-ax1.grid(axis="x",linestyle='--')            # 図にグリッドを表示させます
-plt.rcParams["font.size"] = 20               # 図中の文字サイズの設定
-plt.subplots_adjust(bottom=0.15, left=0.12, right=0.95, top=0.9)  # 図の余白設定
+plt.legend()                                 #
+plt.savefig(dir_product + "figure_histo_mom8.png",dpi=300)
 
 
-# ヒストグラムの準備
+###
+#
+fig = plt.figure(figsize=(10,5))             #
+ax1 = fig.add_subplot(111)                   #
+ax1.grid(axis="x",linestyle='--')            #
+plt.rcParams["font.size"] = 20               #
+plt.subplots_adjust(bottom=0.15, left=0.12, right=0.95, top=0.9)  #
+
+
+#
 bins = 80
 historange = [0.001,4.]
 
-hist_r21 = np.histogram(co21/co10, bins = bins, range = historange) # 比のヒストグラム
-hist_r21_wco10 = np.histogram(co21/co10, bins = bins, range = historange, weights = co10) # co10の輝度温度で重み付けをした比のヒストグラム
-hist_r21_wco21 = np.histogram(co21/co10, bins = bins, range = historange, weights = co21) # co21の輝度温度で重み付けをした比のヒストグラム
+hist_r21 = np.histogram(co21/co10, bins = bins, range = historange) #
+hist_r21_wco10 = np.histogram(co21/co10, bins = bins, range = historange, weights = co10) #
+hist_r21_wco21 = np.histogram(co21/co10, bins = bins, range = historange, weights = co21) #
 
-# ヒストグラムのmedianを求める。
+#
 median_r21 = np.median(co21/co10)
 median_r21_wco10 = weighted_percentile(co21/co10,co10,0.5)
 median_r21_wco21 = weighted_percentile(co21/co10,co21,0.5)
 
-# ヒストグラムの16%を求める。
+#
 p16_r21 = np.percentile(co21/co10,16)
 p16_r21_wco10 = weighted_percentile(co21/co10,co10,0.16)
 p16_r21_wco21 = weighted_percentile(co21/co10,co21,0.16)
 
-# ヒストグラムの84%を求める。
+#
 p84_r21 = np.percentile(co21/co10,84)
 p84_r21_wco10 = weighted_percentile(co21/co10,co10,0.84)
 p84_r21_wco21 = weighted_percentile(co21/co10,co21,0.84)
 
-# medianをプロットする。
+#
 ax1.plot([median_r21,median_r21],[0.14,0.14],"o",markersize=7,alpha=0.5,lw=0,color="blue")
 ax1.plot([median_r21_wco10,median_r21_wco10],[0.13,0.13],"o",markersize=7,alpha=0.5,lw=0,color="green")
 ax1.plot([median_r21_wco21,median_r21_wco21],[0.12,0.12],"o",markersize=7,alpha=0.5,lw=0,color="red")
 
-# 16%-84%の範囲をプロットする。
+#
 ax1.plot([p16_r21,p84_r21],[0.14,0.14],"-",markersize=7,alpha=0.5,lw=2,color="blue")
 ax1.plot([p16_r21_wco10,p84_r21_wco10],[0.13,0.13],"-",markersize=7,alpha=0.5,lw=2,color="green")
 ax1.plot([p16_r21_wco21,p84_r21_wco21],[0.12,0.12],"-",markersize=7,alpha=0.5,lw=2,color="red")
 
-# normalized r21 histogramをプロット。
+#
 ax1.step(np.delete(hist_r21[1],-1),
 	      hist_r21[0]/float(sum(hist_r21[0])),
 	      alpha=0.4,
@@ -126,7 +129,7 @@ ax1.step(np.delete(hist_r21[1],-1),
 	      color = "blue",
 	      label = "unweighted")
 
-# normalized co10-weighted r21 histogramをプロット。
+#
 ax1.step(np.delete(hist_r21_wco10[1],-1),
 	      hist_r21_wco10[0]/float(sum(hist_r21_wco10[0])),
 	      alpha=0.4,
@@ -134,7 +137,7 @@ ax1.step(np.delete(hist_r21_wco10[1],-1),
 	      color = "green",
 	      label = "CO(1-0)-weighted")
 
-# normalized co21-weighted r21 histogramをプロット。
+#
 ax1.step(np.delete(hist_r21_wco21[1],-1),
 	      hist_r21_wco21[0]/float(sum(hist_r21_wco21[0])),
 	      alpha=0.4,
@@ -149,4 +152,4 @@ ax1.set_ylabel("Normlized Count")
 ax1.set_xlabel("Brightness Temperature Ratio")
 
 plt.legend()
-plt.savefig("figure_histo_ratio.png",dpi=300)
+plt.savefig(dir_product + "figure_histo_ratio.png",dpi=300)
