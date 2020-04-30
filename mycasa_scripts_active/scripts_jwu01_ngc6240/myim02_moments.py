@@ -157,6 +157,7 @@ def eazy_immoments(
     outputname,
     snr_mom,
     obsfreq_GHz,
+    pblimit=0.5,
     maskimage=None,
     maskcube=None,
     nchan=3.0,
@@ -240,7 +241,7 @@ def eazy_immoments(
     #
     ### pbcorr
     os.system("rm -rf "+imagename+".pbcor")
-    impbcor(imagename=imagename, pbimage=pbimage, outfile=imagename+".pbcor", cutoff=0.5)
+    impbcor(imagename=imagename, pbimage=pbimage, outfile=imagename+".pbcor", cutoff=pblimit)
     #
     ### export mask
     outfile_mom0 = outputname+"_mom0.image"
@@ -325,9 +326,9 @@ if not done:
     os.mkdir(dir_co21)
 #
 co10mask, noise_co10_mJy = \
-    eazy_immoments(imagename=imageco10, pbimage=pbco10, outputname=dir_co10+"n6240_co10", snr_mom=snr_mom, obsfreq_GHz=115.27120/(1+redshift), clipbox=clipbox)
+    eazy_immoments(imagename=imageco10, pbimage=pbco10, outputname=dir_co10+"n6240_co10", snr_mom=snr_mom, obsfreq_GHz=115.27120/(1+redshift), pblimit=0.5, clipbox=clipbox)
 _, noise_co21_mJy = \
-    eazy_immoments(imagename=imageco21, pbimage=pbco21, outputname=dir_co21+"n6240_co21", snr_mom=snr_mom, obsfreq_GHz=230.53800/(1+redshift), clipbox=clipbox, maskimage=co10mask)
+    eazy_immoments(imagename=imageco21, pbimage=pbco21, outputname=dir_co21+"n6240_co21", snr_mom=snr_mom, obsfreq_GHz=230.53800/(1+redshift), pblimit=0.3, clipbox=clipbox, maskimage=co10mask)
 
 print("### 1sigma of the input co10 datacube = " + noise_co10_mJy + " mJy/beam")
 print("### 1sigma of the input co21 datacube = " + noise_co21_mJy + " mJy/beam")
