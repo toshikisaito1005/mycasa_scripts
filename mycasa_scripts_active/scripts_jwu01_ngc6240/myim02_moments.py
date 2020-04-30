@@ -239,7 +239,7 @@ def eazy_immoments(
     #
     #
     ### pbcorr
-    os.system("rm -rf " + imagename + ".pbcor")
+    os.system("rm -rf "+imagename+".pbcor")
     impbcor(imagename=imagename, pbimage=pbimage, outfile=imagename+".pbcor", cutoff=0.5)
     #
     ### export mask
@@ -303,10 +303,11 @@ def eazy_immoments(
     os.system("rm -rf " + outfile_mom1 + "_tmp")
     os.system("rm -rf " + outfile_mom2 + "_tmp")
     os.system("rm -rf " + outfile_mom8 + "_tmp")
-    os.system("rm -rf " + imagename+".masked_tmp")
-    os.system("rm -rf " + imagename+".masked")
-    os.system("rm -rf " + nchanmask+"*")
-    os.system("rm -rf " + imagename+".mask*")
+    os.system("rm -rf " + imagename + ".pbcor") 
+    os.system("rm -rf " + imagename + ".masked_tmp")
+    os.system("rm -rf " + imagename + ".masked")
+    os.system("rm -rf " + nchanmask + "*")
+    os.system("rm -rf " + imagename + ".mask*")
 
     return outfile_mom0+".mask", noise_mJy
 
