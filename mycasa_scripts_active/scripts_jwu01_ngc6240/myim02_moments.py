@@ -8,21 +8,39 @@ plt.ioff()
 ### Define Parameters
 #####################
 # co10 images
-imageco10    = "co10_cube.image"
-pbco10       = "co10_cube.pb"
+imageco10     = "co10_cube.image"
+pbco10        = "co10_cube.pb"
 #
 # co21 images
-imageco21    = "co21_cube.image"
-pbco21       = "co21_cube.pb"
+imageco21     = "co21_cube.image"
+pbco21        = "co21_cube.pb"
+#
+# hcn10 images
+imagehcn10    = "hcn10_cube.image"
+pbhcn10       = "hcn10_cube.pb"
+#
+# hcn10 images
+imagehcop10   = "hcop10_cube.image"
+pbhcop10      = "hcop10_cube.pb"
+#
+# cs32 images
+imagecs32     = "cs32_cube.image"
+pbcs32        = "cs32_cube.pb"
 #
 # parameters for moment map creations
-snr_mom      = 2.5                    # clip sn ratio level for immoments
-redshift     = 0.02448                # source redshift
-clipbox      = "108,108,263,263"      # clip image size of the output
-rms_co10     = 0.00115                # Jy/beam unit (float), 1 sigma value or None
-rms_co21     = 0.00605                # Jy/beam unit (float), 1 sigma value or None
-obsfreq_co10 = 115.27120/(1+redshift) # GHz unit, co10 observed frequency
-obsfreq_co21 = 230.53800/(1+redshift) # GHz unit, co21 observed frequency
+snr_mom        = 2.5                    # clip sn ratio level for immoments
+redshift       = 0.02448                # source redshift
+clipbox        = "108,108,263,263"      # clip image size of the output
+rms_co10       = 0.00115                # Jy/beam unit (float), 1 sigma value or None
+rms_co21       = 0.00605
+rms_hcn10      = 0.00042
+rms_hcop10     = None
+rms_cs32       = None
+obsfreq_co10   = 115.27120/(1+redshift) # GHz unit, co10 observed frequency
+obsfreq_co21   = 230.53800/(1+redshift)
+obsfreq_hcn10  =  88.63185/(1+redshift)
+obsfreq_hcop10 =  89.18853/(1+redshift)
+obsfreq_cs32   = 146.96903/(1+redshift)
 
 
 #####################
@@ -225,6 +243,7 @@ def eazy_immoments(
         print("# step 1: estimate rms")
         noise = noisehist(imagename, 0.02, "", snr_mom, plotter=False)
     else:
+        print("# step 1: skip estimate rms")
         noise = rms
     print("# rms noise level = " + str(np.round(noise,5)) + " Jy/beam")
     #
@@ -236,6 +255,7 @@ def eazy_immoments(
         maskcube = mask_cube(imagename, bmaj, snr_mom, snr_mask)
     else:
         print("# step 2: skip mask_cube")
+        maskcube = imagename+".mask"
     #
     #
     ### step 3: create nchanmask
@@ -327,21 +347,75 @@ _, noise_co21_mJy = \
                    snr_mom     = snr_mom,
                    rms         = rms_co21,
                    obsfreq_GHz = obsfreq_co21,
-                   pblimit     = 0.3,
                    clipbox     = clipbox,
+                   # additional parameters
+                   pblimit     = 0.3,
                    maskimage   = co10mask,   # In this case, co10 mom-0 detection pixels are used as the additional mask
                    )
+
+_, noise_hcn10_mJy = \
+    eazy_immoments(imagename   = imagehcn10,
+                   pbimage     = pbhcn10,
+                   outputname  = "n6240_hcn10",
+                   snr_mom     = snr_mom,
+                   rms         = rms_hcn10,
+                   obsfreq_GHz = obsfreq_hcn10,
+                   clipbox     = clipbox,
+                   # additional parameters
+                   nchan       = 2,
+                   snr_mask    = 3.0,
+                   maskimage   = co10mask,
+                   )
+
+_, noise_hcop10_mJy = \
+    eazy_immoments(imagename   = imagehcop10,
+                   pbimage     = pbhcop10,
+                   outputname  = "n6240_hcop10",
+                   snr_mom     = snr_mom,
+                   rms         = rms_hcop10,
+                   obsfreq_GHz = obsfreq_hcop10,
+                   clipbox     = clipbox,
+                   # additional parameters
+                   nchan       = 2,
+                   snr_mask    = 3.0,
+                   maskimage   = co10mask,
+                   )
+
+_, noise_cs32_mJy = \
+    eazy_immoments(imagename   = imagecs32,
+                   pbimage     = pbcs32,
+                   outputname  = "n6240_cs32",
+                   snr_mom     = snr_mom,
+                   rms         = rms_cs32,
+                   obsfreq_GHz = obsfreq_cs32,
+                   clipbox     = clipbox,
+                   # additional parameters
+                   nchan       = 2,
+                   snr_mask    = 3.0,
+                   maskimage   = co10mask,
+                   )
+
 
 ### print noise rms levels
 print("###\n###\n###")
 if rms_co10==None:
-    print("### 1sigma of the input co10 datacube = " + noise_co10_mJy + " mJy/beam")
+    print("### 1sigma of the input CO(1-0) datacube = " + noise_co10_mJy + " mJy/beam")
 #
 if rms_co21==None:
-    print("### 1sigma of the input co21 datacube = " + noise_co21_mJy + " mJy/beam")
+    print("### 1sigma of the input CO(2-1) datacube = " + noise_co21_mJy + " mJy/beam")
 #
+if rms_hcn10==None:
+    print("### 1sigma of the input HCN(1-0) datacube = " + noise_hcn10_mJy + " mJy/beam")
+#
+if rms_hcop10==None:
+    print("### 1sigma of the input HCO+(1-0) datacube = " + noise_hcop10_mJy + " mJy/beam")
+#
+if rms_cs32==None:
+    print("### 1sigma of the input HCO+(1-0) datacube = " + noise_hcop10_mJy + " mJy/beam")
+#
+
 
 ### cleanup
 os.system("rm -rf *.last")
-os.system("rm -rf " + co10mask+ " " + _)
+os.system("rm -rf " + co10mask)
 #
