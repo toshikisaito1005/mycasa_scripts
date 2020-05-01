@@ -16,11 +16,11 @@ imageco21    = "co21_cube.image"
 pbco21       = "co21_cube.pb"
 #
 # parameters for moment map creations
-snr_mom      = 3.0                    # clip sn ratio level for immoments
+snr_mom      = 2.5                    # clip sn ratio level for immoments
 redshift     = 0.02448                # source redshift
 clipbox      = "108,108,263,263"      # clip image size of the output
-rms_co10     = None                   # Jy/beam unit (float), 1 sigma value or None
-rms_co21     = None                   # Jy/beam unit (float), 1 sigma value or None
+rms_co10     = 0.00115                # Jy/beam unit (float), 1 sigma value or None
+rms_co21     = 0.00605                # Jy/beam unit (float), 1 sigma value or None
 obsfreq_co10 = 115.27120/(1+redshift) # GHz unit, co10 observed frequency
 obsfreq_co21 = 230.53800/(1+redshift) # GHz unit, co21 observed frequency
 
@@ -40,6 +40,7 @@ def createmask(
     expr = "iif(IM0>=" + str(thres) + ",1.0,0.0)"
     immath(imagename=imagename, mode="evalexpr", expr=expr, outfile=outmask)
     imhead(imagename=outmask, mode="del", hdkey="beammajor")
+    makemask(mode="copy", inpimage=outmask, inpmask=outmask, output=outmask+":mask0", overwrite=True)
 
 def func1(x, a, c):
     return a * np.exp(-(x)**2/(2*c**2))
@@ -208,9 +209,8 @@ def eazy_immoments(
     rms=None,       # 1 sigma level
     pblimit=0.5,    # primary beam limit for imaging
     maskimage=None, # additional mask for moment map creation
-    maskcube=None,
     nchan=3,        # threshold number of channel for moment map creation
-    snr_mask=4.0,   # threshold for cube mask cretion
+    snr_mask=4.5,   # threshold for cube mask cretion
     clipbox="",     # clip image size of the output
     ):
     """
@@ -226,16 +226,16 @@ def eazy_immoments(
         noise = noisehist(imagename, 0.02, "", snr_mom, plotter=False)
     else:
         noise = rms
-    print("# estimated noise = " + str(np.round(noise,5)) + " Jy/beam")
+    print("# rms noise level = " + str(np.round(noise,5)) + " Jy/beam")
     #
     #
     ### step 2: create maskcube
-    if maskcube==None:
+    maskcube = glob.glob(imagename+".mask")
+    if not maskcube:
         print("# step 2: running mask_cube")
         maskcube = mask_cube(imagename, bmaj, snr_mom, snr_mask)
     else:
         print("# step 2: skip mask_cube")
-        maskcube = maskcube
     #
     #
     ### step 3: create nchanmask
@@ -293,12 +293,10 @@ def eazy_immoments(
     noise_mJy = str(np.round(noise*1000., 2))
     #
     # create mom-0 mask
-    createmask(outfile_mom0, 0.0000001, outfile_mom0+".mask")
+    outfile_mom0_for_mask = run_immoments(cube_for_moment, outputname+"_for_mask", 0, bmaj)
+    createmask(outfile_mom0_for_mask, 0.0000001, outfile_mom0+".mask")
     # cleanup
-    os.system("rm -rf " + outfile_mom0 + "_tmp*")
-    os.system("rm -rf " + outfile_mom1 + "_tmp")
-    os.system("rm -rf " + outfile_mom2 + "_tmp")
-    os.system("rm -rf " + outfile_mom8 + "_tmp")
+    os.system("rm -rf " + outfile_mom0_for_mask)
     os.system("rm -rf " + imagename + ".pbcor") 
     os.system("rm -rf " + imagename + ".mask2")
     os.system("rm -rf " + imagename + ".masked")
@@ -320,7 +318,6 @@ co10mask, noise_co10_mJy = \
                    rms         = rms_co10,
                    obsfreq_GHz = obsfreq_co10,
                    clipbox     = clipbox,
-                   #maskcube    = "co10_cube.image.mask",
                    )
 
 _, noise_co21_mJy = \
@@ -332,7 +329,6 @@ _, noise_co21_mJy = \
                    obsfreq_GHz = obsfreq_co21,
                    pblimit     = 0.3,
                    clipbox     = clipbox,
-                   #maskcube    = "co21_cube.image.mask",
                    maskimage   = co10mask,   # In this case, co10 mom-0 detection pixels are used as the additional mask
                    )
 
