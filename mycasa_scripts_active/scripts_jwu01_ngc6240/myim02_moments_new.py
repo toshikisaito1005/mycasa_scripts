@@ -154,44 +154,50 @@ def Jy2Kelvin(
     immath(imagename=imagename, expr="IM0*"+str(J2K), outfile=outfile)
     imhead(outfile, mode="put", hdkey="bunit", hdvalue=hdvalue)
 
-def ():
+def mask_cube(
+    imagename,
+    bmaj,
+    sm1=2.0,
+    sm2=4.0,
+    sm3=6.0,
+    ):
     # get name
     smcube1 = imagename + ".smooth1"
     smcube2 = imagename + ".smooth2"
     smcube3 = imagename + ".smooth3"
     #
     # cleanup
-        os.system("rm -rf " + smcube1)
-        os.system("rm -rf " + smcube2)
-        os.system("rm -rf " + smcube3)
-        #
-        # smooth1 cube mask
-        smbeam = str(bmaj * 2.0) + "arcsec"
-        imsmooth(imagename=imagename, targetres=True, major=smbeam, minor=smbeam, pa="0deg", outfile=smcube1)
-        smnoise1 = noisehist(smcube1, 0.02, "", snr_mom, plotter=False)
-        createmask(smcube1, smnoise1 * snr_mask, smcube1+".mask")
-        #
-        # smooth2 cube mask
-        smbeam = str(bmaj * 4.0) + "arcsec"
-        imsmooth(imagename=imagename, targetres=True, major=smbeam, minor=smbeam, pa="0deg", outfile=smcube2)
-        smnoise2 = noisehist(smcube2, 0.02, "", snr_mom, plotter=False)
-        createmask(smcube2, smnoise2 * snr_mask, smcube2+".mask")
-        #
-        # smooth3 cube mask
-        smbeam = str(bmaj * 6.0) + "arcsec"
-        imsmooth(imagename=imagename, targetres=True, major=smbeam, minor=smbeam, pa="0deg", outfile=smcube3)
-        smnoise3 = noisehist(smcube3, 0.02, "", snr_mom, plotter=False)
-        createmask(smcube3, smnoise3 * snr_mask, smcube3+".mask")
-        #
-        # combined cube mask
-        os.system("rm -rf " + imagename+".mask")
-        maskimages = [smcube1+".mask", smcube2+".mask", smcube3+".mask"]
-        immath(imagename=maskimages, expr="iif(IM0+IM1+IM2>=2.0,1.0,0.0)", outfile=imagename+".mask")
-        # cleanup
-        os.system("rm -rf " + smcube1 + "*")
-        os.system("rm -rf " + smcube2 + "*")
-        os.system("rm -rf " + smcube3 + "*")
-        maskcube = imagename+".mask"
+    os.system("rm -rf " + smcube1)
+    os.system("rm -rf " + smcube2)
+    os.system("rm -rf " + smcube3)
+    #
+    # smooth1 cube mask
+    smbeam = str(bmaj * sm1) + "arcsec"
+    imsmooth(imagename=imagename, targetres=True, major=smbeam, minor=smbeam, pa="0deg", outfile=smcube1)
+    smnoise1 = noisehist(smcube1, 0.02, "", snr_mom, plotter=False)
+    createmask(smcube1, smnoise1 * snr_mask, smcube1+".mask")
+    #
+    # smooth2 cube mask
+    smbeam = str(bmaj * sm2) + "arcsec"
+    imsmooth(imagename=imagename, targetres=True, major=smbeam, minor=smbeam, pa="0deg", outfile=smcube2)
+    smnoise2 = noisehist(smcube2, 0.02, "", snr_mom, plotter=False)
+    createmask(smcube2, smnoise2 * snr_mask, smcube2+".mask")
+    #
+    # smooth3 cube mask
+    smbeam = str(bmaj * sm3) + "arcsec"
+    imsmooth(imagename=imagename, targetres=True, major=smbeam, minor=smbeam, pa="0deg", outfile=smcube3)
+    smnoise3 = noisehist(smcube3, 0.02, "", snr_mom, plotter=False)
+    createmask(smcube3, smnoise3 * snr_mask, smcube3+".mask")
+    #
+    # combined cube mask
+    os.system("rm -rf " + imagename+".mask")
+    maskimages = [smcube1+".mask", smcube2+".mask", smcube3+".mask"]
+    immath(imagename=maskimages, expr="iif(IM0+IM1+IM2>=2.0,1.0,0.0)", outfile=imagename+".mask")
+    # cleanup
+    os.system("rm -rf " + smcube1 + "*")
+    os.system("rm -rf " + smcube2 + "*")
+    os.system("rm -rf " + smcube3 + "*")
+    maskcube = imagename+".mask"
 
 def eazy_immoments(
     imagename,
