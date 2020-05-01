@@ -203,6 +203,20 @@ def mask_cube(
 
     return maskcube
 
+def run_immoments(
+    cube_for_moment,
+    outputname,
+    ):
+    """
+    """
+    outfile_mom0 = outputname+"_mom0.image"
+    immoments(imagename=cube_for_moment, moments=[0], includepix=[0.,1e11], outfile=outfile_mom0+"_tmp")
+    imagenames = [outfile_mom0+"_tmp",nchanmask]
+    expr = "IM0*IM1"
+    immath(imagename=imagenames, expr=expr, outfile=outfile_mom0, box=clipbox)
+    imhead(outfile_mom0, mode="put", hdkey="beammajor", hdvalue=str(bmaj)+"arcsec")
+    imhead(outfile_mom0, mode="put", hdkey="beamminor", hdvalue=str(bmaj)+"arcsec")
+
 def eazy_immoments(
     imagename,
     pbimage,
@@ -262,24 +276,13 @@ def eazy_immoments(
     os.system("rm -rf "+imagename+".pbcor")
     impbcor(imagename=imagename, pbimage=pbimage, outfile=imagename+".pbcor", cutoff=pblimit)
     #
-    ### export mask
-    outfile_mom0 = outputname+"_mom0.image"
-    os.system("rm -rf " + outfile_mom0 + ".mask")
-    os.system("rm -rf " + outfile_mom0 + "*")
-    immoments(imagename=imagename+".pbcor", moments=[0], includepix=[0.,1e11], outfile=outfile_mom0+"_tmp")
-    immath(imagename=[outfile_mom0+"_tmp",nchanmask], expr="IM0*IM1", outfile=outfile_mom0+"_tmp2")
-    createmask(outfile_mom0+"_tmp2", 0.000000001, outfile_mom0+".mask")
+    ### step 6: maksing datacube
+    immath(imagename=[imagename+".pbcor",maskcube],expr="IM0*IM1",outfile=imagename+".masked")
     #
-    immath(imagename=[imagename+".masked",outfile_mom0+".mask"],expr="IM0*IM1",outfile=imagename+".masked2")
-    #
-    ### moments
-    cube_for_moment = imagename+".masked2"
+    ### step 7: moments
+    cube_for_moment = imagename+".masked",
     # mom-0
-    outfile_mom0 = outputname+"_mom0.image"
-    #immoments(imagename=cube_for_moment, moments=[0], includepix=[0.,1e11], outfile=outfile_mom0+"_tmp")
-    imagenames = [outfile_mom0+"_tmp",nchanmask]
-    expr = "IM0*IM1"
-    immath(imagename=imagenames, expr=expr, outfile=outfile_mom0, box=clipbox)
+
     #
     # mom-1
     outfile_mom1 = outputname+"_mom1.image"
@@ -306,8 +309,6 @@ def eazy_immoments(
     immath(imagename=imagenames, expr=expr, outfile=outfile_mom8, box=clipbox)
     #
     # add header to mom0
-    imhead(outfile_mom0, mode="put", hdkey="beammajor", hdvalue=str(bmaj)+"arcsec")
-    imhead(outfile_mom0, mode="put", hdkey="beamminor", hdvalue=str(bmaj)+"arcsec")
     Jy2Kelvin(outfile_mom0, obsfreq_GHz, "K.km/s")
     #
     # add header to mom8
