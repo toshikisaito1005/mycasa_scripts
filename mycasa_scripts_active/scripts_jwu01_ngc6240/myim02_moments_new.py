@@ -238,33 +238,27 @@ def eazy_immoments(
         print("### skip mask_cube")
         maskcube = maskcube
     #
-    ### step 3: create masknchan
+    ### step 3: create nchanmask
+    # masking cube
+    os.system("rm -rf " + imagename+".masked")
+    immath(imagename=[imagename,maskcube], expr="iif(IM1>=1.0,IM0,0.0)", outfile=imagename+".masked")
+    #
+    # create nchan mask
     nchanmask = imagename + ".nchanmask"
     os.system("rm -rf " + nchanmask + "*")
     immath(imagename=imagename+".masked", expr="iif(IM0>="+str(noise*snr_mom)+",1.0/10.,0.0)", outfile=nchanmask+"_tmp") # 10. is the channel width in km/s.
     immoments(imagename=nchanmask+"_tmp", moments=[0], outfile=nchanmask+"_tmp2")
-    # make nchanmask
     createmask(nchanmask+"_tmp2", nchan, nchanmask)
-
     #
-    #
-    #
-    #
-    ### step ?: combime maskimage if specified
+    ### step 4: combime maskimage if specified
+    maskcube_pre = maskcube
+    maskcube = imagename+".mask2"
     if maskimage!=None:
-        print("### combine maskcube and maskimage")
-        maskcube_pre = maskcube
-        maskcube = imagename+".mask2"
-        immath(imagename=[maskcube_pre,maskimage], expr="IM0*IM1", outfile=maskcube)
+        immath(imagename=[maskcube_pre,maskimage,nchanmask], expr="IM0*IM1*IM2", outfile=maskcube)
+    else:
+        immath(imagename=[maskcube_pre,nchanmask], expr="IM0*IM1", outfile=maskcube)    
     #
-    ### mask cube
-    os.system("rm -rf " + imagename+".masked")
-    immath(imagename=[imagename,maskcube], expr="iif(IM1>=1.0,IM0,0.0)", outfile=imagename+".masked")
-    #
-    #
-    #
-    #
-    ### pbcorr
+    ### step 5: pbcorr
     os.system("rm -rf "+imagename+".pbcor")
     impbcor(imagename=imagename, pbimage=pbimage, outfile=imagename+".pbcor", cutoff=pblimit)
     #
