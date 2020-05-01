@@ -34,8 +34,8 @@ clipbox        = "108,108,263,263"      # clip image size of the output
 rms_co10       = 0.00115                # Jy/beam unit (float), 1 sigma value or None
 rms_co21       = 0.00605
 rms_hcn10      = 0.00042
-rms_hcop10     = None
-rms_cs32       = None
+rms_hcop10     = 0.00040
+rms_cs32       = 0.00066
 obsfreq_co10   = 115.27120/(1+redshift) # GHz unit, co10 observed frequency
 obsfreq_co21   = 230.53800/(1+redshift)
 obsfreq_hcn10  =  88.63185/(1+redshift)
@@ -233,7 +233,9 @@ def eazy_immoments(
     ):
     """
     """
+    print("########################################")
     print("### moment map creation for " + imagename)
+    print("########################################")
     ### step 0: get beam size
     bmaj = imhead(imagename, mode="list")["beammajor"]["value"]
     #
@@ -363,7 +365,7 @@ _, noise_hcn10_mJy = \
                    clipbox     = clipbox,
                    # additional parameters
                    nchan       = 2,
-                   snr_mask    = 3.0,
+                   snr_mask    = 2.5,
                    maskimage   = co10mask,
                    )
 
@@ -376,8 +378,8 @@ _, noise_hcop10_mJy = \
                    obsfreq_GHz = obsfreq_hcop10,
                    clipbox     = clipbox,
                    # additional parameters
-                   nchan       = 2,
-                   snr_mask    = 3.0,
+                   nchan       = 3,
+                   snr_mask    = 2.5,
                    maskimage   = co10mask,
                    )
 
@@ -390,8 +392,8 @@ _, noise_cs32_mJy = \
                    obsfreq_GHz = obsfreq_cs32,
                    clipbox     = clipbox,
                    # additional parameters
-                   nchan       = 2,
-                   snr_mask    = 3.0,
+                   nchan       = 3,
+                   snr_mask    = 2.5,
                    maskimage   = co10mask,
                    )
 
