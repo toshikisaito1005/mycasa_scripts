@@ -411,7 +411,7 @@ if rms_hcop10==None:
     print("### 1sigma of the input HCO+(1-0) datacube = " + noise_hcop10_mJy + " mJy/beam")
 #
 if rms_cs32==None:
-    print("### 1sigma of the input HCO+(1-0) datacube = " + noise_hcop10_mJy + " mJy/beam")
+    print("### 1sigma of the input CS(3-2) datacube = " + noise_cs32_mJy + " mJy/beam")
 #
 
 
