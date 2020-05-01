@@ -16,7 +16,7 @@ imageco21    = "co21_cube.image"
 pbco21       = "co21_cube.pb"
 #
 # parameters for moment map creations
-snr_mom      = 3.0                    # clip signal-to-noise ratio level for immoments
+snr_mom      = 3.0                    # clip sn ratio level for immoments
 redshift     = 0.02448                # source redshift
 clipbox      = "108,108,263,263"      # clip image size of the output
 rms_co10     = None                   # Jy/beam unit (float), 1 sigma value or None
@@ -35,14 +35,11 @@ def createmask(
     ):
     """
     """
+    print("# create " + outmask)
     os.system("rm -rf " + outmask)
-    immath(imagename = imagename,
-           mode = "evalexpr",
-           expr = "iif(IM0 >= " + str(thres) + ", 1.0, 0.0)",
-           outfile = outmask)
-    imhead(imagename = outmask,
-           mode = "del",
-           hdkey = "beammajor")
+    expr = "iif(IM0>=" + str(thres) + ",1.0,0.0)"
+    immath(imagename=imagename, mode="evalexpr", expr=expr, outfile=outmask)
+    imhead(imagename=outmask, mode="del", hdkey="beammajor")
 
 def func1(x, a, c):
     return a * np.exp(-(x)**2/(2*c**2))
@@ -92,39 +89,22 @@ def noisehist(
              alpha=0.3,
              label="negative pixels (reversed)")
     # fit the histogram using a Gaussian
+    xaxis = histdata[1][2:][histdata[1][2:]<noises_byeye]
+    yaxis = histdata[0][1:][histdata[1][2:]<noises_byeye]
+    guess0 = np.max(histdata[0][1:][histdata[1][2:]<noises_byeye])
     popt, pcov = \
-        curve_fit(
-            func1,
-            histdata[1][2:][histdata[1][2:]<noises_byeye],
-            histdata[0][1:][histdata[1][2:]<noises_byeye],
-            p0 = [np.max(histdata[0][1:][histdata[1][2:]<noises_byeye]),
-                  noises_byeye],
-            maxfev = 10000)
+        curve_fit(func1, xaxis, yaxis, p0=[guess0,noises_byeye], maxfev=10000)
     #
     x = np.linspace(histdata[1][1], histdata[1][-1], 200)
     plt.plot(x, func1(x, popt[0], popt[1]), '-', c="black", lw=5)
-    plt.plot([0, 0],
-             [2e1, np.max(histdata[0][1:][histdata[1][2:]<noises_byeye]) * 1.2],
-             "-",
-             color="black",
-             lw=2)
-    plt.plot([popt[1], popt[1]],
-             [2e1, np.max(histdata[0][1:][histdata[1][2:]<noises_byeye]) * 1.2],
-             "--",
-             color="black",
-             lw=2,
+    ylim = [2e1, np.max(histdata[0][1:][histdata[1][2:]<noises_byeye]) * 1.2]
+    #
+    plt.plot([0,0], ylim, "-", color="black", lw=2)
+    plt.plot([popt[1],popt[1]], ylim, "--", color="black", lw=2,
              label="1.0 sigma = " + str(np.round(popt[1]*1000.,2)) + " mJy beam$^{-1}$")
-    plt.plot([popt[1]*snr,popt[1]*snr],
-             [2e1, np.max(histdata[0][1:][histdata[1][2:]<noises_byeye]) * 1.2],
-             "--",
-             color="black",
-             lw=5,
+    plt.plot([popt[1]*snr,popt[1]*snr], ylim, "--", color="black", lw=5,
              label=str(snr) + " sigma = " + str(np.round(popt[1]*snr*1000.,2)) + " mJy beam$^{-1}$")
-    plt.plot([-popt[1], -popt[1]],
-             [2e1, np.max(histdata[0][1:][histdata[1][2:]<noises_byeye]) * 1.2],
-             "--",
-             color="black",
-             lw=2)
+    plt.plot([-popt[1],-popt[1]], ylim, "--", color="black", lw=2)
     #
     plt.xlim(0, histrange[1])
     plt.ylim([2e1, np.max(histdata[0][1:][histdata[1][2:]<noises_byeye]) * 1.2])
@@ -135,7 +115,7 @@ def noisehist(
     if plotter==True:
       plt.savefig(output,dpi=100)
 
-    return popt[1]
+    return abs(popt[1])
 
 def Jy2Kelvin(
     imagename,
@@ -145,6 +125,7 @@ def Jy2Kelvin(
     """
     """
     #
+    print("# Jy-to-Kelvin conversion of " + imagename)
     bmaj = imhead(imagename, mode="list")["beammajor"]["value"]
     bmin = imhead(imagename, mode="list")["beamminor"]["value"]
     J2K = 1.222e6 / bmaj / bmin / obsfreq_GHz**2
@@ -169,9 +150,7 @@ def mask_cube(
     smcube3 = imagename + ".smooth3"
     #
     # cleanup
-    os.system("rm -rf " + smcube1)
-    os.system("rm -rf " + smcube2)
-    os.system("rm -rf " + smcube3)
+    os.system("rm -rf " + smcube1 + " " + smcube2 + " " + smcube3)
     #
     # smooth1 cube mask
     smbeam = str(bmaj * sm1) + "arcsec"
@@ -212,7 +191,8 @@ def run_immoments(
     ):
     """
     """
-    outfile_mom = outputname+"_mom0.image"
+    print("# create moment " + str(moment))
+    outfile_mom = outputname+"_mom" + str(moment) + ".image"
     immoments(imagename=cube_for_moment, moments=[moment], includepix=[0.,1e11], outfile=outfile_mom, box=clipbox)
     imhead(outfile_mom, mode="put", hdkey="beammajor", hdvalue=str(bmaj)+"arcsec")
     imhead(outfile_mom, mode="put", hdkey="beamminor", hdvalue=str(bmaj)+"arcsec")
@@ -220,41 +200,46 @@ def run_immoments(
     return outfile_mom
 
 def eazy_immoments(
-    imagename,
-    pbimage,
-    outputname,
-    snr_mom,
-    obsfreq_GHz,
-    rms=None,
-    pblimit=0.5,
-    maskimage=None,
+    imagename,      # input iamge cube
+    pbimage,        # imput pb cube
+    outputname,     # prefix of the output
+    snr_mom,        # threshold for moment map creation
+    obsfreq_GHz,    # observed frequency required for Jy-to-Kelvin conversion
+    rms=None,       # 1 sigma level
+    pblimit=0.5,    # primary beam limit for imaging
+    maskimage=None, # additional mask for moment map creation
     maskcube=None,
-    nchan=3.0,
-    snr_mask=6.0,
-    clipbox="",
+    nchan=3,        # threshold number of channel for moment map creation
+    snr_mask=4.0,   # threshold for cube mask cretion
+    clipbox="",     # clip image size of the output
     ):
     """
     """
     print("### moment map creation for " + imagename)
-    ### get beam size
+    ### step 0: get beam size
     bmaj = imhead(imagename, mode="list")["beammajor"]["value"]
+    #
     #
     ### step 1: measure noise
     if rms==None:
-        print("### estimate rms")
+        print("# step 1: estimate rms")
         noise = noisehist(imagename, 0.02, "", snr_mom, plotter=False)
     else:
-        noise=rms
+        noise = rms
+    print("# estimated noise = " + str(np.round(noise,5)) + " Jy/beam")
+    #
     #
     ### step 2: create maskcube
     if maskcube==None:
-        print("### running mask_cube")
+        print("# step 2: running mask_cube")
         maskcube = mask_cube(imagename, bmaj, snr_mom, snr_mask)
     else:
-        print("### skip mask_cube")
+        print("# step 2: skip mask_cube")
         maskcube = maskcube
     #
+    #
     ### step 3: create nchanmask
+    print("# step 3: create nchan mask")
     # masking cube
     os.system("rm -rf " + imagename+".masked")
     immath(imagename=[imagename,maskcube], expr="iif(IM1>=1.0,IM0,0.0)", outfile=imagename+".masked")
@@ -262,11 +247,14 @@ def eazy_immoments(
     # create nchan mask
     nchanmask = imagename + ".nchanmask"
     os.system("rm -rf " + nchanmask + "*")
-    immath(imagename=imagename+".masked", expr="iif(IM0>="+str(noise*snr_mom)+",1.0/10.,0.0)", outfile=nchanmask+"_tmp") # 10. is the channel width in km/s.
+    expr = "iif(IM0>=" + str(noise * snr_mom) + ",1.0/10.,0.0)"
+    immath(imagename=imagename+".masked", expr=expr, outfile=nchanmask+"_tmp") # 10. is the channel width in km/s.
     immoments(imagename=nchanmask+"_tmp", moments=[0], outfile=nchanmask+"_tmp2")
     createmask(nchanmask+"_tmp2", nchan, nchanmask)
     #
+    #
     ### step 4: combime maskimage if specified
+    print("# step 4: combine masks")
     maskcube_pre = maskcube
     maskcube = imagename+".mask2"
     if maskimage!=None:
@@ -274,20 +262,29 @@ def eazy_immoments(
     else:
         immath(imagename=[maskcube_pre,nchanmask], expr="IM0*IM1", outfile=maskcube)    
     #
+    #
     ### step 5: pbcorr
+    print("# step 5: pbcorr")
     os.system("rm -rf "+imagename+".pbcor")
     impbcor(imagename=imagename, pbimage=pbimage, outfile=imagename+".pbcor", cutoff=pblimit)
     #
+    #
     ### step 6: maksing datacube
-    immath(imagename=[imagename+".pbcor",maskcube],expr="IM0*IM1",outfile=imagename+".masked")
+    print("# step 6: masking datacube")
+    immath(imagename=[imagename+".pbcor",maskcube],expr="IM0*IM1",outfile=imagename+".masked2")
+    #
     #
     ### step 7: moments
-    cube_for_moment = imagename+".masked",
-    outfile_mom0 = run_immoments(cube_for_moment, outputname, 0, bmaj, clipbox=None)
-    _            = run_immoments(cube_for_moment, outputname, 1, bmaj, clipbox=None)
-    _            = run_immoments(cube_for_moment, outputname, 2, bmaj, clipbox=None)
-    outfile_mom8 = run_immoments(cube_for_moment, outputname, 8, bmaj, clipbox=None)
+    print("# step 7: run_immoments")
+    cube_for_moment = imagename+".masked2"
+    outfile_mom0 = run_immoments(cube_for_moment, outputname, 0, bmaj, clipbox=clipbox)
+    outfile_mom1 = run_immoments(cube_for_moment, outputname, 1, bmaj, clipbox=clipbox)
+    outfile_mom2 = run_immoments(cube_for_moment, outputname, 2, bmaj, clipbox=clipbox)
+    outfile_mom8 = run_immoments(cube_for_moment, outputname, 8, bmaj, clipbox=clipbox)
     #
+    #
+    ### step 8: other stuffs
+    print("# step 8: other stuffs")
     # add header to mom0
     Jy2Kelvin(outfile_mom0, obsfreq_GHz, "K.km/s")
     Jy2Kelvin(outfile_mom8, obsfreq_GHz, "K")
@@ -298,16 +295,15 @@ def eazy_immoments(
     # create mom-0 mask
     createmask(outfile_mom0, 0.0000001, outfile_mom0+".mask")
     # cleanup
-    os.system("rm -rf " + outfile_mom0 + "_tmp")
-    os.system("rm -rf " + outfile_mom0 + "_tmp2")
+    os.system("rm -rf " + outfile_mom0 + "_tmp*")
     os.system("rm -rf " + outfile_mom1 + "_tmp")
     os.system("rm -rf " + outfile_mom2 + "_tmp")
     os.system("rm -rf " + outfile_mom8 + "_tmp")
     os.system("rm -rf " + imagename + ".pbcor") 
-    os.system("rm -rf " + imagename + ".masked_tmp")
+    os.system("rm -rf " + imagename + ".mask2")
     os.system("rm -rf " + imagename + ".masked")
+    os.system("rm -rf " + imagename + ".masked_tmp")
     os.system("rm -rf " + nchanmask + "*")
-    os.system("rm -rf " + imagename + ".mask*")
 
     return outfile_mom0+".mask", noise_mJy
 
@@ -315,16 +311,16 @@ def eazy_immoments(
 #####################
 ### Main Procedure
 #####################
-# momemnt map creation
+### momemnt map creation
 co10mask, noise_co10_mJy = \
-    eazy_immoments(imagename   = imageco10,    # input iamge cube
-                   pbimage     = pbco10,       # imput pb cube
-                   outputname  = "n6240_co10", # prefix of the output
-                   snr_mom     = snr_mom,      # threshold for moment map creation
-                   rms         = rms_co10,     # 1 sigma level
-                   obsfreq_GHz = obsfreq_co10, # observed frequency required for Jy-to-Kelvin conversion
-                   pblimit     = 0.5,          # primary beam limit for imaging
-                   clipbox     = clipbox,      # clip image size of the output
+    eazy_immoments(imagename   = imageco10,
+                   pbimage     = pbco10,
+                   outputname  = "n6240_co10",
+                   snr_mom     = snr_mom,
+                   rms         = rms_co10,
+                   obsfreq_GHz = obsfreq_co10,
+                   clipbox     = clipbox,
+                   #maskcube    = "co10_cube.image.mask",
                    )
 
 _, noise_co21_mJy = \
@@ -336,14 +332,20 @@ _, noise_co21_mJy = \
                    obsfreq_GHz = obsfreq_co21,
                    pblimit     = 0.3,
                    clipbox     = clipbox,
-                   maskimage   = co10mask,     # additional mask for moment map creation. In this case, co10 mom-0 detection pixels are used as the additional mask
+                   #maskcube    = "co21_cube.image.mask",
+                   maskimage   = co10mask,   # In this case, co10 mom-0 detection pixels are used as the additional mask
                    )
 
-# print noise rms levels
+### print noise rms levels
 print("###\n###\n###")
-print("### 1sigma of the input co10 datacube = " + noise_co10_mJy + " mJy/beam")
-print("### 1sigma of the input co21 datacube = " + noise_co21_mJy + " mJy/beam")
+if rms_co10==None:
+    print("### 1sigma of the input co10 datacube = " + noise_co10_mJy + " mJy/beam")
+#
+if rms_co21==None:
+    print("### 1sigma of the input co21 datacube = " + noise_co21_mJy + " mJy/beam")
+#
 
-# cleanup
+### cleanup
 os.system("rm -rf *.last")
 os.system("rm -rf " + co10mask+ " " + _)
+#
