@@ -223,7 +223,14 @@ def eazy_immoments(
     ### get beam size
     bmaj = imhead(imagename, mode="list")["beammajor"]["value"]
     #
-    ### step 1: create mask for cube
+    ### step 1: measure noise
+    if rms==None:
+        print("### estimate rms")
+        noise = noisehist(imagename, 0.02, "", snr_mom, plotter=False)
+    else:
+        noise=rms
+    #
+    ### step 2: create maskcube
     if maskcube==None:
         print("### running mask_cube")
         maskcube = mask_cube(imagename, bmaj, snr_mom, snr_mask)
@@ -231,32 +238,29 @@ def eazy_immoments(
         print("### skip mask_cube")
         maskcube = maskcube
     #
-    ### step 2: combime maskimage if specified
-    if maskimage!=None:
-        maskcube_pre = maskcube
-        maskcube = imagename+".mask2"
-        immath(imagename=[maskcube_pre,maskimage], expr="IM0*IM1", outfile=maskcube)
-    #
-    #
-    #
-    #
-    ### nchan mom mask
-    # measure noise
-    if rms==None:
-        noise = noisehist(imagename, 0.02, "", snr_mom, plotter=False)
-    else:
-        noise=rms
-    #
-    # mask cube
-    os.system("rm -rf " + imagename+".masked")
-    immath(imagename=[imagename,maskcube], expr="iif(IM1>=1.0,IM0,0.0)", outfile=imagename+".masked")
-    #
+    ### step 3: create masknchan
     nchanmask = imagename + ".nchanmask"
     os.system("rm -rf " + nchanmask + "*")
     immath(imagename=imagename+".masked", expr="iif(IM0>="+str(noise*snr_mom)+",1.0/10.,0.0)", outfile=nchanmask+"_tmp") # 10. is the channel width in km/s.
     immoments(imagename=nchanmask+"_tmp", moments=[0], outfile=nchanmask+"_tmp2")
     # make nchanmask
     createmask(nchanmask+"_tmp2", nchan, nchanmask)
+
+    #
+    #
+    #
+    #
+    ### step ?: combime maskimage if specified
+    if maskimage!=None:
+        print("### combine maskcube and maskimage")
+        maskcube_pre = maskcube
+        maskcube = imagename+".mask2"
+        immath(imagename=[maskcube_pre,maskimage], expr="IM0*IM1", outfile=maskcube)
+    #
+    ### mask cube
+    os.system("rm -rf " + imagename+".masked")
+    immath(imagename=[imagename,maskcube], expr="iif(IM1>=1.0,IM0,0.0)", outfile=imagename+".masked")
+    #
     #
     #
     #
