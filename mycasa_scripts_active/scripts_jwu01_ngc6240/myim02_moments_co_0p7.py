@@ -279,7 +279,7 @@ def eazy_immoments(
         impbcor(imagename=imagename, pbimage=pbimage, outfile=imagename+".pbcor", cutoff=pblimit)
         cube_for_mask = imagename+".pbcor"
     else:
-        prit("# step 5: skip pbcorr because no pb")
+        print("# step 5: skip pbcorr because no pb")
         cube_for_mask = imagename
     #
     #
@@ -373,5 +373,5 @@ if rms_13co10==None:
 
 ### cleanup
 os.system("rm -rf *.last")
-os.system("rm -rf " + co10mask + " " + _1 + " " _2)
+os.system("rm -rf " + co10mask + " " + _1 + " " + _2)
 #
