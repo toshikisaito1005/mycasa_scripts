@@ -355,8 +355,6 @@ _, noise_13co10_mJy = \
                    rms         = rms_13co10,
                    obsfreq_GHz = obsfreq_13co10,
                    clipbox     = clipbox,
-                   # additional parameters
-                   maskimage   = co10mask,   # In this case, co10 mom-0 detection pixels are used as the additional mask
                    )
 
 
@@ -367,6 +365,9 @@ if rms_co10==None:
 #
 if rms_co21==None:
     print("### 1sigma of the input CO(2-1) datacube = " + noise_co21_mJy + " mJy/beam")
+#
+if rms_13co10==None:
+    print("### 1sigma of the input 13CO(1-0) datacube = " + noise_13co10_mJy + " mJy/beam")
 #
 
 
