@@ -15,8 +15,8 @@ pbco10        = "co10_cube.pb"          # CO(1-0) primary beam cube
 imageco21     = "co21_cube.image"       # CO(2-1) datacube
 pbco21        = "co21_cube.pb"          # CO(2-1) primary beam cube
 # 13co10 images
-imageco21     = "13co10_cube.image"       # CO(2-1) datacube
-pbco21        = None          # CO(2-1) primary beam cube
+image13co10   = "13co10_cube.image"     # CO(2-1) datacube
+pb13co10      = None                    # CO(2-1) primary beam cube
 #
 # parameters for moment map creations
 snr_mom        = 2.5                    # clip sn ratio level for immoments
@@ -24,8 +24,10 @@ redshift       = 0.02448                # source redshift
 clipbox        = "108,108,263,263"      # clip image size of the output
 rms_co10       = 0.00115                # Jy/beam unit (float), 1 sigma value or None
 rms_co21       = 0.00605
+rms_13co10     = None
 obsfreq_co10   = 115.27120/(1+redshift) # GHz unit, co10 observed frequency
 obsfreq_co21   = 230.53800/(1+redshift)
+obsfreq_13co10 = 110.20135/(1+redshift)
 
 
 #####################
@@ -271,14 +273,19 @@ def eazy_immoments(
     #
     #
     ### step 5: pbcorr
-    print("# step 5: pbcorr")
-    os.system("rm -rf "+imagename+".pbcor")
-    impbcor(imagename=imagename, pbimage=pbimage, outfile=imagename+".pbcor", cutoff=pblimit)
+    if pbimage!=None:
+        print("# step 5: pbcorr")
+        os.system("rm -rf "+imagename+".pbcor")
+        impbcor(imagename=imagename, pbimage=pbimage, outfile=imagename+".pbcor", cutoff=pblimit)
+        cube_for_mask = imagename+".pbcor"
+    else:
+        prit("# step 5: skip pbcorr because no pb")
+        cube_for_mask = imagename
     #
     #
     ### step 6: maksing datacube
     print("# step 6: masking datacube")
-    immath(imagename=[imagename+".pbcor",maskcube],expr="IM0*IM1",outfile=imagename+".masked2")
+    immath(imagename=[cube_for_mask,maskcube],expr="IM0*IM1",outfile=imagename+".masked2")
     #
     #
     ### step 7: moments
@@ -337,6 +344,18 @@ _, noise_co21_mJy = \
                    clipbox     = clipbox,
                    # additional parameters
                    pblimit     = 0.3,
+                   maskimage   = co10mask,   # In this case, co10 mom-0 detection pixels are used as the additional mask
+                   )
+
+_, noise_13co10_mJy = \
+    eazy_immoments(imagename   = image13co10,
+                   pbimage     = pb13co10,
+                   outputname  = "n6240_13co10",
+                   snr_mom     = snr_mom,
+                   rms         = rms_13co10,
+                   obsfreq_GHz = obsfreq_13co10,
+                   clipbox     = clipbox,
+                   # additional parameters
                    maskimage   = co10mask,   # In this case, co10 mom-0 detection pixels are used as the additional mask
                    )
 
