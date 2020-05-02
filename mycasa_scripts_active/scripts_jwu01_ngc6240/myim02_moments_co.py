@@ -210,7 +210,7 @@ def eazy_immoments(
     pblimit=0.5,    # primary beam limit for imaging
     maskimage=None, # additional mask for moment map creation
     nchan=3,        # threshold number of channel for moment map creation
-    snr_mask=3.5,   # threshold for cube mask cretion
+    snr_mask=4.0,   # threshold for cube mask cretion
     clipbox="",     # clip image size of the output
     ):
     """
