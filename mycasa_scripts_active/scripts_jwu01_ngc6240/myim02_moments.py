@@ -355,21 +355,7 @@ _, noise_co21_mJy = \
                    maskimage   = co10mask,   # In this case, co10 mom-0 detection pixels are used as the additional mask
                    )
 
-_, noise_hcn10_mJy = \
-    eazy_immoments(imagename   = imagehcn10,
-                   pbimage     = pbhcn10,
-                   outputname  = "n6240_hcn10",
-                   snr_mom     = snr_mom,
-                   rms         = rms_hcn10,
-                   obsfreq_GHz = obsfreq_hcn10,
-                   clipbox     = clipbox,
-                   # additional parameters
-                   nchan       = 2,
-                   snr_mask    = 2.5,
-                   maskimage   = co10mask,
-                   )
-
-_, noise_hcop10_mJy = \
+hcop10mask, noise_hcop10_mJy = \
     eazy_immoments(imagename   = imagehcop10,
                    pbimage     = pbhcop10,
                    outputname  = "n6240_hcop10",
@@ -379,8 +365,22 @@ _, noise_hcop10_mJy = \
                    clipbox     = clipbox,
                    # additional parameters
                    nchan       = 3,
-                   snr_mask    = 2.5,
+                   snr_mask    = 4.0,
                    maskimage   = co10mask,
+                   )
+
+_, noise_hcn10_mJy = \
+    eazy_immoments(imagename   = imagehcn10,
+                   pbimage     = pbhcn10,
+                   outputname  = "n6240_hcn10",
+                   snr_mom     = snr_mom,
+                   rms         = rms_hcn10,
+                   obsfreq_GHz = obsfreq_hcn10,
+                   clipbox     = clipbox,
+                   # additional parameters
+                   nchan       = 3,
+                   snr_mask    = 4.5,
+                   maskimage   = hcop10mask,
                    )
 
 _, noise_cs32_mJy = \
@@ -394,7 +394,7 @@ _, noise_cs32_mJy = \
                    # additional parameters
                    nchan       = 3,
                    snr_mask    = 2.5,
-                   maskimage   = co10mask,
+                   maskimage   = hcop10mask,
                    )
 
 
