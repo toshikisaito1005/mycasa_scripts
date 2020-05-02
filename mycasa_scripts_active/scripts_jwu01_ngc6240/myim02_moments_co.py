@@ -15,8 +15,8 @@ pbco10        = "co10_cube.pb"          # CO(1-0) primary beam cube
 imageco21     = "co21_cube.image"       # CO(2-1) datacube
 pbco21        = "co21_cube.pb"          # CO(2-1) primary beam cube
 # 13co10 images
-image13co10   = "13co10_cube.image"     # CO(2-1) datacube
-pb13co10      = None                    # CO(2-1) primary beam cube
+image13co10   = "13co10_cube.image"     # 13CO(1-0) datacube
+pb13co10      = None                    # 13CO(1-0) primary beam cube
 #
 # parameters for moment map creations
 snr_mom        = 2.5                    # clip sn ratio level for immoments
@@ -24,7 +24,7 @@ redshift       = 0.02448                # source redshift
 clipbox        = "108,108,263,263"      # clip image size of the output
 rms_co10       = 0.00115                # Jy/beam unit (float), 1 sigma value or None
 rms_co21       = 0.00605
-rms_13co10     = None
+rms_13co10     = 0.00036
 obsfreq_co10   = 115.27120/(1+redshift) # GHz unit, co10 observed frequency
 obsfreq_co21   = 230.53800/(1+redshift)
 obsfreq_13co10 = 110.20135/(1+redshift)
@@ -334,7 +334,7 @@ co10mask, noise_co10_mJy = \
                    clipbox     = clipbox,
                    )
 
-_, noise_co21_mJy = \
+_1, noise_co21_mJy = \
     eazy_immoments(imagename   = imageco21,
                    pbimage     = pbco21,
                    outputname  = "n6240_co21",
@@ -347,7 +347,7 @@ _, noise_co21_mJy = \
                    maskimage   = co10mask,   # In this case, co10 mom-0 detection pixels are used as the additional mask
                    )
 
-_, noise_13co10_mJy = \
+_2, noise_13co10_mJy = \
     eazy_immoments(imagename   = image13co10,
                    pbimage     = pb13co10,
                    outputname  = "n6240_13co10",
@@ -373,5 +373,5 @@ if rms_13co10==None:
 
 ### cleanup
 os.system("rm -rf *.last")
-os.system("rm -rf " + co10mask)
+os.system("rm -rf " + co10mask + " " + _1 + " " _2)
 #
