@@ -8,12 +8,12 @@ plt.ioff()
 ### Define Parameters
 #####################
 # co10 images
-imageco10     = "co10_cube.image"
-pbco10        = "co10_cube.pb"
+imageco10     = "co10_cube.image"       # CO(1-0) datacube
+pbco10        = "co10_cube.pb"          # CO(1-0) primary beam cube
 #
 # co21 images
-imageco21     = "co21_cube.image"
-pbco21        = "co21_cube.pb"
+imageco21     = "co21_cube.image"       # CO(2-1) datacube
+pbco21        = "co21_cube.pb"          # CO(2-1) primary beam cube
 #
 # parameters for moment map creations
 snr_mom        = 2.5                    # clip sn ratio level for immoments
