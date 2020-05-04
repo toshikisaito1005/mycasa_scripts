@@ -188,7 +188,7 @@ def plotter_gal(
         r21err_all.extend(r21err)
         w1_all.extend(w1)
         #
-        ax.scatter(w1, r21, alpha=1.0, lw=0, zorder=1e10, s=30,
+        ax.scatter(w1, r21, alpha=1.0, lw=0, zorder=1e10, s=40,
             color="darkgrey")#cm.brg(i/2.5))
         """
         # fit
