@@ -66,6 +66,24 @@ def get_data(txtdata,col):
 
     return r21_low, r21_mid, r21_high, data_low, data_mid, data_high
 
+def startup_plot(
+    xlabel,
+    title,
+    ):
+    """
+    """
+    plt.figure(figsize=(12,4))
+    plt.rcParams["font.size"] = 14
+    gs = gridspec.GridSpec(nrows=5, ncols=15)
+    ax1 = plt.subplot(gs[0:5,0:5])
+    ax2 = plt.subplot(gs[0:5,5:10])
+    ax3 = plt.subplot(gs[0:5,10:15])
+    ax1.grid(axis='both')
+    ax2.grid(axis='both')
+    ax3.grid(axis='both')
+    axlist = [ax1, ax2, ax3]
+
+    return axlist
 
 #####################
 ### Main Procedure
@@ -77,16 +95,7 @@ data_4321 = dir_data + "ngc4321_parameter_600pc.txt"
 data_gals = [data_0628, data_3627, data_4321]
 
 #
-plt.figure(figsize=(12,4))
-plt.rcParams["font.size"] = 14
-gs = gridspec.GridSpec(nrows=5, ncols=15)
-ax1 = plt.subplot(gs[0:5,0:5])
-ax2 = plt.subplot(gs[0:5,5:10])
-ax3 = plt.subplot(gs[0:5,10:15])
-ax1.grid(axis='both')
-ax2.grid(axis='both')
-ax3.grid(axis='both')
-axlist = [ax1, ax2, ax3]
+
 
 r21_all = []
 w1_all = []
@@ -94,7 +103,7 @@ for i in range(len(gals)):
 	#
 	ax = axlist[i]
 	#
-	r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high = get_data(data_gals[i],11)
+	r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high = get_data(data_gals[i],9)
 	r21_all.extend(r21_low)
 	r21_all.extend(r21_mid)
 	r21_all.extend(r21_high)
@@ -102,9 +111,12 @@ for i in range(len(gals)):
 	w1_all.extend(w1_mid)
 	w1_all.extend(w1_high)
 	#
-	ax.scatter(np.log10(w1_low), np.log10(r21_low), color="blue", alpha=0.5, lw=0)
-	ax.scatter(np.log10(w1_mid), np.log10(r21_mid), color="green", alpha=0.5, lw=0)
-	ax.scatter(np.log10(w1_high), np.log10(r21_high), color="red", alpha=0.5, lw=0)
+	ax.scatter(np.log10(w1_low), np.log10(r21_low), alpha=0.5, lw=0,
+        color="blue")
+	ax.scatter(np.log10(w1_mid), np.log10(r21_mid), alpha=0.5, lw=0,
+        color="green")
+	ax.scatter(np.log10(w1_high), np.log10(r21_high), alpha=0.5, lw=0,
+        color="red")
 
 ax1.scatter(np.log10(w1_all), np.log10(r21_all), color="grey", alpha=0.5, zorder=0, lw=0)
 ax2.scatter(np.log10(w1_all), np.log10(r21_all), color="grey", alpha=0.5, zorder=0, lw=0)
