@@ -45,38 +45,43 @@ def get_data(txtdata,col):
     #xlim = [0,data4use.max()*1.1]
     #
     cut_co21 = (co21 != 0)
+    cut_4use = (data4use != 0)
     cut_low = (mask==-1)
     cut_mid = (mask==0)
     cut_high = (mask==1)
-    cut_low = np.where((cut_co21) & (cut_low))
-    cut_mid = np.where((cut_co21) & (cut_mid))
-    cut_high = np.where((cut_co21) & (cut_high))
+    cut_low = np.where((cut_co21) & (cut_low) & (cut_4use))
+    cut_mid = np.where((cut_co21) & (cut_mid) & (cut_4use))
+    cut_high = np.where((cut_co21) & (cut_high) & (cut_4use))
     #
+    r21_low  = r21[cut_low]
+    r21_mid  = r21[cut_mid]
+    r21_high = r21[cut_high]
     data_low  = data4use[cut_low]
     data_mid  = data4use[cut_mid]
     data_high = data4use[cut_high]
 
-    return data_low, data_mid, data_high
+    return r21_low, r21_mid, r21_high, data_low, data_mid, data_high
 
 
 #####################
 ### Main Procedure
 #####################
 #
-data_0628 = np.loadtxt(dir_data + "ngc0628_parameter_600pc.txt")
-data_3627 = np.loadtxt(dir_data + "ngc3627_parameter_600pc.txt")
-data_4321 = np.loadtxt(dir_data + "ngc4321_parameter_600pc.txt")
+data_0628 = dir_data + "ngc0628_parameter_600pc.txt"
+data_3627 = dir_data + "ngc3627_parameter_600pc.txt"
+data_4321 = dir_data + "ngc4321_parameter_600pc.txt"
 data_gals = [data_0628, data_3627, data_4321]
-data_all = np.r_[data_0628, data_3627, data_4321]
 
-for i in range(len(gals)):
-	r21 = get_data(data_gal,1)
-
-
+#
 plt.figure(figsize=(10,0))
 plt.rcParams["font.size"] = 14
 gs = gridspec.GridSpec(nrows=5, ncols=15)
 ax1 = plt.subplot(gs[0:5,0:5])
 ax2 = plt.subplot(gs[0:5,5:10])
 ax3 = plt.subplot(gs[0:5,10:15])
+
+for i in range(len(gals)):
+	r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high = get_data(data_gals[i],7)
+	
+
 
