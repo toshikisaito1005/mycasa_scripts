@@ -50,7 +50,10 @@ def extract_onerow(txtdata1,txtdata2):
 	else:
 		t1 = l1
 	# l2
-	t2 = l2a + " (" + l2b + ")"
+	if l2b=="0.00":
+		t2 = l2a + " ($<$0.001)"
+	else:
+		t2 = l2a + " (" + l2b + ")"
 	# l3
 	t3 = l3a + " $\pm$ " + l3b
 	# l4
@@ -87,6 +90,6 @@ for i in range(len(txtfile1)):
 	galname2 = txtfile1[i].split("_")[1]
 	table = table03_galname(galname, txtfile1[i], txtfile2[i])
 	table03.append(table)
-	os.system("rm -rf " + txtfile1[i] + " " + txtfile2[i])
+	#os.system("rm -rf " + txtfile1[i] + " " + txtfile2[i])
 
 np.savetxt("table03.txt",table03,fmt="%s")
