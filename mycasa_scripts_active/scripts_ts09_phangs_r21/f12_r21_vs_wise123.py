@@ -154,12 +154,21 @@ def plotter_gal(
         w1_all.extend(w1_mid)
         w1_all.extend(w1_high)
         #
+        r21_gal = np.r_[r21_high, r21_mid, r21_low]
+        r21err_gal = np.r_[r21err_high, r21err_mid, r21err_low]
+        w1_gal = np.r_[w1_high, w1_mid, w1_low]
+        dist_gal = np.r_[dist_high, dist_mid, dist_low]
+        #
+        ax.scatter(w1_gal, r21_gal, alpha=1.0, lw=0, zorder=1e10, s=20,
+            color=cm.gist_rainbow(dist_gal/dist_gal.max()))#i/2.5))
+        """
         ax.scatter(w1_low, r21_low, alpha=1.0, lw=0, zorder=1e10, s=40,
-            color=cm.gist_ainbow(dist_low/dist_high.max()))#i/2.5))
+            color=cm.gist_rainbow(dist_low/dist_high.max()))#i/2.5))
         ax.scatter(w1_mid, r21_mid, alpha=1.0, lw=0, zorder=1e10, s=40,
             color=cm.gist_rainbow(dist_mid/dist_high.max()))#i/2.5))
         ax.scatter(w1_high, r21_high, alpha=1.0, lw=0, zorder=1e10, s=40,
             color=cm.gist_rainbow(dist_high/dist_high.max()))#i/2.5))
+        """
 
     return r21_all, r21err_all, w1_all
 
@@ -198,6 +207,7 @@ def plotter(
     ):
     """
     """
+    print("### start plottting " + outputname)
     axlist = startup_plot(xlim, ylim, xlabel, ylabel)
     r21_all, r21err_all, y_all = plotter_gal(axlist, gals, data_gals, data_col)
     plotter_alldata(axlist, r21_all, r21err_all, y_all)
