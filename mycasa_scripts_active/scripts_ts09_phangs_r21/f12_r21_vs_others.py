@@ -79,31 +79,32 @@ gs = gridspec.GridSpec(nrows=5, ncols=15)
 ax1 = plt.subplot(gs[0:5,0:5])
 ax2 = plt.subplot(gs[0:5,5:10])
 ax3 = plt.subplot(gs[0:5,10:15])
+ax1.grid(axis='both')
+ax2.grid(axis='both')
+ax3.grid(axis='both')
 axlist = [ax1, ax2, ax3]
 
-r21_low_all = []
-r21_mid_all = []
-r21_high_all = []
-w1_low_all = []
-w1_mid_all = []
-w1_high_all = []
+r21_all = []
+w1_all = []
 for i in range(len(gals)):
 	#
 	ax = axlist[i]
 	#
 	r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high = get_data(data_gals[i],7)
-	r21_low_all.extend(r21_low)
-	r21_mid_all.extend(r21_mid)
-	r21_high_all.extend(r21_high)
-	w1_low_all.extend(w1_low)
-	w1_mid_all.extend(w1_mid)
-	w1_high_all.extend(w1_high)
+	r21_all.extend(r21_low)
+	r21_all.extend(r21_mid)
+	r21_all.extend(r21_high)
+	w1_all.extend(w1_low)
+	w1_all.extend(w1_mid)
+	w1_all.extend(w1_high)
 	#
-	ax.scatter(np.log10(r21_low), np.log10(w1_low), color="blue", alpha=0.5)
-	ax.scatter(np.log10(r21_mid), np.log10(w1_mid), color="green", alpha=0.5)
-	ax.scatter(np.log10(r21_high), np.log10(w1_high), color="red", alpha=0.5)
+	ax.scatter(np.log10(r21_low), np.log10(w1_low), color="blue", alpha=0.5, lw=0)
+	ax.scatter(np.log10(r21_mid), np.log10(w1_mid), color="green", alpha=0.5, lw=0)
+	ax.scatter(np.log10(r21_high), np.log10(w1_high), color="red", alpha=0.5, lw=0)
 
-ax1.scatter(np.log10(r21_low_all), np.log10(w1_low_all), color="black", alpha=0.5, zorder=0)
+ax1.scatter(np.log10(r21_all), np.log10(w1_all), color="grey", alpha=0.5, zorder=0, lw=0)
+ax2.scatter(np.log10(r21_all), np.log10(w1_all), color="grey", alpha=0.5, zorder=0, lw=0)
+ax3.scatter(np.log10(r21_all), np.log10(w1_all), color="grey", alpha=0.5, zorder=0, lw=0)
 
 
 plt.savefig(dir_data + "fig_r21_vs_w1.png",dpi=200)
