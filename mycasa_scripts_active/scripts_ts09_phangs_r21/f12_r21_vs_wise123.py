@@ -189,7 +189,7 @@ def plotter_gal(
         w1_all.extend(w1)
         #
         ax.scatter(w1, r21, alpha=1.0, lw=0, zorder=1e10, s=30,
-            color=cm.jet(dist/dist.max()))#i/2.5))
+            color=cm.brg(i/2.5))#cm.jet(dist/dist.max())
         """
         # fit
         popt, pcov = curve_fit(function, w1, r21, p0=[1,0], sigma=r21err)
@@ -197,26 +197,35 @@ def plotter_gal(
         ax.plot(x, function(x, *popt), "-", c=cm.brg(i/2.5), lw=4, zorder=1e20)
         """
         # binning
-        xlim4bin = [w1.min(), w1.max()]
-        plotter_binning(w1, r21, 4, xlim4bin, cm.brg(i/2.5))
+        plotter_binning(ax, w1, r21, 4, "black")#cm.brg(i/2.5))
 
     return r21_all, r21err_all, w1_all
 
 def plotter_binning(
+    ax,
     x,
     y,
     bins,
     xlim,
     color,
     ):
+    """
+    """
+    #
+    x = x[x>0]
+    y = y[x>0]
+    #
+    x = x[y>0]
+    y = y[y>0]
+    #
     n, _ = np.histogram(x, bins=bins, range=xlim)
     sy, _ = np.histogram(x, bins=bins, weights=y, range=xlim)
     sy2, _ = np.histogram(x, bins=bins, weights=y*y, range=xlim)
     mean = sy / n
     std = np.sqrt(sy2/n - mean*mean)
-    plt.plot((_[1:] + _[:-1])/2, mean, fmt="-", color=color, lw=5, alpha=1.0)
-    plt.plot((_[1:] + _[:-1])/2, mean+std, fmt="-", color=color, lw=2, alpha=0.5)
-    plt.plot((_[1:] + _[:-1])/2, mean-std, fmt="-", color=color, lw=2, alpha=0.5)
+    ax.plot((_[1:] + _[:-1])/2, mean, "-", color=color, lw=5, alpha=1.0, zorder=1e20)
+    ax.plot((_[1:] + _[:-1])/2, mean+std, "-", color=color, lw=2, alpha=0.5, zorder=1e20)
+    ax.plot((_[1:] + _[:-1])/2, mean-std, "-", color=color, lw=2, alpha=0.5, zorder=1e20)
 
 
 def plotter_alldata(
