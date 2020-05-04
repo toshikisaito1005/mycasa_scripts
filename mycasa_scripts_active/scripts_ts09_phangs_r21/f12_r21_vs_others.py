@@ -73,8 +73,9 @@ def startup_plot(
     ):
     """
     """
-    plt.figure(figsize=(12,4))
+    plt.figure(figsize=(12,5))
     plt.rcParams["font.size"] = 14
+    plt.subplots_adjust(bottom=0.15, left=0.10, right=0.98, top=0.90)
     gs = gridspec.GridSpec(nrows=5, ncols=15)
     ax1 = plt.subplot(gs[0:5,0:5])
     ax2 = plt.subplot(gs[0:5,5:10])
@@ -91,6 +92,7 @@ def startup_plot(
     axlist = [ax1, ax2, ax3]
 
     return axlist
+
 
 #####################
 ### Main Procedure
@@ -131,10 +133,8 @@ for i in range(len(gals)):
     ax.scatter(w1_high, r21_high, alpha=1.0, lw=0, zorder=1e10, s=40,
         color=cm.brg(i/2.5))#"red")
 
-axlist[0].errorbar(np.array(w1_all), np.array(r21_all), yerr=np.array(r21err_all), fmt="o", color="darkgrey", markersize=3, markeredgewidth=0, alpha=1.0, lw=1, capsize=0, zorder=1)
-axlist[1].errorbar(np.array(w1_all), np.array(r21_all), yerr=np.array(r21err_all), fmt="o", color="darkgrey", markersize=3, markeredgewidth=0, alpha=1.0, lw=1, capsize=0, zorder=1)
-axlist[2].errorbar(np.array(w1_all), np.array(r21_all), yerr=np.array(r21err_all), fmt="o", color="darkgrey", markersize=3, markeredgewidth=0, alpha=1.0, lw=1, capsize=0, zorder=1)
-
+for i in range(len(gals)):
+    ax = axlist[i]
+    ax.errorbar(np.array(w1_all), np.array(r21_all), yerr=np.array(r21err_all), fmt="o", color="darkgrey", markersize=3, markeredgewidth=0, alpha=1.0, lw=1, capsize=0, zorder=1)
 
 plt.savefig(dir_data + "fig_r21_vs_w1.png",dpi=200)
-
