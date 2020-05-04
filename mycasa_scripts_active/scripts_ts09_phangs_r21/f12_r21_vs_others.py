@@ -39,7 +39,7 @@ def get_data(txtdata,col):
     w3 = data[:,11]
     mask = data[:,12]
     #
-    data4use = np.log10(data[:,col])
+    data4use = data[:,col]
     data4use[np.isinf(data4use)] = 0
     data4use[np.isnan(data4use)] = 0
     #xlim = [0,data4use.max()*1.1]
@@ -73,7 +73,7 @@ data_4321 = dir_data + "ngc4321_parameter_600pc.txt"
 data_gals = [data_0628, data_3627, data_4321]
 
 #
-plt.figure(figsize=(10,4))
+plt.figure(figsize=(12,4))
 plt.rcParams["font.size"] = 14
 gs = gridspec.GridSpec(nrows=5, ncols=15)
 ax1 = plt.subplot(gs[0:5,0:5])
