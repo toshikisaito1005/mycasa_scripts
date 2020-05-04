@@ -24,7 +24,7 @@ ylabel = "log $R_{21}$ / Median($R_{21}$)"
 ### functions
 #####################
 def function(x, a, b):
-    return a * x + b
+    return x**a * 10**b
 
 def get_data_highlowmask(txtdata,col):
     """
@@ -191,9 +191,8 @@ def plotter_gal(
             color=cm.jet(dist/dist.max()))#i/2.5))
         # fit
         popt, pcov = curve_fit(function, np.log(w1), np.log(r21), p0=[1,0], sigma=np.log10(r21err))
-        x = np.linspace(6.0,
-                np.log10(data2_co*eqn_fl2lum_co).max(), 50)
-
+        x = np.linspace(w1.min(), w1.max(), 100)
+        ax.plot(x, function(), "-", c="black")
 
     return r21_all, r21err_all, w1_all
 
