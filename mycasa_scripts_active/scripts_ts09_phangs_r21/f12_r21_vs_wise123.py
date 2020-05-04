@@ -17,7 +17,7 @@ plt.ioff()
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
 ylim = [0.1,10]
-ylabel = "log $R_{21}$ / Median($R_{21}$)"
+ylabel = "log $R_{21}$/Median($R_{21}$)"
 
 
 #####################
@@ -197,7 +197,7 @@ def plotter_gal(
         ax.plot(x, function(x, *popt), "-", c=cm.brg(i/2.5), lw=4, zorder=1e20)
         """
         # binning
-        plotter_binning(ax, w1, r21, 4, "black")#cm.brg(i/2.5))
+        plotter_binning(ax, w1, r21, 3, "black")#cm.brg(i/2.5))
 
     return r21_all, r21err_all, w1_all
 
@@ -206,7 +206,6 @@ def plotter_binning(
     x,
     y,
     bins,
-    xlim,
     color,
     ):
     """
@@ -215,17 +214,19 @@ def plotter_binning(
     x = x[x>0]
     y = y[x>0]
     #
-    x = x[y>0]
-    y = y[y>0]
+    x = np.log10(x[y>0])
+    y = np.log10(y[y>0])
+    #
+    xlim = [x.min(), x.max()]
     #
     n, _ = np.histogram(x, bins=bins, range=xlim)
     sy, _ = np.histogram(x, bins=bins, weights=y, range=xlim)
     sy2, _ = np.histogram(x, bins=bins, weights=y*y, range=xlim)
     mean = sy / n
     std = np.sqrt(sy2/n - mean*mean)
-    ax.plot((_[1:] + _[:-1])/2, mean, "-", color=color, lw=5, alpha=1.0, zorder=1e20)
-    ax.plot((_[1:] + _[:-1])/2, mean+std, "-", color=color, lw=2, alpha=0.5, zorder=1e20)
-    ax.plot((_[1:] + _[:-1])/2, mean-std, "-", color=color, lw=2, alpha=0.5, zorder=1e20)
+    ax.plot(10**((_[1:] + _[:-1])/2), 10**mean, "-", color=color, lw=5, alpha=1.0, zorder=1e20)
+    ax.plot(10**((_[1:] + _[:-1])/2), 10**(mean+std), "-", color=color, lw=2, alpha=0.5, zorder=1e20)
+    ax.plot(10**((_[1:] + _[:-1])/2), 10**(mean-std), "-", color=color, lw=2, alpha=0.5, zorder=1e20)
 
 
 def plotter_alldata(
@@ -280,28 +281,28 @@ data_4321 = dir_data + "ngc4321_parameter_600pc.txt"
 data_gals = [data_0628, data_3627, data_4321]
 
 # R21 vs WISE1
-xlabel = u"log linewidth / Median(linewidth)"
+xlabel = u"log linewidth/Median(linewidth)"
 outputname = "fig_r21_vs_disp.png"
 data_col = 8
 xlim = [0.3,10]
 plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname)
 
 # R21 vs WISE1
-xlabel = "log W1 / Median(W1)"
+xlabel = "log W1/Median(W1)"
 outputname = "fig_r21_vs_w1.png"
 data_col = 9
 xlim = [0.05,100]
 plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname)
 
 # R21 vs WISE2
-xlabel = "log W2 / Median(W2)"
+xlabel = "log W2/Median(W2)"
 outputname = "fig_r21_vs_w2.png"
 data_col = 10
 xlim = [0.05,100]
 plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname)
 
 # R21 vs WISE3
-xlabel = "log W3 / Median(W3)"
+xlabel = "log W3/Median(W3)"
 outputname = "fig_r21_vs_w3.png"
 data_col = 11
 xlim = [0.05,100]
