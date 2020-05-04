@@ -26,7 +26,11 @@ def get_data(txtdata,col):
     data = np.loadtxt(txtdata)
     #
     dist = data[:,0]
+    #
     r21 = data[:,1]
+    med_r21 = np.median(r21[r21>0])
+    r21 = r21 / med_r21
+    #
     r21err = data[:,2]
     co21 = data[:,3]
     co21snr = data[:,4]
@@ -90,7 +94,7 @@ for i in range(len(gals)):
 	#
 	ax = axlist[i]
 	#
-	r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high = get_data(data_gals[i],7)
+	r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high = get_data(data_gals[i],9)
 	r21_all.extend(r21_low)
 	r21_all.extend(r21_mid)
 	r21_all.extend(r21_high)
@@ -98,13 +102,13 @@ for i in range(len(gals)):
 	w1_all.extend(w1_mid)
 	w1_all.extend(w1_high)
 	#
-	ax.scatter(np.log10(r21_low), np.log10(w1_low), color="blue", alpha=0.5, lw=0)
-	ax.scatter(np.log10(r21_mid), np.log10(w1_mid), color="green", alpha=0.5, lw=0)
-	ax.scatter(np.log10(r21_high), np.log10(w1_high), color="red", alpha=0.5, lw=0)
+	ax.scatter(np.log10(w1_low), np.log10(r21_low), color="blue", alpha=0.5, lw=0)
+	ax.scatter(np.log10(w1_mid), np.log10(r21_mid), color="green", alpha=0.5, lw=0)
+	ax.scatter(np.log10(w1_high), np.log10(r21_high), color="red", alpha=0.5, lw=0)
 
-ax1.scatter(np.log10(r21_all), np.log10(w1_all), color="grey", alpha=0.5, zorder=0, lw=0)
-ax2.scatter(np.log10(r21_all), np.log10(w1_all), color="grey", alpha=0.5, zorder=0, lw=0)
-ax3.scatter(np.log10(r21_all), np.log10(w1_all), color="grey", alpha=0.5, zorder=0, lw=0)
+ax1.scatter(np.log10(w1_all), np.log10(r21_all), color="grey", alpha=0.5, zorder=0, lw=0)
+ax2.scatter(np.log10(w1_all), np.log10(r21_all), color="grey", alpha=0.5, zorder=0, lw=0)
+ax3.scatter(np.log10(w1_all), np.log10(r21_all), color="grey", alpha=0.5, zorder=0, lw=0)
 
 
 plt.savefig(dir_data + "fig_r21_vs_w1.png",dpi=200)
