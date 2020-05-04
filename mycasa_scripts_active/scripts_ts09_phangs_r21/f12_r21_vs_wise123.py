@@ -197,7 +197,7 @@ def plotter_gal(
         ax.plot(x, function(x, *popt), "-", c=cm.brg(i/2.5), lw=4, zorder=1e20)
         """
         # binning
-        plotter_binning(ax, w1, r21, 3, cm.brg(i/2.5))
+        plotter_binning(ax, w1, r21, 3, cm.brg(i/2.5), 0.5, "-")
 
     return r21_all, r21err_all, w1_all
 
@@ -207,6 +207,8 @@ def plotter_binning(
     y,
     bins,
     color,
+    alpha,
+    linetype,
     ):
     """
     """
@@ -225,8 +227,8 @@ def plotter_binning(
     sy2, _ = np.histogram(x, bins=bins, weights=y*y, range=xlim)
     mean = sy / n
     std = np.sqrt(sy2/n - mean*mean)
-    ax.plot(10**((_[1:] + _[:-1])/2), 10**mean, "-", color=color, lw=5, alpha=1.0, zorder=1e20)
-    ax.fill_between(10**((_[1:] + _[:-1])/2), 10**(mean-std), 10**(mean+std), color=color, alpha=0.5, lw=0, zorder=1e20)
+    ax.plot(10**((_[1:] + _[:-1])/2), 10**mean, linetype, color=color, lw=5, alpha=1.0, zorder=1e20)
+    ax.fill_between(10**((_[1:] + _[:-1])/2), 10**(mean-std), 10**(mean+std), color=color, alpha=alpha, lw=0, zorder=1e20)
 
 def plotter_alldata(
     axlist,
@@ -250,6 +252,8 @@ def plotter_alldata(
             lw=1,
             capsize=0,
             zorder=1)
+        #
+        plotter_binning(ax, np.array(y_all), np.array(r21_all), 4, "grey", 0.3, "--")
 
 def plotter(
     gals,
