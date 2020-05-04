@@ -75,7 +75,7 @@ def startup_plot(
     """
     plt.figure(figsize=(12,5))
     plt.rcParams["font.size"] = 14
-    plt.subplots_adjust(bottom=0.15, left=0.10, right=0.98, top=0.90)
+    plt.subplots_adjust(bottom=0.15, left=0.10, right=0.98, top=0.88)
     gs = gridspec.GridSpec(nrows=5, ncols=15)
     ax1 = plt.subplot(gs[0:5,0:5])
     ax2 = plt.subplot(gs[0:5,5:10])
@@ -89,6 +89,9 @@ def startup_plot(
     ax1.set_yscale("log")
     ax2.set_yscale("log")
     ax3.set_yscale("log")
+    ax2.tick_params(labelleft=False)
+    ax3.tick_params(labelleft=False)
+    ax1.xticks([10**0],[0])
     axlist = [ax1, ax2, ax3]
 
     return axlist
