@@ -38,7 +38,11 @@ def get_data(txtdata,col):
     co10snr = data[:,6]
     tpeak = data[:,7]
     disp = data[:,8]
+    #
     w1 = data[:,9]
+    med_w1 = np.median(w1[w1>0])
+    w1 = w1 / med_w1
+    #
     w2 = data[:,10]
     w3 = data[:,11]
     mask = data[:,12]
@@ -94,7 +98,7 @@ for i in range(len(gals)):
 	#
 	ax = axlist[i]
 	#
-	r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high = get_data(data_gals[i],9)
+	r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high = get_data(data_gals[i],7)
 	r21_all.extend(r21_low)
 	r21_all.extend(r21_mid)
 	r21_all.extend(r21_high)
