@@ -15,7 +15,6 @@ plt.ioff()
 #####################
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
-xlim = [0.05,100]
 ylim = [0.1,10]
 ylabel = "log $R_{21}$/Median($R_{21}$)"
 
@@ -210,19 +209,29 @@ data_4321 = dir_data + "ngc4321_parameter_600pc.txt"
 data_gals = [data_0628, data_3627, data_4321]
 
 # R21 vs WISE1
+xlabel = u"log \sigma/Median(\sigma)"
+outputname = "fig_r21_vs_disp.png"
+data_col = 8
+xlim = [0.3,10]
+plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname)
+
+# R21 vs WISE1
 xlabel = "log W1/Median(W1)"
 outputname = "fig_r21_vs_w1.png"
 data_col = 9
+xlim = [0.05,100]
 plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname)
 
 # R21 vs WISE2
 xlabel = "log W2/Median(W2)"
 outputname = "fig_r21_vs_w2.png"
 data_col = 10
+xlim = [0.05,100]
 plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname)
 
 # R21 vs WISE3
 xlabel = "log W3/Median(W3)"
 outputname = "fig_r21_vs_w3.png"
 data_col = 11
+xlim = [0.05,100]
 plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname)
