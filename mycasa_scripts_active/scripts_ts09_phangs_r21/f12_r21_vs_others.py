@@ -60,11 +60,14 @@ def get_data(txtdata,col):
     r21_low  = r21[cut_low]
     r21_mid  = r21[cut_mid]
     r21_high = r21[cut_high]
+    r21err_low  = r21err[cut_low]
+    r21err_mid  = r21err[cut_mid]
+    r21err_high = r21err[cut_high]
     data_low  = data4use[cut_low] / np.median(data4use[cut_all])
     data_mid  = data4use[cut_mid] / np.median(data4use[cut_all])
     data_high = data4use[cut_high] / np.median(data4use[cut_all])
 
-    return r21_low, r21_mid, r21_high, data_low, data_mid, data_high
+    return r21_low, r21_mid, r21_high, data_low, data_mid, data_high, r21err_low, r21err_mid, r21err_high
 
 def startup_plot(
     xlabel,
@@ -98,29 +101,34 @@ data_gals = [data_0628, data_3627, data_4321]
 
 
 r21_all = []
+r21err_all = []
 w1_all = []
 for i in range(len(gals)):
-	#
-	ax = axlist[i]
-	#
-	r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high = get_data(data_gals[i],9)
-	r21_all.extend(r21_low)
-	r21_all.extend(r21_mid)
-	r21_all.extend(r21_high)
-	w1_all.extend(w1_low)
-	w1_all.extend(w1_mid)
-	w1_all.extend(w1_high)
-	#
-	ax.scatter(np.log10(w1_low), np.log10(r21_low), alpha=0.5, lw=0,
-        color="blue")
-	ax.scatter(np.log10(w1_mid), np.log10(r21_mid), alpha=0.5, lw=0,
-        color="green")
-	ax.scatter(np.log10(w1_high), np.log10(r21_high), alpha=0.5, lw=0,
-        color="red")
+    #
+    ax = axlist[i]
+    #
+    r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high,r21err_low,r21err_mid,r21err_high = \
+        get_data(data_gals[i],9)
+    r21_all.extend(r21_low)
+    r21_all.extend(r21_mid)
+    r21_all.extend(r21_high)
+    r21err_all.extend(r21err_low)
+    r21err_all.extend(r21err_mid)
+    r21err_all.extend(r21err_high)
+    w1_all.extend(w1_low)
+    w1_all.extend(w1_mid)
+    w1_all.extend(w1_high)
+    #
+    ax.scatter(np.log10(w1_low), np.log10(r21_low), alpha=1.0, lw=0,
+        color=cm.brg(i/2.5))#"blue")
+    ax.scatter(np.log10(w1_mid), np.log10(r21_mid), alpha=1.0, lw=0,
+        color=cm.brg(i/2.5))#"green")
+    ax.scatter(np.log10(w1_high), np.log10(r21_high), alpha=1.0, lw=0,
+        color=cm.brg(i/2.5))#"red")
 
-ax1.scatter(np.log10(w1_all), np.log10(r21_all), color="grey", alpha=0.5, zorder=0, lw=0)
-ax2.scatter(np.log10(w1_all), np.log10(r21_all), color="grey", alpha=0.5, zorder=0, lw=0)
-ax3.scatter(np.log10(w1_all), np.log10(r21_all), color="grey", alpha=0.5, zorder=0, lw=0)
+ax1.errorbar(np.log10(w1_all), np.log10(r21_all), yerr=r21err_all, color="grey", alpha=0.5, zorder=0, lw=0)
+ax2.errorbar(np.log10(w1_all), np.log10(r21_all), color="grey", alpha=0.5, zorder=0, lw=0)
+ax3.errorbar(np.log10(w1_all), np.log10(r21_all), color="grey", alpha=0.5, zorder=0, lw=0)
 
 
 plt.savefig(dir_data + "fig_r21_vs_w1.png",dpi=200)
