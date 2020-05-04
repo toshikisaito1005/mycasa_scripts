@@ -6,7 +6,7 @@ import scipy
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
-import matplotlib.ticker as ticker
+import matplotlib.gridspec as gridspec
 plt.ioff()
 
 
@@ -79,9 +79,13 @@ gs = gridspec.GridSpec(nrows=5, ncols=15)
 ax1 = plt.subplot(gs[0:5,0:5])
 ax2 = plt.subplot(gs[0:5,5:10])
 ax3 = plt.subplot(gs[0:5,10:15])
+axlist = [ax1, ax2, ax3]
 
 for i in range(len(gals)):
+	#
+	ax = axlist
+	#
 	r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high = get_data(data_gals[i],7)
-	
+	ax.scatter(r21_low,w1_low,color="blue",alpha=0.55)
 
-
+plt.savefig(dir_data + "scatter_r21_vs_w1.png",dpi=200)
