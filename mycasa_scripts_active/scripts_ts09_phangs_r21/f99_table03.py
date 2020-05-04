@@ -63,9 +63,15 @@ def extract_onerow(txtdata1,txtdata2):
 		t4 = "\phantom{$-$}" + l4a + " $\pm$ " + l4b
 	# l5
 	if "-" in l5a:
-		t5 = l5a.replace("-","$-$") + " (" + l5b + ")"
+		if l5b=="0.00":
+			t5 = l5a.replace("-","$-$") + " ($<$0.001)"
+		else:
+			t5 = l5a.replace("-","$-$") + " (" + l5b + ")"
 	else:
-		t5 = "\phantom{$-$}" + l5a + " (" + l5b + ")"
+		if l5b=="0.00":
+			t5 = "\phantom{$-$}" + l5a + " ($<$0.001)"
+		else:
+			t5 = "\phantom{$-$}" + l5a + " (" + l5b + ")"
 	# l6
 	if "-" in l6a:
 		t6 = l6a.replace("-","$-$") + " $\pm$ " + l6b
