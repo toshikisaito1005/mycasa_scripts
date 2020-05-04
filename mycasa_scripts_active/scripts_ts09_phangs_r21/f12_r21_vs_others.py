@@ -131,9 +131,9 @@ for i in range(len(gals)):
     ax.scatter(w1_high, r21_high, alpha=1.0, lw=0,
         color=cm.brg(i/2.5))#"red")
 
-ax1.errorbar(w1_all, r21_all, yerr=r21err_all, color="grey", alpha=0.5, lw=2)
-ax2.errorbar(w1_all, r21_all, yerr=r21err_all, color="grey", alpha=0.5, lw=2)
-ax3.errorbar(w1_all, r21_all, yerr=r21err_all, color="grey", alpha=0.5, lw=2)
+ax1.errorbar(w1_all, r21_all, yerr=r21err_all, color="grey", marker = ".", alpha=0.2, lw=2)
+ax2.errorbar(w1_all, r21_all, yerr=r21err_all, color="grey", marker = ".", alpha=0.2, lw=2)
+ax3.errorbar(w1_all, r21_all, yerr=r21err_all, color="grey", marker = ".", alpha=0.2, lw=2)
 
 
 plt.savefig(dir_data + "fig_r21_vs_w1.png",dpi=200)
