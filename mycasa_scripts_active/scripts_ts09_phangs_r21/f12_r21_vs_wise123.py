@@ -183,6 +183,7 @@ def plotter_gal(
         ax = axlist[i]
         #
         r21, w1, r21err, dist = get_data(data_gals[i], col)
+        #
         r21_all.extend(r21)
         r21err_all.extend(r21err)
         w1_all.extend(w1)
@@ -190,9 +191,9 @@ def plotter_gal(
         ax.scatter(w1, r21, alpha=1.0, lw=0, zorder=1e10, s=30,
             color=cm.jet(dist/dist.max()))#i/2.5))
         # fit
-        popt, pcov = curve_fit(function, np.log(w1), np.log(r21), p0=[1,0], sigma=np.log10(r21err))
+        popt, pcov = curve_fit(function, w1, r21, p0=[1,0], sigma=np.log10(r21err))
         x = np.linspace(w1.min(), w1.max(), 100)
-        ax.plot(x, function(), "-", c="black")
+        ax.plot(x, function(), "-", c=cm.brg(i/2.5), lw=2)
 
     return r21_all, r21err_all, w1_all
 
