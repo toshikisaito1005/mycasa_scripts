@@ -15,6 +15,8 @@ plt.ioff()
 #####################
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
+xlim = [0.1,100]
+ylim = [0.1,10]
 
 
 #####################
@@ -70,6 +72,8 @@ def get_data(txtdata,col):
     return r21_low, r21_mid, r21_high, data_low, data_mid, data_high, r21err_low, r21err_mid, r21err_high
 
 def startup_plot(
+    xlim,
+    ylim,
     ):
     """
     """
@@ -91,7 +95,20 @@ def startup_plot(
     ax3.set_yscale("log")
     ax2.tick_params(labelleft=False)
     ax3.tick_params(labelleft=False)
-    ax1.xticks([10**0],[0])
+    ax1.set_xticks([0.1,1,10,100])
+    ax1.set_xticklabels(["-1","0","1","2"])
+    ax2.set_xticks([0.1,1,10,100])
+    ax2.set_xticklabels(["-1","0","1","2"])
+    ax3.set_xticks([0.1,1,10,100])
+    ax3.set_xticklabels(["-1","0","1","2"])
+    ax1.set_yticks([0.1,1,10])
+    ax1.set_yticklabels(["-1","0","1"])
+    ax1.set_xlim(xlim)
+    ax2.set_xlim(xlim)
+    ax3.set_xlim(xlim)
+    ax1.set_ylim(ylim)
+    ax2.set_ylim(ylim)
+    ax3.set_ylim(ylim)
     axlist = [ax1, ax2, ax3]
 
     return axlist
@@ -107,7 +124,7 @@ data_4321 = dir_data + "ngc4321_parameter_600pc.txt"
 data_gals = [data_0628, data_3627, data_4321]
 
 #
-axlist = startup_plot()
+axlist = startup_plot(xlim, ylim)
 
 
 r21_all = []
