@@ -159,7 +159,7 @@ def plotter_gal(
 
     return r21_all, r21err_all, w1_all
 
-def plotter_all(
+def plotter_alldata(
     axlist,
     r21_all,
     r21err_all,
@@ -182,10 +182,28 @@ def plotter_all(
             capsize=0,
             zorder=1)
 
+def plotter(
+    gals,
+    data_gals,
+    data_col,
+    xlim,
+    ylim,
+    xlabel,
+    ylabel,
+    outputname,
+    ):
+    """
+    """
+    axlist = startup_plot(xlim, ylim, xlabel, ylabel)
+    r21_all, r21err_all, y_all = plotter_gal(axlist, gals, data_gals, data_col)
+    plotter_alldata(axlist, r21_all, r21err_all, y_all)
+    plt.savefig(dir_data + outputname, dpi=200)
+
+
 #####################
 ### Main Procedure
 #####################
-#
+# get data
 data_0628 = dir_data + "ngc0628_parameter_600pc.txt"
 data_3627 = dir_data + "ngc3627_parameter_600pc.txt"
 data_4321 = dir_data + "ngc4321_parameter_600pc.txt"
@@ -194,23 +212,17 @@ data_gals = [data_0628, data_3627, data_4321]
 # R21 vs WISE1
 xlabel = "log W1/Median(W1)"
 outputname = "fig_r21_vs_w1.png"
-axlist = startup_plot(xlim, ylim, xlabel, ylabel)
-r21_all, r21err_all, y_all = plotter_gal(axlist, gals, data_gals, 9)
-plotter_all(axlist, r21_all, r21err_all, y_all)
-plt.savefig(dir_data + outputname,dpi=200)
+data_col = 9
+plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname)
 
 # R21 vs WISE2
 xlabel = "log W2/Median(W2)"
 outputname = "fig_r21_vs_w2.png"
-axlist = startup_plot(xlim, ylim, xlabel, ylabel)
-r21_all, r21err_all, y_all = plotter_gal(axlist, gals, data_gals, 10)
-plotter_all(axlist, r21_all, r21err_all, y_all)
-plt.savefig(dir_data + outputname,dpi=200)
+data_col = 10
+plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname)
 
 # R21 vs WISE3
-xlabel = "log W2/Median(W2)"
-outputname = "fig_r21_vs_w2.png"
-axlist = startup_plot(xlim, ylim, xlabel, ylabel)
-r21_all, r21err_all, y_all = plotter_gal(axlist, gals, data_gals, 10)
-plotter_all(axlist, r21_all, r21err_all, y_all)
-plt.savefig(dir_data + outputname,dpi=200)
+xlabel = "log W3/Median(W3)"
+outputname = "fig_r21_vs_w3.png"
+data_col = 11
+plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname)
