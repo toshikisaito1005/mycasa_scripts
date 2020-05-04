@@ -59,8 +59,8 @@ def extract_onerow(txtdata1,txtdata2):
 	else:
 		t4 = "\phantom{$-$}" + l4a + " $\pm$ " + l4b
 	# l5
-	if "-" in l5:
-		t5 = l5.replace("-","$-$")
+	if "-" in l5a:
+		t5 = l5a.replace("-","$-$") + " (" + l5b + ")"
 	else:
 		t5 = "\phantom{$-$}" + l5a + " (" + l5b + ")"
 	# l6
