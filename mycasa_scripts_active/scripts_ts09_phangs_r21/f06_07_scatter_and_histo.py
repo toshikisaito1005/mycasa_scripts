@@ -4,6 +4,7 @@ import glob
 import math
 import numpy as np
 import scipy.optimize
+from scipy.stats import pearsonr
 from scipy.optimize import curve_fit
 import matplotlib as mpl
 import matplotlib.cm as cm
@@ -141,7 +142,8 @@ def plot_scatter(
 		binrange = [x.min(),x.max()]
 		#
 		# correlation coefficient
-		coeff = str(np.round(np.corrcoef(x, y)[0,1], 2))
+		#coeff = str(np.round(np.corrcoef(x, y)[0,1], 2))
+		coeff = pearsonr(x, y)
 		#err_coeff = str(np.round((1 - float(coeff)**2) / float(len(x)), 4))
 		# fit
 		popt, pcov = curve_fit(func1, x, y, p0 = [1.0,0.0], maxfev = 10000, sigma = sigmay)
@@ -150,10 +152,11 @@ def plot_scatter(
 		err_slope = str(np.round(np.sqrt(np.diag(pcov))[0], 2))
 		err_inter = str(np.round(np.sqrt(np.diag(pcov))[1], 2))
 		# beam, coeff, slope, err_slope, inter, err_inter
-		print(beam+", coeff = "+coeff+", slope = "+slope+" $\pm$ "+err_slope+", inter = "+inter+" $\pm$ "+err_inter)
+		print(beam+", coeff = "+str(coeff[0])+", slope = "+slope+" $\pm$ "+err_slope+", inter = "+inter+" $\pm$ "+err_inter)
 		list_output.append(
 			[float(list_beamname[i].replace("p",".")),
-			np.round(np.corrcoef(x, y)[0,1], 2),
+			np.round(coeff[0], 2),
+			np.round(coeff[1], 5),
 			np.round(popt[0], 2),
 			np.round(np.sqrt(np.diag(pcov))[0], 2),
 			np.round(popt[1], 2),
