@@ -22,7 +22,7 @@ ylabel = "log $R_{21}$/Median($R_{21}$)"
 #####################
 ### functions
 #####################
-def get_data(txtdata,col):
+def get_data_highlowmask(txtdata,col):
     """
     """
     data = np.loadtxt(txtdata)
@@ -73,6 +73,44 @@ def get_data(txtdata,col):
     data_high = data4use[cut_high] / np.median(data4use[cut_all])
 
     return r21_low, r21_mid, r21_high, data_low, data_mid, data_high, r21err_low, r21err_mid, r21err_high, dist_low, dist_mid, dist_high
+
+def get_data(txtdata,col):
+    """
+    """
+    data = np.loadtxt(txtdata)
+    #
+    dist = data[:,0]
+    #
+    r21 = data[:,1]
+    r21 = r21 / np.median(r21[r21>0])
+    #
+    r21err = data[:,2]
+    co21 = data[:,3]
+    co21snr = data[:,4]
+    co10 = data[:,5]
+    co10snr = data[:,6]
+    tpeak = data[:,7]
+    disp = data[:,8]
+    w1 = data[:,9]
+    w2 = data[:,10]
+    w3 = data[:,11]
+    mask = data[:,12]
+    #
+    data4use = data[:,col]
+    data4use[np.isinf(data4use)] = 0
+    data4use[np.isnan(data4use)] = 0
+    #xlim = [0,data4use.max()*1.1]
+    #
+    cut_co21 = (co21 != 0)
+    cut_4use = (data4use != 0)
+    cut_all = np.where((cut_co21) & (cut_4use))
+    #
+    r21_all  = r21[cut_all]
+    r21err_all  = r21err[cut_all]
+    dist_all  = dist[cut_all]
+    data_all  = data4use[cut_all] / np.median(data4use[cut_all])
+
+    return r21_all, data_all, r21err_all, dist_all
 
 def startup_plot(
     xlim,
@@ -140,35 +178,13 @@ def plotter_gal(
         #
         ax = axlist[i]
         #
-        r21_low, r21_mid, r21_high, \
-        w1_low, w1_mid, w1_high, \
-        r21err_low, r21err_mid, r21err_high, \
-        dist_low, dist_mid, dist_high = get_data(data_gals[i], col)
-        r21_all.extend(r21_low)
-        r21_all.extend(r21_mid)
-        r21_all.extend(r21_high)
-        r21err_all.extend(r21err_low)
-        r21err_all.extend(r21err_mid)
-        r21err_all.extend(r21err_high)
-        w1_all.extend(w1_low)
-        w1_all.extend(w1_mid)
-        w1_all.extend(w1_high)
+        r21, w1, r21err, dist = get_data(data_gals[i], col)
+        r21_all.extend(r21)
+        r21err_all.extend(r21err)
+        w1_all.extend(w1)
         #
-        r21_gal = np.r_[r21_high, r21_mid, r21_low]
-        r21err_gal = np.r_[r21err_high, r21err_mid, r21err_low]
-        w1_gal = np.r_[w1_high, w1_mid, w1_low]
-        dist_gal = np.r_[dist_high, dist_mid, dist_low]
-        #
-        ax.scatter(w1_gal, r21_gal, alpha=1.0, lw=0, zorder=1e10, s=20,
-            color=cm.gist_rainbow(dist_gal/dist_gal.max()))#i/2.5))
-        """
-        ax.scatter(w1_low, r21_low, alpha=1.0, lw=0, zorder=1e10, s=40,
-            color=cm.gist_rainbow(dist_low/dist_high.max()))#i/2.5))
-        ax.scatter(w1_mid, r21_mid, alpha=1.0, lw=0, zorder=1e10, s=40,
-            color=cm.gist_rainbow(dist_mid/dist_high.max()))#i/2.5))
-        ax.scatter(w1_high, r21_high, alpha=1.0, lw=0, zorder=1e10, s=40,
-            color=cm.gist_rainbow(dist_high/dist_high.max()))#i/2.5))
-        """
+        ax.scatter(w1, r21, alpha=0.8, lw=0, zorder=1e10, s=30,
+            color=cm.gist_rainbow(dist/dist.max()))#i/2.5))
 
     return r21_all, r21err_all, w1_all
 
@@ -207,7 +223,7 @@ def plotter(
     ):
     """
     """
-    print("### start plottting " + outputname)
+    print("### plottting " + outputname)
     axlist = startup_plot(xlim, ylim, xlabel, ylabel)
     r21_all, r21err_all, y_all = plotter_gal(axlist, gals, data_gals, data_col)
     plotter_alldata(axlist, r21_all, r21err_all, y_all)
