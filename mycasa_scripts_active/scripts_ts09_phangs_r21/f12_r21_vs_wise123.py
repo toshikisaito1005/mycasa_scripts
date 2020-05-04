@@ -140,8 +140,10 @@ def plotter_gal(
         #
         ax = axlist[i]
         #
-        r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high,r21err_low,r21err_mid,r21err_high, dist_low, dist_mid, dist_high = \
-            get_data(data_gals[i], col)
+        r21_low, r21_mid, r21_high, \
+        w1_low, w1_mid, w1_high, \
+        r21err_low, r21err_mid, r21err_high, \
+        dist_low, dist_mid, dist_high = get_data(data_gals[i], col)
         r21_all.extend(r21_low)
         r21_all.extend(r21_mid)
         r21_all.extend(r21_high)
@@ -153,11 +155,11 @@ def plotter_gal(
         w1_all.extend(w1_high)
         #
         ax.scatter(w1_low, r21_low, alpha=1.0, lw=0, zorder=1e10, s=40,
-            color=cm.brg(i/2.5))#"blue")
+            color=cm.gist_ainbow(dist_low/dist_high.max()))#i/2.5))
         ax.scatter(w1_mid, r21_mid, alpha=1.0, lw=0, zorder=1e10, s=40,
-            color=cm.brg(i/2.5))#"green")
+            color=cm.gist_rainbow(dist_mid/dist_high.max()))#i/2.5))
         ax.scatter(w1_high, r21_high, alpha=1.0, lw=0, zorder=1e10, s=40,
-            color=cm.brg(i/2.5))#"red")
+            color=cm.gist_rainbow(dist_high/dist_high.max()))#i/2.5))
 
     return r21_all, r21err_all, w1_all
 
