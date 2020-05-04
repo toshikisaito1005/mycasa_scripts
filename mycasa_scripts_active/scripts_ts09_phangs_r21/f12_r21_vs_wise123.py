@@ -15,7 +15,7 @@ plt.ioff()
 #####################
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
-xlim = [0.1,100]
+xlim = [0.05,100]
 ylim = [0.1,10]
 ylabel = "log $R_{21}$/Median($R_{21}$)"
 
@@ -98,12 +98,12 @@ def startup_plot(
     ax3.set_yscale("log")
     ax2.tick_params(labelleft=False)
     ax3.tick_params(labelleft=False)
-    ax1.set_xticks([0.1,1,10])
-    ax1.set_xticklabels(["-1","0","1"])
-    ax2.set_xticks([0.1,1,10])
-    ax2.set_xticklabels(["-1","0","1"])
-    ax3.set_xticks([0.1,1,10])
-    ax3.set_xticklabels(["-1","0","1"])
+    ax1.set_xticks([0.1,1,10,100])
+    ax1.set_xticklabels(["-1","0","1","2"])
+    ax2.set_xticks([0.1,1,10,100])
+    ax2.set_xticklabels(["-1","0","1","2"])
+    ax3.set_xticks([0.1,1,10,100])
+    ax3.set_xticklabels(["-1","0","1","2"])
     ax1.set_yticks([0.1,1,10])
     ax1.set_yticklabels(["-1","0","1"])
     ax1.set_xlim(xlim)
