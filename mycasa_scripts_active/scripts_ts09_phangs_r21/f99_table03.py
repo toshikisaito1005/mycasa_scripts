@@ -32,23 +32,25 @@ def extract_onerow(txtdata1,txtdata2):
 	"""
 	"""
 	l1  = txtdata1[0].replace("00","0")
-	l2  = txtdata1[1]
-	l3a = txtdata1[2]
-	l3b = txtdata1[3]
-	l4a = txtdata1[4]
-	l4b = txtdata1[5]
-	l5  = txtdata2[1]
-	l6a = txtdata2[2]
-	l6b = txtdata2[3]
-	l7a = txtdata2[4]
-	l7b = txtdata2[5]
+	l2a = txtdata1[1]
+	l2b = txtdata1[2]
+	l3a = txtdata1[3]
+	l3b = txtdata1[4]
+	l4a = txtdata1[5]
+	l4b = txtdata1[6]
+	l5a = txtdata2[1]
+	l5b = txtdata2[2]
+	l6a = txtdata2[3]
+	l6b = txtdata2[4]
+	l7a = txtdata2[5]
+	l7b = txtdata2[6]
 	# l1
 	if len(l1)==3:
 		t1 = "\phantom{0}" + l1
 	else:
 		t1 = l1
 	# l2
-	t2 = l2
+	t2 = l2a + " (" + l2b + ")"
 	# l3
 	t3 = l3a + " $\pm$ " + l3b
 	# l4
@@ -60,7 +62,7 @@ def extract_onerow(txtdata1,txtdata2):
 	if "-" in l5:
 		t5 = l5.replace("-","$-$")
 	else:
-		t5 = "\phantom{$-$}" + l5
+		t5 = "\phantom{$-$}" + l5a + " (" + l5b + ")"
 	# l6
 	if "-" in l6a:
 		t6 = l6a.replace("-","$-$") + " $\pm$ " + l6b
