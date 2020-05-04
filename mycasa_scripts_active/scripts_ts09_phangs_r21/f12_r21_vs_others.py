@@ -17,6 +17,8 @@ dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
 xlim = [0.1,100]
 ylim = [0.1,10]
+xlabel1 = "log W1/Median(W1)"
+ylabel = "log $R_{21}$/Median($R_{21}$)"
 
 
 #####################
@@ -74,6 +76,8 @@ def get_data(txtdata,col):
 def startup_plot(
     xlim,
     ylim,
+    xlabel,
+    ylabel,
     ):
     """
     """
@@ -95,12 +99,12 @@ def startup_plot(
     ax3.set_yscale("log")
     ax2.tick_params(labelleft=False)
     ax3.tick_params(labelleft=False)
-    ax1.set_xticks([0.1,1,10,100])
-    ax1.set_xticklabels(["-1","0","1","2"])
-    ax2.set_xticks([0.1,1,10,100])
-    ax2.set_xticklabels(["-1","0","1","2"])
-    ax3.set_xticks([0.1,1,10,100])
-    ax3.set_xticklabels(["-1","0","1","2"])
+    ax1.set_xticks([0.1,1,10])
+    ax1.set_xticklabels(["-1","0","1"])
+    ax2.set_xticks([0.1,1,10])
+    ax2.set_xticklabels(["-1","0","1"])
+    ax3.set_xticks([0.1,1,10])
+    ax3.set_xticklabels(["-1","0","1"])
     ax1.set_yticks([0.1,1,10])
     ax1.set_yticklabels(["-1","0","1"])
     ax1.set_xlim(xlim)
@@ -109,9 +113,46 @@ def startup_plot(
     ax1.set_ylim(ylim)
     ax2.set_ylim(ylim)
     ax3.set_ylim(ylim)
+    ax1.set_xlabel(xlabel)
+    ax2.set_xlabel(xlabel)
+    ax3.set_xlabel(xlabel)
+    ax1.set_ylabel(ylabel)
     axlist = [ax1, ax2, ax3]
 
     return axlist
+
+def plotter_gal(
+    axlist,
+    gals,
+    data_gals,
+    ):
+    """
+    """
+    r21_all = []
+    r21err_all = []
+    w1_all = []
+    for i in range(len(gals)):
+        #
+        ax = axlist[i]
+        #
+        r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high,r21err_low,r21err_mid,r21err_high = \
+            get_data(data_gals[i], 9)
+        r21_all.extend(r21_low)
+        r21_all.extend(r21_mid)
+        r21_all.extend(r21_high)
+        r21err_all.extend(r21err_low)
+        r21err_all.extend(r21err_mid)
+        r21err_all.extend(r21err_high)
+        w1_all.extend(w1_low)
+        w1_all.extend(w1_mid)
+        w1_all.extend(w1_high)
+        #
+        ax.scatter(w1_low, r21_low, alpha=1.0, lw=0, zorder=1e10, s=40,
+            color=cm.brg(i/2.5))#"blue")
+        ax.scatter(w1_mid, r21_mid, alpha=1.0, lw=0, zorder=1e10, s=40,
+            color=cm.brg(i/2.5))#"green")
+        ax.scatter(w1_high, r21_high, alpha=1.0, lw=0, zorder=1e10, s=40,
+            color=cm.brg(i/2.5))#"red")
 
 
 #####################
@@ -124,8 +165,9 @@ data_4321 = dir_data + "ngc4321_parameter_600pc.txt"
 data_gals = [data_0628, data_3627, data_4321]
 
 #
-axlist = startup_plot(xlim, ylim)
+axlist = startup_plot(xlim, ylim, xlabel1, ylabel)
 
+plotter_gal
 
 r21_all = []
 r21err_all = []
