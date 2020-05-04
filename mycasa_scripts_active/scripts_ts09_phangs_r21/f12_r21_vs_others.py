@@ -28,8 +28,7 @@ def get_data(txtdata,col):
     dist = data[:,0]
     #
     r21 = data[:,1]
-    med_r21 = np.median(r21[r21>0])
-    r21 = r21 / med_r21
+    r21 = r21 / np.median(r21[r21>0])
     #
     r21err = data[:,2]
     co21 = data[:,3]
