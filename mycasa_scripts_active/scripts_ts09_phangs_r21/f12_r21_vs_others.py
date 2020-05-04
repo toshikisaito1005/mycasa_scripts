@@ -45,8 +45,6 @@ def get_data(txtdata,col):
     data4use = data[:,col]
     data4use[np.isinf(data4use)] = 0
     data4use[np.isnan(data4use)] = 0
-    print("### median = " + str(np.median(data4use[data4use>0])))
-    data4use = data4use / np.median(data4use[data4use>0])
     #xlim = [0,data4use.max()*1.1]
     #
     cut_co21 = (co21 != 0)
@@ -57,13 +55,14 @@ def get_data(txtdata,col):
     cut_low = np.where((cut_co21) & (cut_low) & (cut_4use))
     cut_mid = np.where((cut_co21) & (cut_mid) & (cut_4use))
     cut_high = np.where((cut_co21) & (cut_high) & (cut_4use))
+    cut_all = np.where((cut_co21) & (cut_4use))
     #
     r21_low  = r21[cut_low]
     r21_mid  = r21[cut_mid]
     r21_high = r21[cut_high]
-    data_low  = data4use[cut_low]
-    data_mid  = data4use[cut_mid]
-    data_high = data4use[cut_high]
+    data_low  = data4use[cut_low] / np.median(data4use[cut_all])
+    data_mid  = data4use[cut_mid] / np.median(data4use[cut_all])
+    data_high = data4use[cut_high] / np.median(data4use[cut_all])
 
     return r21_low, r21_mid, r21_high, data_low, data_mid, data_high
 
@@ -95,7 +94,7 @@ for i in range(len(gals)):
 	#
 	ax = axlist[i]
 	#
-	r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high = get_data(data_gals[i],9)
+	r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high = get_data(data_gals[i],11)
 	r21_all.extend(r21_low)
 	r21_all.extend(r21_mid)
 	r21_all.extend(r21_high)
