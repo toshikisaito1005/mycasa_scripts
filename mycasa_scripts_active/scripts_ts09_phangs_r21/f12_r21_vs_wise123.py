@@ -65,11 +65,14 @@ def get_data(txtdata,col):
     r21err_low  = r21err[cut_low]
     r21err_mid  = r21err[cut_mid]
     r21err_high = r21err[cut_high]
+    dist_low  = dist[cut_low]
+    dist_mid  = dist[cut_mid]
+    dist_high = dist[cut_high]
     data_low  = data4use[cut_low] / np.median(data4use[cut_all])
     data_mid  = data4use[cut_mid] / np.median(data4use[cut_all])
     data_high = data4use[cut_high] / np.median(data4use[cut_all])
 
-    return r21_low, r21_mid, r21_high, data_low, data_mid, data_high, r21err_low, r21err_mid, r21err_high
+    return r21_low, r21_mid, r21_high, data_low, data_mid, data_high, r21err_low, r21err_mid, r21err_high, dist_low, dist_mid, dist_high
 
 def startup_plot(
     xlim,
@@ -137,7 +140,7 @@ def plotter_gal(
         #
         ax = axlist[i]
         #
-        r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high,r21err_low,r21err_mid,r21err_high = \
+        r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high,r21err_low,r21err_mid,r21err_high, dist_low, dist_mid, dist_high = \
             get_data(data_gals[i], col)
         r21_all.extend(r21_low)
         r21_all.extend(r21_mid)
@@ -209,7 +212,7 @@ data_4321 = dir_data + "ngc4321_parameter_600pc.txt"
 data_gals = [data_0628, data_3627, data_4321]
 
 # R21 vs WISE1
-xlabel = u"log \sigma/Median(\sigma)"
+xlabel = u"log linewidth/Median(linewidth)"
 outputname = "fig_r21_vs_disp.png"
 data_col = 8
 xlim = [0.3,10]
