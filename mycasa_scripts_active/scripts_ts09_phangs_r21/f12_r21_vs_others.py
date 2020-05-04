@@ -70,8 +70,6 @@ def get_data(txtdata,col):
     return r21_low, r21_mid, r21_high, data_low, data_mid, data_high, r21err_low, r21err_mid, r21err_high
 
 def startup_plot(
-    xlabel,
-    title,
     ):
     """
     """
@@ -84,6 +82,12 @@ def startup_plot(
     ax1.grid(axis='both')
     ax2.grid(axis='both')
     ax3.grid(axis='both')
+    ax1.set_xscale("log")
+    ax2.set_xscale("log")
+    ax3.set_xscale("log")
+    ax1.set_yscale("log")
+    ax2.set_yscale("log")
+    ax3.set_yscale("log")
     axlist = [ax1, ax2, ax3]
 
     return axlist
@@ -98,6 +102,7 @@ data_4321 = dir_data + "ngc4321_parameter_600pc.txt"
 data_gals = [data_0628, data_3627, data_4321]
 
 #
+axlist = startup_plot()
 
 
 r21_all = []
@@ -108,7 +113,7 @@ for i in range(len(gals)):
     ax = axlist[i]
     #
     r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high,r21err_low,r21err_mid,r21err_high = \
-        get_data(data_gals[i],9)
+        get_data(data_gals[i], 9)
     r21_all.extend(r21_low)
     r21_all.extend(r21_mid)
     r21_all.extend(r21_high)
@@ -119,16 +124,16 @@ for i in range(len(gals)):
     w1_all.extend(w1_mid)
     w1_all.extend(w1_high)
     #
-    ax.scatter(np.log10(w1_low), np.log10(r21_low), alpha=1.0, lw=0,
+    ax.scatter(w1_low, r21_low, alpha=1.0, lw=0,
         color=cm.brg(i/2.5))#"blue")
-    ax.scatter(np.log10(w1_mid), np.log10(r21_mid), alpha=1.0, lw=0,
+    ax.scatter(w1_mid, r21_mid, alpha=1.0, lw=0,
         color=cm.brg(i/2.5))#"green")
-    ax.scatter(np.log10(w1_high), np.log10(r21_high), alpha=1.0, lw=0,
+    ax.scatter(w1_high, r21_high, alpha=1.0, lw=0,
         color=cm.brg(i/2.5))#"red")
 
-ax1.errorbar(np.log10(w1_all), np.log10(r21_all), yerr=r21err_all, color="grey", alpha=0.5, zorder=0, lw=0)
-ax2.errorbar(np.log10(w1_all), np.log10(r21_all), color="grey", alpha=0.5, zorder=0, lw=0)
-ax3.errorbar(np.log10(w1_all), np.log10(r21_all), color="grey", alpha=0.5, zorder=0, lw=0)
+ax1.errorbar(w1_all, r21_all, yerr=r21err_all, color="grey", alpha=0.5, lw=2)
+ax2.errorbar(w1_all, r21_all, yerr=r21err_all, color="grey", alpha=0.5, lw=2)
+ax3.errorbar(w1_all, r21_all, yerr=r21err_all, color="grey", alpha=0.5, lw=2)
 
 
 plt.savefig(dir_data + "fig_r21_vs_w1.png",dpi=200)
