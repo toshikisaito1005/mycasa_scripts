@@ -13,8 +13,8 @@ plt.ioff()
 #####################
 ### parameters
 #####################
-dir_data = "/Users/saito/data/mycasa_scripts_active/scripts_ts09_phangs_r21/eps/"
-galaxy = ["ngc0628","ngc3627","ngc4321"]
+dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
+gals = ["ngc0628","ngc3627","ngc4321"]
 
 
 #####################
@@ -26,8 +26,10 @@ galaxy = ["ngc0628","ngc3627","ngc4321"]
 #####################
 ### Main Procedure
 #####################
-txtfiles = glob.glob(dir_data + "*_parameter_600pc.txt")
-
+#
+data_0628 = np.loadtxt(dir_data + "ngc0628_parameter_600pc.txt")
+data_3627 = np.loadtxt(dir_data + "ngc3627_parameter_600pc.txt")
+data_4321 = np.loadtxt(dir_data + "ngc4321_parameter_600pc.txt")
 
 
 plt.figure(figsize=(10,0))
