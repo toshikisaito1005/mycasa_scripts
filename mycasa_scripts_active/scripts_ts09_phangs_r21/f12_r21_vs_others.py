@@ -43,10 +43,10 @@ def get_data(txtdata,col):
     mask = data[:,12]
     #
     data4use = data[:,col]
-    print("### median = " + str(np.median(data4use[data4use>0])))
-    data4use = data4use / np.median(data4use[data4use>0])
     data4use[np.isinf(data4use)] = 0
     data4use[np.isnan(data4use)] = 0
+    print("### median = " + str(np.median(data4use[data4use>0])))
+    data4use = data4use / np.median(data4use[data4use>0])
     #xlim = [0,data4use.max()*1.1]
     #
     cut_co21 = (co21 != 0)
