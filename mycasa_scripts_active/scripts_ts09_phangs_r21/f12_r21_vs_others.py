@@ -17,7 +17,6 @@ dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
 xlim = [0.1,100]
 ylim = [0.1,10]
-xlabel1 = "log W1/Median(W1)"
 ylabel = "log $R_{21}$/Median($R_{21}$)"
 
 
@@ -117,6 +116,9 @@ def startup_plot(
     ax2.set_xlabel(xlabel)
     ax3.set_xlabel(xlabel)
     ax1.set_ylabel(ylabel)
+    ax1.set_title("NGC 0628")
+    ax2.set_title("NGC 3627")
+    ax3.set_title("NGC 4321")
     axlist = [ax1, ax2, ax3]
 
     return axlist
@@ -125,6 +127,7 @@ def plotter_gal(
     axlist,
     gals,
     data_gals,
+    col,
     ):
     """
     """
@@ -136,7 +139,7 @@ def plotter_gal(
         ax = axlist[i]
         #
         r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high,r21err_low,r21err_mid,r21err_high = \
-            get_data(data_gals[i], 9)
+            get_data(data_gals[i], col)
         r21_all.extend(r21_low)
         r21_all.extend(r21_mid)
         r21_all.extend(r21_high)
@@ -154,6 +157,30 @@ def plotter_gal(
         ax.scatter(w1_high, r21_high, alpha=1.0, lw=0, zorder=1e10, s=40,
             color=cm.brg(i/2.5))#"red")
 
+    return r21_all, r21err_all, w1_all
+
+def plotter_all(
+    axlist,
+    r21_all,
+    r21err_all,
+    y_all,
+    ):
+    """
+    """
+    for i in range(len(gals)):
+        ax = axlist[i]
+        ax.errorbar(
+            np.array(y_all),
+            np.array(r21_all),
+            yerr=np.array(r21err_all),
+            fmt="o",
+            color="darkgrey",
+            markersize=3,
+            markeredgewidth=0,
+            alpha=1.0,
+            lw=1,
+            capsize=0,
+            zorder=1)
 
 #####################
 ### Main Procedure
@@ -164,39 +191,26 @@ data_3627 = dir_data + "ngc3627_parameter_600pc.txt"
 data_4321 = dir_data + "ngc4321_parameter_600pc.txt"
 data_gals = [data_0628, data_3627, data_4321]
 
-#
-axlist = startup_plot(xlim, ylim, xlabel1, ylabel)
+# R21 vs WISE1
+xlabel = "log W1/Median(W1)"
+outputname = "fig_r21_vs_w1.png"
+axlist = startup_plot(xlim, ylim, xlabel, ylabel)
+r21_all, r21err_all, y_all = plotter_gal(axlist, gals, data_gals, 9)
+plotter_all(axlist, r21_all, r21err_all, y_all)
+plt.savefig(dir_data + outputname,dpi=200)
 
-plotter_gal
+# R21 vs WISE2
+xlabel = "log W2/Median(W2)"
+outputname = "fig_r21_vs_w2.png"
+axlist = startup_plot(xlim, ylim, xlabel, ylabel)
+r21_all, r21err_all, y_all = plotter_gal(axlist, gals, data_gals, 10)
+plotter_all(axlist, r21_all, r21err_all, y_all)
+plt.savefig(dir_data + outputname,dpi=200)
 
-r21_all = []
-r21err_all = []
-w1_all = []
-for i in range(len(gals)):
-    #
-    ax = axlist[i]
-    #
-    r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high,r21err_low,r21err_mid,r21err_high = \
-        get_data(data_gals[i], 9)
-    r21_all.extend(r21_low)
-    r21_all.extend(r21_mid)
-    r21_all.extend(r21_high)
-    r21err_all.extend(r21err_low)
-    r21err_all.extend(r21err_mid)
-    r21err_all.extend(r21err_high)
-    w1_all.extend(w1_low)
-    w1_all.extend(w1_mid)
-    w1_all.extend(w1_high)
-    #
-    ax.scatter(w1_low, r21_low, alpha=1.0, lw=0, zorder=1e10, s=40,
-        color=cm.brg(i/2.5))#"blue")
-    ax.scatter(w1_mid, r21_mid, alpha=1.0, lw=0, zorder=1e10, s=40,
-        color=cm.brg(i/2.5))#"green")
-    ax.scatter(w1_high, r21_high, alpha=1.0, lw=0, zorder=1e10, s=40,
-        color=cm.brg(i/2.5))#"red")
-
-for i in range(len(gals)):
-    ax = axlist[i]
-    ax.errorbar(np.array(w1_all), np.array(r21_all), yerr=np.array(r21err_all), fmt="o", color="darkgrey", markersize=3, markeredgewidth=0, alpha=1.0, lw=1, capsize=0, zorder=1)
-
-plt.savefig(dir_data + "fig_r21_vs_w1.png",dpi=200)
+# R21 vs WISE3
+xlabel = "log W2/Median(W2)"
+outputname = "fig_r21_vs_w2.png"
+axlist = startup_plot(xlim, ylim, xlabel, ylabel)
+r21_all, r21err_all, y_all = plotter_gal(axlist, gals, data_gals, 10)
+plotter_all(axlist, r21_all, r21err_all, y_all)
+plt.savefig(dir_data + outputname,dpi=200)
