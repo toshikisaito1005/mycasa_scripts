@@ -6,6 +6,7 @@ import scipy
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
+from scipy.optimize import curve_fit
 import matplotlib.gridspec as gridspec
 plt.ioff()
 
@@ -16,12 +17,15 @@ plt.ioff()
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 gals = ["ngc0628","ngc3627","ngc4321"]
 ylim = [0.1,10]
-ylabel = "log $R_{21}$/Median($R_{21}$)"
+ylabel = "log $R_{21}$ / Median($R_{21}$)"
 
 
 #####################
 ### functions
 #####################
+def function(x, a, b):
+    return a * x + b
+
 def get_data_highlowmask(txtdata,col):
     """
     """
@@ -183,8 +187,8 @@ def plotter_gal(
         r21err_all.extend(r21err)
         w1_all.extend(w1)
         #
-        ax.scatter(w1, r21, alpha=0.8, lw=0, zorder=1e10, s=30,
-            color=cm.gist_rainbow(dist/dist.max()))#i/2.5))
+        ax.scatter(w1, r21, alpha=1.0, lw=0, zorder=1e10, s=30,
+            color=cm.jet(dist/dist.max()))#i/2.5))
 
     return r21_all, r21err_all, w1_all
 
@@ -223,7 +227,7 @@ def plotter(
     ):
     """
     """
-    print("### plottting " + outputname)
+    print("### plotting " + outputname)
     axlist = startup_plot(xlim, ylim, xlabel, ylabel)
     r21_all, r21err_all, y_all = plotter_gal(axlist, gals, data_gals, data_col)
     plotter_alldata(axlist, r21_all, r21err_all, y_all)
@@ -240,28 +244,28 @@ data_4321 = dir_data + "ngc4321_parameter_600pc.txt"
 data_gals = [data_0628, data_3627, data_4321]
 
 # R21 vs WISE1
-xlabel = u"log linewidth/Median(linewidth)"
+xlabel = u"log linewidth / Median(linewidth)"
 outputname = "fig_r21_vs_disp.png"
 data_col = 8
 xlim = [0.3,10]
 plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname)
 
 # R21 vs WISE1
-xlabel = "log W1/Median(W1)"
+xlabel = "log W1 / Median(W1)"
 outputname = "fig_r21_vs_w1.png"
 data_col = 9
 xlim = [0.05,100]
 plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname)
 
 # R21 vs WISE2
-xlabel = "log W2/Median(W2)"
+xlabel = "log W2 / Median(W2)"
 outputname = "fig_r21_vs_w2.png"
 data_col = 10
 xlim = [0.05,100]
 plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname)
 
 # R21 vs WISE3
-xlabel = "log W3/Median(W3)"
+xlabel = "log W3 / Median(W3)"
 outputname = "fig_r21_vs_w3.png"
 data_col = 11
 xlim = [0.05,100]
