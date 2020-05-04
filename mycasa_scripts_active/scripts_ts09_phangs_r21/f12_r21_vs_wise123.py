@@ -197,7 +197,7 @@ def plotter_gal(
         ax.plot(x, function(x, *popt), "-", c=cm.brg(i/2.5), lw=4, zorder=1e20)
         """
         # binning
-        plotter_binning(ax, w1, r21, 3, cm.brg(i/2.5))
+        plotter_binning(ax, w1, r21, 3, "gold")#cm.brg(i/2.5))
 
     return r21_all, r21err_all, w1_all
 
@@ -225,9 +225,8 @@ def plotter_binning(
     sy2, _ = np.histogram(x, bins=bins, weights=y*y, range=xlim)
     mean = sy / n
     std = np.sqrt(sy2/n - mean*mean)
-    ax.plot(10**((_[1:] + _[:-1])/2), 10**mean, "-", color=color, lw=5, alpha=0.5, zorder=1e20)
+    ax.plot(10**((_[1:] + _[:-1])/2), 10**mean, "-", color=color, lw=5, alpha=1.0, zorder=1e20)
     ax.fill_between(10**((_[1:] + _[:-1])/2), 10**(mean-std), 10**(mean+std), color=color, alpha=0.5, lw=0, zorder=1e20)
-
 
 def plotter_alldata(
     axlist,
