@@ -124,14 +124,16 @@ for i in range(len(gals)):
     w1_all.extend(w1_mid)
     w1_all.extend(w1_high)
     #
-    ax.scatter(w1_low, r21_low, alpha=1.0, lw=0, zorder=1e10,
+    ax.scatter(w1_low, r21_low, alpha=1.0, lw=0, zorder=1e10, s=40,
         color=cm.brg(i/2.5))#"blue")
-    ax.scatter(w1_mid, r21_mid, alpha=1.0, lw=0, zorder=2,
+    ax.scatter(w1_mid, r21_mid, alpha=1.0, lw=0, zorder=1e10, s=40,
         color=cm.brg(i/2.5))#"green")
-    ax.scatter(w1_high, r21_high, alpha=1.0, lw=0, zorder=2,
+    ax.scatter(w1_high, r21_high, alpha=1.0, lw=0, zorder=1e10, s=40,
         color=cm.brg(i/2.5))#"red")
 
-axlist[0].errorbar(np.array(w1_all), np.array(r21_all), yerr=np.array(r21err_all), fmt="o", color="grey", markersize=3, markeredgewidth=0, alpha=1.0, lw=1, capsize=0, zorder=1)
+axlist[0].errorbar(np.array(w1_all), np.array(r21_all), yerr=np.array(r21err_all), fmt="o", color="darkgrey", markersize=3, markeredgewidth=0, alpha=1.0, lw=1, capsize=0, zorder=1)
+axlist[1].errorbar(np.array(w1_all), np.array(r21_all), yerr=np.array(r21err_all), fmt="o", color="darkgrey", markersize=3, markeredgewidth=0, alpha=1.0, lw=1, capsize=0, zorder=1)
+axlist[2].errorbar(np.array(w1_all), np.array(r21_all), yerr=np.array(r21err_all), fmt="o", color="darkgrey", markersize=3, markeredgewidth=0, alpha=1.0, lw=1, capsize=0, zorder=1)
 
 
 plt.savefig(dir_data + "fig_r21_vs_w1.png",dpi=200)
