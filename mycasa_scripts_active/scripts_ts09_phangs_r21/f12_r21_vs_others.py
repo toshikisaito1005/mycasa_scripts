@@ -95,7 +95,7 @@ for i in range(len(gals)):
 	#
 	ax = axlist[i]
 	#
-	r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high = get_data(data_gals[i],8)
+	r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high = get_data(data_gals[i],7)
 	r21_all.extend(r21_low)
 	r21_all.extend(r21_mid)
 	r21_all.extend(r21_high)
