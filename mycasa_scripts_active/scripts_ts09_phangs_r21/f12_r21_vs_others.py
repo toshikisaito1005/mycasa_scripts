@@ -73,7 +73,7 @@ data_4321 = dir_data + "ngc4321_parameter_600pc.txt"
 data_gals = [data_0628, data_3627, data_4321]
 
 #
-plt.figure(figsize=(10,0))
+plt.figure(figsize=(10,4))
 plt.rcParams["font.size"] = 14
 gs = gridspec.GridSpec(nrows=5, ncols=15)
 ax1 = plt.subplot(gs[0:5,0:5])
@@ -83,9 +83,11 @@ axlist = [ax1, ax2, ax3]
 
 for i in range(len(gals)):
 	#
-	ax = axlist
+	ax = axlist[i]
 	#
 	r21_low,r21_mid,r21_high,w1_low,w1_mid,w1_high = get_data(data_gals[i],7)
-	ax.scatter(r21_low,w1_low,color="blue",alpha=0.55)
+	ax.scatter(np.log10(r21_low), np.log10(w1_low), color="blue", alpha=0.5)
+	ax.scatter(np.log10(r21_mid), np.log10(w1_mid), color="green", alpha=0.5)
+	ax.scatter(np.log10(r21_high), np.log10(w1_high), color="red", alpha=0.5)
 
-plt.savefig(dir_data + "scatter_r21_vs_w1.png",dpi=200)
+plt.savefig(dir_data + "fig_r21_vs_w1.png",dpi=200)
