@@ -189,7 +189,7 @@ def plotter_gal(
         w1_all.extend(w1)
         #
         ax.scatter(w1, r21, alpha=1.0, lw=0, zorder=1e10, s=30,
-            color=cm.brg(i/2.5))#cm.jet(dist/dist.max())
+            color="darkgrey")#cm.brg(i/2.5))
         """
         # fit
         popt, pcov = curve_fit(function, w1, r21, p0=[1,0], sigma=r21err)
@@ -197,7 +197,7 @@ def plotter_gal(
         ax.plot(x, function(x, *popt), "-", c=cm.brg(i/2.5), lw=4, zorder=1e20)
         """
         # binning
-        plotter_binning(ax, w1, r21, 3, "gold")#cm.brg(i/2.5))
+        plotter_binning(ax, w1, r21, 3, cm.brg(i/2.5))
 
     return r21_all, r21err_all, w1_all
 
@@ -243,7 +243,7 @@ def plotter_alldata(
             np.array(r21_all),
             yerr=np.array(r21err_all),
             fmt="o",
-            color="darkgrey",
+            color="gainsboro",
             markersize=3,
             markeredgewidth=0,
             alpha=1.0,
