@@ -19,7 +19,7 @@ plt.ioff()
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
-nbins = 150
+nbins = 75
 xlim = [0,2.5]
 
 
@@ -84,13 +84,13 @@ histo_norm = np.histogram(data_norm_all, bins=nbins, range=(xlim), weights=None)
 x_norm, y_norm = np.delete(histo_norm[1],-1),histo_norm[0]
 y_norm = y_norm / float(sum(y_norm))
 #
-p16_all = weighted_median(y_all, None, 16)
-p50_all = weighted_median(y_all, None, 50)
-p84_all = weighted_median(y_all, None, 84)
+p16_all = weighted_median(data_all, None, 0.16)
+p50_all = weighted_median(data_all, None, 0.5)
+p84_all = weighted_median(data_all, None, 0.84)
 #
-p16_norm = weighted_median(y_norm, None, 16)
-p50_norm = weighted_median(y_norm, None, 50)
-p84_norm = weighted_median(y_norm, None, 84)
+p16_norm = weighted_median(data_norm_all, None, 0.16)
+p50_norm = weighted_median(data_norm_all, None, 0.50)
+p84_norm = weighted_median(data_norm_all, None, 0.84)
 
 
 ### plot
@@ -104,14 +104,19 @@ ax2.grid(axis="both")
 plt.rcParams["font.size"] = 16
 
 # ax1
+ylim = [0.0001, y_all.max()*1.1]
 ax1.step(x_all, y_all, "black", lw=1, alpha=1.0, where="mid")
 ax1.bar(x_all, y_all, lw=0, color="black", alpha=0.2, width=x_all[1]-x_all[0], align="center")
-ax1.set_ylim([0.0001, y_all.max()*1.1])
+ax1.plot([p50_all, p50_all], [ylim[1]/1.1*1.05, ylim[1]/1.1*1.05])
+#
+ax1.set_ylim(ylim)
 
 # ax2
+ylim = [0.0001, y_norm.max()*1.1]
 ax2.step(x_norm, y_norm, "black", lw=1, alpha=1.0, where="mid")
 ax2.bar(x_norm, y_norm, lw=0, color="black", alpha=0.2, width=x_norm[1]-x_norm[0], align="center")
-ax2.set_ylim([0.0001, y_norm.max()*1.1])
+#
+ax2.set_ylim(ylim)
 
 plt.savefig(dir_product+"histoall.png",dpi=200)
 
