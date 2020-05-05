@@ -11,7 +11,7 @@ execfile("myim02a_regrid.py")
 execfile("myim02b_pbmasking.py")
 """
 
-
+"""
 print("### running myim03")
 execfile("myim03a_mom_native.py")
 execfile("myim03b_Jy2Kelvin.py")
@@ -42,7 +42,7 @@ execfile("myim10_extract_param_600pc.py")
 
 print("### running myim11")
 execfile("myim11_extract_param_best.py")
-
+"""
 
 print("### running f01")
 execfile("f01a_noise.py")
@@ -60,20 +60,30 @@ execfile("f04_histograms_600pc.py")
 print("### running f05")
 execfile("f05_histo_stats.py")
 
-print("### running f06_07")
-execfile("f06_07_scatter_and_histo.py")
+print("### running f06")
+execfile("f06_histall.py")
 
-print("### running f08")
-execfile("f08_violins.py")
+print("### running f07_08")
+execfile("f07_08_scatter_and_histo.py")
 
 print("### running f09")
-execfile("f09_r21_highlowmask.py")
+execfile("f09_violins.py")
 
 print("### running f10")
-execfile("f10_radial.py")
+execfile("f10a_r21_highlowmask.py")
+execfile("f10b_histo.py")
 
 print("### running f11")
-execfile("f11_radial_norm.py")
+execfile("f11_maskhist.py")
+
+print("### running f12")
+execfile("f12_r21_vs_param.py")
+
+print("### tabulate")
+execfile("ftable02.py")
+execfile("ftable03.py")
+execfile("ftable04.py")
+
 
 print("### cleanup")
 os.system("rm -rf tempalte.image")
