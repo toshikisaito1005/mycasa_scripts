@@ -125,6 +125,8 @@ plt.text(2.5,0.07,'$r$ = ' + str(np.round(correlation, 2)),fontsize=14)
 
 a = plt.axes([.16, .68, .3, .2])
 plt.plot([0.45,0.45+np.median(p2rerr)],[2200,2200],"k-",lw=2)
+print("### print r21err_all = " + str(np.median(r21err_all)))
+print("### print p21err_all = " + str(np.median(p21err_all)))
 plt.ylim([0,2500])
 plt.xlabel("y-axis / x-axis" ,fontsize=14)
 plt.xticks(fontsize=14)
