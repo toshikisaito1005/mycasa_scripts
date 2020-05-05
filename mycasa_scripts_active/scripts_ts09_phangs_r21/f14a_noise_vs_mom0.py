@@ -86,21 +86,21 @@ log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = \
 
 # plot
 figure = plt.figure(figsize=(10,8))
-gs = gridspec.GridSpec(nrows=8, ncols=8)
-plt.subplots_adjust(bottom=0.15, left=0.10, right=0.98, top=0.88)
+gs = gridspec.GridSpec(nrows=9, ncols=8)
+plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
 ax1 = plt.subplot(gs[0:4,0:8])
-ax2 = plt.subplot(gs[4:8,0:8])
+ax2 = plt.subplot(gs[5:9,0:8])
 ax1.grid(axis="both")
 ax2.grid(axis="both")
 plt.rcParams["font.size"] = 16
 
 # ax1
-ax1.plot(log_co10_mom0_k,log_co10_noise_k,"o")
+ax1.scatter(log_co10_mom0_k, log_co10_noise_k, c="black", alpha=0.5)
 
 # ax2
-ax2.plot(log_co21_mom0_k,log_co21_noise_k,"o")
+ax2.scatter(log_co21_mom0_k, log_co21_noise_k, c="black", alpha=0.5)
 
 
-plt.savefig(dir_proj + "eps/noise_vs_mom0.png",dpi=200)
+plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
 
 os.system("rm -rf *.last")
