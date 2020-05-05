@@ -123,14 +123,13 @@ ax2.set_xscale("log")
 ax1.set_yscale("log")
 ax2.set_yscale("log")
 """
-ax1.set_xlim([2,70])
-ax2.set_xlim([0.5,60])
-ax1.set_ylim([0.4,2])
-ax2.set_ylim([0.10,0.6])
 plt.rcParams["font.size"] = 16
 
 # ax1
 ax1.scatter(log_co10_mom0_k, log_co10_noise_k, c="black", alpha=0.5)
+xbins = np.linspace(log_co10_mom0_k.min(), log_co10_mom0_k.max(), 100)
+for i in range(len(xbins)):
+	cut_all = np.where((log_co10_mom0_k>xbins[i]) & ())
 
 # ax2
 ax2.scatter(log_co21_mom0_k, log_co21_noise_k, c="black", alpha=0.5)
