@@ -208,14 +208,14 @@ def plotter_gal(
         r21 = r21[r21>0]
         r21err = r21err[r21>0]
         #
-        y_all = y_all[r21err_all>0]
-        r21_all = r21_all[r21err_all>0]
-        r21err_all = r21err_all[r21err_all>0]
+        w1 = w1[r21err>0]
+        r21 = r21[r21err>0]
+        r21err = r21err[r21err>0]
         #
-        popt, pcov = curve_fit(function, y_all, r21_all, p0=[0.15,-0.1], sigma=r21err_all, maxfev = 10000)
+        popt, pcov = curve_fit(function, w1, r21, p0=[0.15,-0.1], sigma=r21err, maxfev = 10000)
         print("### best-fit = "+str(np.round(popt[1],2))+" + "+str(np.round(popt[0],2))+"*log(x)")
-        x = np.linspace(y_all.min(), y_all.max(), 100)
-        ax.plot(x, function(x, *popt), "--", c="black", lw=3, zorder=1e20)
+        x = np.linspace(w1.min(), w1.max(), 100)
+        ax.plot(x, function(x, *popt), "--", c="red", lw=3, zorder=1e21, label="log y = " + str(np.round(popt[1],2)) + " + " + str(np.round(popt[0],2)) + " log x")
 
     return r21_all, r21err_all, w1_all
 
@@ -339,6 +339,7 @@ def plotter(
     axlist = startup_plot(xlim, ylim, xlabel, ylabel)
     r21_all, r21err_all, y_all = plotter_gal(axlist, gals, data_gals, data_col)
     plotter_alldata(axlist, r21_all, r21err_all, y_all)
+    plt.legend()
     plt.savefig(dir_data + outputname, dpi=200)
 
 
