@@ -92,13 +92,14 @@ ax1 = plt.subplot(gs[0:4,0:8])
 ax2 = plt.subplot(gs[5:9,0:8])
 ax1.grid(axis="both")
 ax2.grid(axis="both")
+ax1.set_xscale("log")
 plt.rcParams["font.size"] = 16
 
 # ax1
-ax1.scatter(log_co10_mom0_k, log_co10_noise_k, c="black", alpha=0.5)
+ax1.scatter(10**log_co10_mom0_k, 10**log_co10_noise_k, c="black", alpha=0.5)
 
 # ax2
-ax2.scatter(log_co21_mom0_k, log_co21_noise_k, c="black", alpha=0.5)
+ax2.scatter(10*8log_co21_mom0_k, 10**log_co21_noise_k, c="black", alpha=0.5)
 
 
 plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
