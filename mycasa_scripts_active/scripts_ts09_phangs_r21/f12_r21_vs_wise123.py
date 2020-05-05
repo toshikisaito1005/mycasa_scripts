@@ -6,6 +6,7 @@ import scipy
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
+from scipy.stats import pearsonr
 from scipy.optimize import curve_fit
 import matplotlib.gridspec as gridspec
 plt.ioff()
@@ -215,7 +216,10 @@ def plotter_gal(
         r21err = r21err[r21err>0]
         #
         popt, pcov = curve_fit(function, w1, r21, p0=[0.15,-0.1], sigma=r21err, maxfev = 10000)
-        print("### best-fit = "+str(np.round(popt[1],2))+" + "+str(np.round(popt[0],2))+"*log(x)")
+        #
+        slope = str(np.round(popt[0],2))
+        intercept = str(np.round(popt[1],2))
+        #
         x = np.linspace(w1.min(), w1.max(), 100)
         ax.plot(x, function(x, *popt), "--", c="red", lw=3, zorder=1e21, label="fit to "+galname)
 
