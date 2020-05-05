@@ -190,12 +190,7 @@ def plotter_gal(
         #
         ax.scatter(w1, r21, alpha=1.0, lw=0, zorder=1e10, s=40,
             color="darkgrey")#cm.brg(i/2.5))
-        """
-        # fit
-        popt, pcov = curve_fit(function, w1, r21, p0=[1,0], sigma=r21err)
-        x = np.linspace(w1.min(), w1.max(), 100)
-        ax.plot(x, function(x, *popt), "-", c=cm.brg(i/2.5), lw=4, zorder=1e20)
-        """
+        #
         # binning
         plotter_binning(ax, w1, r21, 3, cm.brg(i/2.5), 0.5, "-")
 
@@ -281,6 +276,17 @@ def plotter_alldata(
             zorder=1)
         #
         plotter_binning2(ax, np.array(y_all), np.array(r21_all), 5)
+        #
+        ### fit
+        #
+        y_all = np.array(y_all)
+        r21_all = np.array(r21_all)
+        r21err_all = np.array(r21err_all)
+        #
+        popt, pcov = curve_fit(function, y_all, r21_all, p0=[0.15,-0.1], sigma=r21err_all)
+        x = np.linspace(y_all.min(), y_all.max(), 100)
+        ax.plot(x, function(x, *popt), "-", c="black", lw=4, zorder=1e20)
+
 
 def plotter(
     gals,
