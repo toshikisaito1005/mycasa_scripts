@@ -85,8 +85,17 @@ log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = \
 	getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21)
 
 # print
-print("### mean co10 noise = " + str(np.round(np.mean(10**log_co10_noise_k),2)) + " K.km/s")
-print("### mean co21 noise = " + str(np.round(np.mean(10**log_co21_noise_k),2)) + " K.km/s")
+print("### co10 data properties")
+print("# 84% mom-0 = " + str(np.round(np.percentile(10**log_co10_mom0_k,84),2)) + " K.km/s")
+print("# median mom-0 = " + str(np.round(np.mean(10**log_co10_mom0_k),2)) + " K.km/s")
+print("# 16% mom-0 = " + str(np.round(np.percentile(10**log_co10_mom0_k,	6),2)) + " K.km/s")
+print("# mean noise = " + str(np.round(np.mean(10**log_co10_noise_k),2)) + " K.km/s")
+#
+print("### co21 data properties")
+print("# 84% mom-0 = " + str(np.round(np.percentile(10**log_co21_mom0_k,84),2)) + " K.km/s")
+print("# median mom-0 = " + str(np.round(np.mean(10**log_co21_mom0_k),2)) + " K.km/s")
+print("# 16% mom-0 = " + str(np.round(np.percentile(10**log_co21_mom0_k,	6),2)) + " K.km/s")
+print("# mean noise = " + str(np.round(np.mean(10**log_co21_noise_k),2)) + " K.km/s")
 
 # plot
 figure = plt.figure(figsize=(10,8))
