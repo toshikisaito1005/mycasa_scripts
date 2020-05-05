@@ -223,24 +223,19 @@ def plotter_gal(
         intercept = str(np.round(popt[1],2))
         coeff = pearsonr(w1, r21)
         #
-        list_output.append([
-        	gals[i],
-        	str(np.round(coeff[0], 2),
-        	str(np.round(coeff[0], 5),
-        	str(np.round(popt[0], 2)),
-        	str(np.round(np.sqrt(np.diag(pcov))[0], 2)),
-        	str(np.round(popt[0], 2)),
-        	str(np.round(np.sqrt(np.diag(pcov))[1], 2)),
-        	])
+        list_output.append(
+        	[gals[i],
+        	 str(np.round(coeff[0], 2)),
+        	 str(np.round(coeff[0], 5)),
+        	 str(np.round(popt[0], 2)),
+        	 str(np.round(np.sqrt(np.diag(pcov))[0], 2)),
+        	 str(np.round(popt[0], 2)),
+        	 str(np.round(np.sqrt(np.diag(pcov))[1], 2))])
         #
         x = np.linspace(w1.min(), w1.max(), 100)
         ax.plot(x, function(x, *popt), "--", c="red", lw=3, zorder=1e21, label="fit to "+galname)
         #
-    np.savetxt(
-    	savetxt,
-    	np.array(list_output),
-    	fmt='%s',
-		)
+    np.savetxt(savetxt, np.array(list_output), fmt='%s')
 
 
     return r21_all, r21err_all, w1_all
@@ -309,6 +304,7 @@ def plotter_alldata(
     ):
     """
     """
+    list_output = []
     for i in range(len(gals)):
         ax = axlist[i]
         ax.errorbar(
@@ -345,7 +341,21 @@ def plotter_alldata(
         r21err_all = r21err_all[r21err_all>0]
         #
         popt, pcov = curve_fit(function, y_all, r21_all, p0=[0.15,-0.1], sigma=r21err_all, maxfev = 10000)
-        print("### best-fit = "+str(np.round(popt[1],2))+" + "+str(np.round(popt[0],2))+"*log(x)")
+        #
+        slope = str(np.round(popt[0],2))
+        intercept = str(np.round(popt[1],2))
+        coeff = pearsonr(y_all, r21_all)
+        #
+        list_output.append([
+        "all",
+        str(np.round(coeff[0], 2)),
+        str(np.round(coeff[0], 5)),
+        str(np.round(popt[0], 2)),
+        str(np.round(np.sqrt(np.diag(pcov))[0], 2)),
+        str(np.round(popt[0], 2)),
+        str(np.round(np.sqrt(np.diag(pcov))[1], 2)),
+        ])
+        #
         x = np.linspace(y_all.min(), y_all.max(), 100)
         ax.plot(x, function(x, *popt), "--", c="black", lw=3, zorder=1e20, label="fit to all")
 
@@ -358,12 +368,13 @@ def plotter(
     xlabel,
     ylabel,
     outputname,
+    savetxt,
     ):
     """
     """
     print("### plotting " + outputname)
     axlist = startup_plot(xlim, ylim, xlabel, ylabel)
-    r21_all, r21err_all, y_all = plotter_gal(axlist, gals, data_gals, data_col)
+    r21_all, r21err_all, y_all = plotter_gal(axlist, gals, data_gals, data_col, savetxt)
     plotter_alldata(axlist, r21_all, r21err_all, y_all)
     for i in range(len(axlist)):
     	ax = axlist[i]
@@ -385,25 +396,25 @@ xlabel = u"log linewidth/Median(linewidth)"
 outputname = "fig_r21_vs_disp.png"
 data_col = 8
 xlim = [0.3,10]
-plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname)
+plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname, outputname.replace(".png",".txt"))
 
 # R21 vs WISE1
 xlabel = "log W1/Median(W1)"
 outputname = "fig_r21_vs_w1.png"
 data_col = 9
 xlim = [0.05,100]
-plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname)
+plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname, outputname.replace(".png",".txt"))
 
 # R21 vs WISE2
 xlabel = "log W2/Median(W2)"
 outputname = "fig_r21_vs_w2.png"
 data_col = 10
 xlim = [0.05,100]
-plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname)
+plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname, outputname.replace(".png",".txt"))
 
 # R21 vs WISE3
 xlabel = "log W3/Median(W3)"
 outputname = "fig_r21_vs_w3.png"
 data_col = 11
 xlim = [0.05,100]
-plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname)
+plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname, outputname.replace(".png",".txt"))
