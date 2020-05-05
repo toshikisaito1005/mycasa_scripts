@@ -46,7 +46,10 @@ def extract_onerow(txtdata):
 	t0 = l0.replace("ngc","NGC ").replace("a","A")
 	# t1
 	if not str(np.round(float(l2),2)).ljust(4,"0")=="0.00":
-		t1 = l1.ljust(4,"0") + " (" + str(np.round(float(l2),2)).ljust(4,"0") + ")"
+		if "-" in l1:
+			t1 = l1.ljust(4,"0").replace("-","$-$") + " (" + str(np.round(float(l2),2)).ljust(4,"0") + ")"
+		else:
+			t1 = "\phantom{$-$}" + l1.ljust(4,"0") + " (" + str(np.round(float(l2),2)).ljust(4,"0") + ")"
 	else:
 		t1 = l1.ljust(4,"0") + " ($<$0.001)"
 	# t2
@@ -62,13 +65,13 @@ def extract_onerow(txtdata):
 ### main
 #####################
 table04 = []
-for i in [0,2,4,6]:
+for i in [0,2,4,6,8]:
 	#
 	txtfile1 = txtfile[i]
 	txtfile2 = txtfile[i+1]
 	#
 	table = table04_galname(txtfile1, txtfile2)
 	table04.append(table)
-	os.system("rm -rf " + txtfile1 + " " + txtfile2)
+	#os.system("rm -rf " + txtfile1 + " " + txtfile2)
 
 np.savetxt("table04.txt",table04,fmt="%s")
