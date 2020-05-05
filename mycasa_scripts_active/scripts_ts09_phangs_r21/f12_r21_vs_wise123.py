@@ -283,10 +283,10 @@ def plotter_alldata(
         r21_all = np.array(r21_all)
         r21err_all = np.array(r21err_all)
         #
-        popt, pcov = curve_fit(function, y_all, r21_all, p0=[0.15,-0.1], sigma=r21err_all)
+        popt, pcov = curve_fit(function, y_all, r21_all, p0=[0.15,-0.1], sigma=r21err_all, maxfev = 10000)
+        print("### best-fit = "+str(np.round(popt[0],2))+" * log(x) + " + str(np.round(popt[1],2)))
         x = np.linspace(y_all.min(), y_all.max(), 100)
         ax.plot(x, function(x, *popt), "-", c="black", lw=4, zorder=1e20)
-
 
 def plotter(
     gals,
