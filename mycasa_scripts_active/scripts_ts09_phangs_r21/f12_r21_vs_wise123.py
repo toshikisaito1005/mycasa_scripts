@@ -226,10 +226,10 @@ def plotter_gal(
         list_output.append(
         	[gals[i],
         	 str(np.round(coeff[0], 2)),
-        	 str(np.round(coeff[0], 5)),
+        	 str(np.round(coeff[1], 5)),
         	 str(np.round(popt[0], 2)),
         	 str(np.round(np.sqrt(np.diag(pcov))[0], 2)),
-        	 str(np.round(popt[0], 2)),
+        	 str(np.round(popt[1], 2)),
         	 str(np.round(np.sqrt(np.diag(pcov))[1], 2))])
         #
         x = np.linspace(w1.min(), w1.max(), 100)
@@ -350,10 +350,10 @@ def plotter_alldata(
         list_output.append([
         "all",
         str(np.round(coeff[0], 2)),
-        str(np.round(coeff[0], 5)),
+        str(np.round(coeff[1], 5)),
         str(np.round(popt[0], 2)),
         str(np.round(np.sqrt(np.diag(pcov))[0], 2)),
-        str(np.round(popt[0], 2)),
+        str(np.round(popt[1], 2)),
         str(np.round(np.sqrt(np.diag(pcov))[1], 2)),
         ])
         #

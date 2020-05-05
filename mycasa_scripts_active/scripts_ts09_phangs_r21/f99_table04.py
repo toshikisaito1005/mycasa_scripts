@@ -21,7 +21,7 @@ def table04_galname(txtfile1,txtfile2):
 	for j in range(len(txtdata1)):
 		onerow_tmp = extract_onerow(txtdata1[j])
 		if j==0:
-			onerow = "log " + dataname.replace("d","D").replace("w","W") + " & " + onerow_tmp + " \\\\ \n"
+			onerow = "log " + dataname.replace("d","D").replace("w","W") + " vs. log $R_{21}$ & " + onerow_tmp + " \\\\ \n"
 		else:
 			onerow = " & " + onerow_tmp + " \\\\ \n"
 		table.append(onerow)
@@ -45,11 +45,14 @@ def extract_onerow(txtdata):
 	# t0
 	t0 = l0.replace("ngc","NGC ").replace("a","A")
 	# t1
-	t1 = l1.ljust(4,"0") + " (" + str(np.round(float(l2),2)).ljust(4,"0") + ")"
+	if not str(np.round(float(l2),2)).ljust(4,"0")=="0.00":
+		t1 = l1.ljust(4,"0") + " (" + str(np.round(float(l2),2)).ljust(4,"0") + ")"
+	else:
+		t1 = l1.ljust(4,"0") + " ($<$0.001)"
 	# t2
 	t2 = l3 + " $\pm$ " + l4
 	# t3
-	t3 = l5 + " $\pm$ " + l6.ljust(4,"0")
+	t3 = l5.replace("-","").ljust(4,"0") + " $\pm$ " + l6.ljust(4,"0")
 
 	onerow = t0+" & "+t1+" & "+t2+" & "+t3
 	return onerow
@@ -66,6 +69,6 @@ for i in [0,2,4,6]:
 	#
 	table = table04_galname(txtfile1, txtfile2)
 	table04.append(table)
-	#os.system("rm -rf " + txtfile1[i] + " " + txtfile2[i])
+	os.system("rm -rf " + txtfile1 + " " + txtfile2)
 
 np.savetxt("table04.txt",table04,fmt="%s")
