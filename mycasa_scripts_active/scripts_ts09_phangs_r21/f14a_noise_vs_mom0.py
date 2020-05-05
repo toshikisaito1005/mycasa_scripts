@@ -23,5 +23,11 @@ def function(x, a, b):
 #####################
 ### Main Procedure
 #####################
-fits_mom0  = glob.glob(dir_proj)
-fits_noise = 
+co10_mom0  = dir_proj + "ngc0628_co10/co10_04p0.moment0"
+co10_noise = dir_proj + "ngc0628_co10/co10_04p0.moment0.noise"
+
+# get beam
+beamstr = co10_mom0.split("/")[-1].replace(".moment0","").split("_")[-1].replace("p",".")
+beamfloat = float(beamstr)
+
+# get data
