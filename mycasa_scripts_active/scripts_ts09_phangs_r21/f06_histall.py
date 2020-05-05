@@ -94,19 +94,24 @@ p84_norm = weighted_median(y_norm, None, 84)
 
 
 ### plot
-figure = plt.figure(figsize=(9,9))
-gs = gridspec.GridSpec(nrows=8, ncols=16)
+figure = plt.figure(figsize=(10,4))
+gs = gridspec.GridSpec(nrows=8, ncols=18)
+plt.subplots_adjust(bottom=0.15, left=0.10, right=0.98, top=0.88)
 ax1 = plt.subplot(gs[0:8,0:8])
-ax2 = plt.subplot(gs[0:8,8:16])
+ax2 = plt.subplot(gs[0:8,10:18])
+ax1.grid(axis="both")
+ax2.grid(axis="both")
 plt.rcParams["font.size"] = 16
 
 # ax1
-ax1.step(x_all, y_all, "black", lw=3, alpha=0.5, where="mid")
+ax1.step(x_all, y_all, "black", lw=1, alpha=1.0, where="mid")
 ax1.bar(x_all, y_all, lw=0, color="black", alpha=0.2, width=x_all[1]-x_all[0], align="center")
+ax1.set_ylim([0.0001, y_all.max()*1.1])
 
 # ax2
-ax2.step(x_norm, y_norm, "black", lw=3, alpha=0.5, where="mid")
+ax2.step(x_norm, y_norm, "black", lw=1, alpha=1.0, where="mid")
 ax2.bar(x_norm, y_norm, lw=0, color="black", alpha=0.2, width=x_norm[1]-x_norm[0], align="center")
+ax2.set_ylim([0.0001, y_norm.max()*1.1])
 
 plt.savefig(dir_product+"histoall.png",dpi=200)
 
