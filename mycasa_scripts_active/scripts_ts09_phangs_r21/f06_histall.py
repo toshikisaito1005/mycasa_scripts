@@ -21,6 +21,7 @@ dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
 nbins = 75
 xlim = [0,2.5]
+r21err = 0.074504715864920745
 
 
 #####################
@@ -108,8 +109,10 @@ plt.rcParams["font.size"] = 16
 ylim = [0.0001, y_all.max()*1.2]
 ax1.step(x_all, y_all, "black", lw=1, alpha=1.0, where="mid")
 ax1.bar(x_all, y_all, lw=0, color="black", alpha=0.2, width=x_all[1]-x_all[0], align="center")
-ax1.plot(p50_all, ylim[1]/1.2*1.05, "o", markeredgewidth=0, c="black", markersize=7, zorder=1)
-ax1.plot([p16_all, p84_all], [ylim[1]/1.2*1.05, ylim[1]/1.2*1.05], "-", c="black", lw=2, zorder=0)
+ax1.plot(p50_all, ylim[1]/1.2*1.05, "o", markeredgewidth=0, c="grey", markersize=7, zorder=1)
+ax1.plot([p16_all, p84_all], [ylim[1]/1.2*1.05, ylim[1]/1.2*1.05], "-", c="grey", lw=2, zorder=0)
+#
+ax1.plot([2.25, 2.25+r21err], [ylim[1]/1.2*1.05, ylim[1]/1.2*1.05], "k-", lw=2)
 #
 ax1.text(p16_all, ylim[1]/1.2*1.1, str(np.round(p16_all,2)), fontsize=13, ha="right")
 ax1.text(p50_all, ylim[1]/1.2*1.1, str(np.round(p50_all,2)), fontsize=13, ha="center")
@@ -122,8 +125,8 @@ ax1.set_ylim(ylim)
 ylim = [0.0001, y_norm.max()*1.2]
 ax2.step(x_norm, y_norm, "black", lw=1, alpha=1.0, where="mid")
 ax2.bar(x_norm, y_norm, lw=0, color="black", alpha=0.2, width=x_norm[1]-x_norm[0], align="center")
-ax2.plot(p50_norm, ylim[1]/1.2*1.05, "o", markeredgewidth=0, c="black", markersize=7, zorder=1)
-ax2.plot([p16_norm, p84_norm], [ylim[1]/1.2*1.05, ylim[1]/1.2*1.05], "-", c="black", lw=2, zorder=0)
+ax2.plot(p50_norm, ylim[1]/1.2*1.05, "o", markeredgewidth=0, c="grey", markersize=7, zorder=1)
+ax2.plot([p16_norm, p84_norm], [ylim[1]/1.2*1.05, ylim[1]/1.2*1.05], "-", c="grey", lw=2, zorder=0)
 #
 ax2.text(p16_norm, ylim[1]/1.2*1.1, str(np.round(p16_norm,2)), fontsize=13, ha="right")
 ax2.text(p50_norm, ylim[1]/1.2*1.1, str(np.round(p50_norm,2))+"0", fontsize=13, ha="center")
