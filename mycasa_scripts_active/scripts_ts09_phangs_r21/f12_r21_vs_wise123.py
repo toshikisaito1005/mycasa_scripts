@@ -174,12 +174,14 @@ def plotter_gal(
     gals,
     data_gals,
     col,
+    savetxt,
     ):
     """
     """
     r21_all = []
     r21err_all = []
     w1_all = []
+    list_output = []
     for i in range(len(gals)):
         #
         galname = gals[i].replace("ngc","NGC ")
@@ -219,9 +221,27 @@ def plotter_gal(
         #
         slope = str(np.round(popt[0],2))
         intercept = str(np.round(popt[1],2))
+        coeff = pearsonr(w1, r21)
+        #
+        list_output.append([
+        	gals[i],
+        	str(np.round(coeff[0], 2),
+        	str(np.round(coeff[0], 5),
+        	str(np.round(popt[0], 2)),
+        	str(np.round(np.sqrt(np.diag(pcov))[0], 2)),
+        	str(np.round(popt[0], 2)),
+        	str(np.round(np.sqrt(np.diag(pcov))[1], 2)),
+        	])
         #
         x = np.linspace(w1.min(), w1.max(), 100)
         ax.plot(x, function(x, *popt), "--", c="red", lw=3, zorder=1e21, label="fit to "+galname)
+        #
+    np.savetxt(
+    	savetxt,
+    	np.array(list_output),
+    	fmt='%s',
+		)
+
 
     return r21_all, r21err_all, w1_all
 
