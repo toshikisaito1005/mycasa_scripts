@@ -22,6 +22,16 @@ def function(x, a, b):
 	"""
 	return a * x + b
 
+def Jy2Kelvin(
+	data,
+	beam,
+	obsfreq_GHz,
+	):
+	"""
+	"""
+    J2K = 1.222e6 / beam / beam / obsfreq_GHz**2
+    data = np.array(data) * J2K
+
 
 #####################
 ### Main Procedure
@@ -42,14 +52,18 @@ data_co21_mom0  = r21.import_data(co21_mom0, mode="data")
 data_co21_noise = r21.import_data(co21_noise, mode="data")
 #
 # select data
-data_co10_mom0 = data_co10_mom0[data_co10_mom0>0]
-data_co10_noise = data_co10_noise[data_co10_mom0>0]
-data_co21_mom0 = data_co21_mom0[data_co10_mom0>0]
-data_co21_noise = data_co21_noise[data_co10_mom0>0]
+cut_all = np.where((data_co10_mom0>0) & (data_co10_noise>0) & (data_co21_mom0>0) & (data_co21_noise>0))
 #
-data_co10_mom0 = data_co10_mom0[data_co10_noise>0]
-data_co10_noise = data_co10_noise[data_co10_noise>0]
-data_co21_mom0 = data_co21_mom0[data_co10_noise>0]
-data_co21_noise = data_co21_noise[data_co10_noise>0]
+data_co10_mom0 = data_co10_mom0[cut_all]
+data_co10_noise = data_co10_noise[cut_all]
+data_co21_mom0 = data_co21_mom0[cut_all]
+data_co21_noise = data_co21_noise[cut_all]
 #
+# Jy-to-Kelvin
+
+
+
+
+
+
 
