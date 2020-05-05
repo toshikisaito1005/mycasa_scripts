@@ -105,7 +105,7 @@ convert -crop 600x600+24+30 $dir_data"fig_mask_histo.png" $dir_data"fig_mask_his
 
 convert +append -border 0x0 $dir_data"ngc0628_r21_maskb.png" $dir_data"ngc3627_r21_maskb.png" $dir_data"fig10a.png"
 convert +append -border 0x0 $dir_data"ngc4321_r21_maskb.png" $dir_data"fig_mask_histob.png" $dir_data"fig10b.png"
-convert -append -border 0x0 $dir_data"fig10a.png" $dir_data"fig10b.png"  eps2:$dir_data"fig10.eps"
+convert -append -border 0x0 $dir_data"fig10a.png" $dir_data"fig10b.png" eps2:$dir_data"fig10.eps"
 
 rm -rf $dir_data"ngc0628_r21_mask.png" $dir_data"ngc0628_r21_maskb.png"
 rm -rf $dir_data"ngc3627_r21_mask.png" $dir_data"ngc3627_r21_maskb.png"
@@ -115,5 +115,16 @@ rm -rf $dir_data"fig10a.png" $dir_data"fig10b.png"
 
 
 ### figure 11
-convert -crop 600x600+80+30 $dir_data"fig_r21_vs_dist.png" $dir_data"fig_r21_vs_distb.png"
+convert -crop 2250x900+120+50 $dir_data"fig_r21_vs_dist.png" $dir_data"fig_r21_vs_distb.png"
+convert -crop 2250x860+120+90 $dir_data"fig_r21_vs_disp.png" $dir_data"fig_r21_vs_dispb.png"
+
+convert -append -border 0x0 $dir_data"fig_r21_vs_distb.png" $dir_data"fig_r21_vs_dispb.png" eps2:$dir_data"fig11.eps"
+
+
+### figure 12
+convert -crop 2250x860+120+90 $dir_data"fig_r21_vs_w1.png" $dir_data"fig_r21_vs_w1b.png"
+convert -crop 2250x860+120+90 $dir_data"fig_r21_vs_w2.png" $dir_data"fig_r21_vs_w2b.png"
+convert -crop 2250x860+120+90 $dir_data"fig_r21_vs_w3.png" $dir_data"fig_r21_vs_w3b.png"
+
+convert -append -border 0x0 $dir_data"fig_r21_vs_w1b.png" $dir_data"fig_r21_vs_w2b.png" $dir_data"fig_r21_vs_w3b.png" eps2:$dir_data"fig12.eps"
 
