@@ -193,6 +193,29 @@ def plotter_gal(
         #
         # binning
         plotter_binning(ax, w1, r21, 3, cm.brg(i/2.5), 0.5, "-")
+        #
+        ### fit
+        #
+        w1 = np.array(w1)
+        r21 = np.array(r21)
+        r21err = np.array(r21err)
+        #
+        w1 = w1[w1>0]
+        r21 = r21[w1>0]
+        r21err = r21err[w1>0]
+        #
+        w1 = w1[r21>0]
+        r21 = r21[r21>0]
+        r21err = r21err[r21>0]
+        #
+        y_all = y_all[r21err_all>0]
+        r21_all = r21_all[r21err_all>0]
+        r21err_all = r21err_all[r21err_all>0]
+        #
+        popt, pcov = curve_fit(function, y_all, r21_all, p0=[0.15,-0.1], sigma=r21err_all, maxfev = 10000)
+        print("### best-fit = "+str(np.round(popt[1],2))+" + "+str(np.round(popt[0],2))+"*log(x)")
+        x = np.linspace(y_all.min(), y_all.max(), 100)
+        ax.plot(x, function(x, *popt), "--", c="black", lw=3, zorder=1e20)
 
     return r21_all, r21err_all, w1_all
 
@@ -248,9 +271,9 @@ def plotter_binning2(
     sy2, _ = np.histogram(x, bins=bins, weights=y*y, range=xlim)
     mean = sy / n
     std = np.sqrt(sy2/n - mean*mean)
-    ax.plot(10**((_[1:] + _[:-1])/2), 10**mean, "--", color="black", lw=4, alpha=1.0, zorder=1e20)
-    ax.plot(10**((_[1:] + _[:-1])/2), 10**(mean-std), "--", color="black", lw=2, alpha=1.0, zorder=1e20)
-    ax.plot(10**((_[1:] + _[:-1])/2), 10**(mean+std), "--", color="black", lw=2, alpha=1.0, zorder=1e20)
+    ax.plot(10**((_[1:] + _[:-1])/2), 10**mean, "-", color="black", lw=3, alpha=1.0, zorder=1e20)
+    ax.plot(10**((_[1:] + _[:-1])/2), 10**(mean-std), "-", color="black", lw=1, alpha=1.0, zorder=1e20)
+    ax.plot(10**((_[1:] + _[:-1])/2), 10**(mean+std), "-", color="black", lw=1, alpha=1.0, zorder=1e20)
 
 def plotter_alldata(
     axlist,
@@ -283,10 +306,22 @@ def plotter_alldata(
         r21_all = np.array(r21_all)
         r21err_all = np.array(r21err_all)
         #
+        y_all = y_all[y_all>0]
+        r21_all = r21_all[y_all>0]
+        r21err_all = r21err_all[y_all>0]
+        #
+        y_all = y_all[r21_all>0]
+        r21_all = r21_all[r21_all>0]
+        r21err_all = r21err_all[r21_all>0]
+        #
+        y_all = y_all[r21err_all>0]
+        r21_all = r21_all[r21err_all>0]
+        r21err_all = r21err_all[r21err_all>0]
+        #
         popt, pcov = curve_fit(function, y_all, r21_all, p0=[0.15,-0.1], sigma=r21err_all, maxfev = 10000)
-        print("### best-fit = "+str(np.round(popt[0],2))+" * log(x) + " + str(np.round(popt[1],2)))
+        print("### best-fit = "+str(np.round(popt[1],2))+" + "+str(np.round(popt[0],2))+"*log(x)")
         x = np.linspace(y_all.min(), y_all.max(), 100)
-        ax.plot(x, function(x, *popt), "-", c="black", lw=4, zorder=1e20)
+        ax.plot(x, function(x, *popt), "--", c="black", lw=3, zorder=1e20)
 
 def plotter(
     gals,
