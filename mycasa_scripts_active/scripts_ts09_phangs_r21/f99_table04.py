@@ -20,11 +20,14 @@ def table04_galname(txtfile1,txtfile2):
 	txtdata2 = np.loadtxt(txtfile2,dtype="str")
 	for j in range(len(txtdata1)):
 		onerow_tmp = extract_onerow(txtdata1[j])
-		onerow = "log " + dataname.replace("d","D").replace("w","WISE") + " & " + onerow_tmp + " \\\\ \n"
+		if j==0:
+			onerow = "log " + dataname.replace("d","D").replace("w","W") + " & " + onerow_tmp + " \\\\ \n"
+		else:
+			onerow = " & " + onerow_tmp + " \\\\ \n"
 		table.append(onerow)
 
 	onerow_tmp = extract_onerow(txtdata2[j])
-	onerow = dataname + " & " + onerow_tmp + " \\\\ \n"
+	onerow = " & " + onerow_tmp + " \\\\ \n"
 	table.append(onerow)
 
 	return table
@@ -39,12 +42,16 @@ def extract_onerow(txtdata):
 	l4 = txtdata[4]
 	l5 = txtdata[5]
 	l6 = txtdata[6]
-	# l0
+	# t0
 	t0 = l0.replace("ngc","NGC ").replace("a","A")
-	# l1
-	t1 = l1.zfill(4)
+	# t1
+	t1 = l1.ljust(4,"0") + " (" + str(np.round(float(l2),2)).ljust(4,"0") + ")"
+	# t2
+	t2 = l3 + " $\pm$ " + l4
+	# t3
+	t3 = l5 + " $\pm$ " + l6.ljust(4,"0")
 
-	onerow = t1+" & "+t2+" & "+t3+" & "+t4
+	onerow = t0+" & "+t1+" & "+t2+" & "+t3
 	return onerow
 
 
