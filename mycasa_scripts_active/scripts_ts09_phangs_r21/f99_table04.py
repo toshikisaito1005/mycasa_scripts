@@ -11,38 +11,30 @@ txtfile = glob.glob("fig_r21_vs_*.txt")
 #####################
 ### functions
 #####################
-def table04_galname(galname,txtfile1,txtfile2):
+def table04_galname(txtfile1,txtfile2):
 	"""
 	"""
 	table = []
+	dataname = txtfile1.split("_vs_")[1].replace(".txt","").replace("_all","")
 	txtdata1 = np.loadtxt(txtfile1,dtype="str")
 	txtdata2 = np.loadtxt(txtfile2,dtype="str")
 	for j in range(len(txtdata1)):
 		onerow_tmp = extract_onerow(txtdata1[j])
-		if j==0:
-			onerow = galname + " & " + onerow_tmp + " \\\\ \n"
-		else:
-			onerow = " & " + onerow_tmp + " \\\\ \n"
+		onerow = dataname + " & " + onerow_tmp + " \\\\ \n"
 		table.append(onerow)
 
 	return table
 
-def extract_onerow(txtdata1,txtdata2):
+def extract_onerow(txtdata):
 	"""
 	"""
-	l1  = txtdata1[0].replace("00","0")
-	l2a = txtdata1[1]
-	l2b = txtdata1[2]
-	l3a = txtdata1[3]
-	l3b = txtdata1[4]
-	l4a = txtdata1[5]
-	l4b = txtdata1[6]
-	l5a = txtdata2[1]
-	l5b = txtdata2[2]
-	l6a = txtdata2[3]
-	l6b = txtdata2[4]
-	l7a = txtdata2[5]
-	l7b = txtdata2[6]
+	l1  = txtdata[0].replace("00","0")
+	l2a = txtdata[1]
+	l2b = txtdata[2]
+	l3a = txtdata[3]
+	l3b = txtdata[4]
+	l4a = txtdata[5]
+	l4b = txtdata[6]
 	# l1
 	if len(l1)==3:
 		t1 = "\phantom{0}" + l1
@@ -60,27 +52,6 @@ def extract_onerow(txtdata1,txtdata2):
 		t4 = l4a.replace("-","$-$") + " $\pm$ " + l4b
 	else:
 		t4 = "\phantom{$-$}" + l4a + " $\pm$ " + l4b
-	# l5
-	if "-" in l5a:
-		if l5b=="0.00":
-			t5 = l5a.replace("-","$-$") + " ($<$0.001)"
-		else:
-			t5 = l5a.replace("-","$-$") + " (" + l5b + ")"
-	else:
-		if l5b=="0.00":
-			t5 = "\phantom{$-$}" + l5a + " ($<$0.001)"
-		else:
-			t5 = "\phantom{$-$}" + l5a + " (" + l5b + ")"
-	# l6
-	if "-" in l6a:
-		t6 = l6a.replace("-","$-$") + " $\pm$ " + l6b
-	else:
-		t6 = "\phantom{$-$}" + l6a + " $\pm$ " + l6b
-	# l7
-	if "-" in l7a:
-		t7 = l7a.replace("-","$-$") + " $\pm$ " + l7b
-	else:
-		t7 = "\phantom{$-$}" + l7a + " $\pm$ " + l7b
 
 	onerow = t1+" & "+t2+" & "+t3+" & "+t4+" && "+t5+" & "+t6+" & "+t7
 	return onerow
@@ -95,10 +66,7 @@ for i in range(len(txtfile)):
 	txtfile1 = txtfile[i]
 	txtfile2 = txtfile[i+1]
 	#
-	galname = txtfile1[i].split("_")[1].replace("ngc","NGC ")
-	galname2 = txtfile1[i].split("_")[1]
-	#
-	table = table04_galname(galname, txtfile1, txtfile2)
+	table = table04_galname(txtfile1, txtfile2)
 	table04.append(table)
 	#os.system("rm -rf " + txtfile1[i] + " " + txtfile2[i])
 
