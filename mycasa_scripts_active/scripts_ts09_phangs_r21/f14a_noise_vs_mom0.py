@@ -84,6 +84,10 @@ co21_noise = dir_proj + "ngc0628_co21/co21_04p0.moment0.noise"
 log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = \
 	getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21)
 
+# print
+print("### mean co10 noise = " + str(np.round(np.mean(10**log_co10_noise_k),2)) + " K.km/s")
+print("### mean co21 noise = " + str(np.round(np.mean(10**log_co21_noise_k),2)) + " K.km/s")
+
 # plot
 figure = plt.figure(figsize=(10,8))
 gs = gridspec.GridSpec(nrows=9, ncols=8)
@@ -93,15 +97,18 @@ ax2 = plt.subplot(gs[5:9,0:8])
 ax1.grid(axis="both")
 ax2.grid(axis="both")
 ax1.set_xscale("log")
+ax2.set_xscale("log")
+ax1.set_yscale("log")
+ax2.set_yscale("log")
 plt.rcParams["font.size"] = 16
 
 # ax1
 ax1.scatter(10**log_co10_mom0_k, 10**log_co10_noise_k, c="black", alpha=0.5)
 
 # ax2
-ax2.scatter(10*8log_co21_mom0_k, 10**log_co21_noise_k, c="black", alpha=0.5)
+ax2.scatter(10**log_co21_mom0_k, 10**log_co21_noise_k, c="black", alpha=0.5)
 
-
+#
 plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
 
 os.system("rm -rf *.last")
