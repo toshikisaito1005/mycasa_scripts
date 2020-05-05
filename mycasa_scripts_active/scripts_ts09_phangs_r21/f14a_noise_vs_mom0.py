@@ -127,9 +127,11 @@ plt.rcParams["font.size"] = 16
 
 # ax1
 ax1.scatter(log_co10_mom0_k, log_co10_noise_k, c="black", alpha=0.5)
-xbins = np.linspace(log_co10_mom0_k.min(), log_co10_mom0_k.max(), 100)
-for i in range(len(xbins)):
-	cut_all = np.where((log_co10_mom0_k>xbins[i]) & ())
+xbins = np.linspace(log_co10_mom0_k.min(), log_co10_mom0_k.max(), 40)
+for i in range(len(xbins)-1):
+	cut_all = np.where((log_co10_mom0_k>xbins[i]) & (log_co10_mom0_k<xbins[i+1]))
+	noise_cut = 10**log_co10_noise_k[cut_all]
+	print("# noise = " + str(np.round(np.mean(noise_cut),2)) + " K.km/s")
 
 # ax2
 ax2.scatter(log_co21_mom0_k, log_co21_noise_k, c="black", alpha=0.5)
