@@ -20,7 +20,7 @@ def table04_galname(txtfile1,txtfile2):
 	txtdata2 = np.loadtxt(txtfile2,dtype="str")
 	for j in range(len(txtdata1)):
 		onerow_tmp = extract_onerow(txtdata1[j])
-		onerow = dataname + " & " + onerow_tmp + " \\\\ \n"
+		onerow = "log " + dataname.replace("d","D").replace("w","WISE") + " & " + onerow_tmp + " \\\\ \n"
 		table.append(onerow)
 
 	onerow_tmp = extract_onerow(txtdata2[j])
@@ -32,30 +32,17 @@ def table04_galname(txtfile1,txtfile2):
 def extract_onerow(txtdata):
 	"""
 	"""
-	l1  = txtdata[0].replace("00","0")
-	l2a = txtdata[1]
-	l2b = txtdata[2]
-	l3a = txtdata[3]
-	l3b = txtdata[4]
-	l4a = txtdata[5]
-	l4b = txtdata[6]
+	l0 = txtdata[0]
+	l1 = txtdata[1]
+	l2 = txtdata[2]
+	l3 = txtdata[3]
+	l4 = txtdata[4]
+	l5 = txtdata[5]
+	l6 = txtdata[6]
+	# l0
+	t0 = l0.replace("ngc","NGC ").replace("a","A")
 	# l1
-	if len(l1)==3:
-		t1 = "\phantom{0}" + l1
-	else:
-		t1 = l1
-	# l2
-	if l2b=="0.00":
-		t2 = l2a + " ($<$0.001)"
-	else:
-		t2 = l2a + " (" + l2b + ")"
-	# l3
-	t3 = l3a + " $\pm$ " + l3b
-	# l4
-	if "-" in l4a:
-		t4 = l4a.replace("-","$-$") + " $\pm$ " + l4b
-	else:
-		t4 = "\phantom{$-$}" + l4a + " $\pm$ " + l4b
+	t1 = l1.zfill(4)
 
 	onerow = t1+" & "+t2+" & "+t3+" & "+t4
 	return onerow
