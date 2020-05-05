@@ -85,20 +85,20 @@ log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = \
 	getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21)
 
 # print
-print("### co10 data properties")
-print("# 84% mom-0 = " + str(np.round(np.percentile(10**log_co10_mom0_k,84),2)) + " K.km/s")
-print("# median mom-0 = " + str(np.round(np.mean(10**log_co10_mom0_k),2)) + " K.km/s")
-print("# 16% mom-0 = " + str(np.round(np.percentile(10**log_co10_mom0_k,	6),2)) + " K.km/s")
-print("# mean noise = " + str(np.round(np.mean(10**log_co10_noise_k),2)) + " K.km/s")
+print("### co10 data properties (K.km/s)")
+print("# mom-0 84%    = " + str(np.round(np.percentile(10**log_co10_mom0_k,84),2)))
+print("# mom-0 median = " + str(np.round(np.mean(10**log_co10_mom0_k),2)))
+print("# mom-0 16%    = " + str(np.round(np.percentile(10**log_co10_mom0_k,16),2)))
+print("# noise mean   = " + str(np.round(np.mean(10**log_co10_noise_k),2)))
 #
-print("### co21 data properties")
-print("# 84% mom-0 = " + str(np.round(np.percentile(10**log_co21_mom0_k,84),2)) + " K.km/s")
-print("# median mom-0 = " + str(np.round(np.mean(10**log_co21_mom0_k),2)) + " K.km/s")
-print("# 16% mom-0 = " + str(np.round(np.percentile(10**log_co21_mom0_k,	6),2)) + " K.km/s")
-print("# mean noise = " + str(np.round(np.mean(10**log_co21_noise_k),2)) + " K.km/s")
+print("### co21 data properties (K.km/s)")
+print("# mom-0 84%    = " + str(np.round(np.percentile(10**log_co21_mom0_k,84),2)))
+print("# mom-0 median = " + str(np.round(np.mean(10**log_co21_mom0_k),2)))
+print("# mom-0 16%    = " + str(np.round(np.percentile(10**log_co21_mom0_k,16),2)))
+print("# noise mean   = " + str(np.round(np.mean(10**log_co21_noise_k),2)))
 
 # plot
-figure = plt.figure(figsize=(10,8))
+figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=9, ncols=8)
 plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
 ax1 = plt.subplot(gs[0:4,0:8])
