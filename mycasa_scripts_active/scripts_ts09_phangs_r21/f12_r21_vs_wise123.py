@@ -181,7 +181,7 @@ def plotter_gal(
     w1_all = []
     for i in range(len(gals)):
         #
-        galname = gals[i].replace.("ngc","NGC ")
+        galname = gals[i].replace("ngc","NGC ")
         ax = axlist[i]
         #
         r21, w1, r21err, dist = get_data(data_gals[i], col)
@@ -217,7 +217,7 @@ def plotter_gal(
         popt, pcov = curve_fit(function, w1, r21, p0=[0.15,-0.1], sigma=r21err, maxfev = 10000)
         print("### best-fit = "+str(np.round(popt[1],2))+" + "+str(np.round(popt[0],2))+"*log(x)")
         x = np.linspace(w1.min(), w1.max(), 100)
-        ax.plot(x, function(x, *popt), "--", c="red", lw=3, zorder=1e21, label="m = " + str(np.round(popt[0],2)) + ", b = " + str(np.round(popt[1],2)))
+        ax.plot(x, function(x, *popt), "--", c="red", lw=3, zorder=1e21, label="fit to "+galname)
 
     return r21_all, r21err_all, w1_all
 
@@ -323,7 +323,7 @@ def plotter_alldata(
         popt, pcov = curve_fit(function, y_all, r21_all, p0=[0.15,-0.1], sigma=r21err_all, maxfev = 10000)
         print("### best-fit = "+str(np.round(popt[1],2))+" + "+str(np.round(popt[0],2))+"*log(x)")
         x = np.linspace(y_all.min(), y_all.max(), 100)
-        ax.plot(x, function(x, *popt), "--", c="black", lw=3, zorder=1e20)
+        ax.plot(x, function(x, *popt), "--", c="black", lw=3, zorder=1e20, label="fit to all")
 
 def plotter(
     gals,
@@ -343,7 +343,7 @@ def plotter(
     plotter_alldata(axlist, r21_all, r21err_all, y_all)
     for i in range(len(axlist)):
     	ax = axlist[i]
-    	ax.legend()
+    	ax.legend(loc="lower right")
     plt.savefig(dir_data + outputname, dpi=200)
 
 
