@@ -301,6 +301,7 @@ def plotter_alldata(
     r21_all,
     r21err_all,
     y_all,
+    savetxt,
     ):
     """
     """
@@ -358,6 +359,8 @@ def plotter_alldata(
         #
         x = np.linspace(y_all.min(), y_all.max(), 100)
         ax.plot(x, function(x, *popt), "--", c="black", lw=3, zorder=1e20, label="fit to all")
+        #
+        np.savetxt(savetxt, np.array(list_output), fmt='%s')
 
 def plotter(
     gals,
@@ -375,7 +378,7 @@ def plotter(
     print("### plotting " + outputname)
     axlist = startup_plot(xlim, ylim, xlabel, ylabel)
     r21_all, r21err_all, y_all = plotter_gal(axlist, gals, data_gals, data_col, savetxt)
-    plotter_alldata(axlist, r21_all, r21err_all, y_all)
+    plotter_alldata(axlist, r21_all, r21err_all, y_all, savetxt.replace(".txt","_all.txt"))
     for i in range(len(axlist)):
     	ax = axlist[i]
     	ax.legend(loc="lower right")
