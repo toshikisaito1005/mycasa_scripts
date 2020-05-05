@@ -394,7 +394,14 @@ data_3627 = dir_data + "ngc3627_parameter_600pc.txt"
 data_4321 = dir_data + "ngc4321_parameter_600pc.txt"
 data_gals = [data_0628, data_3627, data_4321]
 
-# R21 vs WISE1
+# R21 vs disp
+xlabel = u"log Distance/Median(Distance)"
+outputname = "fig_r21_vs_dist.png"
+data_col = 0
+xlim = [0.02,3]
+plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname, outputname.replace(".png",".txt"))
+
+# R21 vs disp
 xlabel = u"log linewidth/Median(linewidth)"
 outputname = "fig_r21_vs_disp.png"
 data_col = 8
