@@ -136,7 +136,7 @@ for i in range(len(xbins)-1):
 	list_log_noise_mean.append(np.log10(noise_mean))
 
 xbins = np.delete(xbins + (xbins[1]-xbins[0])/2., -1)
-ax1.scatter(xbins, list_log_noise_mean, c="red", alpha=1.0, s=50)
+ax1.scatter(xbins, list_log_noise_mean, c="red", alpha=1.0, s=70)
 
 # ax2
 ax2.scatter(log_co21_mom0_k, log_co21_noise_k, c="black", alpha=0.5)
