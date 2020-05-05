@@ -23,6 +23,10 @@ def table04_galname(txtfile1,txtfile2):
 		onerow = dataname + " & " + onerow_tmp + " \\\\ \n"
 		table.append(onerow)
 
+	onerow_tmp = extract_onerow(txtdata2[j])
+	onerow = dataname + " & " + onerow_tmp + " \\\\ \n"
+	table.append(onerow)
+
 	return table
 
 def extract_onerow(txtdata):
@@ -53,7 +57,7 @@ def extract_onerow(txtdata):
 	else:
 		t4 = "\phantom{$-$}" + l4a + " $\pm$ " + l4b
 
-	onerow = t1+" & "+t2+" & "+t3+" & "+t4+" && "+t5+" & "+t6+" & "+t7
+	onerow = t1+" & "+t2+" & "+t3+" & "+t4
 	return onerow
 
 
@@ -61,7 +65,7 @@ def extract_onerow(txtdata):
 ### main
 #####################
 table04 = []
-for i in range(len(txtfile)):
+for i in [0,2,4,6]:
 	#
 	txtfile1 = txtfile[i]
 	txtfile2 = txtfile[i+1]
