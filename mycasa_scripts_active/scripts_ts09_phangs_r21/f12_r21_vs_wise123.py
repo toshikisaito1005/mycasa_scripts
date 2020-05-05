@@ -126,6 +126,7 @@ def startup_plot(
     """
     plt.figure(figsize=(12,5))
     plt.rcParams["font.size"] = 14
+    plt.rcParams["legend.fontsize"] = 11
     plt.subplots_adjust(bottom=0.15, left=0.10, right=0.98, top=0.88)
     gs = gridspec.GridSpec(nrows=5, ncols=15)
     ax1 = plt.subplot(gs[0:5,0:5])
@@ -180,6 +181,7 @@ def plotter_gal(
     w1_all = []
     for i in range(len(gals)):
         #
+        galname = gals[i].replace.("ngc","NGC ")
         ax = axlist[i]
         #
         r21, w1, r21err, dist = get_data(data_gals[i], col)
@@ -215,7 +217,7 @@ def plotter_gal(
         popt, pcov = curve_fit(function, w1, r21, p0=[0.15,-0.1], sigma=r21err, maxfev = 10000)
         print("### best-fit = "+str(np.round(popt[1],2))+" + "+str(np.round(popt[0],2))+"*log(x)")
         x = np.linspace(w1.min(), w1.max(), 100)
-        ax.plot(x, function(x, *popt), "--", c="red", lw=3, zorder=1e21, label="log y = " + str(np.round(popt[1],2)) + " + " + str(np.round(popt[0],2)) + " log x")
+        ax.plot(x, function(x, *popt), "--", c="red", lw=3, zorder=1e21, label="m = " + str(np.round(popt[0],2)) + ", b = " + str(np.round(popt[1],2)))
 
     return r21_all, r21err_all, w1_all
 
@@ -339,7 +341,9 @@ def plotter(
     axlist = startup_plot(xlim, ylim, xlabel, ylabel)
     r21_all, r21err_all, y_all = plotter_gal(axlist, gals, data_gals, data_col)
     plotter_alldata(axlist, r21_all, r21err_all, y_all)
-    plt.legend()
+    for i in range(len(axlist)):
+    	ax = axlist[i]
+    	ax.legend()
     plt.savefig(dir_data + outputname, dpi=200)
 
 
