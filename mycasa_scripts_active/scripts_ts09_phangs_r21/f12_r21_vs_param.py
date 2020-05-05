@@ -122,6 +122,7 @@ def startup_plot(
     ylim,
     xlabel,
     ylabel,
+    title=True,
     ):
     """
     """
@@ -162,10 +163,11 @@ def startup_plot(
     ax2.set_xlabel(xlabel)
     ax3.set_xlabel(xlabel)
     ax1.set_ylabel(ylabel)
-    ax1.set_title("NGC 0628")
-    ax2.set_title("NGC 3627")
-    ax3.set_title("NGC 4321")
     axlist = [ax1, ax2, ax3]
+    if title==True:
+        ax1.set_title("NGC 0628")
+        ax2.set_title("NGC 3627")
+        ax3.set_title("NGC 4321")
 
     return axlist
 
@@ -372,11 +374,12 @@ def plotter(
     ylabel,
     outputname,
     savetxt,
+    title=True,
     ):
     """
     """
     print("### plotting " + outputname)
-    axlist = startup_plot(xlim, ylim, xlabel, ylabel)
+    axlist = startup_plot(xlim, ylim, xlabel, ylabel, title)
     r21_all, r21err_all, y_all = plotter_gal(axlist, gals, data_gals, data_col, savetxt)
     plotter_alldata(axlist, r21_all, r21err_all, y_all, savetxt.replace(".txt","_all.txt"))
     for i in range(len(axlist)):
@@ -406,25 +409,25 @@ xlabel = u"log linewidth/Median(linewidth)"
 outputname = "fig_r21_vs_disp.png"
 data_col = 8
 xlim = [0.3,10]
-plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname, outputname.replace(".png",".txt"))
+plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname, outputname.replace(".png",".txt"),title=False)
 
 # R21 vs WISE1
 xlabel = "log W1/Median(W1)"
 outputname = "fig_r21_vs_w1.png"
 data_col = 9
 xlim = [0.05,100]
-plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname, outputname.replace(".png",".txt"))
+plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname, outputname.replace(".png",".txt"),title=False)
 
 # R21 vs WISE2
 xlabel = "log W2/Median(W2)"
 outputname = "fig_r21_vs_w2.png"
 data_col = 10
 xlim = [0.05,100]
-plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname, outputname.replace(".png",".txt"))
+plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname, outputname.replace(".png",".txt"),title=False)
 
 # R21 vs WISE3
 xlabel = "log W3/Median(W3)"
 outputname = "fig_r21_vs_w3.png"
 data_col = 11
 xlim = [0.05,100]
-plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname, outputname.replace(".png",".txt"))
+plotter(gals, data_gals, data_col, xlim, ylim, xlabel, ylabel, outputname, outputname.replace(".png",".txt"),title=False)
