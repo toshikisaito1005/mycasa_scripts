@@ -47,7 +47,7 @@ execfile("myim11_extract_param_best.py")
 
 print("### running f01")
 execfile("f01a_noise.py")
-execfile("f01b_missingflux.py")
+execfile("f01b_flux_growthcurve.py")
 
 print("### running f02")
 execfile("f02_images.py")
