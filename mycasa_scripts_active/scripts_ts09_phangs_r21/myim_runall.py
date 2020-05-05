@@ -6,6 +6,7 @@ nchans = [2.0,3.0,3.0] # ngc0628, ngc3627, ngc4321
 
 
 """
+print("### running myim01 and myim02")
 execfile("myim01_prep.py")
 execfile("myim02a_regrid.py")
 execfile("myim02b_pbmasking.py")
