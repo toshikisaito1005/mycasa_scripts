@@ -46,14 +46,20 @@ def extract_onerow(txtdata):
 	t0 = l0.replace("ngc","NGC ").replace("a","A")
 	# t1
 	if not str(np.round(float(l2),2)).ljust(4,"0")=="0.00":
-		if "-" in l1:
-			t1 = l1.ljust(4,"0").replace("-","$-$") + " (" + str(np.round(float(l2),2)).ljust(4,"0") + ")"
+		if float(l1)<0:
+			t1 = "$-$" + l1.replace("-","").ljust(4,"0") + " (" + str(np.round(float(l2),2)).ljust(4,"0") + ")"
 		else:
 			t1 = "\phantom{$-$}" + l1.ljust(4,"0") + " (" + str(np.round(float(l2),2)).ljust(4,"0") + ")"
 	else:
-		t1 = l1.ljust(4,"0") + " ($<$0.001)"
+		if float(l1)<0:
+			t1 = "$-$" + l1.replace("-","").ljust(4,"0") + " ($<$0.001)"
+		else:
+			t1 = "\phantom{$-$}" + l1.replace("-","").ljust(4,"0") + " ($<$0.001)"
 	# t2
-	t2 = l3 + " $\pm$ " + l4
+	if float(l2)<0:
+		t2 = l3.replace("-","$-$") + " $\pm$ " + l4
+	else:
+		t2 = "\phantom{$-$}" + l3.replace("-","$-$") + " $\pm$ " + l4
 	# t3
 	t3 = l5.replace("-","").ljust(4,"0") + " $\pm$ " + l6.ljust(4,"0")
 
