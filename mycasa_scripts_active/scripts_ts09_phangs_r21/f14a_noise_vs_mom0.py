@@ -72,30 +72,42 @@ def getdata(
 
 	return log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k
 
+def print_things(
+	log_co10_mom0_k,
+	log_co10_noise_k,
+	log_co21_mom0_k,
+	log_co21_noise_k,
+	):
+	"""
+	"""
+	# print
+	print("### co10 data properties (K.km/s)")
+	print("# mom-0 84%    = " + str(np.round(np.percentile(10**log_co10_mom0_k,84),2)))
+	print("# mom-0 median = " + str(np.round(np.mean(10**log_co10_mom0_k),2)))
+	print("# mom-0 16%    = " + str(np.round(np.percentile(10**log_co10_mom0_k,16),2)))
+	print("# noise mean   = " + str(np.round(np.mean(10**log_co10_noise_k),2)))
+	#
+	print("### co21 data properties (K.km/s)")
+	print("# mom-0 84%    = " + str(np.round(np.percentile(10**log_co21_mom0_k,84),2)))
+	print("# mom-0 median = " + str(np.round(np.mean(10**log_co21_mom0_k),2)))
+	print("# mom-0 16%    = " + str(np.round(np.percentile(10**log_co21_mom0_k,16),2)))
+	print("# noise mean   = " + str(np.round(np.mean(10**log_co21_noise_k),2)))
+
 
 #####################
 ### Main Procedure
 #####################
+#
 co10_mom0  = dir_proj + "ngc0628_co10/co10_04p0.moment0"
 co10_noise = dir_proj + "ngc0628_co10/co10_04p0.moment0.noise"
 co21_mom0  = dir_proj + "ngc0628_co21/co21_04p0.moment0"
 co21_noise = dir_proj + "ngc0628_co21/co21_04p0.moment0.noise"
-
+#
 log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = \
 	getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21)
-
-# print
-print("### co10 data properties (K.km/s)")
-print("# mom-0 84%    = " + str(np.round(np.percentile(10**log_co10_mom0_k,84),2)))
-print("# mom-0 median = " + str(np.round(np.mean(10**log_co10_mom0_k),2)))
-print("# mom-0 16%    = " + str(np.round(np.percentile(10**log_co10_mom0_k,16),2)))
-print("# noise mean   = " + str(np.round(np.mean(10**log_co10_noise_k),2)))
 #
-print("### co21 data properties (K.km/s)")
-print("# mom-0 84%    = " + str(np.round(np.percentile(10**log_co21_mom0_k,84),2)))
-print("# mom-0 median = " + str(np.round(np.mean(10**log_co21_mom0_k),2)))
-print("# mom-0 16%    = " + str(np.round(np.percentile(10**log_co21_mom0_k,16),2)))
-print("# noise mean   = " + str(np.round(np.mean(10**log_co21_noise_k),2)))
+print_things(log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k)
+#
 
 # plot
 figure = plt.figure(figsize=(10,10))
@@ -105,17 +117,23 @@ ax1 = plt.subplot(gs[0:4,0:8])
 ax2 = plt.subplot(gs[5:9,0:8])
 ax1.grid(axis="both")
 ax2.grid(axis="both")
+"""
 ax1.set_xscale("log")
 ax2.set_xscale("log")
 ax1.set_yscale("log")
 ax2.set_yscale("log")
+"""
+ax1.set_xlim([2,70])
+ax2.set_xlim([0.5,60])
+ax1.set_ylim([0.4,2])
+ax2.set_ylim([0.10,0.6])
 plt.rcParams["font.size"] = 16
 
 # ax1
-ax1.scatter(10**log_co10_mom0_k, 10**log_co10_noise_k, c="black", alpha=0.5)
+ax1.scatter(log_co10_mom0_k, log_co10_noise_k, c="black", alpha=0.5)
 
 # ax2
-ax2.scatter(10**log_co21_mom0_k, 10**log_co21_noise_k, c="black", alpha=0.5)
+ax2.scatter(log_co21_mom0_k, log_co21_noise_k, c="black", alpha=0.5)
 
 #
 plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
