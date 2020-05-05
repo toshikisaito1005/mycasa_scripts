@@ -56,7 +56,7 @@ def extract_onerow(txtdata):
 		else:
 			t1 = "\phantom{$-$}" + l1.replace("-","").ljust(4,"0") + " ($<$0.001)"
 	# t2
-	if float(l2)<0:
+	if float(l3)<0:
 		t2 = l3.replace("-","$-$") + " $\pm$ " + l4
 	else:
 		t2 = "\phantom{$-$}" + l3.replace("-","$-$") + " $\pm$ " + l4
@@ -78,6 +78,6 @@ for i in [0,2,4,6,8]:
 	#
 	table = table04_galname(txtfile1, txtfile2)
 	table04.append(table)
-	#os.system("rm -rf " + txtfile1 + " " + txtfile2)
+	os.system("rm -rf " + txtfile1 + " " + txtfile2)
 
 np.savetxt("table04.txt",table04,fmt="%s")
