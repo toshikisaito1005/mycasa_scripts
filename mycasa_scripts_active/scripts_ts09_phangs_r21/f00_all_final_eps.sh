@@ -101,10 +101,11 @@ rm -rf $dir_data"violin_co21.png"
 convert -crop 600x600+80+30 $dir_data"ngc0628_r21_mask.png" $dir_data"ngc0628_r21_maskb.png"
 convert -crop 600x600+80+30 $dir_data"ngc3627_r21_mask.png" $dir_data"ngc3627_r21_maskb.png"
 convert -crop 600x600+80+30 $dir_data"ngc4321_r21_mask.png" $dir_data"ngc4321_r21_maskb.png"
+convert -crop 600x600+14+30 $dir_data"fig_mask_histo.png" $dir_data"fig_mask_histob.png"
 
 convert +append -border 0x0 $dir_data"ngc0628_r21_maskb.png" $dir_data"ngc3627_r21_maskb.png" $dir_data"fig10a.png"
-convert -append -border 0x0 $dir_data"ngc4321_r21_maskb.png" $dir_data"fig_mask_histo.png" $dir_data"fig10b.png"
-convert -append -border 0x0 $dir_data"fig10a.png"  eps2:$dir_data"fig10.eps"
+convert +append -border 0x0 $dir_data"ngc4321_r21_maskb.png" $dir_data"fig_mask_histob.png" $dir_data"fig10b.png"
+convert -append -border 0x0 $dir_data"fig10a.png" $dir_data"fig10b.png"  eps2:$dir_data"fig10.eps"
 
 rm -rf $dir_data"ngc0628_r21_mask.png" $dir_data"ngc0628_r21_maskb.png"
 rm -rf $dir_data"ngc3627_r21_mask.png" $dir_data"ngc3627_r21_maskb.png"

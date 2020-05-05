@@ -35,7 +35,7 @@ line_low = np.percentile(data,50-33.3/2)
 
 
 ###
-plt.figure(figsize=(8,8))#figsize=(10,10))
+plt.figure(figsize=(6,6))#figsize=(10,10))
 plt.rcParams["font.size"] = 16
 plt.grid(axis="x")
 
