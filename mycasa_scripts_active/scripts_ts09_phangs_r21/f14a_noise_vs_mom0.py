@@ -1,7 +1,7 @@
 import os, re, sys, glob
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
-from scipy.optimize import curve_fit
+from scipy import stats
 plt.ioff()
 
 #
@@ -24,21 +24,6 @@ def function(x, a, b):
 	"""
 	"""
 	return a * x + b
-
-def func_lognorm(x, a, b, c):
-    return a * np.exp(-(np.log(x)-b)**2 / (2*c**2))
-
-def fit_lognorm(func_lognorm, data_x, data_y, guess):
-    """
-    fit data with func1
-    """
-    popt, pcov = curve_fit(func_lognorm,
-                           data_x, data_y,
-                           p0=guess)
-    best_func = func_lognorm(data_x,popt[0],popt[1],popt[2])
-    residual = data_y - best_func
-                           
-    return popt, residual
 
 def Jy2Kelvin(
 	data,
@@ -137,6 +122,17 @@ def calcbins(
 	return xbins, list_log_noise_mean
 
 
+def fit_lognorm(
+	log_co10_mom0_k,
+	):
+	"""
+	"""
+	num_input = len(log_co10_mom0_k)
+	for i in np.linspace(-1.0,0.0,100):
+		for j in np.linspace(0.0,1.0,100):
+			lognorm_model = np.random.lognormal(i, j, num_input)
+
+
 #####################
 ### Main Procedure
 #####################
@@ -187,9 +183,8 @@ plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
 #
 data_histo = np.histogram(log_co10_mom0_k, bins=nbins, range=range_co10_input)
 
-popt, residual = fit_lognorm(func_lognorm, data_histo[0], np.delete(data_histo[1],-1), [0.1,0.1,0.5])
-mu, sigma = popt[1], popt[2]
-mean_lognorm = np.exp(mu + (sigma**2)/2.)
+#
+
 
 
 ### plot obs and model mom-0
@@ -206,7 +201,7 @@ plt.rcParams["font.size"] = 16
 
 # ax1
 ax1.hist(log_co10_mom0_k, color="black", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
-ax1.hist(co10_mom0_k_model, color="red", alpha=0.5, bins=nbins, lw=0, range=range_co10_input)
+ax1.hist(lognorm_model, color="red", alpha=0.5, bins=nbins, lw=0, range=range_co10_input)
 #ax1.plot(data_histo[0], func_lognorm(data_histo[0],*popt), lw=6, alpha=0.5)
 #
 ax1.set_xlim(range_co10_input)
