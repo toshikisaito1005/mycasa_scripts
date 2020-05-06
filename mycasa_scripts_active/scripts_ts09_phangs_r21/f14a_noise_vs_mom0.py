@@ -185,7 +185,7 @@ def fit_lognorm(
 	list_d = []
 	list_p = []
 	list_mean = np.linspace(-2.00, 2.00, nbins)
-	list_disp = np.linspace(0.001, 2.001, nbins)
+	list_disp = 1/np.linspace(1, 400, nbins)
 	for i in list_mean:
 		for j in list_disp:
 			lognorm_model = np.random.lognormal(i, j, num_input)
