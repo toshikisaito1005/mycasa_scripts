@@ -176,12 +176,8 @@ def add_noise(
 		binned_data = best_lognorm_co10[cut_all]
 		num_data = len(binned_data)
 		# create noise
-		binned_data_and_noise = binned_data + np.random.normal(0.0, 10**log_co10_noise_k[i], num_data)
+		binned_data_and_noise = np.log10(10**binned_data + np.random.normal(0.0, 10**log_co10_noise_k[i], num_data))
 		list_output.extend(binned_data_and_noise)
-		#
-		print("#######################################")
-		print("# xbin = " + str(i))
-		print("# len(data) - len(data_w_noise) = " + str(len(binned_data)-len(binned_data_and_noise)))
 
 	return np.array(list_output)
 
@@ -275,12 +271,30 @@ ax1.hist(best_lognorm, color="red", alpha=0.5, bins=nbins, lw=0, range=range_co1
 ax1.set_xlim([0,2.0])
 
 #ax2
-ax2.plot(best_lognorm_co10, best_lognorm_co21, "o", color="red", alpha=1.0, markersize=5, markeredgewidth=0, zorder=1e20)
-ax2.plot(best_lognorm_co10_w_noise, best_lognorm_co21_w_noise, "o", color="green", alpha=0.5, markersize=3, markeredgewidth=0)
-ax2.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="black", alpha=0.5, markersize=1, markeredgewidth=0)
+ax2.hist(log_co21_mom0_k, color="black", alpha=0.5, bins=nbins, range=range_co21_input, lw=0)
+ax2.hist(best_lognorm, color="red", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
 #
-ax2.set_xlim([-0.5,2.0])
-ax2.set_ylim([-0.5,2.0])
+ax2.set_xlim([0,2.0])
+
+#
+plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo.png",dpi=200)
+
+### plot obs and model mom-0
+figure = plt.figure(figsize=(10,10))
+gs = gridspec.GridSpec(nrows=8, ncols=8)
+plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
+ax1 = plt.subplot(gs[0:8,0:8])
+ax1.grid(axis="both")
+ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
+plt.rcParams["font.size"] = 16
+
+# ax1
+ax1.plot(best_lognorm_co10, best_lognorm_co21, "o", color="red", alpha=1.0, markersize=2, markeredgewidth=0, zorder=1e20)
+ax1.plot(best_lognorm_co10_w_noise, best_lognorm_co21_w_noise, "o", color="green", alpha=0.5, markersize=3, markeredgewidth=0)
+ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="black", alpha=0.5, markersize=1, markeredgewidth=0)
+#
+ax.set_xlim([-0.5,2.0])
+ax1.set_ylim([-0.5,2.0])
 
 #
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0.png",dpi=200)
