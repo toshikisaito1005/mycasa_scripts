@@ -133,8 +133,8 @@ def fit_lognorm(
 	list_y = []
 	list_d = []
 	list_p = []
-	list_mean = np.linspace(-1.0,0.0,nbins)
-	list_disp = np.linspace(0.01,1.01,nbins)
+	list_mean = np.linspace(-1.00, 0.00, nbins)
+	list_disp = np.linspace(0.01, 1.01, nbins)
 	for i in list_mean:
 		for j in list_disp:
 			lognorm_model = np.random.lognormal(i, j, num_input)
@@ -220,14 +220,13 @@ plt.rcParams["font.size"] = 16
 # ax1
 ax1.hist(log_co10_mom0_k, color="black", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
 ax1.hist(best_lognorm, color="red", alpha=0.5, bins=nbins, lw=0, range=range_co10_input)
-#ax1.plot(data_histo[0], func_lognorm(data_histo[0],*popt), lw=6, alpha=0.5)
 #
-ax1.set_xlim(range_co10_input)
+ax1.set_xlim([0,2.0])
 
 #ax2
 ax2.plot(data_histo[0], func_lognorm(data_histo[0],100.,-0.2,0.5), lw=6, alpha=0.5)
 #
-ax2.set_xlim(range_co10_input)
+ax2.set_xlim([0,2.0])
 
 #
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0.png",dpi=200)
