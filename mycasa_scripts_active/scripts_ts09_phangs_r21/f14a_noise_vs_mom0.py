@@ -128,9 +128,18 @@ def fit_lognorm(
 	"""
 	"""
 	num_input = len(log_co10_mom0_k)
+	list_d = []
+	list_p = []
 	for i in np.linspace(-1.0,0.0,100):
 		for j in np.linspace(0.0,1.0,100):
 			lognorm_model = np.random.lognormal(i, j, num_input)
+			d, p = stats.ks_2samp(log_co10_mom0_k, lognorm_model)
+			list_d.append(d)
+			list_p.append(p)
+
+	list_output = np.c_[np.linspace(-1.0,0.0,100), np.linspace(0.0,1.0,100), list_d, list_p]
+
+	return list_output
 
 
 #####################
@@ -181,12 +190,11 @@ plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
 
 ### model co10 mom-0 distribution
 #
-data_histo = np.histogram(log_co10_mom0_k, bins=nbins, range=range_co10_input)
-
+list_output = fit_lognorm(log_co10_mom0_k)
 #
 
 
-
+"""
 ### plot obs and model mom-0
 figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=9, ncols=8)
@@ -215,3 +223,4 @@ ax2.set_xlim(range_co10_input)
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0.png",dpi=200)
 #
 os.system("rm -rf *.last")
+"""
