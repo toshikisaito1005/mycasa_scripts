@@ -182,8 +182,8 @@ def fit_lognorm(
 	list_y = []
 	list_d = []
 	list_p = []
-	list_mean = np.linspace(-1.00, 0.00, nbins)
-	list_disp = np.linspace(0.01, 1.01, nbins)
+	list_mean = np.linspace(-1.00, 1.00, nbins)
+	list_disp = np.linspace(0.01, 2.01, nbins)
 	for i in list_mean:
 		for j in list_disp:
 			lognorm_model = np.random.lognormal(i, j, num_input)
@@ -196,9 +196,13 @@ def fit_lognorm(
 			list_p.append(p)
 
 	list_output = np.c_[list_x, list_y, list_d, list_p]
-	np.nan_to_num(list_output, nan=1000.)
+	list_output = np.nan_to_num(list_output)
+	list_output2 = []
+	for i in range(len(list_output)):
+		if list_output[i][2]!=0 and list_output[i][3]!=0:
+			list_output2.append(list_output[i])
 
-	best_lognorm = list_output[np.argmin(list_output[:,2])]
+	best_lognorm = list_output[np.argmin(np.array(list_output2)[:,2])]
 
 	return best_lognorm[0], best_lognorm[1], list_output
 
