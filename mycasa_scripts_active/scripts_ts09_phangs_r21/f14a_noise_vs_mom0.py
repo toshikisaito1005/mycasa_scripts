@@ -263,16 +263,15 @@ best_lognorm_co10 = best_lognorm_co10[best_lognorm_co21<log_co21_mom0_k.max()]
 best_lognorm_co10 = best_lognorm_co10[best_lognorm_co21>log_co21_mom0_k.min()]
 #
 ## adding scatter
-best_lognorm_co10_w_scatter = add_scatter(best_lognorm_co10, 1.0)
-best_lognorm_co21_w_scatter = add_scatter(best_lognorm_co21, 1.0)
-cut_co10 = np.where((best_lognorm_co10_w_scatter>xbins_co10.min()) & ((best_lognorm_co10_w_scatter<xbins_co10.max())) & (best_lognorm_co21_w_scatter>xbins_co21.min()) & ((best_lognorm_co21_w_scatter<xbins_co21.max())))
-cut_all = np.where(cut_co10 & cut_co21)
+best_lognorm_co10_w_scatter = add_scatter(best_lognorm_co10, 0.2)
+best_lognorm_co21_w_scatter = add_scatter(best_lognorm_co21, 0.5)
+cut_all = np.where((best_lognorm_co10_w_scatter>xbins_co10.min()) & ((best_lognorm_co10_w_scatter<xbins_co10.max())) & (best_lognorm_co21_w_scatter>xbins_co21.min()) & ((best_lognorm_co21_w_scatter<xbins_co21.max())))
+best_lognorm_co10_w_scatter = best_lognorm_co10_w_scatter[cut_all]
+best_lognorm_co21_w_scatter = best_lognorm_co21_w_scatter[cut_all]
 #
 ## adding noise
 best_lognorm_co10_w_scatter_noise = add_noise(best_lognorm_co10_w_scatter, log_co10_noise_k, xbins_co10)
 best_lognorm_co21_w_scatter_noise = add_noise(best_lognorm_co21_w_scatter, log_co21_noise_k, xbins_co21)
-best_lognorm_co10_w_scatter_noise = best_lognorm_co10_w_scatter_noise[cut_all]
-best_lognorm_co21_w_scatter_noise = best_lognorm_co21_w_scatter_noise[cut_all]
 
 
 
