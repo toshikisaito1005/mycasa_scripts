@@ -293,8 +293,8 @@ best_lognorm_co10 = best_lognorm_co10[best_lognorm_co21<log_co21_mom0_k.max()]
 best_lognorm_co10 = best_lognorm_co10[best_lognorm_co21>log_co21_mom0_k.min()]
 #
 ## adding scatter
-best_lognorm_co10_w_scatter = add_scatter(best_lognorm_co10, 1.0)
-best_lognorm_co21_w_scatter = add_scatter(best_lognorm_co21, 1.0)
+best_lognorm_co10_w_scatter = add_scatter(best_lognorm_co10, 1.1)
+best_lognorm_co21_w_scatter = add_scatter(best_lognorm_co21, 1.1)
 
 ## adding noise
 best_lognorm_co10_w_scatter_noise, best_lognorm_co21_w_scatter_noise = \
@@ -397,19 +397,19 @@ os.system("rm -rf *.last")
 
 
 ### print
+#
 r21_obs = np.log10(10**log_co21_mom0_k / 10**log_co10_mom0_k)
 r21_obs_above_one = r21_obs[r21_obs>np.log10(1)]
 r21_obs_above_one_percent = np.round(len(r21_above_one)/float(len(r21_obs)) * 100, 1)
-
+#
 r21_scatter = np.log10(10**best_lognorm_co21_w_scatter/10**best_lognorm_co10_w_scatter)
 r21_scatter_above_one = r21_scatter[r21_scatter>np.log10(1)]
 r21_scatter_above_one_percent = np.round(len(r21_scatter_above_one)/float(len(r21_scatter)) * 100, 1)
-
+#
 r21_scatter_noise = np.log10(10**best_lognorm_co21_w_scatter_noise/10**best_lognorm_co10_w_scatter_noise)
 r21_scatter_noise_above_one = r21_scatter_noise[r21_scatter_noise>np.log10(1)]
 r21_scatter_noise_above_one_percent = np.round(len(r21_scatter_noise_above_one)/float(len(r21_scatter_noise)) * 100, 1)
-
-print("### r21_obs > 1.0 = "+str(r21_obs_above_one_percent)+" %")
-print("### r21_model(scatter) > 1.0 = "+str(r21_scatter_above_one_percent)+" %")
+#
+print("### r21_obs                  > 1.0 = "+str(r21_obs_above_one_percent)+" %")
+print("### r21_model(scatter)       > 1.0 = "+str(r21_scatter_above_one_percent)+" %")
 print("### r21_model(scatter+noise) > 1.0 = "+str(r21_scatter_noise_above_one_percent)+" %")
-
