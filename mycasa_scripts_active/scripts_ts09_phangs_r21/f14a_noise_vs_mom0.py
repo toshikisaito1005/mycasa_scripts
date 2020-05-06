@@ -171,6 +171,27 @@ os.system("rm -rf *.last")
 
 
 ### model co10 mom-0 distribution
-mu_co10_input, sigma_co10_input = p50_co10, 1. 
-s = np.random.lognormal(mu, sigma, 1000)
+# create co10 mom-0 model
+mu_co10_input - p50_co10
+sigma_co10_input = (p84_co10-p50_co10)/2.+(p50_co10-p16_co10)/2.
+num_co10_input = len(log_co10_mom0_k)
+co10_mom0_k_model = np.random.lognormal(mu_co10_input, sigma_co10_input, num_co10_input)
+
+### plot obs and model mom-0
+figure = plt.figure(figsize=(10,10))
+gs = gridspec.GridSpec(nrows=9, ncols=8)
+plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
+ax1 = plt.subplot(gs[0:4,0:8])
+ax2 = plt.subplot(gs[5:9,0:8])
+ax1.grid(axis="both")
+ax2.grid(axis="both")
+ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
+ax2.set_xlabel("CO(2-1) mom-0 (K.km/s)")
+plt.rcParams["font.size"] = 16
+
+# ax1
+ax1.hist(10**log_co10_mom0_k, c="black", alpha=0.5)
+
+# ax1
+ax1.hist(co10_mom0_k_model, c="red", alpha=0.5)
 
