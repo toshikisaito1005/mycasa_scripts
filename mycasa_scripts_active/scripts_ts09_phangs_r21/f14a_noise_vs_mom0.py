@@ -159,6 +159,25 @@ def fit_lognorm(
 
 	return best_lognorm[0], best_lognorm[1]
 
+def add_noise(
+	best_lognorm_co10,
+	log_co10_noise_k,
+	xbins_co10,
+	):
+	"""
+	"""
+	list_output = []
+	for i in range(len(xbins_co10)-1):
+		# create binned data
+		cut_all = np.where((best_lognorm_co10>xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]))
+		binned_data = best_lognorm_co10[cut_all]
+		num_data = len(binned_data)
+		# create noise
+		binned_data_and_noise = binned_data + np.random.normal(0.0, 10**log_co10_noise_k[i], num_data)
+		list_output.extend(binned_data_and_noise)
+
+	return np.array(list_output)
+
 
 #####################
 ### Main Procedure
@@ -222,8 +241,11 @@ best_lognorm_co10.sort()
 best_lognorm_co21 = func_co10_vs_co21(best_lognorm_co10, 1.04, -0.31)
 #
 ## adding noise
-cut_all = np.where((best_lognorm_co10>xbins_co10[0]) & (best_lognorm_co10<xbins_co10[1]))
-binned_data = best_lognorm_co10[cut_all]
+add_noise(
+	best_lognorm_co10,
+	log_co10_noise_k,
+	xbins_co10,
+	)
 
 
 ### plot obs and model mom-0
