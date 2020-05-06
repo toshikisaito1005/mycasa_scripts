@@ -187,9 +187,15 @@ def add_noise(
 		for j in range(len(xbins_co21)):
 			# create binned data
 			if i<=37:
-				cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]) & (best_lognorm_co10>=xbins_co21[j]) & (best_lognorm_co10<xbins_co21[j+1]))
+				if j<=37:
+					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]) & (best_lognorm_co21>=xbins_co21[j]) & (best_lognorm_co21<xbins_co21[j+1]))
+				else:
+					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]) & (best_lognorm_co21>=xbins_co21[j]))
 			else:
-				cut_all = np.where((best_lognorm_co10>=xbins_co10[i]))
+				if j<37:
+					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co21>=xbins_co21[j]) & (best_lognorm_co21<xbins_co21[j+1]))
+				else:
+					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co21>=xbins_co21[j]))
 			#
 			binned_co10_data = best_lognorm_co10[cut_all]
 			num_co10_data = len(binned_co10_data)
@@ -301,11 +307,13 @@ plt.rcParams["font.size"] = 16
 # ax1
 ax1.hist(log_co10_mom0_k, color="black", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
 ax1.hist(best_lognorm_co10_w_scatter, color="blue", alpha=0.5, bins=nbins, lw=0, range=range_co10_input)
+ax1.hist(best_lognorm_co10_w_scatter_noise, color="red", alpha=0.5, bins=nbins, lw=0, range=range_co10_input)
 ax1.set_xlim([0,2.0])
 #
 #ax2
 ax2.hist(log_co21_mom0_k, color="black", alpha=0.5, bins=nbins, range=range_co21_input, lw=0)
 ax2.hist(best_lognorm_co21_w_scatter, color="blue", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
+ax2.hist(best_lognorm_co21_w_scatter_noise, color="red", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
 ax2.set_xlim([-0.5,1.6])
 #
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo.png",dpi=200)
@@ -328,6 +336,7 @@ ax1.plot(best_lognorm_co10, best_lognorm_co21, "o", color="black", alpha=1.0, ma
 ax1.plot(best_lognorm_co10_w_scatter_noise, best_lognorm_co21_w_scatter_noise, "o", color="red", alpha=0.2, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
 ax1.plot(best_lognorm_co10_w_scatter, best_lognorm_co21_w_scatter, "o", color="blue", alpha=0.2, markersize=3, markeredgewidth=0, zorder=1e20, label="scatter")
 ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="grey", alpha=0.2, markersize=10, markeredgewidth=0)
+ax1.plot([-0.5,2.0], [-0.5,2.0], "k--", lw=5)
 #
 ax1.set_xlim([-0.5,2.0])
 ax1.set_ylim([-0.5,2.0])
