@@ -168,6 +168,8 @@ def plotter_noise(
 	#
 	plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
 
+	return xbins_co10, xbins_co21
+
 def fit_lognorm(
 	log_co10_mom0_k,
 	num_input,
@@ -271,7 +273,7 @@ co21_noise = dir_proj + "ngc4321_co21/co21_04p0.moment0.noise"
 ### plot noise vs. mom-0
 log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21)
 p84_co10, p50_co10, p16_co10, p84_co21, p50_co21, p16_co21 = print_things(log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k)
-plotter_noise( dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile)
+xbins_co10, xbins_co21 = plotter_noise( dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile)
 
 
 
@@ -291,7 +293,7 @@ best_lognorm_co10 = best_lognorm_co10[best_lognorm_co10<log_co10_mom0_k.max()]
 best_lognorm_co10 = best_lognorm_co10[best_lognorm_co10>log_co10_mom0_k.min()]
 best_lognorm_co10.sort()
 # create co21 model
-best_lognorm_co21 = func_co10_vs_co21(best_lognorm_co10, 1.20, -0.4)
+best_lognorm_co21 = func_co10_vs_co21(best_lognorm_co10, 1.25, -0.7)
 best_lognorm_co21 = best_lognorm_co21[best_lognorm_co21<log_co21_mom0_k.max()]
 best_lognorm_co21 = best_lognorm_co21[best_lognorm_co21>log_co21_mom0_k.min()]
 best_lognorm_co10 = best_lognorm_co10[best_lognorm_co21<log_co21_mom0_k.max()]
@@ -364,9 +366,9 @@ ax1.plot(best_lognorm_co10, best_lognorm_co21, "o", color="black", alpha=1.0, ma
 ax1.plot(best_lognorm_co10_w_scatter_noise, best_lognorm_co21_w_scatter_noise, "o", color="red", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e18, label="scatter and noise")
 ax1.plot(best_lognorm_co10_w_scatter, best_lognorm_co21_w_scatter, "o", color="blue", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e20, label="scatter")
 ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="grey", alpha=0.2, markersize=10, markeredgewidth=0)
-ax1.plot([-0.5,2.0], [-0.5,2.0], "k--", lw=5)
-ax1.set_xlim([-0.5,2.0])
-ax1.set_ylim([-0.5,2.0])
+ax1.plot([-0.5,3.0], [-0.5,3.0], "k--", lw=5)
+ax1.set_xlim([-0.5,3.0])
+ax1.set_ylim([-0.5,3.0])
 #
 ax1.legend()
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0.png",dpi=200)
@@ -391,7 +393,7 @@ ax1.plot(best_lognorm_co21, np.log10(10**best_lognorm_co21/10**best_lognorm_co10
 ax1.plot(best_lognorm_co21_w_scatter_noise, np.log10(10**best_lognorm_co21_w_scatter_noise/10**best_lognorm_co10_w_scatter_noise), "o", color="red", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e18, label="scatter and noise")
 ax1.plot(best_lognorm_co21_w_scatter, np.log10(10**best_lognorm_co21_w_scatter/10**best_lognorm_co10_w_scatter), "o", color="blue", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e20, label="scatter")
 ax1.plot(log_co21_mom0_k, np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k), "o", color="grey", alpha=0.2, markersize=10, markeredgewidth=0)
-ax1.set_xlim([-0.5,2.0])
+ax1.set_xlim([-0.5,3.0])
 ax1.set_ylim([-1.0,0.5])
 #
 ax1.legend()
