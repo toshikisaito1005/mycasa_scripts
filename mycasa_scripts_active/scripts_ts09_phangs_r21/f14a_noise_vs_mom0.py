@@ -190,6 +190,7 @@ def fit_lognorm(
 			lognorm_model = lognorm_model[lognorm_model>minimum]
 			lognorm_model = lognorm_model[lognorm_model<maximum]
 			d, p = stats.ks_2samp(log_co10_mom0_k, lognorm_model)
+			if 
 			list_x.append(i)
 			list_y.append(j)
 			list_d.append(d)
@@ -199,7 +200,7 @@ def fit_lognorm(
 
 	best_lognorm = list_output[np.argmin(list_output[:,2])]
 
-	return best_lognorm[0], best_lognorm[1]
+	return best_lognorm[0], best_lognorm[1], list_output
 
 def add_scatter(
 	best_lognorm_co10,
@@ -280,7 +281,7 @@ range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 ## create log co10 vs log co21 scaling relation with log-normal intensity distributions
 # create co10 model lognormal distribution
 num_input = len(log_co10_mom0_k)
-best_mean, best_disp = fit_lognorm(log_co10_mom0_k, num_input, nbins)
+best_mean, best_disp, _ = fit_lognorm(log_co10_mom0_k, num_input, nbins)
 best_lognorm_co10 = np.random.lognormal(best_mean, best_disp, num_input)
 best_lognorm_co10 = best_lognorm_co10[best_lognorm_co10<log_co10_mom0_k.max()]
 best_lognorm_co10 = best_lognorm_co10[best_lognorm_co10>log_co10_mom0_k.min()]
