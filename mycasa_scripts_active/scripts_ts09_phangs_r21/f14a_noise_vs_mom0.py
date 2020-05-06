@@ -167,7 +167,7 @@ def add_scatter(
 	"""
 	# create noise
 	num_data = len(best_lognorm_co10)
-	binned_data_and_noise = np.log10(10**best_lognorm_co10 + np.random.normal(0.0, 10**scatter_sigma, num_data))
+	binned_data_and_noise = np.log10(10**best_lognorm_co10 + np.random.normal(0.0, scatter_sigma, num_data))
 
 	return np.array(binned_data_and_noise)
 
@@ -281,8 +281,8 @@ best_lognorm_co10 = best_lognorm_co10[best_lognorm_co21<log_co21_mom0_k.max()]
 best_lognorm_co10 = best_lognorm_co10[best_lognorm_co21>log_co21_mom0_k.min()]
 #
 ## adding scatter
-best_lognorm_co10_w_scatter = add_scatter(best_lognorm_co10, 0.001)
-best_lognorm_co21_w_scatter = add_scatter(best_lognorm_co21, 0.001)
+best_lognorm_co10_w_scatter = add_scatter(best_lognorm_co10, 0.1)
+best_lognorm_co21_w_scatter = add_scatter(best_lognorm_co21, 0.1)
 
 ## adding noise
 best_lognorm_co10_w_scatter_noise, best_lognorm_co21_w_scatter_noise = \
