@@ -2,7 +2,6 @@ import os, re, sys, glob
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from scipy.optimize import curve_fit
-from scipy import stats
 plt.ioff()
 
 #
@@ -172,11 +171,11 @@ plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
 ### model co10 mom-0 distribution
 # 
 data_histo = np.histogram(log_co10_mom0_k, bins=nbins, range=range_co10_input)
+stats.lognorm.fit(data_histo, floc=0)
 
 
 
-
-
+"""
 ### plot obs and model mom-0
 figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=9, ncols=8)
@@ -197,4 +196,6 @@ ax1.hist(co10_mom0_k_model, color="red", alpha=0.5, bins=nbins, lw=0, range=rang
 #
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0.png",dpi=200)
 #
+"""
+
 os.system("rm -rf *.last")
