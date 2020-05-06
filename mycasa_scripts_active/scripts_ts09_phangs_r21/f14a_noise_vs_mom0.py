@@ -174,7 +174,7 @@ mu_co10_input = p50_co10
 sigma_co10_input = (p84_co10-p50_co10)/2.+(p50_co10-p16_co10)/2.
 num_co10_input = len(log_co10_mom0_k)
 range_co10_input = [xbins_co10.min(), xbins_co10.max()]
-log_co10_mom0_k_model = np.random.lognormal(np.log(mu_co10_input), np.log(sigma_co10_input), num_co10_input)
+co10_mom0_k_model = np.log10(np.random.normal(mu_co10_input, sigma_co10_input, num_co10_input))
 
 
 ### plot obs and model mom-0
@@ -192,7 +192,7 @@ plt.rcParams["font.size"] = 16
 # ax1
 ax1.hist(log_co10_mom0_k, color="black", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
 
-ax1.hist(log_co10_mom0_k_model, color="red", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
+ax1.hist(co10_mom0_k_model, color="red", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
 
 #
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0.png",dpi=200)
