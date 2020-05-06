@@ -181,22 +181,29 @@ def add_noise(
 	):
 	"""
 	"""
-	list_output = []
+	list_output_co10 = []
+	list_output_co21 = []
 	for i in range(len(xbins_co10)):
-		# create binned data
-		if i<=37:
-			cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]) & (best_lognorm_co21>=xbins_co21[i]) & (best_lognorm_co21<xbins_co21[i+1]))
-		else:
-			cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co21>=xbins_co21[i]))
-		binned_co10_data = best_lognorm_co10[cut_all]
-		num_co10_data = len(binned_co10_data)
-		binned_co21_data = best_lognorm_co21[cut_all]
-		num_co21_data = len(binned_co21_data)
-		# create noise
-		binned_data_and_noise = np.log10(10**binned_data + np.random.normal(0.0, 10**log_co10_noise_k[i], num_data))
-		list_output.extend(binned_data_and_noise)
+		for j in range(len(xbins_co21)):
+			# create binned data
+			if i<=37:
+				cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]) & (best_lognorm_co10>=xbins_co21[j]) & (best_lognorm_co10<xbins_co21[j+1]))
+			else:
+				cut_all = np.where((best_lognorm_co10>=xbins_co10[i]))
+			#
+			binned_co10_data = best_lognorm_co10[cut_all]
+			num_co10_data = len(binned_co10_data)
+			#
+			binned_co21_data = best_lognorm_co21[cut_all]
+			num_co21_data = len(binned_co21_data)
+			# create noise
+			binned_co10_data_and_noise = np.log10(10**binned_co10_data + np.random.normal(0.0, 10**log_co10_noise_k[i], num_co10_data))
+			list_output_co10.extend(binned_co10_data_and_noise)
+			#
+			binned_co21_data_and_noise = np.log10(10**binned_co21_data + np.random.normal(0.0, 10**log_co21_noise_k[i], num_co21_data))
+			list_output_co21.extend(binned_co21_data_and_noise)
 
-	return np.array(list_output)
+	return np.array(list_output_co10), np.array(list_output_co21)
 
 
 #####################
@@ -318,8 +325,8 @@ plt.rcParams["font.size"] = 16
 
 # ax1
 ax1.plot(best_lognorm_co10, best_lognorm_co21, "o", color="black", alpha=1.0, markersize=3, markeredgewidth=0, zorder=1e22)
-#ax1.plot(best_lognorm_co10_w_scatter_noise, best_lognorm_co21_w_scatter_noise, "o", color="red", alpha=0.2, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter and noise")
-ax1.plot(best_lognorm_co10_w_scatter, best_lognorm_co21_w_scatter, "o", color="blue", alpha=0.2, markersize=3, markeredgewidth=0, zorder=1e18, label="scatter")
+ax1.plot(best_lognorm_co10_w_scatter_noise, best_lognorm_co21_w_scatter_noise, "o", color="red", alpha=0.2, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
+ax1.plot(best_lognorm_co10_w_scatter, best_lognorm_co21_w_scatter, "o", color="blue", alpha=0.2, markersize=3, markeredgewidth=0, zorder=1e20, label="scatter")
 ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="grey", alpha=0.2, markersize=10, markeredgewidth=0)
 #
 ax1.set_xlim([-0.5,2.0])
