@@ -25,6 +25,21 @@ def function(x, a, b):
 	"""
 	return a * x + b
 
+def func_lognorm(x, a, b, c):
+    return a*np.exp(-(np.log(x)-b)**2/(2*c**2))
+
+def fit_lognorm(func_lognorm, data_x, data_y, guess):
+    """
+    fit data with func1
+    """
+    popt, pcov = curve_fit(func_lognorm,
+                           data_x, data_y,
+                           p0=guess)
+    best_func = func_lognorm(data_x,popt[0],popt[1],popt[2])
+    residual = data_y - best_func
+                           
+    return popt, residual
+
 def Jy2Kelvin(
 	data,
 	beam,
@@ -170,8 +185,11 @@ plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
 
 ### model co10 mom-0 distribution
 # 
+
 data_histo = np.histogram(log_co10_mom0_k, bins=nbins, range=range_co10_input)
-stats.lognorm.fit(data_histo, floc=0)
+
+popt, residual = fit_lognorm(func_lognorm, data_histo[0], np.delete(data_histo[1],-1), [0.5,0.5,0.5])
+mean_lognorm = np.exp()
 
 
 
