@@ -93,22 +93,22 @@ def print_things(
 	print("# mom-0 16%    = " + str(np.round(np.percentile(10**log_co21_mom0_k,16),2)))
 	print("# noise mean   = " + str(np.round(np.mean(10**log_co21_noise_k),2)))
 
-def calc_noise_bin(
-	log_co_mom_k,
+def calcbins(
+	log_co_mom0_k,
+	log_co_noise_k,
 	):
 	"""
 	"""
-	xbins = np.linspace(log_co_mom_k.min(), log_co_mom_k.max(), 40)
+	xbins = np.linspace(log_co_mom0_k.min(), log_co_mom0_k.max(), 40)
 	list_log_noise_mean = []
 	for i in range(len(xbins)-1):
-		cut_all = np.where((log_co_mom_k>xbins[i]) & (log_co_mom_k<xbins[i+1]))
-		noise_cut = 10**log_co_mom_k[cut_all]
+		cut_all = np.where((log_co10_mom0_k>xbins[i]) & (log_co10_mom0_k<xbins[i+1]))
+		noise_cut = 10**log_co10_noise_k[cut_all]
 		noise_mean = np.round(np.mean(noise_cut),2)
 		list_log_noise_mean.append(np.log10(noise_mean))
 
 	xbins = np.delete(xbins + (xbins[1]-xbins[0])/2., -1)
 
-	return xbins, list_log_noise_mean
 
 #####################
 ### Main Procedure
@@ -143,7 +143,7 @@ plt.rcParams["font.size"] = 16
 
 # ax1
 ax1.scatter(log_co10_mom0_k, log_co10_noise_k, c="black", alpha=0.5)
-xbins, list_log_noise_mean = calc_noise_bin(log_co_mom_k)
+
 ax1.scatter(xbins, list_log_noise_mean, c="red", alpha=1.0, s=70)
 
 # ax2
