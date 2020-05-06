@@ -173,6 +173,8 @@ plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
 mean_co10 = np.log10(p50_co10)
 sigma_co10 = np.log10((p84_co10-p50_co10)/2.+(p50_co10-p16_co10)/2.)
 
+
+
 num_co10_input = len(log_co10_mom0_k)
 range_co10_input = [xbins_co10.min(), xbins_co10.max()]
 co10_mom0_k_model = np.random.lognormal(0.1, 0.1, num_co10_input)
