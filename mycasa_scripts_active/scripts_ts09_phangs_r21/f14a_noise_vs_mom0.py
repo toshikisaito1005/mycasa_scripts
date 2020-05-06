@@ -190,13 +190,13 @@ def fit_lognorm(
 			lognorm_model = lognorm_model[lognorm_model>minimum]
 			lognorm_model = lognorm_model[lognorm_model<maximum]
 			d, p = stats.ks_2samp(log_co10_mom0_k, lognorm_model)
-			if 
 			list_x.append(i)
 			list_y.append(j)
 			list_d.append(d)
 			list_p.append(p)
 
 	list_output = np.c_[list_x, list_y, list_d, list_p]
+	np.nan_to_num(list_output, nan=1000.)
 
 	best_lognorm = list_output[np.argmin(list_output[:,2])]
 
