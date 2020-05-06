@@ -121,9 +121,10 @@ def calcbins(
 
 	return xbins, list_log_noise_mean
 
-
 def fit_lognorm(
 	log_co10_mom0_k,
+	num_input,
+	nbins,
 	):
 	"""
 	"""
@@ -132,8 +133,8 @@ def fit_lognorm(
 	list_y = []
 	list_d = []
 	list_p = []
-	list_mean = np.linspace(-1.0,0.0,10)
-	list_disp = np.linspace(0.01,1.01,10)
+	list_mean = np.linspace(-1.0,0.0,nbins)
+	list_disp = np.linspace(0.01,1.01,nbins)
 	for i in list_mean:
 		for j in list_disp:
 			lognorm_model = np.random.lognormal(i, j, num_input)
@@ -145,7 +146,9 @@ def fit_lognorm(
 
 	list_output = np.c_[list_x, list_y, list_d, list_p]
 
-	return list_output
+	best_lognorm = list_output[np.argmin(list_output[:,2])]
+
+	return best_lognorm[0], best_lognorm[1]
 
 
 #####################
@@ -162,9 +165,10 @@ log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = \
 #
 p84_co10, p50_co10, p16_co10, p84_co21, p50_co21, p16_co21 = \
 	print_things(log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k)
-#
+
 
 ### plot noise vs mom-0
+# preparation
 figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=9, ncols=8)
 plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
@@ -177,31 +181,30 @@ ax2.set_xlabel("CO(2-1) mom-0 (K.km/s)")
 ax1.set_ylabel("CO(1-0) mom-0 noise (K.km/s)")
 ax2.set_ylabel("CO(2-1) mom-0 noise (K.km/s)")
 plt.rcParams["font.size"] = 16
-
+#
 # ax1
 ax1.scatter(log_co10_mom0_k, log_co10_noise_k, c="black", alpha=0.5)
 xbins_co10, list_log_noise_co10_mean = calcbins(log_co10_mom0_k, log_co10_noise_k, nbins)
 ax1.scatter(xbins_co10, list_log_noise_co10_mean, c="red", alpha=1.0, s=70)
-np.savetxt(dir_proj + "eps/ngc0628_4p0_lognoise_co10_bin.txt", np.array(np.c_[xbins_co10, list_log_noise_co10_mean]), fmt="%.3f")
-
+#np.savetxt(dir_proj + "eps/ngc0628_4p0_lognoise_co10_bin.txt", np.array(np.c_[xbins_co10, list_log_noise_co10_mean]), fmt="%.3f")
+#
 # ax2
 ax2.scatter(log_co21_mom0_k, log_co21_noise_k, c="black", alpha=0.5)
 xbins_co21, list_log_noise_co21_mean = calcbins(log_co21_mom0_k, log_co21_noise_k, nbins)
 ax2.scatter(xbins_co21, list_log_noise_co21_mean, c="red", alpha=1.0, s=70)
-np.savetxt(dir_proj + "eps/ngc0628_4p0_lognoise_co21_bin.txt", np.array(np.c_[xbins_co21, list_log_noise_co21_mean]), fmt="%.3f")
-
+#np.savetxt(dir_proj + "eps/ngc0628_4p0_lognoise_co21_bin.txt", np.array(np.c_[xbins_co21, list_log_noise_co21_mean]), fmt="%.3f")
+#
 #
 plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
 
 
 ### model co10 mom-0 distribution
 #
-list_output = fit_lognorm(log_co10_mom0_k)
-best_lognorm = list_output[np.argmin(list_output[:,2])]
+num_input = len(log_co10_mom0_k)
+best_mean, best_disp = fit_lognorm(log_co10_mom0_k, num_input, nbins)
+best_lognorm = np.random.lognormal(best_mean, best_disp, num_input)
 #
 
-
-"""
 ### plot obs and model mom-0
 figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=9, ncols=8)
@@ -216,7 +219,7 @@ plt.rcParams["font.size"] = 16
 
 # ax1
 ax1.hist(log_co10_mom0_k, color="black", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
-ax1.hist(lognorm_model, color="red", alpha=0.5, bins=nbins, lw=0, range=range_co10_input)
+ax1.hist(best_lognorm, color="red", alpha=0.5, bins=nbins, lw=0, range=range_co10_input)
 #ax1.plot(data_histo[0], func_lognorm(data_histo[0],*popt), lw=6, alpha=0.5)
 #
 ax1.set_xlim(range_co10_input)
@@ -230,4 +233,4 @@ ax2.set_xlim(range_co10_input)
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0.png",dpi=200)
 #
 os.system("rm -rf *.last")
-"""
+
