@@ -130,6 +130,7 @@ def fit_lognorm(
 	"""
 	num_input = len(log_co10_mom0_k)
 	minimum = log_co10_mom0_k.min()
+	maximum = log_co10_mom0_k.max()
 	list_x = []
 	list_y = []
 	list_d = []
@@ -140,6 +141,7 @@ def fit_lognorm(
 		for j in list_disp:
 			lognorm_model = np.random.lognormal(i, j, num_input)
 			lognorm_model = lognorm_model[lognorm_model>minimum]
+			lognorm_model = lognorm_model[lognorm_model<maximum]
 			d, p = stats.ks_2samp(log_co10_mom0_k, lognorm_model)
 			list_x.append(i)
 			list_y.append(j)
@@ -207,6 +209,7 @@ plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
 num_input = len(log_co10_mom0_k)
 best_mean, best_disp = fit_lognorm(log_co10_mom0_k, num_input, nbins)
 best_lognorm_co10 = np.random.lognormal(best_mean, best_disp, num_input)
+best_lognorm_co10 = best_lognorm_co10[np.where((best_lognorm_co10>log_co10_mom0_k.min()) & (best_lognorm_co10<log_co10_mom0_k.max()))]
 best_lognorm_co10.sort()
 #
 num_input = len(log_co21_mom0_k)
@@ -233,7 +236,8 @@ ax1.hist(best_lognorm, color="red", alpha=0.5, bins=nbins, lw=0, range=range_co1
 ax1.set_xlim([0,2.0])
 
 #ax2
-ax2.plot(data_histo[0], func_lognorm(data_histo[0],100.,-0.2,0.5), lw=6, alpha=0.5)
+ax2.plot(best_lognorm_co10, best_lognorm_co21, "o", color="red", alpha=0.5, markersize=10, markeredgewidth=0)
+ax2.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="black", alpha=0.5, markersize=5, markeredgewidth=0)
 #
 ax2.set_xlim([0,2.0])
 
