@@ -167,9 +167,12 @@ def add_noise(
 	"""
 	"""
 	list_output = []
-	for i in range(len(xbins_co10)-1):
+	for i in range(len(xbins_co10)):
 		# create binned data
-		cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]))
+		if i<=37:
+			cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]))
+		else:
+			cut_all = np.where((best_lognorm_co10>=xbins_co10[i]))
 		binned_data = best_lognorm_co10[cut_all]
 		num_data = len(binned_data)
 		# create noise
@@ -178,8 +181,7 @@ def add_noise(
 		#
 		print("#######################################")
 		print("# xbin = " + str(i))
-		print("# data         = " + str(len(binned_data)))
-		print("# data_w_noise = " + str(len(binned_data_and_noise)))
+		print("# len(data) - len(data_w_noise) = " + str(len(binned_data)-len(binned_data_and_noise)))
 
 	return np.array(list_output)
 
@@ -274,7 +276,7 @@ ax1.set_xlim([0,2.0])
 
 #ax2
 ax2.plot(best_lognorm_co10, best_lognorm_co21, "o", color="red", alpha=1.0, markersize=5, markeredgewidth=0, zorder=1e20)
-#ax2.plot(best_lognorm_co10_w_noise, best_lognorm_co21_w_noise, "o", color="green", alpha=0.5, markersize=3, markeredgewidth=0)
+ax2.plot(best_lognorm_co10_w_noise, best_lognorm_co21_w_noise, "o", color="green", alpha=0.5, markersize=3, markeredgewidth=0)
 ax2.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="black", alpha=0.5, markersize=1, markeredgewidth=0)
 #
 ax2.set_xlim([-0.5,2.0])
