@@ -231,11 +231,7 @@ def plot_scatter(
 	ax.legend(bbox_to_anchor=(1.05, -0.05), loc="upper left", ncol=ncol)
 	# save txt
 	os.system("rm -rf " + txtfile)
-	np.savetxt(
-		txtfile,
-		np.array(list_output),
-		fmt='%.2f',
-		)
+	np.savetxt(txtfile, np.array(list_output), fmt='%.2f')
 
 def plot_hist_right(
 	ax,

@@ -14,6 +14,7 @@ import scripts_phangs_r21 as r21
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 freqco10 = 115.27120
 freqco21 = 230.53800
+nbins = 40
 
 
 #####################
@@ -96,18 +97,21 @@ def print_things(
 def calcbins(
 	log_co_mom0_k,
 	log_co_noise_k,
+	nbins,
 	):
 	"""
 	"""
-	xbins = np.linspace(log_co_mom0_k.min(), log_co_mom0_k.max(), 40)
+	xbins = np.linspace(log_co_mom0_k.min(), log_co_mom0_k.max(), nbins)
 	list_log_noise_mean = []
 	for i in range(len(xbins)-1):
-		cut_all = np.where((log_co10_mom0_k>xbins[i]) & (log_co10_mom0_k<xbins[i+1]))
-		noise_cut = 10**log_co10_noise_k[cut_all]
+		cut_all = np.where((log_co_mom0_k>xbins[i]) & (log_co_mom0_k<xbins[i+1]))
+		noise_cut = 10**log_co_noise_k[cut_all]
 		noise_mean = np.round(np.mean(noise_cut),2)
 		list_log_noise_mean.append(np.log10(noise_mean))
 
 	xbins = np.delete(xbins + (xbins[1]-xbins[0])/2., -1)
+
+	return xbins, list_log_noise_mean
 
 
 #####################
@@ -133,6 +137,10 @@ ax1 = plt.subplot(gs[0:4,0:8])
 ax2 = plt.subplot(gs[5:9,0:8])
 ax1.grid(axis="both")
 ax2.grid(axis="both")
+ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
+ax2.set_xlabel("CO(2-1) mom-0 (K.km/s)")
+ax1.set_ylabel("CO(1-0) mom-0 noise (K.km/s)")
+ax2.set_ylabel("CO(2-1) mom-0 noise (K.km/s)")
 """
 ax1.set_xscale("log")
 ax2.set_xscale("log")
@@ -143,11 +151,14 @@ plt.rcParams["font.size"] = 16
 
 # ax1
 ax1.scatter(log_co10_mom0_k, log_co10_noise_k, c="black", alpha=0.5)
-
-ax1.scatter(xbins, list_log_noise_mean, c="red", alpha=1.0, s=70)
+xbins, list_log_noise_co10_mean = calcbins(log_co10_mom0_k, log_co10_noise_k, nbins)
+ax1.scatter(xbins, list_log_noise_co10_mean, c="red", alpha=1.0, s=70)
+np.savetxt(dir_proj + "eps/", np.array(np.r_[xbins, list_log_noise_co10_mean]), fmt="%.2f")
 
 # ax2
 ax2.scatter(log_co21_mom0_k, log_co21_noise_k, c="black", alpha=0.5)
+xbins, list_log_noise_co21_mean = calcbins(log_co21_mom0_k, log_co21_noise_k, nbins)
+ax2.scatter(xbins, list_log_noise_co21_mean, c="red", alpha=1.0, s=70)
 
 #
 plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
