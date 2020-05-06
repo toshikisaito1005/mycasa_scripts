@@ -184,16 +184,14 @@ plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
 
 
 ### model co10 mom-0 distribution
-# 
-
+#
 data_histo = np.histogram(log_co10_mom0_k, bins=nbins, range=range_co10_input)
 
 popt, residual = fit_lognorm(func_lognorm, data_histo[0], np.delete(data_histo[1],-1), [0.5,0.5,0.5])
-mean_lognorm = np.exp()
+mu, sigma = popt[1], popt[2]
+mean_lognorm = np.exp(mu + (sigma**2)/2.)
 
 
-
-"""
 ### plot obs and model mom-0
 figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=9, ncols=8)
@@ -207,13 +205,12 @@ ax2.set_xlabel("CO(2-1) mom-0 (K.km/s)")
 plt.rcParams["font.size"] = 16
 
 # ax1
-ax1.hist(log_co10_mom0_k, color="black", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
-
-ax1.hist(co10_mom0_k_model, color="red", alpha=0.5, bins=nbins, lw=0, range=range_co10_input)
-
+#ax1.hist(log_co10_mom0_k, color="black", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
+#ax1.hist(co10_mom0_k_model, color="red", alpha=0.5, bins=nbins, lw=0, range=range_co10_input)
+ax1.plot(data_histo[0], func_lognorm(data_histo[0],*popt), lw=6, alpha=0.5)
+#
+ax1.set_xlim(range_co10_input)
 #
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0.png",dpi=200)
 #
-"""
-
 os.system("rm -rf *.last")
