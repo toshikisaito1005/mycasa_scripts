@@ -170,11 +170,12 @@ plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
 
 ### model co10 mom-0 distribution
 # create co10 mom-0 model
-mu_co10_input = p50_co10
-sigma_co10_input = (p84_co10-p50_co10)/2.+(p50_co10-p16_co10)/2.
+mean_co10 = np.log10(p50_co10)
+sigma_co10 = np.log10((p84_co10-p50_co10)/2.+(p50_co10-p16_co10)/2.)
+
 num_co10_input = len(log_co10_mom0_k)
 range_co10_input = [xbins_co10.min(), xbins_co10.max()]
-co10_mom0_k_model = np.random.lognormal(mu_co10_input, sigma_co10_input, num_co10_input)
+co10_mom0_k_model = np.random.lognormal(mean_co10, sigma_co10, num_co10_input)
 
 
 ### plot obs and model mom-0
