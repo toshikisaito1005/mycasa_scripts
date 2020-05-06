@@ -26,7 +26,7 @@ def function(x, a, b):
 	return a * x + b
 
 def func_lognorm(x, a, b, c):
-    return a*np.exp(-(np.log(x)-b)**2/(2*c**2))
+    return a * np.exp(-(np.log(x)-b)**2 / (2*c**2))
 
 def fit_lognorm(func_lognorm, data_x, data_y, guess):
     """
@@ -212,7 +212,7 @@ ax1.hist(co10_mom0_k_model, color="red", alpha=0.5, bins=nbins, lw=0, range=rang
 ax1.set_xlim(range_co10_input)
 
 #ax2
-ax2.plot(data_histo[0], func_lognorm(data_histo[0],10000.,0.1,0.5), lw=6, alpha=0.5)
+ax2.plot(data_histo[0], func_lognorm(data_histo[0],100.,-0.2,0.5), lw=6, alpha=0.5)
 #
 ax2.set_xlim(range_co10_input)
 
