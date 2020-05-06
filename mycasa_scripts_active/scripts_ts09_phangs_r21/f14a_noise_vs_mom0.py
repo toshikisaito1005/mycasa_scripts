@@ -196,7 +196,10 @@ log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = \
 #
 p84_co10, p50_co10, p16_co10, p84_co21, p50_co21, p16_co21 = \
 	print_things(log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k)
-
+#
+range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
+range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
+#
 
 ### plot noise vs mom-0
 # preparation
@@ -250,6 +253,12 @@ best_lognorm_co10 = best_lognorm_co10[best_lognorm_co21>log_co21_mom0_k.min()]
 ## adding noise
 best_lognorm_co10_w_noise = add_noise(best_lognorm_co10, log_co10_noise_k, xbins_co10)
 best_lognorm_co21_w_noise = add_noise(best_lognorm_co21, log_co21_noise_k, xbins_co21)
+best_lognorm_co10_w_noise = best_lognorm_co10_w_noise[best_lognorm_co10_w_noise<log_co10_mom0_k.max()]
+best_lognorm_co10_w_noise = best_lognorm_co10_w_noise[best_lognorm_co10_w_noise>log_co10_mom0_k.min()]
+best_lognorm_co21_w_noise = best_lognorm_co21_w_noise[best_lognorm_co21_w_noise<log_co21_mom0_k.max()]
+best_lognorm_co21_w_noise = best_lognorm_co21_w_noise[best_lognorm_co21_w_noise>log_co21_mom0_k.min()]
+
+
 
 
 ### plot obs and model mom-0
@@ -279,6 +288,10 @@ ax2.set_xlim([0,2.0])
 #
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo.png",dpi=200)
 
+
+
+
+
 ### plot obs and model mom-0
 figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=8, ncols=8)
@@ -289,11 +302,11 @@ ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
 plt.rcParams["font.size"] = 16
 
 # ax1
-ax1.plot(best_lognorm_co10, best_lognorm_co21, "o", color="red", alpha=1.0, markersize=2, markeredgewidth=0, zorder=1e20)
-ax1.plot(best_lognorm_co10_w_noise, best_lognorm_co21_w_noise, "o", color="green", alpha=0.5, markersize=3, markeredgewidth=0)
-ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="black", alpha=0.5, markersize=1, markeredgewidth=0)
+ax1.plot(best_lognorm_co10, best_lognorm_co21, "o", color="grey", alpha=1.0, markersize=3, markeredgewidth=0, zorder=1e20)
+ax1.plot(best_lognorm_co10_w_noise, best_lognorm_co21_w_noise, "o", color="red", alpha=0.5, markersize=3, markeredgewidth=0)
+ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="gret", alpha=0.5, markersize=2, markeredgewidth=0)
 #
-ax.set_xlim([-0.5,2.0])
+ax1.set_xlim([-0.5,2.0])
 ax1.set_ylim([-0.5,2.0])
 
 #
