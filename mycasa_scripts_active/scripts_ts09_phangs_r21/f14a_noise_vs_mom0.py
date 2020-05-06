@@ -184,7 +184,7 @@ def fit_lognorm(
 	list_y = []
 	list_d = []
 	list_p = []
-	list_mean = np.linspace(-1.00, 1.00, nbins)
+	list_mean = np.linspace(-2.00, 2.00, nbins)
 	list_disp = np.linspace(0.01, 2.01, nbins)
 	for i in list_mean:
 		for j in list_disp:
@@ -265,10 +265,10 @@ def add_noise(
 ### Main Procedure
 #####################
 ### get filenames
-co10_mom0  = dir_proj + "ngc4321_co10/co10_04p0.moment0"
-co10_noise = dir_proj + "ngc4321_co10/co10_04p0.moment0.noise"
-co21_mom0  = dir_proj + "ngc4321_co21/co21_04p0.moment0"
-co21_noise = dir_proj + "ngc4321_co21/co21_04p0.moment0.noise"
+co10_mom0  = dir_proj + "ngc0628_co10/co10_04p0.moment0"
+co10_noise = dir_proj + "ngc0628_co10/co10_04p0.moment0.noise"
+co21_mom0  = dir_proj + "ngc0628_co21/co21_04p0.moment0"
+co21_noise = dir_proj + "ngc0628_co21/co21_04p0.moment0.noise"
 #
 ### plot noise vs. mom-0
 log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21)
@@ -334,15 +334,14 @@ ax2.set_xlabel("CO(2-1) mom-0 (K.km/s)")
 plt.rcParams["font.size"] = 16
 
 # ax1
-ax1.hist(log_co10_mom0_k, color="black", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
-ax1.hist(best_lognorm_co10_w_scatter, color="blue", alpha=0.5, bins=nbins, lw=0, range=range_co10_input)
-ax1.hist(best_lognorm_co10_w_scatter_noise, color="red", alpha=0.5, bins=nbins, lw=0, range=range_co10_input)
+ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
+ax1.hist(best_lognorm_co10_w_scatter, normed=True, color="blue", alpha=0.5, bins=nbins, lw=0, range=range_co10_input)
+ax1.hist(best_lognorm_co10_w_scatter_noise, normed=True, color="red", alpha=0.5, bins=nbins, lw=0, range=range_co10_input)
 ax1.set_xlim([0,2.0])
 #
 #ax2
-ax2.hist(log_co21_mom0_k, color="black", alpha=0.5, bins=nbins, range=range_co21_input, lw=0)
-ax2.hist(best_lognorm_co21_w_scatter, color="blue", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
-ax2.hist(best_lognorm_co21_w_scatter_noise, color="red", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
+ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, range=range_co21_input, lw=0)
+ax2.hist(best_lognorm_co21_w_scatter_noise, normed=True, color="red", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
 ax2.set_xlim([-0.5,1.6])
 #
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo.png",dpi=200)
