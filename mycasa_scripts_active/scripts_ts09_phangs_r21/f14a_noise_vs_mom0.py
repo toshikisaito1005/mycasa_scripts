@@ -122,7 +122,7 @@ def calcbins(
 		noise_mean = np.round(np.mean(noise_cut),2)
 		list_log_noise_mean.append(np.log10(noise_mean))
 
-	xbins = np.delete(xbins + (xbins[1]-xbins[0])/2., -1)
+	xbins = np.delete(xbins, -1) # np.delete(xbins + (xbins[1]-xbins[0])/2., -1)
 
 	return xbins, list_log_noise_mean
 
@@ -222,7 +222,8 @@ best_lognorm_co10.sort()
 best_lognorm_co21 = func_co10_vs_co21(best_lognorm_co10, 1.04, -0.31)
 #
 ## adding noise
-
+cut_all = np.where((best_lognorm_co10>xbins_co10[0]) & (best_lognorm_co10<xbins_co10[1]))
+binned_data = best_lognorm_co10[cut_all]
 
 
 ### plot obs and model mom-0
