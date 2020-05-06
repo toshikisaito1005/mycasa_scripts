@@ -15,6 +15,7 @@ dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 freqco10 = 115.27120
 freqco21 = 230.53800
 nbins = 40
+percentile = 84
 
 
 #####################
@@ -111,6 +112,7 @@ def calcbins(
 	log_co_mom0_k,
 	log_co_noise_k,
 	nbins,
+	percentile,
 	):
 	"""
 	"""
@@ -119,7 +121,7 @@ def calcbins(
 	for i in range(len(xbins)-1):
 		cut_all = np.where((log_co_mom0_k>xbins[i]) & (log_co_mom0_k<xbins[i+1]))
 		noise_cut = 10**log_co_noise_k[cut_all]
-		noise_mean = np.round(np.mean(noise_cut),2)
+		noise_mean = np.round(np.percentile(noise_cut,percentile),2)
 		list_log_noise_mean.append(np.log10(noise_mean))
 
 	xbins = np.delete(xbins, -1) # np.delete(xbins + (xbins[1]-xbins[0])/2., -1)
@@ -248,13 +250,13 @@ plt.rcParams["font.size"] = 16
 #
 # ax1
 ax1.scatter(log_co10_mom0_k, log_co10_noise_k, c="black", alpha=0.5)
-xbins_co10, list_log_noise_co10_mean = calcbins(log_co10_mom0_k, log_co10_noise_k, nbins)
+xbins_co10, list_log_noise_co10_mean = calcbins(log_co10_mom0_k, log_co10_noise_k, nbins, percentile)
 ax1.scatter(xbins_co10, list_log_noise_co10_mean, c="red", alpha=1.0, s=70)
 #np.savetxt(dir_proj + "eps/ngc0628_4p0_lognoise_co10_bin.txt", np.array(np.c_[xbins_co10, list_log_noise_co10_mean]), fmt="%.3f")
 #
 # ax2
 ax2.scatter(log_co21_mom0_k, log_co21_noise_k, c="black", alpha=0.5)
-xbins_co21, list_log_noise_co21_mean = calcbins(log_co21_mom0_k, log_co21_noise_k, nbins)
+xbins_co21, list_log_noise_co21_mean = calcbins(log_co21_mom0_k, log_co21_noise_k, nbins, percentile)
 ax2.scatter(xbins_co21, list_log_noise_co21_mean, c="red", alpha=1.0, s=70)
 #np.savetxt(dir_proj + "eps/ngc0628_4p0_lognoise_co21_bin.txt", np.array(np.c_[xbins_co21, list_log_noise_co21_mean]), fmt="%.3f")
 #
@@ -281,8 +283,8 @@ best_lognorm_co10 = best_lognorm_co10[best_lognorm_co21<log_co21_mom0_k.max()]
 best_lognorm_co10 = best_lognorm_co10[best_lognorm_co21>log_co21_mom0_k.min()]
 #
 ## adding scatter
-best_lognorm_co10_w_scatter = add_scatter(best_lognorm_co10, 0.1)
-best_lognorm_co21_w_scatter = add_scatter(best_lognorm_co21, 0.1)
+best_lognorm_co10_w_scatter = add_scatter(best_lognorm_co10, 0.8)
+best_lognorm_co21_w_scatter = add_scatter(best_lognorm_co21, 0.8)
 
 ## adding noise
 best_lognorm_co10_w_scatter_noise, best_lognorm_co21_w_scatter_noise = \
@@ -375,7 +377,7 @@ ax1.plot(best_lognorm_co21_w_scatter_noise, np.log10(10**best_lognorm_co21_w_sca
 ax1.plot(best_lognorm_co21_w_scatter, np.log10(10**best_lognorm_co21_w_scatter/10**best_lognorm_co10_w_scatter), "o", color="blue", alpha=0.2, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter")
 ax1.plot(log_co21_mom0_k, np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k), "o", color="grey", alpha=0.2, markersize=5, markeredgewidth=0)
 ax1.set_xlim([-0.5,2.0])
-ax1.set_ylim([-1.0,1.0])
+ax1.set_ylim([-1.0,0.5])
 #
 ax1.legend()
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21.png",dpi=200)
