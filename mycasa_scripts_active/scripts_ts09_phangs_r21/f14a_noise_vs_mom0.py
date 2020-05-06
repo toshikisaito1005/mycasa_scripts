@@ -20,6 +20,11 @@ nbins = 40
 #####################
 ### functions
 #####################
+def func_co10_vs_co21(x, a, b):
+	"""
+	"""
+	return a * x + b
+
 def function(x, a, b):
 	"""
 	"""
@@ -208,8 +213,6 @@ plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
 # create log co10 vs log co21 scaling relation
 
 
-
-
 #
 num_input = len(log_co10_mom0_k)
 best_mean, best_disp = fit_lognorm(log_co10_mom0_k, num_input, nbins)
@@ -222,7 +225,7 @@ best_mean, best_disp = fit_lognorm(log_co21_mom0_k, num_input, nbins)
 best_lognorm_co21 = np.random.lognormal(best_mean, best_disp, num_input)
 best_lognorm_co21.sort()
 """
-best_lognorm_co21 = best_lognorm_co10 * 0.7
+best_lognorm_co21 = func_co10_vs_co21(best_lognorm_co10, 1.04, -0.31)
 
 ### plot obs and model mom-0
 figure = plt.figure(figsize=(10,10))
