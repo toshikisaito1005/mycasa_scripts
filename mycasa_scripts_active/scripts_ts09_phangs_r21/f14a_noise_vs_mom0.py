@@ -210,22 +210,20 @@ plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
 
 
 ### model co10 mom-0 distribution
-# create log co10 vs log co21 scaling relation
-
-
-#
+## create log co10 vs log co21 scaling relation with log-normal intensity distributions
+# create co10 model
 num_input = len(log_co10_mom0_k)
 best_mean, best_disp = fit_lognorm(log_co10_mom0_k, num_input, nbins)
 best_lognorm_co10 = np.random.lognormal(best_mean, best_disp, num_input)
+best_lognorm_co10 = best_lognorm_co10[best_lognorm_co10<log_co10_mom0_k.max()]
+best_lognorm_co10 = best_lognorm_co10[best_lognorm_co10>log_co10_mom0_k.min()]
 best_lognorm_co10.sort()
-#
-"""
-num_input = len(log_co21_mom0_k)
-best_mean, best_disp = fit_lognorm(log_co21_mom0_k, num_input, nbins)
-best_lognorm_co21 = np.random.lognormal(best_mean, best_disp, num_input)
-best_lognorm_co21.sort()
-"""
+# create co21 model
 best_lognorm_co21 = func_co10_vs_co21(best_lognorm_co10, 1.04, -0.31)
+#
+## adding noise
+
+
 
 ### plot obs and model mom-0
 figure = plt.figure(figsize=(10,10))
@@ -246,10 +244,11 @@ ax1.hist(best_lognorm, color="red", alpha=0.5, bins=nbins, lw=0, range=range_co1
 ax1.set_xlim([0,2.0])
 
 #ax2
-ax2.plot(best_lognorm_co10, best_lognorm_co21, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0)
+ax2.plot(best_lognorm_co10, best_lognorm_co21, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e20)
 ax2.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="black", alpha=0.5, markersize=2, markeredgewidth=0)
 #
-ax2.set_xlim([0,2.0])
+ax2.set_xlim([-0.5,2.0])
+ax2.set_ylim([-0.5,2.0])
 
 #
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0.png",dpi=200)
