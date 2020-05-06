@@ -155,13 +155,13 @@ plt.rcParams["font.size"] = 16
 # ax1
 ax1.scatter(log_co10_mom0_k, log_co10_noise_k, c="black", alpha=0.5)
 xbins_co10, list_log_noise_co10_mean = calcbins(log_co10_mom0_k, log_co10_noise_k, nbins)
-ax1.scatter(xbins, list_log_noise_co10_mean, c="red", alpha=1.0, s=70)
+ax1.scatter(xbins_co10, list_log_noise_co10_mean, c="red", alpha=1.0, s=70)
 np.savetxt(dir_proj + "eps/ngc0628_4p0_lognoise_co10_bin.txt", np.array(np.c_[xbins_co10, list_log_noise_co10_mean]), fmt="%.3f")
 
 # ax2
 ax2.scatter(log_co21_mom0_k, log_co21_noise_k, c="black", alpha=0.5)
 xbins_co21, list_log_noise_co21_mean = calcbins(log_co21_mom0_k, log_co21_noise_k, nbins)
-ax2.scatter(xbins, list_log_noise_co21_mean, c="red", alpha=1.0, s=70)
+ax2.scatter(xbins_co21, list_log_noise_co21_mean, c="red", alpha=1.0, s=70)
 np.savetxt(dir_proj + "eps/ngc0628_4p0_lognoise_co21_bin.txt", np.array(np.c_[xbins_co21, list_log_noise_co21_mean]), fmt="%.3f")
 
 #
@@ -170,10 +170,12 @@ plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
 
 ### model co10 mom-0 distribution
 # create co10 mom-0 model
-mu_co10_input - p50_co10
+mu_co10_input = p50_co10
 sigma_co10_input = (p84_co10-p50_co10)/2.+(p50_co10-p16_co10)/2.
 num_co10_input = len(log_co10_mom0_k)
-co10_mom0_k_model = np.random.normal(mu_co10_input, sigma_co10_input, num_co10_input)
+range_co10_input = [xbins_co10.min(), xbins_co10.max()]
+log_co10_mom0_k_model = np.random.lognormal(np.log(mu_co10_input), np.log(sigma_co10_input), num_co10_input)
+
 
 ### plot obs and model mom-0
 figure = plt.figure(figsize=(10,10))
@@ -188,10 +190,9 @@ ax2.set_xlabel("CO(2-1) mom-0 (K.km/s)")
 plt.rcParams["font.size"] = 16
 
 # ax1
-ax1.hist(10**log_co10_mom0_k, color="black", alpha=0.5, bins=nbins, range=[10**xbins_co10.min(), 10**xbins_co10.max()])
+ax1.hist(log_co10_mom0_k, color="black", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
 
-# ax1
-ax1.hist(co10_mom0_k_model, color="red", alpha=0.5, bins=nbins, range=[10**xbins_co10.min(), 10**xbins_co10.max()])
+ax1.hist(log_co10_mom0_k_model, color="red", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
 
 #
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0.png",dpi=200)
