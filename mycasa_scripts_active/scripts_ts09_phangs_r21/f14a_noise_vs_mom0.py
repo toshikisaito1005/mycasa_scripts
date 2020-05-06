@@ -2,6 +2,7 @@ import os, re, sys, glob
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from scipy.optimize import curve_fit
+from scipy import stats
 plt.ioff()
 
 #
@@ -169,15 +170,11 @@ plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
 
 
 ### model co10 mom-0 distribution
-# create co10 mom-0 model
-mean_co10 = np.log10(p50_co10)
-sigma_co10 = np.log10((p84_co10-p50_co10)/2.+(p50_co10-p16_co10)/2.)
+# 
+data_histo = np.histogram(log_co10_mom0_k, bins=nbins, range=range_co10_input)
 
 
 
-num_co10_input = len(log_co10_mom0_k)
-range_co10_input = [xbins_co10.min(), xbins_co10.max()]
-co10_mom0_k_model = np.random.lognormal(-0.2, 0.3, num_co10_input)
 
 
 ### plot obs and model mom-0
