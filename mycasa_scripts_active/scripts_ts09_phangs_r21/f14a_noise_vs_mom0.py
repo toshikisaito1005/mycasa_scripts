@@ -169,12 +169,17 @@ def add_noise(
 	list_output = []
 	for i in range(len(xbins_co10)-1):
 		# create binned data
-		cut_all = np.where((best_lognorm_co10>xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]))
+		cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]))
 		binned_data = best_lognorm_co10[cut_all]
 		num_data = len(binned_data)
 		# create noise
 		binned_data_and_noise = binned_data + np.random.normal(0.0, 10**log_co10_noise_k[i], num_data)
 		list_output.extend(binned_data_and_noise)
+		#
+		print("#######################################")
+		print("# xbin = " + str(i))
+		print("# data         = " + str(len(binned_data)))
+		print("# data_w_noise = " + str(len(binned_data_and_noise)))
 
 	return np.array(list_output)
 
