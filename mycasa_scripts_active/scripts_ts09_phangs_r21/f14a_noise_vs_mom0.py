@@ -206,7 +206,7 @@ def fit_lognorm(
 
 	best_lognorm = list_output[np.argmin(np.array(list_output2)[:,2])]
 
-	return best_lognorm[0], best_lognorm[1], list_output
+	return best_lognorm[0], best_lognorm[1], list_output2
 
 def add_scatter(
 	best_lognorm_co10,
@@ -293,7 +293,7 @@ best_lognorm_co10 = best_lognorm_co10[best_lognorm_co10<log_co10_mom0_k.max()]
 best_lognorm_co10 = best_lognorm_co10[best_lognorm_co10>log_co10_mom0_k.min()]
 best_lognorm_co10.sort()
 # create co21 model
-best_lognorm_co21 = func_co10_vs_co21(best_lognorm_co10, 1.25, -0.7)
+best_lognorm_co21 = func_co10_vs_co21(best_lognorm_co10, 1.27, -0.7)
 best_lognorm_co21 = best_lognorm_co21[best_lognorm_co21<log_co21_mom0_k.max()]
 best_lognorm_co21 = best_lognorm_co21[best_lognorm_co21>log_co21_mom0_k.min()]
 best_lognorm_co10 = best_lognorm_co10[best_lognorm_co21<log_co21_mom0_k.max()]
