@@ -128,16 +128,22 @@ def fit_lognorm(
 	"""
 	"""
 	num_input = len(log_co10_mom0_k)
+	list_x = []
+	list_y = []
 	list_d = []
 	list_p = []
-	for i in np.linspace(-1.0,0.0,100):
-		for j in np.linspace(0.0,1.0,100):
+	list_mean = np.linspace(-1.0,0.0,10)
+	list_disp = np.linspace(0.01,1.01,10)
+	for i in list_mean:
+		for j in list_disp:
 			lognorm_model = np.random.lognormal(i, j, num_input)
 			d, p = stats.ks_2samp(log_co10_mom0_k, lognorm_model)
+			list_x.append(i)
+			list_y.append(j)
 			list_d.append(d)
 			list_p.append(p)
 
-	list_output = np.c_[np.linspace(-1.0,0.0,100), np.linspace(0.0,1.0,100), list_d, list_p]
+	list_output = np.c_[list_x, list_y, list_d, list_p]
 
 	return list_output
 
@@ -191,6 +197,7 @@ plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
 ### model co10 mom-0 distribution
 #
 list_output = fit_lognorm(log_co10_mom0_k)
+best_lognorm = list_output[np.argmin(list_output[:,2])]
 #
 
 
