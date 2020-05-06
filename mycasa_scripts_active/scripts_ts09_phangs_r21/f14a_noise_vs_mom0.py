@@ -129,6 +129,7 @@ def fit_lognorm(
 	"""
 	"""
 	num_input = len(log_co10_mom0_k)
+	minimum = log_co10_mom0_k.min()
 	list_x = []
 	list_y = []
 	list_d = []
@@ -138,6 +139,7 @@ def fit_lognorm(
 	for i in list_mean:
 		for j in list_disp:
 			lognorm_model = np.random.lognormal(i, j, num_input)
+			lognorm_model = lognorm_model[lognorm_model>minimum]
 			d, p = stats.ks_2samp(log_co10_mom0_k, lognorm_model)
 			list_x.append(i)
 			list_y.append(j)
@@ -198,12 +200,19 @@ ax2.scatter(xbins_co21, list_log_noise_co21_mean, c="red", alpha=1.0, s=70)
 plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
 
 
+
+
 ### model co10 mom-0 distribution
 #
 num_input = len(log_co10_mom0_k)
 best_mean, best_disp = fit_lognorm(log_co10_mom0_k, num_input, nbins)
-best_lognorm = np.random.lognormal(best_mean, best_disp, num_input)
+best_lognorm_co10 = np.random.lognormal(best_mean, best_disp, num_input)
+best_lognorm_co10.sort()
 #
+num_input = len(log_co21_mom0_k)
+best_mean, best_disp = fit_lognorm(log_co21_mom0_k, num_input, nbins)
+best_lognorm_co21 = np.random.lognormal(best_mean, best_disp, num_input)
+best_lognorm_co21.sort()
 
 ### plot obs and model mom-0
 figure = plt.figure(figsize=(10,10))
