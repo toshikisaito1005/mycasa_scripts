@@ -159,6 +159,18 @@ def fit_lognorm(
 
 	return best_lognorm[0], best_lognorm[1]
 
+def add_scatter(
+	best_lognorm_co10,
+	scatter_sigma,
+	):
+	"""
+	"""
+	# create noise
+	num_data = len(best_lognorm_co10)
+	binned_data_and_noise = np.log10(10**best_lognorm_co10 + np.random.normal(0.0, 10**scatter_sigma, num_data))
+
+	return np.array(binned_data_and_noise)
+
 def add_noise(
 	best_lognorm_co10,
 	log_co10_noise_k,
@@ -236,7 +248,7 @@ plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
 
 ### model co10 mom-0 distribution
 ## create log co10 vs log co21 scaling relation with log-normal intensity distributions
-# create co10 model
+# create co10 model lognormal distribution
 num_input = len(log_co10_mom0_k)
 best_mean, best_disp = fit_lognorm(log_co10_mom0_k, num_input, nbins)
 best_lognorm_co10 = np.random.lognormal(best_mean, best_disp, num_input)
@@ -249,6 +261,9 @@ best_lognorm_co21 = best_lognorm_co21[best_lognorm_co21<log_co21_mom0_k.max()]
 best_lognorm_co21 = best_lognorm_co21[best_lognorm_co21>log_co21_mom0_k.min()]
 best_lognorm_co10 = best_lognorm_co10[best_lognorm_co21<log_co21_mom0_k.max()]
 best_lognorm_co10 = best_lognorm_co10[best_lognorm_co21>log_co21_mom0_k.min()]
+#
+## adding scatter
+add_scatter(best_lognorm_co10, scatter_sigma)
 #
 ## adding noise
 best_lognorm_co10_w_noise = add_noise(best_lognorm_co10, log_co10_noise_k, xbins_co10)
