@@ -128,6 +128,46 @@ def calcbins(
 
 	return xbins, list_log_noise_mean
 
+def plotter_noise(
+	dir_proj,
+	log_co10_mom0_k,
+	log_co10_noise_k,
+	log_co21_mom0_k,
+	log_co21_noise_k,
+	nbins,
+	percentile,
+	):
+	"""
+	"""
+	# preparation
+	figure = plt.figure(figsize=(10,10))
+	gs = gridspec.GridSpec(nrows=9, ncols=8)
+	plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
+	ax1 = plt.subplot(gs[0:4,0:8])
+	ax2 = plt.subplot(gs[5:9,0:8])
+	ax1.grid(axis="both")
+	ax2.grid(axis="both")
+	ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
+	ax2.set_xlabel("CO(2-1) mom-0 (K.km/s)")
+	ax1.set_ylabel("CO(1-0) mom-0 noise (K.km/s)")
+	ax2.set_ylabel("CO(2-1) mom-0 noise (K.km/s)")
+	plt.rcParams["font.size"] = 16
+	#
+	# ax1
+	ax1.scatter(log_co10_mom0_k, log_co10_noise_k, c="black", alpha=0.5)
+	xbins_co10, list_log_noise_co10_mean = calcbins(log_co10_mom0_k, log_co10_noise_k, nbins, percentile)
+	ax1.scatter(xbins_co10, list_log_noise_co10_mean, c="red", alpha=1.0, s=70)
+	#np.savetxt(dir_proj + "eps/ngc0628_4p0_lognoise_co10_bin.txt", np.array(np.c_[xbins_co10, list_log_noise_co10_mean]), fmt="%.3f")
+	#
+	# ax2
+	ax2.scatter(log_co21_mom0_k, log_co21_noise_k, c="black", alpha=0.5)
+	xbins_co21, list_log_noise_co21_mean = calcbins(log_co21_mom0_k, log_co21_noise_k, nbins, percentile)
+	ax2.scatter(xbins_co21, list_log_noise_co21_mean, c="red", alpha=1.0, s=70)
+	#np.savetxt(dir_proj + "eps/ngc0628_4p0_lognoise_co21_bin.txt", np.array(np.c_[xbins_co21, list_log_noise_co21_mean]), fmt="%.3f")
+	#
+	#
+	plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
+
 def fit_lognorm(
 	log_co10_mom0_k,
 	num_input,
@@ -217,56 +257,26 @@ def add_noise(
 #####################
 ### Main Procedure
 #####################
-###
+### get filenames
 co10_mom0  = dir_proj + "ngc0628_co10/co10_04p0.moment0"
 co10_noise = dir_proj + "ngc0628_co10/co10_04p0.moment0.noise"
 co21_mom0  = dir_proj + "ngc0628_co21/co21_04p0.moment0"
 co21_noise = dir_proj + "ngc0628_co21/co21_04p0.moment0.noise"
 #
-log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = \
-	getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21)
-#
-p84_co10, p50_co10, p16_co10, p84_co21, p50_co21, p16_co21 = \
-	print_things(log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k)
-#
-range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
-range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
-#
+### plot noise vs. mom-0
+log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21)
+p84_co10, p50_co10, p16_co10, p84_co21, p50_co21, p16_co21 = print_things(log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k)
+plotter_noise( dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile)
 
-### plot noise vs mom-0
-# preparation
-figure = plt.figure(figsize=(10,10))
-gs = gridspec.GridSpec(nrows=9, ncols=8)
-plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
-ax1 = plt.subplot(gs[0:4,0:8])
-ax2 = plt.subplot(gs[5:9,0:8])
-ax1.grid(axis="both")
-ax2.grid(axis="both")
-ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
-ax2.set_xlabel("CO(2-1) mom-0 (K.km/s)")
-ax1.set_ylabel("CO(1-0) mom-0 noise (K.km/s)")
-ax2.set_ylabel("CO(2-1) mom-0 noise (K.km/s)")
-plt.rcParams["font.size"] = 16
-#
-# ax1
-ax1.scatter(log_co10_mom0_k, log_co10_noise_k, c="black", alpha=0.5)
-xbins_co10, list_log_noise_co10_mean = calcbins(log_co10_mom0_k, log_co10_noise_k, nbins, percentile)
-ax1.scatter(xbins_co10, list_log_noise_co10_mean, c="red", alpha=1.0, s=70)
-#np.savetxt(dir_proj + "eps/ngc0628_4p0_lognoise_co10_bin.txt", np.array(np.c_[xbins_co10, list_log_noise_co10_mean]), fmt="%.3f")
-#
-# ax2
-ax2.scatter(log_co21_mom0_k, log_co21_noise_k, c="black", alpha=0.5)
-xbins_co21, list_log_noise_co21_mean = calcbins(log_co21_mom0_k, log_co21_noise_k, nbins, percentile)
-ax2.scatter(xbins_co21, list_log_noise_co21_mean, c="red", alpha=1.0, s=70)
-#np.savetxt(dir_proj + "eps/ngc0628_4p0_lognoise_co21_bin.txt", np.array(np.c_[xbins_co21, list_log_noise_co21_mean]), fmt="%.3f")
-#
-#
-plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
 
 
 
 
 ### model co10 mom-0 distribution
+## define plot range
+range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
+range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
+#
 ## create log co10 vs log co21 scaling relation with log-normal intensity distributions
 # create co10 model lognormal distribution
 num_input = len(log_co10_mom0_k)
