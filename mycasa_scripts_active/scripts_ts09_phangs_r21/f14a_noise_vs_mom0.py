@@ -281,8 +281,8 @@ best_lognorm_co10 = best_lognorm_co10[best_lognorm_co21<log_co21_mom0_k.max()]
 best_lognorm_co10 = best_lognorm_co10[best_lognorm_co21>log_co21_mom0_k.min()]
 #
 ## adding scatter
-best_lognorm_co10_w_scatter = add_scatter(best_lognorm_co10, 0.001)
-best_lognorm_co21_w_scatter = add_scatter(best_lognorm_co21, 0.001)
+best_lognorm_co10_w_scatter = add_scatter(best_lognorm_co10, 0.005)
+best_lognorm_co21_w_scatter = add_scatter(best_lognorm_co21, 0.005)
 #
 ## adding noise
 best_lognorm_co10_w_scatter_noise, best_lognorm_co21_w_scatter_noise = \
@@ -332,11 +332,17 @@ ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
 plt.rcParams["font.size"] = 16
 
 # ax1
+"""
 ax1.plot(best_lognorm_co10, best_lognorm_co21, "o", color="black", alpha=1.0, markersize=3, markeredgewidth=0, zorder=1e22)
 ax1.plot(best_lognorm_co10_w_scatter_noise, best_lognorm_co21_w_scatter_noise, "o", color="red", alpha=0.2, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
-ax1.plot(best_lognorm_co10_w_scatter, best_lognorm_co21_w_scatter, "o", color="blue", alpha=0.2, markersize=3, markeredgewidth=0, zorder=1e20, label="scatter")
+ax1.plot(best_lognorm_co10_w_scatter, best_lognorm_co21_w_scatter, "o", color="blue", alpha=0.2, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter")
 ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="grey", alpha=0.2, markersize=10, markeredgewidth=0)
 ax1.plot([-0.5,2.0], [-0.5,2.0], "k--", lw=5)
+"""
+ax1.plot(best_lognorm_co21, np.log10(10**best_lognorm_co21/10**best_lognorm_co10), "o", color="black", alpha=1.0, markersize=3, markeredgewidth=0, zorder=1e22)
+ax1.plot(best_lognorm_co21_w_scatter_noise, np.log10(10**best_lognorm_co21_w_scatter_noise/10**best_lognorm_co10_w_scatter_noise), "o", color="red", alpha=0.2, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
+ax1.plot(best_lognorm_co21_w_scatter, np.log10(10**best_lognorm_co21_w_scatter/10**best_lognorm_co10_w_scatter), "o", color="blue", alpha=0.2, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter")
+ax1.plot(log_co10_mom0_k, np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k), "o", color="grey", alpha=0.2, markersize=10, markeredgewidth=0)
 #
 ax1.set_xlim([-0.5,2.0])
 ax1.set_ylim([-0.5,2.0])
