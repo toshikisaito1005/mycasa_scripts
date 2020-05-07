@@ -398,7 +398,7 @@ def get_best_co21_parameter(
 			if numiter % 500 == 0:
 				print("### create co21 model " + str(numiter).zfill(4) + "/" + str(numall))
 			#
-			log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 1.00+i, -0.3+j)
+			log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 0.9+i, -0.3+j)
 			#
 			log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, 1.0+k)
 			log_co21_mom0_k_model_scatter[np.isnan(log_co21_mom0_k_model_scatter)] = -9999
