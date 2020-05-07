@@ -488,8 +488,8 @@ def print_boot(
 	text,
 	):
 	list_median = str(np.percentile(list_best_co10_parameter[0],50))
-	list_max = str(list_best_co10_parameter[0].max())
-	list_min = str(list_best_co10_parameter[0].min())
+	list_max = str(np.max(list_best_co10_parameter[0]))
+	list_min = str(np.min(list_best_co10_parameter[0]))
 	print("# " + text)
 	print("# median = " + list_median)
 	print("# max = " + list_max)
