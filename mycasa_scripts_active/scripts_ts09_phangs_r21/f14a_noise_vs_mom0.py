@@ -433,6 +433,8 @@ def create_best_models(
 	log_co21_mom0_k,
 	log_co10_noise_k,
 	log_co21_noise_k,
+	xbins_co10,
+	xbins_co21,
 	best_co10_parameter,
 	best_co21_parameter,
 	):
@@ -458,21 +460,33 @@ def create_best_models(
 	log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 1.00+co21_slope, -0.3+co21_intercept)
 	#
 	### log_co_mom0_k_model_scatter
-
-
-	#
-	log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, 1.0+best_scatter)
+	# add scatter
+	log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, 1.0+co10_scatter)
+	log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, 1.0+co21_scatter)
+	# cut
 	log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
-	cut = np.where((log_co10_mom0_k_model_scatter>-9000))
+	log_co21_mom0_k_model_scatter[np.isnan(log_co21_mom0_k_model_scatter)] = -9999
+	cut = np.where((log_co10_mom0_k_model_scatter>-9000) & (log_co21_mom0_k_model_scatter>-9000))
 	log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+	log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
 	#
-	log_co10_mom0_k_model_scatter_noise = add_noise_co10(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10)
+	### log_co_mom0_k_model_scatter_noise
+	log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise = \
+		add_noise(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10, log_co21_mom0_k_model_scatter, log_co21_noise_k, xbins_co21)
 	#
-	cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0]) & (log_co10_mom0_k_model_scatter<range_co10_input[1]))
+	### cut
+	#
+	cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0]) & (log_co21_mom0_k_model_scatter>range_co21_input[0]))
 	log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+	log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
 	#
-	cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<range_co10_input[1]))
+	cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co21_mom0_k_model_scatter_noise>range_co21_input[0]))
 	log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
+	log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[cut]
+
+	return log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise
+
+
 
 #####################
 ### plot noise
@@ -500,52 +514,13 @@ log_co10_mom0_k_model_for_co21 = get_best_co10_parameter(log_co10_mom0_k, log_co
 best_co21_parameter = get_best_co21_parameter(log_co10_mom0_k_model_for_co21, log_co21_mom0_k, log_co21_noise_k, xbins_co21, nbins)
 #
 ### create best models
+log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise = \
+	create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, best_co10_parameter, best_co21_parameter)
 
 
-
-
-"""
-### model co10 mom-0 distribution
-## define plot range
-range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
-range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
-#
-## create log co10 vs log co21 scaling relation with log-normal intensity distributions
-# create co10 model lognormal distribution
-num_co10 = len(log_co10_mom0_k)
-popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
-log_co10_mom0_k_model = np.random.normal(popt[1], popt[2], num_co10)
-#log_co10_mom0_k_model = log_co10_mom0_k * 1.0
-log_co10_mom0_k_model.sort()
-#
-# create co10 model lognormal distribution
-log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 1.27, -0.5)#-0.7)
-#
-## adding scatter
-# add
-log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, 1.1)
-log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, 1.1)
-# cut
-log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
-log_co21_mom0_k_model_scatter[np.isnan(log_co21_mom0_k_model_scatter)] = -9999
-cut = np.where((log_co10_mom0_k_model_scatter>-9000) & (log_co21_mom0_k_model_scatter>-9000))
-#
-## adding noise
-log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise = \
-	add_noise(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10, log_co21_mom0_k_model_scatter, log_co21_noise_k, xbins_co21)
-
-## cut
-#
-cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0]) & (log_co21_mom0_k_model_scatter>range_co21_input[0]))
-log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
-log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
-#
-cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co21_mom0_k_model_scatter_noise>range_co21_input[0]))
-log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
-log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[cut]
-"""
-
-
+#####################
+### plot
+#####################
 ### plot obs and model mom-0
 figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=9, ncols=8)
@@ -557,7 +532,7 @@ ax2.grid(axis="both")
 ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
 ax2.set_xlabel("CO(2-1) mom-0 (K.km/s)")
 plt.rcParams["font.size"] = 16
-
+#
 # ax1
 ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
 ax1.hist(log_co10_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
@@ -583,7 +558,7 @@ ax1 = plt.subplot(gs[0:8,0:8])
 ax1.grid(axis="both")
 ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
 plt.rcParams["font.size"] = 16
-
+#
 # ax1
 ax1.plot(log_co10_mom0_k_model, log_co21_mom0_k_model, "o", color="black", alpha=1.0, markersize=3, markeredgewidth=0, zorder=1e22)
 ax1.plot(log_co10_mom0_k_model_scatter, log_co21_mom0_k_model_scatter, "o", color="blue", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e20, label="scatter")
@@ -596,6 +571,7 @@ ax1.set_ylim([-0.5,2.0])
 ax1.legend()
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0.png",dpi=200)
 #
+
 
 
 """
