@@ -209,6 +209,46 @@ def add_scatter(
 
 	return np.array(data_log_w_noise)
 
+def add_noise(
+	best_lognorm_co10,
+	log_co10_noise_k,
+	xbins_co10,
+	best_lognorm_co21,
+	log_co21_noise_k,
+	xbins_co21,
+	):
+	"""
+	"""
+	list_output_co10 = []
+	list_output_co21 = []
+	for i in range(len(xbins_co10)):
+		for j in range(len(xbins_co21)):
+			# create binned data
+			if i<=37:
+				if j<=37:
+					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]) & (best_lognorm_co21>=xbins_co21[j]) & (best_lognorm_co21<xbins_co21[j+1]))
+				else:
+					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]) & (best_lognorm_co21>=xbins_co21[j]))
+			else:
+				if j<37:
+					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co21>=xbins_co21[j]) & (best_lognorm_co21<xbins_co21[j+1]))
+				else:
+					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co21>=xbins_co21[j]))
+			#
+			binned_co10_data = best_lognorm_co10[cut_all]
+			num_co10_data = len(binned_co10_data)
+			#
+			binned_co21_data = best_lognorm_co21[cut_all]
+			num_co21_data = len(binned_co21_data)
+			# create noise
+			binned_co10_data_and_noise = np.log10(10**binned_co10_data + np.random.normal(0.0, 10**log_co10_noise_k[i], num_co10_data))
+			list_output_co10.extend(binned_co10_data_and_noise)
+			#
+			binned_co21_data_and_noise = np.log10(10**binned_co21_data + np.random.normal(0.0, 10**log_co21_noise_k[i], num_co21_data))
+			list_output_co21.extend(binned_co21_data_and_noise)
+
+	return np.array(list_output_co10), np.array(list_output_co21)
+
 
 #####################
 ### plot noise
@@ -254,9 +294,10 @@ log_co21_mom0_k_model_scatter[np.isnan(log_co21_mom0_k_model_scatter)] = -9999
 cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0]) & (log_co21_mom0_k_model_scatter>range_co21_input[0]))
 log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
 log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
-
-
-
+#
+## adding noise
+log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise = \
+	add_noise(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10, log_co21_mom0_k_model_scatter, log_co21_noise_k, xbins_co21)
 
 
 
@@ -277,6 +318,7 @@ plt.rcParams["font.size"] = 16
 ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
 ax1.hist(log_co10_mom0_k_model, normed=True, color="blue", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
 ax1.hist(log_co10_mom0_k_model_scatter, normed=True, color="green", alpha=0.5, bins=nbins, lw=0, range=range_co10_input)
+ax1.hist(log_co10_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.5, bins=nbins, lw=0, range=range_co10_input)
 ax1.set_xlim([0,2.0])
 #
 #ax2
@@ -284,6 +326,7 @@ ax1.set_xlim([0,2.0])
 ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, range=range_co21_input, lw=0)
 ax2.hist(log_co21_mom0_k_model, normed=True, color="blue", alpha=0.5, bins=nbins, range=range_co21_input, lw=0)
 ax2.hist(log_co21_mom0_k_model_scatter, normed=True, color="green", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
+ax2.hist(log_co21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
 ax2.set_xlim([-0.5,1.6])
 #
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo.png",dpi=200)
