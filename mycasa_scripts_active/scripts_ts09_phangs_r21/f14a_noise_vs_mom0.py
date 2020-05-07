@@ -1,7 +1,7 @@
 import os, re, sys, glob
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
-from scipy import stats
+from scipy.optimize import curve_fit
 plt.ioff()
 
 #
@@ -164,7 +164,7 @@ def plotter_noise(
 def func1(x, a, b, c):
 	"""
 	"""
-    return a  *np.exp(-(x-b)**2 / (2*c**2))
+	return a * np.exp(-(x-b)**2 / (2*c**2))
 
 def fit_func1(func1, data_x, data_y, guess):
     """
@@ -188,11 +188,14 @@ def fit_norm(
 	histo = np.histogram(data, range=histrange, bins=nbins, weights=weights)
 	x, y = np.delete(histo[1],-1), histo[0]
 	y = y/float(sum(y))
+	popt, residual = fit_func1(func1, x, y, [0.1,0.5,0.1])
+
+	return popt
 
 
 
 #####################
-### Main Procedure
+### plot noise
 #####################
 ### get filenames
 co10_mom0  = dir_proj + galname + "_co10/co10_04p0.moment0"
@@ -207,6 +210,9 @@ xbins_co10, xbins_co21 = plotter_noise( dir_proj, log_co10_mom0_k, log_co10_nois
 #
 
 
+#####################
+### modeling
+#####################
 ### model co10 mom-0 distribution
 ## define plot range
 range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
@@ -214,8 +220,9 @@ range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 #
 ## create log co10 vs log co21 scaling relation with log-normal intensity distributions
 # create co10 model lognormal distribution
-best_mean, best_disp, _ = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
-
+num_co10 = len(log_co10_mom0_k)
+popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
+best_norm_co10 = np.random.normal(popt[1], popt[2], num_co10)
 
 
 #
