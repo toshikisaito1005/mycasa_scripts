@@ -304,6 +304,13 @@ def create_best_co10_mode(
 	range_popt1   = np.linspace(-0.2, 0.2, 11)
 	range_popt2   = np.linspace(-0.2, 0.2, 11)
 	range_scatter = np.linspace(-0.2, 0.2, 11)
+	#
+	list_popt1 = []
+	list_popt2 = []
+	list_scatter = []
+	list_d = []
+	list_p = []
+	list_output = []
 	for i, j, k in itertools.product(range_popt1, range_popt2, range_scatter):
 		#
 		log_co10_mom0_k_model = np.random.normal(popt[1]+i, popt[2]+j, num_co10)
@@ -320,10 +327,17 @@ def create_best_co10_mode(
 		#
 		cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<range_co10_input[1]))
 		log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
-		# log_co10_mom0_k_model
-		# log_co10_mom0_k_model_scatter
-		# log_co10_mom0_k_model_scatter_noise
 		d, p = stats.ks_2samp(log_co10_mom0_k, log_co10_mom0_k_model_scatter)
+		#
+		list_popt1.append(i)
+		list_popt2.append(j)
+		list_scatter.append(k)
+		list_d.append(d)
+		list_p.append(p)
+		#
+	list_output = np.c_[list_popt1, list_popt2, list_scatter, list_d, list_p]
+
+	return list_output
 
 
 #####################
@@ -340,7 +354,7 @@ log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(c
 p84_co10, p50_co10, p16_co10, p84_co21, p50_co21, p16_co21 = print_things(log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k)
 xbins_co10, xbins_co21 = plotter_noise( dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile)
 #
-
+list_output = create_best_co10_mode(log_co10_mom0_k, log_co10_noise_k, xbins_co10, nbins)
 
 #####################
 ### modeling
