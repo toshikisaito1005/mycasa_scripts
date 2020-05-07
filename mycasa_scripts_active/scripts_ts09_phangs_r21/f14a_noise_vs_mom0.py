@@ -444,9 +444,9 @@ def create_best_models(
 	popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
 	#
 	### co21 parameters
-	co21_slope = best_co21_parameter[0]
-	co21_intercept = best_co21_parameter[1]
-	co21_scatter = best_co21_parameter[2]
+	co21_slope = best_co21_parameter[3]
+	co21_intercept = best_co21_parameter[4]
+	co21_scatter = best_co21_parameter[5]
 	range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 	num_co21 = len(log_co21_mom0_k)
 	#
@@ -518,8 +518,8 @@ for i in range(100):
 	### output
 	list_best_co10_parameter.append(best_co10_parameter.tolist())
 	list_best_co21_parameter.append(best_co21_parameter.tolist())
-	print(list_best_co10_parameter)
-	print(list_best_co21_parameter)
+	print(np.array(list_best_co10_parameter))
+	print(np.array(list_best_co21_parameter))
 	#
 np.savetxt(dir_proj+"eps/bootstrap_co10_models"+galname+".txt", np.array(list_best_co10_parameter))
 np.savetxt(dir_proj+"eps/bootstrap_co21_models"+galname+".txt", np.array(list_best_co21_parameter))
