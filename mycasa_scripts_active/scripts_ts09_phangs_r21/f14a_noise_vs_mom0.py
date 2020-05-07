@@ -321,7 +321,7 @@ def get_best_co10_parameter(
 				#
 				cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<range_co10_input[1]))
 				log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
-				d, p = stats.ks_2samp(log_co10_mom0_k, log_co10_mom0_k_model_scatter)
+				d, p = stats.ks_2samp(log_co10_mom0_k, log_co10_mom0_k_model_scatter_noise)
 				#
 				list_popt1.append(popt[1]+i)
 				list_popt2.append(popt[2]+j)
@@ -376,7 +376,7 @@ def get_best_co21_parameter(
 	num_co21 = len(log_co21_mom0_k)
 	#
 	range_slope = np.linspace(0.0, 0.3, 11)
-	range_intercept = np.linspace(-1.0, 0.0, 11)
+	range_intercept = np.linspace(-0.5, 0.5, 11)
 	range_scatter = np.linspace(-0.2, 0.2, 11)
 	#
 	list_slope = []
@@ -408,7 +408,7 @@ def get_best_co21_parameter(
 			#
 			cut = np.where((log_co21_mom0_k_model_scatter_noise>range_co21_input[0]) & (log_co21_mom0_k_model_scatter_noise<range_co21_input[1]))
 			log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[cut]
-			d, p = stats.ks_2samp(log_co21_mom0_k, log_co21_mom0_k_model_scatter)
+			d, p = stats.ks_2samp(log_co21_mom0_k, log_co21_mom0_k_model_scatter_noise)
 			#
 			list_slope.append(1.00+i)
 			list_intercept.append(-0.3+j)
