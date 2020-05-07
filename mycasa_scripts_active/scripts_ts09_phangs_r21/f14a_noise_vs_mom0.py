@@ -402,6 +402,7 @@ def get_best_co21_parameter(
 			this_intercept = -0.3+j
 			this_scatter = 1.0+k
 			#
+			log_co10_mom0_k_model.sort()
 			log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, this_slope, this_intercept)
 			#
 			log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, this_scatter)
