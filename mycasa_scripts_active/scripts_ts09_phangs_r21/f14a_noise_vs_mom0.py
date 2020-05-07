@@ -276,9 +276,10 @@ range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 #
 ## create log co10 vs log co21 scaling relation with log-normal intensity distributions
 # create co10 model lognormal distribution
-num_co10 = len(log_co10_mom0_k)
-popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
-log_co10_mom0_k_model = np.random.normal(popt[1], popt[2], num_co10)
+#num_co10 = len(log_co10_mom0_k)
+#popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
+#log_co10_mom0_k_model = np.random.normal(popt[1], popt[2], num_co10)
+log_co10_mom0_k_model = log_co10_mom0_k
 log_co10_mom0_k_model.sort()
 #
 # create co10 model lognormal distribution
@@ -316,18 +317,18 @@ plt.rcParams["font.size"] = 16
 
 # ax1
 ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
-ax1.hist(log_co10_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, range=range_co10_input, lw=0)
-ax1.hist(log_co10_mom0_k_model_scatter, normed=True, color="green", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
+#ax1.hist(log_co10_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, range=range_co10_input, lw=0)
+#ax1.hist(log_co10_mom0_k_model_scatter, normed=True, color="green", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
 ax1.hist(log_co10_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
-ax1.set_xlim([0,2.0])
+ax1.set_xlim([0,3.0])
 #
 #ax2
 # ax1
 ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, range=range_co21_input, lw=0)
-ax2.hist(log_co21_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, range=range_co21_input, lw=0)
-ax2.hist(log_co21_mom0_k_model_scatter, normed=True, color="green", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
+#ax2.hist(log_co21_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, range=range_co21_input, lw=0)
+#ax2.hist(log_co21_mom0_k_model_scatter, normed=True, color="green", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
 ax2.hist(log_co21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
-ax2.set_xlim([-0.5,1.6])
+ax2.set_xlim([-0.5,2.6])
 #
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo.png",dpi=200)
 
