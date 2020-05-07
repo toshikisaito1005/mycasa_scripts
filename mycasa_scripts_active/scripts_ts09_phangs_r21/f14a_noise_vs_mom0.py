@@ -287,9 +287,9 @@ def get_best_co10_parameter(
 	num_co10 = len(log_co10_mom0_k)
 	popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
 	#
-	range_popt1   = np.linspace(-0.2, 0.2, 11)
+	range_popt1   = np.linspace(-0.1, 0.1, 21)
 	range_popt2   = np.linspace(-0.05, 0.05, 11)
-	range_scatter = np.linspace(-0.5, 0.5, 21)
+	range_scatter = np.linspace(-0.5, 0.5, 11)
 	#
 	list_popt1 = []
 	list_popt2 = []
@@ -327,8 +327,8 @@ def get_best_co10_parameter(
 					list_popt1.append(popt[1]+i)
 					list_popt2.append(popt[2]+j)
 					list_scatter.append(1.0+k)
-					n = len(log_co21_mom0_k)
-					m = len(log_co21_mom0_k_model_scatter_noise)
+					n = len(log_co10_mom0_k)
+					m = len(log_co10_mom0_k_model_scatter_noise)
 					list_d.append(d*np.sqrt(n*m/(n+m)))
 					list_p.append(p)
 				#
