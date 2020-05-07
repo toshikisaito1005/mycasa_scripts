@@ -565,14 +565,17 @@ for i in range(100):
 	range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 	### plot obs and model mom-0
 	figure = plt.figure(figsize=(10,10))
-	gs = gridspec.GridSpec(nrows=9, ncols=8)
+	gs = gridspec.GridSpec(nrows=10, ncols=10)
 	plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
-	ax1 = plt.subplot(gs[0:4,0:8])
-	ax2 = plt.subplot(gs[5:9,0:8])
-	ax1.grid(axis="both")
-	ax2.grid(axis="both")
+	ax1 = plt.subplot(gs[0:2,0:10])
+	ax2 = plt.subplot(gs[4:6,0:10])
+	ax3 = plt.subplot(gs[8:10,0:10])
+	ax1.grid(axis="x")
+	ax2.grid(axis="x")
+	ax3.grid(axis="x")
 	ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
 	ax2.set_xlabel("CO(2-1) mom-0 (K.km/s)")
+	ax3.set_xlabel("$R_{21}$")
 	plt.rcParams["font.size"] = 16
 	#
 	# ax1
@@ -581,11 +584,18 @@ for i in range(100):
 	ax1.hist(log_co10_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
 	ax1.set_xlim([0,3.0])
 	#
-	#ax2
+	# ax2
 	ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
-	#ax2.hist(log_co21_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
 	ax2.hist(log_co21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
 	ax2.set_xlim([-0.5,2.6])
+	#
+	# ax3
+	log_r21_mom_k = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k)
+	log_r21_mom0_k_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise/10**log_co10_mom0_k_model_scatter_noise)
+	#
+	ax3.hist(log_r21_mom_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0)
+	ax3.hist(log_r21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0)
+	ax3.set_xlim([-1.0,0.5])
 	#
 	plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo"+galname+".png",dpi=200)
 
