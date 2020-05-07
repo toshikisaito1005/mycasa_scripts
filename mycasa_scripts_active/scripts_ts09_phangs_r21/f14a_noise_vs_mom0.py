@@ -369,7 +369,7 @@ def create_best_co10_model(
 		cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<range_co10_input[1]))
 		log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
 
-		return log_co10_mom0_k_model, log_co10_mom0_k_model_scatter_noise
+		return log_co10_mom0_k_model,log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise
 
 def create_best_co21_model(
 	log_co10_mom0_k_model,
@@ -433,7 +433,7 @@ def create_best_co21_model(
 		best_intercept = best_parameters[1]
 		best_scatter = best_parameters[2]
 		#
-		log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 1.27+best_slope, -0.5+best_intercept)
+		log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 1.00+best_slope, -0.3+best_intercept)
 		#
 		log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, 1.0+best_scatter)
 		log_co21_mom0_k_model_scatter[np.isnan(log_co21_mom0_k_model_scatter)] = -9999
@@ -448,7 +448,7 @@ def create_best_co21_model(
 		cut = np.where((log_co21_mom0_k_model_scatter_noise>range_co21_input[0]) & (log_co21_mom0_k_model_scatter_noise<range_co21_input[1]))
 		log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[cut]
 		
-		return log_co21_mom0_k_model, log_co21_mom0_k_model_scatter_noise
+		return log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise
 
 
 #####################
@@ -471,11 +471,11 @@ xbins_co10, xbins_co21 = plotter_noise( dir_proj, log_co10_mom0_k, log_co10_nois
 #####################
 ### create best co10 distribution
 best_co10_parameter = create_best_co10_model(log_co10_mom0_k, log_co10_noise_k, xbins_co10, nbins)
-log_co10_mom0_k_model, log_co10_mom0_k_model_scatter_noise = create_best_co10_model(log_co10_mom0_k, log_co10_noise_k, xbins_co10, nbins, best_co10_parameter)
+log_co10_mom0_k_model,log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise = create_best_co10_model(log_co10_mom0_k, log_co10_noise_k, xbins_co10, nbins, best_co10_parameter)
 #
 ### create best co21 distribution
 best_co21_parameter = create_best_co21_model(log_co10_mom0_k_model, log_co21_mom0_k, log_co21_noise_k, xbins_co21, nbins)
-log_co21_mom0_k_model, log_co21_mom0_k_model_scatter_noise = create_best_co21_model(log_co10_mom0_k_model, log_co21_mom0_k, log_co21_noise_k, xbins_co21, nbins, best_co21_parameter)
+log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise = create_best_co21_model(log_co10_mom0_k_model, log_co21_mom0_k, log_co21_noise_k, xbins_co21, nbins, best_co21_parameter)
 
 
 
@@ -535,12 +535,14 @@ plt.rcParams["font.size"] = 16
 
 # ax1
 ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
+ax1.hist(log_co10_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
 ax1.hist(log_co10_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
 ax1.set_xlim([0,3.0])
 #
 #ax2
 # ax1
 ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
+ax2.hist(log_co21_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
 ax2.hist(log_co21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
 ax2.set_xlim([-0.5,2.6])
 #
