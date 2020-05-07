@@ -301,6 +301,7 @@ def create_best_co10_mode(
 	popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
 	#
 	range_popt1 = np.linspace(-0.2, 0.2, 10)
+	range_popt2 = np.linspace(-0.2, 0.2, 10)
 	##################################################################################################
 	#
 	log_co10_mom0_k_model = np.random.normal(popt[1], popt[2], num_co10)
