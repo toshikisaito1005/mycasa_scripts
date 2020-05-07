@@ -342,15 +342,15 @@ plt.rcParams["font.size"] = 16
 # ax1
 ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
 ax1.hist(log_co10_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, range=range_co10_input, lw=0)
-#ax1.hist(log_co10_mom0_k_model_scatter, normed=True, color="green", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
-ax1.hist(log_co10_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
+ax1.hist(log_co10_mom0_k_model_scatter, normed=True, color="green", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
+#ax1.hist(log_co10_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
 ax1.set_xlim([0,3.0])
 #
 #ax2
 # ax1
 ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, range=range_co21_input, lw=0)
 ax2.hist(log_co21_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, range=range_co21_input, lw=0)
-#ax2.hist(log_co21_mom0_k_model_scatter, normed=True, color="green", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
+ax2.hist(log_co21_mom0_k_model_scatter, normed=True, color="green", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
 ax2.hist(log_co21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
 ax2.set_xlim([-0.5,2.6])
 #
