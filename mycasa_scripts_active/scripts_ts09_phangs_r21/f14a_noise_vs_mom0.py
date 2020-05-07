@@ -226,6 +226,29 @@ def add_scatter(
 
 	return np.array(data_log_w_noise)
 
+def add_noise_co10(
+	best_lognorm_co10,
+	log_co10_noise_k,
+	xbins_co10,
+	):
+	"""
+	"""
+	list_output_co10 = []
+	for i in range(len(xbins_co10)):
+			# create binned data
+			if i<=37:
+				cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]))
+			else:
+				cut_all = np.where((best_lognorm_co10>=xbins_co10[i]))
+			#
+			binned_co10_data = best_lognorm_co10[cut_all]
+			num_co10_data = len(binned_co10_data)
+			# create noise
+			binned_co10_data_and_noise = np.log10(10**binned_co10_data + np.random.normal(0.0, 10**log_co10_noise_k[i], num_co10_data))
+			list_output_co10.extend(binned_co10_data_and_noise)
+
+	return np.array(list_output_co10)
+
 def add_noise(
 	best_lognorm_co10,
 	log_co10_noise_k,
@@ -266,7 +289,6 @@ def add_noise(
 
 	return np.array(list_output_co10), np.array(list_output_co21)
 
-
 #####################
 ### plot noise
 #####################
@@ -291,6 +313,24 @@ xbins_co10, xbins_co21 = plotter_noise( dir_proj, log_co10_mom0_k, log_co10_nois
 range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
 range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 #
+num_co10 = len(log_co10_mom0_k)
+popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
+#
+log_co10_mom0_k_model = np.random.normal(popt[1], popt[2], num_co10)
+#
+log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, 1.1)
+log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
+cut = np.where((log_co10_mom0_k_model_scatter>-9000) & (log_co21_mom0_k_model_scatter>-9000))
+#
+log_co10_mom0_k_model_scatter_noise = add_noise_co10(best_lognorm_co10, log_co10_noise_k, xbins_co10)
+#
+cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0]))
+log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+# log_co10_mom0_k_model
+# 
+
+
+"""
 ## create log co10 vs log co21 scaling relation with log-normal intensity distributions
 # create co10 model lognormal distribution
 num_co10 = len(log_co10_mom0_k)
@@ -324,6 +364,8 @@ log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
 cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co21_mom0_k_model_scatter_noise>range_co21_input[0]))
 log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
 log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[cut]
+"""
+
 
 
 
