@@ -271,14 +271,16 @@ p84_co10, p50_co10, p16_co10, p84_co21, p50_co21, p16_co21 = print_things(log_co
 xbins_co10, xbins_co21 = plotter_noise( dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile)
 
 
-
-
-
 ### model co10 mom-0 distribution
 ## define plot range
 range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
 range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 #
+
+
+
+
+
 ## create log co10 vs log co21 scaling relation with log-normal intensity distributions
 # create co10 model lognormal distribution
 num_input = len(log_co10_mom0_k)
