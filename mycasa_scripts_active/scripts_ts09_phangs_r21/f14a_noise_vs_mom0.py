@@ -487,9 +487,9 @@ def print_boot(
 	list,
 	text,
 	):
-	list_median = str(np.percentile(list_best_co10_parameter[0],50))
-	list_max = str(np.max(list_best_co10_parameter[0]))
-	list_min = str(np.min(list_best_co10_parameter[0]))
+	list_median = str(np.percentile(list_best_co10_parameter,50))
+	list_max = str(np.max(list_best_co10_parameter))
+	list_min = str(np.min(list_best_co10_parameter))
 	print("# " + text)
 	print("# median = " + list_median)
 	print("# max = " + list_max)
@@ -531,12 +531,12 @@ for i in range(100):
 	list_best_co10_parameter.append(best_co10_parameter.tolist())
 	list_best_co21_parameter.append(best_co21_parameter.tolist())
 	# print
-	print_boot(list_best_co10_parameter[0], "co10_norm_mean")
-	print_boot(list_best_co10_parameter[1], "co10_norm_disp")
-	print_boot(list_best_co10_parameter[2], "co10_scatter")
-	print_boot(list_best_co21_parameter[0], "co21_norm_mean")
-	print_boot(list_best_co21_parameter[1], "co21_norm_disp")
-	print_boot(list_best_co21_parameter[2], "co21_scatter")
+	print_boot(np.array(list_best_co10_parameter)[:,0], "co10_norm_mean")
+	print_boot(np.array(list_best_co10_parameter)[:,1], "co10_norm_disp")
+	print_boot(np.array(list_best_co10_parameter)[:,2], "co10_scatter")
+	print_boot(np.array(list_best_co21_parameter)[:,0], "co21_norm_mean")
+	print_boot(np.array(list_best_co21_parameter)[:,1], "co21_norm_disp")
+	print_boot(np.array(list_best_co21_parameter)[:,2], "co21_scatter")
 	#
 np.savetxt(dir_proj+"eps/bootstrap_co10_models"+galname+".txt", np.array(list_best_co10_parameter))
 np.savetxt(dir_proj+"eps/bootstrap_co21_models"+galname+".txt", np.array(list_best_co21_parameter))
