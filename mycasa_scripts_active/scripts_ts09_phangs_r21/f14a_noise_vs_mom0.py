@@ -279,7 +279,7 @@ range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 #num_co10 = len(log_co10_mom0_k)
 #popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
 #log_co10_mom0_k_model = np.random.normal(popt[1], popt[2], num_co10)
-log_co10_mom0_k_model = log_co10_mom0_k
+log_co10_mom0_k_model = log_co10_mom0_k * 1.0
 log_co10_mom0_k_model.sort()
 #
 # create co10 model lognormal distribution
@@ -300,7 +300,7 @@ log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
 log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise = \
 	add_noise(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10, log_co21_mom0_k_model_scatter, log_co21_noise_k, xbins_co21)
 
-
+## cut
 
 
 ### plot obs and model mom-0
@@ -346,8 +346,8 @@ plt.rcParams["font.size"] = 16
 
 # ax1
 ax1.plot(log_co10_mom0_k_model, log_co21_mom0_k_model, "o", color="black", alpha=1.0, markersize=3, markeredgewidth=0, zorder=1e22)
-ax1.plot(log_co10_mom0_k_model_scatter, log_co21_mom0_k_model_scatter, "o", color="red", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e18, label="scatter and noise")
-ax1.plot(log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise, "o", color="blue", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e20, label="scatter")
+ax1.plot(log_co10_mom0_k_model_scatter, log_co21_mom0_k_model_scatter, "o", color="red", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e18, label="scatter")
+ax1.plot(log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise, "o", color="blue", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e20, label="scatter and noise")
 ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="grey", alpha=0.2, markersize=10, markeredgewidth=0)
 ax1.plot([-0.5,3.0], [-0.5,3.0], "k--", lw=5)
 ax1.set_xlim([-0.5,3.0])
