@@ -298,7 +298,7 @@ def get_best_co10_parameter(
 	list_p = []
 	list_output = []
 	numiter = 0
-	numall = 11*11*11
+	numall = 11*11*21
 	if best_parameters==None:
 		done = glob.glob(dir_proj+"eps/best_co10_model_parameter.txt")
 		if not done:
@@ -390,7 +390,7 @@ def get_best_co21_parameter(
 	list_p = []
 	list_output = []
 	numiter = 0
-	numall = 11**3
+	numall = 11*11*11
 	done = glob.glob(dir_proj+"eps/best_co21_model_parameter.txt")
 	if not done:
 		for i, j, k in itertools.product(range_slope, range_intercept, range_scatter):
@@ -427,6 +427,7 @@ def get_best_co21_parameter(
 		best_parameter = list_output[np.argmin(list_output[:,3])]
 		print(best_parameter)
 		#
+		np.savetxt(dir_proj+"eps/best_co21_model_all_parameters.txt", np.array(list_output))
 		np.savetxt(dir_proj+"eps/best_co21_model_parameter.txt", np.array(best_parameter))
 	else:
 		print("### skip creating co21 model because of best_co21_model_parameter.txt")
