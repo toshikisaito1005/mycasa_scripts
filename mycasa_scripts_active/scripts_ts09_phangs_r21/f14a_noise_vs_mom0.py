@@ -27,6 +27,11 @@ def func1(x, a, b, c):
 	"""
 	return a * np.exp(-(x-b)**2 / (2*c**2))
 
+def func2(x, a1, b1, c1, a2, b2, c2):
+	"""
+	"""
+	return a1 * np.exp(-(x-b1)**2/(2*c1**2)) + a2 * np.exp(-(x-b2)**2/(2*c2**2))
+
 def func_co10_vs_co21(x, a, b):
 	"""
 	"""
@@ -182,6 +187,17 @@ def fit_func1(func1, data_x, data_y, guess):
                            
     return popt, residual
 
+def fit_func2(func1, data_x, data_y, guess):
+    """
+    """
+    popt, pcov = curve_fit(func2,
+                           data_x, data_y,
+                           p0=guess)
+    best_func = func2(data_x,popt[0],popt[1],popt[2],popt[3],popt[4],popt[5])
+    residual = data_y - best_func
+                           
+    return popt, residual
+
 def fit_norm(
 	data,
 	histrange,
@@ -193,7 +209,7 @@ def fit_norm(
 	histo = np.histogram(data, range=histrange, bins=nbins, weights=weights)
 	x, y = np.delete(histo[1],-1), histo[0]
 	y = y/float(sum(y))
-	popt, residual = fit_func1(func1, x, y, [0.1,0.5,0.1])
+	popt, residual = fit_func1(func1, x, y, [0.05,0.74,0.26])
 
 	return popt
 
@@ -276,10 +292,10 @@ range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 #
 ## create log co10 vs log co21 scaling relation with log-normal intensity distributions
 # create co10 model lognormal distribution
-#num_co10 = len(log_co10_mom0_k)
-#popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
-#log_co10_mom0_k_model = np.random.normal(popt[1], popt[2], num_co10)
-log_co10_mom0_k_model = log_co10_mom0_k * 1.0
+num_co10 = len(log_co10_mom0_k)
+popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
+log_co10_mom0_k_model = np.random.normal(popt[1], popt[2], num_co10)
+#log_co10_mom0_k_model = log_co10_mom0_k * 1.0
 log_co10_mom0_k_model.sort()
 #
 # create co10 model lognormal distribution
@@ -324,7 +340,7 @@ plt.rcParams["font.size"] = 16
 
 # ax1
 ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
-#ax1.hist(log_co10_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, range=range_co10_input, lw=0)
+ax1.hist(log_co10_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, range=range_co10_input, lw=0)
 #ax1.hist(log_co10_mom0_k_model_scatter, normed=True, color="green", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
 ax1.hist(log_co10_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
 ax1.set_xlim([0,3.0])
@@ -332,7 +348,7 @@ ax1.set_xlim([0,3.0])
 #ax2
 # ax1
 ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, range=range_co21_input, lw=0)
-#ax2.hist(log_co21_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, range=range_co21_input, lw=0)
+ax2.hist(log_co21_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, range=range_co21_input, lw=0)
 #ax2.hist(log_co21_mom0_k_model_scatter, normed=True, color="green", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
 ax2.hist(log_co21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
 ax2.set_xlim([-0.5,2.6])
