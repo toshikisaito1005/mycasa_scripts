@@ -325,7 +325,7 @@ def get_best_co10_parameter(
 				#
 				list_popt1.append(popt[1]+i)
 				list_popt2.append(popt[2]+j)
-				list_scatter.append(k)
+				list_scatter.append(1.0+k)
 				list_d.append(d)
 				list_p.append(p)
 				#
@@ -409,9 +409,9 @@ def get_best_co21_parameter(
 			log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[cut]
 			d, p = stats.ks_2samp(log_co21_mom0_k, log_co21_mom0_k_model_scatter)
 			#
-			list_slope.append(i)
-			list_intercept.append(j)
-			list_scatter.append(k)
+			list_slope.append(1.00+i)
+			list_intercept.append(-0.3+j)
+			list_scatter.append(1.0+k)
 			list_d.append(d)
 			list_p.append(p)
 			#
@@ -454,12 +454,12 @@ def create_best_models(
 	log_co10_mom0_k_model = np.random.normal(co10_mean, co10_disp, num_co10)
 	log_co10_mom0_k_model.sort()
 	#
-	log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 1.00+co21_slope, -0.3+co21_intercept)
+	log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, co21_slope, co21_intercept)
 	#
 	### log_co_mom0_k_model_scatter
 	# add scatter
-	log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, 1.0+co10_scatter)
-	log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, 1.0+co21_scatter)
+	log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, co10_scatter)
+	log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, co21_scatter)
 	# cut
 	log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
 	log_co21_mom0_k_model_scatter[np.isnan(log_co21_mom0_k_model_scatter)] = -9999
@@ -534,96 +534,99 @@ for i in range(100):
 	print_boot(np.array(list_best_co10_parameter)[:,0], "co10_norm_mean")
 	print_boot(np.array(list_best_co10_parameter)[:,1], "co10_norm_disp")
 	print_boot(np.array(list_best_co10_parameter)[:,2], "co10_scatter")
-	print_boot(np.array(list_best_co21_parameter)[:,0], "co21_norm_mean")
-	print_boot(np.array(list_best_co21_parameter)[:,1], "co21_norm_disp")
+	print_boot(np.array(list_best_co21_parameter)[:,0], "slope")
+	print_boot(np.array(list_best_co21_parameter)[:,1], "intercept")
 	print_boot(np.array(list_best_co21_parameter)[:,2], "co21_scatter")
+	### create best models
+	log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise = \
+		create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, best_co10_parameter, best_co21_parameter)
 	#
+	#
+	#
+	#
+	#####################
+	### plot
+	#####################
+	### plot obs and model mom-0
+	figure = plt.figure(figsize=(10,10))
+	gs = gridspec.GridSpec(nrows=9, ncols=8)
+	plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
+	ax1 = plt.subplot(gs[0:4,0:8])
+	ax2 = plt.subplot(gs[5:9,0:8])
+	ax1.grid(axis="both")
+	ax2.grid(axis="both")
+	ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
+	ax2.set_xlabel("CO(2-1) mom-0 (K.km/s)")
+	plt.rcParams["font.size"] = 16
+	#
+	# ax1
+	ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
+	#ax1.hist(log_co10_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
+	ax1.hist(log_co10_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
+	ax1.set_xlim([0,3.0])
+	#
+	#ax2
+	# ax1
+	ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
+	#ax2.hist(log_co21_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
+	ax2.hist(log_co21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
+	ax2.set_xlim([-0.5,2.6])
+	#
+	plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo"+galname+".png",dpi=200)
+
+
+	### plot obs and model mom-0
+	figure = plt.figure(figsize=(10,10))
+	gs = gridspec.GridSpec(nrows=8, ncols=8)
+	plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
+	ax1 = plt.subplot(gs[0:8,0:8])
+	ax1.grid(axis="both")
+	ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
+	plt.rcParams["font.size"] = 16
+	#
+	# ax1
+	ax1.plot(log_co10_mom0_k_model, log_co21_mom0_k_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=1e22)
+	ax1.plot(log_co10_mom0_k_model_scatter, log_co21_mom0_k_model_scatter, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter")
+	ax1.plot(log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
+	ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0)
+	ax1.plot([-0.5,3.0], [-0.5,3.0], "k--", lw=5)
+	ax1.set_xlim([-0.5,2.0])
+	ax1.set_ylim([-0.5,2.0])
+	#
+	ax1.legend()
+	plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0"+galname+".png",dpi=200)
+
+
+	### plot obs and model mom-0
+	#
+	r21 = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k)
+	r21_model = np.log10(10**log_co21_mom0_k_model/10**log_co10_mom0_k_model)
+	r21_model_scatter = np.log10(10**log_co21_mom0_k_model_scatter/10**log_co10_mom0_k_model_scatter)
+	r21_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise/10**log_co10_mom0_k_model_scatter_noise)
+	#
+	figure = plt.figure(figsize=(10,10))
+	gs = gridspec.GridSpec(nrows=8, ncols=8)
+	plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
+	ax1 = plt.subplot(gs[0:8,0:8])
+	ax1.grid(axis="both")
+	ax1.set_xlabel("CO(2-1) mom-0 (K.km/s)")
+	plt.rcParams["font.size"] = 16
+
+	# ax1
+	ax1.plot(log_co21_mom0_k_model, r21_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=1e22)
+	ax1.plot(log_co21_mom0_k_model_scatter, r21_model_scatter, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter")
+	ax1.plot(log_co21_mom0_k_model_scatter_noise, r21_model_scatter_noise, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
+	ax1.plot(log_co21_mom0_k, r21, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0)
+	ax1.set_xlim([-0.5,2.0])
+	ax1.set_ylim([-1.2,0.5])
+	#
+	ax1.legend()
+	plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21"+galname+".png",dpi=200)
+
+
 np.savetxt(dir_proj+"eps/bootstrap_co10_models"+galname+".txt", np.array(list_best_co10_parameter))
 np.savetxt(dir_proj+"eps/bootstrap_co21_models"+galname+".txt", np.array(list_best_co21_parameter))
 #
-### create best models
-log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise = \
-	create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, best_co10_parameter, best_co21_parameter)
-
-
-#####################
-### plot
-#####################
-### plot obs and model mom-0
-figure = plt.figure(figsize=(10,10))
-gs = gridspec.GridSpec(nrows=9, ncols=8)
-plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
-ax1 = plt.subplot(gs[0:4,0:8])
-ax2 = plt.subplot(gs[5:9,0:8])
-ax1.grid(axis="both")
-ax2.grid(axis="both")
-ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
-ax2.set_xlabel("CO(2-1) mom-0 (K.km/s)")
-plt.rcParams["font.size"] = 16
-#
-# ax1
-ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
-#ax1.hist(log_co10_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
-ax1.hist(log_co10_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
-ax1.set_xlim([0,3.0])
-#
-#ax2
-# ax1
-ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
-#ax2.hist(log_co21_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
-ax2.hist(log_co21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
-ax2.set_xlim([-0.5,2.6])
-#
-plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo"+galname+".png",dpi=200)
-
-
-### plot obs and model mom-0
-figure = plt.figure(figsize=(10,10))
-gs = gridspec.GridSpec(nrows=8, ncols=8)
-plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
-ax1 = plt.subplot(gs[0:8,0:8])
-ax1.grid(axis="both")
-ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
-plt.rcParams["font.size"] = 16
-#
-# ax1
-ax1.plot(log_co10_mom0_k_model, log_co21_mom0_k_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=1e22)
-ax1.plot(log_co10_mom0_k_model_scatter, log_co21_mom0_k_model_scatter, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter")
-ax1.plot(log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
-ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0)
-ax1.plot([-0.5,3.0], [-0.5,3.0], "k--", lw=5)
-ax1.set_xlim([-0.5,2.0])
-ax1.set_ylim([-0.5,2.0])
-#
-ax1.legend()
-plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0"+galname+".png",dpi=200)
-
-
-### plot obs and model mom-0
-#
-r21 = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k)
-r21_model = np.log10(10**log_co21_mom0_k_model/10**log_co10_mom0_k_model)
-r21_model_scatter = np.log10(10**log_co21_mom0_k_model_scatter/10**log_co10_mom0_k_model_scatter)
-r21_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise/10**log_co10_mom0_k_model_scatter_noise)
-#
-figure = plt.figure(figsize=(10,10))
-gs = gridspec.GridSpec(nrows=8, ncols=8)
-plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
-ax1 = plt.subplot(gs[0:8,0:8])
-ax1.grid(axis="both")
-ax1.set_xlabel("CO(2-1) mom-0 (K.km/s)")
-plt.rcParams["font.size"] = 16
-
-# ax1
-ax1.plot(log_co21_mom0_k_model, r21_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=1e22)
-ax1.plot(log_co21_mom0_k_model_scatter, r21_model_scatter, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter")
-ax1.plot(log_co21_mom0_k_model_scatter_noise, r21_model_scatter_noise, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
-ax1.plot(log_co21_mom0_k, r21, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0)
-ax1.set_xlim([-0.5,2.0])
-ax1.set_ylim([-1.2,0.5])
-#
-ax1.legend()
-plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21"+galname+".png",dpi=200)
 
 
 #
