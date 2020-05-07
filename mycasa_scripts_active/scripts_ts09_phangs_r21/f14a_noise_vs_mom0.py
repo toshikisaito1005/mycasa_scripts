@@ -398,7 +398,7 @@ def get_best_co21_parameter(
 			if numiter % 500 == 0:
 				print("### create co21 model " + str(numiter).zfill(4) + "/" + str(numall))
 			#
-			this_slope = 0.9+i
+			this_slope = 1.0+i
 			this_intercept = -0.3+j
 			this_scatter = 1.0+k
 			#
