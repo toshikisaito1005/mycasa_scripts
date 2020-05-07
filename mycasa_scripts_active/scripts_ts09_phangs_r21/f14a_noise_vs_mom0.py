@@ -492,8 +492,8 @@ def print_boot(
 	list_min = str(np.min(listdata))
 	print("# " + text)
 	print("# median = " + list_median)
-	print("# max = " + list_max)
-	print("# min = " + list_min)
+	print("# max    = " + list_max)
+	print("# min    = " + list_min)
 
 
 #####################
