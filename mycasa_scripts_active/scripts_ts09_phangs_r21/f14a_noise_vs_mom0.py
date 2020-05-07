@@ -349,9 +349,9 @@ def create_best_co10_model(
 		#
 		print("### create best co10 model")
 		#
-		best_mean = best_parameter[0]
-		best_disp = best_parameter[1]
-		best_scatter = best_parameter[2]
+		best_mean = best_parameters[0]
+		best_disp = best_parameters[1]
+		best_scatter = best_parameters[2]
 		#
 		log_co10_mom0_k_model = np.random.normal(popt[1]+best_mean, popt[2]+best_disp, num_co10)
 		log_co10_mom0_k_model.sort()
@@ -429,13 +429,13 @@ def create_best_co21_model(
 	else:
 		print("### create best co21 model")
 		#
-		best_slope = best_parameter[0]
-		best_intercept = best_parameter[1]
-		best_scatter = best_parameter[2]
+		best_slope = best_parameters[0]
+		best_intercept = best_parameters[1]
+		best_scatter = best_parameters[2]
 		#
-		log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 1.27+i, -0.5+j)
+		log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 1.27+best_slope, -0.5+best_intercept)
 		#
-		log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, 1.0+k)
+		log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, 1.0+best_scatter)
 		log_co21_mom0_k_model_scatter[np.isnan(log_co21_mom0_k_model_scatter)] = -9999
 		cut = np.where((log_co21_mom0_k_model_scatter>-9000))
 		log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
@@ -447,7 +447,8 @@ def create_best_co21_model(
 		#
 		cut = np.where((log_co21_mom0_k_model_scatter_noise>range_co21_input[0]) & (log_co21_mom0_k_model_scatter_noise<range_co21_input[1]))
 		log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[cut]
-		#
+		
+		return log_co21_mom0_k_model, log_co21_mom0_k_model_scatter_noise
 
 
 #####################
@@ -474,6 +475,7 @@ log_co10_mom0_k_model, log_co10_mom0_k_model_scatter_noise = create_best_co10_mo
 #
 ### create best co21 distribution
 best_co21_parameter = create_best_co21_model(log_co10_mom0_k_model, log_co21_mom0_k, log_co21_noise_k, xbins_co21, nbins)
+log_co21_mom0_k_model, log_co21_mom0_k_model_scatter_noise = create_best_co21_model(log_co10_mom0_k_model, log_co21_mom0_k, log_co21_noise_k, xbins_co21, nbins, best_co21_parameter)
 
 
 
@@ -539,9 +541,7 @@ ax1.set_xlim([0,3.0])
 #ax2
 # ax1
 ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
-ax2.hist(log_co21_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
-#ax2.hist(log_co21_mom0_k_model_scatter, normed=True, color="green", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
-#ax2.hist(log_co21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
+ax2.hist(log_co21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
 ax2.set_xlim([-0.5,2.6])
 #
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo.png",dpi=200)
