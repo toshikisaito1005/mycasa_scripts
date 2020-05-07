@@ -413,7 +413,9 @@ def get_best_co21_parameter(
 			list_slope.append(1.00+i)
 			list_intercept.append(-0.3+j)
 			list_scatter.append(1.0+k)
-			list_d.append(d)
+			n = len(log_co21_mom0_k)
+			m = len(log_co21_mom0_k_model_scatter_noise)
+			list_d.append(d*np.sqrt(n*m/(n+m)))
 			list_p.append(p)
 			#
 		list_output = np.c_[list_slope, list_intercept, list_scatter, list_d, list_p]
