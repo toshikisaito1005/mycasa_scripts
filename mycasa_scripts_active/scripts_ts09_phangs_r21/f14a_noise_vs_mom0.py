@@ -29,11 +29,6 @@ def func1(x, a, b, c):
 	"""
 	return a * np.exp(-(x-b)**2 / (2*c**2))
 
-def func2(x, a1, b1, c1, a2, b2, c2):
-	"""
-	"""
-	return a1 * np.exp(-(x-b1)**2/(2*c1**2)) + a2 * np.exp(-(x-b2)**2/(2*c2**2))
-
 def func_co10_vs_co21(x, a, b):
 	"""
 	"""
@@ -185,17 +180,6 @@ def fit_func1(func1, data_x, data_y, guess):
                            data_x, data_y,
                            p0=guess)
     best_func = func1(data_x,popt[0],popt[1],popt[2])
-    residual = data_y - best_func
-                           
-    return popt, residual
-
-def fit_func2(func1, data_x, data_y, guess):
-    """
-    """
-    popt, pcov = curve_fit(func2,
-                           data_x, data_y,
-                           p0=guess)
-    best_func = func2(data_x,popt[0],popt[1],popt[2],popt[3],popt[4],popt[5])
     residual = data_y - best_func
                            
     return popt, residual
@@ -531,16 +515,18 @@ for i in range(100):
 	### get best parameters for co21 model
 	best_co21_parameter = get_best_co21_parameter(dir_proj, log_co10_mom0_k_model_for_co21, log_co21_mom0_k, log_co21_noise_k, xbins_co21, nbins)
 	#
-	### create best models
-	log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise = \
-		create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, best_co10_parameter, best_co21_parameter)
-	#
 	### output
 	list_best_co10_parameter.append(best_co10_parameter.tolist())
 	list_best_co21_parameter.append(best_co21_parameter.tolist())
+	print(list_best_co10_parameter)
+	print(list_best_co21_parameter)
 	#
-np.savetxt(dir_proj+"eps/bootstrap_co10_models.txt", np.array(list_best_co10_parameter))
-np.savetxt(dir_proj+"eps/bootstrap_co21_models.txt", np.array(list_best_co21_parameter))
+np.savetxt(dir_proj+"eps/bootstrap_co10_models"+galname+".txt", np.array(list_best_co10_parameter))
+np.savetxt(dir_proj+"eps/bootstrap_co21_models"+galname+".txt", np.array(list_best_co21_parameter))
+#
+### create best models
+log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise = \
+	create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, best_co10_parameter, best_co21_parameter)
 
 
 #####################
@@ -594,8 +580,6 @@ ax1.set_ylim([-0.5,2.0])
 #
 ax1.legend()
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0"+galname+".png",dpi=200)
-#
-
 
 
 ### plot obs and model mom-0
@@ -623,8 +607,6 @@ ax1.set_ylim([-1.2,0.5])
 #
 ax1.legend()
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21"+galname+".png",dpi=200)
-#
-
 
 
 #
