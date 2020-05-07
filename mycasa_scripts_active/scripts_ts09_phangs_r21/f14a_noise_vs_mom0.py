@@ -346,7 +346,28 @@ def create_best_co10_model(
 		#
 		return best_parameter
 	else:
-		
+		#
+		best_mean = best_co10_parameter[0]
+		best_disp = best_co10_parameter[1]
+		best_scatter = best_co10_parameter[2]
+		#
+		log_co10_mom0_k_model = np.random.normal(popt[1]+best_mean, popt[2]+best_disp, num_co10)
+		log_co10_mom0_k_model.sort()
+		#
+		log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, 1.0+best_scatter)
+		log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
+		cut = np.where((log_co10_mom0_k_model_scatter>-9000))
+		log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+		#
+		log_co10_mom0_k_model_scatter_noise = add_noise_co10(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10)
+		#
+		cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0]) & (log_co10_mom0_k_model_scatter<range_co10_input[1]))
+		log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+		#
+		cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<range_co10_input[1]))
+		log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
+
+		return log_co10_mom0_k_model, log_co10_mom0_k_model_scatter_noise
 
 
 #####################
@@ -363,7 +384,10 @@ log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(c
 p84_co10, p50_co10, p16_co10, p84_co21, p50_co21, p16_co21 = print_things(log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k)
 xbins_co10, xbins_co21 = plotter_noise( dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile)
 #
-best_co10_parameter = create_best_co10_model(log_co10_mom0_k, log_co10_noise_k, xbins_co10, nbins)
+best_co10_parameter = \
+	create_best_co10_model(log_co10_mom0_k, log_co10_noise_k, xbins_co10, nbins)
+log_co10_mom0_k_model, log_co10_mom0_k_model_scatter_noise = \
+	create_best_co10_model(log_co10_mom0_k, log_co10_noise_k, xbins_co10, nbins, best_co10_parameter)
 
 
 #####################
@@ -426,25 +450,23 @@ ax2.set_xlabel("CO(2-1) mom-0 (K.km/s)")
 plt.rcParams["font.size"] = 16
 
 # ax1
-ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
-ax1.hist(log_co10_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, range=range_co10_input, lw=0)
-ax1.hist(log_co10_mom0_k_model_scatter, normed=True, color="green", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
-#ax1.hist(log_co10_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
+ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
+ax1.hist(log_co10_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
 ax1.set_xlim([0,3.0])
 #
 #ax2
 # ax1
-ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, range=range_co21_input, lw=0)
-ax2.hist(log_co21_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, range=range_co21_input, lw=0)
-ax2.hist(log_co21_mom0_k_model_scatter, normed=True, color="green", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
-ax2.hist(log_co21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
+#ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, range=range_co21_input, lw=0)
+#ax2.hist(log_co21_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, range=range_co21_input, lw=0)
+#ax2.hist(log_co21_mom0_k_model_scatter, normed=True, color="green", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
+#ax2.hist(log_co21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
 ax2.set_xlim([-0.5,2.6])
 #
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo.png",dpi=200)
 
 
 
-
+"""
 ### plot obs and model mom-0
 figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=8, ncols=8)
@@ -493,7 +515,7 @@ ax1.set_ylim([-1.2,0.5])
 ax1.legend()
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21.png",dpi=200)
 #
-
+"""
 
 #
 os.system("rm -rf *.last")
