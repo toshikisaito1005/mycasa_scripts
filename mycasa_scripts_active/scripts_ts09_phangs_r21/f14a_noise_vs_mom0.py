@@ -292,15 +292,22 @@ log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, 1.5)
 # cut
 log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
 log_co21_mom0_k_model_scatter[np.isnan(log_co21_mom0_k_model_scatter)] = -9999
-cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0]) & (log_co21_mom0_k_model_scatter>range_co21_input[0]))
-log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
-log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
+cut = np.where((log_co10_mom0_k_model_scatter>-9000) & (log_co21_mom0_k_model_scatter>-9000))
 #
 ## adding noise
 log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise = \
 	add_noise(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10, log_co21_mom0_k_model_scatter, log_co21_noise_k, xbins_co21)
 
 ## cut
+#
+cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0]) & (log_co21_mom0_k_model_scatter>range_co21_input[0]))
+log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
+#
+cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co21_mom0_k_model_scatter_noise>range_co21_input[0]))
+log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
+log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[cut]
+
 
 
 ### plot obs and model mom-0
@@ -346,8 +353,8 @@ plt.rcParams["font.size"] = 16
 
 # ax1
 ax1.plot(log_co10_mom0_k_model, log_co21_mom0_k_model, "o", color="black", alpha=1.0, markersize=3, markeredgewidth=0, zorder=1e22)
-ax1.plot(log_co10_mom0_k_model_scatter, log_co21_mom0_k_model_scatter, "o", color="red", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e18, label="scatter")
-ax1.plot(log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise, "o", color="blue", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e20, label="scatter and noise")
+ax1.plot(log_co10_mom0_k_model_scatter, log_co21_mom0_k_model_scatter, "o", color="blue", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e20, label="scatter")
+ax1.plot(log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise, "o", color="red", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e18, label="scatter and noise")
 ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="grey", alpha=0.2, markersize=10, markeredgewidth=0)
 ax1.plot([-0.5,3.0], [-0.5,3.0], "k--", lw=5)
 ax1.set_xlim([-0.5,3.0])
@@ -355,6 +362,33 @@ ax1.set_ylim([-0.5,3.0])
 #
 ax1.legend()
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0.png",dpi=200)
+#
+
+### plot obs and model mom-0
+#
+r21 = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k)
+r21_model = np.log10(10**log_co21_mom0_k_model/10**log_co10_mom0_k_model)
+r21_model_scatter = np.log10(10**log_co21_mom0_k_model_scatter/10**log_co10_mom0_k_model_scatter)
+r21_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise/10**log_co10_mom0_k_model_scatter_noise)
+#
+figure = plt.figure(figsize=(10,10))
+gs = gridspec.GridSpec(nrows=8, ncols=8)
+plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
+ax1 = plt.subplot(gs[0:8,0:8])
+ax1.grid(axis="both")
+ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
+plt.rcParams["font.size"] = 16
+
+# ax1
+ax1.plot(log_co21_mom0_k_model, r21_model, "o", color="black", alpha=1.0, markersize=3, markeredgewidth=0, zorder=1e22)
+ax1.plot(log_co21_mom0_k_model_scatter, r21_model_scatter, "o", color="blue", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e20, label="scatter")
+ax1.plot(log_co21_mom0_k_model_scatter_noise, r21_model_scatter_noise, "o", color="red", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e18, label="scatter and noise")
+ax1.plot(log_co21_mom0_k, r21, "o", color="grey", alpha=0.2, markersize=10, markeredgewidth=0)
+ax1.set_xlim([-0.5,3.0])
+ax1.set_ylim([-0.5,3.0])
+#
+ax1.legend()
+plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21.png",dpi=200)
 #
 
 
