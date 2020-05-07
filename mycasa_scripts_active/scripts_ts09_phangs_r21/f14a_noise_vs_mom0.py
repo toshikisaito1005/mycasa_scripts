@@ -312,8 +312,10 @@ def create_best_co10_model(
 	list_p = []
 	list_output = []
 	numiter = 0
+	numall = 21*21*21
 	for i, j, k in itertools.product(range_popt1, range_popt2, range_scatter):
-		print("### create co10 mode ")
+		numiter += 1
+		print("### create co10 mode " + str(numiter).zfill(4) + "/" + str(numall))
 		#
 		log_co10_mom0_k_model = np.random.normal(popt[1]+i, popt[2]+j, num_co10)
 		#
@@ -338,8 +340,9 @@ def create_best_co10_model(
 		list_p.append(p)
 		#
 	list_output = np.c_[list_popt1, list_popt2, list_scatter, list_d, list_p]
+	best_parameter = list_output[np.argmin(list_output[:,3])]
 
-	return list_output
+	return best_parameter
 
 
 #####################
@@ -356,7 +359,7 @@ log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(c
 p84_co10, p50_co10, p16_co10, p84_co21, p50_co21, p16_co21 = print_things(log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k)
 xbins_co10, xbins_co21 = plotter_noise( dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile)
 #
-list_output = create_best_co10_model(log_co10_mom0_k, log_co10_noise_k, xbins_co10, nbins)
+best_co10_parameter = create_best_co10_model(log_co10_mom0_k, log_co10_noise_k, xbins_co10, nbins)
 
 
 #####################
