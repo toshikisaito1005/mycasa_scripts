@@ -188,7 +188,7 @@ def fit_lognorm(
 	list_disp = np.linspace(0.1, 2, nbins)
 	for i in list_mean:
 		for j in list_disp:
-			lognorm_model = np.random.lognormal(i, j, num_input)
+			lognorm_model = np.random.normal(i, j, num_input)
 			lognorm_model = lognorm_model[lognorm_model>minimum]
 			lognorm_model = lognorm_model[lognorm_model<maximum]
 			d, p = stats.ks_2samp(log_co10_mom0_k, lognorm_model)
