@@ -280,13 +280,6 @@ range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 # create co10 model lognormal distribution
 num_input = len(log_co10_mom0_k)
 best_mean, best_disp, _ = fit_lognorm(log_co10_mom0_k, num_input, nbins)
-
-
-
-
-
-
-
 best_lognorm_co10 = np.random.lognormal(best_mean, best_disp, num_input)
 best_lognorm_co10 = best_lognorm_co10[best_lognorm_co10<log_co10_mom0_k.max()]
 best_lognorm_co10 = best_lognorm_co10[best_lognorm_co10>log_co10_mom0_k.min()]
@@ -297,6 +290,11 @@ best_lognorm_co21 = best_lognorm_co21[best_lognorm_co21<log_co21_mom0_k.max()]
 best_lognorm_co21 = best_lognorm_co21[best_lognorm_co21>log_co21_mom0_k.min()]
 best_lognorm_co10 = best_lognorm_co10[best_lognorm_co21<log_co21_mom0_k.max()]
 best_lognorm_co10 = best_lognorm_co10[best_lognorm_co21>log_co21_mom0_k.min()]
+
+
+
+
+
 #
 ## adding scatter
 best_lognorm_co10_w_scatter = add_scatter(best_lognorm_co10, 1.1)
@@ -316,8 +314,6 @@ best_lognorm_co10_w_scatter = best_lognorm_co10_w_scatter[cut_all_scatter]
 best_lognorm_co21_w_scatter = best_lognorm_co21_w_scatter[cut_all_scatter]
 best_lognorm_co10_w_scatter_noise = best_lognorm_co10_w_scatter_noise[cut_all_scatter_noise]
 best_lognorm_co21_w_scatter_noise = best_lognorm_co21_w_scatter_noise[cut_all_scatter_noise]
-
-
 
 
 ### plot obs and model mom-0
@@ -346,10 +342,6 @@ ax2.set_xlim([-0.5,1.6])
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo.png",dpi=200)
 
 
-
-
-
-
 ### plot obs and model mom-0
 figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=8, ncols=8)
@@ -373,10 +365,6 @@ plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0.png",dpi=200)
 #
 
 
-
-
-
-
 ### plot obs and model mom-0
 figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=8, ncols=8)
@@ -398,7 +386,6 @@ ax1.legend()
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21.png",dpi=200)
 #
 os.system("rm -rf *.last")
-
 
 
 ### print

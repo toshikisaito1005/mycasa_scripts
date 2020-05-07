@@ -22,6 +22,16 @@ percentile = 84
 #####################
 ### functions
 #####################
+def func1(x, a, b, c):
+	"""
+	"""
+	return a * np.exp(-(x-b)**2 / (2*c**2))
+
+def func_co10_vs_co21(x, a, b):
+	"""
+	"""
+	return a * x + b
+
 def Jy2Kelvin(
 	data,
 	beam,
@@ -161,11 +171,6 @@ def plotter_noise(
 
 	return xbins_co10, xbins_co21
 
-def func1(x, a, b, c):
-	"""
-	"""
-	return a * np.exp(-(x-b)**2 / (2*c**2))
-
 def fit_func1(func1, data_x, data_y, guess):
     """
     """
@@ -192,6 +197,17 @@ def fit_norm(
 
 	return popt
 
+def add_scatter(
+	data_log,
+	sigma,
+	):
+	"""
+	"""
+	# create noise
+	num_data = len(data_log)
+	data_log_w_noise = np.log10(10**data_log + np.random.normal(0.0, sigma, num_data))
+
+	return np.array(data_log_w_noise)
 
 
 #####################
@@ -222,7 +238,15 @@ range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 # create co10 model lognormal distribution
 num_co10 = len(log_co10_mom0_k)
 popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
-best_norm_co10 = np.random.normal(popt[1], popt[2], num_co10)
+log_co10_mom0_k_model = np.random.normal(popt[1], popt[2], num_co10)
+log_co10_mom0_k_model.sort()
+#
+# create co10 model lognormal distribution
+log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 1.27, -0.7)
+#
+## adding scatter
+log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, 1.1)
+log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, 1.1)
 
 
 #
