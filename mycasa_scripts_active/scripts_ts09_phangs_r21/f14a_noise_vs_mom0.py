@@ -287,9 +287,9 @@ def get_best_co10_parameter(
 	num_co10 = len(log_co10_mom0_k)
 	popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
 	#
-	range_popt1   = popt[1] + np.linspace(-0.1, 0.1, 11)
-	range_popt2   = popt[2] + np.linspace(-0.05, 0.05, 11)
-	range_scatter = np.linspace(0.7, 1.5, 11)
+	range_popt1   = popt[1] + np.linspace(-0.5, 0.5, 11)
+	range_popt2   = popt[2] + np.linspace(-0.03, 0.03, 11)
+	range_scatter = np.linspace(0.1, 2.1, 21)
 	#
 	list_popt1 = []
 	list_popt2 = []
@@ -381,7 +381,7 @@ def get_best_co21_parameter(
 	#
 	range_slope = np.linspace(1.0, 1.3, 21)
 	range_intercept = np.linspace(-0.6, -0.1, 21)
-	range_scatter = np.linspace(0.9, 1.4, 11)
+	range_scatter = np.linspace(0.1, 2.1, 21)
 	#
 	list_slope = []
 	list_intercept = []
