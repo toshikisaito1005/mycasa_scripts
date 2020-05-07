@@ -484,12 +484,12 @@ def create_best_models(
 	return log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise
 
 def print_boot(
-	list,
+	listdata,
 	text,
 	):
-	list_median = str(np.percentile(list_best_co10_parameter,50))
-	list_max = str(np.max(list_best_co10_parameter))
-	list_min = str(np.min(list_best_co10_parameter))
+	list_median = str(np.percentile(listdata,50))
+	list_max = str(np.max(listdata))
+	list_min = str(np.min(listdata))
 	print("# " + text)
 	print("# median = " + list_median)
 	print("# max = " + list_max)
