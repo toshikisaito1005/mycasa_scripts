@@ -419,14 +419,13 @@ def get_best_co21_parameter(
 			log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[cut]
 			d, p = stats.ks_2samp(log_co21_mom0_k, log_co21_mom0_k_model_scatter_noise)
 			#
-			if p<0.1:
-				list_slope.append(this_slope)
-				list_intercept.append(this_intercept)
-				list_scatter.append(this_scatter)
-				n = len(log_co21_mom0_k)
-				m = len(log_co21_mom0_k_model_scatter_noise)
-				list_d.append(d)
-				list_p.append(p)
+			list_slope.append(this_slope)
+			list_intercept.append(this_intercept)
+			list_scatter.append(this_scatter)
+			n = len(log_co21_mom0_k)
+			m = len(log_co21_mom0_k_model_scatter_noise)
+			list_d.append(d*np.sqrt(n*m/(n+m)))
+			list_p.append(p)
 			#
 		list_output = np.c_[list_slope, list_intercept, list_scatter, list_d, list_p]
 		best_parameter = list_output[np.argmin(list_output[:,3])]
