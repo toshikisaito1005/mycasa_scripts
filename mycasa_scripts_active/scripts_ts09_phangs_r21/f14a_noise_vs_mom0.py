@@ -399,11 +399,12 @@ def get_best_co21_parameter(
 				print("### create co21 model " + str(numiter).zfill(4) + "/" + str(numall))
 			#
 			this_slope = 0.9+i
-			this_intercept = 
+			this_intercept = -0.3+j
+			this_scatter = 1.0+k
 			#
-			log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 0.9+i, -0.3+j)
+			log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, this_slope, this_intercept)
 			#
-			log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, 1.0+k)
+			log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, this_scatter)
 			log_co21_mom0_k_model_scatter[np.isnan(log_co21_mom0_k_model_scatter)] = -9999
 			cut = np.where((log_co21_mom0_k_model_scatter>-9000))
 			log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
@@ -418,9 +419,9 @@ def get_best_co21_parameter(
 			d, p = stats.ks_2samp(log_co21_mom0_k, log_co21_mom0_k_model_scatter_noise)
 			#
 			if p<0.1:
-				list_slope.append(0.9+i)
-				list_intercept.append(-0.3+j)
-				list_scatter.append(1.0+k)
+				list_slope.append(this_slope)
+				list_intercept.append(this_intercept)
+				list_scatter.append(this_scatter)
 				n = len(log_co21_mom0_k)
 				m = len(log_co21_mom0_k_model_scatter_noise)
 				list_d.append(d)
