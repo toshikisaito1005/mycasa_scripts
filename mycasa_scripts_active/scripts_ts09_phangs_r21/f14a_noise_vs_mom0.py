@@ -483,6 +483,18 @@ def create_best_models(
 
 	return log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise
 
+def print_boot(
+	list,
+	text,
+	):
+	list_median = str(np.percentile(list_best_co10_parameter[0],50))
+	list_max = str(list_best_co10_parameter[0].max())
+	list_min = str(list_best_co10_parameter[0].min())
+	print("# " + text)
+	print("# median = " + list_median)
+	print("# max = " + list_max)
+	print("# min = " + list_min)
+
 
 #####################
 ### plot noise
@@ -518,8 +530,8 @@ for i in range(100):
 	### output
 	list_best_co10_parameter.append(best_co10_parameter.tolist())
 	list_best_co21_parameter.append(best_co21_parameter.tolist())
-	print(np.array(list_best_co10_parameter))
-	print(np.array(list_best_co21_parameter))
+	# print
+	print_boot(list_best_co10_parameter[0], "co10_")
 	#
 np.savetxt(dir_proj+"eps/bootstrap_co10_models"+galname+".txt", np.array(list_best_co10_parameter))
 np.savetxt(dir_proj+"eps/bootstrap_co21_models"+galname+".txt", np.array(list_best_co21_parameter))
