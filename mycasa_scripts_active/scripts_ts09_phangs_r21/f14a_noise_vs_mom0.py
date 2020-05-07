@@ -287,8 +287,8 @@ def get_best_co10_parameter(
 	num_co10 = len(log_co10_mom0_k)
 	popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
 	#
-	range_popt1   = np.linspace(-0.2, 0.2, 21)
-	range_popt2   = np.linspace(-0.2, 0.2, 21)
+	range_popt1   = np.linspace(-0.1, 0.1, 21)
+	range_popt2   = np.linspace(-0.1, 0.1, 21)
 	range_scatter = np.linspace(-0.2, 0.2, 21)
 	#
 	list_popt1 = []
@@ -444,9 +444,9 @@ def create_best_models(
 	popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
 	#
 	### co21 parameters
-	co21_slope = best_co21_parameter[3]
-	co21_intercept = best_co21_parameter[4]
-	co21_scatter = best_co21_parameter[5]
+	co21_slope = best_co21_parameter[0]
+	co21_intercept = best_co21_parameter[1]
+	co21_scatter = best_co21_parameter[2]
 	range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 	num_co21 = len(log_co21_mom0_k)
 	#
@@ -547,6 +547,8 @@ for i in range(100):
 	#####################
 	### plot
 	#####################
+	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
+	range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 	### plot obs and model mom-0
 	figure = plt.figure(figsize=(10,10))
 	gs = gridspec.GridSpec(nrows=9, ncols=8)
