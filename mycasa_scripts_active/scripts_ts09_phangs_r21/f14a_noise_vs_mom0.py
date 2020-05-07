@@ -2,6 +2,7 @@ import os, re, sys, glob
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from scipy.optimize import curve_fit
+from scipy import stats
 plt.ioff()
 
 #
