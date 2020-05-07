@@ -290,7 +290,7 @@ def add_noise(
 
 	return np.array(list_output_co10), np.array(list_output_co21)
 
-def create_best_co10_mode(
+def create_best_co10_model(
 	log_co10_mom0_k,
 	log_co10_noise_k,
 	xbins_co10,
@@ -301,9 +301,9 @@ def create_best_co10_mode(
 	num_co10 = len(log_co10_mom0_k)
 	popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
 	#
-	range_popt1   = np.linspace(-0.2, 0.2, 11)
-	range_popt2   = np.linspace(-0.2, 0.2, 11)
-	range_scatter = np.linspace(-0.2, 0.2, 11)
+	range_popt1   = np.linspace(-0.2, 0.2, 41)
+	range_popt2   = np.linspace(-0.2, 0.2, 41)
+	range_scatter = np.linspace(-0.2, 0.2, 41)
 	#
 	list_popt1 = []
 	list_popt2 = []
@@ -312,6 +312,7 @@ def create_best_co10_mode(
 	list_p = []
 	list_output = []
 	for i, j, k in itertools.product(range_popt1, range_popt2, range_scatter):
+		print("### create co10 mode with mean = " + str(popt[1]+i) + ", disp = " + ste(popt[2]+j) + " scatter = " + str(1.0+k))
 		#
 		log_co10_mom0_k_model = np.random.normal(popt[1]+i, popt[2]+j, num_co10)
 		#
@@ -354,7 +355,8 @@ log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(c
 p84_co10, p50_co10, p16_co10, p84_co21, p50_co21, p16_co21 = print_things(log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k)
 xbins_co10, xbins_co21 = plotter_noise( dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile)
 #
-list_output = create_best_co10_mode(log_co10_mom0_k, log_co10_noise_k, xbins_co10, nbins)
+list_output = create_best_co10_model(log_co10_mom0_k, log_co10_noise_k, xbins_co10, nbins)
+
 
 #####################
 ### modeling
