@@ -538,7 +538,9 @@ for i in range(100):
 	### output
 	list_best_co10_parameter.append(best_co10_parameter.tolist())
 	list_best_co21_parameter.append(best_co21_parameter.tolist())
-
+	#
+np.savetxt(dir_proj+"eps/bootstrap_co10_models.txt", np.array(list_best_co10_parameter))
+np.savetxt(dir_proj+"eps/bootstrap_co21_models.txt", np.array(list_best_co21_parameter))
 
 
 #####################
@@ -569,7 +571,7 @@ ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=
 ax2.hist(log_co21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
 ax2.set_xlim([-0.5,2.6])
 #
-plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo.png",dpi=200)
+plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo"+galname+".png",dpi=200)
 
 
 ### plot obs and model mom-0
@@ -591,7 +593,7 @@ ax1.set_xlim([-0.5,2.0])
 ax1.set_ylim([-0.5,2.0])
 #
 ax1.legend()
-plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0.png",dpi=200)
+plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0"+galname+".png",dpi=200)
 #
 
 
@@ -620,7 +622,7 @@ ax1.set_xlim([-0.5,2.0])
 ax1.set_ylim([-1.2,0.5])
 #
 ax1.legend()
-plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21.png",dpi=200)
+plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21"+galname+".png",dpi=200)
 #
 
 
