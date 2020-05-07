@@ -429,10 +429,50 @@ def get_best_co21_parameter(
 		return best_parameter
 
 def create_best_models(
+	log_co10_mom0_k,
+	log_co21_mom0_k,
+	log_co10_noise_k,
+	log_co21_noise_k,
 	best_co10_parameter,
 	best_co21_parameter,
 	):
+	### co10 parameters
+	co10_mean = best_co10_parameter[0]
+	co10_disp = best_co10_parameter[1]
+	co10_scatter = best_co10_parameter[2]
+	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
+	num_co10 = len(log_co10_mom0_k)
+	popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
+	#
+	### co21 parameters
+	co21_slope = best_co21_parameter[0]
+	co21_intercept = best_co21_parameter[1]
+	co21_scatter = best_co21_parameter[2]
+	range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
+	num_co21 = len(log_co21_mom0_k)
+	#
+	### log_co_mom0_k_model
+	log_co10_mom0_k_model = np.random.normal(popt[1]+co10_mean, popt[2]+co10_disp, num_co10)
+	log_co10_mom0_k_model.sort()
+	#
+	log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 1.00+co21_slope, -0.3+co21_intercept)
+	#
+	### log_co_mom0_k_model_scatter
 
+
+	#
+	log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, 1.0+best_scatter)
+	log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
+	cut = np.where((log_co10_mom0_k_model_scatter>-9000))
+	log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+	#
+	log_co10_mom0_k_model_scatter_noise = add_noise_co10(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10)
+	#
+	cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0]) & (log_co10_mom0_k_model_scatter<range_co10_input[1]))
+	log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+	#
+	cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<range_co10_input[1]))
+	log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
 
 #####################
 ### plot noise
