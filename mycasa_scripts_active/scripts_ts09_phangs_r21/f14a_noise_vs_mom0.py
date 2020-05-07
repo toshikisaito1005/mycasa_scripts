@@ -323,16 +323,20 @@ def get_best_co10_parameter(
 				log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
 				d, p = stats.ks_2samp(log_co10_mom0_k, log_co10_mom0_k_model_scatter_noise)
 				#
-				list_popt1.append(popt[1]+i)
-				list_popt2.append(popt[2]+j)
-				list_scatter.append(1.0+k)
-				list_d.append(d)
-				list_p.append(p)
+				if p<0.1:
+					list_popt1.append(popt[1]+i)
+					list_popt2.append(popt[2]+j)
+					list_scatter.append(1.0+k)
+					n = len(log_co21_mom0_k)
+					m = len(log_co21_mom0_k_model_scatter_noise)
+					list_d.append(d*np.sqrt(n*m/(n+m)))
+					list_p.append(p)
 				#
 			list_output = np.c_[list_popt1, list_popt2, list_scatter, list_d, list_p]
 			best_parameter = list_output[np.argmin(list_output[:,3])]
 			print(best_parameter)
 			#
+			np.savetxt(dir_proj+"eps/best_co10_model_all_parameters.txt", np.array(list_output))
 			np.savetxt(dir_proj+"eps/best_co10_model_parameter.txt", np.array(best_parameter))
 		else:
 			print("### skip creating co10 model because of best_co10_model_parameter.txt")
@@ -410,13 +414,14 @@ def get_best_co21_parameter(
 			log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[cut]
 			d, p = stats.ks_2samp(log_co21_mom0_k, log_co21_mom0_k_model_scatter_noise)
 			#
-			list_slope.append(1.00+i)
-			list_intercept.append(-0.3+j)
-			list_scatter.append(1.0+k)
-			n = len(log_co21_mom0_k)
-			m = len(log_co21_mom0_k_model_scatter_noise)
-			list_d.append(d*np.sqrt(n*m/(n+m)))
-			list_p.append(p)
+			if p<0.1:
+				list_slope.append(1.00+i)
+				list_intercept.append(-0.3+j)
+				list_scatter.append(1.0+k)
+				n = len(log_co21_mom0_k)
+				m = len(log_co21_mom0_k_model_scatter_noise)
+				list_d.append(d*np.sqrt(n*m/(n+m)))
+				list_p.append(p)
 			#
 		list_output = np.c_[list_slope, list_intercept, list_scatter, list_d, list_p]
 		best_parameter = list_output[np.argmin(list_output[:,3])]
