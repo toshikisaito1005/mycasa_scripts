@@ -177,43 +177,18 @@ def fit_func1(func1, data_x, data_y, guess):
                            
     return popt, residual
 
-def fit_lognorm(
-	log_co10_mom0_k,
-	num_input,
+def fit_norm(
+	data,
+	histrange,
 	nbins,
+	weights=None,
 	):
 	"""
 	"""
-	num_input = len(log_co10_mom0_k)
-	minimum = log_co10_mom0_k.min()
-	maximum = log_co10_mom0_k.max()
-	list_x = []
-	list_y = []
-	list_d = []
-	list_p = []
-	list_mean = np.linspace(-2.00, 2.00, nbins)
-	list_disp = np.linspace(0.1, 2, nbins)
-	for i in list_mean:
-		for j in list_disp:
-			lognorm_model = np.random.normal(i, j, num_input)
-			lognorm_model = lognorm_model[lognorm_model>minimum]
-			lognorm_model = lognorm_model[lognorm_model<maximum]
-			d, p = stats.ks_2samp(log_co10_mom0_k, lognorm_model)
-			list_x.append(i)
-			list_y.append(j)
-			list_d.append(d)
-			list_p.append(p)
+	histo = np.histogram(data, range=histrange, bins=nbins, weights=weights)
+	x, y = np.delete(histo[1],-1), histo[0]
+	y = y/float(sum(y))
 
-	list_output = np.c_[list_x, list_y, list_d, list_p]
-	list_output = np.nan_to_num(list_output)
-	list_output2 = []
-	for i in range(len(list_output)):
-		if list_output[i][2]!=0 and list_output[i][3]!=0:
-			list_output2.append(list_output[i])
-
-	best_lognorm = list_output[np.argmin(np.array(list_output2)[:,2])]
-
-	return best_lognorm[0], best_lognorm[1], list_output2
 
 
 #####################
@@ -239,8 +214,7 @@ range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 #
 ## create log co10 vs log co21 scaling relation with log-normal intensity distributions
 # create co10 model lognormal distribution
-num_co10 = len(log_co10_mom0_k)
-best_mean, best_disp, _ = fit_norm(log_co10_mom0_k, num_input, nbins)
+best_mean, best_disp, _ = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
 
 
 
