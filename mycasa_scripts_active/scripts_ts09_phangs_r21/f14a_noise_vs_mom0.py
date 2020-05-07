@@ -380,7 +380,7 @@ def get_best_co21_parameter(
 	num_co21 = len(log_co21_mom0_k)
 	#
 	range_slope = np.linspace(0, 0.4, 21)
-	range_intercept = np.linspace(-0.5, 0.5, 21)
+	range_intercept = np.linspace(-0.5, 0.3, 21)
 	range_scatter = np.linspace(0, 0.5, 21)
 	#
 	list_slope = []
