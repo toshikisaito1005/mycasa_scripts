@@ -374,7 +374,7 @@ def get_best_co21_parameter(
 	range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 	num_co21 = len(log_co21_mom0_k)
 	#
-	range_slope = np.linspace(-0.3, 0.3, 21)
+	range_slope = np.linspace(0.0, 0.3, 21)
 	range_intercept = np.linspace(-0.3, 0.3, 21)
 	range_scatter = np.linspace(-0.2, 0.2, 21)
 	#
@@ -417,6 +417,7 @@ def get_best_co21_parameter(
 			#
 		list_output = np.c_[list_slope, list_intercept, list_scatter, list_d, list_p]
 		best_parameter = list_output[np.argmin(list_output[:,3])]
+		print(best_parameter)
 		#
 		np.savetxt(dir_proj+"eps/best_co21_model_parameter.txt", np.array(best_parameter))
 	else:
