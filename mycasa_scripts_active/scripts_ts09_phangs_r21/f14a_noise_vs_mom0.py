@@ -245,8 +245,38 @@ log_co10_mom0_k_model.sort()
 log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 1.27, -0.7)
 #
 ## adding scatter
-log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, 1.1)
-log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, 1.1)
+log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, 1.5)
+log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, 1.5)
+
+
+
+
+
+
+### plot obs and model mom-0
+figure = plt.figure(figsize=(10,10))
+gs = gridspec.GridSpec(nrows=9, ncols=8)
+plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
+ax1 = plt.subplot(gs[0:4,0:8])
+ax2 = plt.subplot(gs[5:9,0:8])
+ax1.grid(axis="both")
+ax2.grid(axis="both")
+ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
+ax2.set_xlabel("CO(2-1) mom-0 (K.km/s)")
+plt.rcParams["font.size"] = 16
+
+# ax1
+ax1.hist(log_co10_mom0_k_model, normed=True, color="black", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
+ax1.hist(log_co10_mom0_k_model_scatter, normed=True, color="blue", alpha=0.5, bins=nbins, lw=0, range=range_co10_input)
+ax1.set_xlim([0,2.0])
+#
+#ax2
+# ax1
+ax2.hist(log_co21_mom0_k_model, normed=True, color="black", alpha=0.5, bins=nbins, range=range_co21_input, lw=0)
+ax2.hist(log_co21_mom0_k_model_scatter, normed=True, color="blue", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
+ax2.set_xlim([-0.5,1.6])
+#
+plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo.png",dpi=200)
 
 
 #
