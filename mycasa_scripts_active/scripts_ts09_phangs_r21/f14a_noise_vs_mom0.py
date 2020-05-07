@@ -245,8 +245,16 @@ log_co10_mom0_k_model.sort()
 log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 1.27, -0.7)
 #
 ## adding scatter
+# add
 log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, 1.5)
 log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, 1.5)
+# cut
+log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
+log_co21_mom0_k_model_scatter[np.isnan(log_co21_mom0_k_model_scatter)] = -9999
+cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0]) & (log_co21_mom0_k_model_scatter>range_co21_input[0]))
+log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
+
 
 
 
@@ -266,14 +274,16 @@ ax2.set_xlabel("CO(2-1) mom-0 (K.km/s)")
 plt.rcParams["font.size"] = 16
 
 # ax1
-ax1.hist(log_co10_mom0_k_model, normed=True, color="black", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
-ax1.hist(log_co10_mom0_k_model_scatter, normed=True, color="blue", alpha=0.5, bins=nbins, lw=0, range=range_co10_input)
+ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
+ax1.hist(log_co10_mom0_k_model, normed=True, color="blue", alpha=0.5, bins=nbins, range=range_co10_input, lw=0)
+ax1.hist(log_co10_mom0_k_model_scatter, normed=True, color="green", alpha=0.5, bins=nbins, lw=0, range=range_co10_input)
 ax1.set_xlim([0,2.0])
 #
 #ax2
 # ax1
-ax2.hist(log_co21_mom0_k_model, normed=True, color="black", alpha=0.5, bins=nbins, range=range_co21_input, lw=0)
-ax2.hist(log_co21_mom0_k_model_scatter, normed=True, color="blue", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
+ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, range=range_co21_input, lw=0)
+ax2.hist(log_co21_mom0_k_model, normed=True, color="blue", alpha=0.5, bins=nbins, range=range_co21_input, lw=0)
+ax2.hist(log_co21_mom0_k_model_scatter, normed=True, color="green", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
 ax2.set_xlim([-0.5,1.6])
 #
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo.png",dpi=200)
