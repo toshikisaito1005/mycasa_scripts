@@ -1,4 +1,5 @@
 import os, re, sys, glob
+import itertools
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from scipy.optimize import curve_fit
@@ -300,28 +301,29 @@ def create_best_co10_mode(
 	num_co10 = len(log_co10_mom0_k)
 	popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
 	#
-	range_popt1 = np.linspace(-0.2, 0.2, 10)
-	range_popt2 = np.linspace(-0.2, 0.2, 10)
-	##################################################################################################
-	#
-	log_co10_mom0_k_model = np.random.normal(popt[1], popt[2], num_co10)
-	#
-	log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, 1.1)
-	log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
-	cut = np.where((log_co10_mom0_k_model_scatter>-9000))
-	log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
-	#
-	log_co10_mom0_k_model_scatter_noise = add_noise_co10(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10)
-	#
-	cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0]) & (log_co10_mom0_k_model_scatter<range_co10_input[1]))
-	log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
-	#
-	cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<range_co10_input[1]))
-	log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
-	# log_co10_mom0_k_model
-	# log_co10_mom0_k_model_scatter
-	# log_co10_mom0_k_model_scatter_noise
-	d, p = stats.ks_2samp(log_co10_mom0_k, log_co10_mom0_k_model_scatter)
+	range_popt1   = np.linspace(-0.2, 0.2, 11)
+	range_popt2   = np.linspace(-0.2, 0.2, 11)
+	range_scatter = np.linspace(-0.2, 0.2, 11)
+	for i, j, k in itertools.product(range_popt1, range_popt2, range_scatter):
+		#
+		log_co10_mom0_k_model = np.random.normal(popt[1]+i, popt[2]+j, num_co10)
+		#
+		log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, 1.0+k)
+		log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
+		cut = np.where((log_co10_mom0_k_model_scatter>-9000))
+		log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+		#
+		log_co10_mom0_k_model_scatter_noise = add_noise_co10(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10)
+		#
+		cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0]) & (log_co10_mom0_k_model_scatter<range_co10_input[1]))
+		log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+		#
+		cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<range_co10_input[1]))
+		log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
+		# log_co10_mom0_k_model
+		# log_co10_mom0_k_model_scatter
+		# log_co10_mom0_k_model_scatter_noise
+		d, p = stats.ks_2samp(log_co10_mom0_k, log_co10_mom0_k_model_scatter)
 
 
 #####################
