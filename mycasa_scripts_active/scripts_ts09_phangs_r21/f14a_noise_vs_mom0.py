@@ -287,8 +287,8 @@ log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 1.27, -0.5)#-0.
 #
 ## adding scatter
 # add
-log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, 1.5)
-log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, 1.5)
+log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, 1.1)
+log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, 1.1)
 # cut
 log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
 log_co21_mom0_k_model_scatter[np.isnan(log_co21_mom0_k_model_scatter)] = -9999
