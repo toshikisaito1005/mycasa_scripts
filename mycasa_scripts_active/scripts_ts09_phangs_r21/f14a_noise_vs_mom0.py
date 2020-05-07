@@ -565,11 +565,11 @@ for i in range(100):
 	range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 	### plot obs and model mom-0
 	figure = plt.figure(figsize=(10,10))
-	gs = gridspec.GridSpec(nrows=10, ncols=10)
+	gs = gridspec.GridSpec(nrows=8, ncols=8)
 	plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
-	ax1 = plt.subplot(gs[0:2,0:10])
-	ax2 = plt.subplot(gs[4:6,0:10])
-	ax3 = plt.subplot(gs[8:10,0:10])
+	ax1 = plt.subplot(gs[0:2,0:8])
+	ax2 = plt.subplot(gs[3:5,0:8])
+	ax3 = plt.subplot(gs[6:8,0:8])
 	ax1.grid(axis="x")
 	ax2.grid(axis="x")
 	ax3.grid(axis="x")
