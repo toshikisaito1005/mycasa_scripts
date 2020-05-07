@@ -303,7 +303,7 @@ best_lognorm_co10_w_scatter_noise, best_lognorm_co21_w_scatter_noise = \
 
 
 
-
+ 
 ### cut data
 cut_all_scatter = np.where((best_lognorm_co10_w_scatter>=xbins_co10.min()) & (best_lognorm_co10_w_scatter<=xbins_co10.max()) & (best_lognorm_co21_w_scatter>=xbins_co21.min()) & (best_lognorm_co21_w_scatter<=xbins_co21.max()))
 cut_all_scatter_noise = np.where((best_lognorm_co10_w_scatter_noise>=xbins_co10.min()) & (best_lognorm_co10_w_scatter_noise<=xbins_co10.max()) & (best_lognorm_co21_w_scatter_noise>=xbins_co21.min()) & (best_lognorm_co21_w_scatter_noise<=xbins_co21.max()))

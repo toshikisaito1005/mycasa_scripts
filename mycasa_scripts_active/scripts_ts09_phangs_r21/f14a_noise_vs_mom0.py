@@ -12,7 +12,7 @@ import scripts_phangs_r21 as r21
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-galname = "ngc4321"
+galname = "ngc0628"
 freqco10 = 115.27120
 freqco21 = 230.53800
 nbins = 40
@@ -283,7 +283,7 @@ log_co10_mom0_k_model = log_co10_mom0_k * 1.0
 log_co10_mom0_k_model.sort()
 #
 # create co10 model lognormal distribution
-log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 1.27, -0.7)
+log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 1.27, -0.5)#-0.7)
 #
 ## adding scatter
 # add
@@ -355,10 +355,10 @@ plt.rcParams["font.size"] = 16
 ax1.plot(log_co10_mom0_k_model, log_co21_mom0_k_model, "o", color="black", alpha=1.0, markersize=3, markeredgewidth=0, zorder=1e22)
 ax1.plot(log_co10_mom0_k_model_scatter, log_co21_mom0_k_model_scatter, "o", color="blue", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e20, label="scatter")
 ax1.plot(log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise, "o", color="red", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e18, label="scatter and noise")
-ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="grey", alpha=0.2, markersize=10, markeredgewidth=0)
+ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="grey", alpha=1.0, markersize=10, markeredgewidth=0)
 ax1.plot([-0.5,3.0], [-0.5,3.0], "k--", lw=5)
-ax1.set_xlim([-0.5,3.0])
-ax1.set_ylim([-0.5,3.0])
+ax1.set_xlim([-0.5,2.0])
+ax1.set_ylim([-0.5,2.0])
 #
 ax1.legend()
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0.png",dpi=200)
@@ -383,9 +383,9 @@ plt.rcParams["font.size"] = 16
 ax1.plot(log_co21_mom0_k_model, r21_model, "o", color="black", alpha=1.0, markersize=3, markeredgewidth=0, zorder=1e22)
 ax1.plot(log_co21_mom0_k_model_scatter, r21_model_scatter, "o", color="blue", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e20, label="scatter")
 ax1.plot(log_co21_mom0_k_model_scatter_noise, r21_model_scatter_noise, "o", color="red", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e18, label="scatter and noise")
-ax1.plot(log_co21_mom0_k, r21, "o", color="grey", alpha=0.2, markersize=10, markeredgewidth=0)
-ax1.set_xlim([-0.5,3.0])
-ax1.set_ylim([-0.5,3.0])
+ax1.plot(log_co21_mom0_k, r21, "o", color="grey", alpha=1.0, markersize=10, markeredgewidth=0)
+ax1.set_xlim([-0.5,2.0])
+ax1.set_ylim([-1.2,0.5])
 #
 ax1.legend()
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21.png",dpi=200)
