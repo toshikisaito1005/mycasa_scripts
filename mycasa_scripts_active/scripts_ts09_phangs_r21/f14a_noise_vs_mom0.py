@@ -521,7 +521,9 @@ xbins_co10, xbins_co21 = plotter_noise( dir_proj, log_co10_mom0_k, log_co10_nois
 list_best_co10_parameter = []
 list_best_co21_parameter = []
 for i in range(100):
-	print("")
+	print("### bootstrap " + str(i+1).zfill(3) + "/100")
+	os.system("rm -rf " + dir_proj + "eps/best_co10_model_parameter.txt")
+	os.system("rm -rf " + dir_proj + "eps/best_co21_model_parameter.txt")
 	### get best parameters for co10 model
 	best_co10_parameter = get_best_co10_parameter(dir_proj, log_co10_mom0_k, log_co10_noise_k, xbins_co10, nbins)
 	log_co10_mom0_k_model_for_co21 = get_best_co10_parameter(dir_proj, log_co10_mom0_k, log_co10_noise_k, xbins_co10, nbins, best_co10_parameter)

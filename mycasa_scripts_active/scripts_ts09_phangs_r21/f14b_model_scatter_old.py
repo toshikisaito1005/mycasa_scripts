@@ -26,11 +26,6 @@ def func_co10_vs_co21(x, a, b):
 	"""
 	return a * x + b
 
-def function(x, a, b):
-	"""
-	"""
-	return a * x + b
-
 def Jy2Kelvin(
 	data,
 	beam,
@@ -276,9 +271,6 @@ p84_co10, p50_co10, p16_co10, p84_co21, p50_co21, p16_co21 = print_things(log_co
 xbins_co10, xbins_co21 = plotter_noise( dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile)
 
 
-
-
-
 ### model co10 mom-0 distribution
 ## define plot range
 range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
@@ -302,13 +294,16 @@ best_lognorm_co10 = best_lognorm_co10[best_lognorm_co21>log_co21_mom0_k.min()]
 ## adding scatter
 best_lognorm_co10_w_scatter = add_scatter(best_lognorm_co10, 1.1)
 best_lognorm_co21_w_scatter = add_scatter(best_lognorm_co21, 1.1)
-
+#
 ## adding noise
 best_lognorm_co10_w_scatter_noise, best_lognorm_co21_w_scatter_noise = \
 	add_noise(best_lognorm_co10_w_scatter, log_co10_noise_k, xbins_co10, best_lognorm_co21_w_scatter, log_co21_noise_k, xbins_co21)
 
 
 
+
+
+ 
 ### cut data
 cut_all_scatter = np.where((best_lognorm_co10_w_scatter>=xbins_co10.min()) & (best_lognorm_co10_w_scatter<=xbins_co10.max()) & (best_lognorm_co21_w_scatter>=xbins_co21.min()) & (best_lognorm_co21_w_scatter<=xbins_co21.max()))
 cut_all_scatter_noise = np.where((best_lognorm_co10_w_scatter_noise>=xbins_co10.min()) & (best_lognorm_co10_w_scatter_noise<=xbins_co10.max()) & (best_lognorm_co21_w_scatter_noise>=xbins_co21.min()) & (best_lognorm_co21_w_scatter_noise<=xbins_co21.max()))
@@ -317,8 +312,6 @@ best_lognorm_co10_w_scatter = best_lognorm_co10_w_scatter[cut_all_scatter]
 best_lognorm_co21_w_scatter = best_lognorm_co21_w_scatter[cut_all_scatter]
 best_lognorm_co10_w_scatter_noise = best_lognorm_co10_w_scatter_noise[cut_all_scatter_noise]
 best_lognorm_co21_w_scatter_noise = best_lognorm_co21_w_scatter_noise[cut_all_scatter_noise]
-
-
 
 
 ### plot obs and model mom-0
@@ -347,10 +340,6 @@ ax2.set_xlim([-0.5,1.6])
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo.png",dpi=200)
 
 
-
-
-
-
 ### plot obs and model mom-0
 figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=8, ncols=8)
@@ -374,10 +363,6 @@ plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0.png",dpi=200)
 #
 
 
-
-
-
-
 ### plot obs and model mom-0
 figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=8, ncols=8)
@@ -399,7 +384,6 @@ ax1.legend()
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21.png",dpi=200)
 #
 os.system("rm -rf *.last")
-
 
 
 ### print
