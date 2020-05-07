@@ -294,15 +294,13 @@ best_lognorm_co10 = best_lognorm_co10[best_lognorm_co21>log_co21_mom0_k.min()]
 ## adding scatter
 best_lognorm_co10_w_scatter = add_scatter(best_lognorm_co10, 1.1)
 best_lognorm_co21_w_scatter = add_scatter(best_lognorm_co21, 1.1)
-
-
-
-
-
-
+#
 ## adding noise
 best_lognorm_co10_w_scatter_noise, best_lognorm_co21_w_scatter_noise = \
 	add_noise(best_lognorm_co10_w_scatter, log_co10_noise_k, xbins_co10, best_lognorm_co21_w_scatter, log_co21_noise_k, xbins_co21)
+
+
+
 
 
 
