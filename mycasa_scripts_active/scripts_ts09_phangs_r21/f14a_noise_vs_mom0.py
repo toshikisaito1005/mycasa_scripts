@@ -317,7 +317,8 @@ def create_best_co10_model(
 	if best_parameters==None:
 		for i, j, k in itertools.product(range_popt1, range_popt2, range_scatter):
 			numiter += 1
-			print("### create co10 model " + str(numiter).zfill(4) + "/" + str(numall))
+			if numiter % 500 == 0:
+				print("### create co10 model " + str(numiter).zfill(4) + "/" + str(numall))
 			#
 			log_co10_mom0_k_model = np.random.normal(popt[1]+i, popt[2]+j, num_co10)
 			#
@@ -398,8 +399,8 @@ def create_best_co21_model(
 	if best_parameters==None:
 		for i, j, k in itertools.product(range_slope, range_intercept, range_scatter):
 			numiter += 1
-			if f
-			print("### create co21 model " + str(numiter).zfill(4) + "/" + str(numall))
+			if numiter % 500 == 0:
+				print("### create co21 model " + str(numiter).zfill(4) + "/" + str(numall))
 			#
 			log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 1.00+i, -0.3+j)
 			#
@@ -472,7 +473,7 @@ xbins_co10, xbins_co21 = plotter_noise( dir_proj, log_co10_mom0_k, log_co10_nois
 #####################
 ### create best co10 distribution
 best_co10_parameter = create_best_co10_model(log_co10_mom0_k, log_co10_noise_k, xbins_co10, nbins)
-log_co10_mom0_k_model,log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise = create_best_co10_model(log_co10_mom0_k, log_co10_noise_k, xbins_co10, nbins, best_co10_parameter)
+log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise = create_best_co10_model(log_co10_mom0_k, log_co10_noise_k, xbins_co10, nbins, best_co10_parameter)
 #
 ### create best co21 distribution
 best_co21_parameter = create_best_co21_model(log_co10_mom0_k_model, log_co21_mom0_k, log_co21_noise_k, xbins_co21, nbins)
@@ -551,7 +552,6 @@ plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo.png",dpi=200)
 
 
 
-"""
 ### plot obs and model mom-0
 figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=8, ncols=8)
@@ -574,6 +574,8 @@ ax1.legend()
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0.png",dpi=200)
 #
 
+
+"""
 ### plot obs and model mom-0
 #
 r21 = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k)
