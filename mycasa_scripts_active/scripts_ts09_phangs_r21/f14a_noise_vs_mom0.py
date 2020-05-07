@@ -398,9 +398,10 @@ def create_best_co21_model(
 	if best_parameters==None:
 		for i, j, k in itertools.product(range_slope, range_intercept, range_scatter):
 			numiter += 1
+			if f
 			print("### create co21 model " + str(numiter).zfill(4) + "/" + str(numall))
 			#
-			log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 1.27+i, -0.5+j)
+			log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 1.00+i, -0.3+j)
 			#
 			log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, 1.0+k)
 			log_co21_mom0_k_model_scatter[np.isnan(log_co21_mom0_k_model_scatter)] = -9999
