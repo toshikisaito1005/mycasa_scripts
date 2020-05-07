@@ -287,9 +287,9 @@ def get_best_co10_parameter(
 	num_co10 = len(log_co10_mom0_k)
 	popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
 	#
-	range_popt1   = np.linspace(-0.1, 0.1, 21)
-	range_popt2   = np.linspace(-0.1, 0.1, 21)
-	range_scatter = np.linspace(-0.2, 0.2, 21)
+	range_popt1   = np.linspace(-0.2, 0.2, 11)
+	range_popt2   = np.linspace(-0.2, 0.2, 11)
+	range_scatter = np.linspace(-0.2, 0.2, 11)
 	#
 	list_popt1 = []
 	list_popt2 = []
@@ -298,7 +298,7 @@ def get_best_co10_parameter(
 	list_p = []
 	list_output = []
 	numiter = 0
-	numall = 21*21*21
+	numall = 11*11*11
 	if best_parameters==None:
 		done = glob.glob(dir_proj+"eps/best_co10_model_parameter.txt")
 		if not done:
@@ -331,6 +331,7 @@ def get_best_co10_parameter(
 				#
 			list_output = np.c_[list_popt1, list_popt2, list_scatter, list_d, list_p]
 			best_parameter = list_output[np.argmin(list_output[:,3])]
+			print(best_parameter)
 			#
 			np.savetxt(dir_proj+"eps/best_co10_model_parameter.txt", np.array(best_parameter))
 		else:
@@ -374,9 +375,9 @@ def get_best_co21_parameter(
 	range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 	num_co21 = len(log_co21_mom0_k)
 	#
-	range_slope = np.linspace(0.0, 0.3, 21)
-	range_intercept = np.linspace(-0.3, 0.3, 21)
-	range_scatter = np.linspace(-0.2, 0.2, 21)
+	range_slope = np.linspace(0.0, 0.3, 11)
+	range_intercept = np.linspace(-1.0, 0.0, 11)
+	range_scatter = np.linspace(-0.2, 0.2, 11)
 	#
 	list_slope = []
 	list_intercept = []
@@ -385,7 +386,7 @@ def get_best_co21_parameter(
 	list_p = []
 	list_output = []
 	numiter = 0
-	numall = 21*21*21
+	numall = 11**3
 	done = glob.glob(dir_proj+"eps/best_co21_model_parameter.txt")
 	if not done:
 		for i, j, k in itertools.product(range_slope, range_intercept, range_scatter):
