@@ -289,6 +289,40 @@ def add_noise(
 
 	return np.array(list_output_co10), np.array(list_output_co21)
 
+def create_best_co10_mode(
+	log_co10_mom0_k,
+	log_co10_noise_k,
+	xbins_co10,
+	nbins,
+	):
+	# prepare
+	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
+	num_co10 = len(log_co10_mom0_k)
+	popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
+	#
+	range_popt1 = np.linspace(-0.2, 0.2, 10)
+	##################################################################################################
+	#
+	log_co10_mom0_k_model = np.random.normal(popt[1], popt[2], num_co10)
+	#
+	log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, 1.1)
+	log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
+	cut = np.where((log_co10_mom0_k_model_scatter>-9000))
+	log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+	#
+	log_co10_mom0_k_model_scatter_noise = add_noise_co10(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10)
+	#
+	cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0]) & (log_co10_mom0_k_model_scatter<range_co10_input[1]))
+	log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+	#
+	cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<range_co10_input[1]))
+	log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
+	# log_co10_mom0_k_model
+	# log_co10_mom0_k_model_scatter
+	# log_co10_mom0_k_model_scatter_noise
+	d, p = stats.ks_2samp(log_co10_mom0_k, log_co10_mom0_k_model_scatter)
+
+
 #####################
 ### plot noise
 #####################
@@ -308,30 +342,6 @@ xbins_co10, xbins_co21 = plotter_noise( dir_proj, log_co10_mom0_k, log_co10_nois
 #####################
 ### modeling
 #####################
-range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
-#
-num_co10 = len(log_co10_mom0_k)
-popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
-#
-log_co10_mom0_k_model = np.random.normal(popt[1], popt[2], num_co10)
-#
-log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, 1.1)
-log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
-cut = np.where((log_co10_mom0_k_model_scatter>-9000))
-log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
-#
-log_co10_mom0_k_model_scatter_noise = add_noise_co10(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10)
-#
-cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0]) & (log_co10_mom0_k_model_scatter<range_co10_input[1]))
-log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
-#
-cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<range_co10_input[1]))
-log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
-# log_co10_mom0_k_model
-# log_co10_mom0_k_model_scatter
-# log_co10_mom0_k_model_scatter_noise
-d, p = stats.ks_2samp(log_co10_mom0_k, log_co10_mom0_k_model_scatter)
-
 
 
 """
@@ -374,8 +384,6 @@ cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_
 log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
 log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[cut]
 """
-
-
 
 
 ### plot obs and model mom-0
