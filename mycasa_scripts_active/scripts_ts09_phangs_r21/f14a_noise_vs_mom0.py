@@ -323,8 +323,8 @@ def get_best_co10_parameter(
 				log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
 				d, p = stats.ks_2samp(log_co10_mom0_k, log_co10_mom0_k_model_scatter)
 				#
-				list_popt1.append(i)
-				list_popt2.append(j)
+				list_popt1.append(popt[1]+i)
+				list_popt2.append(popt[2]+j)
 				list_scatter.append(k)
 				list_d.append(d)
 				list_p.append(p)
@@ -451,7 +451,7 @@ def create_best_models(
 	num_co21 = len(log_co21_mom0_k)
 	#
 	### log_co_mom0_k_model
-	log_co10_mom0_k_model = np.random.normal(popt[1]+co10_mean, popt[2]+co10_disp, num_co10)
+	log_co10_mom0_k_model = np.random.normal(co10_mean, co10_disp, num_co10)
 	log_co10_mom0_k_model.sort()
 	#
 	log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 1.00+co21_slope, -0.3+co21_intercept)
@@ -531,7 +531,12 @@ for i in range(100):
 	list_best_co10_parameter.append(best_co10_parameter.tolist())
 	list_best_co21_parameter.append(best_co21_parameter.tolist())
 	# print
-	print_boot(list_best_co10_parameter[0], "co10_")
+	print_boot(list_best_co10_parameter[0], "co10_norm_mean")
+	print_boot(list_best_co10_parameter[1], "co10_norm_disp")
+	print_boot(list_best_co10_parameter[2], "co10_scatter")
+	print_boot(list_best_co21_parameter[0], "co21_norm_mean")
+	print_boot(list_best_co21_parameter[1], "co21_norm_disp")
+	print_boot(list_best_co21_parameter[2], "co21_scatter")
 	#
 np.savetxt(dir_proj+"eps/bootstrap_co10_models"+galname+".txt", np.array(list_best_co10_parameter))
 np.savetxt(dir_proj+"eps/bootstrap_co21_models"+galname+".txt", np.array(list_best_co21_parameter))
