@@ -583,8 +583,8 @@ plt.rcParams["font.size"] = 16
 #
 # ax1
 ax1.plot(log_co10_mom0_k_model, log_co21_mom0_k_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=1e22)
-ax1.plot(log_co10_mom0_k_model_scatter, log_co21_mom0_k_model_scatter, "o", color="blue", alpha=0.2, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter")
-ax1.plot(log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise, "o", color="red", alpha=0.2, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
+ax1.plot(log_co10_mom0_k_model_scatter, log_co21_mom0_k_model_scatter, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter")
+ax1.plot(log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
 ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0)
 ax1.plot([-0.5,3.0], [-0.5,3.0], "k--", lw=5)
 ax1.set_xlim([-0.5,2.0])
@@ -608,13 +608,13 @@ gs = gridspec.GridSpec(nrows=8, ncols=8)
 plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
 ax1 = plt.subplot(gs[0:8,0:8])
 ax1.grid(axis="both")
-ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
+ax1.set_xlabel("CO(2-1) mom-0 (K.km/s)")
 plt.rcParams["font.size"] = 16
 
 # ax1
 ax1.plot(log_co21_mom0_k_model, r21_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=1e22)
-ax1.plot(log_co21_mom0_k_model_scatter, r21_model_scatter, "o", color="blue", alpha=0.2, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter")
-ax1.plot(log_co21_mom0_k_model_scatter_noise, r21_model_scatter_noise, "o", color="red", alpha=0.2, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
+ax1.plot(log_co21_mom0_k_model_scatter, r21_model_scatter, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter")
+ax1.plot(log_co21_mom0_k_model_scatter_noise, r21_model_scatter_noise, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
 ax1.plot(log_co21_mom0_k, r21, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0)
 ax1.set_xlim([-0.5,2.0])
 ax1.set_ylim([-1.2,0.5])
