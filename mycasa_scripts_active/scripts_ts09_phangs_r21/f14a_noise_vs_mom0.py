@@ -406,7 +406,7 @@ os.system("rm -rf *.last")
 #
 r21_obs = np.log10(10**log_co21_mom0_k / 10**log_co10_mom0_k)
 r21_obs_above_one = r21_obs[r21_obs>np.log10(1)]
-r21_obs_above_one_percent = np.round(len(r21_above_one)/float(len(r21_obs)) * 100, 1)
+r21_obs_above_one_percent = np.round(len(r21_obs_above_one)/float(len(r21_obs)) * 100, 1)
 #
 r21_scatter = np.log10(10**best_lognorm_co21_w_scatter/10**best_lognorm_co10_w_scatter)
 r21_scatter_above_one = r21_scatter[r21_scatter>np.log10(1)]
