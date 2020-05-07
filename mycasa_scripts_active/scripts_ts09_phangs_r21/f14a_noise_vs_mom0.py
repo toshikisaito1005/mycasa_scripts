@@ -295,6 +295,7 @@ def create_best_co10_model(
 	log_co10_noise_k,
 	xbins_co10,
 	nbins,
+	best_parameters=None,
 	):
 	# prepare
 	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
@@ -313,36 +314,39 @@ def create_best_co10_model(
 	list_output = []
 	numiter = 0
 	numall = 21*21*21
-	for i, j, k in itertools.product(range_popt1, range_popt2, range_scatter):
-		numiter += 1
-		print("### create co10 mode " + str(numiter).zfill(4) + "/" + str(numall))
+	if best_parameters==None:
+		for i, j, k in itertools.product(range_popt1, range_popt2, range_scatter):
+			numiter += 1
+			print("### create co10 mode " + str(numiter).zfill(4) + "/" + str(numall))
+			#
+			log_co10_mom0_k_model = np.random.normal(popt[1]+i, popt[2]+j, num_co10)
+			#
+			log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, 1.0+k)
+			log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
+			cut = np.where((log_co10_mom0_k_model_scatter>-9000))
+			log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+			#
+			log_co10_mom0_k_model_scatter_noise = add_noise_co10(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10)
+			#
+			cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0]) & (log_co10_mom0_k_model_scatter<range_co10_input[1]))
+			log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+			#
+			cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<range_co10_input[1]))
+			log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
+			d, p = stats.ks_2samp(log_co10_mom0_k, log_co10_mom0_k_model_scatter)
+			#
+			list_popt1.append(i)
+			list_popt2.append(j)
+			list_scatter.append(k)
+			list_d.append(d)
+			list_p.append(p)
+			#
+		list_output = np.c_[list_popt1, list_popt2, list_scatter, list_d, list_p]
+		best_parameter = list_output[np.argmin(list_output[:,3])]
 		#
-		log_co10_mom0_k_model = np.random.normal(popt[1]+i, popt[2]+j, num_co10)
-		#
-		log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, 1.0+k)
-		log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
-		cut = np.where((log_co10_mom0_k_model_scatter>-9000))
-		log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
-		#
-		log_co10_mom0_k_model_scatter_noise = add_noise_co10(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10)
-		#
-		cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0]) & (log_co10_mom0_k_model_scatter<range_co10_input[1]))
-		log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
-		#
-		cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<range_co10_input[1]))
-		log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
-		d, p = stats.ks_2samp(log_co10_mom0_k, log_co10_mom0_k_model_scatter)
-		#
-		list_popt1.append(i)
-		list_popt2.append(j)
-		list_scatter.append(k)
-		list_d.append(d)
-		list_p.append(p)
-		#
-	list_output = np.c_[list_popt1, list_popt2, list_scatter, list_d, list_p]
-	best_parameter = list_output[np.argmin(list_output[:,3])]
-
-	return best_parameter
+		return best_parameter
+	else:
+		
 
 
 #####################
