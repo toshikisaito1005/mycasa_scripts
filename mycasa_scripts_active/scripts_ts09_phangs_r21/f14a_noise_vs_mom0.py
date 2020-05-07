@@ -398,6 +398,9 @@ def get_best_co21_parameter(
 			if numiter % 500 == 0:
 				print("### create co21 model " + str(numiter).zfill(4) + "/" + str(numall))
 			#
+			this_slope = 0.9+i
+			this_intercept = 
+			#
 			log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, 0.9+i, -0.3+j)
 			#
 			log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, 1.0+k)
@@ -415,7 +418,7 @@ def get_best_co21_parameter(
 			d, p = stats.ks_2samp(log_co21_mom0_k, log_co21_mom0_k_model_scatter_noise)
 			#
 			if p<0.1:
-				list_slope.append(1.00+i)
+				list_slope.append(0.9+i)
 				list_intercept.append(-0.3+j)
 				list_scatter.append(1.0+k)
 				n = len(log_co21_mom0_k)
