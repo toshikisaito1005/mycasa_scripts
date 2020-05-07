@@ -301,9 +301,9 @@ def create_best_co10_model(
 	num_co10 = len(log_co10_mom0_k)
 	popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
 	#
-	range_popt1   = np.linspace(-0.2, 0.2, 41)
-	range_popt2   = np.linspace(-0.2, 0.2, 41)
-	range_scatter = np.linspace(-0.2, 0.2, 41)
+	range_popt1   = np.linspace(-0.2, 0.2, 21)
+	range_popt2   = np.linspace(-0.2, 0.2, 21)
+	range_scatter = np.linspace(-0.2, 0.2, 21)
 	#
 	list_popt1 = []
 	list_popt2 = []
@@ -311,8 +311,9 @@ def create_best_co10_model(
 	list_d = []
 	list_p = []
 	list_output = []
+	numiter = 0
 	for i, j, k in itertools.product(range_popt1, range_popt2, range_scatter):
-		print("### create co10 mode with mean = " + str(popt[1]+i) + ", disp = " + ste(popt[2]+j) + " scatter = " + str(1.0+k))
+		print("### create co10 mode ")
 		#
 		log_co10_mom0_k_model = np.random.normal(popt[1]+i, popt[2]+j, num_co10)
 		#
