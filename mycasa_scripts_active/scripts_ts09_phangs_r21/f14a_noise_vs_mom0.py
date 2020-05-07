@@ -316,7 +316,7 @@ def get_best_co10_parameter(
 	numiter = 0
 	numall = 21*21*21
 	if best_parameters==None:
-		done = glob.glob(dir_proj+"best_co10_model_parameter.txt")
+		done = glob.glob(dir_proj+"eps/best_co10_model_parameter.txt")
 		if not done:
 			for i, j, k in itertools.product(range_popt1, range_popt2, range_scatter):
 				numiter += 1
@@ -348,15 +348,13 @@ def get_best_co10_parameter(
 			list_output = np.c_[list_popt1, list_popt2, list_scatter, list_d, list_p]
 			best_parameter = list_output[np.argmin(list_output[:,3])]
 			#
-			np.savetxt(dir_proj+"best_co10_model_parameter.txt", np.array(best_parameter))
+			np.savetxt(dir_proj+"eps/best_co10_model_parameter.txt", np.array(best_parameter))
 		else:
 			print("### skip creating co10 model because of best_co10_model_parameter.txt")
-			best_parameter = np.loadtxt(dir_proj+"best_co10_model_parameter.txt")
+			best_parameter = np.loadtxt(dir_proj+"eps/best_co10_model_parameter.txt")
 		#
 		return best_parameter
 	else:
-		#
-		print("### create best co10 model")
 		#
 		best_mean = best_parameters[0]
 		best_disp = best_parameters[1]
@@ -404,7 +402,7 @@ def get_best_co21_parameter(
 	list_output = []
 	numiter = 0
 	numall = 21*21*21
-	done = glob.glob(dir_proj+"best_co21_model_parameter.txt")
+	done = glob.glob(dir_proj+"eps/best_co21_model_parameter.txt")
 	if not done:
 		for i, j, k in itertools.product(range_slope, range_intercept, range_scatter):
 			numiter += 1
@@ -436,10 +434,10 @@ def get_best_co21_parameter(
 		list_output = np.c_[list_slope, list_intercept, list_scatter, list_d, list_p]
 		best_parameter = list_output[np.argmin(list_output[:,3])]
 		#
-		np.savetxt(dir_proj+"best_co21_model_parameter.txt", np.array(best_parameter))
+		np.savetxt(dir_proj+"eps/best_co21_model_parameter.txt", np.array(best_parameter))
 	else:
 		print("### skip creating co21 model because of best_co21_model_parameter.txt")
-		best_parameter = np.loadtxt(dir_proj+"best_co21_model_parameter.txt")
+		best_parameter = np.loadtxt(dir_proj+"eps/best_co21_model_parameter.txt")
 	#
 	return best_parameter
 
@@ -573,10 +571,10 @@ ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
 plt.rcParams["font.size"] = 16
 #
 # ax1
-ax1.plot(log_co10_mom0_k_model, log_co21_mom0_k_model, "o", color="black", alpha=1.0, markersize=3, markeredgewidth=0, zorder=1e22)
-ax1.plot(log_co10_mom0_k_model_scatter, log_co21_mom0_k_model_scatter, "o", color="blue", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e20, label="scatter")
-ax1.plot(log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise, "o", color="red", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e18, label="scatter and noise")
-ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="grey", alpha=1.0, markersize=10, markeredgewidth=0)
+ax1.plot(log_co10_mom0_k_model, log_co21_mom0_k_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=1e22)
+ax1.plot(log_co10_mom0_k_model_scatter, log_co21_mom0_k_model_scatter, "o", color="blue", alpha=0.2, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter")
+ax1.plot(log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise, "o", color="red", alpha=0.2, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
+ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0)
 ax1.plot([-0.5,3.0], [-0.5,3.0], "k--", lw=5)
 ax1.set_xlim([-0.5,2.0])
 ax1.set_ylim([-0.5,2.0])
@@ -586,7 +584,7 @@ plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0.png",dpi=200)
 #
 
 
-"""
+
 ### plot obs and model mom-0
 #
 r21 = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k)
@@ -603,17 +601,18 @@ ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
 plt.rcParams["font.size"] = 16
 
 # ax1
-ax1.plot(log_co21_mom0_k_model, r21_model, "o", color="black", alpha=1.0, markersize=3, markeredgewidth=0, zorder=1e22)
-ax1.plot(log_co21_mom0_k_model_scatter, r21_model_scatter, "o", color="blue", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e20, label="scatter")
-ax1.plot(log_co21_mom0_k_model_scatter_noise, r21_model_scatter_noise, "o", color="red", alpha=0.2, markersize=7, markeredgewidth=0, zorder=1e18, label="scatter and noise")
-ax1.plot(log_co21_mom0_k, r21, "o", color="grey", alpha=1.0, markersize=10, markeredgewidth=0)
+ax1.plot(log_co21_mom0_k_model, r21_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=1e22)
+ax1.plot(log_co21_mom0_k_model_scatter, r21_model_scatter, "o", color="blue", alpha=0.2, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter")
+ax1.plot(log_co21_mom0_k_model_scatter_noise, r21_model_scatter_noise, "o", color="red", alpha=0.2, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
+ax1.plot(log_co21_mom0_k, r21, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0)
 ax1.set_xlim([-0.5,2.0])
 ax1.set_ylim([-1.2,0.5])
 #
 ax1.legend()
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21.png",dpi=200)
 #
-"""
+
+
 
 #
 os.system("rm -rf *.last")
