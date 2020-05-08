@@ -466,6 +466,7 @@ def create_best_models(
 	co10_scatter = best_co10_parameter[2]
 	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
 	num_co10 = len(log_co10_mom0_k)
+	print("# range_co10_input = " + str(range_co10_input))
 	#
 	### co21 parameters
 	co21_slope = best_co21_parameter[0]
@@ -473,6 +474,7 @@ def create_best_models(
 	co21_scatter = best_co21_parameter[2]
 	range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 	num_co21 = len(log_co21_mom0_k)
+	print("# range_co21_input = " + str(range_co21_input))
 	#
 	### log_co_mom0_k_model
 	log_co10_mom0_k_model = np.random.normal(co10_mean, co10_disp, num_co10)
