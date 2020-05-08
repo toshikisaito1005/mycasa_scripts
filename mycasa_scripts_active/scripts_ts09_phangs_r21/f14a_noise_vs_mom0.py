@@ -364,7 +364,7 @@ def get_best_co21_parameter(
 	#
 	range_slope = np.linspace(1.00, 1.35, 11)
 	range_intercept = np.linspace(-0.50, -0.05, 11)
-	range_scatter = np.logspace(np.log10(0.01), np.log10(10), 21)
+	range_scatter = np.logspace(np.log10(0.1), np.log10(3), 21)
 	#
 	best_mean = best_co10_parameter[0]
 	best_disp = best_co10_parameter[1]
@@ -413,7 +413,7 @@ def get_best_co21_parameter(
 			log_r21_mom0_k = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k)
 			log_r21_mom0_k_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise/10**log_co10_mom0_k_model_scatter_noise)
 			#
-			cut = np.where(() & ())
+			cut = np.where((log_r21_mom0_k_model_scatter_noise>=log_r21_mom0_k.min()) & (log_r21_mom0_k_model_scatter_noise<=log_r21_mom0_k.max()))
 			d, p = stats.ks_2samp(log_r21_mom0_k, log_r21_mom0_k_model_scatter_noise)
 			#
 			list_slope.append(this_slope)
