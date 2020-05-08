@@ -345,17 +345,6 @@ def get_best_co10_parameter(
 			best_parameter = np.loadtxt(dir_proj+"eps/best_co10_model_parameter.txt")
 		#
 		return best_parameter
-	else:
-		#
-		best_mean = best_parameters[0]
-		best_disp = best_parameters[1]
-		best_scatter = best_parameters[2]
-		#
-		log_co10_mom0_k_model = np.random.normal(best_mean, best_disp, num_co10)
-		#
-		log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, best_scatter)
-
-		return log_co10_mom0_k_model, log_co10_mom0_k_model_scatter
 
 def get_best_co21_parameter(
 	dir_proj,
@@ -371,11 +360,18 @@ def get_best_co21_parameter(
 	# prepare
 	range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
-	num_co21 = len(log_co21_mom0_k)
+	#num_co21 = len(log_co21_mom0_k)
 	#
 	range_slope = np.linspace(1.05, 1.35, 11)
 	range_intercept = np.linspace(-1.00, -0.10, 11)
 	range_scatter = np.logspace(np.log10(0.01), np.log10(1), 16)
+	#
+	best_mean = best_co10_parameter[0]
+	best_disp = best_co10_parameter[1]
+	best_scatter = best_co10_parameter[2]
+	num_co10 = len(log_co10_mom0_k)
+	log_co10_mom0_k_model = np.random.normal(best_mean, best_disp, num_co10)
+	log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, best_scatter)
 	#
 	list_slope = []
 	list_intercept = []
@@ -400,12 +396,14 @@ def get_best_co21_parameter(
 			log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, this_slope, this_intercept)
 			#
 			log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, this_scatter)
-			log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = 1e20
-			log_co21_mom0_k_model_scatter[np.isnan(log_co21_mom0_k_model_scatter)] = 1e20
+			log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = 100
+			log_co21_mom0_k_model_scatter[np.isnan(log_co21_mom0_k_model_scatter)] = 100
 			#
-			print("### len(log_co10_mom0_k_model_scatter)" + str(len(log_co10_mom0_k_model_scatter)))
-			print("### len(log_co21_mom0_k_model_scatter)" + str(len(log_co21_mom0_k_model_scatter)))
-			cut = np.where((log_co10_mom0_k_model_scatter<1e19) & (log_co21_mom0_k_model_scatter<1e19))
+			print("## slope = " + str(this_slope))
+			print("## intercept = " + str(this_intercept))
+			print("# len(log_co10_mom0_k_model_scatter)" + str(len(log_co10_mom0_k_model_scatter)))
+			print("# len(log_co21_mom0_k_model_scatter)" + str(len(log_co21_mom0_k_model_scatter)))
+			cut = np.where((log_co10_mom0_k_model_scatter<100) & (log_co21_mom0_k_model_scatter<100))
 			log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
 			log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
 			############################################################################################################################################################
