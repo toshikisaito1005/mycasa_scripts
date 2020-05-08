@@ -469,6 +469,7 @@ def create_best_models(
 	#
 	log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, co21_slope, co21_intercept)
 	#
+	"""
 	### log_co_mom0_k_model_scatter
 	# add scatter
 	log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, co10_scatter)
@@ -500,6 +501,7 @@ def create_best_models(
 	print("### co10_best_model mean = " + str(np.mean(log_co10_mom0_k_model)))
 	print("### co10_best_model_scatter mean = " + str(np.mean(log_co10_mom0_k_model_scatter)))
 	print("### co10_best_model_scatter_noise mean = " + str(np.mean(log_co10_mom0_k_model_scatter_noise)))
+	"""
 
 	return log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise
 
@@ -601,7 +603,7 @@ for i in range(100):
 	log_r21_mom0_k_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise/10**log_co10_mom0_k_model_scatter_noise)
 	#
 	ax3.hist(log_r21_mom_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0)
-	ax3.hist(log_r21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0)
+	ax3.hist(log_r21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=[-1.0,0.5])
 	ax3.set_xlim([-1.0,0.5])
 	#
 	plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo"+galname+".png",dpi=200)
