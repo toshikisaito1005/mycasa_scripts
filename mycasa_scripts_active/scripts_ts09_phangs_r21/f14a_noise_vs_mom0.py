@@ -365,12 +365,11 @@ def get_best_co10_parameter(
 		cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<range_co10_input[1]))
 		log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
 
-		return log_co10_mom0_k_model, log_co10_mom0_k_model_scatter_noise
+		return log_co10_mom0_k_model
 
 def get_best_co21_parameter(
 	dir_proj,
 	log_co10_mom0_k_model,
-	log_co10_mom0_k_model_scatter_noise,
 	log_co10_mom0_k,
 	log_co21_mom0_k,
 	log_co21_noise_k,
@@ -378,7 +377,6 @@ def get_best_co21_parameter(
 	nbins,
 	):
 	# prepare
-	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
 	range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 	num_co21 = len(log_co21_mom0_k)
 	#
@@ -420,7 +418,10 @@ def get_best_co21_parameter(
 			#
 			cut = np.where((log_co21_mom0_k_model_scatter_noise>range_co21_input[0]) & (log_co21_mom0_k_model_scatter_noise<range_co21_input[1]))
 			log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[cut]
-			d, p = stats.ks_2samp(log_co21_mom0_k, log_co21_mom0_k_model_scatter_noise)
+			#
+			log_r21_mom0_k = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k)
+			log_r21_mom0_k_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise/10**log_co10_mom0_k)
+			d, p = stats.ks_2samp(log_r21_mom0_k, log_r21_mom0_k_model_scatter_noise)
 			#
 			list_slope.append(this_slope)
 			list_intercept.append(this_intercept)
@@ -539,10 +540,10 @@ for i in range(100):
 	os.system("rm -rf " + dir_proj + "eps/best_co21_model_parameter.txt")
 	### get best parameters for co10 model
 	best_co10_parameter = get_best_co10_parameter(dir_proj, log_co10_mom0_k, log_co10_noise_k, xbins_co10, nbins)
-	log_co10_mom0_k_model_for_co21, log_co10_mom0_k_model_scatter_noise_for_co21 = get_best_co10_parameter(dir_proj, log_co10_mom0_k, log_co10_noise_k, xbins_co10, nbins, best_co10_parameter)
+	log_co10_mom0_k_model_for_co21 = get_best_co10_parameter(dir_proj, log_co10_mom0_k, log_co10_noise_k, xbins_co10, nbins, best_co10_parameter)
 	#
 	### get best parameters for co21 model
-	best_co21_parameter = get_best_co21_parameter(dir_proj, log_co10_mom0_k_model_for_co21, log_co10_mom0_k_model_scatter_noise_for_co21, log_co10_mom0_k, log_co21_mom0_k, log_co21_noise_k, xbins_co21, nbins)
+	best_co21_parameter = get_best_co21_parameter(dir_proj, log_co10_mom0_k_model_for_co21, log_co10_mom0_k, log_co21_mom0_k, log_co21_noise_k, xbins_co21, nbins)
 	#
 	### output
 	list_best_co10_parameter.append(best_co10_parameter.tolist())
