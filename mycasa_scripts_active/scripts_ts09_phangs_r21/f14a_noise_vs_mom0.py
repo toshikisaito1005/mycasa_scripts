@@ -298,7 +298,7 @@ def get_best_co10_parameter(
 	list_p = []
 	list_output = []
 	numiter = 0
-	numall = 11*11*11
+	numall = 11*11*16
 	if best_parameters==None:
 		done = glob.glob(dir_proj+"eps/best_co10_model_parameter.txt")
 		if not done:
@@ -363,7 +363,7 @@ def get_best_co21_parameter(
 	#num_co21 = len(log_co21_mom0_k)
 	#
 	range_slope = np.linspace(1.00, 1.35, 11)
-	range_intercept = np.linspace(-0.50, -0.05, 16)
+	range_intercept = np.linspace(-0.50, -0.05, 11)
 	range_scatter = np.logspace(np.log10(0.01), np.log10(10), 16)
 	#
 	best_mean = best_co10_parameter[0]
@@ -378,7 +378,7 @@ def get_best_co21_parameter(
 	list_p = []
 	list_output = []
 	numiter = 0
-	numall = 11*16*11
+	numall = 11*16*16
 	done = glob.glob(dir_proj+"eps/best_co21_model_parameter.txt")
 	if not done:
 		for i, j, k in itertools.product(range_slope, range_intercept, range_scatter):
