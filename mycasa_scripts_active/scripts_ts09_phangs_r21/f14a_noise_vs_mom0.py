@@ -472,10 +472,6 @@ def create_best_models(
 	range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 	num_co21 = len(log_co21_mom0_k)
 	#
-	print("### craete best models")
-	print("# co10_mean = " + str(co10_mean))
-	print("# co10_disp = " + str(co10_disp))
-	#
 	### log_co_mom0_k_model
 	log_co10_mom0_k_model = np.random.normal(co10_mean, co10_disp, num_co10)
 	log_co10_mom0_k_model.sort()
@@ -506,10 +502,6 @@ def create_best_models(
 	cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co21_mom0_k_model_scatter_noise>range_co21_input[0]))
 	log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
 	log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[cut]
-	#
-	print("# modeled co10 mean = " + str(np.mean(log_co10_mom0_k_model)))
-	print("# modeled co10_scatter mean = " + str(np.mean(log_co10_mom0_k_model_scatter)))
-	print("# modeled co10_scatter_noise mean = " + str(np.mean(log_co10_mom0_k_model_scatter_noise)))
 
 	return log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise
 
@@ -571,8 +563,6 @@ for i in range(100):
 	log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise = \
 		create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, best_co10_parameter, best_co21_parameter)
 	#
-	print("# plot-ready co10 mean = " + str(np.mean(log_co10_mom0_k_model_scatter_noise)))
-	#
 	#
 	#
 	#####################
@@ -600,8 +590,6 @@ for i in range(100):
 	#ax1.hist(log_co10_mom0_k_model_scatter, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
 	ax1.hist(log_co10_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
 	ax1.set_xlim([0,3.0])
-	#
-	print("# plotted co10 mean = " + str(np.mean(log_co10_mom0_k_model_scatter_noise)))
 	#
 	# ax2
 	ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
