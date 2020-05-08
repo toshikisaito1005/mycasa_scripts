@@ -415,6 +415,8 @@ def get_best_co21_parameter(
 			log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, this_scatter)
 			log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
 			log_co21_mom0_k_model_scatter[np.isnan(log_co21_mom0_k_model_scatter)] = -9999
+			print("### len(log_co21_mom0_k_model) after isnan + " + str(len(log_co21_mom0_k_model)))
+			print("### len(log_co10_mom0_k_model) after isnan + " + str(len(log_co10_mom0_k_model)))
 			#
 			cut = np.where((log_co10_mom0_k_model_scatter>-9000) & (log_co21_mom0_k_model_scatter>-9000))
 			log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
