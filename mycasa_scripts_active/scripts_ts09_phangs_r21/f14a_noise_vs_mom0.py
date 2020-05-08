@@ -364,7 +364,7 @@ def get_best_co21_parameter(
 	#
 	range_slope = np.linspace(1.00, 1.35, 11)
 	range_intercept = np.linspace(-0.50, -0.05, 11)
-	range_scatter = np.logspace(np.log10(0.1), np.log10(3), 21)
+	range_scatter = np.logspace(np.log10(0.01), np.log10(1), 21)
 	#
 	best_mean = best_co10_parameter[0]
 	best_disp = best_co10_parameter[1]
@@ -653,8 +653,8 @@ for i in range(100):
 	plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21"+galname+".png",dpi=200)
 
 
-np.savetxt(dir_proj+"eps/bootstrap_co10_models"+galname+".txt", np.array(list_best_co10_parameter))
-np.savetxt(dir_proj+"eps/bootstrap_co21_models"+galname+".txt", np.array(list_best_co21_parameter))
+np.savetxt(dir_proj+"eps/bootstrap_co10_models_"+galname+".txt", np.array(list_best_co10_parameter))
+np.savetxt(dir_proj+"eps/bootstrap_co21_models_"+galname+".txt", np.array(list_best_co21_parameter))
 #
 
 
