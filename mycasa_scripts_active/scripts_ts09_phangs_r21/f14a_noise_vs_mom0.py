@@ -362,9 +362,9 @@ def get_best_co21_parameter(
 	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
 	#num_co21 = len(log_co21_mom0_k)
 	#
-	range_slope = np.linspace(1.00, 1.35, 11)
-	range_intercept = np.linspace(-0.40, -0.15, 11)
-	range_scatter = np.logspace(np.log10(0.1), np.log10(1.3), 21)
+	range_slope = np.linspace(1.03, 1.23, 16)
+	range_intercept = np.linspace(-0.40, -0.15, 16)
+	range_scatter = np.logspace(np.log10(0.1), np.log10(1.3), 16)
 	#
 	best_mean = best_co10_parameter[0]
 	best_disp = best_co10_parameter[1]
@@ -533,7 +533,7 @@ xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise
 #####################
 list_best_co10_parameter = []
 list_best_co21_parameter = []
-for i in range(100):
+for i in range(1000):
 	print("### bootstrap " + str(i+1).zfill(3) + "/100")
 	os.system("rm -rf " + dir_proj + "eps/best_co10_model_parameter.txt")
 	os.system("rm -rf " + dir_proj + "eps/best_co21_model_parameter.txt")
