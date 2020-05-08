@@ -580,7 +580,7 @@ for i in range(100):
 	#
 	# ax1
 	ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
-	ax1.hist(log_co10_mom0_k_model_scatter, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
+	#ax1.hist(log_co10_mom0_k_model_scatter, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
 	ax1.hist(log_co10_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
 	ax1.set_xlim([0,3.0])
 	#
