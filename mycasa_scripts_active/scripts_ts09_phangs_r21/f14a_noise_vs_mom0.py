@@ -490,9 +490,7 @@ def create_best_models(
 	log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
 	log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
 	#
-	log_co10_mom0_k_model_scatter_noise[np.isnan(log_co10_mom0_k_model_scatter_noise)] = -9999
-	log_co21_mom0_k_model_scatter_noise[np.isnan(log_co21_mom0_k_model_scatter_noise)] = -9999
-	cut = np.where((log_co10_mom0_k_model_scatter_noise>-9000) & (log_co21_mom0_k_model_scatter_noise>-9000))
+	cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<range_co10_input[1]) & (log_co21_mom0_k_model_scatter_noise>range_co21_input[0]) & (log_co21_mom0_k_model_scatter_noise<range_co21_input[1]))
 	log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
 	log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[cut]
 	#
