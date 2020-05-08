@@ -484,8 +484,8 @@ def create_best_models(
 	# add scatter
 	log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, co10_scatter)
 	log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, co21_scatter)
-	if np.mean(log_co10_mom0_k_model_scatter)-np.mean(log_co10_mom0_k_model)>0.1:
-		print("### co10_best_model_scatter - co10_best_model = " + str(np.mean(log_co10_mom0_k_model_scatter) - np.mean(log_co10_mom0_k_model)))
+	print("### co10_best_model" + str(np.mean(log_co10_mom0_k_model)))
+	print("### co10_best_model_scatter" + str(np.mean(log_co10_mom0_k_model_scatter)))
 	# cut
 	log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
 	log_co21_mom0_k_model_scatter[np.isnan(log_co21_mom0_k_model_scatter)] = -9999
@@ -563,6 +563,7 @@ for i in range(100):
 	print_boot(np.array(list_best_co21_parameter)[:,0], "slope")
 	print_boot(np.array(list_best_co21_parameter)[:,1], "intercept")
 	print_boot(np.array(list_best_co21_parameter)[:,2], "co21_scatter")
+	#
 	### create best models
 	log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise = \
 		create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, best_co10_parameter, best_co21_parameter)
@@ -591,7 +592,8 @@ for i in range(100):
 	#
 	# ax1
 	ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
-	#ax1.hist(log_co10_mom0_k_model_scatter, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
+	ax1.hist(log_co10_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
+	ax1.hist(log_co10_mom0_k_model_scatter, normed=True, color="green", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
 	ax1.hist(log_co10_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
 	ax1.set_xlim([0,3.0])
 	#
