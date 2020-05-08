@@ -289,7 +289,7 @@ def get_best_co10_parameter(
 	#
 	range_popt1   = popt[1] + np.linspace(-0.1, 0.1, 11)
 	range_popt2   = popt[2] + np.linspace(-0.05, 0.05, 11)
-	range_scatter = np.logspace(np.log10(0.01), np.log10(10), 21)
+	range_scatter = np.logspace(np.log10(0.001), np.log10(1), 11)
 	#
 	list_popt1 = []
 	list_popt2 = []
@@ -412,6 +412,8 @@ def get_best_co21_parameter(
 			#
 			log_r21_mom0_k = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k)
 			log_r21_mom0_k_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise/10**log_co10_mom0_k_model_scatter_noise)
+			#
+			cut = np.where(() & ())
 			d, p = stats.ks_2samp(log_r21_mom0_k, log_r21_mom0_k_model_scatter_noise)
 			#
 			list_slope.append(this_slope)
