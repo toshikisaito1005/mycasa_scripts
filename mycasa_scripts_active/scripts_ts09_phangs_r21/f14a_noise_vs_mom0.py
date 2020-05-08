@@ -287,7 +287,7 @@ def get_best_co10_parameter(
 	num_co10 = len(log_co10_mom0_k)
 	popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
 	#
-	range_popt1   = popt[1] + np.linspace(-0.1, 0.1, 11)
+	range_popt1   = popt[1] + np.linspace(-0.05, 0.05, 11)
 	range_popt2   = popt[2] + np.linspace(-0.02, 0.02, 11)
 	range_scatter = np.logspace(np.log10(0.001), np.log10(1), 16)
 	#
@@ -355,12 +355,12 @@ def get_best_co10_parameter(
 		log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, best_scatter)
 		log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
 		cut = np.where((log_co10_mom0_k_model_scatter>-9000))
-		log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+		#log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
 		#
 		log_co10_mom0_k_model_scatter_noise = add_noise_co10(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10)
 		#
-		cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0]) & (log_co10_mom0_k_model_scatter<range_co10_input[1]))
-		log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+		#cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0]) & (log_co10_mom0_k_model_scatter<range_co10_input[1]))
+		#log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
 		#
 		cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<range_co10_input[1]))
 		log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
@@ -381,6 +381,7 @@ def get_best_co21_parameter(
 	):
 	# prepare
 	range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
+	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
 	num_co21 = len(log_co21_mom0_k)
 	#
 	range_slope = np.linspace(1.0, 1.3, 11)
@@ -418,11 +419,10 @@ def get_best_co21_parameter(
 			log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
 			#
 			log_co21_mom0_k_model_scatter_noise = add_noise_co10(log_co21_mom0_k_model_scatter, log_co21_noise_k, xbins_co21)
+			log_co10_mom0_k_model_scatter_noise = add_noise_co10(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10)
 			#
-			cut = np.where((log_co21_mom0_k_model_scatter>range_co21_input[0]) & (log_co21_mom0_k_model_scatter<range_co21_input[1]))
-			log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
-			#
-			cut = np.where((log_co21_mom0_k_model_scatter_noise>range_co21_input[0]) & (log_co21_mom0_k_model_scatter_noise<range_co21_input[1]))
+			cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<range_co10_input[1]) & (log_co21_mom0_k_model_scatter_noise>range_co21_input[0]) & (log_co21_mom0_k_model_scatter_noise<range_co21_input[1]))
+			log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
 			log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[cut]
 			#
 			log_r21_mom0_k = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k)
