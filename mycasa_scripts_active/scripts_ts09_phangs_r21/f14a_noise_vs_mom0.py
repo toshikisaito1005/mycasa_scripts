@@ -484,8 +484,8 @@ def create_best_models(
 	# add scatter
 	log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, co10_scatter)
 	log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, co21_scatter)
-	print("### co10_best_model" + str(np.mean(log_co10_mom0_k_model)))
-	print("### co10_best_model_scatter" + str(np.mean(log_co10_mom0_k_model_scatter)))
+	print("### co10_best_model mean = " + str(np.mean(log_co10_mom0_k_model)))
+	print("### co10_best_model_scatter mean = " + str(np.mean(log_co10_mom0_k_model_scatter)))
 	# cut
 	log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
 	log_co21_mom0_k_model_scatter[np.isnan(log_co21_mom0_k_model_scatter)] = -9999
@@ -496,6 +496,8 @@ def create_best_models(
 	### log_co_mom0_k_model_scatter_noise
 	log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise = \
 		add_noise(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10, log_co21_mom0_k_model_scatter, log_co21_noise_k, xbins_co21)
+	print("### co10_best_model mean = " + str(np.mean(log_co10_mom0_k_model)))
+	print("### co10_best_model_scatter mean = " + str(np.mean(log_co10_mom0_k_model_scatter)))
 	#
 	### cut
 	#
@@ -506,6 +508,10 @@ def create_best_models(
 	cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co21_mom0_k_model_scatter_noise>range_co21_input[0]))
 	log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
 	log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[cut]
+	#
+	print("### co10_best_model mean = " + str(np.mean(log_co10_mom0_k_model)))
+	print("### co10_best_model_scatter mean = " + str(np.mean(log_co10_mom0_k_model_scatter)))
+	print("### co10_best_model_scatter_noise mean = " + str(np.mean(log_co10_mom0_k_model_scatter_noise)))
 
 	return log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise
 
