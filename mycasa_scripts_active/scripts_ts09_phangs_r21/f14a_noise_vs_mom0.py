@@ -362,9 +362,9 @@ def get_best_co21_parameter(
 	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
 	#num_co21 = len(log_co21_mom0_k)
 	#
-	range_slope = np.linspace(1.03, 1.23, 16)
-	range_intercept = np.linspace(-0.40, -0.15, 16)
-	range_scatter = np.logspace(np.log10(0.1), np.log10(1.3), 16)
+	range_slope = np.linspace(1.05, 1.15, 11)
+	range_intercept = np.linspace(-0.8, -0.2, 16)
+	range_scatter = np.logspace(np.log10(0.1), np.log10(1.3), 11)
 	#
 	best_mean = best_co10_parameter[0]
 	best_disp = best_co10_parameter[1]
@@ -378,7 +378,7 @@ def get_best_co21_parameter(
 	list_p = []
 	list_output = []
 	numiter = 0
-	numall = 11*16*16
+	numall = 11*11*16
 	done = glob.glob(dir_proj+"eps/best_co21_model_parameter.txt")
 	if not done:
 		for i, j, k in itertools.product(range_slope, range_intercept, range_scatter):
