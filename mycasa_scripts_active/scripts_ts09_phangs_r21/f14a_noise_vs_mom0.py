@@ -313,6 +313,7 @@ def get_best_co10_parameter(
 				log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
 				cut = np.where((log_co10_mom0_k_model_scatter>-9000))
 				log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+				#
 				if np.mean(log_co10_mom0_k_model_scatter)-np.mean(log_co10_mom0_k_model)>0.1:
 					print("### co10_model_scatter - co10_model = " + str(np.mean(log_co10_mom0_k_model_scatter) - np.mean(log_co10_mom0_k_model)))
 				#
@@ -483,6 +484,8 @@ def create_best_models(
 	# add scatter
 	log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, co10_scatter)
 	log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, co21_scatter)
+	if np.mean(log_co10_mom0_k_model_scatter)-np.mean(log_co10_mom0_k_model)>0.1:
+		print("### co10_best_model_scatter - co10_best_model = " + str(np.mean(log_co10_mom0_k_model_scatter) - np.mean(log_co10_mom0_k_model)))
 	# cut
 	log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
 	log_co21_mom0_k_model_scatter[np.isnan(log_co21_mom0_k_model_scatter)] = -9999
