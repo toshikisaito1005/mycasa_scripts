@@ -507,7 +507,9 @@ def create_best_models(
 	log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
 	log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[cut]
 	#
-	print("# modeled co10 mean = " + str(np.mean(log_co10_mom0_k_model_scatter_noise)))
+	print("# modeled co10 mean = " + str(np.mean(log_co10_mom0_k_model)))
+	print("# modeled co10_scatter mean = " + str(np.mean(log_co10_mom0_k_model_scatter)))
+	print("# modeled co10_scatter_noise mean = " + str(np.mean(log_co10_mom0_k_model_scatter_noise)))
 
 	return log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise
 
