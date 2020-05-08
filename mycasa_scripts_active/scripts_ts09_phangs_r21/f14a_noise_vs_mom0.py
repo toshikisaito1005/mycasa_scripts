@@ -569,6 +569,7 @@ for i in range(100):
 	log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise = \
 		create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, best_co10_parameter, best_co21_parameter)
 	#
+	print("# plot-ready co10 mean = " + str(np.mean(log_co10_mom0_k_model_scatter_noise)))
 	#
 	#
 	#
