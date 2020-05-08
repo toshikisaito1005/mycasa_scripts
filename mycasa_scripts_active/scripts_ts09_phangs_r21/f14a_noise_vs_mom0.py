@@ -287,9 +287,9 @@ def get_best_co10_parameter(
 	num_co10 = len(log_co10_mom0_k)
 	popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
 	#
-	range_popt1   = popt[1] + np.linspace(-0.05, 0.05, 11)
-	range_popt2   = popt[2] + np.linspace(-0.1, 0.1, 11)
-	range_scatter = np.logspace(np.log10(0.001), np.log10(1), 11)
+	range_popt1   = popt[1] + np.linspace(-0.025, 0.025, 11)
+	range_popt2   = popt[2] + np.linspace(-0.05, 0.05, 11)
+	range_scatter = np.logspace(np.log10(0.001), np.log10(10), 16)
 	#
 	list_popt1 = []
 	list_popt2 = []
@@ -314,7 +314,7 @@ def get_best_co10_parameter(
 				cut = np.where((log_co10_mom0_k_model_scatter>-9000))
 				log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
 				#
-				if np.mean(log_co10_mom0_k_model_scatter)-np.mean(log_co10_mom0_k_model)>0.1:
+				if np.mean(log_co10_mom0_k_model_scatter)-np.mean(log_co10_mom0_k_model)>0.2:
 					print("### co10_model_scatter - co10_model = " + str(np.mean(log_co10_mom0_k_model_scatter) - np.mean(log_co10_mom0_k_model)))
 				#
 				log_co10_mom0_k_model_scatter_noise = add_noise_co10(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10)
@@ -362,9 +362,9 @@ def get_best_co21_parameter(
 	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
 	#num_co21 = len(log_co21_mom0_k)
 	#
-	range_slope = np.linspace(1.05, 1.35, 11)
-	range_intercept = np.linspace(-1.00, -0.10, 16)
-	range_scatter = np.logspace(np.log10(0.01), np.log10(1), 11)
+	range_slope = np.linspace(1.00, 1.35, 11)
+	range_intercept = np.linspace(-0.50, -0.05, 16)
+	range_scatter = np.logspace(np.log10(0.01), np.log10(10), 16)
 	#
 	best_mean = best_co10_parameter[0]
 	best_disp = best_co10_parameter[1]
