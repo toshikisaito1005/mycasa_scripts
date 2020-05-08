@@ -473,15 +473,15 @@ def create_best_models(
 	# add scatter
 	log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, co10_scatter)
 	log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, co21_scatter)
+	print("### co10_best_model_scatter mean = " + str(np.mean(log_co10_mom0_k_model_scatter)))
+	print("### co21_best_model_scatter mean = " + str(np.mean(log_co21_mom0_k_model_scatter)))
 	#
 	# cut
 	log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = -9999
 	log_co21_mom0_k_model_scatter[np.isnan(log_co21_mom0_k_model_scatter)] = -9999
-	cut = np.where((log_co10_mom0_k_model_scatter>-9000) & (log_co21_mom0_k_model_scatter>-9000))
-	log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
-	log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
-	print("min log_co10_mom0_k_model_scatter = " + str(np.min(log_co10_mom0_k_model_scatter)))
-	print("max log_co10_mom0_k_model_scatter = " + str(np.max(log_co10_mom0_k_model_scatter)))
+	#cut = np.where((log_co10_mom0_k_model_scatter>-9000) & (log_co21_mom0_k_model_scatter>-9000))
+	#log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+	#log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
 	#
 	### log_co_mom0_k_model_scatter_noise
 	log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise = \
