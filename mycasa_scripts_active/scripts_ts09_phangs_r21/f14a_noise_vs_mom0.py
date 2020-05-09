@@ -573,7 +573,9 @@ for i in range(1000):
 	ax3 = plt.subplot(gs[6:8,0:4])
 	ax4 = plt.subplot(gs[0:2,4:8])
 	ax5 = plt.subplot(gs[3:5,4:8])
-	ax1.hist(list_best_co10_parameter,)
+	ax1.hist(list_best_co10_parameter[0], range=[-0.015,0.015], nbins=11, label="co10 norm mean")
+	ax2.hist(list_best_co10_parameter[1], range=[-0.02, 0.02], nbins=11, label="co10 norm disp")
+	ax3.hist(np.log10(list_best_co10_parameter[2]), range=[-3.0, 0], nbins=11, label="co10 scatter")
 	#	
 	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
 	range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
