@@ -573,9 +573,22 @@ for i in range(1000):
 	ax3 = plt.subplot(gs[6:8,0:4])
 	ax4 = plt.subplot(gs[0:2,4:8])
 	ax5 = plt.subplot(gs[3:5,4:8])
+	ax6 = plt.subplot(gs[6:8,4:8])
 	ax1.hist(list_best_co10_parameter[0], range=[-0.015,0.015], nbins=11, label="co10 norm mean")
 	ax2.hist(list_best_co10_parameter[1], range=[-0.02, 0.02], nbins=11, label="co10 norm disp")
-	ax3.hist(np.log10(list_best_co10_parameter[2]), range=[-3.0, 0], nbins=11, label="co10 scatter")
+	ax3.hist(np.log10(np.array(list_best_co10_parameter[2])), range=[-3.0, 0.0], nbins=11, label="log co10 scatter")
+	ax4.hist(list_best_co21_parameter[0], range=[1.05, 1.15], nbins=11, label="co10 vs co21 slope")
+	ax5.hist(list_best_co21_parameter[1], range=[-0.8, -0.2], nbins=11, label="co10 vs co21 intercept")
+	ax6.hist(np.log10(np.array(list_best_co21_parameter[2])), range=[-1.0, -0.11394335], nbins=11, label="log co10 scatter")
+	ax1.legend()
+	ax2.legend()
+	ax3.legend()
+	ax4.legend()
+	ax5.legend()
+	ax6.legend()
+	plt.savefig(dir_proj + "eps/fig_model_param_"+galname+".png",dpi=200)
+	#
+	#
 	#	
 	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
 	range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
@@ -614,7 +627,7 @@ for i in range(1000):
 	ax3.hist(log_r21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=[-1.0,0.5])
 	ax3.set_xlim([-1.0,0.5])
 	#
-	plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo"+galname+".png",dpi=200)
+	plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo_"+galname+".png",dpi=200)
 
 
 	### plot obs and model mom-0
@@ -636,7 +649,7 @@ for i in range(1000):
 	ax1.set_ylim([-0.5,2.0])
 	#
 	ax1.legend()
-	plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0"+galname+".png",dpi=200)
+	plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0_"+galname+".png",dpi=200)
 
 
 	### plot obs and model mom-0
@@ -663,7 +676,7 @@ for i in range(1000):
 	ax1.set_ylim([-1.2,0.5])
 	#
 	ax1.legend()
-	plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21"+galname+".png",dpi=200)
+	plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21_"+galname+".png",dpi=200)
 
 
 np.savetxt(dir_proj+"eps/bootstrap_co10_models_"+galname+".txt", np.array(list_best_co10_parameter))
