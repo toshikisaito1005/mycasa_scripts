@@ -287,8 +287,8 @@ def get_best_co10_parameter(
 	num_co10 = len(log_co10_mom0_k)
 	popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
 	#
-	range_popt1   = popt[1] + np.linspace(-0.015, 0.015, 11)
-	range_popt2   = popt[2] + np.linspace(-0.02, 0.02, 11)
+	range_popt1   = popt[1] + np.linspace(-0.005, 0.010, 11)
+	range_popt2   = popt[2] + np.linspace(-0.015, 0.015, 11)
 	range_scatter = np.logspace(np.log10(0.001), np.log10(1), 11)
 	#
 	list_popt1 = []
@@ -363,7 +363,7 @@ def get_best_co21_parameter(
 	#num_co21 = len(log_co21_mom0_k)
 	#
 	range_slope = np.linspace(1.05, 1.15, 11)
-	range_intercept = np.linspace(-0.8, -0.2, 16)
+	range_intercept = np.linspace(-0.5, -0.1, 11)
 	range_scatter = np.logspace(np.log10(0.1), np.log10(1.3), 11)
 	#
 	best_mean = best_co10_parameter[0]
@@ -533,7 +533,7 @@ xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise
 #####################
 list_best_co10_parameter = []
 list_best_co21_parameter = []
-for i in range(1000):
+for i in range(500):
 	print("### bootstrap " + str(i+1).zfill(3) + "/100")
 	os.system("rm -rf " + dir_proj + "eps/best_co10_model_parameter.txt")
 	os.system("rm -rf " + dir_proj + "eps/best_co21_model_parameter.txt")
@@ -577,12 +577,12 @@ for i in range(1000):
 	ax4 = plt.subplot(gs[0:2,5:9])
 	ax5 = plt.subplot(gs[3:5,5:9])
 	ax6 = plt.subplot(gs[6:8,5:9])
-	ax1.hist(histdata10[:,0], range=[-0.015+0.727, 0.015+0.727], bins=11)
-	ax2.hist(histdata10[:,1], range=[-0.02+0.2848, 0.02+0.2848], bins=11)
+	ax1.hist(histdata10[:,0], range=[-0.005+0.727, 0.010+0.727], bins=11)
+	ax2.hist(histdata10[:,1], range=[-0.015+0.2848, 0.015+0.2848], bins=11)
 	ax3.hist(np.log10(np.array(histdata10[:,2])), range=[-3.0, 0.0], bins=11)
 	ax4.hist(histdata21[:,0], range=[1.05, 1.15],bins=11)
-	ax5.hist(histdata21[:,1], range=[-0.8, -0.2], bins=11)
-	ax6.hist(np.log10(np.array(histdata21[:,2])), range=[-1.0, 0.11394335], bins=11)
+	ax5.hist(histdata21[:,1], range=[-0.5, -0.1], bins=11)
+	ax6.hist(np.log10(np.array(histdata21[:,2])), range=[-1.0, 0.2], bins=11)
 	ax1.set_title("co10 norm mean")
 	ax2.set_title("co10 norm disp")
 	ax3.set_title("log co10 scatter")
@@ -680,11 +680,11 @@ for i in range(1000):
 	#
 	ax1.legend()
 	plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21_"+galname+".png",dpi=200)
-
-
-np.savetxt(dir_proj+"eps/bootstrap_co10_models_"+galname+".txt", np.array(list_best_co10_parameter))
-np.savetxt(dir_proj+"eps/bootstrap_co21_models_"+galname+".txt", np.array(list_best_co21_parameter))
-#
+	#
+	os.system("rm -rf " + dir_proj+"eps/bootstrap_co*_models_"+galname+".txt")
+	np.savetxt(dir_proj+"eps/bootstrap_co10_models_"+galname+".txt", np.array(list_best_co10_parameter))
+	np.savetxt(dir_proj+"eps/bootstrap_co21_models_"+galname+".txt", np.array(list_best_co21_parameter))
+	#
 
 
 #
