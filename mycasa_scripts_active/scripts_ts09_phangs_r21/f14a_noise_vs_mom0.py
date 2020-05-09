@@ -588,7 +588,7 @@ for i in range(1000):
 	ax3.set_title("log co10 scatter")
 	ax4.set_title("co10 vs co21 slope")
 	ax5.set_title("co10 vs co21 intercept")
-	ax6.set_title("log co10 scatter")
+	ax6.set_title("log co21 scatter")
 	plt.savefig(dir_proj + "eps/fig_model_param_"+galname+".png",dpi=200)
 	#
 	#
