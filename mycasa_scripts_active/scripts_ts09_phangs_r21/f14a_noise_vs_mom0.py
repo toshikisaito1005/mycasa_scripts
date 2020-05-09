@@ -563,7 +563,18 @@ for i in range(1000):
 	#
 	#####################
 	### plot
-	#####################
+	######################
+	###
+	figure = plt.figure(figsize=(10,10))
+	gs = gridspec.GridSpec(nrows=9, ncols=8)
+	plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
+	ax1 = plt.subplot(gs[0:2,0:4])
+	ax2 = plt.subplot(gs[3:5,0:4])
+	ax3 = plt.subplot(gs[6:8,0:4])
+	ax4 = plt.subplot(gs[0:2,4:8])
+	ax5 = plt.subplot(gs[3:5,4:8])
+	ax1.hist(list_best_co10_parameter,)
+	#	
 	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
 	range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 	### plot obs and model mom-0
