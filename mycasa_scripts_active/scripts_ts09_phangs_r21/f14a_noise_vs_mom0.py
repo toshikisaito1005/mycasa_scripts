@@ -378,7 +378,7 @@ def get_best_co21_parameter(
 	list_p = []
 	list_output = []
 	numiter = 0
-	numall = 11*11*16
+	numall = 11*11*11
 	done = glob.glob(dir_proj+"eps/best_co21_model_parameter.txt")
 	if not done:
 		for i, j, k in itertools.product(range_slope, range_intercept, range_scatter):
@@ -577,7 +577,7 @@ for i in range(500):
 	ax4 = plt.subplot(gs[0:2,5:9])
 	ax5 = plt.subplot(gs[3:5,5:9])
 	ax6 = plt.subplot(gs[6:8,5:9])
-	ax1.hist(histdata10[:,0], range=[-0.005+0.727, 0.010+0.727], bins=11)
+	ax1.hist(histdata10[:,0], range=[0.720, 0.74], bins=11)
 	ax2.hist(histdata10[:,1], range=[-0.015+0.2848, 0.015+0.2848], bins=11)
 	ax3.hist(np.log10(np.array(histdata10[:,2])), range=[-3.0, 0.0], bins=11)
 	ax4.hist(histdata21[:,0], range=[1.05, 1.15],bins=11)
