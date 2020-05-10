@@ -583,7 +583,7 @@ for i in range(100):
 	ax4.hist(histdata21[:,0], range=[1.05, 1.15],bins=11)
 	ax5.hist(histdata21[:,1], range=[-0.5, -0.1], bins=11)
 	ax6.hist(np.log10(np.array(histdata21[:,2])), range=[-0.52, 0.12], bins=11)
-	ax1.set_title("co10 norm mean at niter = " + str(i))
+	ax1.set_title("co10 norm mean at niter = " + str(i+1))
 	ax2.set_title("co10 norm disp")
 	ax3.set_title("log co10 scatter")
 	ax4.set_title("co10 vs co21 slope")
