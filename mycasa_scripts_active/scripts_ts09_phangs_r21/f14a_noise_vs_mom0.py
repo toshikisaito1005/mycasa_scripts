@@ -517,10 +517,10 @@ def print_boot(
 ### plot noise
 #####################
 ### get filenames
-co10_mom0  = dir_proj + galname + "_co10/co10_04p0.moment0"
-co10_noise = dir_proj + galname + "_co10/co10_04p0.moment0.noise"
-co21_mom0  = dir_proj + galname + "_co21/co21_04p0.moment0"
-co21_noise = dir_proj + galname + "_co21/co21_04p0.moment0.noise"
+co10_mom0  = dir_proj + galname + "_co10/co10_08p0.moment0"
+co10_noise = dir_proj + galname + "_co10/co10_08p0.moment0.noise"
+co21_mom0  = dir_proj + galname + "_co21/co21_08p0.moment0"
+co21_noise = dir_proj + galname + "_co21/co21_08p0.moment0.noise"
 #
 ### plot noise vs. mom-0
 log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21)
