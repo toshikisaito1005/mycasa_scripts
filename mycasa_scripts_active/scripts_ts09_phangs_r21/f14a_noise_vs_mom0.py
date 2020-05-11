@@ -677,7 +677,7 @@ for i in range(1000):
 	# ax1
 	ax1.plot(log_co21_mom0_k_model, r21_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=1e22)
 	ax1.plot(log_co21_mom0_k_model_scatter_cut, r21_model_scatter, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter")
-	ax1.plot(log_co21_mom0_k_model_scatter_noise_cut, r21_model_scatter_noise_cut, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
+	ax1.plot(log_co21_mom0_k_model_scatter_noise_cut, r21_model_scatter_noise, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
 	ax1.plot(log_co21_mom0_k, r21, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0)
 	ax1.set_xlim([-0.5,2.0])
 	ax1.set_ylim([-1.2,0.5])
