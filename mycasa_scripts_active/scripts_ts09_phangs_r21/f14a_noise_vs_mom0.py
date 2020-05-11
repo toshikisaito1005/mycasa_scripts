@@ -648,8 +648,8 @@ for i in range(1000):
 	#
 	# ax1
 	ax1.plot(log_co10_mom0_k_model, log_co21_mom0_k_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=1e22)
-	ax1.plot(log_co10_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_cut, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter")
-	ax1.plot(log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise_cut, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
+	ax1.plot(log_co10_mom0_k_model_scatter_cut, log_co21_mom0_k_model_scatter_cut, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter")
+	ax1.plot(log_co10_mom0_k_model_scatter_noise_cut, log_co21_mom0_k_model_scatter_noise_cut, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
 	ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0)
 	ax1.plot([-0.5,3.0], [-0.5,3.0], "k--", lw=5)
 	ax1.set_xlim([-0.5,2.0])
