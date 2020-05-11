@@ -628,8 +628,8 @@ for i in range(1000):
 	#
 	# ax1
 	ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
-	ax1.hist(log_co10_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
-	ax1.hist(log_co10_mom0_k_model_scatter_cut, normed=True, color="green", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
+	#ax1.hist(log_co10_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
+	#ax1.hist(log_co10_mom0_k_model_scatter_cut, normed=True, color="green", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
 	ax1.hist(log_co10_mom0_k_model_scatter_noise_cut, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
 	ax1.set_xlim([0,3.0])
 	#
@@ -660,7 +660,7 @@ for i in range(1000):
 	plt.rcParams["font.size"] = 16
 	#
 	binx, mean, std = get_binned_dist(log_co10_mom0_k_model_scatter_noise_cut, log_co21_mom0_k_model_scatter_noise_cut, range_co10_input)
-	ax1.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
+	ax1.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4, zorder=1e24)
 	#
 	# ax1
 	ax1.plot(log_co10_mom0_k_model, log_co21_mom0_k_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=1e22)
@@ -692,7 +692,7 @@ for i in range(1000):
 	plt.rcParams["font.size"] = 16
 	#
 	binx, mean, std = get_binned_dist(log_co10_mom0_k_model_scatter_noise_cut, r21_model_scatter_noise, range_co10_input)
-	ax1.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
+	ax1.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4, zorder=1e24)
 	#
 	# ax1
 	ax1.plot(log_co21_mom0_k_model, r21_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=1e22)
