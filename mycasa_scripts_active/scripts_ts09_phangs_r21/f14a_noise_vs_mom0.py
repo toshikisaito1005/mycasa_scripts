@@ -655,11 +655,12 @@ for i in range(1000):
 	plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
 	ax1 = plt.subplot(gs[0:8,0:8])
 	ax1.grid(axis="both")
-	ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
+	ax1.set_xlabel("log CO(1-0) mom-0 (K.km/s)")
+	ax1.set_ylabel("log CO(2-1) mom-0 (K.km/s)")
 	plt.rcParams["font.size"] = 16
 	#
 	binx, mean, std = get_binned_dist(log_co10_mom0_k_model_scatter_noise_cut, log_co21_mom0_k_model_scatter_noise_cut, range_co10_input)
-	ax.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
+	ax1.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
 	#
 	# ax1
 	ax1.plot(log_co10_mom0_k_model, log_co21_mom0_k_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=1e22)
@@ -686,9 +687,13 @@ for i in range(1000):
 	plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
 	ax1 = plt.subplot(gs[0:8,0:8])
 	ax1.grid(axis="both")
-	ax1.set_xlabel("CO(2-1) mom-0 (K.km/s)")
+	ax1.set_xlabel("log CO(2-1) mom-0 (K.km/s)")
+	ax1.set_ylabel("log $R_{21}$")
 	plt.rcParams["font.size"] = 16
-
+	#
+	binx, mean, std = get_binned_dist(log_co10_mom0_k_model_scatter_noise_cut, r21_model_scatter_noise, range_co10_input)
+	ax1.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
+	#
 	# ax1
 	ax1.plot(log_co21_mom0_k_model, r21_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=1e22)
 	ax1.plot(log_co21_mom0_k_model_scatter_cut, r21_model_scatter, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter")
