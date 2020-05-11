@@ -633,19 +633,17 @@ for i in range(1000):
 	ax1.legend(loc = "upper right")
 	#
 	# ax2
-	ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=range_co21_input, label="Observed Data")
-	ax2.hist(log_co21_mom0_k_model_scatter_noise_cut, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input, label="Model with Scatter+Noise")
+	ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
+	ax2.hist(log_co21_mom0_k_model_scatter_noise_cut, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
 	ax2.set_xlim([-0.5,2.6])
-	ax2.legend(loc = "upper left")
 	#
 	# ax3
 	log_r21_mom_k = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k)
 	log_r21_mom0_k_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise_cut/10**log_co10_mom0_k_model_scatter_noise_cut)
 	#
-	ax3.hist(log_r21_mom_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, label="Observed Data")
-	ax3.hist(log_r21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=[-1.0,0.5], label="Model with Scatter+Noise")
+	ax3.hist(log_r21_mom_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0)
+	ax3.hist(log_r21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=[-1.0,0.5])
 	ax3.set_xlim([-1.0,0.5])
-	ax3.legend(loc = "upper left")
 	#
 	plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo_"+galname+".png",dpi=200)
 
