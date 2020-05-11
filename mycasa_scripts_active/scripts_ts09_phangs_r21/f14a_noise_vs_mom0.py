@@ -688,7 +688,7 @@ for i in range(1000):
 	ax1.set_ylabel("log $R_{21}$")
 	plt.rcParams["font.size"] = 16
 	#
-	binx, mean, std = get_binned_dist(log_co10_mom0_k_model_scatter_noise_cut, r21_model_scatter_noise, range_co21_input)
+	binx, mean, std = get_binned_dist(log_co21_mom0_k_model_scatter_noise_cut, r21_model_scatter_noise, range_co21_input)
 	ax1.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
 	#
 	# ax1
