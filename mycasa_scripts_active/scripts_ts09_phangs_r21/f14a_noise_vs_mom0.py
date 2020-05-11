@@ -639,6 +639,7 @@ for i in range(1000):
 	#
 	# ax3
 	log_r21_mom_k = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k)
+	log_r21_mom0_k_model_scatter = np.log10(10**log_co21_mom0_k_model_scatter_cut/10**log_co10_mom0_k_model_scatter_cut)
 	log_r21_mom0_k_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise_cut/10**log_co10_mom0_k_model_scatter_noise_cut)
 	#
 	ax3.hist(log_r21_mom_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0)
