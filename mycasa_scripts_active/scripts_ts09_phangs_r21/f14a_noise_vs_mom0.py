@@ -533,7 +533,7 @@ xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise
 #####################
 list_best_co10_parameter = []
 list_best_co21_parameter = []
-for i in range(100):
+for i in range(1000):
 	print("### bootstrap " + str(i+1).zfill(3) + "/100")
 	os.system("rm -rf " + dir_proj + "eps/best_co10_model_parameter.txt")
 	os.system("rm -rf " + dir_proj + "eps/best_co21_model_parameter.txt")
@@ -582,7 +582,7 @@ for i in range(100):
 	ax3.hist(np.log10(np.array(histdata10[:,2])), range=[-3.0, 0.0], bins=11)
 	ax4.hist(histdata21[:,0], range=[1.05, 1.15],bins=11)
 	ax5.hist(histdata21[:,1], range=[-0.45, -0.20], bins=11)
-	ax6.hist(np.log10(np.array(histdata21[:,2])), range=[-0.52, 0.12], bins=11)
+	ax6.hist(np.log10(np.array(histdata21[:,2])), range=[-0.30, 0.12], bins=11)
 	ax1.set_title("co10 norm mean at niter = " + str(i+1))
 	ax2.set_title("co10 norm disp")
 	ax3.set_title("log co10 scatter")
@@ -596,6 +596,10 @@ for i in range(100):
 	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
 	range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 	### plot obs and model mom-0
+	log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[np.where((log_co10_mom0_k_model_scatter>=range_co10_input[0]) & (log_co10_mom0_k_model_scatter<=range_co10_input[1]))]
+	log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[np.where((log_co21_mom0_k_model_scatter>=range_co21_input[0]) & (log_co10_mom0_k_model_scatter<=range_co21_input[1]))]
+	log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[np.where((log_co10_mom0_k_model_scatter_noise>=range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<=range_co10_input[1]))]
+	log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[np.where((log_co21_mom0_k_model_scatter_noise>=range_co21_input[0]) & (log_co10_mom0_k_model_scatter_noise<=range_co21_input[1]))]
 	figure = plt.figure(figsize=(10,10))
 	gs = gridspec.GridSpec(nrows=8, ncols=8)
 	plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
