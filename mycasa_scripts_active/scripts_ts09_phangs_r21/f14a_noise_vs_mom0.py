@@ -596,10 +596,10 @@ for i in range(1000):
 	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
 	range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 	### plot obs and model mom-0
-	log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[np.where((log_co10_mom0_k_model_scatter>=range_co10_input[0]) & (log_co10_mom0_k_model_scatter<=range_co10_input[1]))]
-	log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[np.where((log_co21_mom0_k_model_scatter>=range_co21_input[0]) & (log_co21_mom0_k_model_scatter<=range_co21_input[1]))]
-	log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[np.where((log_co10_mom0_k_model_scatter_noise>=range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<=range_co10_input[1]))]
-	log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[np.where((log_co21_mom0_k_model_scatter_noise>=range_co21_input[0]) & (log_co21_mom0_k_model_scatter_noise<=range_co21_input[1]))]
+	log_co10_mom0_k_model_scatter_cut = log_co10_mom0_k_model_scatter[np.where((log_co10_mom0_k_model_scatter>=range_co10_input[0]) & (log_co10_mom0_k_model_scatter<=range_co10_input[1]) & (log_co21_mom0_k_model_scatter>=range_co21_input[0]) & (log_co21_mom0_k_model_scatter<=range_co21_input[1]))]
+	log_co21_mom0_k_model_scatter_cut = log_co21_mom0_k_model_scatter[np.where((log_co10_mom0_k_model_scatter>=range_co10_input[0]) & (log_co10_mom0_k_model_scatter<=range_co10_input[1]) & (log_co21_mom0_k_model_scatter>=range_co21_input[0]) & (log_co21_mom0_k_model_scatter<=range_co21_input[1]))]
+	log_co10_mom0_k_model_scatter_noise_cut = log_co10_mom0_k_model_scatter_noise[np.where((log_co10_mom0_k_model_scatter_noise>=range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<=range_co10_input[1]) & (log_co21_mom0_k_model_scatter_noise>=range_co21_input[0]) & (log_co21_mom0_k_model_scatter_noise<=range_co21_input[1]))]
+	log_co21_mom0_k_model_scatter_noise_cut = log_co21_mom0_k_model_scatter_noise[np.where((log_co10_mom0_k_model_scatter_noise>=range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<=range_co10_input[1]) & (log_co21_mom0_k_model_scatter_noise>=range_co21_input[0]) & (log_co21_mom0_k_model_scatter_noise<=range_co21_input[1]))]
 	figure = plt.figure(figsize=(10,10))
 	gs = gridspec.GridSpec(nrows=8, ncols=8)
 	plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
@@ -628,7 +628,7 @@ for i in range(1000):
 	#
 	# ax3
 	log_r21_mom_k = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k)
-	log_r21_mom0_k_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise/10**log_co10_mom0_k_model_scatter_noise)
+	log_r21_mom0_k_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise_cut/10**log_co10_mom0_k_model_scatter_noise_cut)
 	#
 	ax3.hist(log_r21_mom_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0)
 	ax3.hist(log_r21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=[-1.0,0.5])
@@ -648,8 +648,8 @@ for i in range(1000):
 	#
 	# ax1
 	ax1.plot(log_co10_mom0_k_model, log_co21_mom0_k_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=1e22)
-	ax1.plot(log_co10_mom0_k_model_scatter, log_co21_mom0_k_model_scatter, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter")
-	ax1.plot(log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
+	ax1.plot(log_co10_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_cut, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter")
+	ax1.plot(log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise_cut, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
 	ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0)
 	ax1.plot([-0.5,3.0], [-0.5,3.0], "k--", lw=5)
 	ax1.set_xlim([-0.5,2.0])
@@ -663,8 +663,8 @@ for i in range(1000):
 	#
 	r21 = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k)
 	r21_model = np.log10(10**log_co21_mom0_k_model/10**log_co10_mom0_k_model)
-	r21_model_scatter = np.log10(10**log_co21_mom0_k_model_scatter/10**log_co10_mom0_k_model_scatter)
-	r21_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise/10**log_co10_mom0_k_model_scatter_noise)
+	r21_model_scatter = np.log10(10**log_co21_mom0_k_model_scatter_cut/10**log_co10_mom0_k_model_scatter_cut)
+	r21_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise_cut/10**log_co10_mom0_k_model_scatter_noise_cut)
 	#
 	figure = plt.figure(figsize=(10,10))
 	gs = gridspec.GridSpec(nrows=8, ncols=8)
@@ -676,8 +676,8 @@ for i in range(1000):
 
 	# ax1
 	ax1.plot(log_co21_mom0_k_model, r21_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=1e22)
-	ax1.plot(log_co21_mom0_k_model_scatter, r21_model_scatter, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter")
-	ax1.plot(log_co21_mom0_k_model_scatter_noise, r21_model_scatter_noise, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
+	ax1.plot(log_co21_mom0_k_model_scatter_cut, r21_model_scatter_cut, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e20, label="scatter")
+	ax1.plot(log_co21_mom0_k_model_scatter_noise_cut, r21_model_scatter_noise_cut, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=1e18, label="scatter and noise")
 	ax1.plot(log_co21_mom0_k, r21, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0)
 	ax1.set_xlim([-0.5,2.0])
 	ax1.set_ylim([-1.2,0.5])
