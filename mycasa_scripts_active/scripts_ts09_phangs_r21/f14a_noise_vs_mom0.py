@@ -597,9 +597,9 @@ for i in range(1000):
 	range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 	### plot obs and model mom-0
 	log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[np.where((log_co10_mom0_k_model_scatter>=range_co10_input[0]) & (log_co10_mom0_k_model_scatter<=range_co10_input[1]))]
-	log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[np.where((log_co21_mom0_k_model_scatter>=range_co21_input[0]) & (log_co10_mom0_k_model_scatter<=range_co21_input[1]))]
+	log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[np.where((log_co21_mom0_k_model_scatter>=range_co21_input[0]) & (log_co21_mom0_k_model_scatter<=range_co21_input[1]))]
 	log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[np.where((log_co10_mom0_k_model_scatter_noise>=range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<=range_co10_input[1]))]
-	log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[np.where((log_co21_mom0_k_model_scatter_noise>=range_co21_input[0]) & (log_co10_mom0_k_model_scatter_noise<=range_co21_input[1]))]
+	log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[np.where((log_co21_mom0_k_model_scatter_noise>=range_co21_input[0]) & (log_co21_mom0_k_model_scatter_noise<=range_co21_input[1]))]
 	figure = plt.figure(figsize=(10,10))
 	gs = gridspec.GridSpec(nrows=8, ncols=8)
 	plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
@@ -617,13 +617,13 @@ for i in range(1000):
 	# ax1
 	ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
 	ax1.hist(log_co10_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
-	ax1.hist(log_co10_mom0_k_model_scatter, normed=True, color="green", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
-	ax1.hist(log_co10_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
+	ax1.hist(log_co10_mom0_k_model_scatter_cut, normed=True, color="green", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
+	ax1.hist(log_co10_mom0_k_model_scatter_noise_cut, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
 	ax1.set_xlim([0,3.0])
 	#
 	# ax2
 	ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
-	ax2.hist(log_co21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
+	ax2.hist(log_co21_mom0_k_model_scatter_noise_cut, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
 	ax2.set_xlim([-0.5,2.6])
 	#
 	# ax3
