@@ -630,7 +630,7 @@ for i in range(1000):
 	#ax1.hist(log_co10_mom0_k_model_scatter_cut, normed=True, color="green", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
 	ax1.hist(log_co10_mom0_k_model_scatter_noise_cut, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input, label="Model with Scatter+Noise")
 	ax1.set_xlim([0,3.0])
-	ax1.legend(loc = "upper left")
+	ax1.legend(loc = "upper right")
 	#
 	# ax2
 	ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=range_co21_input, label="Observed Data")
@@ -639,11 +639,11 @@ for i in range(1000):
 	ax2.legend(loc = "upper left")
 	#
 	# ax3
-	log_r21_mom_k = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k, label="Observed Data")
-	log_r21_mom0_k_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise_cut/10**log_co10_mom0_k_model_scatter_noise_cut, label="Model with Scatter+Noise")
+	log_r21_mom_k = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k)
+	log_r21_mom0_k_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise_cut/10**log_co10_mom0_k_model_scatter_noise_cut)
 	#
-	ax3.hist(log_r21_mom_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0)
-	ax3.hist(log_r21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=[-1.0,0.5])
+	ax3.hist(log_r21_mom_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, label="Observed Data")
+	ax3.hist(log_r21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=[-1.0,0.5], label="Model with Scatter+Noise")
 	ax3.set_xlim([-1.0,0.5])
 	ax3.legend(loc = "upper left")
 	#
@@ -696,13 +696,12 @@ for i in range(1000):
 	#
 	# ax1
 	ax1.plot(log_co21_mom0_k_model, r21_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=-1e18)
-	ax1.plot(log_co21_mom0_k_model_scatter_cut, r21_model_scatter, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=-1e20, label="scatter")
-	ax1.plot(log_co21_mom0_k_model_scatter_noise_cut, r21_model_scatter_noise, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=-1e22, label="scatter and noise")
+	ax1.plot(log_co21_mom0_k_model_scatter_cut, r21_model_scatter, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=-1e20)
+	ax1.plot(log_co21_mom0_k_model_scatter_noise_cut, r21_model_scatter_noise, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=-1e22)
 	ax1.plot(log_co21_mom0_k, r21, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0, zorder=-1e24)
 	ax1.set_xlim([-0.5,2.0])
 	ax1.set_ylim([-1.2,0.5])
 	#
-	ax1.legend()
 	plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21_"+galname+".png",dpi=200)
 	#
 	os.system("rm -rf " + dir_proj+"eps/bootstrap_co*_models_"+galname+".txt")
