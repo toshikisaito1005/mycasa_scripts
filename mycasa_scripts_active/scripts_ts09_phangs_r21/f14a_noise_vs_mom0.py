@@ -24,6 +24,18 @@ percentile = 84
 #####################
 ### functions
 #####################
+def get_binned_dist(x,y,binrange):
+	"""
+	"""
+	n, _ = np.histogram(x, bins=10, range=binrange)
+	sy, _ = np.histogram(x, bins=10, range=binrange, weights=y)
+	sy2, _ = np.histogram(x, bins=10, range=binrange, weights=y*y)
+	mean = sy / n
+	std = np.sqrt(sy2/n - mean*mean)
+	binx = (_[1:] + _[:-1])/2
+
+	return binx, mean, std
+
 def func1(x, a, b, c):
 	"""
 	"""
@@ -645,6 +657,9 @@ for i in range(1000):
 	ax1.grid(axis="both")
 	ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
 	plt.rcParams["font.size"] = 16
+	#
+	binx, mean, std = get_binned_dist(log_co10_mom0_k_model_scatter_noise_cut, log_co21_mom0_k_model_scatter_noise_cut, range_co10_input)
+	ax.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
 	#
 	# ax1
 	ax1.plot(log_co10_mom0_k_model, log_co21_mom0_k_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=1e22)
