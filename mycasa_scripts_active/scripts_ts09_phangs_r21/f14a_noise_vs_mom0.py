@@ -619,30 +619,33 @@ for i in range(1000):
 	ax1.grid(axis="x")
 	ax2.grid(axis="x")
 	ax3.grid(axis="x")
-	ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
-	ax2.set_xlabel("CO(2-1) mom-0 (K.km/s)")
-	ax3.set_xlabel("$R_{21}$")
+	ax1.set_xlabel("log CO(1-0) mom-0 (K.km/s)")
+	ax2.set_xlabel("log CO(2-1) mom-0 (K.km/s)")
+	ax3.set_xlabel("log $R_{21}$")
 	plt.rcParams["font.size"] = 16
 	#
 	# ax1
-	ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
+	ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=range_co10_input, label="Observed Data")
 	#ax1.hist(log_co10_mom0_k_model, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
 	#ax1.hist(log_co10_mom0_k_model_scatter_cut, normed=True, color="green", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
-	ax1.hist(log_co10_mom0_k_model_scatter_noise_cut, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input)
+	ax1.hist(log_co10_mom0_k_model_scatter_noise_cut, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input, label="Model with Scatter+Noise")
 	ax1.set_xlim([0,3.0])
+	ax1.legend(loc = "upper left")
 	#
 	# ax2
-	ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
-	ax2.hist(log_co21_mom0_k_model_scatter_noise_cut, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
+	ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=range_co21_input, label="Observed Data")
+	ax2.hist(log_co21_mom0_k_model_scatter_noise_cut, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input, label="Model with Scatter+Noise")
 	ax2.set_xlim([-0.5,2.6])
+	ax2.legend(loc = "upper left")
 	#
 	# ax3
-	log_r21_mom_k = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k)
-	log_r21_mom0_k_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise_cut/10**log_co10_mom0_k_model_scatter_noise_cut)
+	log_r21_mom_k = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k, label="Observed Data")
+	log_r21_mom0_k_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise_cut/10**log_co10_mom0_k_model_scatter_noise_cut, label="Model with Scatter+Noise")
 	#
 	ax3.hist(log_r21_mom_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0)
 	ax3.hist(log_r21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=[-1.0,0.5])
 	ax3.set_xlim([-1.0,0.5])
+	ax3.legend(loc = "upper left")
 	#
 	plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo_"+galname+".png",dpi=200)
 
@@ -661,15 +664,15 @@ for i in range(1000):
 	ax1.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
 	#
 	# ax1
-	ax1.plot(log_co10_mom0_k_model, log_co21_mom0_k_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=-1e18)
-	ax1.plot(log_co10_mom0_k_model_scatter_cut, log_co21_mom0_k_model_scatter_cut, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=-1e20, label="scatter")
-	ax1.plot(log_co10_mom0_k_model_scatter_noise_cut, log_co21_mom0_k_model_scatter_noise_cut, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=-1e22, label="scatter and noise")
-	ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0, zorder=-1e24)
+	ax1.plot(log_co10_mom0_k_model, log_co21_mom0_k_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=-1e18, label="Model")
+	ax1.plot(log_co10_mom0_k_model_scatter_cut, log_co21_mom0_k_model_scatter_cut, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=-1e20, label="Model with Scatter")
+	ax1.plot(log_co10_mom0_k_model_scatter_noise_cut, log_co21_mom0_k_model_scatter_noise_cut, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=-1e22, label="Model with Scatter+Noise")
+	ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0, zorder=-1e24, label="Observed Data")
 	ax1.plot([-0.5,3.0], [-0.5,3.0], "k--", lw=5)
 	ax1.set_xlim([-0.5,2.0])
 	ax1.set_ylim([-0.5,2.0])
 	#
-	ax1.legend()
+	ax1.legend(loc = "upper left")
 	plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0_"+galname+".png",dpi=200)
 
 
