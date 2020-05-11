@@ -14,7 +14,7 @@ import scripts_phangs_r21 as r21
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-galname = "ngc3627"
+galname = "ngc0628"
 freqco10 = 115.27120
 freqco21 = 230.53800
 nbins = 40
@@ -288,7 +288,7 @@ def get_best_co10_parameter(
 	popt = fit_norm(log_co10_mom0_k, range_co10_input, nbins)
 	#
 	range_popt1   = popt[1] + np.linspace(-0.005, 0.010, 11)
-	range_popt2   = popt[2] + np.linspace(-0.015, 0.015, 11)
+	range_popt2   = popt[2] + np.linspace(-0.010, 0.010, 11)
 	range_scatter = np.logspace(np.log10(0.01), np.log10(1), 11)
 	#
 	list_popt1 = []
@@ -363,8 +363,8 @@ def get_best_co21_parameter(
 	#num_co21 = len(log_co21_mom0_k)
 	#
 	range_slope = np.linspace(1.05, 1.15, 11)
-	range_intercept = np.linspace(-0.5, -0.1, 11)
-	range_scatter = np.logspace(np.log10(0.3), np.log10(1.3), 11)
+	range_intercept = np.linspace(-0.45, -0.20, 11)
+	range_scatter = np.logspace(np.log10(0.5), np.log10(1.3), 11)
 	#
 	best_mean = best_co10_parameter[0]
 	best_disp = best_co10_parameter[1]
@@ -517,10 +517,10 @@ def print_boot(
 ### plot noise
 #####################
 ### get filenames
-co10_mom0  = dir_proj + galname + "_co10/co10_08p0.moment0"
-co10_noise = dir_proj + galname + "_co10/co10_08p0.moment0.noise"
-co21_mom0  = dir_proj + galname + "_co21/co21_08p0.moment0"
-co21_noise = dir_proj + galname + "_co21/co21_08p0.moment0.noise"
+co10_mom0  = dir_proj + galname + "_co10/co10_04p0.moment0"
+co10_noise = dir_proj + galname + "_co10/co10_04p0.moment0.noise"
+co21_mom0  = dir_proj + galname + "_co21/co21_04p0.moment0"
+co21_noise = dir_proj + galname + "_co21/co21_04p0.moment0.noise"
 #
 ### plot noise vs. mom-0
 log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21)
@@ -581,7 +581,7 @@ for i in range(100):
 	ax2.hist(histdata10[:,1], range=[-0.015+0.2848, 0.015+0.2848], bins=11)
 	ax3.hist(np.log10(np.array(histdata10[:,2])), range=[-3.0, 0.0], bins=11)
 	ax4.hist(histdata21[:,0], range=[1.05, 1.15],bins=11)
-	ax5.hist(histdata21[:,1], range=[-0.5, -0.1], bins=11)
+	ax5.hist(histdata21[:,1], range=[-0.45, -0.20], bins=11)
 	ax6.hist(np.log10(np.array(histdata21[:,2])), range=[-0.52, 0.12], bins=11)
 	ax1.set_title("co10 norm mean at niter = " + str(i+1))
 	ax2.set_title("co10 norm disp")
