@@ -106,16 +106,19 @@ def get_stats(
 ### plot
 figure = plt.figure(figsize=(10,4))
 gs = gridspec.GridSpec(nrows=1, ncols=15)
-plt.subplots_adjust(bottom=0.15, left=0.05, right=0.98, top=0.90)
+plt.subplots_adjust(bottom=0.15, left=0.07, right=0.98, top=0.90)
 ax1 = plt.subplot(gs[0:5,0:5])
 ax2 = plt.subplot(gs[0:5,5:10])
 ax3 = plt.subplot(gs[0:5,10:15])
 ax1.grid(axis="y")
 ax2.grid(axis="y")
 ax3.grid(axis="y")
-ax1.set_xlabel("log $I_{CO(1-0)}$ (K.km/s)")
-ax2.set_xlabel("log $I_{CO(2-1)}$ (K.km/s)")
-ax3.set_xlabel("log $R_{21}$")
+ax1.set_ylabel("Normed Median")
+ax1.set_xlabel("Beam Size (arcsec)")
+ax2.set_xlabel("Beam Size (arcsec)")
+ax3.set_xlabel("Beam Size (arcsec)")
+ax2.tick_params(labelleft=False)
+ax3.tick_params(labelleft=False)
 plt.rcParams["font.size"] = 12
 #
 axlist = [ax1, ax2, ax3]
@@ -164,8 +167,10 @@ for i in range(len(gals)):
 	ax = axlist[i]
 	#
 	norm_median = np.array(statslist_r21)[:,2] / np.array(statslist_r21)[:,2][0]
-	ax.plot(list_beam, norm_median, "o-", color=color)
-	ax.set_ylim([0.5,1.5])
+	markers, bars = ax.plot(list_beam, norm_median, "o-", color=color)
+	[bar.set_alpha(0.6) for bar in bars]
+
+	ax.set_ylim([0.8,1.5])
 
 plt.savefig(dir_proj+"eps/violin_stats.png",dpi=300)
 
