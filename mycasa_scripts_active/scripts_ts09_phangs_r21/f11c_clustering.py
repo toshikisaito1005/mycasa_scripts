@@ -52,16 +52,31 @@ for i in range(len(txtfiles)):
 	#
 	### calcurate function
 	list_log_dist = np.log10(np.logspace(np.log10(1), np.log10(10000), 21))
-	list_num = []
+	list_num_high = []
+	list_num_mid = []
+	list_num_low = []
 	for this_log_dist in list_log_dist:
+		# high
 		num_zero_high = len(distance_high[distance_high==0])
 		this_num_high = len(distance_high[distance_high<=10**this_log_dist]/2 - num_zero_high)
-		list_num.append(this_num)
+		list_num_high.append(this_num_high)
+		# mid
+		num_zero_mid = len(distance_mid[distance_mid==0])
+		this_num_mid = len(distance_mid[distance_mid<=10**this_log_dist]/2 - num_zero_mid)
+		list_num_mid.append(this_num_mid)
+		# low
+		num_zero_low = len(distance_low[distance_low==0])
+		this_num_low = len(distance_low[distance_low<=10**this_log_dist]/2 - num_zero_low)
+		list_num_low.append(this_num_low)
 	#
-	list_num = np.sqrt(np.array(list_num)/np.pi) - 10**list_log_dist
+	list_num_high = np.sqrt(np.array(list_num_high)/np.pi) - 10**list_log_dist
+	list_num_mid = np.sqrt(np.array(list_num_mid)/np.pi) - 10**list_log_dist
+	list_num_low = np.sqrt(np.array(list_num_low)/np.pi) - 10**list_log_dist
 	#
 	# plot
-	ax.plot(list_log_dist, list_num, "o-")
+	ax.plot(list_log_dist, list_num_high, "o-", color="red", alpha=0.4, label="High")
+	ax.plot(list_log_dist, list_num_mid, "o-", color="green", alpha=0.4, label="Mid")
+	ax.plot(list_log_dist, list_num_low, "o-", color="blue", alpha=0.4, label="Low")
 	ax.set_ylim([-100,100])
 
 #
