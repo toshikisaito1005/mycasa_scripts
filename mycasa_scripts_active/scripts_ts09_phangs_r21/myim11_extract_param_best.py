@@ -95,13 +95,7 @@ for i in range(len(gals)):
     data_co21err = data_co21 / data_co21snr
     data_r21err = data_r21 * np.sqrt((1.0/data_co10snr)**2 + (1.0/data_co21snr)**2)
     data_p21err = data_r21 * np.sqrt((data_pco10err/data_pco10)**2 + (data_pco21err/data_pco21)**2)
-
-
-
-
-
-
-
+    #
     data_all = np.c_[
         data_dist.astype(int), # 0
         data_co10,             # 1
@@ -117,8 +111,8 @@ for i in range(len(gals)):
         data_p21,              # 11
         data_p21err,           # 12
         data_r21mask,          # 13
-        data_ra,               # 14
-        data_dec,              # 15
+        data_ra * 3600 * scales[i],  # 14
+        data_dec * 3600 * scales[i], # 15
         ]
 
     np.savetxt(
