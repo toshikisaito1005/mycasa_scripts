@@ -113,7 +113,7 @@ ax3 = plt.subplot(gs[0:5,10:15])
 ax1.grid(axis="y")
 ax2.grid(axis="y")
 ax3.grid(axis="y")
-ax1.set_ylabel("Normed Median")
+ax1.set_ylabel("Normed 84%-16% Width")
 ax1.set_xlabel("Beam Size (arcsec)")
 ax2.set_xlabel("Beam Size (arcsec)")
 ax3.set_xlabel("Beam Size (arcsec)")
@@ -183,13 +183,14 @@ for i in range(len(gals)):
 	bars = ax.plot(list_beam, norm_disp, "o-", color=color, alpha=0.6, lw=2, label=label2)
 	[bar.set_alpha(0.4) for bar in bars]
 	#
-	norm_median = np.array(statslist_r21_wco21)[:,2] / np.array(statslist_r21_wco21)[:,2][0]
+	norm_disp = (np.array(statslist_r21_wco21)[:,0]-np.array(statslist_r21_wco21)[:,4]) / (np.array(statslist_r21_wco21)[:,0][0]-np.array(statslist_r21_wco21)[:,4][0])
 	bars = ax.plot(list_beam, norm_disp, "o-", color=color, alpha=0.6, lw=2, label=label3)
 	[bar.set_alpha(0.2) for bar in bars]
 
-	ax.set_ylim([0.9,1.4])
+	ax.set_ylim([0.3,1.4])
+	ax.set_xlim([1.0,34.0])
 	ax.legend()
 
-plt.savefig(dir_proj+"eps/violin_stats.png",dpi=300)
+plt.savefig(dir_proj+"eps/violin_disp.png",dpi=300)
 
 os.system("rm -rf *.last")
