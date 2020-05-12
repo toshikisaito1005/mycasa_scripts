@@ -151,6 +151,7 @@ def plotter_noise(
 	log_co21_noise_k,
 	nbins,
 	percentile,
+	galname,
 	):
 	"""
 	"""
@@ -181,7 +182,7 @@ def plotter_noise(
 	#np.savetxt(dir_proj + "eps/ngc0628_4p0_lognoise_co21_bin.txt", np.array(np.c_[xbins_co21, list_log_noise_co21_mean]), fmt="%.3f")
 	#
 	#
-	plt.savefig(dir_proj + "eps/fig_noise_vs_mom0.png",dpi=200)
+	plt.savefig(dir_proj + "eps/fig_noise_vs_mom0_"+galname+".png",dpi=200)
 
 	return xbins_co10, xbins_co21
 
@@ -303,33 +304,36 @@ def create_best_models(
 
 
 #####################
-### plot noise
+### main
 #####################
 ### get best fit values
 dataco10 = np.loadtxt(dir_proj + "eps/bootstrap_co10_models_ngc0628.txt")
 dataco21 = np.loadtxt(dir_proj + "eps/bootstrap_co21_models_ngc0628.txt")
+best_co10_parameter = np.median(dataco10)
+best_co21_parameter = np.median(dataco21)
+
+
+### get filenames
+co10_mom0  = dir_proj + galname + "_co10/co10_04p0.moment0"
+co10_noise = dir_proj + galname + "_co10/co10_04p0.moment0.noise"
+co21_mom0  = dir_proj + galname + "_co21/co21_04p0.moment0"
+co21_noise = dir_proj + galname + "_co21/co21_04p0.moment0.noise"
 
 
 ### plot noise vs. mom-0
 log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21)
 p84_co10, p50_co10, p16_co10, p84_co21, p50_co21, p16_co21 = print_things(log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k)
-xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile)
-
-
+xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile, galname)
 
 
 ### create best models
 log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise = \
 	create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, best_co10_parameter, best_co21_parameter)
-#
-#
-#
-#####################
-### plot
-######################
+
+
 ### plot obs and model mom-0
-histdata10 = np.array(list_best_co10_parameter)
-histdata21 = np.array(list_best_co21_parameter)
+histdata10 = np.array(dataco10)
+histdata21 = np.array(dataco21)
 #
 figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=9, ncols=9)
@@ -346,13 +350,18 @@ ax3.hist(np.log10(np.array(histdata10[:,2])), range=[-3.0, 0.0], bins=11)
 ax4.hist(histdata21[:,0], range=[1.05, 1.15],bins=11)
 ax5.hist(histdata21[:,1], range=[-0.45, -0.20], bins=11)
 ax6.hist(np.log10(np.array(histdata21[:,2])), range=[-0.30, 0.12], bins=11)
-ax1.set_title("co10 norm mean at niter = " + str(i+1))
+ax1.set_title("co10 norm mean")
 ax2.set_title("co10 norm disp")
 ax3.set_title("log co10 scatter")
 ax4.set_title("co10 vs co21 slope")
 ax5.set_title("co10 vs co21 intercept")
 ax6.set_title("log co21 scatter")
 plt.savefig(dir_proj + "eps/fig_model_param_"+galname+".png",dpi=200)
+
+
+
+
+###
 #
 range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
 range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
@@ -394,11 +403,15 @@ log_r21_mom0_k_model_scatter = np.log10(10**log_co21_mom0_k_model_scatter_cut/10
 log_r21_mom0_k_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise_cut/10**log_co10_mom0_k_model_scatter_noise_cut)
 #
 ax3.hist(log_r21_mom_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0)
-ax3.hist(log_r21_mom0_k_model_scatter, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=[-1.0,0.5])
+#ax3.hist(log_r21_mom0_k_model_scatter, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=[-1.0,0.5])
 ax3.hist(log_r21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=[-1.0,0.5])
 ax3.set_xlim([-1.0,0.5])
 #
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo_"+galname+".png",dpi=200)
+
+
+
+
 
 
 ### plot co10 vs co21
