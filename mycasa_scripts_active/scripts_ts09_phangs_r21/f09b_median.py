@@ -119,6 +119,9 @@ ax2.set_xlabel("Beam Size (arcsec)")
 ax3.set_xlabel("Beam Size (arcsec)")
 ax2.tick_params(labelleft=False)
 ax3.tick_params(labelleft=False)
+ax1.set_title("NGC 0628")
+ax2.set_title("NGC 3627")
+ax3.set_title("NGC 4321")
 plt.rcParams["font.size"] = 12
 #
 axlist = [ax1, ax2, ax3]
