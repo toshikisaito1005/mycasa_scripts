@@ -166,11 +166,28 @@ for i in range(len(gals)):
 	color = cm.brg(i/2.5)
 	ax = axlist[i]
 	#
+	if i==0:
+		label1 = "Unweighted"
+		label2 = "CO(1-0)-weighted"
+		label3 = "CO(2-1)-weighted"
+	else:
+		label1=None
+		label2=None
+		label3=None
+	#
 	norm_median = np.array(statslist_r21)[:,2] / np.array(statslist_r21)[:,2][0]
-	markers, bars = ax.plot(list_beam, norm_median, "o-", color=color)
+	bars = ax.plot(list_beam, norm_median, "o-", color=color, alpha=0.6, lw=2, label=label1)
 	[bar.set_alpha(0.6) for bar in bars]
+	#
+	norm_median = np.array(statslist_r21_wco10)[:,2] / np.array(statslist_r21_wco10)[:,2][0]
+	bars = ax.plot(list_beam, norm_median, "o-", color=color, alpha=0.6, lw=2, label=label2)
+	[bar.set_alpha(0.4) for bar in bars]
+	#
+	norm_median = np.array(statslist_r21_wco21)[:,2] / np.array(statslist_r21_wco21)[:,2][0]
+	bars = ax.plot(list_beam, norm_median, "o-", color=color, alpha=0.6, lw=2, label=label3)
+	[bar.set_alpha(0.2) for bar in bars]
 
-	ax.set_ylim([0.8,1.5])
+	ax.set_ylim([0.9,1.4])
 
 plt.savefig(dir_proj+"eps/violin_stats.png",dpi=300)
 
