@@ -98,6 +98,11 @@ rm -rf $dir_data"violin_co21.png"
 
 
 ### figure 10
+convert -append -border 0x0 $dir_data"violin_median.png" $dir_data"violin_disp.png" eps2:$dir_data"fig10.eps"
+
+rm -rf $dir_data"violin_median.png" $dir_data"violin_disp.png"
+
+### figure 11
 convert -crop 600x600+80+30 $dir_data"ngc0628_r21_mask.png" $dir_data"ngc0628_r21_maskb.png"
 convert -crop 600x600+118+30 $dir_data"ngc3627_r21_mask.png" $dir_data"ngc3627_r21_maskb.png"
 convert -crop 600x600+80+30 $dir_data"ngc4321_r21_mask.png" $dir_data"ngc4321_r21_maskb.png"
@@ -105,7 +110,7 @@ convert -crop 600x600+24+30 $dir_data"fig_mask_histo.png" $dir_data"fig_mask_his
 
 convert +append -border 0x0 $dir_data"ngc0628_r21_maskb.png" $dir_data"ngc3627_r21_maskb.png" $dir_data"fig10a.png"
 convert +append -border 0x0 $dir_data"ngc4321_r21_maskb.png" $dir_data"fig_mask_histob.png" $dir_data"fig10b.png"
-convert -append -border 0x0 $dir_data"fig10a.png" $dir_data"fig10b.png" eps2:$dir_data"fig10.eps"
+convert -append -border 0x0 $dir_data"fig10a.png" $dir_data"fig10b.png" eps2:$dir_data"fig11.eps"
 
 rm -rf $dir_data"ngc0628_r21_mask.png" $dir_data"ngc0628_r21_maskb.png"
 rm -rf $dir_data"ngc3627_r21_mask.png" $dir_data"ngc3627_r21_maskb.png"
@@ -114,33 +119,33 @@ rm -rf $dir_data"fig_mask_histo.png" $dir_data"fig_mask_histob.png"
 rm -rf $dir_data"fig10a.png" $dir_data"fig10b.png"
 
 
-### figure 11
+### figure 12
 convert -crop 2250x900+120+50 $dir_data"fig_r21_vs_dist.png" $dir_data"fig_r21_vs_distb.png"
 convert -crop 2250x860+120+90 $dir_data"fig_r21_vs_disp.png" $dir_data"fig_r21_vs_dispb.png"
 
-convert -append -border 0x0 $dir_data"fig_r21_vs_distb.png" $dir_data"fig_r21_vs_dispb.png" eps2:$dir_data"fig11.eps"
+convert -append -border 0x0 $dir_data"fig_r21_vs_distb.png" $dir_data"fig_r21_vs_dispb.png" eps2:$dir_data"fig12.eps"
 
 rm -rf $dir_data"fig_r21_vs_dist.png" $dir_data"fig_r21_vs_distb.png"
 rm -rf $dir_data"fig_r21_vs_disp.png" $dir_data"fig_r21_vs_dispb.png"
 
 
-### figure 12
+### figure 13
 convert -crop 2250x860+120+90 $dir_data"fig_r21_vs_w1.png" $dir_data"fig_r21_vs_w1b.png"
 convert -crop 2250x860+120+90 $dir_data"fig_r21_vs_w2.png" $dir_data"fig_r21_vs_w2b.png"
 convert -crop 2250x860+120+90 $dir_data"fig_r21_vs_w3.png" $dir_data"fig_r21_vs_w3b.png"
 
-convert -append -border 0x0 $dir_data"fig_r21_vs_w1b.png" $dir_data"fig_r21_vs_w2b.png" $dir_data"fig_r21_vs_w3b.png" eps2:$dir_data"fig12.eps"
+convert -append -border 0x0 $dir_data"fig_r21_vs_w1b.png" $dir_data"fig_r21_vs_w2b.png" $dir_data"fig_r21_vs_w3b.png" eps2:$dir_data"fig13.eps"
 
 rm -rf $dir_data"fig_r21_vs_w1.png" $dir_data"fig_r21_vs_w1b.png"
 rm -rf $dir_data"fig_r21_vs_w2.png" $dir_data"fig_r21_vs_w2b.png"
 rm -rf $dir_data"fig_r21_vs_w3.png" $dir_data"fig_r21_vs_w3b.png"
 
 
-### figure 13
+### figure 14
 convert +append -border 0x0 $dir_data"fig_noise_vs_mom0_ngc0628.png" $dir_data"fig_obs_vs_model_histo_ngc0628.png" $dir_data"fig13a.png"
 convert +append -border 0x0 $dir_data"fig_obs_vs_model_mom0_ngc0628.png" $dir_data"fig_obs_vs_model_r21_ngc0628.png" $dir_data"fig13b.png"
 
-convert -append -border 0x0 $dir_data"fig13a.png" $dir_data"fig13b.png" eps2:$dir_data"fig13.eps"
+convert -append -border 0x0 $dir_data"fig13a.png" $dir_data"fig13b.png" eps2:$dir_data"fig14.eps"
 
 rm -rf $dir_data"fig_noise_vs_mom0_ngc0628.png" $dir_data"fig_obs_vs_model_histo_ngc0628.png" $dir_data"fig13a.png"
 rm -rf $dir_data"fig_obs_vs_model_mom0_ngc0628.png" $dir_data"fig_obs_vs_model_r21_ngc0628.png" $dir_data"fig13b.png"
