@@ -305,6 +305,11 @@ def create_best_models(
 #####################
 ### plot noise
 #####################
+### get best fit values
+dataco10 = np.loadtxt(dir_proj + "eps/bootstrap_co10_models_ngc0628.txt")
+dataco21 = np.loadtxt(dir_proj + "eps/bootstrap_co21_models_ngc0628.txt")
+
+
 ### plot noise vs. mom-0
 log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21)
 p84_co10, p50_co10, p16_co10, p84_co21, p50_co21, p16_co21 = print_things(log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k)
