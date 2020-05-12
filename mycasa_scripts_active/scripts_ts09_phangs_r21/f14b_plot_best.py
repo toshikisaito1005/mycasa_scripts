@@ -362,22 +362,31 @@ ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=
 histo = ax1.hist(log_co10_mom0_k_model_scatter_noise_cut, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input, label="Model with Scatter+Noise")
 histomax = histo[0].max()
 ax1.set_xlim([0,3.0])
-ax1.set_ylim([0,histomax2*1.3])
+ax1.set_ylim([0,histomax*1.3])
 ax1.legend(loc = "upper right")
-ax1.plot(np.median(log_co10_mom0_k), histomax*1.1, "o", color="black")
-ax1.plot([np.percentile(log_co10_mom0_k,16),np.percentile(log_co10_mom0_k,84)], [histomax*1.1,histomax*1.1], "-", color="black")
+ax1.plot(np.median(log_co10_mom0_k), histomax*1.1, "o", color="grey", markersize=10, markeredgewidth=0)
+ax1.plot([np.percentile(log_co10_mom0_k,16),np.percentile(log_co10_mom0_k,84)], [histomax*1.1,histomax*1.1], "-", color="grey", lw=3)
+ax1.plot(np.median(log_co10_mom0_k_model_scatter_noise_cut), histomax*1.2, "o", color="red", markersize=10, markeredgewidth=0)
+ax1.plot([np.percentile(log_co10_mom0_k_model_scatter_noise_cut,16),np.percentile(log_co10_mom0_k_model_scatter_noise_cut,84)], [histomax*1.2,histomax*1.2], "-", color="red", lw=3)
 #
 # ax2
 ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
 histo = ax2.hist(log_co21_mom0_k_model_scatter_noise_cut, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
+histomax = histo[0].max()
 ax2.set_xlim([-0.5,2.6])
-ax2.set_ylim([0,histo[0].max()*1.3])
+ax2.set_ylim([0,histomax*1.3])
+ax2.legend(loc = "upper right")
+ax2.plot(np.median(log_co10_mom0_k), histomax*1.1, "o", color="grey", markersize=10, markeredgewidth=0)
+ax2.plot([np.percentile(log_co10_mom0_k,16),np.percentile(log_co10_mom0_k,84)], [histomax*1.1,histomax*1.1], "-", color="grey", lw=3)
+ax2.plot(np.median(log_co10_mom0_k_model_scatter_noise_cut), histomax*1.2, "o", color="red", markersize=10, markeredgewidth=0)
+ax2.plot([np.percentile(log_co10_mom0_k_model_scatter_noise_cut,16),np.percentile(log_co10_mom0_k_model_scatter_noise_cut,84)], [histomax*1.2,histomax*1.2], "-", color="red", lw=3)
 #
 # ax3
 ax3.hist(log_r21_mom_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0)
 histo = ax3.hist(log_r21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=[-1.0,0.5])
+histomax = histo[0].max()
 ax3.set_xlim([-1.0,0.5])
-ax3.set_ylim([0,histo[0].max()*1.3])
+ax3.set_ylim([0,histomax*1.3])
 #
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo_"+galname+".png",dpi=200)
 
