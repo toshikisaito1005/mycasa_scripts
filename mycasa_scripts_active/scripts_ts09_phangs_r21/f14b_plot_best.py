@@ -344,11 +344,11 @@ log_r21_mom0_k_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_
 
 ###
 figure = plt.figure(figsize=(10,10))
-gs = gridspec.GridSpec(nrows=16, ncols=8)
+gs = gridspec.GridSpec(nrows=17, ncols=8)
 plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
 ax1 = plt.subplot(gs[0:5,0:8])
 ax2 = plt.subplot(gs[6:11,0:8])
-ax3 = plt.subplot(gs[12:16,0:8])
+ax3 = plt.subplot(gs[12:17,0:8])
 ax1.grid(axis="x")
 ax2.grid(axis="x")
 ax3.grid(axis="x")
@@ -360,24 +360,24 @@ plt.rcParams["font.size"] = 16
 # ax1
 ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=range_co10_input, label="Observed Data")
 histo = ax1.hist(log_co10_mom0_k_model_scatter_noise_cut, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input, label="Model with Scatter+Noise")
+histomax = histo[0].max()
 ax1.set_xlim([0,3.0])
-print(str(histo[0].max()*1.3))
-ax1.set_ylim([0,histo[0].max()*1.3])
+ax1.set_ylim([0,histomax2*1.3])
 ax1.legend(loc = "upper right")
+ax1.plot(np.median(log_co10_mom0_k), histomax*1.1, "o", color="black")
+ax1.plot([np.percentile(log_co10_mom0_k,16),np.percentile(log_co10_mom0_k,84)], [histomax*1.1,histomax*1.1], "-", color="black")
 #
 # ax2
 ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
 histo = ax2.hist(log_co21_mom0_k_model_scatter_noise_cut, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
 ax2.set_xlim([-0.5,2.6])
-print(str(histo[0].max()*1.3))
 ax2.set_ylim([0,histo[0].max()*1.3])
 #
 # ax3
 ax3.hist(log_r21_mom_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0)
 histo = ax3.hist(log_r21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=[-1.0,0.5])
 ax3.set_xlim([-1.0,0.5])
-print(str(histo[0].max()*1.3))
-ax2.set_ylim([0,histo[0].max()*1.3])
+ax3.set_ylim([0,histo[0].max()*1.3])
 #
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo_"+galname+".png",dpi=200)
 
