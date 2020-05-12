@@ -25,9 +25,9 @@ ax3 = plt.subplot(gs[0:5,10:15])
 ax1.grid(axis="x")
 ax2.grid(axis="x")
 ax3.grid(axis="x")
-ax1.set_xlabel("log Distance (kpc)")
-ax2.set_xlabel("log Distance (kpc)")
-ax3.set_xlabel("log Distance (kpc)")
+ax1.set_xlabel("log Distance (pc)")
+ax2.set_xlabel("log Distance (pc)")
+ax3.set_xlabel("log Distance (pc)")
 axlist = [ax1, ax2, ax3]
 
 for i in range(len(txtfiles)):
