@@ -104,19 +104,19 @@ def get_stats(
 ### Main Procedure
 #####################
 ### plot
-figure = plt.figure(figsize=(10,5))
+figure = plt.figure(figsize=(10,4))
 gs = gridspec.GridSpec(nrows=1, ncols=15)
-plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
+plt.subplots_adjust(bottom=0.15, left=0.05, right=0.98, top=0.90)
 ax1 = plt.subplot(gs[0:5,0:5])
 ax2 = plt.subplot(gs[0:5,5:10])
-ax3 = plt.subplot(gs[0;5,10:15])
-ax1.grid(axis="x")
-ax2.grid(axis="x")
-ax3.grid(axis="x")
+ax3 = plt.subplot(gs[0:5,10:15])
+ax1.grid(axis="y")
+ax2.grid(axis="y")
+ax3.grid(axis="y")
 ax1.set_xlabel("log $I_{CO(1-0)}$ (K.km/s)")
 ax2.set_xlabel("log $I_{CO(2-1)}$ (K.km/s)")
 ax3.set_xlabel("log $R_{21}$")
-plt.rcParams["font.size"] = 16
+plt.rcParams["font.size"] = 12
 #
 axlist = [ax1, ax2, ax3]
 for i in range(len(gals)):
@@ -154,7 +154,7 @@ for i in range(len(gals)):
 		list_co10.append(co10)
 		list_co21.append(co21)
 		list_r21.append(r21)
-		beamfloat.append(beamfloat)
+		list_beam.append(beamfloat)
 		statslist_r21.append(stats_r21) # [p84, mean, p50, mode, p16]
 		statslist_r21_wco10.append(stats_r21_wco10)
 		statslist_r21_wco21.append(stats_r21_wco21)
@@ -163,8 +163,10 @@ for i in range(len(gals)):
 	color = cm.brg(i/2.5)
 	ax = axlist[i]
 	#
-	ax.plot(beamfloat, np.array(statslist_r21)[:,2], "o-")
+	norm_median = np.array(statslist_r21)[:,2] / np.array(statslist_r21)[:,2][0]
+	ax.plot(list_beam, norm_median, "o-", color=color)
+	ax.set_ylim([0.5,1.5])
 
-plt.savefig(dir_proj+"eps/violin_co21.png",dpi=300)
+plt.savefig(dir_proj+"eps/violin_stats.png",dpi=300)
 
 os.system("rm -rf *.last")
