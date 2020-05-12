@@ -330,40 +330,7 @@ xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise
 log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise = \
 	create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, best_co10_parameter, best_co21_parameter)
 
-
-"""
-### plot obs and model mom-0
-histdata10 = np.array(dataco10)
-histdata21 = np.array(dataco21)
-#
-figure = plt.figure(figsize=(10,10))
-gs = gridspec.GridSpec(nrows=9, ncols=9)
-plt.subplots_adjust(bottom=0.05, left=0.05, right=0.95, top=0.95)
-ax1 = plt.subplot(gs[0:2,0:4])
-ax2 = plt.subplot(gs[3:5,0:4])
-ax3 = plt.subplot(gs[6:8,0:4])
-ax4 = plt.subplot(gs[0:2,5:9])
-ax5 = plt.subplot(gs[3:5,5:9])
-ax6 = plt.subplot(gs[6:8,5:9])
-ax1.hist(histdata10[:,0], range=[histdata10[:,0].min(), histdata10[:,0].max()], bins=10)
-ax2.hist(histdata10[:,1], range=[histdata10[:,1].min(), histdata10[:,1].max()], bins=10)
-ax3.hist(np.log10(np.array(histdata10[:,2])), range=[np.log10(histdata10[:,2]).min(), np.log10(histdata10[:,2]).max()], bins=10)
-ax4.hist(histdata21[:,0], range=[1.05, 1.15],bins=11)
-ax5.hist(histdata21[:,1], range=[-0.45, -0.20], bins=11)
-ax6.hist(np.log10(np.array(histdata21[:,2])), range=[-0.30, 0.12], bins=11)
-ax1.set_title("co10 norm mean")
-ax2.set_title("co10 norm disp")
-ax3.set_title("log co10 scatter")
-ax4.set_title("co10 vs co21 slope")
-ax5.set_title("co10 vs co21 intercept")
-ax6.set_title("log co21 scatter")
-plt.savefig(dir_proj + "eps/fig_model_param_"+galname+".png",dpi=200)
-"""
-
-
-
-###
-#
+### cut data
 range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
 range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
 log_co10_mom0_k_model_scatter_cut = log_co10_mom0_k_model_scatter[np.where((log_co10_mom0_k_model_scatter>=range_co10_input[0]) & (log_co10_mom0_k_model_scatter<=range_co10_input[1]) & (log_co21_mom0_k_model_scatter>=range_co21_input[0]) & (log_co21_mom0_k_model_scatter<=range_co21_input[1]))]
@@ -373,7 +340,9 @@ log_co21_mom0_k_model_scatter_noise_cut = log_co21_mom0_k_model_scatter_noise[np
 log_r21_mom_k = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k)
 log_r21_mom0_k_model_scatter = np.log10(10**log_co21_mom0_k_model_scatter_cut/10**log_co10_mom0_k_model_scatter_cut)
 log_r21_mom0_k_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise_cut/10**log_co10_mom0_k_model_scatter_noise_cut)
-#
+
+
+###
 figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=16, ncols=8)
 plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
@@ -383,26 +352,32 @@ ax3 = plt.subplot(gs[12:16,0:8])
 ax1.grid(axis="x")
 ax2.grid(axis="x")
 ax3.grid(axis="x")
-ax1.set_xlabel("log CO(1-0) mom-0 (K.km/s)")
-ax2.set_xlabel("log CO(2-1) mom-0 (K.km/s)")
+ax1.set_xlabel("log $I_{CO(1-0)}$ (K.km/s)")
+ax2.set_xlabel("log $I_{CO(2-1)}$ (K.km/s)")
 ax3.set_xlabel("log $R_{21}$")
 plt.rcParams["font.size"] = 16
 #
 # ax1
 ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=range_co10_input, label="Observed Data")
-ax1.hist(log_co10_mom0_k_model_scatter_noise_cut, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input, label="Model with Scatter+Noise")
+histo = ax1.hist(log_co10_mom0_k_model_scatter_noise_cut, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input, label="Model with Scatter+Noise")
 ax1.set_xlim([0,3.0])
+print(str(histo[0].max()*1.3))
+ax1.set_ylim([0,histo[0].max()*1.3])
 ax1.legend(loc = "upper right")
 #
 # ax2
 ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
-ax2.hist(log_co21_mom0_k_model_scatter_noise_cut, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
+histo = ax2.hist(log_co21_mom0_k_model_scatter_noise_cut, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
 ax2.set_xlim([-0.5,2.6])
+print(str(histo[0].max()*1.3))
+ax2.set_ylim([0,histo[0].max()*1.3])
 #
 # ax3
 ax3.hist(log_r21_mom_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0)
-ax3.hist(log_r21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=[-1.0,0.5])
+histo = ax3.hist(log_r21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=[-1.0,0.5])
 ax3.set_xlim([-1.0,0.5])
+print(str(histo[0].max()*1.3))
+ax2.set_ylim([0,histo[0].max()*1.3])
 #
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo_"+galname+".png",dpi=200)
 
