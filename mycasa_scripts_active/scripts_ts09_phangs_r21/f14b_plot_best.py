@@ -402,8 +402,6 @@ ax1 = plt.subplot(gs[0:8,0:8])
 ax1.grid(axis="both")
 ax1.set_xlabel("log $I_{CO(1-0)}$ (K.km/s)")
 ax1.set_ylabel("log $I_{CO(2-1)}$ (K.km/s)")
-ax1.set_xlim([0.2,1.8])
-ax1.set_ylim([-0.3,1.8])
 plt.rcParams["font.size"] = 16
 #
 binx, mean, std = get_binned_dist(log_co10_mom0_k_model_scatter_noise_cut, log_co21_mom0_k_model_scatter_noise_cut, range_co10_input)
@@ -415,15 +413,11 @@ ax1.plot(log_co10_mom0_k_model_scatter_cut, log_co21_mom0_k_model_scatter_cut, "
 ax1.plot(log_co10_mom0_k_model_scatter_noise_cut, log_co21_mom0_k_model_scatter_noise_cut, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=-1e22, label="Model with Scatter+Noise")
 ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0, zorder=-1e24, label="Observed Data")
 ax1.plot([-0.5,3.0], [-0.5,3.0], "k--", lw=5)
-ax1.set_xlim([-0.5,2.0])
-ax1.set_ylim([-0.5,2.0])
+ax1.set_xlim([0.2,1.8])
+ax1.set_ylim([-0.3,1.8])
 #
 ax1.legend(loc = "upper left")
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0_"+galname+".png",dpi=200)
-
-
-
-
 
 
 ### plot co21 vs r21
@@ -449,14 +443,10 @@ ax1.plot(log_co21_mom0_k_model, r21_model, "o", color="black", alpha=1.0, marker
 ax1.plot(log_co21_mom0_k_model_scatter_cut, r21_model_scatter, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=-1e20)
 ax1.plot(log_co21_mom0_k_model_scatter_noise_cut, r21_model_scatter_noise, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=-1e22)
 ax1.plot(log_co21_mom0_k, r21, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0, zorder=-1e24)
-ax1.set_xlim([-0.5,2.0])
+ax1.set_xlim([-0.3,1.8])
 ax1.set_ylim([-1.2,0.5])
 #
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21_"+galname+".png",dpi=200)
-#
-os.system("rm -rf " + dir_proj+"eps/bootstrap_co*_models_"+galname+".txt")
-np.savetxt(dir_proj+"eps/bootstrap_co10_models_"+galname+".txt", np.array(list_best_co10_parameter))
-np.savetxt(dir_proj+"eps/bootstrap_co21_models_"+galname+".txt", np.array(list_best_co21_parameter))
 #
 
 
