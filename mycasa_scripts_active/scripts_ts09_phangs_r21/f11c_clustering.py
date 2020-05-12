@@ -30,4 +30,7 @@ all_diffs = np.expand_dims(xydata_low, axis=1) - np.expand_dims(xydata_low, axis
 distance_low = np.sqrt(np.sum(all_diffs**2, axis=-1))
 #
 ### calcurate function
+list_dist = np.log10(np.logspace(np.log10(1), np.log10(10000), 21))
+list_func = []
+for i in list_dist"
 num_zero_high = len(distance_high[distance_high==0])
