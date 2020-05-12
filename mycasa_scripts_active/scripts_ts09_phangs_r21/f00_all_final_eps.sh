@@ -142,10 +142,13 @@ rm -rf $dir_data"fig_r21_vs_w3.png" $dir_data"fig_r21_vs_w3b.png"
 
 
 ### figure 14
+
+
+### figure 15
 convert +append -border 0x0 $dir_data"fig_noise_vs_mom0_ngc0628.png" $dir_data"fig_obs_vs_model_histo_ngc0628.png" $dir_data"fig13a.png"
 convert +append -border 0x0 $dir_data"fig_obs_vs_model_mom0_ngc0628.png" $dir_data"fig_obs_vs_model_r21_ngc0628.png" $dir_data"fig13b.png"
 
-convert -append -border 0x0 $dir_data"fig13a.png" $dir_data"fig13b.png" eps2:$dir_data"fig14.eps"
+convert -append -border 0x0 $dir_data"fig13a.png" $dir_data"fig13b.png" eps2:$dir_data"fig15.eps"
 
 rm -rf $dir_data"fig_noise_vs_mom0_ngc0628.png" $dir_data"fig_obs_vs_model_histo_ngc0628.png" $dir_data"fig13a.png"
 rm -rf $dir_data"fig_obs_vs_model_mom0_ngc0628.png" $dir_data"fig_obs_vs_model_r21_ngc0628.png" $dir_data"fig13b.png"
