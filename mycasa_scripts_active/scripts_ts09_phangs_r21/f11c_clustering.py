@@ -37,20 +37,30 @@ for this_log_dist in list_log_dist:
 	this_num = len(distance_high[distance_high<=10**this_log_dist]/2 - num_zero_high)
 	list_num.append(this_num)
 #
-list_num = np.array(list_num)
+list_num = np.sqrt(np.array(list_num)/np.pi) - 10**list_log_dist
 #
 ### plot
-figure = plt.figure(figsize=(10,10))
-gs = gridspec.GridSpec(nrows=17, ncols=8)
-plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
-ax1 = plt.subplot(gs[0:5,0:8])
-ax2 = plt.subplot(gs[6:11,0:8])
-ax3 = plt.subplot(gs[12:17,0:8])
+plt.figure(figsize=(12,5))
+plt.rcParams["font.size"] = 14
+plt.rcParams["legend.fontsize"] = 11
+plt.subplots_adjust(bottom=0.15, left=0.10, right=0.98, top=0.88)
+gs = gridspec.GridSpec(nrows=5, ncols=15)
+ax1 = plt.subplot(gs[0:5,0:5])
+ax2 = plt.subplot(gs[0:5,5:10])
+ax3 = plt.subplot(gs[0:5,10:15])
 ax1.grid(axis="x")
 ax2.grid(axis="x")
 ax3.grid(axis="x")
-ax1.set_xlabel("Distance (kpc)")
-ax2.set_xlabel("Distance (kpc)")
-ax3.set_xlabel("Distance (kpc)")
-plt.rcParams["font.size"] = 16
+ax1.set_xlabel("log Distance (kpc)")
+ax2.set_xlabel("log Distance (kpc)")
+ax3.set_xlabel("log Distance (kpc)")
+#
+# ax1
+ax1.plot(list_log_dist, list_num, "o-")
+ax1.set_ylim([-100,100])
+
+#
+plt.savefig(dir_data + "eps/fig_clustering.png",dpi=200)
+
+
 
