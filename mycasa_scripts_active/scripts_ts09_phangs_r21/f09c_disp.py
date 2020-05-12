@@ -188,7 +188,10 @@ for i in range(len(gals)):
 	[bar.set_alpha(0.2) for bar in bars]
 
 	ax.set_ylim([0.3,1.4])
-	ax.set_xlim([1.0,34.0])
+	if i==1:
+		ax.set_xlim([6.0,35.0])
+	else:
+		ax.set_xlim([2.0,35.0])
 	ax.legend()
 
 plt.savefig(dir_proj+"eps/violin_disp.png",dpi=300)
