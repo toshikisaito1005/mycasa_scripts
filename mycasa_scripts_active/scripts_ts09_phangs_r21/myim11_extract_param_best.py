@@ -117,6 +117,8 @@ for i in range(len(gals)):
         data_p21,              # 11
         data_p21err,           # 12
         data_r21mask,          # 13
+        data_ra,               # 14
+        data_dec,              # 15
         ]
 
     np.savetxt(
