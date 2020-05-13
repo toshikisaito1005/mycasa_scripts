@@ -12,7 +12,7 @@ plt.ioff()
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-bins = 10
+bins = 20
 
 
 #####################
@@ -30,10 +30,10 @@ co21_scatter_cut = data_scatter_cut_ngc0628[:,1]
 r21_scatter_cut = np.log10(10**co21_scatter_cut/10**co10_scatter_cut)
 
 ###
-xwdith_co10 = co10_scatter.max() - co10_scatter.min()
-xlim_co10 = [co10_scatter.min(), co10_scatter.max()]
-xwdith_co21 = co21_scatter_cut.max() - co21_scatter_cut.min()
-xlim_co21 = [co21_scatter_cut.min(), co21_scatter_cut.max()]
+xwdith_co10 = co10_scatter.max() - co10_scatter_cut.min()
+xlim_co10 = [co10_scatter.min(), co10_scatter_cut.max()]
+xwdith_co21 = co21_scatter.max() - co21_scatter_cut.min()
+xlim_co21 = [co21_scatter.min(), co21_scatter_cut.max()]
 
 ###
 n_scatter, _ = np.histogram(co10_scatter, bins=bins, range=xlim_co10)
@@ -72,23 +72,26 @@ plt.figure(figsize=(12,5))
 plt.rcParams["font.size"] = 14
 plt.rcParams["legend.fontsize"] = 11
 plt.subplots_adjust(bottom=0.15, left=0.10, right=0.98, top=0.88)
-gs = gridspec.GridSpec(nrows=5, ncols=15)
+gs = gridspec.GridSpec(nrows=5, ncols=16)
 ax1 = plt.subplot(gs[0:5,0:7])
-ax2 = plt.subplot(gs[0:5,8:15])
+ax2 = plt.subplot(gs[0:5,9:16])
 ax1.grid(axis='both')
 ax2.grid(axis='both')
+ax1.set_xlabel("log $I_{CO(1-0)}$ (K km s$^{-1}$)")
+ax2.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
+ax1.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
 #
 # ax1
 ax1.plot(xaxis_co10, std_scatter, "-", color=cm.brg(0/2.5), alpha=0.5, lw=4)
 ax1.plot(xaxis_co10, std_scatter_cut, "--", color=cm.brg(0/2.5), alpha=0.5, lw=4)
 ax1.set_xlim(xlim_co10)
-ax1.set_ylim([0,0.45])
+ax1.set_ylim([0,0.5])
 # ax2
 #ax2.plot(co21_scatter,r21_scatter,"o")
 #ax2.plot(co21_scatter_cut,r21_scatter_cut,"o")
 ax2.plot(xaxis_co21, std_r21scatter, "-", color=cm.brg(0/2.5), alpha=0.5, lw=4)
 ax2.plot(xaxis_co21, std_r21scatter_cut, "--", color=cm.brg(0/2.5), alpha=0.5, lw=4)
 ax2.set_xlim(xlim_co21)
-ax2.set_ylim([0,0.2])
+ax2.set_ylim([0,0.25])
 #
 plt.savefig(dir_proj + "eps/model_scatter.png",dpi=200)
