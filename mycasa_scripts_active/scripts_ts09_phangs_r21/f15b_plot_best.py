@@ -313,7 +313,12 @@ best_co10_parameter = np.median(dataco10, axis=0)
 best_co21_parameter = np.median(dataco21, axis=0)
 
 ### print parameters
-print("### co10 norm mean = " + )
+print("### co10 norm mean     = " + str(np.round(np.percentile(dataco10, 16, axis=0)[0], 3)) + " - " + str(np.round(np.percentile(dataco10, 50, axis=0)[0], 3)) + " - " + str(np.round(np.percentile(dataco10, 84, axis=0)[0], 3)))
+print("### co10 norm std      = " + str(np.round(np.percentile(dataco10, 16, axis=0)[1], 3)) + " - " + str(np.round(np.percentile(dataco10, 50, axis=0)[1], 3)) + " - " + str(np.round(np.percentile(dataco10, 84, axis=0)[1], 3)))
+print("### co10 scatter       = " + str(np.round(np.percentile(dataco10, 16, axis=0)[2], 3)) + " - " + str(np.round(np.percentile(dataco10, 50, axis=0)[2], 3)) + " - " + str(np.round(np.percentile(dataco10, 84, axis=0)[2], 3)))
+print("### co21-co10 slope    = " + str(np.round(np.percentile(dataco21, 16, axis=0)[0], 3)) + " - " + str(np.round(np.percentile(dataco21, 50, axis=0)[0], 3)) + " - " + str(np.round(np.percentile(dataco21, 84, axis=0)[0], 3)))
+print("### co21-co10 intecept = " + str(np.round(np.percentile(dataco21, 16, axis=0)[1], 3)) + " - " + str(np.round(np.percentile(dataco21, 50, axis=0)[1], 3)) + " - " + str(np.round(np.percentile(dataco21, 84, axis=0)[1], 3)))
+print("### co21 scatter       = " + str(np.round(np.percentile(dataco21, 16, axis=0)[2], 3)) + " - " + str(np.round(np.percentile(dataco21, 50, axis=0)[2], 3)) + " - " + str(np.round(np.percentile(dataco21, 84, axis=0)[2], 3)))
 
 
 ### get filenames
