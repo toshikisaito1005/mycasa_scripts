@@ -312,6 +312,9 @@ dataco21 = np.loadtxt(dir_proj + "eps/bootstrap_co21_models_ngc0628.txt")
 best_co10_parameter = np.median(dataco10, axis=0)
 best_co21_parameter = np.median(dataco21, axis=0)
 
+### print parameters
+print("### co10 norm mean = " + )
+
 
 ### get filenames
 co10_mom0  = dir_proj + galname + "_co10/co10_04p0.moment0"
