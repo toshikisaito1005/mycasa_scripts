@@ -402,9 +402,16 @@ data_3627 = dir_data + "ngc3627_parameter_600pc.txt"
 data_4321 = dir_data + "ngc4321_parameter_600pc.txt"
 data_gals = [data_0628, data_3627, data_4321]
 
-# R21 vs disp
+#
 xlabel = u"log W3/W1/Median(W3/W1)"
 outputname = "fig_r21_vs_ratio_w3w1.png"
 data_cols = [11,9]
 xlim = [0.15,5]
+plotter(gals, data_gals, data_cols, xlim, ylim, xlabel, ylabel, outputname, outputname.replace(".png",".txt"))
+
+#
+xlabel = u"log W3/$I_{CO(2-1)}$/Median(W3/$I_{CO(2-1)}$)"
+outputname = "fig_r21_vs_ratio_w3co21.png"
+data_cols = [11,3]
+xlim = [0.15,20]
 plotter(gals, data_gals, data_cols, xlim, ylim, xlabel, ylabel, outputname, outputname.replace(".png",".txt"))
