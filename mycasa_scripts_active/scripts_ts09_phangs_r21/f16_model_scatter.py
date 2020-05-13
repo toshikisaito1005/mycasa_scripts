@@ -22,18 +22,12 @@ bins = 8
 data_scatter_ngc0628 = np.loadtxt(dir_proj + "eps/ngc0628_model_scatter.txt")
 co10_scatter = data_scatter_ngc0628[:,0]
 co21_scatter = data_scatter_ngc0628[:,1]
-#
-data_scatter_noise_ngc0628 = np.loadtxt(dir_proj + "eps/ngc0628_model_scatter_noise.txt")
-co10_scatter_noise = data_scatter_noise_ngc0628[:,0]
-co21_scatter_noise = data_scatter_noise_ngc0628[:,1]
+r21_scatter = np.log10(10**co21_scatter/10**co10_scatter)
 #
 data_scatter_cut_ngc0628 = np.loadtxt(dir_proj + "eps/ngc0628_model_scatter_cut.txt")
 co10_scatter_cut = data_scatter_cut_ngc0628[:,0]
 co21_scatter_cut = data_scatter_cut_ngc0628[:,1]
-#
-data_scatter_noise_cut_ngc0628 = np.loadtxt(dir_proj + "eps/ngc0628_model_scatter_noise_cut.txt")
-co10_scatter_noise_cut = data_scatter_noise_cut_ngc0628[:,0]
-co21_scatter_noise_cut = data_scatter_noise_cut_ngc0628[:,1]
+r21_scatter_cut = np.log10(10**co21_scatter_cut/10**co10_scatter_cut)
 
 ###
 xwdith = co10.max() - co10.min()
@@ -44,30 +38,16 @@ n_scatter, _ = np.histogram(co10_scatter, bins=bins, range=xlim)
 sy_scatter, _ = np.histogram(co10_scatter, bins=bins, weights=co21_scatter, range=xlim)
 sy2_scatter, _ = np.histogram(co10_scatter, bins=bins, weights=co21_scatter*co21_scatter, range=xlim)
 #
-n_scatter_noise, _ = np.histogram(co10_scatter_noise, bins=bins, range=xlim)
-sy_scatter_noise, _ = np.histogram(co10_scatter_noise, bins=bins, weights=co21_scatter_noise, range=xlim)
-sy2_scatter_noise, _ = np.histogram(co10_scatter_noise, bins=bins, weights=co21_scatter_noise*co21_scatter_noise, range=xlim)
-#
 n_scatter_cut, _ = np.histogram(co10_scatter_cut, bins=bins, range=xlim)
 sy_scatter_cut, _ = np.histogram(co10_scatter_cut, bins=bins, weights=co21_scatter_cut, range=xlim)
 sy2_scatter_cut, _ = np.histogram(co10_scatter_cut, bins=bins, weights=co21_scatter_cut*co21_scatter_cut, range=xlim)
-#
-n_scatter_noise_cut, _ = np.histogram(co10_scatter_noise_cut, bins=bins, range=xlim)
-sy_scatter_noise_cut, _ = np.histogram(co10_scatter_noise_cut, bins=bins, weights=co21_scatter_noise_cut, range=xlim)
-sy2_scatter_noise_cut, _ = np.histogram(co10_scatter_noise_cut, bins=bins, weights=co21_scatter_noise_cut*co21_scatter_noise_cut, range=xlim)
 
 ###
 mean_scatter = sy_scatter / n_scatter
 std_scatter = np.sqrt(sy2_scatter/n_scatter - mean_scatter*mean_scatter)
 #
-mean_scatter_noise = sy_scatter_noise / n_scatter_noise
-std_scatter_noise = np.sqrt(sy2_scatter_noise/n_scatter_noise - mean_scatter_noise*mean_scatter_noise)
-#
 mean_scatter_cut = sy_scatter_cut / n_scatter_cut
 std_scatter_cut = np.sqrt(sy2_scatter_cut/n_scatter_cut - mean_scatter_cut*mean_scatter_cut)
-#
-mean_scatter_noise_cut = sy_scatter_noise_cut / n_scatter_noise_cut
-std_scatter_noise_cut = np.sqrt(sy2_scatter_noise_cut/n_scatter_noise_cut - mean_scatter_noise_cut*mean_scatter_noise_cut)
 
 #
 plt.figure(figsize=(12,7))
