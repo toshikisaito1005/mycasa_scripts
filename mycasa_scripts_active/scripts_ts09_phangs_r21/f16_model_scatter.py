@@ -30,10 +30,10 @@ co21_scatter_cut = data_scatter_cut_ngc0628[:,1]
 r21_scatter_cut = np.log10(10**co21_scatter_cut/10**co10_scatter_cut)
 
 ###
-xwdith_co10 = co10.max() - co10.min()
-xlim_co10 = [co10.min(), co10.max()]
-xwdith_co21 = co21.max() - co21.min()
-xlim_co21 = [co21.min(), co21.max()]
+xwdith_co10 = co10_scatter_cut.max() - co10_scatter_cut.min()
+xlim_co10 = [co10_scatter_cut.min(), co10_scatter_cut.max()]
+xwdith_co21 = co21_scatter_cut.max() - co21_scatter_cut.min()
+xlim_co21 = [co21_scatter_cut.min(), co21_scatter_cut.max()]
 
 ###
 n_scatter, _ = np.histogram(co10_scatter, bins=bins, range=xlim_co10)
@@ -82,11 +82,11 @@ ax2.grid(axis='both')
 ax1.plot(xaxis_co10, std_scatter, "-", color=cm.brg(0/2.5), alpha=0.5, lw=4)
 ax1.plot(xaxis_co10, std_scatter_cut, "--", color=cm.brg(0/2.5), alpha=0.5, lw=4)
 ax1.set_xlim(xlim_co10)
-ax1.set_ylim([0,0.4])
+ax1.set_ylim([0,0.45])
 # ax2
 ax2.plot(xaxis_co21, std_r21scatter, "-", color=cm.brg(0/2.5), alpha=0.5, lw=4)
 ax2.plot(xaxis_co21, std_r21scatter_cut, "--", color=cm.brg(0/2.5), alpha=0.5, lw=4)
 ax2.set_xlim(xlim_co21)
-#ax2.set_ylim([0,0.4])
+ax2.set_ylim([0,0.2])
 #
 plt.savefig(dir_proj + "eps/model_scatter.png",dpi=200)

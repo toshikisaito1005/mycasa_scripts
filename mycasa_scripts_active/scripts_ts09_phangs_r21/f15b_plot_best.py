@@ -290,9 +290,9 @@ def create_best_models(
 		add_noise(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10, log_co21_mom0_k_model_scatter, log_co21_noise_k, xbins_co21)
 	#
 	### cut
-	cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0])) # & (log_co21_mom0_k_model_scatter>range_co21_input[0]))
-	log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
-	log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
+	#cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0])) # & (log_co21_mom0_k_model_scatter>range_co21_input[0]))
+	#log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+	#log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
 	#
 	#cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<range_co10_input[1]) & (log_co21_mom0_k_model_scatter_noise>range_co21_input[0]) & (log_co21_mom0_k_model_scatter_noise<range_co21_input[1]))
 	#log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
