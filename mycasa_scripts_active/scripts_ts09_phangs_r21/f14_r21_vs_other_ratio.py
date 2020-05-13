@@ -106,16 +106,19 @@ def get_data(txtdata,cols):
     data0 = data[:,cols[0]]
     data0[np.isinf(data0)] = 0
     data0[np.isnan(data0)] = 0
-    #xlim = [0,data4use.max()*1.1]
+    data1 = data[:,cols[1]]
+    data1[np.isinf(data1)] = 0
+    data1[np.isnan(data1)] = 0
     #
     cut_co21 = (co21 != 0)
-    cut_4use = (data4use != 0)
-    cut_all = np.where((cut_co21) & (cut_4use))
+    cut_data0 = (data0 != 0)
+    cut_data1 = (data1 != 0)
+    cut_all = np.where((cut_co21) & (cut_data0) & (cut_data1))
     #
     r21_all  = r21[cut_all]
     r21err_all  = r21err[cut_all]
     dist_all  = dist[cut_all]
-    data_all  = data4use[cut_all] / np.median(data4use[cut_all])
+    data_all  = (data0[cut_all]/data1[cut_all])/np.median((data0[cut_all]/data1[cut_all]))
 
     return r21_all, data_all, r21err_all, dist_all
 
@@ -401,7 +404,7 @@ data_gals = [data_0628, data_3627, data_4321]
 
 # R21 vs disp
 xlabel = u"log W3/W1/Median(W3/W1)"
-outputname = "fig_r21_vs_ratio_w3e1.png"
-data_cols = 11,9
-xlim = [0.02,3]
+outputname = "fig_r21_vs_ratio_w3w1.png"
+data_cols = [11,9]
+xlim = [0.15,5]
 plotter(gals, data_gals, data_cols, xlim, ylim, xlabel, ylabel, outputname, outputname.replace(".png",".txt"))
