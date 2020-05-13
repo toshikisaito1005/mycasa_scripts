@@ -363,8 +363,8 @@ ax3 = plt.subplot(gs[16:22,0:8])
 ax1.grid(axis="x")
 ax2.grid(axis="x")
 ax3.grid(axis="x")
-ax1.set_xlabel("log $I_{CO(1-0)}$ (K.km/s)")
-ax2.set_xlabel("log $I_{CO(2-1)}$ (K.km/s)")
+ax1.set_xlabel("log $I_{CO(1-0)}$ (K km s$^{-1}$)")
+ax2.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
 ax3.set_xlabel("log $R_{21}$")
 plt.rcParams["font.size"] = 20
 plt.rcParams["legend.fontsize"] = 18
@@ -412,8 +412,8 @@ gs = gridspec.GridSpec(nrows=8, ncols=8)
 plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
 ax1 = plt.subplot(gs[0:8,0:8])
 ax1.grid(axis="both")
-ax1.set_xlabel("log $I_{CO(1-0)}$ (K.km/s)")
-ax1.set_ylabel("log $I_{CO(2-1)}$ (K.km/s)")
+ax1.set_xlabel("log $I_{CO(1-0)}$ (K km s$^{-1}$)")
+ax1.set_ylabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
 plt.rcParams["font.size"] = 20
 plt.rcParams["legend.fontsize"] = 18
 #
@@ -444,7 +444,7 @@ gs = gridspec.GridSpec(nrows=8, ncols=8)
 plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
 ax1 = plt.subplot(gs[0:8,0:8])
 ax1.grid(axis="both")
-ax1.set_xlabel("log CO(2-1) mom-0 (K.km/s)")
+ax1.set_xlabel("log CO(2-1) mom-0 (K km s$^{-1}$)")
 ax1.set_ylabel("log $R_{21}$")
 plt.rcParams["font.size"] = 20
 plt.rcParams["legend.fontsize"] = 18
@@ -463,6 +463,8 @@ ax1.set_ylim([-1.2,0.5])
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21_"+galname+".png",dpi=200)
 #
 
+#
+np.savetxt(dir_proj + "eps/ngc0628_model.txt", np.c_[log_co10_mom0_k_model, log_co21_mom0_k_model])
 
 #
 os.system("rm -rf *.last")
