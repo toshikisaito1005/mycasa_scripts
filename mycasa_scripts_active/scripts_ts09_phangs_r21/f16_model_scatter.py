@@ -12,7 +12,7 @@ plt.ioff()
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-bins = 20
+bins = 25
 
 
 #####################
@@ -68,18 +68,19 @@ mean_r21scatter_cut = sy_r21scatter_cut / n_r21scatter_cut
 std_r21scatter_cut = np.sqrt(sy2_r21scatter_cut/n_r21scatter_cut - mean_r21scatter_cut*mean_r21scatter_cut)
 
 #
-plt.figure(figsize=(12,5))
+plt.figure(figsize=(12,4))
 plt.rcParams["font.size"] = 14
 plt.rcParams["legend.fontsize"] = 11
-plt.subplots_adjust(bottom=0.15, left=0.10, right=0.98, top=0.88)
-gs = gridspec.GridSpec(nrows=5, ncols=16)
+plt.subplots_adjust(bottom=0.15, left=0.07, right=0.98, top=0.88)
+gs = gridspec.GridSpec(nrows=5, ncols=15)
 ax1 = plt.subplot(gs[0:5,0:7])
-ax2 = plt.subplot(gs[0:5,9:16])
+ax2 = plt.subplot(gs[0:5,8:15])
 ax1.grid(axis='both')
 ax2.grid(axis='both')
 ax1.set_xlabel("log $I_{CO(1-0)}$ (K km s$^{-1}$)")
 ax2.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
-ax1.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
+ax1.set_ylabel("S.D. of log $I_{CO(2-1)}$ (K km s$^{-1}$)")
+ax2.set_ylabel("S.D. of log $R_{21}$")
 #
 # ax1
 ax1.plot(xaxis_co10, std_scatter, "-", color=cm.brg(0/2.5), alpha=0.5, lw=4)
