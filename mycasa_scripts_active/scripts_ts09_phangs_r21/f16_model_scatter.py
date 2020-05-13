@@ -62,9 +62,15 @@ std_scatter = np.sqrt(sy2_scatter/n_scatter - mean_scatter*mean_scatter)
 #
 mean_scatter_noise = sy_scatter_noise / n_scatter_noise
 std_scatter_noise = np.sqrt(sy2_scatter_noise/n_scatter_noise - mean_scatter_noise*mean_scatter_noise)
+#
+mean_scatter_cut = sy_scatter_cut / n_scatter_cut
+std_scatter_cut = np.sqrt(sy2_scatter_cut/n_scatter_cut - mean_scatter_cut*mean_scatter_cut)
+#
+mean_scatter_noise_cut = sy_scatter_noise_cut / n_scatter_noise_cut
+std_scatter_noise_cut = np.sqrt(sy2_scatter_noise_cut/n_scatter_noise_cut - mean_scatter_noise_cut*mean_scatter_noise_cut)
 
 #
-plt.figure(figsize=(12,5))
+plt.figure(figsize=(12,7))
 plt.rcParams["font.size"] = 14
 plt.rcParams["legend.fontsize"] = 11
 plt.subplots_adjust(bottom=0.15, left=0.10, right=0.98, top=0.88)
@@ -72,8 +78,8 @@ gs = gridspec.GridSpec(nrows=5, ncols=15)
 ax = plt.subplot(gs[0:5,0:15])
 ax.grid(axis='both')
 #
-ax.plot((_[1:] + _[:-1])/2, std_scatter, "-", color=cm.brg(0/2.5), alpha=0.5, lw=3)
-ax.plot((_[1:] + _[:-1])/2, std_scatter_noise, "--", color=cm.brg(0/2.5), alpha=0.5, lw=3)
+ax.plot((_[1:] + _[:-1])/2, std_scatter, "-", color=cm.brg(0/2.5), alpha=0.5, lw=4)
+ax.plot((_[1:] + _[:-1])/2, std_scatter_cut, "--", color=cm.brg(0/2.5), alpha=0.5, lw=4)
 ax.set_xlim([0.2,1.8])
 ax.set_ylim([0,0.4])
 #
