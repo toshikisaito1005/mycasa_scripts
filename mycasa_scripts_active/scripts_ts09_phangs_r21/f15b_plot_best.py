@@ -467,6 +467,9 @@ plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21_"+galname+".png",dpi=200)
 #np.savetxt(dir_proj + "eps/ngc0628_model.txt", np.c_[log_co10_mom0_k_model, log_co21_mom0_k_model])
 np.savetxt(dir_proj + "eps/ngc0628_model_scatter.txt", np.c_[log_co10_mom0_k_model_scatter, log_co21_mom0_k_model_scatter])
 np.savetxt(dir_proj + "eps/ngc0628_model_scatter_noise.txt", np.c_[log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise])
+#
+np.savetxt(dir_proj + "eps/ngc0628_model_scatter_cut.txt", np.c_[log_co10_mom0_k_model_scatter_cut, log_co21_mom0_k_model_scatter_cut])
+np.savetxt(dir_proj + "eps/ngc0628_model_scatter_noise_cut.txt", np.c_[log_co10_mom0_k_model_scatter_noise_cut, log_co21_mom0_k_model_scatter_noise_cut])
 
 #
 os.system("rm -rf *.last")
