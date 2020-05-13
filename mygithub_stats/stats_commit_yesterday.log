@@ -1,3 +1,4 @@
-      11 - mycasa_scripts_active/scripts_ts09_phangs_r21/f11c_clustering.py
-       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/f00_all_final_eps.sh
-       2 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim11_extract_param_best.py
+      15 - mycasa_scripts_active/scripts_ts09_phangs_r21/f16_model_scatter.py
+      10 - mycasa_scripts_active/scripts_ts09_phangs_r21/f15b_plot_best.py
+       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/f14_r21_vs_other_ratio.py
+       3 - mycasa_scripts_active/scripts_ts09_phangs_r21/f00_all_final_eps.sh
