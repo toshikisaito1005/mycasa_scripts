@@ -142,8 +142,13 @@ rm -rf $dir_data"fig_r21_vs_w3.png" $dir_data"fig_r21_vs_w3b.png"
 
 
 ### figure 14
-convert -crop 2250x860+120+90 $dir_data"fig_r21_vs_ratio_w3w1.png" $dir_data"fig_r21_vs_ratio_w3w1b.png"
+convert -crop 2250x900+120+50 $dir_data"fig_r21_vs_ratio_w3w1.png" $dir_data"fig_r21_vs_ratio_w3w1b.png"
 convert -crop 2250x860+120+90 $dir_data"fig_r21_vs_ratio_w3co21.png" $dir_data"fig_r21_vs_ratio_w3co21b.png"
+
+convert -append -border 0x0 $dir_data"fig_r21_vs_ratio_w3w1b.png" $dir_data"fig_r21_vs_ratio_w3co21b.png" eps2:$dir_data"fig14.eps"
+
+rm -rf $dir_data"fig_r21_vs_ratio_w3w1.png" $dir_data"fig_r21_vs_ratio_w3w1b.png"
+rm -rf $dir_data"fig_r21_vs_ratio_w3co21.png" $dir_data"fig_r21_vs_ratio_w3co21b.png"
 
 
 ### figure 15

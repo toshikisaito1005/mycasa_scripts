@@ -414,4 +414,4 @@ xlabel = u"log W3/$I_{CO(2-1)}$/Median(W3/$I_{CO(2-1)}$)"
 outputname = "fig_r21_vs_ratio_w3co21.png"
 data_cols = [11,3]
 xlim = [0.15,20]
-plotter(gals, data_gals, data_cols, xlim, ylim, xlabel, ylabel, outputname, outputname.replace(".png",".txt"))
+plotter(gals, data_gals, data_cols, xlim, ylim, xlabel, ylabel, outputname, outputname.replace(".png",".txt"), title=False)
