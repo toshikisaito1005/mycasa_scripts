@@ -12,7 +12,7 @@ plt.ioff()
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-bins = 8
+bins = 10
 
 
 #####################
@@ -30,8 +30,8 @@ co21_scatter_cut = data_scatter_cut_ngc0628[:,1]
 r21_scatter_cut = np.log10(10**co21_scatter_cut/10**co10_scatter_cut)
 
 ###
-xwdith_co10 = co10_scatter_cut.max() - co10_scatter_cut.min()
-xlim_co10 = [co10_scatter_cut.min(), co10_scatter_cut.max()]
+xwdith_co10 = co10_scatter.max() - co10_scatter.min()
+xlim_co10 = [co10_scatter.min(), co10_scatter.max()]
 xwdith_co21 = co21_scatter_cut.max() - co21_scatter_cut.min()
 xlim_co21 = [co21_scatter_cut.min(), co21_scatter_cut.max()]
 
@@ -84,6 +84,8 @@ ax1.plot(xaxis_co10, std_scatter_cut, "--", color=cm.brg(0/2.5), alpha=0.5, lw=4
 ax1.set_xlim(xlim_co10)
 ax1.set_ylim([0,0.45])
 # ax2
+#ax2.plot(co21_scatter,r21_scatter,"o")
+#ax2.plot(co21_scatter_cut,r21_scatter_cut,"o")
 ax2.plot(xaxis_co21, std_r21scatter, "-", color=cm.brg(0/2.5), alpha=0.5, lw=4)
 ax2.plot(xaxis_co21, std_r21scatter_cut, "--", color=cm.brg(0/2.5), alpha=0.5, lw=4)
 ax2.set_xlim(xlim_co21)
