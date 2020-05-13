@@ -43,6 +43,7 @@ sy2_scatter, _ = np.histogram(co10_scatter, bins=bins, weights=co21_scatter*co21
 n_scatter_cut, _ = np.histogram(co10_scatter_cut, bins=bins, range=xlim_co10)
 sy_scatter_cut, _ = np.histogram(co10_scatter_cut, bins=bins, weights=co21_scatter_cut, range=xlim_co10)
 sy2_scatter_cut, _ = np.histogram(co10_scatter_cut, bins=bins, weights=co21_scatter_cut*co21_scatter_cut, range=xlim_co10)
+xaxis_co10 = (_[1:] + _[:-1])/2
 #
 n_r21scatter, _ = np.histogram(co21_scatter, bins=bins, range=xlim_co21)
 sy_r21scatter, _ = np.histogram(co21_scatter, bins=bins, weights=r21_scatter, range=xlim_co21)
@@ -51,6 +52,7 @@ sy2_r21scatter, _ = np.histogram(co21_scatter, bins=bins, weights=r21_scatter*r2
 n_r21scatter_cut, _ = np.histogram(co21_scatter_cut, bins=bins, range=xlim_co21)
 sy_r21scatter_cut, _ = np.histogram(co21_scatter_cut, bins=bins, weights=r21_scatter_cut, range=xlim_co21)
 sy2_r21scatter_cut, _ = np.histogram(co21_scatter_cut, bins=bins, weights=r21_scatter_cut*r21_scatter_cut, range=xlim_co21)
+xaxis_co21 = (_[1:] + _[:-1])/2
 
 ###
 mean_scatter = sy_scatter / n_scatter
@@ -70,21 +72,21 @@ plt.figure(figsize=(12,5))
 plt.rcParams["font.size"] = 14
 plt.rcParams["legend.fontsize"] = 11
 plt.subplots_adjust(bottom=0.15, left=0.10, right=0.98, top=0.88)
-gs = gridspec.GridSpec(nrows=5, ncols=16)
-ax1 = plt.subplot(gs[0:5,0:8])
-ax2 = plt.subplot(gs[0:5,8:16])
+gs = gridspec.GridSpec(nrows=5, ncols=15)
+ax1 = plt.subplot(gs[0:5,0:7])
+ax2 = plt.subplot(gs[0:5,8:15])
 ax1.grid(axis='both')
 ax2.grid(axis='both')
 #
 # ax1
-ax1.plot((_[1:] + _[:-1])/2, std_scatter, "-", color=cm.brg(0/2.5), alpha=0.5, lw=4)
-ax1.plot((_[1:] + _[:-1])/2, std_scatter_cut, "--", color=cm.brg(0/2.5), alpha=0.5, lw=4)
-ax1.set_xlim([0.2,1.8])
+ax1.plot(xaxis_co10, std_scatter, "-", color=cm.brg(0/2.5), alpha=0.5, lw=4)
+ax1.plot(xaxis_co10, std_scatter_cut, "--", color=cm.brg(0/2.5), alpha=0.5, lw=4)
+ax1.set_xlim(xlim_co10)
 ax1.set_ylim([0,0.4])
 # ax2
-ax2.plot((_[1:] + _[:-1])/2, std_r21scatter, "-", color=cm.brg(0/2.5), alpha=0.5, lw=4)
-ax2.plot((_[1:] + _[:-1])/2, std_r21scatter_cut, "--", color=cm.brg(0/2.5), alpha=0.5, lw=4)
-#ax2.set_xlim([0.2,1.8])
+ax2.plot(xaxis_co21, std_r21scatter, "-", color=cm.brg(0/2.5), alpha=0.5, lw=4)
+ax2.plot(xaxis_co21, std_r21scatter_cut, "--", color=cm.brg(0/2.5), alpha=0.5, lw=4)
+ax2.set_xlim(xlim_co21)
 #ax2.set_ylim([0,0.4])
 #
 plt.savefig(dir_proj + "eps/model_scatter.png",dpi=200)
