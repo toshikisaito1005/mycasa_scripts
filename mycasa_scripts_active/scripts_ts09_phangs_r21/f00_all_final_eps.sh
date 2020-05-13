@@ -152,3 +152,9 @@ convert -append -border 0x0 $dir_data"fig13a.png" $dir_data"fig13b.png" eps2:$di
 
 rm -rf $dir_data"fig_noise_vs_mom0_ngc0628.png" $dir_data"fig_obs_vs_model_histo_ngc0628.png" $dir_data"fig13a.png"
 rm -rf $dir_data"fig_obs_vs_model_mom0_ngc0628.png" $dir_data"fig_obs_vs_model_r21_ngc0628.png" $dir_data"fig13b.png"
+
+
+### figure 16
+convert $dir_data"model_scatter.png" eps2:$dir_data"fig16.eps"
+
+rm -rf $dir_data"model_scatter.png"

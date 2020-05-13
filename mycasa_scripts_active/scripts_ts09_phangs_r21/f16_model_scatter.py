@@ -71,7 +71,7 @@ std_r21scatter_cut = np.sqrt(sy2_r21scatter_cut/n_r21scatter_cut - mean_r21scatt
 plt.figure(figsize=(12,4))
 plt.rcParams["font.size"] = 14
 plt.rcParams["legend.fontsize"] = 11
-plt.subplots_adjust(bottom=0.15, left=0.07, right=0.98, top=0.88)
+plt.subplots_adjust(bottom=0.15, left=0.07, right=0.98, top=0.95)
 gs = gridspec.GridSpec(nrows=5, ncols=15)
 ax1 = plt.subplot(gs[0:5,0:7])
 ax2 = plt.subplot(gs[0:5,8:15])
@@ -83,10 +83,11 @@ ax1.set_ylabel("S.D. of log $I_{CO(2-1)}$ (K km s$^{-1}$)")
 ax2.set_ylabel("S.D. of log $R_{21}$")
 #
 # ax1
-ax1.plot(xaxis_co10, std_scatter, "-", color=cm.brg(0/2.5), alpha=0.5, lw=4)
-ax1.plot(xaxis_co10, std_scatter_cut, "--", color=cm.brg(0/2.5), alpha=0.5, lw=4)
+ax1.plot(xaxis_co10, std_scatter, "-", color=cm.brg(0/2.5), alpha=0.5, lw=4, label="Model with Scatter")
+ax1.plot(xaxis_co10, std_scatter_cut, "--", color=cm.brg(0/2.5), alpha=0.5, lw=4, label="Model with Scatter (sensitivity-limited)")
 ax1.set_xlim(xlim_co10)
-ax1.set_ylim([0,0.5])
+ax1.set_ylim([0,0.6])
+ax1.legend()
 # ax2
 #ax2.plot(co21_scatter,r21_scatter,"o")
 #ax2.plot(co21_scatter_cut,r21_scatter_cut,"o")
