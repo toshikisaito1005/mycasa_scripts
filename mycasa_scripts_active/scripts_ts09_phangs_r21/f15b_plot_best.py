@@ -163,11 +163,15 @@ def plotter_noise(
 	ax2 = plt.subplot(gs[5:9,0:8])
 	ax1.grid(axis="both")
 	ax2.grid(axis="both")
-	ax1.set_xlabel("CO(1-0) mom-0 (K.km/s)")
-	ax2.set_xlabel("CO(2-1) mom-0 (K.km/s)")
+	ax1.set_xlim([0.3,1.7])
+	ax2.set_xlim([-0.4,1.7])
+	ax1.set_xlabel("log $I_{CO(1-0)}$ (K.km/s)")
+	ax2.set_xlabel("log $I_{CO(2-1)}$ (K.km/s)")
+	ax1.set_ylabel("log $I_{CO(1-0)}$ 1 sigma error (K.km/s)")
 	ax1.set_ylabel("CO(1-0) mom-0 noise (K.km/s)")
 	ax2.set_ylabel("CO(2-1) mom-0 noise (K.km/s)")
 	plt.rcParams["font.size"] = 20
+	plt.rcParams["legend.fontsize"] = 16
 	#
 	# ax1
 	ax1.scatter(log_co10_mom0_k, log_co10_noise_k, c="black", alpha=0.5)
@@ -364,6 +368,7 @@ ax1.set_xlabel("log $I_{CO(1-0)}$ (K.km/s)")
 ax2.set_xlabel("log $I_{CO(2-1)}$ (K.km/s)")
 ax3.set_xlabel("log $R_{21}$")
 plt.rcParams["font.size"] = 20
+plt.rcParams["legend.fontsize"] = 16
 #
 # ax1
 ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=range_co10_input, label="Observed Data")
@@ -411,6 +416,7 @@ ax1.grid(axis="both")
 ax1.set_xlabel("log $I_{CO(1-0)}$ (K.km/s)")
 ax1.set_ylabel("log $I_{CO(2-1)}$ (K.km/s)")
 plt.rcParams["font.size"] = 20
+plt.rcParams["legend.fontsize"] = 16
 #
 binx, mean, std = get_binned_dist(log_co10_mom0_k_model_scatter_noise_cut, log_co21_mom0_k_model_scatter_noise_cut, range_co10_input)
 ax1.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
@@ -442,6 +448,7 @@ ax1.grid(axis="both")
 ax1.set_xlabel("log CO(2-1) mom-0 (K.km/s)")
 ax1.set_ylabel("log $R_{21}$")
 plt.rcParams["font.size"] = 20
+plt.rcParams["legend.fontsize"] = 16
 #
 binx, mean, std = get_binned_dist(log_co21_mom0_k_model_scatter_noise_cut, r21_model_scatter_noise, range_co21_input)
 ax1.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
