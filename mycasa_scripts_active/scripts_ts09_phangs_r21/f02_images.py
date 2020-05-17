@@ -7,6 +7,8 @@ import mycasaimaging_tools as myim
 import matplotlib.pyplot as plt
 plt.ioff()
 
+reload(myim)
+
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 data_image = glob.glob(dir_data + "*/*_04p0*moment0_Kelvin")
 data_image.extend(glob.glob(dir_data + "*/*_04p0*moment8_Kelvin"))
@@ -68,7 +70,8 @@ myim.fits2eps(dir_data = dir_data,
               value = value,
               contour = contour,
               xlim = xlim,
-              ylim = ylim)
+              ylim = ylim,
+              nucleus = 20)
 
 
 ### 12CO(2-1)
