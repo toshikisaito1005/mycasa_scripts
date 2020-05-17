@@ -315,6 +315,8 @@ list_range_co10_input = []
 list_range_co21_input = []
 list_log_co10_mom0_k_model_scatter_cut = []
 list_log_co21_mom0_k_model_scatter_cut = []
+list_log_co10_mom0_k_model_scatter_noise = []
+list_log_co21_mom0_k_model_scatter_noise = []
 list_log_co10_mom0_k_model_scatter_noise_cut = []
 list_log_co21_mom0_k_model_scatter_noise_cut = []
 list_log_r21_mom_k = []
@@ -370,13 +372,22 @@ for i in range(len(beams)):
 	list_log_co21_mom0_k_model_scatter_cut.append(log_co21_mom0_k_model_scatter_cut.tolist())
 	list_log_co10_mom0_k_model_scatter_noise_cut.append(log_co10_mom0_k_model_scatter_noise_cut.tolist())
 	list_log_co21_mom0_k_model_scatter_noise_cut.append(log_co21_mom0_k_model_scatter_noise_cut.tolist())
+	list_log_co10_mom0_k_model_scatter_noise.append(log_co10_mom0_k_model_scatter_noise.tolist())
+	list_log_co21_mom0_k_model_scatter_noise.append(log_co21_mom0_k_model_scatter_noise.tolist())
 	list_log_r21_mom_k.append(log_r21_mom_k.tolist())
 	list_log_r21_mom0_k_model_scatter.append(log_r21_mom0_k_model_scatter.tolist())
 	list_log_r21_mom0_k_model_scatter_noise.append(log_r21_mom0_k_model_scatter_noise.tolist())
 
 
-list_median = [10**np.median(s) for s in list_log_r21_mom0_k_model_scatter_noise]
-list_width = [10**np.percentile(s,84)-10**np.percentile(s,16) for s in list_log_r21_mom0_k_model_scatter_noise]
+list_median_cut = [10**np.median(s) for s in list_log_r21_mom0_k_model_scatter_noise]
+list_width_cut = [10**np.percentile(s,84)-10**np.percentile(s,16) for s in list_log_r21_mom0_k_model_scatter_noise]
+
+for i in range(len(list_log_co21_mom0_k_model_scatter_noise)):
+	log_r21_mom0_k_model_scatter_noise_nocut = list_log_co21_mom0_k_model_scatter_noise/list_log_co10_mom0_k_model_scatter_noise
+
+
+list_median_nocut = [10**np.median(s) for s in list_log_co21_mom0_k_model_scatter_noise/list_log_co10_mom0_k_model_scatter_noise]
+list_width_nocut = [10**np.percentile(s,84)-10**np.percentile(s,16) for s in list_log_co21_mom0_k_model_scatter_noise/list_log_co10_mom0_k_model_scatter_noise]
 
 
 """
