@@ -19,7 +19,7 @@ freqco10 = 115.27120
 freqco21 = 230.53800
 nbins = 40
 percentile = 84
-beams = ["16p0","20p0"]
+beams = ["20p0"]
 
 
 #####################
