@@ -366,13 +366,13 @@ for i in range(len(beams)):
 	#
 	list_range_co10_input.append(range_co10_input)
 	list_range_co21_input.append(range_co21_input)
-	list_log_co10_mom0_k_model_scatter_cut.append()
-	list_log_co21_mom0_k_model_scatter_cut.append()
-	list_log_co10_mom0_k_model_scatter_noise_cut.append()
-	list_log_co21_mom0_k_model_scatter_noise_cut.append()
-	list_log_r21_mom_k.append()
-	list_log_r21_mom0_k_model_scatter.append()
-	list_log_r21_mom0_k_model_scatter_noise.append()
+	list_log_co10_mom0_k_model_scatter_cut.append(log_co10_mom0_k_model_scatter_cut.tolist())
+	list_log_co21_mom0_k_model_scatter_cut.append(log_co21_mom0_k_model_scatter_cut.tolist())
+	list_log_co10_mom0_k_model_scatter_noise_cut.append(log_co10_mom0_k_model_scatter_noise_cut.tolist())
+	list_log_co21_mom0_k_model_scatter_noise_cut.append(log_co21_mom0_k_model_scatter_noise_cut.tolist())
+	list_log_r21_mom_k.append(log_r21_mom_k.tolist())
+	list_log_r21_mom0_k_model_scatter.append(log_r21_mom0_k_model_scatter.tolist())
+	list_log_r21_mom0_k_model_scatter_noise.append(log_r21_mom0_k_model_scatter_noise.tolist())
 
 
 """
