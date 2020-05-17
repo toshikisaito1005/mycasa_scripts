@@ -170,7 +170,7 @@ def fits2eps(dir_data, imagename_color, imagename_contour, ra_center,
         dec_center, title, colorbar_label, output, colorscale,
         colorlog = False, value = None, colorbar = False,
         contour = [0.1], color_contour = "k", color_beam = "b",
-        xlim = ([-30, 30]), ylim = ([30, -30]), clim = None):
+        xlim = ([-30, 30]), ylim = ([30, -30]), clim = None, nucleus=None):
     """
     test
     """
@@ -257,6 +257,13 @@ def fits2eps(dir_data, imagename_color, imagename_contour, ra_center,
                         angle = bpa * -1,
                         fc = color_beam)
     ax.add_patch(e)
+    if nucleus!=None:
+        e2 = patches.Ellipse(xy = (0, 0),
+                             width = nucleus,
+                             height = nucleus,
+                             angle = 0,
+                             fc = "grey",
+                             linestyle = "--")
     plt.grid()
     plt.savefig(dir_data + output, dpi = 100)
 
