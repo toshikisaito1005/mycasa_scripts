@@ -20,6 +20,8 @@ freqco21 = 230.53800
 nbins = 40
 percentile = 84
 
+beams = ["04p0","08p0","12p0","16p0","20p0"]
+
 
 #####################
 ### functions
@@ -309,50 +311,71 @@ def create_best_models(
 #####################
 ### main
 #####################
-### get best fit values
-dataco10 = np.loadtxt(dir_proj + "eps/bootstrap_co10_models_ngc0628.txt")
-dataco21 = np.loadtxt(dir_proj + "eps/bootstrap_co21_models_ngc0628.txt")
-best_co10_parameter = np.median(dataco10, axis=0)
-best_co21_parameter = np.median(dataco21, axis=0)
+list_range_co10_input = []
+list_range_co21_input = []
+list_log_co10_mom0_k_model_scatter_cut = []
+list_log_co21_mom0_k_model_scatter_cut = []
+list_log_co10_mom0_k_model_scatter_noise_cut = []
+list_log_co21_mom0_k_model_scatter_noise_cut = []
+list_log_r21_mom_k = []
+list_log_r21_mom0_k_model_scatter = []
+list_log_r21_mom0_k_model_scatter_noise = []
+for i in range(len(beams)):
+	### get best fit values
+	dataco10 = np.loadtxt(dir_proj + "eps/bootstrap_co10_models_ngc0628_"+beams[i]+".txt")
+	dataco21 = np.loadtxt(dir_proj + "eps/bootstrap_co21_models_ngc0628_"+beams[i]+".txt")
+	best_co10_parameter = np.median(dataco10, axis=0)
+	best_co21_parameter = np.median(dataco21, axis=0)
 
-### print parameters
-print("### co10 norm mean     = " + str(np.round(np.percentile(dataco10, 16, axis=0)[0], 3)) + ", " + str(np.round(np.percentile(dataco10, 50, axis=0)[0], 3)) + ", " + str(np.round(np.percentile(dataco10, 84, axis=0)[0], 3)))
-print("### co10 norm std      = " + str(np.round(np.percentile(dataco10, 16, axis=0)[1], 3)) + ", " + str(np.round(np.percentile(dataco10, 50, axis=0)[1], 3)) + ", " + str(np.round(np.percentile(dataco10, 84, axis=0)[1], 3)))
-print("### co10 scatter       = " + str(np.round(np.percentile(dataco10, 16, axis=0)[2], 3)) + ", " + str(np.round(np.percentile(dataco10, 50, axis=0)[2], 3)) + ", " + str(np.round(np.percentile(dataco10, 84, axis=0)[2], 3)))
-print("### co21-co10 slope    = " + str(np.round(np.percentile(dataco21, 16, axis=0)[0], 3)) + ", " + str(np.round(np.percentile(dataco21, 50, axis=0)[0], 3)) + ", " + str(np.round(np.percentile(dataco21, 84, axis=0)[0], 3)))
-print("### co21-co10 intecept = " + str(np.round(np.percentile(dataco21, 16, axis=0)[1], 3)) + ", " + str(np.round(np.percentile(dataco21, 50, axis=0)[1], 3)) + ", " + str(np.round(np.percentile(dataco21, 84, axis=0)[1], 3)))
-print("### co21 scatter       = " + str(np.round(np.percentile(dataco21, 16, axis=0)[2], 3)) + ", " + str(np.round(np.percentile(dataco21, 50, axis=0)[2], 3)) + ", " + str(np.round(np.percentile(dataco21, 84, axis=0)[2], 3)))
-
-
-### get filenames
-co10_mom0  = dir_proj + galname + "_co10/co10_04p0.moment0"
-co10_noise = dir_proj + galname + "_co10/co10_04p0.moment0.noise"
-co21_mom0  = dir_proj + galname + "_co21/co21_04p0.moment0"
-co21_noise = dir_proj + galname + "_co21/co21_04p0.moment0.noise"
-
-
-### plot noise vs. mom-0
-log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21)
-p84_co10, p50_co10, p16_co10, p84_co21, p50_co21, p16_co21 = print_things(log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k)
-xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile, galname)
+	### print parameters
+	print("### co10 norm mean     = " + str(np.round(np.percentile(dataco10, 16, axis=0)[0], 3)) + ", " + str(np.round(np.percentile(dataco10, 50, axis=0)[0], 3)) + ", " + str(np.round(np.percentile(dataco10, 84, axis=0)[0], 3)))
+	print("### co10 norm std      = " + str(np.round(np.percentile(dataco10, 16, axis=0)[1], 3)) + ", " + str(np.round(np.percentile(dataco10, 50, axis=0)[1], 3)) + ", " + str(np.round(np.percentile(dataco10, 84, axis=0)[1], 3)))
+	print("### co10 scatter       = " + str(np.round(np.percentile(dataco10, 16, axis=0)[2], 3)) + ", " + str(np.round(np.percentile(dataco10, 50, axis=0)[2], 3)) + ", " + str(np.round(np.percentile(dataco10, 84, axis=0)[2], 3)))
+	print("### co21-co10 slope    = " + str(np.round(np.percentile(dataco21, 16, axis=0)[0], 3)) + ", " + str(np.round(np.percentile(dataco21, 50, axis=0)[0], 3)) + ", " + str(np.round(np.percentile(dataco21, 84, axis=0)[0], 3)))
+	print("### co21-co10 intecept = " + str(np.round(np.percentile(dataco21, 16, axis=0)[1], 3)) + ", " + str(np.round(np.percentile(dataco21, 50, axis=0)[1], 3)) + ", " + str(np.round(np.percentile(dataco21, 84, axis=0)[1], 3)))
+	print("### co21 scatter       = " + str(np.round(np.percentile(dataco21, 16, axis=0)[2], 3)) + ", " + str(np.round(np.percentile(dataco21, 50, axis=0)[2], 3)) + ", " + str(np.round(np.percentile(dataco21, 84, axis=0)[2], 3)))
 
 
-### create best models
-log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise = \
-	create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, best_co10_parameter, best_co21_parameter)
-
-### cut data
-range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
-range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
-log_co10_mom0_k_model_scatter_cut = log_co10_mom0_k_model_scatter[np.where((log_co10_mom0_k_model_scatter>=range_co10_input[0]) & (log_co10_mom0_k_model_scatter<=range_co10_input[1]) & (log_co21_mom0_k_model_scatter>=range_co21_input[0]) & (log_co21_mom0_k_model_scatter<=range_co21_input[1]))]
-log_co21_mom0_k_model_scatter_cut = log_co21_mom0_k_model_scatter[np.where((log_co10_mom0_k_model_scatter>=range_co10_input[0]) & (log_co10_mom0_k_model_scatter<=range_co10_input[1]) & (log_co21_mom0_k_model_scatter>=range_co21_input[0]) & (log_co21_mom0_k_model_scatter<=range_co21_input[1]))]
-log_co10_mom0_k_model_scatter_noise_cut = log_co10_mom0_k_model_scatter_noise[np.where((log_co10_mom0_k_model_scatter_noise>=range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<=range_co10_input[1]) & (log_co21_mom0_k_model_scatter_noise>=range_co21_input[0]) & (log_co21_mom0_k_model_scatter_noise<=range_co21_input[1]))]
-log_co21_mom0_k_model_scatter_noise_cut = log_co21_mom0_k_model_scatter_noise[np.where((log_co10_mom0_k_model_scatter_noise>=range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<=range_co10_input[1]) & (log_co21_mom0_k_model_scatter_noise>=range_co21_input[0]) & (log_co21_mom0_k_model_scatter_noise<=range_co21_input[1]))]
-log_r21_mom_k = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k)
-log_r21_mom0_k_model_scatter = np.log10(10**log_co21_mom0_k_model_scatter_cut/10**log_co10_mom0_k_model_scatter_cut)
-log_r21_mom0_k_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise_cut/10**log_co10_mom0_k_model_scatter_noise_cut)
+	### get filenames
+	co10_mom0  = dir_proj + galname + "_co10/co10_04p0.moment0"
+	co10_noise = dir_proj + galname + "_co10/co10_04p0.moment0.noise"
+	co21_mom0  = dir_proj + galname + "_co21/co21_04p0.moment0"
+	co21_noise = dir_proj + galname + "_co21/co21_04p0.moment0.noise"
 
 
+	### plot noise vs. mom-0
+	log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21)
+	p84_co10, p50_co10, p16_co10, p84_co21, p50_co21, p16_co21 = print_things(log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k)
+	xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile, galname)
+
+
+	### create best models
+	log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise = \
+		create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, best_co10_parameter, best_co21_parameter)
+
+	### cut data
+	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
+	range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
+	log_co10_mom0_k_model_scatter_cut = log_co10_mom0_k_model_scatter[np.where((log_co10_mom0_k_model_scatter>=range_co10_input[0]) & (log_co10_mom0_k_model_scatter<=range_co10_input[1]) & (log_co21_mom0_k_model_scatter>=range_co21_input[0]) & (log_co21_mom0_k_model_scatter<=range_co21_input[1]))]
+	log_co21_mom0_k_model_scatter_cut = log_co21_mom0_k_model_scatter[np.where((log_co10_mom0_k_model_scatter>=range_co10_input[0]) & (log_co10_mom0_k_model_scatter<=range_co10_input[1]) & (log_co21_mom0_k_model_scatter>=range_co21_input[0]) & (log_co21_mom0_k_model_scatter<=range_co21_input[1]))]
+	log_co10_mom0_k_model_scatter_noise_cut = log_co10_mom0_k_model_scatter_noise[np.where((log_co10_mom0_k_model_scatter_noise>=range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<=range_co10_input[1]) & (log_co21_mom0_k_model_scatter_noise>=range_co21_input[0]) & (log_co21_mom0_k_model_scatter_noise<=range_co21_input[1]))]
+	log_co21_mom0_k_model_scatter_noise_cut = log_co21_mom0_k_model_scatter_noise[np.where((log_co10_mom0_k_model_scatter_noise>=range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<=range_co10_input[1]) & (log_co21_mom0_k_model_scatter_noise>=range_co21_input[0]) & (log_co21_mom0_k_model_scatter_noise<=range_co21_input[1]))]
+	log_r21_mom_k = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k)
+	log_r21_mom0_k_model_scatter = np.log10(10**log_co21_mom0_k_model_scatter_cut/10**log_co10_mom0_k_model_scatter_cut)
+	log_r21_mom0_k_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise_cut/10**log_co10_mom0_k_model_scatter_noise_cut)
+	#
+	list_range_co10_input.append(range_co10_input)
+	list_range_co21_input.append(range_co21_input)
+	list_log_co10_mom0_k_model_scatter_cut.append()
+	list_log_co21_mom0_k_model_scatter_cut.append()
+	list_log_co10_mom0_k_model_scatter_noise_cut.append()
+	list_log_co21_mom0_k_model_scatter_noise_cut.append()
+	list_log_r21_mom_k.append()
+	list_log_r21_mom0_k_model_scatter.append()
+	list_log_r21_mom0_k_model_scatter_noise.append()
+
+
+"""
 ###
 figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=22, ncols=8)
@@ -470,6 +493,7 @@ np.savetxt(dir_proj + "eps/ngc0628_model_scatter_noise.txt", np.c_[log_co10_mom0
 #
 np.savetxt(dir_proj + "eps/ngc0628_model_scatter_cut.txt", np.c_[log_co10_mom0_k_model_scatter_cut, log_co21_mom0_k_model_scatter_cut])
 np.savetxt(dir_proj + "eps/ngc0628_model_scatter_noise_cut.txt", np.c_[log_co10_mom0_k_model_scatter_noise_cut, log_co21_mom0_k_model_scatter_noise_cut])
+"""
 
 #
 os.system("rm -rf *.last")
