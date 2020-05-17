@@ -375,6 +375,10 @@ for i in range(len(beams)):
 	list_log_r21_mom0_k_model_scatter_noise.append(log_r21_mom0_k_model_scatter_noise.tolist())
 
 
+list_median = [10**np.median(s) for s in list_log_r21_mom0_k_model_scatter_noise]
+list_width = [10**np.percentile(s,84)-10**np.percentile(s,16) for s in list_log_r21_mom0_k_model_scatter_noise]
+
+
 """
 ###
 figure = plt.figure(figsize=(10,10))
