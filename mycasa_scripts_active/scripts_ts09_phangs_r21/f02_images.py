@@ -71,7 +71,7 @@ myim.fits2eps(dir_data = dir_data,
               contour = contour,
               xlim = xlim,
               ylim = ylim,
-              nucleus = 20)
+              nucleus = 50)
 
 
 ### 12CO(2-1)
@@ -101,7 +101,8 @@ myim.fits2eps(dir_data = dir_data,
               value = value,
               contour = contour,
               xlim = xlim,
-              ylim = ylim)
+              ylim = ylim,
+              nucleus = 50)
 
 ### R21
 # R21 color + CO(2-1) moment 0 contour
@@ -132,7 +133,8 @@ myim.fits2eps(dir_data = dir_data,
               contour = contour,
               xlim = xlim,
               ylim = ylim,
-              clim = clim)
+              clim = clim,
+              nucleus = 50)
 
 
 ### ngc4321
@@ -173,7 +175,8 @@ myim.fits2eps(dir_data = dir_data,
               value = value,
               contour = contour,
               xlim = xlim,
-              ylim = ylim)
+              ylim = ylim,
+              nucleus = 30)
 
 ### 12CO(2-1)
 # moment 0 color + moment 0 contour
@@ -202,7 +205,8 @@ myim.fits2eps(dir_data = dir_data,
               value = value,
               contour = contour,
               xlim = xlim,
-              ylim = ylim)
+              ylim = ylim,
+              nucleus = 30)
 
 ### R21
 # R21 color + CO(2-1) moment 0 contour
@@ -233,7 +237,8 @@ myim.fits2eps(dir_data = dir_data,
               contour = contour,
               xlim = xlim,
               ylim = ylim,
-              clim = clim)
+              clim = clim,
+              nucleus = 30)
 
 """
 ### R21
@@ -308,7 +313,8 @@ myim.fits2eps(dir_data = dir_data,
               value = value,
               contour = contour,
               xlim = xlim,
-              ylim = ylim)
+              ylim = ylim,
+              nucleus = 50)
 
 
 ### 12CO(2-1)
@@ -338,7 +344,8 @@ myim.fits2eps(dir_data = dir_data,
               value = value,
               contour = contour,
               xlim = xlim,
-              ylim = ylim)
+              ylim = ylim,
+              nucleus = 50)
 
 ### R21
 # R21 color + CO(2-1) moment 0 contour
@@ -369,7 +376,8 @@ myim.fits2eps(dir_data = dir_data,
               contour = contour,
               xlim = xlim,
               ylim = ylim,
-              clim = clim)
+              clim = clim,
+              nucleus = 50)
 
 
 

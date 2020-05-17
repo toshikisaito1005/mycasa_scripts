@@ -263,8 +263,10 @@ def fits2eps(dir_data, imagename_color, imagename_contour, ra_center,
                              height = nucleus,
                              angle = 0,
                              fill = False,
-                             ls = ":",
-                             lw = 3)
+                             edgecolor = "black",
+                             alpha = 0.5,
+                             #ls = ":",
+                             lw = 5)
         ax.add_patch(e2)
     plt.grid()
     plt.savefig(dir_data + output, dpi = 100)
