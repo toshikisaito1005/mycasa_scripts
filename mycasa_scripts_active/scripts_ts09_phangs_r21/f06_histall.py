@@ -17,7 +17,7 @@ plt.ioff()
 ### parameters
 #####################
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
-dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
+#dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
 def_nucleus = [50*44./1.0,50*52./1.3,30*103/1.4]
 nbins = 75
@@ -80,12 +80,12 @@ for i in range(len(txtfile)):
     data_all.extend(data)
     data_norm_all.extend(data_norm)
     #
-    data_nuc = data[data<=def_nucleus[i]]
+    data_nuc = data[dist<=def_nucleus[i]]
     data_nuc_norm = data_nuc / np.median(data_nuc)
     data_nuc_all.extend(data_nuc)
     data_nuc_norm_all.extend(data_nuc_norm)
     #
-    data_out = data[data>def_nucleus[i]]
+    data_out = data[dist>def_nucleus[i]]
     data_out_norm = data_out / np.median(data_out)
     data_out_all.extend(data_out)
     data_out_norm_all.extend(data_out_norm)
@@ -108,14 +108,6 @@ y_all = y_all / float(sum(y_all))
 histo_norm = np.histogram(data_norm_all, bins=nbins, range=(xlim), weights=None)
 x_norm, y_norm = np.delete(histo_norm[1],-1),histo_norm[0]
 y_norm = y_norm / float(sum(y_norm))
-#
-p16_all = weighted_percentile(data_all, 0.16)
-p50_all = weighted_percentile(data_all, 0.5)
-p84_all = weighted_percentile(data_all, 0.84)
-#
-p16_norm = weighted_percentile(data_norm_all, 0.16)
-p50_norm = weighted_percentile(data_norm_all, 0.50)
-p84_norm = weighted_percentile(data_norm_all, 0.84)
 ## out
 #
 histo_out_all = np.histogram(data_out_all, bins=nbins, range=(xlim), weights=None)
@@ -129,11 +121,15 @@ y_out_norm = y_out_norm / float(sum(y_out_norm))
 #
 histo_nuc_all = np.histogram(data_nuc_all, bins=nbins, range=(xlim), weights=None)
 x_nuc_all, y_nuc_all = np.delete(histo_nuc_all[1],-1),histo_nuc_all[0]
-y_out_all = y_out_all / float(sum(y_out_all))
+y_nuc_all = y_nuc_all / float(sum(y_nuc_all))
 #
-histo_out_norm = np.histogram(data_out_norm_all, bins=nbins, range=(xlim), weights=None)
-x_out_norm, y_out_norm = np.delete(histo_out_norm[1],-1),histo_out_norm[0]
-y_out_norm = y_out_norm / float(sum(y_out_norm))
+histo_nuc_norm = np.histogram(data_nuc_norm_all, bins=nbins, range=(xlim), weights=None)
+x_nuc_norm, y_nuc_norm = np.delete(histo_nuc_norm[1],-1),histo_nuc_norm[0]
+y_nuc_norm = y_nuc_norm / float(sum(y_nuc_norm))
+
+
+###
+##
 #
 p16_all = weighted_percentile(data_all, 0.16)
 p50_all = weighted_percentile(data_all, 0.5)
@@ -142,6 +138,15 @@ p84_all = weighted_percentile(data_all, 0.84)
 p16_norm = weighted_percentile(data_norm_all, 0.16)
 p50_norm = weighted_percentile(data_norm_all, 0.50)
 p84_norm = weighted_percentile(data_norm_all, 0.84)
+##
+#
+p16_out_all = weighted_percentile(data_out_all, 0.16)
+p50_out_all = weighted_percentile(data_out_all, 0.5)
+p84_out_all = weighted_percentile(data_out_all, 0.84)
+#
+p16_out_norm = weighted_percentile(data_out_norm_all, 0.16)
+p50_out_norm = weighted_percentile(data_out_norm_all, 0.50)
+p84_out_norm = weighted_percentile(data_out_norm_all, 0.84)
 
 
 ### plot
