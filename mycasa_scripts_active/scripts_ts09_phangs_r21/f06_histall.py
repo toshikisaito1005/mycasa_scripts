@@ -65,19 +65,41 @@ txtfile = glob.glob(dir_product + "ngc*_parameter_600pc.txt")
 #
 data_all = []
 data_norm_all = []
+data_nuc_all = []
+data_nuc_norm_all = []
+data_out_all = []
+data_out_norm_all = []
 for i in range(len(txtfile)):
     dist = np.loadtxt(txtfile[i])[:,0]
     data = np.loadtxt(txtfile[i])[:,1]
+    #
     data = data[data>0]
+    dist = dist[data>0]
+    #
     data_norm = data / np.median(data)
     data_all.extend(data)
     data_norm_all.extend(data_norm)
+    #
+    data_nuc = data[data<=def_nucleus[i]]
+    data_nuc_norm = data_nuc / np.median(data_nuc)
+    data_nuc_all.extend(data_nuc)
+    data_nuc_norm_all.extend(data_nuc_norm)
+    #
+    data_out = data[data>def_nucleus[i]]
+    data_out_norm = data_out / np.median(data_out)
+    data_out_all.extend(data_out)
+    data_out_norm_all.extend(data_out_norm)
 #
 data_all = np.array(data_all)
 data_norm_all = np.array(data_norm_all)
+data_nuc_all = np.array(data_nuc_all)
+data_nuc_norm_all = np.array(data_nuc_norm_all)
+data_out_all = np.array(data_out_all)
+data_out_norm_all = np.array(data_out_norm_all)
 
 
 ### histogram and stats
+## all
 #
 histo_all = np.histogram(data_all, bins=nbins, range=(xlim), weights=None)
 x_all, y_all = np.delete(histo_all[1],-1),histo_all[0]
@@ -86,6 +108,32 @@ y_all = y_all / float(sum(y_all))
 histo_norm = np.histogram(data_norm_all, bins=nbins, range=(xlim), weights=None)
 x_norm, y_norm = np.delete(histo_norm[1],-1),histo_norm[0]
 y_norm = y_norm / float(sum(y_norm))
+#
+p16_all = weighted_percentile(data_all, 0.16)
+p50_all = weighted_percentile(data_all, 0.5)
+p84_all = weighted_percentile(data_all, 0.84)
+#
+p16_norm = weighted_percentile(data_norm_all, 0.16)
+p50_norm = weighted_percentile(data_norm_all, 0.50)
+p84_norm = weighted_percentile(data_norm_all, 0.84)
+## out
+#
+histo_out_all = np.histogram(data_out_all, bins=nbins, range=(xlim), weights=None)
+x_out_all, y_out_all = np.delete(histo_out_all[1],-1),histo_out_all[0]
+y_out_all = y_out_all / float(sum(y_out_all))
+#
+histo_out_norm = np.histogram(data_out_norm_all, bins=nbins, range=(xlim), weights=None)
+x_out_norm, y_out_norm = np.delete(histo_out_norm[1],-1),histo_out_norm[0]
+y_out_norm = y_out_norm / float(sum(y_out_norm))
+## nuc
+#
+histo_nuc_all = np.histogram(data_nuc_all, bins=nbins, range=(xlim), weights=None)
+x_nuc_all, y_nuc_all = np.delete(histo_nuc_all[1],-1),histo_nuc_all[0]
+y_out_all = y_out_all / float(sum(y_out_all))
+#
+histo_out_norm = np.histogram(data_out_norm_all, bins=nbins, range=(xlim), weights=None)
+x_out_norm, y_out_norm = np.delete(histo_out_norm[1],-1),histo_out_norm[0]
+y_out_norm = y_out_norm / float(sum(y_out_norm))
 #
 p16_all = weighted_percentile(data_all, 0.16)
 p50_all = weighted_percentile(data_all, 0.5)
