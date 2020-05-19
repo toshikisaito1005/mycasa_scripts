@@ -123,22 +123,22 @@ def plot_hists_for_nuclear_outer_whole(
 	ylim,
 	color,
 	weights = None,
-	size_nuclear = None,
+	size_nuclear = None, # diameter
 	):
 	"""
 	"""
 	#
 	data_all = data
-	data_in = data[distance<size_nuclear]
-	data_out = data[distance>size_nuclear]
+	data_in = data[distance<size_nuclear/2.]
+	data_out = data[distance>size_nuclear/2.]
 	if weights==None:
 		weights_all = None
 		weights_in = None
 		weights_out = None
 	else:
 		weights_all = weights
-		weights_in = weights[distance<size_nuclear]
-		weights_out = weights[distance>size_nuclear]
+		weights_in = weights[distance<size_nuclear/2.]
+		weights_out = weights[distance>size_nuclear/2.]
 	#
 	# construct histograms
 	histo_all = np.histogram(data_all,bins=bins,range=(xlim),weights=weights_all)

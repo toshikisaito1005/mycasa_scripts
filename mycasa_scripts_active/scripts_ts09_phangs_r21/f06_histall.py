@@ -80,12 +80,12 @@ for i in range(len(txtfile)):
     data_all.extend(data)
     data_norm_all.extend(data_norm)
     #
-    data_nuc = data[dist<=def_nucleus[i]]
+    data_nuc = data[dist<=def_nucleus[i]/2.]
     data_nuc_norm = data_nuc / np.median(data_nuc)
     data_nuc_all.extend(data_nuc)
     data_nuc_norm_all.extend(data_nuc_norm)
     #
-    data_out = data[dist>def_nucleus[i]]
+    data_out = data[dist>def_nucleus[i]/2.]
     data_out_norm = data_out / np.median(data_out)
     data_out_all.extend(data_out)
     data_out_norm_all.extend(data_out_norm)
