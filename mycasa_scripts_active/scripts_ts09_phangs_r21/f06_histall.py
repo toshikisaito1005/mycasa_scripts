@@ -19,6 +19,7 @@ plt.ioff()
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 dist25 = [4.9, 5.1, 3.0] # arcmin, Leroy et al. 2019
 scales = [44/1.0, 52/1.3, 103/1.4]
+def_nucleus = [50*44./1.0,50*52./1.3,30*103/1.4]
 nbins = 75
 xlim = [0,2.5]
 r21err = 0.074504715864920745
@@ -65,6 +66,7 @@ txtfile = glob.glob(dir_product + "ngc*_parameter_600pc.txt")
 data_all = []
 data_norm_all = []
 for i in range(len(txtfile)):
+    dist = np.loadtxt(txtfile[i])[:,0]
     data = np.loadtxt(txtfile[i])[:,1]
     data = data[data>0]
     data_norm = data / np.median(data)
