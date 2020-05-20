@@ -190,11 +190,11 @@ ax3.set_xlabel("$R_{21}$")
 ax3.set_ylim(ylim)
 
 # ax4
-ylim = [0.0001, y_in_norm.max()*1.4]
-ax4.step(x_out_norm, y_out_norm, "red", lw=1, alpha=1.0, where="mid")
-ax4.bar(x_out_norm, y_out_norm, lw=0, color="red", alpha=0.2, width=x_out_norm[1]-x_out_norm[0], align="center")
-ax4.plot(p50_out_norm, ylim[1]/1.2*1.05, "o", markeredgewidth=0, c="red", markersize=7, zorder=1)
-ax4.plot([p16_out_norm, p84_out_norm], [ylim[1]/1.2*1.05, ylim[1]/1.2*1.05], "-", c="red", lw=2, zorder=0)
+ylim = [0.0001, y_out_norm.max()*1.4]
+ax4.step(x_out_norm, y_out_norm, "blue", lw=1, alpha=1.0, where="mid")
+ax4.bar(x_out_norm, y_out_norm, lw=0, color="blue", alpha=0.2, width=x_out_norm[1]-x_out_norm[0], align="center")
+ax4.plot(p50_out_norm, ylim[1]/1.2*1.05, "o", markeredgewidth=0, c="blue", markersize=7, zorder=1)
+ax4.plot([p16_out_norm, p84_out_norm], [ylim[1]/1.2*1.05, ylim[1]/1.2*1.05], "-", c="blue", lw=2, zorder=0)
 #
 ax4.text(p16_out_norm, ylim[1]/1.2*1.1, str(np.round(p16_out_norm,2)), fontsize=13, ha="right")
 ax4.text(p50_out_norm, ylim[1]/1.2*1.1, str(np.round(p50_out_norm,2))+"0", fontsize=13, ha="center")
