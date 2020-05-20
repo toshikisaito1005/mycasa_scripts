@@ -22,11 +22,16 @@ output = ["../../ngc0628_r21/cprops_04p0.mask.fits",
 		  "../../ngc4321_r21/cprops_04p0.mask.fits"]
 # output = "ngc1365_cprops_mask_1p38.fits"
 snr = 5.0 # peak signal-to-noise ratio threshold to identify clouds
-scale = 120.0 / 1.378 # parsec / arcsec
-image_ra_cnt = "01:36:41.790"
-image_decl_cnt = "15.46.58.400"
+scales = [44/1.0,52/1.3,103/1.4] # parsec / arcsec
+image_ra_cnt = ["01:36:41.790",
+				"11:20:15.181",
+				"12:22:54.961"]
+image_decl_cnt = ["15.46.58.400",
+				  "12.59.28.137",
+				  "15.49.20.263"]
 
 i=0
+
 
 #####################
 ### Main Procedure
@@ -34,6 +39,9 @@ i=0
 catalog_fits = catalog_fits[i]
 mom0_fits = mom0_fits[i]
 output = dir_fits + output[i]
+image_ra_cnt = image_ra_cnt[i]
+image_decl_cnt = image_decl_cnt[i]
+scale = scales[i]
 
 
 done = glob.glob(dir_product)
@@ -117,8 +125,7 @@ ia.setbrightnessunit("Jy/pixel")
 ia.modify(cl.torecord(),subtract=False)
 
 immath(imagename=output.replace(".fits",".im"),
-       expr="iif(IM0>0,IM0,0)",
-       # expr="iif(IM0>0,1,0)",
+       expr="iif(IM0>0,1,0)",
        outfile=output.replace(".fits",".im2"))
 
 exportfits(imagename=output.replace(".fits",".im2"),
