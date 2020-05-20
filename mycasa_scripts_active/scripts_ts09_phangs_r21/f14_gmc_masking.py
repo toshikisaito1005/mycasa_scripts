@@ -17,14 +17,14 @@ catalog_fits = ["ngc0628_12m+7m+tp_co21_120pc_props.fits",
 mom0_fits = ["../../ngc0628_r21/r21_04p0.moment0",
 			 "../../ngc3627_r21/r21_08p0.moment0",
 			 "../../ngc4321_r21/r21_04p0.moment0"]
-output = ["../../ngc0628_r21/cprops_04p0.mask",
-		  "../../ngc3627_r21/cprops_08p0.mask",
-		  "../../ngc4321_r21/cprops_04p0.mask"]
+output = ["../../ngc0628_r21/cprops_04p0.mask.fits",
+		  "../../ngc3627_r21/cprops_08p0.mask.fits",
+		  "../../ngc4321_r21/cprops_04p0.mask.fits"]
 # output = "ngc1365_cprops_mask_1p38.fits"
 snr = 5.0 # peak signal-to-noise ratio threshold to identify clouds
 scale = 120.0 / 1.378 # parsec / arcsec
-image_ra_cnt = "03:33:36.406"
-image_decl_cnt = "-36.08.24.023"
+image_ra_cnt = "01:36:41.790"
+image_decl_cnt = "15.46.58.400"
 
 i=0
 
@@ -94,8 +94,7 @@ for i in range(len(gmc_ra_dgr)):
     direction = "J2000 " + str(gmc_ra_dgr[i])+"deg " + str(gmc_decl_dgr[i])+"deg"
     area = float(majoraxis.replace("arcsec","")) * float(minoraxis.replace("arcsec","")) * np.pi * (4*np.log(2) * 4.007484905673586)
     cl.addcomponent(dir=direction,
-                    flux=int(gmc_num[i])*area,
-                    # flux=1.0,
+                    flux=1.0,
                     fluxunit="Jy",
                     freq=str(obsfreq)+"GHz",
                     shape="disk",
