@@ -1,3 +1,4 @@
+      15 - mycasa_scripts_active/scripts_ts09_phangs_r21/f14_gmc_masking.py
       15 - mycasa_scripts_active/scripts_ts09_phangs_r21/f06_histall.py
       14 - mycasa_scripts_active/scripts_ts09_phangs_r21/f00_all_final_eps.sh
        6 - mycasa_scripts_active/scripts_ts09_phangs_r21/table04.txt
@@ -8,7 +9,7 @@
        3 - mycasa_scripts_active/scripts_ts09_phangs_r21/table03.txt
        3 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim_runall.py
        3 - mycasa_scripts_active/myUtils/mycasaimaging_tools.py
-       2 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim11_extract_param_best.py
+       2 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim12_extract_param_best.py
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/f07_08_scatter_and_histo.py
        2 - mycasa_scripts_active/scripts_ts09_phangs_r21/f02_images.py
        2 - mycasa_scripts_active/myUtils/mycasaimaging_tools.pyc
