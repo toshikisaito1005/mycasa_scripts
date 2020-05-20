@@ -34,7 +34,7 @@ convolution_scale = [np.sqrt((44/1.0*4.0)**2-120**2),
 					 np.sqrt((103/1.4*4.0)**2-120**2),
 					 ]
 
-i=1
+i=2
 
 
 #####################
@@ -73,6 +73,7 @@ cut = (gmc_radius_pc > 0.) & (gmc_sn_ratio > snr) & (gmc_minor > 0.) & (gmc_majo
 gmc_ra_dgr = gmc_ra_dgr[cut]
 gmc_decl_dgr = gmc_decl_dgr[cut]
 gmc_radius_arcsec = np.sqrt((gmc_radius_pc[cut] / scale)**2 + (convolution_scale / scale)**2)
+# gmc_radius_arcsec = gmc_radius_pc[cut] / scale
 gmc_pa = gmc_pa[cut]
 gmc_major_arcsec = gmc_major[cut] / scale
 gmc_minor_arcsec = gmc_minor[cut] / scale
