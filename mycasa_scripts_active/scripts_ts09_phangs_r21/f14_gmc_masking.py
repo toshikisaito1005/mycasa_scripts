@@ -9,11 +9,14 @@ from astropy.coordinates import SkyCoord
 #####################
 ### set keys
 #####################
-dir_fits = "/Users/saito/data/myproj_active/proj_santoro01_ngc1365/data_raw/"
-dir_product = "/Users/saito/data/myproj_active/proj_santoro01_ngc1365/products/"
-catalog_fits = "ngc1365_co21_v1p0_props.fits"
-mom0_fits = "ngc1365_12m+7m+tp_co21_broad_mom0.fits"
-output = "ngc1365_cprops_progressive_mask_1p38.fits"
+dir_fits = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/data_other/cprops/"
+dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
+catalog_fits = ["ngc0628_12m+7m+tp_co21_120pc_props.fits",
+				"ngc3627_12m+7m+tp_co21_120pc_props.fits",
+				"ngc4321_12m+7m+tp_co21_120pc_props.fits"]
+mom0_fits = ["../../ngc0628_r21/r21_04p0.moment0",
+			 "../../ngc3627_r21/r21_08p0.moment0",
+			 "../../ngc4321_r21/r21_04p0.moment0"]
 # output = "ngc1365_cprops_mask_1p38.fits"
 snr = 5.0 # peak signal-to-noise ratio threshold to identify clouds
 scale = 120.0 / 1.378 # parsec / arcsec
@@ -24,6 +27,11 @@ image_decl_cnt = "-36.08.24.023"
 #####################
 ### Main Procedure
 #####################
+catalog_fits = catalog_fits[i]
+mom0_fits = mom0_fits[i]
+output = mom0_fits + ""
+
+
 done = glob.glob(dir_product)
 if not done:
     os.mkdir(dir_product)
@@ -105,19 +113,19 @@ ia.setcoordsys(cs.torecord())
 ia.setbrightnessunit("Jy/pixel")
 ia.modify(cl.torecord(),subtract=False)
 
-immath(imagename=dir_product+output.replace(".fits",".im"),
+immath(imagename=output.replace(".fits",".im"),
        expr="iif(IM0>0,IM0,0)",
        # expr="iif(IM0>0,1,0)",
-       outfile=dir_product+output.replace(".fits",".im2"))
+       outfile=output.replace(".fits",".im2"))
 
-exportfits(imagename=dir_product+output.replace(".fits",".im2"),
-           fitsimage=dir_product+output,
+exportfits(imagename=output.replace(".fits",".im2"),
+           fitsimage=output,
            overwrite=True,
            dropstokes=True,
            dropdeg=True)
 
-os.system("rm -rf " + dir_product + output.replace(".fits",".im"))
-os.system("rm -rf " + dir_product + output.replace(".fits",".im2"))
+os.system("rm -rf " + output.replace(".fits",".im"))
+os.system("rm -rf " + output.replace(".fits",".im2"))
 
 #cl.close()
 #cl.done()
