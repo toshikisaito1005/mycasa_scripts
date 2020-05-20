@@ -29,12 +29,12 @@ image_ra_cnt = ["01:36:41.790",
 image_decl_cnt = ["15.46.58.400",
 				  "12.59.28.137",
 				  "15.49.20.263"]
-convolution_scale = [44/1.0*4.0,
-					 52/1.3*8.0,
-					 103/1.4*4.0,
+convolution_scale = [np.sqrt((44/1.0*4.0)**2-120**2),
+					 np.sqrt((52/1.3*8.0)**2-120**2),
+					 np.sqrt((103/1.4*4.0)**2-120**2),
 					 ]
 
-i=0
+i=1
 
 
 #####################
@@ -46,6 +46,7 @@ output = dir_fits + output[i]
 image_ra_cnt = image_ra_cnt[i]
 image_decl_cnt = image_decl_cnt[i]
 scale = scales[i]
+convolution_scale = convolution_scale[i]
 
 
 done = glob.glob(dir_product)
@@ -71,7 +72,7 @@ cut = (gmc_radius_pc > 0.) & (gmc_sn_ratio > snr) & (gmc_minor > 0.) & (gmc_majo
 
 gmc_ra_dgr = gmc_ra_dgr[cut]
 gmc_decl_dgr = gmc_decl_dgr[cut]
-gmc_radius_arcsec = gmc_radius_pc[cut] / scale
+gmc_radius_arcsec = np.sqrt((gmc_radius_pc[cut] / scale)**2 + (convolution_scale / scale)**2)
 gmc_pa = gmc_pa[cut]
 gmc_major_arcsec = gmc_major[cut] / scale
 gmc_minor_arcsec = gmc_minor[cut] / scale
