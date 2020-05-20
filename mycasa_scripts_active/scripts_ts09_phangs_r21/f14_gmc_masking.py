@@ -57,16 +57,14 @@ def weighted_percentile(
 ### main
 #####################
 ### get data
-txtfile = glob.glob(dir_product + "ngc*_parameter_best.txt")
+txtfile = glob.glob(dir_product + "ngc*_parameter_matched_res.txt")
 #
-data_all = []
-data_norm_all = []
-data_nuc_all = []
-data_nuc_norm_all = []
-data_out_all = []
-data_out_norm_all = []
+data_inmask_all = []
+data_inmask_norm_all = []
+data_outmask_all = []
+data_outmask_norm_all = []
 for i in range(len(txtfile)):
-    data = np.loadtxt(txtfile[i])[:,1]
+    data = np.loadtxt(txtfile[i])[:,9]
     gmcmask = np.loadtxt(txtfile[i])[:,16]
     #
     data = data[data>0]
@@ -75,12 +73,31 @@ for i in range(len(txtfile)):
     data_inmask  = data[gmcmask==1]
     data_outmask = data[gmcmask==0]
     #
-    data_norm = data / np.median(data)
-    data_all.extend(data)
-    data_norm_all.extend(data_norm)
+    data_inmask_norm = data_inmask / np.median(data_inmask)
+    data_inmask_all.extend(data_inmask)
+    data_inmask_norm_all.extend(data_inmask_norm)
     #
+    data_outmask_norm = data_outmask / np.median(data_outmask)
+    data_outmask_all.extend(data_outmask)
+    data_outmask_norm_all.extend(data_outmask_norm)
 #
-data_all = np.array(data_all)
-data_norm_all = np.array(data_norm_all)
+data_inmask_all = np.array(data_inmask_all)
+data_inmask_norm_all = np.array(data_inmask_norm_all)
+#
+data_outmask_all = np.array(data_outmask_all)
+data_outmask_norm_all = np.array(data_outmask_norm_all)
+
+
+### histogram and stats
+## in
+#
+histo_inmask_all = np.histogram(data_inmask_all, bins=nbins, range=(xlim), weights=None)
+x_in, y_in = np.delete(histo_inmask_all[1],-1),histo_inmask_all[0]
+y_in = y_in / float(sum(y_in))
+#
+histo_inmask_all = np.histogram(data_inmask_all, bins=nbins, range=(xlim), weights=None)
+x_in, y_in = np.delete(histo_inmask_all[1],-1),histo_inmask_all[0]
+y_in = y_in / float(sum(y_in))
+
 
 
