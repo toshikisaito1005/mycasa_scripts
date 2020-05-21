@@ -100,7 +100,6 @@ data_outmask_norm_all = np.array(data_outmask_norm_all)
 #
 histo_all = np.histogram(data_all, bins=nbins, range=(xlim), weights=None)
 x_all, y_all = np.delete(histo_all[1],-1),histo_all[0]
-y_all = y_all / float(sum(y_all))
 ## in
 #
 histo_inmask_all = np.histogram(data_inmask_all, bins=nbins, range=(xlim), weights=None)
@@ -148,43 +147,30 @@ plt.rcParams["font.size"] = 14
 #plt.rcParams["legend.fontsize"] = 11
 
 # ax1
-ylim = [0.0001, y_in.max()*1.2]
+ylim = [0.0001, np.r_[y_in, y_out].max()*1.4]
 ax1.step(x_in, y_in, "red", lw=1, alpha=1.0, where="mid")
-ax1.bar(x_in, y_in, lw=0, color="red", alpha=0.2, width=x_in[1]-x_in[0], align="center")
-ax1.plot(p50_in, ylim[1]/1.2*1.05, "o", markeredgewidth=0, c="red", markersize=7, zorder=1)
-ax1.plot([p16_in, p84_in], [ylim[1]/1.2*1.05, ylim[1]/1.2*1.05], "-", c="red", lw=2, zorder=0)
+ax1.bar(x_in, y_in, lw=0, color="red", alpha=0.2, width=x_in[1]-x_in[0], align="center", label="")
+ax1.plot(p50_in, ylim[1]*0.95, "o", markeredgewidth=0, c="red", markersize=7, zorder=1)
+ax1.plot([p16_in, p84_in], [ylim[1]*0.95, ylim[1]*0.95], "-", c="red", lw=2, zorder=0)
 #
-ax1.text(p16_in, ylim[1]/1.2*1.1, str(np.round(p16_in,2)), fontsize=13, ha="right")
-ax1.text(p50_in, ylim[1]/1.2*1.1, str(np.round(p50_in,2)), fontsize=13, ha="center")
-ax1.text(p84_in, ylim[1]/1.2*1.1, str(np.round(p84_in,2)), fontsize=13, ha="left")
+#ax1.text(p16_in, ylim[1]/1.2*1.1, str(np.round(p16_in,2)), fontsize=13, ha="right")
+#ax1.text(p50_in, ylim[1]/1.2*1.1, str(np.round(p50_in,2)), fontsize=13, ha="center")
+#ax1.text(p84_in, ylim[1]/1.2*1.1, str(np.round(p84_in,2)), fontsize=13, ha="left")
 #
 ax1.step(x_out, y_out, "blue", lw=1, alpha=1.0, where="mid")
 ax1.bar(x_out, y_out, lw=0, color="blue", alpha=0.2, width=x_out[1]-x_out[0], align="center")
-ax1.plot(p50_out, ylim[1]/1.2*1.05, "o", markeredgewidth=0, c="blue", markersize=7, zorder=1)
-ax1.plot([p16_out, p84_out], [ylim[1]/1.2*1.05, ylim[1]/1.2*1.05], "-", c="blue", lw=2, zorder=0)
+ax1.plot(p50_out, ylim[1]*0.85, "o", markeredgewidth=0, c="blue", markersize=7, zorder=1)
+ax1.plot([p16_out, p84_out], [ylim[1]*0.85, ylim[1]*0.85], "-", c="blue", lw=2, zorder=0)
 #
-ax1.text(p16_out, ylim[1]/1.2*1.1, str(np.round(p16_out,2)), fontsize=13, ha="right")
-ax1.text(p50_out, ylim[1]/1.2*1.1, str(np.round(p50_out,2)), fontsize=13, ha="center")
-ax1.text(p84_out, ylim[1]/1.2*1.1, str(np.round(p84_out,2)), fontsize=13, ha="left")
+#ax1.text(p16_out, ylim[1]/1.2*1.1, str(np.round(p16_out,2)), fontsize=13, ha="right")
+#ax1.text(p50_out, ylim[1]/1.2*1.1, str(np.round(p50_out,2)), fontsize=13, ha="center")
+#ax1.text(p84_out, ylim[1]/1.2*1.1, str(np.round(p84_out,2)), fontsize=13, ha="left")
 #
 ax1.set_xlabel("$R_{21}$")
 ax1.set_ylim(ylim)
-ax1.set_title("Pixels inside Cloud Mask")
+ax1.set_title("Cloud Masked Histogram")
 
 # ax2
-ylim = [0.0001, y_out.max()*1.2]
-ax2.step(x_out, y_out, "blue", lw=1, alpha=1.0, where="mid")
-ax2.bar(x_out, y_out, lw=0, color="blue", alpha=0.2, width=x_out[1]-x_out[0], align="center")
-ax2.plot(p50_out, ylim[1]/1.2*1.05, "o", markeredgewidth=0, c="blue", markersize=7, zorder=1)
-ax2.plot([p16_out, p84_out], [ylim[1]/1.2*1.05, ylim[1]/1.2*1.05], "-", c="blue", lw=2, zorder=0)
-#
-ax2.text(p16_out, ylim[1]/1.2*1.1, str(np.round(p16_out,2)), fontsize=13, ha="right")
-ax2.text(p50_out, ylim[1]/1.2*1.1, str(np.round(p50_out,2)), fontsize=13, ha="center")
-ax2.text(p84_out, ylim[1]/1.2*1.1, str(np.round(p84_out,2)), fontsize=13, ha="left")
-#
-ax2.set_xlabel("$R_{21}$")
-ax2.set_ylim(ylim)
-ax2.set_title("Pixels outside Cloud Mask")
 
 
 # save
