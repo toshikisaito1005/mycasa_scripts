@@ -60,6 +60,7 @@ def weighted_percentile(
 ### get data
 txtfile = glob.glob(dir_product + "ngc*_parameter_matched_res.txt")
 #
+data_all = []
 data_inmask_all = []
 data_inmask_norm_all = []
 data_outmask_all = []
@@ -84,6 +85,8 @@ for i in range(len(txtfile)):
     data_outmask_norm = data_outmask / np.median(data_outmask)
     data_outmask_all.extend(data_outmask)
     data_outmask_norm_all.extend(data_outmask_norm)
+    #
+    data_all.extend(data)
 #
 data_inmask_all = np.array(data_inmask_all)
 data_inmask_norm_all = np.array(data_inmask_norm_all)
@@ -93,25 +96,22 @@ data_outmask_norm_all = np.array(data_outmask_norm_all)
 
 
 ### histogram and stats
+## all
+#
+histo_all = np.histogram(data_all, bins=nbins, range=(xlim), weights=None)
+x_all, y_all = np.delete(histo_all[1],-1),histo_all[0]
+y_all = y_all / float(sum(y_all))
 ## in
 #
 histo_inmask_all = np.histogram(data_inmask_all, bins=nbins, range=(xlim), weights=None)
 x_in, y_in = np.delete(histo_inmask_all[1],-1),histo_inmask_all[0]
-y_in = y_in / float(sum(y_in))
-#
-histo_inmask_norm = np.histogram(data_inmask_norm_all, bins=nbins, range=(xlim), weights=None)
-x_in_norm, y_in_norm = np.delete(histo_inmask_norm[1],-1),histo_inmask_norm[0]
-y_in_norm = y_in_norm / float(sum(y_in_norm))
+y_in = y_in / float(sum(y_all))
 #
 ## out
 #
 histo_outmask_all = np.histogram(data_outmask_all, bins=nbins, range=(xlim), weights=None)
 x_out, y_out = np.delete(histo_outmask_all[1],-1),histo_outmask_all[0]
-y_out = y_out / float(sum(y_out))
-#
-histo_outmask_norm = np.histogram(data_outmask_norm_all, bins=nbins, range=(xlim), weights=None)
-x_out_norm, y_out_norm = np.delete(histo_outmask_norm[1],-1),histo_outmask_norm[0]
-y_out_norm = y_out_norm / float(sum(y_out_norm))
+y_out = y_out / float(sum(y_all))
 
 
 ###
@@ -157,6 +157,15 @@ ax1.plot([p16_in, p84_in], [ylim[1]/1.2*1.05, ylim[1]/1.2*1.05], "-", c="red", l
 ax1.text(p16_in, ylim[1]/1.2*1.1, str(np.round(p16_in,2)), fontsize=13, ha="right")
 ax1.text(p50_in, ylim[1]/1.2*1.1, str(np.round(p50_in,2)), fontsize=13, ha="center")
 ax1.text(p84_in, ylim[1]/1.2*1.1, str(np.round(p84_in,2)), fontsize=13, ha="left")
+#
+ax1.step(x_out, y_out, "blue", lw=1, alpha=1.0, where="mid")
+ax1.bar(x_out, y_out, lw=0, color="blue", alpha=0.2, width=x_out[1]-x_out[0], align="center")
+ax1.plot(p50_out, ylim[1]/1.2*1.05, "o", markeredgewidth=0, c="blue", markersize=7, zorder=1)
+ax1.plot([p16_out, p84_out], [ylim[1]/1.2*1.05, ylim[1]/1.2*1.05], "-", c="blue", lw=2, zorder=0)
+#
+ax1.text(p16_out, ylim[1]/1.2*1.1, str(np.round(p16_out,2)), fontsize=13, ha="right")
+ax1.text(p50_out, ylim[1]/1.2*1.1, str(np.round(p50_out,2)), fontsize=13, ha="center")
+ax1.text(p84_out, ylim[1]/1.2*1.1, str(np.round(p84_out,2)), fontsize=13, ha="left")
 #
 ax1.set_xlabel("$R_{21}$")
 ax1.set_ylim(ylim)
