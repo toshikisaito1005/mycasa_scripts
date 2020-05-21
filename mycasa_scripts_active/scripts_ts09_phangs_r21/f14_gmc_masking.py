@@ -19,6 +19,7 @@ plt.ioff()
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 nbins = 75
 xlim = [0,1.5]
+def_nucleus = [50*44./1.0,50*52./1.3,30*103/1.4]
 
 
 #####################
@@ -64,11 +65,14 @@ data_inmask_norm_all = []
 data_outmask_all = []
 data_outmask_norm_all = []
 for i in range(len(txtfile)):
+    dist = np.loadtxt(txtfile[i])[:,0]
     data = np.loadtxt(txtfile[i])[:,9]
     gmcmask = np.loadtxt(txtfile[i])[:,16]
     #
-    data = data[data>0]
-    gmcmask = gmcmask[data>0]
+    cut_all = np.where((data>0) & (dist>def_nucleus[i]))
+    dist = dist[cut_all]
+    data = data[cut_all]
+    gmcmask = gmcmask[cut_all]
     #
     data_inmask  = data[gmcmask==1]
     data_outmask = data[gmcmask==0]
