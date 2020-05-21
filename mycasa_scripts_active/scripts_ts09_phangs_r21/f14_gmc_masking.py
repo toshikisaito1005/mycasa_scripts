@@ -18,7 +18,7 @@ plt.ioff()
 #####################
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 nbins = 75
-xlim = [0,2.5]
+xlim = [0,2.0]
 
 
 #####################
@@ -133,22 +133,18 @@ p84_out_norm = weighted_percentile(data_outmask_norm_all, 0.84)
 
 
 ### plot
-figure = plt.figure(figsize=(10,4))
+figure = plt.figure(figsize=(10,3))
 gs = gridspec.GridSpec(nrows=8, ncols=17)
-plt.subplots_adjust(bottom=0.15, left=0.10, right=0.98, top=0.88)
-ax1 = plt.subplot(gs[0:4,0:8])
-ax2 = plt.subplot(gs[0:4,9:17])
-ax3 = plt.subplot(gs[4:8,0:8])
-ax4 = plt.subplot(gs[4:8,9:17])
+plt.subplots_adjust(bottom=0.20, left=0.10, right=0.98, top=0.88)
+ax1 = plt.subplot(gs[0:8,0:8])
+ax2 = plt.subplot(gs[0:8,9:17])
 ax1.grid(axis="both")
 ax2.grid(axis="both")
-ax3.grid(axis="both")
-ax4.grid(axis="both")
 plt.rcParams["font.size"] = 16
 #plt.rcParams["legend.fontsize"] = 11
 
 # ax1
-ylim = [0.0001, y_in.max()*1.4]
+ylim = [0.0001, y_in.max()*1.2]
 ax1.step(x_in, y_in, "red", lw=1, alpha=1.0, where="mid")
 ax1.bar(x_in, y_in, lw=0, color="red", alpha=0.2, width=x_in[1]-x_in[0], align="center")
 ax1.plot(p50_in, ylim[1]/1.2*1.05, "o", markeredgewidth=0, c="red", markersize=7, zorder=1)
@@ -162,46 +158,18 @@ ax1.set_xlabel("$R_{21}$")
 ax1.set_ylim(ylim)
 
 # ax2
-ylim = [0.0001, y_in_norm.max()*1.4]
-ax2.step(x_in_norm, y_in_norm, "red", lw=1, alpha=1.0, where="mid")
-ax2.bar(x_in_norm, y_in_norm, lw=0, color="red", alpha=0.2, width=x_in_norm[1]-x_in_norm[0], align="center")
-ax2.plot(p50_in_norm, ylim[1]/1.2*1.05, "o", markeredgewidth=0, c="red", markersize=7, zorder=1)
-ax2.plot([p16_in_norm, p84_in_norm], [ylim[1]/1.2*1.05, ylim[1]/1.2*1.05], "-", c="red", lw=2, zorder=0)
+ylim = [0.0001, y_out.max()*1.2]
+ax2.step(x_out, y_out, "blue", lw=1, alpha=1.0, where="mid")
+ax2.bar(x_out, y_out, lw=0, color="blue", alpha=0.2, width=x_out[1]-x_out[0], align="center")
+ax2.plot(p50_out, ylim[1]/1.2*1.05, "o", markeredgewidth=0, c="blue", markersize=7, zorder=1)
+ax2.plot([p16_out, p84_out], [ylim[1]/1.2*1.05, ylim[1]/1.2*1.05], "-", c="blue", lw=2, zorder=0)
 #
-ax2.text(p16_in_norm, ylim[1]/1.2*1.1, str(np.round(p16_in_norm,2)), fontsize=13, ha="right")
-ax2.text(p50_in_norm, ylim[1]/1.2*1.1, str(np.round(p50_in_norm,2))+"0", fontsize=13, ha="center")
-ax2.text(p84_in_norm, ylim[1]/1.2*1.1, str(np.round(p84_in_norm,2)), fontsize=13, ha="left")
+ax2.text(p16_out, ylim[1]/1.2*1.1, str(np.round(p16_out,2)), fontsize=13, ha="right")
+ax2.text(p50_out, ylim[1]/1.2*1.1, str(np.round(p50_out,2)), fontsize=13, ha="center")
+ax2.text(p84_out, ylim[1]/1.2*1.1, str(np.round(p84_out,2)), fontsize=13, ha="left")
 #
-ax2.set_xlabel("$R_{21}$/Median($R_{21}$)")
+ax2.set_xlabel("$R_{21}$")
 ax2.set_ylim(ylim)
-
-# ax3
-ylim = [0.0001, y_out.max()*1.4]
-ax3.step(x_out, y_out, "blue", lw=1, alpha=1.0, where="mid")
-ax3.bar(x_out, y_out, lw=0, color="blue", alpha=0.2, width=x_out[1]-x_out[0], align="center")
-ax3.plot(p50_out, ylim[1]/1.2*1.05, "o", markeredgewidth=0, c="blue", markersize=7, zorder=1)
-ax3.plot([p16_out, p84_out], [ylim[1]/1.2*1.05, ylim[1]/1.2*1.05], "-", c="blue", lw=2, zorder=0)
-#
-ax3.text(p16_out, ylim[1]/1.2*1.1, str(np.round(p16_out,2)), fontsize=13, ha="right")
-ax3.text(p50_out, ylim[1]/1.2*1.1, str(np.round(p50_out,2)), fontsize=13, ha="center")
-ax3.text(p84_out, ylim[1]/1.2*1.1, str(np.round(p84_out,2)), fontsize=13, ha="left")
-#
-ax3.set_xlabel("$R_{21}$")
-ax3.set_ylim(ylim)
-
-# ax4
-ylim = [0.0001, y_out_norm.max()*1.4]
-ax4.step(x_out_norm, y_out_norm, "blue", lw=1, alpha=1.0, where="mid")
-ax4.bar(x_out_norm, y_out_norm, lw=0, color="blue", alpha=0.2, width=x_out_norm[1]-x_out_norm[0], align="center")
-ax4.plot(p50_out_norm, ylim[1]/1.2*1.05, "o", markeredgewidth=0, c="blue", markersize=7, zorder=1)
-ax4.plot([p16_out_norm, p84_out_norm], [ylim[1]/1.2*1.05, ylim[1]/1.2*1.05], "-", c="blue", lw=2, zorder=0)
-#
-ax4.text(p16_out_norm, ylim[1]/1.2*1.1, str(np.round(p16_out_norm,2)), fontsize=13, ha="right")
-ax4.text(p50_out_norm, ylim[1]/1.2*1.1, str(np.round(p50_out_norm,2))+"0", fontsize=13, ha="center")
-ax4.text(p84_out_norm, ylim[1]/1.2*1.1, str(np.round(p84_out_norm,2)), fontsize=13, ha="left")
-#
-ax4.set_xlabel("$R_{21}$/Median($R_{21}$)")
-ax4.set_ylim(ylim)
 
 
 plt.savefig(dir_product+"histo_mask_gmc.png",dpi=200)
