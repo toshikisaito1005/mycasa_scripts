@@ -165,8 +165,11 @@ ax1.legend()
 ax1.set_title("Histogram with Cloud Mask")
 
 # ax2
+fraction = y_in/(y_in+y_out)
+fraction[np.isnan(fraction)] = 0
+
 ax2.plot(x_in, y_in/(y_in+y_out), color="black")
-ax2.fill_between(x_in, 0, y_in/(y_in+y_out))
+ax2.fill_between(x_in, fraction)
 ax2.set_ylim([0,1])
 
 # save
