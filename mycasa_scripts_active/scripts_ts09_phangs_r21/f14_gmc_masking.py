@@ -17,7 +17,7 @@ plt.ioff()
 ### parameters
 #####################
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
-nbins = 75
+nbins = 50
 xlim = [0,1.5]
 def_nucleus = [50*44./1.0,50*52./1.3,30*103/1.4]
 
@@ -142,7 +142,7 @@ plt.subplots_adjust(bottom=0.20, left=0.10, right=0.98, top=0.88)
 ax1 = plt.subplot(gs[0:8,0:8])
 ax2 = plt.subplot(gs[0:8,9:17])
 ax1.grid(axis="x")
-ax2.grid(axis="y")
+ax2.grid(axis="both")
 plt.rcParams["font.size"] = 14
 plt.rcParams["legend.fontsize"] = 12
 
@@ -169,11 +169,14 @@ fraction = y_in/(y_in+y_out)
 x_in = x_in[~np.isnan(fraction)]
 fraction = fraction[~np.isnan(fraction)]
 
-ax2.step(x_in, fraction, color="black", lw=1, where="mid")
+ax2.plot(x_in, fraction, color="black", lw=1)
 ax2.fill_between(x_in, fraction, color="red", alpha=0.2)
 ax2.fill_between(x_in, fraction, 1, color="blue", alpha=0.2)
+#
+ax2.set_xlabel("$R_{21}$")
 ax2.set_xlim(xlim)
-ax2.set_ylim([0,1])
+ax2.set_ylim([0.0001,1])
+ax2.set_title("Fraction")
 
 # save
 plt.savefig(dir_product+"histo_mask_gmc.png",dpi=200)
