@@ -141,33 +141,27 @@ gs = gridspec.GridSpec(nrows=8, ncols=17)
 plt.subplots_adjust(bottom=0.20, left=0.10, right=0.98, top=0.88)
 ax1 = plt.subplot(gs[0:8,0:8])
 ax2 = plt.subplot(gs[0:8,9:17])
-ax1.grid(axis="both")
-ax2.grid(axis="both")
+ax1.grid(axis="x")
+ax2.grid(axis="y")
 plt.rcParams["font.size"] = 14
-#plt.rcParams["legend.fontsize"] = 11
+plt.rcParams["legend.fontsize"] = 12
 
 # ax1
 ylim = [0.0001, np.r_[y_in, y_out].max()*1.4]
 ax1.step(x_in, y_in, "red", lw=1, alpha=1.0, where="mid")
-ax1.bar(x_in, y_in, lw=0, color="red", alpha=0.2, width=x_in[1]-x_in[0], align="center", label="")
+ax1.bar(x_in, y_in, lw=0, color="red", alpha=0.2, width=x_in[1]-x_in[0], align="center", label="inside mask")
 ax1.plot(p50_in, ylim[1]*0.95, "o", markeredgewidth=0, c="red", markersize=7, zorder=1)
 ax1.plot([p16_in, p84_in], [ylim[1]*0.95, ylim[1]*0.95], "-", c="red", lw=2, zorder=0)
 #
-#ax1.text(p16_in, ylim[1]/1.2*1.1, str(np.round(p16_in,2)), fontsize=13, ha="right")
-#ax1.text(p50_in, ylim[1]/1.2*1.1, str(np.round(p50_in,2)), fontsize=13, ha="center")
-#ax1.text(p84_in, ylim[1]/1.2*1.1, str(np.round(p84_in,2)), fontsize=13, ha="left")
-#
 ax1.step(x_out, y_out, "blue", lw=1, alpha=1.0, where="mid")
-ax1.bar(x_out, y_out, lw=0, color="blue", alpha=0.2, width=x_out[1]-x_out[0], align="center")
-ax1.plot(p50_out, ylim[1]*0.85, "o", markeredgewidth=0, c="blue", markersize=7, zorder=1)
-ax1.plot([p16_out, p84_out], [ylim[1]*0.85, ylim[1]*0.85], "-", c="blue", lw=2, zorder=0)
-#
-#ax1.text(p16_out, ylim[1]/1.2*1.1, str(np.round(p16_out,2)), fontsize=13, ha="right")
-#ax1.text(p50_out, ylim[1]/1.2*1.1, str(np.round(p50_out,2)), fontsize=13, ha="center")
-#ax1.text(p84_out, ylim[1]/1.2*1.1, str(np.round(p84_out,2)), fontsize=13, ha="left")
+ax1.bar(x_out, y_out, lw=0, color="blue", alpha=0.2, width=x_out[1]-x_out[0], align="center", label="outside mask")
+ax1.plot(p50_out, ylim[1]*0.88, "o", markeredgewidth=0, c="blue", markersize=7, zorder=1)
+ax1.plot([p16_out, p84_out], [ylim[1]*0.88, ylim[1]*0.88], "-", c="blue", lw=2, zorder=0)
 #
 ax1.set_xlabel("$R_{21}$")
+ax1.set_xlim(xlim)
 ax1.set_ylim(ylim)
+ax1.legend()
 ax1.set_title("Cloud Masked Histogram")
 
 # ax2
