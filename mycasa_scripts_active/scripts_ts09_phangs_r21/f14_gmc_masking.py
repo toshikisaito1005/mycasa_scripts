@@ -70,7 +70,7 @@ for i in range(len(txtfile)):
     data = np.loadtxt(txtfile[i])[:,9]
     gmcmask = np.loadtxt(txtfile[i])[:,16]
     #
-    cut_all = np.where((data>0) & (dist>def_nucleus[i]))
+    cut_all = np.where(data>0) # np.where((data>0) & (dist>def_nucleus[i]))
     dist = dist[cut_all]
     data = data[cut_all]
     gmcmask = gmcmask[cut_all]
@@ -104,13 +104,13 @@ x_all, y_all = np.delete(histo_all[1],-1),histo_all[0]
 #
 histo_inmask_all = np.histogram(data_inmask_all, bins=nbins, range=(xlim), weights=None)
 x_in, y_in = np.delete(histo_inmask_all[1],-1),histo_inmask_all[0]
-y_in = y_in / float(sum(y_all))
+y_in = y_in / float(sum(y_in))
 #
 ## out
 #
 histo_outmask_all = np.histogram(data_outmask_all, bins=nbins, range=(xlim), weights=None)
 x_out, y_out = np.delete(histo_outmask_all[1],-1),histo_outmask_all[0]
-y_out = y_out / float(sum(y_all))
+y_out = y_out / float(sum(y_out))
 
 
 ###
@@ -170,12 +170,13 @@ x_in = x_in[~np.isnan(fraction)]
 fraction = fraction[~np.isnan(fraction)]
 
 ax2.plot(x_in, fraction, color="black", lw=1)
-ax2.fill_between(x_in, fraction, color="red", alpha=0.2)
-ax2.fill_between(x_in, fraction, 1, color="blue", alpha=0.2)
+ax2.fill_between(x_in, fraction, color="red", alpha=0.2, label="inside mask")
+ax2.fill_between(x_in, fraction, 1, color="blue", alpha=0.2, label="outside mask")
 #
 ax2.set_xlabel("$R_{21}$")
 ax2.set_xlim(xlim)
 ax2.set_ylim([0.0001,1])
+ax2.legend()
 ax2.set_title("Fraction")
 
 # save
