@@ -162,10 +162,12 @@ ax1.set_xlabel("$R_{21}$")
 ax1.set_xlim(xlim)
 ax1.set_ylim(ylim)
 ax1.legend()
-ax1.set_title("Cloud Masked Histogram")
+ax1.set_title("Histogram with Cloud Mask")
 
 # ax2
-
+ax2.plot(x_in, y_in/(y_in+y_out), color="black")
+ax2.fill_between(x_in, 0, y_in/(y_in+y_out))
+ax2.set_ylim([0,1])
 
 # save
 plt.savefig(dir_product+"histo_mask_gmc.png",dpi=200)
