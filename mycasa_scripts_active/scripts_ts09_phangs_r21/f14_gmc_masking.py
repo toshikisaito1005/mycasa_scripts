@@ -18,7 +18,7 @@ plt.ioff()
 #####################
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 nbins = 75
-xlim = [0,2.0]
+xlim = [0,1.5]
 
 
 #####################
@@ -140,7 +140,7 @@ ax1 = plt.subplot(gs[0:8,0:8])
 ax2 = plt.subplot(gs[0:8,9:17])
 ax1.grid(axis="both")
 ax2.grid(axis="both")
-plt.rcParams["font.size"] = 16
+plt.rcParams["font.size"] = 14
 #plt.rcParams["legend.fontsize"] = 11
 
 # ax1
@@ -156,6 +156,7 @@ ax1.text(p84_in, ylim[1]/1.2*1.1, str(np.round(p84_in,2)), fontsize=13, ha="left
 #
 ax1.set_xlabel("$R_{21}$")
 ax1.set_ylim(ylim)
+ax1.set_title("Pixels inside Cloud Mask")
 
 # ax2
 ylim = [0.0001, y_out.max()*1.2]
@@ -170,8 +171,10 @@ ax2.text(p84_out, ylim[1]/1.2*1.1, str(np.round(p84_out,2)), fontsize=13, ha="le
 #
 ax2.set_xlabel("$R_{21}$")
 ax2.set_ylim(ylim)
+ax2.set_title("Pixels outside Cloud Mask")
 
 
+# save
 plt.savefig(dir_product+"histo_mask_gmc.png",dpi=200)
 
 os.system("rm -rf *.last")
