@@ -103,14 +103,16 @@ x_all, y_all = np.delete(histo_all[1],-1),histo_all[0]
 ## in
 #
 histo_inmask_all = np.histogram(data_inmask_all, bins=nbins, range=(xlim), weights=None)
-x_in, y_in = np.delete(histo_inmask_all[1],-1),histo_inmask_all[0]
-y_in = y_in / float(sum(y_in))
+x_ino, y_ino = np.delete(histo_inmask_all[1],-1),histo_inmask_all[0]
+x_in = x_ino
+y_in = y_ino / float(sum(y_ino))
 #
 ## out
 #
 histo_outmask_all = np.histogram(data_outmask_all, bins=nbins, range=(xlim), weights=None)
-x_out, y_out = np.delete(histo_outmask_all[1],-1),histo_outmask_all[0]
-y_out = y_out / float(sum(y_out))
+x_outo, y_outo = np.delete(histo_outmask_all[1],-1),histo_outmask_all[0]
+x_out = x_outo
+y_out = y_outo / float(sum(y_outo))
 
 
 ###
@@ -165,7 +167,7 @@ ax1.legend()
 ax1.set_title("Histogram with Cloud Mask")
 
 # ax2
-fraction = y_in/(y_in+y_out)
+fraction = y_ino.astype(float)/(y_ino+y_outo)
 x_in = x_in[~np.isnan(fraction)]
 fraction = fraction[~np.isnan(fraction)]
 
