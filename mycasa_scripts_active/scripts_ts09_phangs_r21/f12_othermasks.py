@@ -7,6 +7,8 @@ import mycasaimaging_tools as myim
 import matplotlib.pyplot as plt
 plt.ioff()
 
+reload(myim)
+
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 data_image = glob.glob(dir_data + "*/*_04p0*moment0")
 data_image.extend(glob.glob(dir_data + "*/*_04p0*moment8"))
@@ -71,7 +73,8 @@ myim.fits2eps(dir_data = dir_data,
               contour = contour,
               xlim = xlim,
               ylim = ylim,
-              clim = clim)
+              clim = clim,
+              showbeam = False)
 
 
 ### ngc4321
@@ -110,7 +113,8 @@ myim.fits2eps(dir_data = dir_data,
               contour = contour,
               xlim = xlim,
               ylim = ylim,
-              clim = clim)
+              clim = clim,
+              showbeam = False)
 
 
 ### ngc3627
@@ -148,6 +152,7 @@ myim.fits2eps(dir_data = dir_data,
               contour = contour,
               xlim = xlim,
               ylim = ylim,
-              clim = clim)
+              clim = clim,
+              showbeam = False)
 
 os.system("rm -rf *.last")

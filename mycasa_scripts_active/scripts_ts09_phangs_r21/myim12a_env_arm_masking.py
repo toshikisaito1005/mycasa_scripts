@@ -61,7 +61,7 @@ for i in range(len(spiral_fits)):
   importfits(fitsimage = this_output,
              imagename = this_output.replace(".fits",".image"),
              defaultaxes = True,
-             defaultaxesvalues = ["RA","Dec","Frequency","Stokes"])
+             defaultaxesvalues = ["RA","Dec","1GHz","Stokes"])
 
   os.system("rm -rf " + this_output)
   exportfits(imagename = this_output.replace(".fits",".image"),

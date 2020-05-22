@@ -170,7 +170,7 @@ def fits2eps(dir_data, imagename_color, imagename_contour, ra_center,
         dec_center, title, colorbar_label, output, colorscale,
         colorlog = False, value = None, colorbar = False,
         contour = [0.1], color_contour = "k", color_beam = "b",
-        xlim = ([-30, 30]), ylim = ([30, -30]), clim = None, nucleus=None):
+        xlim = ([-30, 30]), ylim = ([30, -30]), clim = None, nucleus=None, showbeam=True):
     """
     test
     """
@@ -246,17 +246,18 @@ def fits2eps(dir_data, imagename_color, imagename_contour, ra_center,
     plt.contour(contour_data, levels = contour2,
                 extent = [xmin_cnt, xmax_cnt, ymax_cnt, ymin_cnt],
                 colors = color_contour)
-    bmaj = imhead(image_file, "list")["beammajor"]["value"]
-    bmin = imhead(image_file, "list")["beamminor"]["value"]
-    bpa = imhead(image_file, "list")["beampa"]["value"]
-    ax = plt.axes()
-    e = patches.Ellipse(xy = (min(xlim) * 0.8,
-                              max(ylim) * 0.8),
-                        width = bmin,
-                        height = bmaj,
-                        angle = bpa * -1,
-                        fc = color_beam)
-    ax.add_patch(e)
+    if showbeam==True:
+        bmaj = imhead(image_file, "list")["beammajor"]["value"]
+        bmin = imhead(image_file, "list")["beamminor"]["value"]
+        bpa = imhead(image_file, "list")["beampa"]["value"]
+        ax = plt.axes()
+        e = patches.Ellipse(xy = (min(xlim) * 0.8,
+                                  max(ylim) * 0.8),
+                            width = bmin,
+                            height = bmaj,
+                            angle = bpa * -1,
+                            fc = color_beam)
+        ax.add_patch(e)
     if nucleus!=None:
         e2 = patches.Ellipse(xy = (0, 0),
                              width = nucleus,
