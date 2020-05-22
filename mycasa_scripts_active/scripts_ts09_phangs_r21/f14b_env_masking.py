@@ -61,6 +61,10 @@ txtfile = glob.glob(dir_product + "ngc*_parameter_matched_res.txt")
 #
 data_all = []
 data_mask0_all = []
+data_mask1_all = []
+data_mask2_all = []
+data_mask3_all = []
+data_mask4_all = []
 for i in range(len(txtfile)):
     dist = np.loadtxt(txtfile[i])[:,0]
     data = np.loadtxt(txtfile[i])[:,9]
@@ -76,8 +80,6 @@ for i in range(len(txtfile)):
     data_mask2 = data[gmcmask==2]
     data_mask3 = data[gmcmask==3]
     data_mask4 = data[gmcmask==4]
-    #
-    data_inmask_all.extend(data_inmask)
     #
     data_all.extend(data)
     data_mask0_all.extend(data_mask0)
@@ -103,36 +105,36 @@ x_all, y_all = np.delete(histo_all[1],-1),histo_all[0]
 #
 histo_mask0_all = np.histogram(data_mask0_all, bins=nbins, range=(xlim), weights=None)
 x_0o, y_0o = np.delete(histo_mask0_all[1],-1),histo_mask0_all[0]
-x_0 = x_0
-y_0 = y_0 / float(sum(y_all))
+x_0 = x_0o
+y_0 = y_0o / float(sum(y_0o))
 #
 ## 1
 #
 histo_mask1_all = np.histogram(data_mask1_all, bins=nbins, range=(xlim), weights=None)
 x_1o, y_1o = np.delete(histo_mask1_all[1],-1),histo_mask1_all[0]
-x_1 = x_1
-y_1 = y_1 / float(sum(y_all))
+x_1 = x_1o
+y_1 = y_1o / float(sum(y_1o))
 #
 ## 2
 #
 histo_mask2_all = np.histogram(data_mask2_all, bins=nbins, range=(xlim), weights=None)
 x_2o, y_2o = np.delete(histo_mask2_all[1],-1),histo_mask2_all[0]
-x_2 = x_2
-y_2 = y_2 / float(sum(y_all))
+x_2 = x_2o
+y_2 = y_2o / float(sum(y_2o))
 #
 ## 3
 #
 histo_mask3_all = np.histogram(data_mask3_all, bins=nbins, range=(xlim), weights=None)
 x_3o, y_3o = np.delete(histo_mask3_all[1],-1),histo_mask3_all[0]
-x_3 = x_3
-y_3 = y_3 / float(sum(y_all))
+x_3 = x_3o
+y_3 = y_3o / float(sum(y_3o))
 #
 ## 4
 #
 histo_mask4_all = np.histogram(data_mask4_all, bins=nbins, range=(xlim), weights=None)
 x_4o, y_4o = np.delete(histo_mask4_all[1],-1),histo_mask4_all[0]
-x_4 = x_4
-y_4 = y_4 / float(sum(y_all))
+x_4 = x_4o
+y_4 = y_4o / float(sum(y_4o))
 #
 
 ###
@@ -173,33 +175,33 @@ plt.rcParams["legend.fontsize"] = 9
 
 # ax1
 ylim = [0.0001, np.r_[y_0, y_0].max()*1.4]
-ax1.step(x_0, y_0, "red", lw=1, alpha=1.0, where="mid")
-ax1.bar(x_0, y_0, lw=0, color="red", alpha=0.2, width=x_0[1]-x_0[0], align="center", label="inside mask")
-ax1.plot(p50_0, ylim[1]*0.95, "o", markeredgewidth=0, c="red", markersize=7, zorder=1)
-ax1.plot([p16_0, p84_0], [ylim[1]*0.95, ylim[1]*0.95], "-", c="red", lw=2, zorder=0)
+ax1.step(x_0, y_0, color=cm.gnuplot(0/5.), lw=1, alpha=1.0, where="mid")
+ax1.bar(x_0, y_0, lw=0, color=cm.gnuplot(0/5.), alpha=0.2, width=x_0[1]-x_0[0], align="center", label="inter-arm")
+ax1.plot(p50_0, ylim[1]*0.95, "o", markeredgewidth=0, c=cm.gnuplot(0/5.), markersize=7, zorder=1)
+ax1.plot([p16_0, p84_0], [ylim[1]*0.95, ylim[1]*0.95], "-", c=cm.gnuplot(0/5.), lw=2, zorder=0)
 #
-ax1.step(x_1, y_1, "blue", lw=1, alpha=1.0, where="mid")
-ax1.bar(x_1, y_1, lw=0, color="blue", alpha=0.2, width=x_1[1]-x_1[0], align="center", label="outside mask")
-ax1.plot(p50_1, ylim[1]*0.88, "o", markeredgewidth=0, c="blue", markersize=7, zorder=1)
-ax1.plot([p16_1, p84_1], [ylim[1]*0.88, ylim[1]*0.88], "-", c="blue", lw=2, zorder=0)
+ax1.step(x_1, y_1, color=cm.gnuplot(1/5.), lw=1, alpha=1.0, where="mid")
+ax1.bar(x_1, y_1, lw=0, color=cm.gnuplot(1/5.), alpha=0.2, width=x_1[1]-x_1[0], align="center", label="arm")
+ax1.plot(p50_1, ylim[1]*0.88, "o", markeredgewidth=0, c=cm.gnuplot(1/5.), markersize=7, zorder=1)
+ax1.plot([p16_1, p84_1], [ylim[1]*0.88, ylim[1]*0.88], "-", c=cm.gnuplot(1/5.), lw=2, zorder=0)
 #
 ax1.set_xlabel("$R_{21}$")
-ax1.set_xlim([x_in.min(),x_in.max()])
+ax1.set_xlim([x_0.min(),x_0.max()])
 ax1.set_ylim(ylim)
 ax1.legend()
 ax1.set_title("Histogram with Environmental Mask")
 
 # ax2
-fraction = y_ino.astype(float)/(y_ino+y_outo)
-x_in = x_in[~np.isnan(fraction)]
+fraction = y_0.astype(float)/(y_0+y_1)
+x_0 = x_0[~np.isnan(fraction)]
 fraction = fraction[~np.isnan(fraction)]
 
-ax2.step(x_in, fraction, color="black", lw=1, where="mid")
-ax2.bar(x_in, fraction, color="red", alpha=0.2, width=x_in[1]-x_in[0], align="center", lw=0)
-ax2.bar(x_in, -1*(1-fraction), color="blue", alpha=0.2, width=x_in[1]-x_in[0], align="center", lw=0, bottom=1.0)
+ax2.step(x_0, fraction, color="black", lw=1, where="mid")
+ax2.bar(x_0, fraction, color="red", alpha=0.2, width=x_0[1]-x_0[0], align="center", lw=0)
+ax2.bar(x_0, -1*(1-fraction), color="blue", alpha=0.2, width=x_0[1]-x_0[0], align="center", lw=0, bottom=1.0)
 #
 ax2.set_xlabel("$R_{21}$")
-ax2.set_xlim([x_in.min(),x_in.max()])
+ax2.set_xlim([x_0.min(),x_0.max()])
 ax2.set_ylim([0.0001,1])
 ax2.legend()
 ax2.set_title("Fraction")
