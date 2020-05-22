@@ -11,19 +11,18 @@ from astropy.coordinates import SkyCoord
 #####################
 dir_fits = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/data_other/env_masks/"
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
-spiral_fits = ["NGC0628_mask_v5_sp_arms.image",    # >0
-				       "NGC3627_mask_large_barends.image", # 5
-				       "NGC4321_mask_v5_sp_arms.image"]    # >0
+spiral_fits = ["NGC0628_mask_v5_bulge.image",
+				       "NGC3627_mask_v5_bulge.image",
+				       "NGC4321_mask_v5_bulge.image"]
 mom0_fits = ["../../ngc0628_r21/r21_04p0.moment0",
 			 "../../ngc3627_r21/r21_08p0.moment0",
 			 "../../ngc4321_r21/r21_04p0.moment0"]
-output = ["../../ngc0628_r21/env_disk_04p0.mask.fits",
-		  "../../ngc3627_r21/env_disk_08p0.mask.fits",
-		  "../../ngc4321_r21/env_disk_04p0.mask.fits"]
+output = ["../../ngc0628_r21/env_bulge_04p0.mask.fits",
+		  "../../ngc3627_r21/env_bulge_08p0.mask.fits",
+		  "../../ngc4321_r21/env_bulge_04p0.mask.fits"]
 expr = ["iif(IM0>0,1,0)",
-        "iif(IM0=5,1,0)",
+        "iif(IM0>0,1,0)",
         "iif(IM0>0,1,0)"]
-# output = "ngc1365_cprops_mask_1p38.fits"
 
 
 #####################
@@ -34,7 +33,7 @@ for i in range(len(spiral_fits)):
   this_spiral_fits = dir_fits + spiral_fits[i]
   this_mom0_fits = dir_fits + mom0_fits[i]
   this_output = dir_fits + output[i]
-  convolution_scale = convolution_scale[i]
+  print("### processing " + this_spiral_fits)
   #
   os.system("rm -rf " + this_spiral_fits.replace(".image",".mask"))
   immath(imagename = this_spiral_fits,
