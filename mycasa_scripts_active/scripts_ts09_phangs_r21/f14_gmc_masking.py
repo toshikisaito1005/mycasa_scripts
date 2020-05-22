@@ -138,15 +138,15 @@ p84_out_norm = weighted_percentile(data_outmask_norm_all, 0.84)
 
 
 ### plot
-figure = plt.figure(figsize=(10,3))
+figure = plt.figure(figsize=(10,2))
 gs = gridspec.GridSpec(nrows=8, ncols=17)
-plt.subplots_adjust(bottom=0.20, left=0.10, right=0.98, top=0.88)
+plt.subplots_adjust(bottom=0.22, left=0.05, right=0.98, top=0.88)
 ax1 = plt.subplot(gs[0:8,0:8])
 ax2 = plt.subplot(gs[0:8,9:17])
 ax1.grid(axis="x")
 ax2.grid(axis="both")
-plt.rcParams["font.size"] = 14
-plt.rcParams["legend.fontsize"] = 12
+plt.rcParams["font.size"] = 12
+plt.rcParams["legend.fontsize"] = 10
 
 # ax1
 ylim = [0.0001, np.r_[y_in, y_out].max()*1.4]
@@ -161,7 +161,6 @@ ax1.plot(p50_out, ylim[1]*0.88, "o", markeredgewidth=0, c="blue", markersize=7, 
 ax1.plot([p16_out, p84_out], [ylim[1]*0.88, ylim[1]*0.88], "-", c="blue", lw=2, zorder=0)
 #
 ax1.set_xlabel("$R_{21}$")
-ax1.set_xlim(xlim)
 ax1.set_ylim(ylim)
 ax1.legend()
 ax1.set_title("Histogram with Cloud Mask")
@@ -171,12 +170,13 @@ fraction = y_ino.astype(float)/(y_ino+y_outo)
 x_in = x_in[~np.isnan(fraction)]
 fraction = fraction[~np.isnan(fraction)]
 
-ax2.plot(x_in, fraction, color="black", lw=1)
+ax2.step(x_in, fraction, color="black", lw=1, where="mid")
 ax2.fill_between(x_in, fraction, color="red", alpha=0.2, label="inside mask")
 ax2.fill_between(x_in, fraction, 1, color="blue", alpha=0.2, label="outside mask")
 #
 ax2.set_xlabel("$R_{21}$")
-ax2.set_xlim(xlim)
+ax1.set_xlim([x_in.min(),x_in.max()])
+ax2.set_xlim([x_in.min(),x_in.max()])
 ax2.set_ylim([0.0001,1])
 ax2.legend()
 ax2.set_title("Fraction")
