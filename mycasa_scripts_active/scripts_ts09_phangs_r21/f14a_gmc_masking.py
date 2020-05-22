@@ -144,8 +144,8 @@ ax1 = plt.subplot(gs[0:8,0:8])
 ax2 = plt.subplot(gs[0:8,9:17])
 ax1.grid(axis="x")
 ax2.grid(axis="both")
-plt.rcParams["font.size"] = 12
-plt.rcParams["legend.fontsize"] = 10
+plt.rcParams["font.size"] = 11
+plt.rcParams["legend.fontsize"] = 9
 
 # ax1
 ylim = [0.0001, np.r_[y_in, y_out].max()*1.4]
