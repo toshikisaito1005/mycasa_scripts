@@ -53,6 +53,7 @@ for i in range(len(gals)):
     image_r21mask = glob.glob(dir_r21 + "r21_"+beamp+".moment0.highlowmask")[0]
     image_gmcmask = glob.glob(dir_r21 + "cprops_"+beamp+".mask.fits")[0]
     image_envmask = glob.glob(dir_r21 + "env_all_"+beamp+".mask.fits")[0]
+    image_piemask = glob.glob(dir_r21 + "piechart_"+beamp+".mask.fits")[0]
 
 
     # import data
@@ -69,6 +70,7 @@ for i in range(len(gals)):
     data_r21mask = r21.import_data(imagename=image_r21mask,mode="data")
     data_gmcmask = r21.import_data(imagename=image_gmcmask,mode="data")
     data_envmask = r21.import_data(imagename=image_envmask,mode="data")
+    data_piemask = r21.import_data(imagename=image_piemask,mode="data")
 
     # masking
     cut_co10 = (data_co10 > 0)
