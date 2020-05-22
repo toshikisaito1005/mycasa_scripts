@@ -20,6 +20,9 @@ mom0_fits = ["../../ngc0628_r21/r21_04p0.moment0",
 output = ["../../ngc0628_r21/env_04p0.mask.fits",
 		  "../../ngc3627_r21/env_08p0.mask.fits",
 		  "../../ngc4321_r21/env_04p0.mask.fits"]
+expr = ["iif(IM0>0,1,0)",
+        "iif(IM0=5,1,0)",
+        "iif(IM0>0,1,0)"]
 # output = "ngc1365_cprops_mask_1p38.fits"
 snr = 5.0 # peak signal-to-noise ratio threshold to identify clouds
 scales = [44/1.0,52/1.3,103/1.4] # parsec / arcsec
@@ -34,13 +37,14 @@ convolution_scale = [np.sqrt((44/1.0*4.0)**2-120**2),
 					 np.sqrt((103/1.4*4.0)**2-120**2),
 					 ]
 
-i=2
+i=0
 
 
 #####################
 ### Main Procedure
 #####################
-spiral_fits = spiral_fits[i]
+expr = expr[i]
+spiral_fits = dir_fits + spiral_fits[i]
 mom0_fits = mom0_fits[i]
 output = dir_fits + output[i]
 image_ra_cnt = image_ra_cnt[i]
@@ -49,11 +53,20 @@ scale = scales[i]
 convolution_scale = convolution_scale[i]
 
 
+#
+os.system("rm -rf " + spiral_fits.replace(".image",".mask"))
+immath(imagename = spiral_fits,
+  expr = expr,
+  outfile = spiral_fits.replace(".image",".mask"))
+
+exportfits(imagename = spiral_fits.replace(".image",".mask"),
+  fitsimage = spiral_fits.replace(".image",".mask.fits"))
+
 done = glob.glob(dir_product)
 if not done:
     os.mkdir(dir_product)
 
-hdu_list = fits.open(dir_fits + catalog_fits, memmap=True)
+hdu_list = fits.open(spiral_fits.replace(".image",".mask.fits"), memmap=True)
 data = Table(hdu_list[1].data)
 
 gmc_ra_dgr = data["XCTR_DEG"]         # center ra position of the cloud in decimal degrees
