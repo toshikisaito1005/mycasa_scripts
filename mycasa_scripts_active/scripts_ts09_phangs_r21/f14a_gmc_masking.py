@@ -149,15 +149,15 @@ plt.rcParams["legend.fontsize"] = 9
 
 # ax1
 ylim = [0.0001, np.r_[y_in, y_out].max()*1.4]
-ax1.step(x_in, y_in, "red", lw=1, alpha=1.0, where="mid")
-ax1.bar(x_in, y_in, lw=0, color="red", alpha=0.2, width=x_in[1]-x_in[0], align="center", label="inside mask")
-ax1.plot(p50_in, ylim[1]*0.95, "o", markeredgewidth=0, c="red", markersize=7, zorder=1)
-ax1.plot([p16_in, p84_in], [ylim[1]*0.95, ylim[1]*0.95], "-", c="red", lw=2, zorder=0)
+ax1.step(x_in, y_in, color=cm.bwr(1/1.), lw=1, alpha=1.0, where="mid")
+ax1.bar(x_in, y_in, lw=0, color=cm.bwr(1/1.), alpha=0.2, width=x_in[1]-x_in[0], align="center", label="inside mask")
+ax1.plot(p50_in, ylim[1]*0.95, "o", markeredgewidth=0, c=cm.bwr(1/1.), markersize=7, zorder=1)
+ax1.plot([p16_in, p84_in], [ylim[1]*0.95, ylim[1]*0.95], "-", c=cm.bwr(1/1.), lw=2, zorder=0)
 #
-ax1.step(x_out, y_out, "blue", lw=1, alpha=1.0, where="mid")
-ax1.bar(x_out, y_out, lw=0, color="blue", alpha=0.2, width=x_out[1]-x_out[0], align="center", label="outside mask")
-ax1.plot(p50_out, ylim[1]*0.88, "o", markeredgewidth=0, c="blue", markersize=7, zorder=1)
-ax1.plot([p16_out, p84_out], [ylim[1]*0.88, ylim[1]*0.88], "-", c="blue", lw=2, zorder=0)
+ax1.step(x_out, y_out, color=cm.bwr(0/1.), lw=1, alpha=1.0, where="mid")
+ax1.bar(x_out, y_out, lw=0, color=cm.bwr(0/1.), alpha=0.2, width=x_out[1]-x_out[0], align="center", label="outside mask")
+ax1.plot(p50_out, ylim[1]*0.88, "o", markeredgewidth=0, c=cm.bwr(0/1.), markersize=7, zorder=1)
+ax1.plot([p16_out, p84_out], [ylim[1]*0.88, ylim[1]*0.88], "-", c=cm.bwr(0/1.), lw=2, zorder=0)
 #
 ax1.set_xlabel("$R_{21}$")
 ax1.set_xlim([x_in.min(),x_in.max()])
@@ -170,8 +170,8 @@ x_in = x_in[~np.isnan(fraction)]
 fraction = fraction[~np.isnan(fraction)]
 
 ax2.step(x_in, fraction, color="black", lw=1, where="mid")
-ax2.bar(x_in, fraction, color="red", alpha=0.2, width=x_in[1]-x_in[0], align="center", lw=0, label="inside mask")
-ax2.bar(x_in, -1*(1-fraction), color="blue", alpha=0.2, width=x_in[1]-x_in[0], align="center", lw=0, bottom=1.0, label="outside mask")
+ax2.bar(x_in, fraction, color=cm.bwr(1/1.), alpha=0.2, width=x_in[1]-x_in[0], align="center", lw=0, label="inside mask")
+ax2.bar(x_in, -1*(1-fraction), color=cm.bwr(0/1.), alpha=0.2, width=x_in[1]-x_in[0], align="center", lw=0, bottom=1.0, label="outside mask")
 #
 ax2.set_xlabel("$R_{21}$")
 ax2.set_xlim([x_in.min(),x_in.max()])
