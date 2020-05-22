@@ -218,17 +218,19 @@ fraction_2 = fraction_2[~np.isnan(fraction_2)]
 fraction_3 = y_3.astype(float)/(y_0+y_1+y_2+y_3)
 fraction_3 = fraction_3[~np.isnan(fraction_3)]
 #
-#ax2.step(x_0, fraction, color="black", lw=1, where="mid")
-ax2.bar(x_0, fraction_0, color=cm.gnuplot(0/3.5), alpha=0.2, width=x_0[1]-x_0[0], align="center", lw=0, label="inter-arm")
+ax2.step(x_0, fraction_0, color="black", lw=1, where="mid")
+ax2.step(x_0, fraction_0+fraction_1, color="black", lw=1, where="mid")
+ax2.step(x_0, fraction_0+fraction_1+fraction_2, color="black", lw=1, where="mid")
+ax2.bar(x_0, fraction_0, color=cm.gnuplot(0/3.5), alpha=0.2, width=x_0[1]-x_0[0], align="center", lw=0, label="interarm")
 ax2.bar(x_1, fraction_1, bottom=fraction_0, color=cm.gnuplot(1/3.5), alpha=0.2, width=x_1[1]-x_1[0], align="center", lw=0, label="arm")
 ax2.bar(x_2, fraction_2, bottom=fraction_0+fraction_1, color=cm.gnuplot(2/3.5), alpha=0.2, width=x_2[1]-x_2[0], align="center", lw=0, label="bulge")
-ax2.bar(x_3, fraction_3, bottom=fraction_0+fraction_1+fraction_2, color=cm.gnuplot(3/3.5), alpha=0.2, width=x_3[1]-x_3[0], align="center", lw=0, label="bar + bar-end")
+ax2.bar(x_3, fraction_3, bottom=fraction_0+fraction_1+fraction_2, color=cm.gnuplot(3/3.5), alpha=0.2, width=x_3[1]-x_3[0], align="center", lw=0, label="bar/bar-end")
 
 #
 ax2.set_xlabel("$R_{21}$")
 ax2.set_xlim([x_0.min(),x_0.max()])
 ax2.set_ylim([0.0001,1])
-ax2.legend()
+ax2.legend(ncol=2)
 ax2.set_title("Fraction")
 
 # save
