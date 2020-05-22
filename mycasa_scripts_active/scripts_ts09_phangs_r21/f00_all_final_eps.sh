@@ -126,6 +126,9 @@ convert -crop 1970x400+15+0 $dir_data"histo_mask_env.png" $dir_data"histo_mask_e
 
 convert -append -border 0x0 $dir_data"histo_mask_gmcb.png" $dir_data"histo_mask_envb.png" eps2:$dir_data"fig12.eps"
 
+rm -rf $dir_data"histo_mask_gmc.png" $dir_data"histo_mask_gmcb.png"
+rm -rf $dir_data"histo_mask_env.png" $dir_data"histo_mask_envb.png"
+
 
 ### figure 13
 convert -crop 2250x900+120+50 $dir_data"fig_r21_vs_dist.png" $dir_data"fig_r21_vs_distb.png"
