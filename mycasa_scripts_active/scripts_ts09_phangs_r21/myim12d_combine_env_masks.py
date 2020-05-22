@@ -45,9 +45,11 @@ for i in range(len(gals)):
       outfile = output + "_tmp2")
     #
     os.system("rm -rf " + output)
-    immath(imagename = [output + "_tmp", fits_barend[0]],
+    immath(imagename = [output + "_tmp2", fits_barend[0]],
       expr = "iif(IM1>0, IM1*4, IM0)",
       outfile = output)
+    #
+    os.system("rm -rf " + output + "_tmp*")
 
   os.system("rm -rf " + dir_project + galname + "_r21/" + output.replace(".image",".fits"))
   exportfits(imagename = output,
