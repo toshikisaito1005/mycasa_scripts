@@ -174,7 +174,7 @@ plt.rcParams["font.size"] = 11
 plt.rcParams["legend.fontsize"] = 9
 
 # ax1
-ylim = [0.0001, np.r_[y_0, y_0].max()*1.4]
+ylim = [0.0001, np.r_[y_0, y_1, y_2, y_3, y_4].max()*1.5]
 ax1.step(x_0, y_0, color=cm.gnuplot(0/5.), lw=1, alpha=1.0, where="mid")
 ax1.bar(x_0, y_0, lw=0, color=cm.gnuplot(0/5.), alpha=0.2, width=x_0[1]-x_0[0], align="center", label="inter-arm")
 ax1.plot(p50_0, ylim[1]*0.95, "o", markeredgewidth=0, c=cm.gnuplot(0/5.), markersize=7, zorder=1)
@@ -184,6 +184,21 @@ ax1.step(x_1, y_1, color=cm.gnuplot(1/5.), lw=1, alpha=1.0, where="mid")
 ax1.bar(x_1, y_1, lw=0, color=cm.gnuplot(1/5.), alpha=0.2, width=x_1[1]-x_1[0], align="center", label="arm")
 ax1.plot(p50_1, ylim[1]*0.88, "o", markeredgewidth=0, c=cm.gnuplot(1/5.), markersize=7, zorder=1)
 ax1.plot([p16_1, p84_1], [ylim[1]*0.88, ylim[1]*0.88], "-", c=cm.gnuplot(1/5.), lw=2, zorder=0)
+#
+ax1.step(x_2, y_2, color=cm.gnuplot(2/5.), lw=1, alpha=1.0, where="mid")
+ax1.bar(x_2, y_2, lw=0, color=cm.gnuplot(2/5.), alpha=0.2, width=x_2[1]-x_2[0], align="center", label="bulge")
+ax1.plot(p50_2, ylim[1]*0.81, "o", markeredgewidth=0, c=cm.gnuplot(2/5.), markersize=7, zorder=1)
+ax1.plot([p16_2, p84_2], [ylim[1]*0.81, ylim[1]*0.81], "-", c=cm.gnuplot(2/5.), lw=2, zorder=0)
+#
+ax1.step(x_3, y_3, color=cm.gnuplot(3/5.), lw=1, alpha=1.0, where="mid")
+ax1.bar(x_3, y_3, lw=0, color=cm.gnuplot(3/5.), alpha=0.2, width=x_3[1]-x_3[0], align="center", label="bar")
+ax1.plot(p50_3, ylim[1]*0.74, "o", markeredgewidth=0, c=cm.gnuplot(3/5.), markersize=7, zorder=1)
+ax1.plot([p16_3, p84_3], [ylim[1]*0.74, ylim[1]*0.74], "-", c=cm.gnuplot(3/5.), lw=2, zorder=0)
+#
+ax1.step(x_4, y_4, color=cm.gnuplot(4/5.), lw=1, alpha=1.0, where="mid")
+ax1.bar(x_4, y_4, lw=0, color=cm.gnuplot(4/5.), alpha=0.2, width=x_4[1]-x_4[0], align="center", label="bar-end")
+ax1.plot(p50_3, ylim[1]*0.74, "o", markeredgewidth=0, c=cm.gnuplot(3/5.), markersize=7, zorder=1)
+ax1.plot([p16_3, p84_3], [ylim[1]*0.74, ylim[1]*0.74], "-", c=cm.gnuplot(3/5.), lw=2, zorder=0)
 #
 ax1.set_xlabel("$R_{21}$")
 ax1.set_xlim([x_0.min(),x_0.max()])
