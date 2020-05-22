@@ -52,6 +52,7 @@ for i in range(len(gals)):
     image_p21 = glob.glob(dir_r21 + "r21_"+beamp+".moment8")[0]
     image_r21mask = glob.glob(dir_r21 + "r21_"+beamp+".moment0.highlowmask")[0]
     image_gmcmask = glob.glob(dir_r21 + "cprops_"+beamp+".mask.fits")[0]
+    image_envmask = glob.glob(dir_r21 + "env_all_"+beamp+".mask.fits")[0]
 
 
     # import data
@@ -67,6 +68,7 @@ for i in range(len(gals)):
     data_p21 = r21.import_data(imagename=image_p21,mode="data")
     data_r21mask = r21.import_data(imagename=image_r21mask,mode="data")
     data_gmcmask = r21.import_data(imagename=image_gmcmask,mode="data")
+    data_envmask = r21.import_data(imagename=image_envmask,mode="data")
 
     # masking
     cut_co10 = (data_co10 > 0)
@@ -88,6 +90,7 @@ for i in range(len(gals)):
     data_p21 = data_p21[cut_all]
     data_r21mask = data_r21mask[cut_all]
     data_gmcmask = data_gmcmask[cut_all]
+    data_envmask = data_envmask[cut_all]
 
     # rms per channel
     data_pco10err = co10rmss[i] * np.ones(len(data_pco10))
@@ -118,6 +121,7 @@ for i in range(len(gals)):
         data_ra * 3600 * scales[i],  # 14
         data_dec * 3600 * scales[i], # 15
         data_gmcmask,          # 16
+        data_envmask,          # 17
         ]
 
     np.savetxt(
