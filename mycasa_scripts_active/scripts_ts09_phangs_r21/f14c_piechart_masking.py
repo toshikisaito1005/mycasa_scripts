@@ -176,7 +176,7 @@ ax2.bar(x_in, -1*(1-fraction), color="green", alpha=0.2, width=x_in[1]-x_in[0], 
 ax2.set_xlabel("$R_{21}$")
 ax2.set_xlim([x_in.min(),x_in.max()])
 ax2.set_ylim([0.0001,1])
-ax2.legend(loc="upper left")
+ax2.legend(loc="lower right")
 ax2.set_title("Fraction")
 
 # save
