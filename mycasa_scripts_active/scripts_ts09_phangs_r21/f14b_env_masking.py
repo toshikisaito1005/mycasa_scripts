@@ -74,24 +74,18 @@ for i in range(len(txtfile)):
     data = data[cut_all]
     gmcmask = gmcmask[cut_all]
     #
-    data_inmask  = data[gmcmask==1]
-    data_outmask = data[gmcmask==0]
+    data_mask0 = data[gmcmask==0]
+    data_mask1 = data[gmcmask==1]
+    data_mask2 = data[gmcmask==2]
+    data_mask3 = data[gmcmask==3]
+    data_mask4 = data[gmcmask==4]
     #
-    data_inmask_norm = data_inmask / np.median(data_inmask)
     data_inmask_all.extend(data_inmask)
-    data_inmask_norm_all.extend(data_inmask_norm)
-    #
-    data_outmask_norm = data_outmask / np.median(data_outmask)
-    data_outmask_all.extend(data_outmask)
-    data_outmask_norm_all.extend(data_outmask_norm)
     #
     data_all.extend(data)
 #
 data_inmask_all = np.array(data_inmask_all)
-data_inmask_norm_all = np.array(data_inmask_norm_all)
-#
 data_outmask_all = np.array(data_outmask_all)
-data_outmask_norm_all = np.array(data_outmask_norm_all)
 
 
 ### histogram and stats
