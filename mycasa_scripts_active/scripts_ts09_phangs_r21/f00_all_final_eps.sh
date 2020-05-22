@@ -123,20 +123,23 @@ rm -rf $dir_data"fig_mask_histo.png" $dir_data"fig_mask_histob.png"
 
 ### figure 12
 convert -crop 600x600+80+30 $dir_data"ngc0628_r21_mask.png" $dir_data"ngc0628_r21_maskb.png"
-convert -crop 600x600+118+30 $dir_data"ngc3627_r21_mask.png" $dir_data"ngc3627_r21_maskb.png"
+convert -crop 600x600+80+30 $dir_data"ngc3627_r21_mask.png" $dir_data"ngc3627_r21_maskb.png"
 convert -crop 600x600+80+30 $dir_data"ngc4321_r21_mask.png" $dir_data"ngc4321_r21_maskb.png"
-
 convert -crop 600x600+80+30 $dir_data"ngc0628_cloud_mask.png" $dir_data"ngc0628_cloud_maskb.png"
-convert -crop 600x600+118+30 $dir_data"ngc3627_cloud_mask.png" $dir_data"ngc3627_cloud_maskb.png"
+convert -crop 600x600+80+30 $dir_data"ngc3627_cloud_mask.png" $dir_data"ngc3627_cloud_maskb.png"
 convert -crop 600x600+80+30 $dir_data"ngc4321_cloud_mask.png" $dir_data"ngc4321_cloud_maskb.png"
-
 convert -crop 600x600+80+30 $dir_data"ngc0628_env_mask.png" $dir_data"ngc0628_env_maskb.png"
-convert -crop 600x600+118+30 $dir_data"ngc3627_env_mask.png" $dir_data"ngc3627_env_maskb.png"
+convert -crop 600x600+80+30 $dir_data"ngc3627_env_mask.png" $dir_data"ngc3627_env_maskb.png"
 convert -crop 600x600+80+30 $dir_data"ngc4321_env_mask.png" $dir_data"ngc4321_env_maskb.png"
-
 convert -crop 600x600+80+30 $dir_data"ngc0628_piechart_mask.png" $dir_data"ngc0628_piechart_maskb.png"
-convert -crop 600x600+118+30 $dir_data"ngc3627_piechart_mask.png" $dir_data"ngc3627_piechart_maskb.png"
+convert -crop 600x600+80+30 $dir_data"ngc3627_piechart_mask.png" $dir_data"ngc3627_piechart_maskb.png"
 convert -crop 600x600+80+30 $dir_data"ngc4321_piechart_mask.png" $dir_data"ngc4321_piechart_maskb.png"
+
+convert -append -border 0x0 $dir_data"ngc0628_r21_maskb.png" $dir_data"ngc3627_r21_maskb.png" $dir_data"ngc4321_r21_maskb.png" $dir_data"fig12a.png"
+convert -append -border 0x0 $dir_data"ngc0628_cloud_maskb.png" $dir_data"ngc3627_cloud_maskb.png" $dir_data"ngc4321_cloud_maskb.png" $dir_data"fig12b.png"
+convert -append -border 0x0 $dir_data"ngc0628_env_maskb.png" $dir_data"ngc3627_env_maskb.png" $dir_data"ngc4321_env_maskb.png" $dir_data"fig12c.png"
+convert -append -border 0x0 $dir_data"ngc0628_piechart_maskb.png" $dir_data"ngc3627_piechart_maskb.png" $dir_data"ngc4321_piechart_maskb.png" $dir_data"fig12d.png"
+convert +append -border 0x0 $dir_data"fig12a.png" $dir_data"fig12b.png" $dir_data"fig12c.png" $dir_data"fig12d.png" eps2:$dir_data"fig12.eps"
 
 
 ### figure 13
