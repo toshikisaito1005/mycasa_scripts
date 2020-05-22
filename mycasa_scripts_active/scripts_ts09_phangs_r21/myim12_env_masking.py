@@ -11,15 +11,15 @@ from astropy.coordinates import SkyCoord
 #####################
 dir_fits = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/data_other/env_masks/"
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
-spiral_fits = ["ngc0628_12m+7m+tp_co21_120pc_props.fits",
-				"ngc3627_12m+7m+tp_co21_120pc_props.fits",
-				"ngc4321_12m+7m+tp_co21_120pc_props.fits"]
+spiral_fits = ["NGC0628_mask_v5_sp_arms.image",    # >0
+				       "NGC3627_mask_large_barends.image", # 5
+				       "NGC4321_mask_v5_sp_arms.image"]    # >0
 mom0_fits = ["../../ngc0628_r21/r21_04p0.moment0",
 			 "../../ngc3627_r21/r21_08p0.moment0",
 			 "../../ngc4321_r21/r21_04p0.moment0"]
-output = ["../../ngc0628_r21/cprops_04p0.mask.fits",
-		  "../../ngc3627_r21/cprops_08p0.mask.fits",
-		  "../../ngc4321_r21/cprops_04p0.mask.fits"]
+output = ["../../ngc0628_r21/env_04p0.mask.fits",
+		  "../../ngc3627_r21/env_08p0.mask.fits",
+		  "../../ngc4321_r21/env_04p0.mask.fits"]
 # output = "ngc1365_cprops_mask_1p38.fits"
 snr = 5.0 # peak signal-to-noise ratio threshold to identify clouds
 scales = [44/1.0,52/1.3,103/1.4] # parsec / arcsec
