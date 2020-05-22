@@ -16,9 +16,12 @@ data_image = np.r_[data_image, data2_image]
 data_image.sort()
 
 for i in range(len(data_image)):
-    os.system("rm -rf " + data_image[i].replace(".image","") + ".fits")
-    exportfits(imagename = data_image[i],
-               fitsimage = data_image[i].replace(".image","") + ".fits")
+    done = glob.glob(data_image[i])
+    if not done:
+      print("### processing " + data_image[i])
+      os.system("rm -rf " + data_image[i].replace(".image","") + ".fits")
+      exportfits(imagename = data_image[i],
+                 fitsimage = data_image[i].replace(".image","") + ".fits")
 
 done = glob.glob(dir_data + "eps/")
 if not done:
@@ -50,7 +53,7 @@ colorscale = "bwr"
 colorlog = False
 colorbar = False
 colorbar_label = "Line Ratio"
-output = "eps/ngc0628_cloiud_mask.png"
+output = "eps/ngc0628_cloud_mask.png"
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
               imagename_contour = imagename_contour,

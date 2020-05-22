@@ -137,8 +137,9 @@ immath(imagename=output.replace(".fits",".im"),
 exportfits(imagename=output.replace(".fits",".im2"),
            fitsimage=output,
            overwrite=True,
-           dropstokes=True,
-           dropdeg=True)
+           #dropstokes=True,
+           #dropdeg=True,
+           )
 
 os.system("rm -rf " + output.replace(".fits",".im"))
 os.system("rm -rf " + output.replace(".fits",".im2"))
