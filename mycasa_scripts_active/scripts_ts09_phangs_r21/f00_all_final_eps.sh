@@ -104,26 +104,35 @@ rm -rf $dir_data"violin_median.png" $dir_data"violin_disp.png"
 
 
 ### figure 11
-convert -crop 600x600+80+30 $dir_data"ngc0628_r21_mask.png" $dir_data"ngc0628_r21_maskb.png"
-convert -crop 600x600+118+30 $dir_data"ngc3627_r21_mask.png" $dir_data"ngc3627_r21_maskb.png"
-convert -crop 600x600+80+30 $dir_data"ngc4321_r21_mask.png" $dir_data"ngc4321_r21_maskb.png"
-convert -crop 600x600+24+30 $dir_data"fig_mask_histo.png" $dir_data"fig_mask_histob.png"
+#convert -crop 600x600+80+30 $dir_data"ngc0628_r21_mask.png" $dir_data"ngc0628_r21_maskb.png"
+#convert -crop 600x600+118+30 $dir_data"ngc3627_r21_mask.png" $dir_data"ngc3627_r21_maskb.png"
+#convert -crop 600x600+80+30 $dir_data"ngc4321_r21_mask.png" $dir_data"ngc4321_r21_maskb.png"
+#convert -crop 600x600+24+30 $dir_data"fig_mask_histo.png" $dir_data"fig_mask_histob.png"
+convert -crop 600x600+24+30 $dir_data"fig_mask_histo.png" eps2:$dir_data"fig11.eps"
 
-convert +append -border 0x0 $dir_data"ngc0628_r21_maskb.png" $dir_data"ngc3627_r21_maskb.png" $dir_data"fig10a.png"
-convert +append -border 0x0 $dir_data"ngc4321_r21_maskb.png" $dir_data"fig_mask_histob.png" $dir_data"fig10b.png"
-convert -append -border 0x0 $dir_data"fig10a.png" $dir_data"fig10b.png" eps2:$dir_data"fig11.eps"
+#convert +append -border 0x0 $dir_data"ngc0628_r21_maskb.png" $dir_data"ngc3627_r21_maskb.png" $dir_data"fig10a.png"
+#convert +append -border 0x0 $dir_data"ngc4321_r21_maskb.png" $dir_data"fig_mask_histob.png" $dir_data"fig10b.png"
+#convert -append -border 0x0 $dir_data"fig10a.png" $dir_data"fig10b.png" eps2:$dir_data"fig11.eps"
 
-rm -rf $dir_data"ngc0628_r21_mask.png" $dir_data"ngc0628_r21_maskb.png"
-rm -rf $dir_data"ngc3627_r21_mask.png" $dir_data"ngc3627_r21_maskb.png"
-rm -rf $dir_data"ngc4321_r21_mask.png" $dir_data"ngc4321_r21_maskb.png"
+#rm -rf $dir_data"ngc0628_r21_mask.png" $dir_data"ngc0628_r21_maskb.png"
+#rm -rf $dir_data"ngc3627_r21_mask.png" $dir_data"ngc3627_r21_maskb.png"
+#rm -rf $dir_data"ngc4321_r21_mask.png" $dir_data"ngc4321_r21_maskb.png"
 rm -rf $dir_data"fig_mask_histo.png" $dir_data"fig_mask_histob.png"
-rm -rf $dir_data"fig10a.png" $dir_data"fig10b.png"
+#rm -rf $dir_data"fig10a.png" $dir_data"fig10b.png"
 
 
 ### figure 12
 convert -crop 600x600+80+30 $dir_data"ngc0628_r21_mask.png" $dir_data"ngc0628_r21_maskb.png"
 convert -crop 600x600+118+30 $dir_data"ngc3627_r21_mask.png" $dir_data"ngc3627_r21_maskb.png"
 convert -crop 600x600+80+30 $dir_data"ngc4321_r21_mask.png" $dir_data"ngc4321_r21_maskb.png"
+
+convert -crop 600x600+80+30 $dir_data"ngc0628_cloud_mask.png" $dir_data"ngc0628_cloud_maskb.png"
+convert -crop 600x600+118+30 $dir_data"ngc3627_cloud_mask.png" $dir_data"ngc3627_cloud_maskb.png"
+convert -crop 600x600+80+30 $dir_data"ngc4321_cloud_mask.png" $dir_data"ngc4321_cloud_maskb.png"
+
+convert -crop 600x600+80+30 $dir_data"ngc0628_env_mask.png" $dir_data"ngc0628_env_maskb.png"
+convert -crop 600x600+118+30 $dir_data"ngc3627_env_mask.png" $dir_data"ngc3627_env_maskb.png"
+convert -crop 600x600+80+30 $dir_data"ngc4321_env_mask.png" $dir_data"ngc4321_env_maskb.png"
 
 
 
