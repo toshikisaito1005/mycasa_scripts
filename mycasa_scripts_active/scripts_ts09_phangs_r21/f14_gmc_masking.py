@@ -18,7 +18,6 @@ plt.ioff()
 #####################
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 nbins = 50
-xlim = [0,1.5]
 def_nucleus = [50*44./1.0,50*52./1.3,30*103/1.4]
 
 
@@ -161,6 +160,7 @@ ax1.plot(p50_out, ylim[1]*0.88, "o", markeredgewidth=0, c="blue", markersize=7, 
 ax1.plot([p16_out, p84_out], [ylim[1]*0.88, ylim[1]*0.88], "-", c="blue", lw=2, zorder=0)
 #
 ax1.set_xlabel("$R_{21}$")
+ax1.set_xlim([x_in.min(),x_in.max()])
 ax1.set_ylim(ylim)
 ax1.legend()
 ax1.set_title("Histogram with Cloud Mask")
@@ -175,7 +175,6 @@ ax2.bar(x_in, fraction, color="red", alpha=0.2, width=x_in[1]-x_in[0], align="ce
 ax2.bar(x_in, -1*(1-fraction), color="blue", alpha=0.2, width=x_in[1]-x_in[0], align="center", lw=0, bottom=1.0)
 #
 ax2.set_xlabel("$R_{21}$")
-ax1.set_xlim([x_in.min(),x_in.max()])
 ax2.set_xlim([x_in.min(),x_in.max()])
 ax2.set_ylim([0.0001,1])
 ax2.legend()
