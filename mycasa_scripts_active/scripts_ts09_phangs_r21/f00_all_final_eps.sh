@@ -121,7 +121,10 @@ rm -rf $dir_data"fig10a.png" $dir_data"fig10b.png"
 
 
 ### figure 12
-convert -crop 600x600+15+0 $dir_data"histo_mask_gmc.png" $dir_data"histo_mask_gmcb.png"
+convert -crop 1970x320+15+0 $dir_data"histo_mask_gmc.png" $dir_data"histo_mask_gmcb.png"
+convert -crop 1970x400+15+0 $dir_data"histo_mask_env.png" $dir_data"histo_mask_envb.png"
+
+convert -append -border 0x0 $dir_data"histo_mask_gmcb.png" $dir_data"histo_mask_envb.png" eps2:$dir_data"fig12.eps"
 
 
 ### figure 13
