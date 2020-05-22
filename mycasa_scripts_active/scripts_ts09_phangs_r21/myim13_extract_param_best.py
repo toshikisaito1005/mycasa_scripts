@@ -53,6 +53,7 @@ for i in range(len(gals)):
     image_r21mask = glob.glob(dir_r21 + "r21_"+beamp+".moment0.highlowmask")[0]
     image_gmcmask = glob.glob(dir_r21 + "cprops_"+beamp+".mask.fits")[0]
 
+
     # import data
     data_ra = r21.import_data(imagename=image_co21,mode="coords")
     data_dec = r21.import_data(imagename=image_co21,mode="coords",index=1)
