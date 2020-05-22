@@ -121,6 +121,10 @@ rm -rf $dir_data"fig10a.png" $dir_data"fig10b.png"
 
 
 ### figure 12
+convert -crop 600x600+80+30 $dir_data"ngc0628_r21_mask.png" $dir_data"ngc0628_r21_maskb.png"
+convert -crop 600x600+118+30 $dir_data"ngc3627_r21_mask.png" $dir_data"ngc3627_r21_maskb.png"
+convert -crop 600x600+80+30 $dir_data"ngc4321_r21_mask.png" $dir_data"ngc4321_r21_maskb.png"
+
 
 
 ### figure 13
