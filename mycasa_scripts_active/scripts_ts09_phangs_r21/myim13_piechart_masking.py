@@ -17,9 +17,9 @@ spiral_fits = ["ngc0628_400pc_CO95_HA95_overlap_mask.image",
 mom0_fits = ["../../ngc0628_r21/r21_04p0.moment0",
 			 "../../ngc3627_r21/r21_08p0.moment0",
 			 "../../ngc4321_r21/r21_04p0.moment0"]
-output = ["../../ngc0628_r21/pirchart_04p0.mask.fits",
-		  "../../ngc3627_r21/pirchart_08p0.mask.fits",
-		  "../../ngc4321_r21/pirchart_04p0.mask.fits"]
+output = ["../../ngc0628_r21/piechart_04p0.mask.fits",
+		  "../../ngc3627_r21/piechart_08p0.mask.fits",
+		  "../../ngc4321_r21/piechart_04p0.mask.fits"]
 expr = ["iif(IM0>0,1,0)",
         "iif(IM0>0,1,0)",
         "iif(IM0>0,1,0)"]

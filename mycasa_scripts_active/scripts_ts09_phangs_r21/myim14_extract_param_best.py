@@ -93,6 +93,7 @@ for i in range(len(gals)):
     data_r21mask = data_r21mask[cut_all]
     data_gmcmask = data_gmcmask[cut_all]
     data_envmask = data_envmask[cut_all]
+    data_piemask = data_piemask[cut_all]
 
     # rms per channel
     data_pco10err = co10rmss[i] * np.ones(len(data_pco10))
@@ -124,6 +125,7 @@ for i in range(len(gals)):
         data_dec * 3600 * scales[i], # 15
         data_gmcmask,          # 16
         data_envmask,          # 17
+        data_piemask,          # 18
         ]
 
     np.savetxt(
