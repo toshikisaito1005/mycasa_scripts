@@ -11,18 +11,27 @@ from astropy.coordinates import SkyCoord
 #####################
 dir_project = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 gals = ["ngc0628","ngc3627","ngc4321"]
-
+exprs = ["IM0 + IM1*2",
+         "IM0 + IM1*2 + IM2*3 + IM3*4",
+         "IM0 + IM1*2"]
+outputs = ["env_all_04p0.mask.fits",
+           "env_all_08p0.mask.fits",
+           "env_all_04p0.mask.fits"]
 
 #####################
 ### Main Procedure
 #####################
 galname = gals[i]
+expr = exprs[i]
+#
 fits_arm = glob.glob(dir_project + galname + "_r21/env_*arm*.fits")
 fits_bulge = glob.glob(dir_project + galname + "_r21/env_*bulge*.fits")
 fits_bar = glob.glob(dir_project + galname + "_r21/env_*bar_*.fits")
 fits_barend = glob.glob(dir_project + galname + "_r21/env_*barend_*.fits")
 fitsimages = np.r_[fits_arm, fits_bulge, fits_bar, fits_barend]
 #
+immath(imagename = fitsimages,
+  )
 
 
 os.system("rm -rf *.last")
