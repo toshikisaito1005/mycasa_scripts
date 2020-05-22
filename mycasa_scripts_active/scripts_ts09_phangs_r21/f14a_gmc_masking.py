@@ -17,7 +17,7 @@ plt.ioff()
 ### parameters
 #####################
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
-nbins = 50
+nbins = 40
 def_nucleus = [50*44./1.0,50*52./1.3,30*103/1.4]
 
 
