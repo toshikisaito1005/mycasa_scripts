@@ -171,8 +171,8 @@ x_in = x_in[~np.isnan(fraction)]
 fraction = fraction[~np.isnan(fraction)]
 
 ax2.step(x_in, fraction, color="black", lw=1, where="mid")
-ax2.fill_between(x_in, fraction, color="red", alpha=0.2, label="inside mask")
-ax2.fill_between(x_in, fraction, 1, color="blue", alpha=0.2, label="outside mask")
+ax2.bar(x_in, fraction, color="red", alpha=0.2, width=x_in[1]-x_in[0], align="center", lw=0)
+ax2.bar(x_in, -1*(1-fraction), color="blue", alpha=0.2, width=x_in[1]-x_in[0], align="center", lw=0, bottom=1.0)
 #
 ax2.set_xlabel("$R_{21}$")
 ax1.set_xlim([x_in.min(),x_in.max()])
