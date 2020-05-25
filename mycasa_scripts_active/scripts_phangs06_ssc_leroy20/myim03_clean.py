@@ -80,10 +80,10 @@ def dirty_map(
 		mask = "",
 		)
     # masking dirty map
-    os.system("rm -rf " + dir_sim + "/_tmp_inverse.mask")
+    os.system("rm -rf _tmp_inverse.mask")
 
 
-    os.system("rm -rf " + dir_sim + "/_tmp_inverse.mask")
+    #os.system("rm -rf " + dir_sim + "/_tmp_inverse.mask")
     imregrid(imagename = dir_mask + galname + "_12m+7m+tp_co21_hybridmask.mask",
     	template = outputname + ".image",
     	output = dir_sim + "/_tmp_inverse.mask")
