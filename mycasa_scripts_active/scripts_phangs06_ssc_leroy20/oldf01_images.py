@@ -168,5 +168,31 @@ myim.fits2eps(dir_data = dir_data,
               clim = clim)
 
 
+### TP image
+#
+imagename_color = galname + "/sim_ngc0628.sd.startmodel.fits"
+imagename_contour = galname + "/sim_ngc0628.sd.startmodel.fits"
+title = "TP Model"
+output = "../eps/ngc0628_tpimage.png"
+#
+myim.fits2eps(dir_data = dir_data,
+              imagename_color = imagename_color,
+              imagename_contour = imagename_contour,
+              ra_center = ra_center,
+              dec_center = dec_center,
+              title = title,
+              colorbar_label = colorbar_label,
+              output = output,
+              colorscale = colorscale,
+              colorlog = colorlog,
+              color_contour = color_contour,
+              color_beam = color_beam,
+              colorbar = colorbar,
+              value = value,
+              contour = contour,
+              xlim = xlim,
+              ylim = ylim)
+
+
 os.system("rm -rf *.last")
 
