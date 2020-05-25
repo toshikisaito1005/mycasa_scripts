@@ -27,6 +27,7 @@ dec_center = "15.47.0.0"
 xlim = [-150, 150]
 ylim = [150, -150]
 clim = [0, 3.93731]
+clim_diff = [-1.0, 0.3]
 value = None
 color_contour = "black"
 color_beam = "white"
@@ -110,7 +111,7 @@ myim.fits2eps(dir_data = dir_data,
               contour = contour,
               xlim = xlim,
               ylim = ylim,
-              clim = clim)
+              clim = clim_diff)
 
 
 ### CAF
@@ -159,7 +160,7 @@ myim.fits2eps(dir_data = dir_data,
               contour = contour,
               xlim = xlim,
               ylim = ylim,
-              clim = clim)
+              clim = clim_diff)
 
 
 ### CBF
@@ -208,7 +209,7 @@ myim.fits2eps(dir_data = dir_data,
               contour = contour,
               xlim = xlim,
               ylim = ylim,
-              clim = clim)
+              clim = clim_diff)
 
 
 ### CDF
@@ -257,7 +258,7 @@ myim.fits2eps(dir_data = dir_data,
               contour = contour,
               xlim = xlim,
               ylim = ylim,
-              clim = clim)
+              clim = clim_diff)
 
 
 os.system("rm -rf *.last")
