@@ -12,40 +12,38 @@ robust = 0.5
 ##############################
 ### def
 ##############################
-def get_info(dir_sim,mosaic_def2,robust):
-    galname = dir_sim.split("/")[-1]
-    start = "" #mosaic_def[:,1][np.where(mosaic_def[:,0]==galname)[0][0]] + "km/s"
-    ra = mosaic_def2[:,1][np.where(mosaic_def2[:,0]==galname)[0][0]]
-    dec = mosaic_def2[:,2][np.where(mosaic_def2[:,0]==galname)[0][0]]
-    if "h" not in ra:
-        ra = ra + "deg"
-    if "d" not in dec:
-        dec = dec + "deg"
+def get_info(
+	dir_sim,
+	mosaic_def2
+	robust,
+	):
+	galname = dir_sim.split("/")[-1]
+	start = "" #mosaic_def[:,1][np.where(mosaic_def[:,0]==galname)[0][0]] + "km/s"
+	ra = mosaic_def2[:,1][np.where(mosaic_def2[:,0]==galname)[0][0]]
+	dec = mosaic_def2[:,2][np.where(mosaic_def2[:,0]==galname)[0][0]]
+	if "h" not in ra:
+	    ra = ra + "deg"
+	if "d" not in dec:
+	    dec = dec + "deg"
 
-    if robust == 2.0:
-        weighting = "natural"
-        wt = "na"
-    elif robust == -2.0:
-        weighting = "uniform"
-        wt = "un"
-    else:
-        weighting = "briggs"
-        wt = "br"
+	if robust == 2.0:
+	    weighting = "natural"
+	    wt = "na"
+	elif robust == -2.0:
+	    weighting = "uniform"
+	    wt = "un"
+	else:
+	    weighting = "briggs"
+	    wt = "br"
 
-    return galname, start, ra, dec, weighting, wt
+	return galname, start, ra, dec, weighting, wt
 
 def dirty_map(
-  dir_sim,
-  galname,
-  wt,
-  width,
-  start,
-  ra,
-  dec,
-  weighting,
-  robust,
-  dir_mask,
-  imsize):
+	vis,
+	):
+	tclean(vis = vis,
+
+
   outputname = dir_sim + "/dirty_" + galname + "_7m_"+wt
   os.system("rm -rf "+outputname+"*")
   tclean(vis = dir_sim + "/sim_" + galname + ".aca.cycle5.noisy.ms",
@@ -74,7 +72,6 @@ def dirty_map(
 	restoringbeam = "common",
 	startmodel = "",
 	mask = "")
-
     # masking dirty map
     os.system("rm -rf " + dir_sim + "/_tmp_inverse.mask")
     imregrid(imagename = dir_mask + galname + "_12m+7m+tp_co21_hybridmask.mask",
@@ -130,4 +127,6 @@ for i in [0]:
 
     ### measure 7m-only rms
     print("### dirty map of " + title)
-    rms = dirty_map(this_dir_sim,galname,wt,width,start,ra,dec,weighting,robust,dir_mask,imsize)
+    vis = dir_sim + "/sim_" + galname + ".aca.cycle5.noisy.ms"
+    imagename = dir_sim + "/dirty_" + galname + "_7m_"+wt
+    rms = dirty_map(vis, )
