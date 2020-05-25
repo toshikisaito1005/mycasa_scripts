@@ -21,19 +21,17 @@ if not done:
 #####################
 ### Main Procedure
 #####################
-dir_gal = dir_data + galname
-#
 ra_center = "01:36:41.8"
 dec_center = "15.47.0.0"
 xlim = [-120, 120]
 ylim = [120, -120]
 value = None
 #
-imagename_contour = dir_gal + "/sim_ngc0628_skymodel.smooth.fits"
-imagename_color = dir_gal + "/sim_ngc0628_7m_br.smooth.pbcor.clip.fits"
-imagemax = imstat(imagename_contour)["max"]
+imagename_contour = galname + "/sim_ngc0628_skymodel.smooth.fits"
+imagename_color = galname + "/sim_ngc0628_7m_br.smooth.pbcor.clip.fits"
+imagemax = imstat(dir_data + imagename_contour)["max"]
 #
-contour = np.array([0.04, 0.08, 0.16, 0.32, 0.64, 0.96]) / imagemax
+contour = np.array([0.04, 0.08, 0.16, 0.32, 0.64, 0.96])
 title = "7m-only"
 colorscale = "PuBu"
 color_contour = "black"
@@ -58,8 +56,7 @@ myim.fits2eps(dir_data = dir_data,
               value = value,
               contour = contour,
               xlim = xlim,
-              ylim = ylim,
-              nucleus = 50)
+              ylim = ylim)
 
 
 os.system("rm -rf *.last")
