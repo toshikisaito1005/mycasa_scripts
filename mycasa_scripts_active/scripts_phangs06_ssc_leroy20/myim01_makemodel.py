@@ -53,9 +53,10 @@ for i in range(len(imagenames)):
     os.system("rm -rf " + maskname2)
     immoments(imagename=maskname, outfile=maskname2)
     #
+    expr = "iif(IM1>=1.0,"+"IM0/"+str(factor)+",0.0)"
+    #
     outfile1 = this_image.replace(".image",".jyperbeam")
     os.system("rm -rf " + outfile1)
-    expr = "iif(IM1>=1.0,"+"IM0/"+str(factor)+",0.0)"
     immath(imagename=[this_image,maskname2], mode="evalexpr", expr=expr, outfile=outfile1)
     # skymodel
     bmaj = imhead(outfile1,mode="list")["beammajor"]["value"]
@@ -89,7 +90,28 @@ for i in range(len(imagenames)):
     outfile5 = this_image.replace(".image",".jyppix.smooth")
     os.system("rm -rf " + outfile5)
     immath(imagename=outfile4, expr="IM0/"+str(beamarea), outfile=outfile5)
-
+    #
+    imhead(imagename=outfile5, mode="put", hdkey="bunit", hdvalue="Jy/pixel")
+    imhead(imagename=outfile5, mode="del", hdkey="beammajor")
+    #
+    os.system("rm -rf " + maskname)
+    os.system("rm -rf " + outfile3)
+    #
+    maskname3 = maskname.replace(".image",".mask2.smooth")
+    os.system("rm -rf " + maskname3)
+    #
+    imsmooth(imagename=maskname2, targetres=True, major="3arcsec", minor="3arcsec", pa="0deg", outfile=maskname3)
+    #
+    maskname4 = maskname.replace(".image",".mask")
+    os.system("rm -rf " + maskname4)
+    immath(imagename=maskname3, mode="evalexpr", expr="iif(IM0>=1.0,1.0,0.0)", outfile=maskname4)
+    #
+    os.system("rm -rf " + maskname.replace(".image",".mask2*"))
+    os.system("rm -rf " + maskname.replace(".image",".mask3*"))
+    #
+    os.system("rm -rf " + maskname.replace(".image",".mask.fits"))
+        exportfits(imagename = maskname.replace(".image",".mask"),
+             fitsimage = maskname.replace(".image",".mask.fits"))
 
 
 # get PHANGS DR1 moment-8 maps
@@ -98,36 +120,6 @@ for i in range(len(imagenames)):
 
 
 
-        imhead(imagename = outfile,
-               mode = "put",
-	       hdkey = "bunit",
-	       hdvalue= "Jy/pixel")
-
-	imhead(imagename = outfile,
-	       mode = "del",
-	       hdkey = "beammajor")
-
-        os.system("rm -rf " + maskname)
-        os.system("rm -rf " + imagenames[i].replace(".image",".jypb.smooth_tmp_"))
-	os.system("rm -rf " + maskname.replace(".image",".mask2.smooth"))
-        imsmooth(imagename = maskname.replace(".image",".mask2"),
-	          targetres = True,
-		  major = "3arcsec",
-		  minor = "3arcsec",
-		  pa = "0deg",
-		  outfile = maskname.replace(".image",".mask2.smooth"))
-
-        os.system("rm -rf " + maskname.replace(".image",".mask"))
-        immath(imagename = maskname.replace(".image",".mask2.smooth"),
-	       mode = "evalexpr",
-	       expr = "iif(IM0>=1.0,1.0,0.0)",
-	       outfile = maskname.replace(".image",".mask"))
-	os.system("rm -rf " + maskname.replace(".image",".mask2*"))
-	os.system("rm -rf " + maskname.replace(".image",".mask3*"))
-
-        os.system("rm -rf " + maskname.replace(".image",".mask.fits"))
-        exportfits(imagename = maskname.replace(".image",".mask"),
-	           fitsimage = maskname.replace(".image",".mask.fits"))
 
         os.system("rm -rf " + maskname.replace(".image",".mask"))
         importfits(fitsimage = maskname.replace(".image",".mask.fits"),
