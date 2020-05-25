@@ -30,6 +30,7 @@ for i in range(len(fitsimages)):
     imagename = fitsimages[i].replace(".fits",".image"))
   os.system("rm -rf " + fitsimages[i])
 
+os.system("rm -rf " + dir_data + "ic5332_12m+7m+tp_co21_strict_tpeak.image")
 os.system("rm -rf " + dir_data + "ngc1300_12m+7m+tp_co21_strict_tpeak.image")
 os.system("rm -rf " + dir_data + "ngc4569_12m+7m+tp_co21_strict_tpeak.image")
 os.system("rm -rf " + dir_data + "ngc4298_12m+7m+tp_co21_strict_tpeak.image")

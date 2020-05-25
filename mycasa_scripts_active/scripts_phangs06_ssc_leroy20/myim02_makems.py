@@ -25,8 +25,8 @@ skymodels.sort()
 tpmodels.sort()
 
 
-#for i in range(len(skymodels)):
-for i in [0]:
+for i in range(len(skymodels)):
+#for i in [0]:
     ###
     galname = skymodels[i].split("/")[-1].split("_12m")[0]
     dir_this = "sim_" + galname
@@ -92,7 +92,7 @@ for i in [0]:
     os.system("rm -rf " + dir_product)
     os.system("mkdir " + dir_product)
     #
-    tp2vispl([dir_simobs + ms_aca, ms_tp2vis], outfig = dir_product + "plot_tp2viswt_" + galname + ".png")
+    tp2vispl([dir_simobs + ms_aca, ms_tp2vis], outfig = dir_project + "eps/" + "plot_tp2viswt_" + galname + ".png")
     #
     os.system("mv " + dir_simobs + ms_aca + " " + dir_product)
     os.system("mv " + dir_simobs + ms_aca.replace(".ms",".noisy.ms") + " " + dir_product)
