@@ -69,13 +69,14 @@ for j in range(len(imagenames)):
     print("### processing " + this_image.split("/")[-1])
     txtfile = this_image + ".txt"
     data = import_data(imagename=this_image, mode="data", txtname=txtfile)
+    data[np.isinf(data)] = 0
     #
     this_ra = ra[data>0.0001]
     this_dec = dec[data>0.0001]
     this_data = data[data>0.0001]
     #
     plt.figure(figsize=(8,8))
-    plt.scatter(this_ra, this_dec, color=this_data, marker=".", cmap="rainbow", lw=1, s=5, alpha=0.5)
+    plt.scatter(this_ra, this_dec, color=this_data, marker=".", cmap="rainbow", lw=0, s=50, alpha=0.5)
     plt.xlim([this_ra.max(),this_ra.min()])
     plt.ylim([this_dec.min(),this_dec.max()])
     plt.savefig(dir_product + this_image.split("/")[-1]+".png",dpi=100)
