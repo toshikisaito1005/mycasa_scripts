@@ -55,14 +55,11 @@ for i in [0]:
                imagename = infile)
 
     os.system("rm -rf " + infile)
-    importfits(fitsimage = fitsimage,
-               imagename = infile,
-           defaultaxes = True,
-               defaultaxesvalues=["","","","I"])
+    importfits(fitsimage=fitsimage, imagename=infile, defaultaxes=True, defaultaxesvalues=["","","","I"])
     os.system("rm -rf " + fitsimage)
     #
     dir_simobs = "./" + dir_this + "/"
-    dir_product = dir_project + "/" + dir_this + "/"
+    dir_product = dir_sim + "/" + dir_this + "/"
     #
     # get pointing positions
     txtdata = dir_simobs + "sim_" + galname + ".aca.cycle5.ptg.txt"
@@ -83,16 +80,20 @@ for i in [0]:
     ms_tp2vis = dir_simobs +  "sim_" + galname + ".sd.ms"
     ptgfile = txtdata.replace(".txt","")
     tp2vis(infile, ms_tp2vis, ptgfile, nvgrp=5, rms=0.1, winpix=3)
-    tp2viswt(ms_tp2vis, mode='const', value=0.5)#12.**4/7.**4)
-
+    #tp2viswt(ms_tp2vis, mode='const', value=0.5)#12.**4/7.**4)
+    #
     ms_aca = "sim_" + galname + ".aca.cycle5.ms"
     im_tp2vis = "sim_" + galname + ".sd.tp2vis.input"
-
+    #
+    tp2vispl(ms_aca,ms_tp2vis)
+    #
     os.system("rm -rf " + dir_product)
     os.system("mkdir " + dir_product)
+    #
+    os.system("mv " + dir_simobs + ms_aca + " " + dir_product)
+    os.system("mv " + dir_simobs + ms_aca.replace(".ms",".noisy.ms") + " " + dir_product)
+    os.system("mv " + ms_tp2vis + " " + dir_product)
+    os.system("cp -r " + infile + " " + dir_product + im_tp2vis)
+    #os.system("rm -rf sim_" + galname)
 
-    os.system("mv "+dir_simobs + ms_aca + " " + dir_product)
-    os.system("mv "+dir_simobs + ms_aca.replace(".ms",".noisy.ms") + " " + dir_product)
-    os.system("mv "+ms_tp2vis + " " + dir_product)
-    os.system("cp -r "+infile + " " + dir_product + im_tp2vis)
-    os.system("rm -rf sim_" + galname)
+os.system("rm -rf *.last")
