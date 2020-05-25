@@ -41,9 +41,15 @@ def import_data(imagename,
 
 
 #####
+dir_product = dir_data + "../eps/"
+done = glob.glob(dir_product)
+if not done:
+    os.mkdir(dir_product)
+
+
 galname = gals[i]
 #
-imagenames = glob.glob(dir_data + galname + "/*.image")
+imagenames = glob.glob(dir_data + galname + "/*.smooth.pbcor")
 #
 txt_ra = imagenames[0] + "_ra.txt"
 os.system("rm -rf " + txt_ra)
@@ -59,8 +65,10 @@ dec = dec * 180 / np.pi
 
 
 for j in range(len(imagenames)):
-    txtfile = imagenames[i] + ".txt"
-    data = import_data(imagename=imagenames[j], mode="data", txtname=txtfile)
+    this_image = imagenames[j]
+    print("### processing " + this_image.split("/")[-1])
+    txtfile = this_image + ".txt"
+    data = import_data(imagename=this_image, mode="data", txtname=txtfile)
     #
     this_ra = ra[data>0.0001]
     this_dec = dec[data>0.0001]
@@ -68,9 +76,9 @@ for j in range(len(imagenames)):
     #
     plt.figure(figsize=(8,8))
     plt.scatter(this_ra, this_dec, color=this_data, marker=".", cmap="rainbow", lw=1, s=5, alpha=0.5)
-    plt.xlim([ra_tmp1_.max(),ra_tmp1_.min()])
-    plt.ylim([dec_tmp1_.min(),dec_tmp1_.max()])
-    plt.savefig(imagenames[j].split("/")[-1]+".png",dpi=100)
+    plt.xlim([this_ra.max(),this_ra.min()])
+    plt.ylim([this_dec.min(),this_dec.max()])
+    plt.savefig(dir_product + this_image.split("/")[-1]+".png",dpi=100)
 
 
 os.system("rm -rf *.last")
