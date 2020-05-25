@@ -50,6 +50,7 @@ def dirty_map(
 	weighting,
 	robust,
 	nchan,
+	hybridmaskimage,
 	):
 	# tclean
 	os.system("rm -rf " + imagename + "*")
@@ -81,6 +82,12 @@ def dirty_map(
 		)
     # masking dirty map
     os.system("rm -rf _tmp_inverse.mask")
+
+
+	imregrid(imagename = dir_mask + galname + "_12m+7m+tp_co21_hybridmask.mask",
+		template = outputname + ".image",
+		output = dir_sim + "_tmp_inverse.mask")
+
 
 
     #os.system("rm -rf " + dir_sim + "/_tmp_inverse.mask")
@@ -140,5 +147,6 @@ for i in [0]:
     print("### dirty map of " + title)
     vis = dir_sim + "/sim_" + galname + ".aca.cycle5.noisy.ms"
     imagename = dir_sim + "/dirty_" + galname + "_7m_" + wt
+    hybridmaskimage = glob.glob(dir_mask + )
     rms = dirty_map(vis, imagename, width, start, imsize, phasecenter, weighting, robust, nchan)
 
