@@ -37,33 +37,36 @@ os.system("rm -rf " + dir_data + "ngc4569_12m+7m+tp_co21_strict_tpeak.image")
 
 ###
 imagenames = glob.glob(dir_data + "*.image")
-masknames = glob.glob(dir_mask + "*.image")
 imagenames.sort()
-masknames.sort()
-
+#
+for i in range(len(imagenames)):
+  #
+  this_image = imagenames[i]
+  print("### processing " + this_image.split("/")[-1])
+  bmaj = imhead(this_image,mode="list")["beammajor"]["value"]
+  factor = 1.222e+6 / bmaj**2 / 230.53800**2
+  #
+  maskname = glob.glob(dir_mask + this_image.split("/")[-1].split("12m")[0] + "*_hybridmask*")
+  if maskname:
+    #
+    maskname2 = maskname.replace(".image",".mask2")
+    os.system("rm -rf " + maskname2)
+    immoments(imagename=maskname, outfile=maskname2)
+    #
+    outfile = this_image.replace(".image",".jyperbeam")
+    os.system("rm -rf " + outfile)
+    expr = "iif(IM1>=1.0,"+"IM0/"+str(factor)+",0.0)"
+    immath(imagename = [this_image,maskname2],
+               mode = "evalexpr",
+               expr = expr,
+         outfile = outfile)
 
 
 
 # get PHANGS DR1 moment-8 maps
 for i in range(len(imagenames)):
-    bmaj = imhead(imagenames[i],mode="list")["beammajor"]["value"]
-    factor = 1.222e+6 / bmaj**2 / 230.53800**2
-
-    maskname = glob.glob(imagenames[i].split("12m")[0]+"*_hybridmask*")
     if maskname:
-	maskname = maskname[0]
-        os.system("rm -rf " + maskname.replace(".image",".mask2"))
-        immoments(imagename = maskname,
-                  outfile = maskname.replace(".image",".mask2"))
 
-        outfile = imagenames[i].replace(".image",".jyperbeam")
-        os.system("rm -rf " + outfile)
-        expr = "iif(IM1>=1.0,"+"IM0/"+str(factor)+",0.0)"
-        immath(imagename = [imagenames[i],
-                            maskname.replace(".image",".mask2")],
-               mode = "evalexpr",
-               expr = expr,
-	       outfile = outfile)
 
         # skymodel
         bmaj = imhead(imagenames[i].replace(".image",".jyperbeam"),
