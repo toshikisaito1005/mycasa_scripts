@@ -8,7 +8,6 @@ dir_project = "/Users/saito/data/myproj_active/proj_phangs06_ssc/"
 tpbeam = "28.5arcsec"
 
 
-
 ##############################
 ### main
 ##############################
@@ -48,6 +47,7 @@ for i in range(len(imagenames)):
   #
   maskname = glob.glob(dir_mask + this_image.split("/")[-1].split("12m")[0] + "*_hybridmask*")
   if maskname:
+    maskname = maskname[0]
     #
     maskname2 = maskname.replace(".image",".mask2")
     os.system("rm -rf " + maskname2)
@@ -109,23 +109,13 @@ for i in range(len(imagenames)):
     os.system("rm -rf " + maskname.replace(".image",".mask2*"))
     os.system("rm -rf " + maskname.replace(".image",".mask3*"))
     #
-    os.system("rm -rf " + maskname.replace(".image",".mask.fits"))
-        exportfits(imagename = maskname.replace(".image",".mask"),
-             fitsimage = maskname.replace(".image",".mask.fits"))
+    maskfits = maskname.replace(".image",".mask.fits")
+    os.system("rm -rf " + maskfits)
+    exportfits(imagename=maskname4, fitsimage=maskfits)
+    #
+    os.system("rm -rf " + maskname4)
+    importfits(fitsimage=maskfits, imagename=maskname4, defaultaxes=True, defaultaxesvalues=["RA","Dec","Frequency","Stokes"])
+    os.system("rm -rf " + maskfits)
 
 
-# get PHANGS DR1 moment-8 maps
-for i in range(len(imagenames)):
-    if maskname:
-
-
-
-
-        os.system("rm -rf " + maskname.replace(".image",".mask"))
-        importfits(fitsimage = maskname.replace(".image",".mask.fits"),
-	           imagename = maskname.replace(".image",".mask"),
-		   defaultaxes = True,
-		   defaultaxesvalues=["RA","Dec","Frequency","Stokes"])
-	os.system("rm -rf " + maskname.replace(".image",".mask.fits"))
-
-    os.system("rm -rf " + imagenames[i])
+os.system("rm -rf *.last")
