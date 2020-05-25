@@ -85,6 +85,8 @@ def dirty_map(
 
     return rms
 
+
+
 def eazy_tclean(outputname,
                 dir_sim,
                 galname,
