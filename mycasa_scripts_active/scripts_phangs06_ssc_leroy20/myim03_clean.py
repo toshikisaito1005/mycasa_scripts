@@ -41,47 +41,47 @@ def get_info(
 	return galname, start, ra, dec, weighting, wt
 
 def def_imsize(
-	this_dir_sim,
+	dir_proj,
 	galname,
 	):
-	skymodel = glob.glob("../phangs_dr1/"+galname+"*.skymodel")[0]
-	size_ra = imhead(tpname,mode="list")["shape"][0]
-	size_dec = imhead(tpname,mode="list")["shape"][1]
-	size_pixel = max(size_ra,size_dec)
-	pixel_arcsec = abs(imhead(tpname,mode="list")["cdelt1"]) * 180/np.pi*3600
+	skymodel = glob.glob(dir_proj+"../v3p4_tpeak/"+galname+"*.skymodel")[0]
+	size_ra = imhead(skymodel,mode="list")["shape"][0]
+	size_dec = imhead(skymodel,mode="list")["shape"][1]
+	size_pixel = max(size_ra, size_dec)
+	pixel_arcsec = abs(imhead(skymodel,mode="list")["cdelt1"]) * 180/np.pi*3600
 	size_arcsec = size_pixel * pixel_arcsec
 	imsize  = int(np.round(size_arcsec,-1) * 1.4)
 	if imsize < 256:
-	    imsize = 256
+		imsize = 256
 	else:
-	    if imsize < 288:
-	    imsize = 288
-	else:
-	    if imsize < 320:
-	        imsize = 320
-		    else:
-	        if imsize < 384:
-	            imsize = 384
-	        else:
-		    if imsize < 400:
-		        imsize = 400
-		    else:
-	   	                if imsize < 448:
-		            imsize = 448
-		        else:
-		            if imsize < 512:
-		                imsize = 512
-	                        else:
-		                if imsize < 576:
-			            imsize = 576
-			        else:
-			            if imsize < 648:
-			                imsize = 648
-			            else:
-				        if imsize < 800:
-				            imsize = 800
-				        else:
-				            imsize = 1024
+		if imsize < 288:
+			imsize = 288
+		else:
+			if imsize < 320:
+				imsize = 320
+			else:
+				if imsize < 384:
+					imsize = 384
+				else:
+					if imsize < 400:
+						imsize = 400
+					else:
+						if imsize < 448:
+							imsize = 448
+						else:
+							if imsize < 512:
+								imsize = 512
+							else:
+								if imsize < 576:
+									imsize = 576
+								else:
+									if imsize < 648:
+										imsize = 648
+									else:
+										if imsize < 800:
+											imsize = 800
+										else:
+											imsize = 1024
 
 	return imsize
 
@@ -174,13 +174,13 @@ for i in [0]:
 	galname, start, ra, dec, weighting, wt = \
 	    get_info(this_dir_sim, mosaic_def2, robust)
 	phasecenter = "J2000 " + ra + " " + dec
-	imsize = def_imsize(this_dir_sim, galname)
+	imsize = def_imsize(dir_proj, galname)
 	title = galname + ", " + str(i+1) + "/" + str(len(dir_sim))
 
 	### measure 7m-only rms
 	print("### dirty map of " + title)
-	vis = dir_sim + "/sim_" + galname + ".aca.cycle5.noisy.ms"
-	imagename = dir_sim + "/dirty_" + galname + "_7m_" + wt
+	vis = this_dir_sim + "/sim_" + galname + ".aca.cycle5.noisy.ms"
+	imagename = this_dir_sim + "/dirty_" + galname + "_7m_" + wt
 	hybridmaskimage = glob.glob(dir_mask + galname + "*")[0]
 	rms = dirty_map(vis, imagename, width, start, imsize, phasecenter, weighting, robust, nchan, hybridmaskimage)
 
