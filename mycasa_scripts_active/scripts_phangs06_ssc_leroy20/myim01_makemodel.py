@@ -3,9 +3,28 @@ import sys
 import glob
 import numpy as np
 
-# get systemic velocity definition
-mosaic_def_tmp_ = np.loadtxt("../scripts/mosaic_definitions.txt",dtype="S20",usecols=(0,3))
-mosaic_def = np.c_[[s.split("_")[0] for s in mosaic_def_tmp_[:,0]],mosaic_def_tmp_[:,1]]
+
+dir_project = "/Users/saito/data/myproj_active/proj_phangs06_ssc/"
+
+
+
+
+##############################
+### main
+##############################
+### directories
+dir_mask = dir_project + "v3p3_hybridmask"
+dir_data = dir_project + "v3p4_tpeak"
+
+### get systemic velocity definition
+mosaic_def = np.loadtxt("mosaic_definitions.txt",dtype="S20",usecols=(0,3))
+mosaic_def = np.c_[[s.split("_")[0] for s in mosaic_def[:,0]], mosaic_def[:,1]]
+
+### convert to CASA image
+fitsimages = glob.glob(dir_mask + ".fits")
+
+
+
 
 # convert to CASA image
 fitsimages = glob.glob("../phangs_dr1/*.fits")
