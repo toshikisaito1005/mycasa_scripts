@@ -3,6 +3,7 @@ import sys
 import glob
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
 plt.ioff()
 
 
@@ -53,13 +54,11 @@ imagenames = glob.glob(dir_data + galname + "/*.smooth.pbcor")
 #
 txt_ra = imagenames[0] + "_ra.txt"
 os.system("rm -rf " + txt_ra)
-ra = import_data(imagename=imagenames[0], mode="coords", txtname=txt_ra)
-ra = ra * 180 / np.pi
+ra = import_data(imagename=imagenames[0], mode="coords", txtname=txt_ra) * 180 / np.pi
 #
 txt_dec = imagenames[0] + "_dec.txt"
 os.system("rm -rf " + txt_dec)
-dec = import_data(imagename=imagenames[0], mode="coords", txtname=txt_dec, index=1)
-dec = dec * 180 / np.pi
+dec = import_data(imagename=imagenames[0], mode="coords", txtname=txt_dec, index=1) * 180 / np.pi
 #
 
 
@@ -71,14 +70,14 @@ for j in range(len(imagenames)):
     data = import_data(imagename=this_image, mode="data", txtname=txtfile)
     data[np.isinf(data)] = 0
     #
-    this_ra = ra[data>0.0001]
-    this_dec = dec[data>0.0001]
-    this_data = data[data>0.0001]
+    this_ra = ra[data>0.0001].tolist()
+    this_dec = dec[data>0.0001].tolist()
+    this_data = data[data>0.0001].tolist()
     #
     plt.figure(figsize=(8,8))
-    plt.scatter(this_ra, this_dec, color=this_data, marker=".", cmap="rainbow", lw=0, s=50, alpha=0.5)
-    plt.xlim([this_ra.max(),this_ra.min()])
-    plt.ylim([this_dec.min(),this_dec.max()])
+    plt.scatter(this_ra, this_dec, color=this_data, marker="o", cmap=cm.rainbow, lw=4, s=50, alpha=0.5)
+    plt.xlim([np.max(this_ra),np.min(this_ra)])
+    plt.ylim([np.min(this_dec),np.max(this_dec)])
     plt.savefig(dir_product + this_image.split("/")[-1]+".png",dpi=100)
 
 
