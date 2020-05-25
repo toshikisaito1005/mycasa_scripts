@@ -4,7 +4,16 @@ import glob
 import pyfits
 import shutil
 
-os.system("mkdir ../sim_phangs/")
+
+dir_project = "/Users/saito/data/myproj_active/proj_phangs06_ssc/"
+
+
+##############################
+### main
+##############################
+dir_sim = dir_project + "sim_phangs/"
+
+os.system("mkdir " + dir_sim)
 
 skymodels = glob.glob("../phangs_dr1/*.skymodel")
 tpmodels = glob.glob("../phangs_dr1/*.jypb.smooth")
