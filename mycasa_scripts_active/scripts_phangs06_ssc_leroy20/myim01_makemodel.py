@@ -64,13 +64,31 @@ for i in range(len(imagenames)):
     beamarea = (bmaj*bmaj*np.pi) / (4*np.log(2)) / area_pix_arcsec
     #
     outfile2 = this_image.replace(".image",".skymodel")
+    os.system("rm -rf " + outfile2)
     immath(imagename=outfile1, expr="IM0/"+str(beamarea), outfile=outfile2)
+    #
     imhead(imagename=outfile2, mode="put", hdkey="bunit", hdvalue="Jy/pixel")
     imhead(imagename=outfile1,mode="put", hdkey="bunit", hdvalue="Jy/beam")
     #
     outfile3 = this_image.replace(".image",".jypb.smooth_tmp_")
-        os.system("rm -rf " + outfile)
-        imsmooth(imagename=outfile1, major=tpbeam, minor=tpbeam, pa="0deg", outfile=outfile3)
+    os.system("rm -rf " + outfile3)
+    imsmooth(imagename=outfile1, major=tpbeam, minor=tpbeam, pa="0deg", outfile=outfile3)
+    #
+    cell = np.abs(imhead(outfile3,mode='list')['cdelt1']) * 180.*3600./np.pi
+    nbin = int(28.5 / 4.5 / cell)
+    #
+    outfile4 = this_image.replace(".image",".jypb.smooth")
+    os.system("rm -rf " + outfile4)
+    imrebin(imagename=outfile3, outfile=outfile4, factor=[nbin,nbin])
+    #
+    bmaj = imhead(outfile4,mode="list")["beammajor"]["value"]
+    size_pix = abs(imhead(outfile4,mode="list")["cdelt1"])
+    area_pix_arcsec = (size_pix * 3600 * 180 / np.pi) ** 2
+    beamarea = (bmaj*bmaj*np.pi) / (4*np.log(2)) / area_pix_arcsec
+    #
+    outfile5 = this_image.replace(".image",".jyppix.smooth")
+    os.system("rm -rf " + outfile5)
+    immath(imagename=outfile4, expr="IM0/"+str(beamarea), outfile=outfile5)
 
 
 
@@ -78,33 +96,7 @@ for i in range(len(imagenames)):
 for i in range(len(imagenames)):
     if maskname:
 
-        outfile = imagenames[i].replace(".image",".jypb.smooth_tmp_")
-        os.system("rm -rf " + outfile)
-        imsmooth(imagename = imagenames[i].replace(".image",".jyperbeam"),
-                 major = "28.5arcsec",
-                 minor = "28.5arcsec",
-                 pa = "0deg",
-                 outfile = outfile)
 
-        cell=np.abs(imhead(imagenames[i].replace(".image",".jypb.smooth_tmp_"),
-                           mode='list')['cdelt1'])*180.*3600./np.pi
-        nbin = int(28.5 / 4.5 / cell)
-        os.system("rm -rf " + imagenames[i].replace(".image",".jypb.smooth"))
-        imrebin(imagename = imagenames[i].replace(".image",".jypb.smooth_tmp_"),
-                outfile = imagenames[i].replace(".image",".jypb.smooth"),
-                factor=[nbin,nbin])
-
-        outfile = imagenames[i].replace(".image",".jyppix.smooth")
-        os.system("rm -rf " + outfile)
-        bmaj = imhead(imagenames[i].replace(".image",".jypb.smooth"),
-                      mode="list")["beammajor"]["value"]
-        size_pix = abs(imhead(imagenames[i].replace(".image",".jypb.smooth"),
-                              mode="list")["cdelt1"])
-        area_pix_arcsec = (size_pix * 3600 * 180 / np.pi) ** 2
-        beamarea = (bmaj*bmaj*np.pi) / (4*np.log(2)) / area_pix_arcsec
-        immath(imagename = imagenames[i].replace(".image",".jypb.smooth"),
-               expr = "IM0/" + str(beamarea),
-               outfile = outfile)
 
         imhead(imagename = outfile,
                mode = "put",
