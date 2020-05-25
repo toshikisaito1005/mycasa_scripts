@@ -23,6 +23,7 @@ tpmodels.sort()
 
 #for i in range(len(skymodels)):
 for i in [0]:
+    ###
     galname = skymodels[i].split("/")[-1].split("_12m")[0]
     dir_this = "sim_" + galname
     os.system("rm -rf " + dir_this)
@@ -45,16 +46,8 @@ for i in [0]:
     pointingspacing    =  "0.4arcmin"
     overwrite          =  True
     simobserve()
-
-
-
-
-
-
     #
-    dir_simobs = dir_this
-    dir_product = dir_this
-
+    ###
     infile = tpmodels[i]
     fitsimage = tpmodels[i] + ".fits"
     os.system("rm -rf " + fitsimage)
@@ -64,13 +57,16 @@ for i in [0]:
     os.system("rm -rf " + infile)
     importfits(fitsimage = fitsimage,
                imagename = infile,
-	       defaultaxes = True,
+           defaultaxes = True,
                defaultaxesvalues=["","","","I"])
     os.system("rm -rf " + fitsimage)
-      
+    #
+    dir_simobs = "./" + dir_this + "/"
+    dir_product = dir_project + "/" + dir_this + "/"
+    #
     # get pointing positions
     txtdata = dir_simobs + "sim_" + galname + ".aca.cycle5.ptg.txt"
-
+    #
     f = open(txtdata)
     data1 = f.read()
     f.close()
@@ -82,34 +78,14 @@ for i in [0]:
     for i in lines2:
         f.write(i + "\n")                      
     f.close()
-
-    """
-    ms_aca = dir_simobs + "sim_" + galname + ".aca.cycle5.ms"
-    listobs(ms_aca, listfile=ms_aca+".listobs")
-    f = open(ms_aca+".listobs")
-    data1 = f.read()
-    f.close()
-    lines1 = data1.split('\n')
-    for j in lines1:
-        if "Fields:" in j:
-            index_f = lines1.index(j)
-    lines2 = lines1[index_f+2:index_f+int(lines1[index_f].split(": ")[1])+2]
-    lines3 = ["J2000 "+s.split("*")[1].split(" J2000  ")[0] for s in lines2]
-    os.system("rm -rf " + ms_aca.replace(".ms",".ptg"))
-    f = open(ms_aca.replace(".ms",".ptg"), "w")
-    for i in lines3:
-        f.write(i + "\n")
-    f.close()
-    """
-
+    #
     execfile('tp2vis.py')
-    outfile = dir_simobs +  "sim_" + galname + ".sd.ms"
+    ms_tp2vis = dir_simobs +  "sim_" + galname + ".sd.ms"
     ptgfile = txtdata.replace(".txt","")
-    tp2vis(infile,outfile,ptgfile,nvgrp=5,rms=0.1,winpix=3)
-    tp2viswt(outfile,mode='const',value=0.5)#12.**4/7.**4)
+    tp2vis(infile, ms_tp2vis, ptgfile, nvgrp=5, rms=0.1, winpix=3)
+    tp2viswt(ms_tp2vis, mode='const', value=0.5)#12.**4/7.**4)
 
     ms_aca = "sim_" + galname + ".aca.cycle5.ms"
-    ms_tp2vis = outfile
     im_tp2vis = "sim_" + galname + ".sd.tp2vis.input"
 
     os.system("rm -rf " + dir_product)
