@@ -80,13 +80,11 @@ def dirty_map(
 		startmodel = "",
 		mask = "",
 		)
-    # masking dirty map
-    os.system("rm -rf _tmp_inverse.mask")
-
-
-	imregrid(imagename = dir_mask + galname + "_12m+7m+tp_co21_hybridmask.mask",
-		template = outputname + ".image",
-		output = dir_sim + "_tmp_inverse.mask")
+	# masking dirty map
+	os.system("rm -rf _tmp_inverse.mask")
+	imregrid(imagename = hybridmaskimage,
+		template = imagename + ".image",
+		output = "_tmp_inverse.mask")
 
 
 
@@ -130,7 +128,7 @@ mosaic_def2 = np.r_[np.loadtxt("mosaic_definitions.txt",dtype="S20",usecols=(0,1
 
 #
 dir_sim = glob.glob(dir_proj + "*")
-dir_mask = dir_proj + "v3p3_hybridmask/"
+dir_mask = dir_proj + "../v3p3_hybridmask/"
 
 #for i in range(len(dir_sim)):
 for i in [0]:
@@ -147,6 +145,6 @@ for i in [0]:
     print("### dirty map of " + title)
     vis = dir_sim + "/sim_" + galname + ".aca.cycle5.noisy.ms"
     imagename = dir_sim + "/dirty_" + galname + "_7m_" + wt
-    hybridmaskimage = glob.glob(dir_mask + )
-    rms = dirty_map(vis, imagename, width, start, imsize, phasecenter, weighting, robust, nchan)
+    hybridmaskimage = glob.glob(dir_mask + galname + "*")[0]
+    rms = dirty_map(vis, imagename, width, start, imsize, phasecenter, weighting, robust, nchan, hybridmaskimage)
 
