@@ -11,6 +11,10 @@ dir_project = "/Users/saito/data/myproj_active/proj_phangs06_ssc/"
 ##############################
 ### main
 ##############################
+done = glob.glob(dir_project + "eps/")
+if not done:
+    os.mkdir(dir_project + "eps/")
+
 dir_sim = dir_project + "sim_phangs/"
 os.system("rm -rf " + dir_sim)
 os.mkdir(dir_sim)
@@ -59,7 +63,7 @@ for i in [0]:
     os.system("rm -rf " + fitsimage)
     #
     dir_simobs = "./" + dir_this + "/"
-    dir_product = dir_sim + "/" + dir_this + "/"
+    dir_product = dir_sim + dir_this + "/"
     #
     # get pointing positions
     txtdata = dir_simobs + "sim_" + galname + ".aca.cycle5.ptg.txt"
@@ -85,15 +89,16 @@ for i in [0]:
     ms_aca = "sim_" + galname + ".aca.cycle5.ms"
     im_tp2vis = "sim_" + galname + ".sd.tp2vis.input"
     #
-    tp2vispl(ms_aca,ms_tp2vis)
-    #
     os.system("rm -rf " + dir_product)
     os.system("mkdir " + dir_product)
+    #
+    tp2vispl([dir_simobs + ms_aca, ms_tp2vis], outfig = dir_product + "plot_tp2viswt_" + galname + ".png")
     #
     os.system("mv " + dir_simobs + ms_aca + " " + dir_product)
     os.system("mv " + dir_simobs + ms_aca.replace(".ms",".noisy.ms") + " " + dir_product)
     os.system("mv " + ms_tp2vis + " " + dir_product)
     os.system("cp -r " + infile + " " + dir_product + im_tp2vis)
-    #os.system("rm -rf sim_" + galname)
+    os.system("rm -rf sim_" + galname)
+
 
 os.system("rm -rf *.last")
