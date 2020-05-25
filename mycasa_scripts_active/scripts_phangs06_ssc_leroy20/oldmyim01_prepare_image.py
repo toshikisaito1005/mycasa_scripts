@@ -54,12 +54,23 @@ imagenames = glob.glob(dir_data + galname + "/*.smooth.pbcor")
 template = glob.glob(dir_data + galname + "/*_skymodel.smooth")[0]
 #
 for i in range(len(imagenames)):
+    ###
+    #
     os.system("rm -rf " + imagenames[i] + ".clip*")
     immath(imagename = [imagenames[i], template],
         expr = "iif(IM1>0.0394, IM0, 0.0)",
         outfile = imagenames[i] + ".clip")
-
+    #
     exportfits(imagename = imagenames[i] + ".clip",
         fitsimage = imagenames[i] + ".clip.fits")
+    #
+    ### difference
+    os.system("rm -rf " + imagenames[i] + ".difference*")
+    immath(imagename = [imagenames[i] + ".clip", template],
+        expr = "IM0 - IM1",
+        outfile = imagenames[i] + ".difference")
+    #
+    exportfits(imagename = imagenames[i] + ".difference",
+        fitsimage = imagenames[i] + ".difference.fits")
 
 os.system("rm -rf *.last")
