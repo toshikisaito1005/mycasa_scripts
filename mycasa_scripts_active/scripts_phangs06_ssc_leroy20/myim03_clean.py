@@ -8,6 +8,7 @@ a=datetime.datetime.now()
 dir_proj = "/Users/saito/data/myproj_active/proj_phangs06_ssc/sim_phangs/"
 robust = 0.5
 width = "" # "2.6km/s"
+nchan = 1 # 96
 
 
 ##############################
@@ -45,10 +46,15 @@ def dirty_map(
 	width,
 	start,
 	imsize,
-	phasecenter
+	phasecenter,
+	weighting,
+	robust,
+	nchan,
 	):
+	# tclean
 	os.system("rm -rf " + imagename + "*")
-	tclean(vis = vis,
+	tclean(
+		vis = vis,
 		imagename = imagename,
 		field = "",
 		specmode = "cube",
@@ -60,41 +66,23 @@ def dirty_map(
 		interactive = False,
 		imsize = imsize,
 		cell = "1.0arcsec",
-		phasecenter = "J2000 "+ra+" "+dec,
-
-
-  outputname = dir_sim + "/dirty_" + galname + "_7m_"+wt
-  os.system("rm -rf "+outputname+"*")
-  tclean(
-  	"""
-	vis = dir_sim + "/sim_" + galname + ".aca.cycle5.noisy.ms",
-	imagename = outputname,
-	field = "",
-	specmode = "cube",
-	width = width,
-	start = start,
-	restfreq = "230.53800GHz",
-	outframe = "LSRK",
-	niter = 0,
-	threshold = "",
-	cyclefactor = 4,
-	interactive = False,
-	imsize = imsize,
-	"""
-	#cell = "1.0arcsec",
-	#phasecenter = "J2000 "+ra+" "+dec,
-	weighting = weighting,
-	robust = robust,
-	gridder = "mosaic",
-	deconvolver = "multiscale",
-	scales = [0,2,5],
-	nchan = nchan,
-	cycleniter = 50,
-	usemask = "user",
-	restoringbeam = "common",
-	startmodel = "",
-	mask = "")
+		phasecenter = phasecenter,
+		weighting = weighting,
+		robust = robust,
+		gridder = "mosaic",
+		deconvolver = "multiscale",
+		scales = [0,2,5],
+		nchan = nchan,
+		cycleniter = 50,
+		usemask = "user",
+		restoringbeam = "common",
+		startmodel = "",
+		mask = "",
+		)
     # masking dirty map
+    os.system("rm -rf " + dir_sim + "/_tmp_inverse.mask")
+
+
     os.system("rm -rf " + dir_sim + "/_tmp_inverse.mask")
     imregrid(imagename = dir_mask + galname + "_12m+7m+tp_co21_hybridmask.mask",
     	template = outputname + ".image",
@@ -152,4 +140,5 @@ for i in [0]:
     print("### dirty map of " + title)
     vis = dir_sim + "/sim_" + galname + ".aca.cycle5.noisy.ms"
     imagename = dir_sim + "/dirty_" + galname + "_7m_" + wt
-    rms = dirty_map(vis, imagename, width, start, imsize, phasecenter)
+    rms = dirty_map(vis, imagename, width, start, imsize, phasecenter, weighting, robust, nchan)
+
