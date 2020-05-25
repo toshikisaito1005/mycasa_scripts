@@ -5,7 +5,7 @@ import numpy as np
 
 
 dir_project = "/Users/saito/data/myproj_active/proj_phangs06_ssc/"
-
+tpbeam = "28.5arcsec"
 
 
 
@@ -53,42 +53,30 @@ for i in range(len(imagenames)):
     os.system("rm -rf " + maskname2)
     immoments(imagename=maskname, outfile=maskname2)
     #
-    outfile = this_image.replace(".image",".jyperbeam")
-    os.system("rm -rf " + outfile)
+    outfile1 = this_image.replace(".image",".jyperbeam")
+    os.system("rm -rf " + outfile1)
     expr = "iif(IM1>=1.0,"+"IM0/"+str(factor)+",0.0)"
-    immath(imagename = [this_image,maskname2],
-               mode = "evalexpr",
-               expr = expr,
-         outfile = outfile)
+    immath(imagename=[this_image,maskname2], mode="evalexpr", expr=expr, outfile=outfile1)
+    # skymodel
+    bmaj = imhead(outfile1,mode="list")["beammajor"]["value"]
+    size_pix = abs(imhead(outfile1,mode="list")["cdelt1"])
+    area_pix_arcsec = (size_pix * 3600 * 180 / np.pi) ** 2
+    beamarea = (bmaj*bmaj*np.pi) / (4*np.log(2)) / area_pix_arcsec
+    #
+    outfile2 = this_image.replace(".image",".skymodel")
+    immath(imagename=outfile1, expr="IM0/"+str(beamarea), outfile=outfile2)
+    imhead(imagename=outfile2, mode="put", hdkey="bunit", hdvalue="Jy/pixel")
+    imhead(imagename=outfile1,mode="put", hdkey="bunit", hdvalue="Jy/beam")
+    #
+    outfile3 = this_image.replace(".image",".jypb.smooth_tmp_")
+        os.system("rm -rf " + outfile)
+        imsmooth(imagename=outfile1, major=tpbeam, minor=tpbeam, pa="0deg", outfile=outfile3)
 
 
 
 # get PHANGS DR1 moment-8 maps
 for i in range(len(imagenames)):
     if maskname:
-
-
-        # skymodel
-        bmaj = imhead(imagenames[i].replace(".image",".jyperbeam"),
-                      mode="list")["beammajor"]["value"]
-        size_pix = abs(imhead(imagenames[i].replace(".image",".jyperbeam"),
-                              mode="list")["cdelt1"])
-        area_pix_arcsec = (size_pix * 3600 * 180 / np.pi) ** 2
-        beamarea = (bmaj*bmaj*np.pi) / (4*np.log(2)) / area_pix_arcsec
-        immath(imagename = imagenames[i].replace(".image",".jyperbeam"),
-               expr = "IM0/" + str(beamarea),
-               outfile = imagenames[i].replace(".image",".skymodel"))
-
-        imhead(imagename = imagenames[i].replace(".image",".skymodel"),
-               mode = "put",
-               hdkey = "bunit",
-               hdvalue= "Jy/pixel")
-
-        #
-        imhead(imagename = imagenames[i].replace(".image",".jyperbeam"),
-               mode = "put",
-	       hdkey = "bunit",
-	       hdvalue= "Jy/beam")
 
         outfile = imagenames[i].replace(".image",".jypb.smooth_tmp_")
         os.system("rm -rf " + outfile)
