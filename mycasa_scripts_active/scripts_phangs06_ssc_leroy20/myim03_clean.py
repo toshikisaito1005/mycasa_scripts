@@ -7,6 +7,7 @@ a=datetime.datetime.now()
 
 dir_proj = "/Users/saito/data/myproj_active/proj_phangs06_ssc/sim_phangs/"
 robust = 0.5
+width = "" # "2.6km/s"
 
 
 ##############################
@@ -40,13 +41,33 @@ def get_info(
 
 def dirty_map(
 	vis,
+	imagename,
+	width,
+	start,
+	imsize,
+	phasecenter
 	):
+	os.system("rm -rf " + imagename + "*")
 	tclean(vis = vis,
+		imagename = imagename,
+		field = "",
+		specmode = "cube",
+		restfreq = "230.53800GHz",
+		outframe = "LSRK",
+		niter = 0,
+		threshold = "",
+		cyclefactor = 4,
+		interactive = False,
+		imsize = imsize,
+		cell = "1.0arcsec",
+		phasecenter = "J2000 "+ra+" "+dec,
 
 
   outputname = dir_sim + "/dirty_" + galname + "_7m_"+wt
   os.system("rm -rf "+outputname+"*")
-  tclean(vis = dir_sim + "/sim_" + galname + ".aca.cycle5.noisy.ms",
+  tclean(
+  	"""
+	vis = dir_sim + "/sim_" + galname + ".aca.cycle5.noisy.ms",
 	imagename = outputname,
 	field = "",
 	specmode = "cube",
@@ -59,8 +80,9 @@ def dirty_map(
 	cyclefactor = 4,
 	interactive = False,
 	imsize = imsize,
-	cell = "1.0arcsec",
-	phasecenter = "J2000 "+ra+" "+dec,
+	"""
+	#cell = "1.0arcsec",
+	#phasecenter = "J2000 "+ra+" "+dec,
 	weighting = weighting,
 	robust = robust,
 	gridder = "mosaic",
@@ -122,11 +144,12 @@ for i in [0]:
     # get info
     galname, start, ra, dec, weighting, wt = \
         def_name(this_dir_sim, mosaic_def2, robust)
-    title = galname + ", " + str(i+1) + "/" + str(len(dir_sim))
+    phasecenter = "J2000 " + ra + " " + dec
     imsize = def_imsize(this_dir_sim, galname)
+    title = galname + ", " + str(i+1) + "/" + str(len(dir_sim))
 
     ### measure 7m-only rms
     print("### dirty map of " + title)
     vis = dir_sim + "/sim_" + galname + ".aca.cycle5.noisy.ms"
-    imagename = dir_sim + "/dirty_" + galname + "_7m_"+wt
-    rms = dirty_map(vis, )
+    imagename = dir_sim + "/dirty_" + galname + "_7m_" + wt
+    rms = dirty_map(vis, imagename, width, start, imsize, phasecenter)
