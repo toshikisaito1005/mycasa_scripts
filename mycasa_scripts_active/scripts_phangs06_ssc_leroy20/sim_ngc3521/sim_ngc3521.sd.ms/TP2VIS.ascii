@@ -1,6 +1,0 @@
-TP2VIS definition of VIRTUAL interferometer
-antList:['ALMA']
-dish:12.0
-observatory:ALMA
-maxRad:999.0
-fwhm100:65.2
