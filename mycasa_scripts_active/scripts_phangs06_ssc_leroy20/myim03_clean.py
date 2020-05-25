@@ -165,9 +165,7 @@ mosaic_def2 = np.r_[np.loadtxt("mosaic_definitions.txt",dtype="S20",usecols=(0,1
 #
 dir_sim = glob.glob(dir_proj + "*")
 dir_mask = dir_proj + "../v3p3_hybridmask/"
-
-#for i in range(len(dir_sim)):
-for i in [0]:
+for i in range(len(dir_sim)):
 	#
 	this_dir_sim = dir_sim[i]
 	# get info
@@ -178,9 +176,12 @@ for i in [0]:
 	title = galname + ", " + str(i+1) + "/" + str(len(dir_sim))
 
 	### measure 7m-only rms
-	print("### dirty map of " + title)
-	vis = this_dir_sim + "/sim_" + galname + ".aca.cycle5.noisy.ms"
-	imagename = this_dir_sim + "/dirty_" + galname + "_7m_" + wt
-	hybridmaskimage = glob.glob(dir_mask + galname + "*")[0]
-	rms = dirty_map(vis, imagename, width, start, imsize, phasecenter, weighting, robust, nchan, hybridmaskimage)
+	hybridmaskimage = glob.glob(dir_mask + galname + "*")
+	if hybridmaskimage:
+		print("### processing dirty map of " + title)
+		hybridmaskimage = hybridmaskimage[0]
+		vis = this_dir_sim + "/sim_" + galname + ".aca.cycle5.noisy.ms"
+		imagename = this_dir_sim + "/dirty_" + galname + "_7m_" + wt
+		rms = dirty_map(vis, imagename, width, start, imsize, phasecenter, weighting, robust, nchan, hybridmaskimage)
+
 

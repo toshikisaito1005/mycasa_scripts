@@ -227,6 +227,7 @@ mosaic_def2 = np.loadtxt("../scripts/multipart_fields.txt",dtype="S20",usecols=(
 mosaic_def2 = np.r_[np.loadtxt("../scripts/mosaic_definitions.txt",dtype="S20",usecols=(0,1,2)),mosaic_def2]
 
 for i in range(len(dir_sim)):
+  """
     # define name
     galname,start,ra,dec,weighting,wt = def_name(dir_sim[i],mosaic_def2,robust)
     title = galname + ", " + str(i) + "/" + str(len(dir_sim) - 1)
@@ -236,7 +237,8 @@ for i in range(len(dir_sim)):
     print("### dirty map of " + title)
     rms = dirty_map(dir_sim[i],galname,wt,width,start,ra,dec,
 		    weighting,robust,dir_mask,imsize)
-
+  """
+  
     ### model TP data
     tpname = dir_sim[i] + "/sim_" + galname + ".sd.tp2vis.input"
 
