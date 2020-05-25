@@ -15,11 +15,11 @@ nchan = 1 # 96
 ### def
 ##############################
 def get_info(
-	dir_sim,
-	mosaic_def2
+	this_dir_sim,
+	mosaic_def2,
 	robust,
 	):
-	galname = dir_sim.split("/")[-1]
+	galname = this_dir_sim.split("/")[-1]
 	start = "" #mosaic_def[:,1][np.where(mosaic_def[:,0]==galname)[0][0]] + "km/s"
 	ra = mosaic_def2[:,1][np.where(mosaic_def2[:,0]==galname)[0][0]]
 	dec = mosaic_def2[:,2][np.where(mosaic_def2[:,0]==galname)[0][0]]
@@ -85,36 +85,28 @@ def dirty_map(
 	imregrid(imagename = hybridmaskimage,
 		template = imagename + ".image",
 		output = "_tmp_inverse.mask")
+	#
+	os.system("rm -rf inverse.mask")
+	immath(imagename = "_tmp_inverse.mask",
+		mode = "evalexpr",
+		expr = "iif(IM0>=1,0,1)",
+		outfile = "inverse.mask")
+	#
+	os.system("rm -rf inverse.mask.fits")
+	exportfits(imagename = "inverse.mask",
+	           fitsimage = "inverse.mask.fits")
+	#
+	os.system("rm -rf inverse.mask")
+	importfits(fitsimage = "inverse.mask.fits",
+	           imagename = "inverse.mask",
+	           defaultaxes = True,
+	           defaultaxesvalues = ["RA","Dec","Frequency","Stokes"])
+	#
+	os.system("rm -rf inverse.mask.fits")
+	#
+	rms = imstat(imagename=imagename+".image",mask="inverse.mask")["rms"][0]
 
-
-
-    #os.system("rm -rf " + dir_sim + "/_tmp_inverse.mask")
-    imregrid(imagename = dir_mask + galname + "_12m+7m+tp_co21_hybridmask.mask",
-    	template = outputname + ".image",
-    	output = dir_sim + "/_tmp_inverse.mask")
-
-    os.system("rm -rf " + dir_sim + "/inverse.mask")
-    immath(imagename = dir_sim + "/_tmp_inverse.mask",
-    	mode = "evalexpr",
-    	expr = "iif(IM0>=1,0,1)",
-    	outfile = dir_sim + "/inverse.mask")
-
-    os.system("rm -rf " + dir_sim + "/inverse.mask.fits")
-    exportfits(imagename = dir_sim + "/inverse.mask",
-               fitsimage = dir_sim + "/inverse.mask.fits")
-
-    os.system("rm -rf " + dir_sim + "/inverse.mask")
-    os.system("rm -rf inverse.mask")
-    importfits(fitsimage = dir_sim + "/inverse.mask.fits",
-               imagename = "inverse.mask",
-               defaultaxes=True,
-               defaultaxesvalues=["RA","Dec","Frequency","Stokes"])
-    os.system("rm -rf " + dir_sim + "/inverse.mask.fits")
-
-    rms = imstat(imagename = outputname + ".image",
-                 mask = "inverse.mask")["rms"][0]
-
-    return rms
+	return rms
 
 
 ##############################
@@ -134,17 +126,17 @@ dir_mask = dir_proj + "../v3p3_hybridmask/"
 for i in [0]:
 	#
 	this_dir_sim = dir_sim[i]
-    # get info
-    galname, start, ra, dec, weighting, wt = \
-        def_name(this_dir_sim, mosaic_def2, robust)
-    phasecenter = "J2000 " + ra + " " + dec
-    imsize = def_imsize(this_dir_sim, galname)
-    title = galname + ", " + str(i+1) + "/" + str(len(dir_sim))
+	# get info
+	galname, start, ra, dec, weighting, wt = \
+	    get_info(this_dir_sim, mosaic_def2, robust)
+	phasecenter = "J2000 " + ra + " " + dec
+	imsize = def_imsize(this_dir_sim, galname)
+	title = galname + ", " + str(i+1) + "/" + str(len(dir_sim))
 
-    ### measure 7m-only rms
-    print("### dirty map of " + title)
-    vis = dir_sim + "/sim_" + galname + ".aca.cycle5.noisy.ms"
-    imagename = dir_sim + "/dirty_" + galname + "_7m_" + wt
-    hybridmaskimage = glob.glob(dir_mask + galname + "*")[0]
-    rms = dirty_map(vis, imagename, width, start, imsize, phasecenter, weighting, robust, nchan, hybridmaskimage)
+	### measure 7m-only rms
+	print("### dirty map of " + title)
+	vis = dir_sim + "/sim_" + galname + ".aca.cycle5.noisy.ms"
+	imagename = dir_sim + "/dirty_" + galname + "_7m_" + wt
+	hybridmaskimage = glob.glob(dir_mask + galname + "*")[0]
+	rms = dirty_map(vis, imagename, width, start, imsize, phasecenter, weighting, robust, nchan, hybridmaskimage)
 
