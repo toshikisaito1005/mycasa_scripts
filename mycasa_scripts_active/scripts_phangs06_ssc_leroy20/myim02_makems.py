@@ -24,7 +24,7 @@ tpmodels.sort()
 #for i in range(len(skymodels)):
 for i in [0]:
     galname = skymodels[i].split("/")[-1].split("_12m")[0]
-    dir_this = dir_sim + "sim_" + galname + "/"
+    dir_this = "sim_" + galname
     os.system("rm -rf " + dir_this)
     print("### working on " + galname + ", "+str(i)+"/"+str(len(skymodels) - 1))
     default('simobserve')
@@ -45,6 +45,11 @@ for i in [0]:
     pointingspacing    =  "0.4arcmin"
     overwrite          =  True
     simobserve()
+
+
+
+
+
 
     #
     dir_simobs = dir_this
