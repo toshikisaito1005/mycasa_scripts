@@ -41,11 +41,11 @@ imagenames.sort()
 for i in range(len(imagenames)):
   #
   this_image = imagenames[i]
-  print("### processing " + this_image.split("/")[-1])
+  print("### processing " + this_image.split("/")[-1] + " " + str(i+1) + "/" + str(len(imagenames)))
   bmaj = imhead(this_image,mode="list")["beammajor"]["value"]
   factor = 1.222e+6 / bmaj**2 / 230.53800**2
   #
-  maskname = glob.glob(dir_mask + this_image.split("/")[-1].split("12m")[0] + "*_hybridmask*")
+  maskname = glob.glob(dir_mask + this_image.split("/")[-1].split("12m")[0] + "*_hybridmask.image")
   if maskname:
     maskname = maskname[0]
     #
