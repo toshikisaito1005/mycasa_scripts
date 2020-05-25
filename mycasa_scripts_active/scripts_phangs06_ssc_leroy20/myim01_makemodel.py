@@ -13,35 +13,38 @@ dir_project = "/Users/saito/data/myproj_active/proj_phangs06_ssc/"
 ### main
 ##############################
 ### directories
-dir_mask = dir_project + "v3p3_hybridmask"
-dir_data = dir_project + "v3p4_tpeak"
+dir_mask = dir_project + "v3p3_hybridmask/"
+dir_data = dir_project + "v3p4_tpeak/"
+
 
 ### get systemic velocity definition
 mosaic_def = np.loadtxt("mosaic_definitions.txt",dtype="S20",usecols=(0,3))
 mosaic_def = np.c_[[s.split("_")[0] for s in mosaic_def[:,0]], mosaic_def[:,1]]
 
+
 ### convert to CASA image
-fitsimages = glob.glob(dir_mask + ".fits")
-
-
-
-
-# convert to CASA image
-fitsimages = glob.glob("../phangs_dr1/*.fits")
+fitsimages = glob.glob(dir_mask + "*.fits")
+fitsimages.extend(glob.glob(dir_data + "*.fits"))
 for i in range(len(fitsimages)):
-    importfits(fitsimage = fitsimages[i],
-               imagename = fitsimages[i].replace(".fits",".image"))
-    os.system("rm -rf " + fitsimages[i])
+  print("### " + str(i+1) + "/" + str(len(fitsimages)))
+  importfits(fitsimage = fitsimages[i],
+    imagename = fitsimages[i].replace(".fits",".image"))
+  os.system("rm -rf " + fitsimages[i])
 
-os.system("rm -rf ../phangs*/ngc1300_12m+7m+tp_co21_strict_tpeak.image")
-os.system("rm -rf ../phangs*/ngc4569_12m+7m+tp_co21_strict_tpeak.image")
+os.system("rm -rf " + dir_data + "ngc1300_12m+7m+tp_co21_strict_tpeak.image")
+os.system("rm -rf " + dir_data + "ngc4569_12m+7m+tp_co21_strict_tpeak.image")
 
-# get PHANGS DR1 moment-8 maps
-imagenames = glob.glob("../phangs_dr1/*_tpeak.image")
-masknames = glob.glob("../phangs_dr1/*_hybridmask.image")
+
+###
+imagenames = glob.glob(dir_data + "*.image")
+masknames = glob.glob(dir_mask + "*.image")
 imagenames.sort()
 masknames.sort()
 
+
+
+
+# get PHANGS DR1 moment-8 maps
 for i in range(len(imagenames)):
     bmaj = imhead(imagenames[i],mode="list")["beammajor"]["value"]
     factor = 1.222e+6 / bmaj**2 / 230.53800**2
