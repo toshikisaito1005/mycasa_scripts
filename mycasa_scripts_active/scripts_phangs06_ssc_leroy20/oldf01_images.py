@@ -90,11 +90,63 @@ myim.fits2eps(dir_data = dir_data,
               clim = clim)
 
 
-### 7m-only
+### CAF
 #
-imagename_color = galname + "/sim_ngc0628_7m_br.smooth.pbcor.clip.fits"
-title = "Convolved 7m-only"
-output = "../eps/ngc0628_7m.png"
+imagename_color = galname + "/sim_ngc0628_caf_br.smooth.pbcor.clip.fits"
+title = "Convolved Feather"
+output = "../eps/ngc0628_feather.png"
+#
+myim.fits2eps(dir_data = dir_data,
+              imagename_color = imagename_color,
+              imagename_contour = imagename_contour,
+              ra_center = ra_center,
+              dec_center = dec_center,
+              title = title,
+              colorbar_label = colorbar_label,
+              output = output,
+              colorscale = colorscale,
+              colorlog = colorlog,
+              color_contour = color_contour,
+              color_beam = color_beam,
+              colorbar = colorbar,
+              value = value,
+              contour = contour,
+              xlim = xlim,
+              ylim = ylim,
+              clim = clim)
+
+
+### CBF
+#
+imagename_color = galname + "/sim_ngc0628_cbf_br.smooth.pbcor.clip.fits"
+title = "Convolved tp2vis"
+output = "../eps/ngc0628_tp2vis.png"
+#
+myim.fits2eps(dir_data = dir_data,
+              imagename_color = imagename_color,
+              imagename_contour = imagename_contour,
+              ra_center = ra_center,
+              dec_center = dec_center,
+              title = title,
+              colorbar_label = colorbar_label,
+              output = output,
+              colorscale = colorscale,
+              colorlog = colorlog,
+              color_contour = color_contour,
+              color_beam = color_beam,
+              colorbar = colorbar,
+              value = value,
+              contour = contour,
+              xlim = xlim,
+              ylim = ylim,
+              clim = clim)
+
+
+### CDF
+#
+imagename_color = galname + "/sim_ngc0628_cdf_br.smooth.pbcor.clip.fits"
+title = "Convolved TPmodel"
+output = "../eps/ngc0628_tpmodel.png"
 #
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
