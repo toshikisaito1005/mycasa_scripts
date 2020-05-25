@@ -12,23 +12,25 @@ dir_project = "/Users/saito/data/myproj_active/proj_phangs06_ssc/"
 ### main
 ##############################
 dir_sim = dir_project + "sim_phangs/"
+os.system("rm -rf " + dir_sim)
+os.mkdir(dir_sim)
 
-os.system("mkdir " + dir_sim)
-
-skymodels = glob.glob("../phangs_dr1/*.skymodel")
-tpmodels = glob.glob("../phangs_dr1/*.jypb.smooth")
+skymodels = glob.glob(dir_project + "v3p4_tpeak/*.skymodel")
+tpmodels = glob.glob(dir_project + "v3p4_tpeak/*.jypb.smooth")
 skymodels.sort()
 tpmodels.sort()
 
 
-for i in range(len(skymodels)):
-    galname = skymodels[i].split("/")[2].split("_12m")[0]
-    os.system("rm -rf " + "sim_" + galname)
+#for i in range(len(skymodels)):
+for i in [0]:
+    galname = skymodels[i].split("/")[-1].split("_12m")[0]
+    dir_this = dir_sim + "sim_" + galname + "/"
+    os.system("rm -rf " + dir_this)
     print("### working on " + galname + ", "+str(i)+"/"+str(len(skymodels) - 1))
     default('simobserve')
     antennalist        =  "aca.cycle5.cfg"
     skymodel           =  skymodels[i]
-    project            =  "sim_" + galname
+    project            =  dir_this
     indirection        =  ""
     incell             =  ""
     mapsize            =  ["",""]
@@ -45,8 +47,8 @@ for i in range(len(skymodels)):
     simobserve()
 
     #
-    dir_simobs = "sim_" + galname + "/"
-    dir_product = "../sim_phangs/" + galname + "/"
+    dir_simobs = dir_this
+    dir_product = dir_this
 
     infile = tpmodels[i]
     fitsimage = tpmodels[i] + ".fits"
@@ -59,7 +61,6 @@ for i in range(len(skymodels)):
                imagename = infile,
 	       defaultaxes = True,
                defaultaxesvalues=["","","","I"])
-	       #defaultaxesvalues=["RA","Dec","Frequency","Stokes"])
     os.system("rm -rf " + fitsimage)
       
     # get pointing positions
