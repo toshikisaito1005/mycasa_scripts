@@ -131,29 +131,29 @@ def dirty_map(
 		template = imagename + ".image",
 		output = "_tmp_inverse.mask")
 	#
-	os.system("rm -rf " + imagename + ".mask")
+	os.system("rm -rf " + imagename + ".inversemask")
 	immath(imagename = "_tmp_inverse.mask",
 		mode = "evalexpr",
 		expr = "iif(IM0>=1,0,1)",
-		outfile = imagename + ".mask")
+		outfile = imagename + ".inversemask")
 	#
 	os.system("rm -rf inverse.mask.fits")
-	exportfits(imagename = imagename + ".mask",
+	exportfits(imagename = imagename + ".inversemask",
 	           fitsimage = "inverse.mask.fits")
 	#
-	os.system("rm -rf " + imagename + ".mask")
+	os.system("rm -rf " + imagename + ".inversemask")
 	importfits(fitsimage = "inverse.mask.fits",
-	           imagename = imagename + ".mask",
+	           imagename = imagename + ".inversemask",
 	           defaultaxes = True,
 	           defaultaxesvalues = ["RA","Dec","Frequency","Stokes"])
-	os.system("cp -r " + imagename + ".mask" + " " + (imagename + ".mask").split("/")[-1])
+	os.system("cp -r " + imagename + ".inversemask" + " " + (imagename + ".inversemask").split("/")[-1])
 	#
 	os.system("rm -rf inverse.mask.fits")
 	os.system("rm -rf _tmp_inverse.mask")
 	#
-	rms = imstat(imagename=imagename+".image",mask=(imagename+".mask").split("/")[-1])["rms"][0]
+	rms = imstat(imagename=imagename+".image",mask=(imagename+".inversemask").split("/")[-1])["rms"][0]
 	#
-	os.system("rm -rf " + (imagename+".mask").split("/")[-1])
+	os.system("rm -rf " + (imagename+".inversemask").split("/")[-1])
 
 	return rms
 
@@ -178,6 +178,8 @@ for i in range(len(dir_sim)):
 	phasecenter = "J2000 " + ra + " " + dec
 	imsize = def_imsize(dir_proj, galname)
 	title = galname + ", " + str(i+1) + "/" + str(len(dir_sim))
+	#
+	tpname = this_dir_sim + "/sim_" + galname + ".sd.tp2vis.input"
 
 	hybridmaskimage = glob.glob(dir_mask + galname + "*")
 	if hybridmaskimage:
@@ -191,8 +193,11 @@ for i in range(len(dir_sim)):
 			rms = dirty_map(vis, imagename, width, start, imsize, phasecenter, weighting, robust, nchan, hybridmaskimage)
 		else:
 			print("### skip dirty map of " + title)
-			os.system("cp -r " + imagename + ".mask" + " " + (imagename + ".mask").split("/")[-1])
-			rms = imstat(imagename=imagename+".image",mask=(imagename+".mask").split("/")[-1])["rms"][0]
-			os.system("rm -rf " + (imagename+".mask").split("/")[-1])
+			os.system("cp -r " + imagename + ".inversemask" + " " + (imagename + ".inversemask").split("/")[-1])
+			rms = imstat(imagename=imagename+".image",mask=(imagename+".inversemask").split("/")[-1])["rms"][0]
+			os.system("rm -rf " + (imagename+".inversemask").split("/")[-1])
+		#
+		### imaging 7m-only
+
 
 
