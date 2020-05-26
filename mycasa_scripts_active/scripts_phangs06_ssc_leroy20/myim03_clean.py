@@ -342,6 +342,7 @@ def imaging_cdf(
 	inversemask = this_dir_sim + "/dirty_" + galname + "_7m_" + wt + ".inversemask"
 	os.system("cp -r " + inversemask + " " + inversemask.split("/")[-1])
 	rms_tp = imstat(imagename=sdimage,mask=inversemask.split("/")[-1])["rms"][0]
+	os.system("rm -rf " + inversemask.split("/")[-1])
 	#
 	tpstartmodel = sdimage.replace("_tmp_","")
 	os.system("rm -rf " + tpstartmodel)
