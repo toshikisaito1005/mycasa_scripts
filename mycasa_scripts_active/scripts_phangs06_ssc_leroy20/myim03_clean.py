@@ -261,6 +261,31 @@ def get_dirty_rms(
 
 	return thres_clean
 
+def imaging_caf(
+	this_dir_sim,
+	galname,
+	tpname,
+	imagename,
+	wt,
+	):
+	sdimage = this_dir_sim + "/sim_" + galname + ".sd.startmodel_tmp_"
+	pbimage = this_dir_sim + "/sim_" + galname + "_7m_" + wt + ".pb"
+	os.system("rm -rf " + sdimage)
+	imregrid(imagename=tpname, template=pbimage, output=sdimage)
+	#
+	depbsdimage = this_dir_sim + "/sim_" + galname + ".sd.startmodel.depb"
+	os.system("rm -rf " + depbsdimage)
+	immath(imagename=[sdimage,pbimage], expr="IM0*IM1", outfile=depbsdimage)
+	os.system("rm -rf " + sdimage)
+	#
+	cafimage = this_dir_sim + "/sim_" + galname + "_feather_" + wt + ".image"
+	7mname = this_dir_sim + "/sim_" + galname + "_7m_" + wt + ".image"
+	os.system("rm -rf " + cafimage)
+	feather(imagename=cafimage, highres=7mname, lowres=depbsdimage)
+	#
+	os.system("rm -rf " + cafimage + ".pbcor")
+	impbcor(imagename=cafimage, outfile=cafimage+".pbcor", pbimage=pbimage)
+
 
 ##############################
 ### main
@@ -301,25 +326,6 @@ for i in range(len(dir_sim)):
 		#
 		### imaging CAF feather
 		print("### processing CAF feather map of " + title)
-		sdimage = this_dir_sim + "/sim_" + galname + ".sd.startmodel_tmp_"
-		os.system("rm -rf " + sdimage)
-		imregrid(imagename=tpname, template=imagename+".pb", output=sdimage)
-		#
-		depbsdimage = this_dir_sim + "/sim_" + galname + ".sd.startmodel.depb"
-		os.system("rm -rf " + depbsdimage)
-		immath(imagename=[sdimage,imagename+".pb"], expr="IM0*IM1", outfile=depbsdimage)
-		os.system("rm -rf " + sdimage)
-		#
-		imagename = this_dir_sim + "/sim_" + galname + "_feather_" + wt + ".image"
-		os.system("rm -rf " + imagename)
-		feather(imagename = imagename,
-		highres = dir_sim[i]+"/sim_"+galname+"_7m_"+wt+".image",
-		lowres = outfile)
-
-		os.system("rm -rf "+imagename+".pbcor")
-		impbcor(imagename = imagename,
-		outfile = imagename+".pbcor",
-		pbimage = dir_sim[i]+"/sim_"+galname+"_7m_"+wt+".pb")
-
+		imaging_caf(this_dir_sim,galname,tpname,imagename,wt)
 
 
