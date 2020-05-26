@@ -10,7 +10,7 @@ robust = 0.5
 width = "" # "2.6km/s"
 nchan = 1 # 96
 niter = 500000
-snr = 1.5
+thres_ngc0628 = 0
 
 
 ##############################
@@ -200,7 +200,7 @@ def eazy_tclean(
 		start = start,
 		niter = niter,
 		threshold = str(rms*4.0) + "Jy",
-		#cyclefactor = 4,
+		cyclefactor = 4,
 		interactive = False,
 		imsize = imsize,
 		cell = "1.0arcsec",
@@ -211,7 +211,7 @@ def eazy_tclean(
 		deconvolver = "multiscale",
 		scales = [0,2,5],
 		nchan = nchan,
-		#cycleniter = 50,
+		cycleniter = 50,
 		usemask = "user",
 		restoringbeam = "",
 		startmodel = startmodel,
@@ -230,7 +230,7 @@ def eazy_tclean(
 		start = start,
 		niter = niter,
 		threshold = str(rms*2.0) + "Jy",
-		#cyclefactor = 4,
+		cyclefactor = 4,
 		interactive = False,
 		imsize = imsize,
 		cell = "1.0arcsec",
@@ -240,7 +240,7 @@ def eazy_tclean(
 		gridder = "mosaic",
 		deconvolver = "hogbom",
 		nchan = nchan,
-		#cycleniter = 50,
+		cycleniter = 50,
 		usemask = "user",
 		restoringbeam = "",
 		gain = 0.1,
