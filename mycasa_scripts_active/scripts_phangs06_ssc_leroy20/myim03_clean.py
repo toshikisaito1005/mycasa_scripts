@@ -9,6 +9,8 @@ dir_proj = "/Users/saito/data/myproj_active/proj_phangs06_ssc/sim_phangs/"
 robust = 0.5
 width = "" # "2.6km/s"
 nchan = 1 # 96
+niter = 500000
+snr = 2.0
 
 
 ##############################
@@ -167,8 +169,10 @@ def eazy_tclean(
 	weighting,
 	robust,
 	nchan,
-	hybridmaskimage,
+	niter,
+	thres_clean,
 	tpvis=None,
+	startmodel="",
 	):
 	# ms
 	if tpvis==None:
@@ -188,8 +192,8 @@ def eazy_tclean(
 		specmode = "cube",
 		restfreq = "230.53800GHz",
 		outframe = "LSRK",
-		niter = 0,
-		threshold = "",
+		niter = niter,
+		threshold = thres_clean,
 		cyclefactor = 4,
 		interactive = False,
 		imsize = imsize,
@@ -204,37 +208,16 @@ def eazy_tclean(
 		cycleniter = 50,
 		usemask = "user",
 		restoringbeam = "common",
-		startmodel = "",
+		startmodel = startmodel,
 		mask = "",
 		)
 	"""
     outputname = dir_sim + "/sim_" + galname + "_" + outputname + "_"+wt
     os.system("rm -rf "+outputname+"*")
-    tclean(vis = vis,
-           imagename = outputname,
-           field = "",
-           specmode = "cube",
+    tclean(
            width = width,
            start = start,
-           restfreq = "230.53800GHz",
-           outframe = "LSRK",
-           niter = niter,
 	   gain = 0.2,
-           threshold = thres_clean,
-           cyclefactor = 4,
-           interactive = False,
-           imsize = imsize,
-           cell = "1.0arcsec",
-           phasecenter = "J2000 "+ra+" "+dec,
-           weighting = weighting,
-           robust = robust,
-           gridder = "mosaic",
-           deconvolver = "multiscale",
-	   scales = [0,2,5],
-           nchan = nchan,
-           #cycleniter = 50,
-           usemask = "user",
-           restoringbeam = "common",
            startmodel = startmodel,
            mask = dir_mask + galname + "_12m+7m+tp_co21_hybridmask.mask")
 
@@ -267,6 +250,7 @@ for i in range(len(dir_sim)):
 	title = galname + ", " + str(i+1) + "/" + str(len(dir_sim))
 	#
 	tpname = this_dir_sim + "/sim_" + galname + ".sd.tp2vis.input"
+	vis = this_dir_sim + "/sim_" + galname + ".aca.cycle5.noisy.ms"
 
 	hybridmaskimage = glob.glob(dir_mask + galname + "*")
 	if hybridmaskimage:
@@ -276,16 +260,18 @@ for i in range(len(dir_sim)):
 		if not done:
 			print("### processing dirty map of " + title)
 			hybridmaskimage = hybridmaskimage[0]
-			vis = this_dir_sim + "/sim_" + galname + ".aca.cycle5.noisy.ms"
 			rms = dirty_map(vis, imagename, width, start, imsize, phasecenter, weighting, robust, nchan, hybridmaskimage)
+			thres_clean = str(rms*snr) + "Jy"
 		else:
 			print("### skip dirty map of " + title)
 			os.system("cp -r " + imagename + ".inversemask" + " " + (imagename + ".inversemask").split("/")[-1])
 			rms = imstat(imagename=imagename+".image",mask=(imagename+".inversemask").split("/")[-1])["rms"][0]
 			os.system("rm -rf " + (imagename+".inversemask").split("/")[-1])
+			thres_clean = str(rms*snr) + "Jy"
 		#
 		### imaging 7m-only
 		print("### processing 7m-only map of " + title)
+
 
 
 
