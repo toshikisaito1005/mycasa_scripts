@@ -146,11 +146,14 @@ def dirty_map(
 	           imagename = imagename + ".mask",
 	           defaultaxes = True,
 	           defaultaxesvalues = ["RA","Dec","Frequency","Stokes"])
+	os.system("cp -r " + imagename + ".mask" + " " + (imagename + ".mask").split("/")[-1])
 	#
 	os.system("rm -rf inverse.mask.fits")
 	os.system("rm -rf _tmp_inverse.mask")
 	#
-	rms = imstat(imagename=imagename+".image",mask=imagename+".mask")["rms"][0]
+	rms = imstat(imagename=imagename+".image",mask=(imagename+".mask").split("/")[-1])["rms"][0]
+	#
+	os.system("rm -rf " + (imagename+".mask").split("/")[-1])
 
 	return rms
 
@@ -187,6 +190,9 @@ for i in range(len(dir_sim)):
 			vis = this_dir_sim + "/sim_" + galname + ".aca.cycle5.noisy.ms"
 			rms = dirty_map(vis, imagename, width, start, imsize, phasecenter, weighting, robust, nchan, hybridmaskimage)
 		else:
-			rms = 
+			print("### skip dirty map of " + title)
+			os.system("cp -r " + imagename + ".mask" + " " + (imagename + ".mask").split("/")[-1])
+			rms = imstat(imagename=imagename+".image",mask=(imagename+".mask").split("/")[-1])["rms"][0]
+			os.system("rm -rf " + (imagename+".mask").split("/")[-1])
 
 
