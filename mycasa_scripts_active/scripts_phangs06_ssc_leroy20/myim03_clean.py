@@ -157,6 +157,93 @@ def dirty_map(
 
 	return rms
 
+def eazy_tclean(
+	intvis,
+	imagename,
+	width,
+	start,
+	imsize,
+	phasecenter,
+	weighting,
+	robust,
+	nchan,
+	hybridmaskimage,
+	tpvis=None,
+	):
+	# ms
+	if tpvis==None:
+		vis = intvis
+	else:
+		concat(vis = [intvis, tpvis],
+			concatvis = vis.replace(".ms",".concatms"),
+			freqtol = "50MHz"))
+		vis = vis.replace(".ms",".concatms")
+	#
+	# tclean
+	os.system("rm -rf " + imagename + "*")
+	tclean(
+		vis = vis,
+		imagename = imagename,
+		field = "",
+		specmode = "cube",
+		restfreq = "230.53800GHz",
+		outframe = "LSRK",
+		niter = 0,
+		threshold = "",
+		cyclefactor = 4,
+		interactive = False,
+		imsize = imsize,
+		cell = "1.0arcsec",
+		phasecenter = phasecenter,
+		weighting = weighting,
+		robust = robust,
+		gridder = "mosaic",
+		deconvolver = "multiscale",
+		scales = [0,2,5],
+		nchan = nchan,
+		cycleniter = 50,
+		usemask = "user",
+		restoringbeam = "common",
+		startmodel = "",
+		mask = "",
+		)
+	"""
+    outputname = dir_sim + "/sim_" + galname + "_" + outputname + "_"+wt
+    os.system("rm -rf "+outputname+"*")
+    tclean(vis = vis,
+           imagename = outputname,
+           field = "",
+           specmode = "cube",
+           width = width,
+           start = start,
+           restfreq = "230.53800GHz",
+           outframe = "LSRK",
+           niter = niter,
+	   gain = 0.2,
+           threshold = thres_clean,
+           cyclefactor = 4,
+           interactive = False,
+           imsize = imsize,
+           cell = "1.0arcsec",
+           phasecenter = "J2000 "+ra+" "+dec,
+           weighting = weighting,
+           robust = robust,
+           gridder = "mosaic",
+           deconvolver = "multiscale",
+	   scales = [0,2,5],
+           nchan = nchan,
+           #cycleniter = 50,
+           usemask = "user",
+           restoringbeam = "common",
+           startmodel = startmodel,
+           mask = dir_mask + galname + "_12m+7m+tp_co21_hybridmask.mask")
+
+    os.system("rm -rf "+outputname+".image.pbcor")
+    impbcor(imagename = outputname+".image",
+            outfile = outputname+".image.pbcor",
+	    pbimage = outputname+".pb")
+	"""
+
 
 ##############################
 ### main
@@ -198,6 +285,7 @@ for i in range(len(dir_sim)):
 			os.system("rm -rf " + (imagename+".inversemask").split("/")[-1])
 		#
 		### imaging 7m-only
+		print("### processing 7m-only map of " + title)
 
 
 
