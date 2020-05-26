@@ -10,7 +10,7 @@ robust = 0.5
 width = "" # "2.6km/s"
 nchan = 1 # 96
 niter = 500000
-snr = 2.0
+snr = 1.0
 
 
 ##############################
@@ -303,15 +303,23 @@ for i in range(len(dir_sim)):
 		print("### processing CAF feather map of " + title)
 		sdimage = this_dir_sim + "/sim_" + galname + ".sd.startmodel_tmp_"
 		os.system("rm -rf " + sdimage)
-		imregrid(imagename = tpname,
-			template = imagename + ".pb",
-			output = sdimage)
-
+		imregrid(imagename=tpname, template=imagename+".pb", output=sdimage)
+		#
 		depbsdimage = this_dir_sim + "/sim_" + galname + ".sd.startmodel.depb"
 		os.system("rm -rf " + depbsdimage)
-		immath(imagename = [inimodelname, imagename + ".pb"],
-		expr = "IM0*IM1",
-		outfile = depbsdimage)
+		immath(imagename=[sdimage,imagename+".pb"], expr="IM0*IM1", outfile=depbsdimage)
+		os.system("rm -rf " + sdimage)
+		#
+		imagename = this_dir_sim + "/sim_" + galname + "_feather_" + wt + ".image"
+		os.system("rm -rf " + imagename)
+		feather(imagename = imagename,
+		highres = dir_sim[i]+"/sim_"+galname+"_7m_"+wt+".image",
+		lowres = outfile)
+
+		os.system("rm -rf "+imagename+".pbcor")
+		impbcor(imagename = imagename,
+		outfile = imagename+".pbcor",
+		pbimage = dir_sim[i]+"/sim_"+galname+"_7m_"+wt+".pb")
 
 
 

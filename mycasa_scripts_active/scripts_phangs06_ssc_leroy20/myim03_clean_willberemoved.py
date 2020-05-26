@@ -263,7 +263,7 @@ for i in range(len(dir_sim)):
 		    startmodel="",
 		    tpms=False)
     """
-
+    """
     ### CAF
     if 1 in do_steps:
 	inimodelname = dir_sim[i] + "/sim_" + galname + ".sd.startmodel_tmp_"
@@ -278,6 +278,7 @@ for i in range(len(dir_sim)):
         immath(imagename = [inimodelname, dir_sim[i]+"/sim_"+galname+"_7m_"+wt+".pb"],
                expr = "IM0*IM1",
 	       outfile= outfile)
+    """
 
 	print("### start CAF for " + title)
         imagename = dir_sim[i]+"/sim_"+galname+"_caf_"+wt+".image"
