@@ -108,6 +108,8 @@ def dirty_map(
 		specmode = "cube",
 		restfreq = "230.53800GHz",
 		outframe = "LSRK",
+		width = width,
+		start = start,
 		niter = 0,
 		threshold = "",
 		cyclefactor = 4,
@@ -169,6 +171,7 @@ def eazy_tclean(
 	weighting,
 	robust,
 	nchan,
+	hybridmaskimage,
 	niter,
 	thres_clean,
 	tpvis=None,
@@ -192,6 +195,8 @@ def eazy_tclean(
 		specmode = "cube",
 		restfreq = "230.53800GHz",
 		outframe = "LSRK",
+		width = width,
+		start = start,
 		niter = niter,
 		threshold = thres_clean,
 		cyclefactor = 4,
@@ -209,23 +214,14 @@ def eazy_tclean(
 		usemask = "user",
 		restoringbeam = "common",
 		startmodel = startmodel,
-		mask = "",
+		mask = hybridmaskimage,
+		gain = 0.2,
 		)
-	"""
-    outputname = dir_sim + "/sim_" + galname + "_" + outputname + "_"+wt
-    os.system("rm -rf "+outputname+"*")
-    tclean(
-           width = width,
-           start = start,
-	   gain = 0.2,
-           startmodel = startmodel,
-           mask = dir_mask + galname + "_12m+7m+tp_co21_hybridmask.mask")
-
-    os.system("rm -rf "+outputname+".image.pbcor")
-    impbcor(imagename = outputname+".image",
-            outfile = outputname+".image.pbcor",
-	    pbimage = outputname+".pb")
-	"""
+	#
+	os.system("rm -rf "+imagename+".image.pbcor")
+	impbcor(imagename = imagename+".image",
+		outfile = imagename+".image.pbcor",
+		pbimage = imagename+".pb")
 
 
 ##############################
@@ -254,12 +250,12 @@ for i in range(len(dir_sim)):
 
 	hybridmaskimage = glob.glob(dir_mask + galname + "*")
 	if hybridmaskimage:
+		hybridmaskimage = hybridmaskimage[0]
 		### measure 7m-only rms
 		imagename = this_dir_sim + "/dirty_" + galname + "_7m_" + wt
 		done = glob.glob(imagename + ".image")
 		if not done:
 			print("### processing dirty map of " + title)
-			hybridmaskimage = hybridmaskimage[0]
 			rms = dirty_map(vis, imagename, width, start, imsize, phasecenter, weighting, robust, nchan, hybridmaskimage)
 			thres_clean = str(rms*snr) + "Jy"
 		else:
@@ -271,6 +267,16 @@ for i in range(len(dir_sim)):
 		#
 		### imaging 7m-only
 		print("### processing 7m-only map of " + title)
+		eazy_tclean(
+	intvis,
+	imagename,
+	width,
+	start,
+	imsize,
+	phasecenter,
+	weighting,
+	robust,
+	nchan,hybridmaskimage,niter,thres_clean)
 
 
 
