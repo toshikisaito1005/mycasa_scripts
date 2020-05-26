@@ -278,7 +278,7 @@ def imaging_caf(
 	os.system("rm -rf " + sdimage)
 	#
 	cafimage = this_dir_sim + "/sim_" + galname + "_feather_" + wt + ".image"
-	7mname = this_dir_sim + "/sim_" + galname + "_7m_" + wt + ".image"
+	7mname   = this_dir_sim + "/sim_" + galname + "_7m_" + wt + ".image"
 	os.system("rm -rf " + cafimage)
 	feather(imagename=cafimage, highres=7mname, lowres=depbsdimage)
 	#
@@ -298,7 +298,7 @@ mosaic_def2 = np.r_[np.loadtxt("mosaic_definitions.txt",dtype="S20",usecols=(0,1
 dir_sim = glob.glob(dir_proj + "*")
 dir_mask = dir_proj + "../v3p3_hybridmask/"
 #for i in range(len(dir_sim)):
-for i in [0]:
+for i in [1]:
 	#
 	this_dir_sim = dir_sim[i]
 	# get info
