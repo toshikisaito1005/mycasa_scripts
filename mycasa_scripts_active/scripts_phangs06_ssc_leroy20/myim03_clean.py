@@ -131,25 +131,26 @@ def dirty_map(
 		template = imagename + ".image",
 		output = "_tmp_inverse.mask")
 	#
-	os.system("rm -rf inverse.mask")
+	os.system("rm -rf " + imagename + ".mask")
 	immath(imagename = "_tmp_inverse.mask",
 		mode = "evalexpr",
 		expr = "iif(IM0>=1,0,1)",
-		outfile = "inverse.mask")
+		outfile = imagename + ".mask")
 	#
 	os.system("rm -rf inverse.mask.fits")
-	exportfits(imagename = "inverse.mask",
+	exportfits(imagename = imagename + ".mask",
 	           fitsimage = "inverse.mask.fits")
 	#
-	os.system("rm -rf inverse.mask")
+	os.system("rm -rf " + imagename + ".mask")
 	importfits(fitsimage = "inverse.mask.fits",
-	           imagename = "inverse.mask",
+	           imagename = imagename + ".mask",
 	           defaultaxes = True,
 	           defaultaxesvalues = ["RA","Dec","Frequency","Stokes"])
 	#
 	os.system("rm -rf inverse.mask.fits")
+	os.system("rm -rf _tmp_inverse.mask")
 	#
-	rms = imstat(imagename=imagename+".image",mask="inverse.mask")["rms"][0]
+	rms = imstat(imagename=imagename+".image",mask=imagename+".mask")["rms"][0]
 
 	return rms
 
@@ -175,13 +176,17 @@ for i in range(len(dir_sim)):
 	imsize = def_imsize(dir_proj, galname)
 	title = galname + ", " + str(i+1) + "/" + str(len(dir_sim))
 
-	### measure 7m-only rms
 	hybridmaskimage = glob.glob(dir_mask + galname + "*")
 	if hybridmaskimage:
-		print("### processing dirty map of " + title)
-		hybridmaskimage = hybridmaskimage[0]
-		vis = this_dir_sim + "/sim_" + galname + ".aca.cycle5.noisy.ms"
+		### measure 7m-only rms
 		imagename = this_dir_sim + "/dirty_" + galname + "_7m_" + wt
-		rms = dirty_map(vis, imagename, width, start, imsize, phasecenter, weighting, robust, nchan, hybridmaskimage)
+		done = glob.glob(imagename + ".image")
+		if not done:
+			print("### processing dirty map of " + title)
+			hybridmaskimage = hybridmaskimage[0]
+			vis = this_dir_sim + "/sim_" + galname + ".aca.cycle5.noisy.ms"
+			rms = dirty_map(vis, imagename, width, start, imsize, phasecenter, weighting, robust, nchan, hybridmaskimage)
+		else:
+			rms = 
 
 
