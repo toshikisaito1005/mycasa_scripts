@@ -327,16 +327,18 @@ for i in range(len(dir_sim)):
                  template = templatename,
 	         output = inimodelname)
         """
-
+        """
         size_pix = abs(imhead(inimodelname,mode="list")["cdelt1"])
         area_pix_arcsec = (size_pix * 3600 * 180 / np.pi) ** 2
         bmaj = imhead(inimodelname,mode="list")["beammajor"]["value"]
         bmin = imhead(inimodelname,mode="list")["beamminor"]["value"]
         beamarea_tp = (bmaj*bmin*np.pi) / (4*np.log(2)) / area_pix_arcsec
-
+        """
+        """
         rms_tp = imstat(imagename = inimodelname,
                         mask = "inverse.mask")["rms"][0]
-
+        """
+        """
         os.system("rm -rf " + inimodelname.replace("_tmp_",""))
         expr = "iif(IM0>=" + str(rms_tp) + ",IM0*IM1/" + str(beamarea_tp) + ",0.0)"
         immath(imagename = [inimodelname,
@@ -349,6 +351,7 @@ for i in range(len(dir_sim)):
                mode = "put",
 	       hdkey = "bunit",
 	       hdvalue = "Jy/pixel")
+        """
 
         eazy_tclean("cdf",
                     dir_sim[i],

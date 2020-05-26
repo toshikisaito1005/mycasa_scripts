@@ -348,5 +348,14 @@ for i in [1]:
 		bmaj = imhead(sdimage,mode="list")["beammajor"]["value"]
 		bmin = imhead(sdimage,mode="list")["beamminor"]["value"]
 		beamarea_tp = (bmaj*bmin*np.pi) / (4*np.log(2)) / area_pix_arcsec
-
+		#
+		inversemask = this_dir_sim + "/sim_" + galname + "_7m_" + wt + ".inversemask"
+		os.system("cp -r " + inversemask + " " + inversemask.split("/")[-1])
+		rms_tp = imstat(imagename=sdimage,mask=inversemask.split("/")[-1])["rms"][0]
+		#
+		os.system("rm -rf " + sdimage.replace("_tmp_",""))
+		expr = "iif(IM0>=" + str(rms_tp) + ",IM0*IM1/" + str(beamarea_tp) + ",0.0)"
+		immath(imagename=[sdimage,pbimage], mode="evalexpr", expr=expr, outfile=sdimage.replace("_tmp_",""))
+		#
+		imhead(imagename=sdimage.replace("_tmp_",""), mode="put", hdkey="bunit", hdvalue="Jy/pixel")
 
