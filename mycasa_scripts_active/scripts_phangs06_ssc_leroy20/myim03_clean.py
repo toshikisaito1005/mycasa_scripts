@@ -188,7 +188,7 @@ def eazy_tclean(
 	#
 	# tclean
 	os.system("rm -rf " + imagename + "*")
-	print("# multiscale clean")
+	print("# multiscale clean down to 3 sigma")
 	tclean(
 		vis = vis,
 		imagename = imagename,
@@ -199,7 +199,7 @@ def eazy_tclean(
 		width = width,
 		start = start,
 		niter = niter,
-		threshold = float(thres_clean.replace("Jy",""))*3.0 + "Jy",
+		threshold = str(float(thres_clean.replace("Jy",""))*3.0) + "Jy",
 		#cyclefactor = 4,
 		interactive = False,
 		imsize = imsize,
@@ -218,7 +218,7 @@ def eazy_tclean(
 		mask = hybridmaskimage,
 		gain = 0.2,
 		)
-	print("# singlescale clean")
+	print("# singlescale clean down to 1 sigma")
 	tclean(
 		vis = vis,
 		imagename = imagename,
@@ -243,8 +243,6 @@ def eazy_tclean(
 		#cycleniter = 50,
 		usemask = "user",
 		restoringbeam = "",
-		startmodel = startmodel,
-		mask = hybridmaskimage,
 		gain = 0.1,
 		)
 	#
@@ -371,8 +369,8 @@ mosaic_def2 = np.r_[np.loadtxt("mosaic_definitions.txt",dtype="S20",usecols=(0,1
 #
 dir_sim = glob.glob(dir_proj + "*")
 dir_mask = dir_proj + "../v3p3_hybridmask/"
-for i in range(len(dir_sim)):
-#for i in [1]:
+#for i in range(len(dir_sim)):
+for i in [1]:
 	#
 	this_dir_sim = dir_sim[i]
 	# get info
