@@ -182,9 +182,9 @@ def eazy_tclean(
 		vis = intvis
 	else:
 		concat(vis = [intvis, tpvis],
-			concatvis = vis.replace(".ms",".concatms"),
+			concatvis = intvis.replace(".ms",".concatms"),
 			freqtol = "50MHz")
-		vis = vis.replace(".ms",".concatms")
+		vis = intvis.replace(".ms",".concatms")
 	#
 	# tclean
 	os.system("rm -rf " + imagename + "*")
@@ -278,9 +278,9 @@ def imaging_caf(
 	os.system("rm -rf " + sdimage)
 	#
 	cafimage = this_dir_sim + "/sim_" + galname + "_feather_" + wt + ".image"
-	7mname   = this_dir_sim + "/sim_" + galname + "_7m_" + wt + ".image"
+	intname  = this_dir_sim + "/sim_" + galname + "_7m_" + wt + ".image"
 	os.system("rm -rf " + cafimage)
-	feather(imagename=cafimage, highres=7mname, lowres=depbsdimage)
+	feather(imagename=cafimage, highres=intname, lowres=depbsdimage)
 	#
 	os.system("rm -rf " + cafimage + ".pbcor")
 	impbcor(imagename=cafimage, outfile=cafimage+".pbcor", pbimage=pbimage)
