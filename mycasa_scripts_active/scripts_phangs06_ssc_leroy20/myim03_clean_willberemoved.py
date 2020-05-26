@@ -352,7 +352,7 @@ for i in range(len(dir_sim)):
 	       hdkey = "bunit",
 	       hdvalue = "Jy/pixel")
         """
-
+        """
         eazy_tclean("cdf",
                     dir_sim[i],
                     galname,
@@ -369,6 +369,7 @@ for i in range(len(dir_sim)):
 		    imsize,
 		    startmodel = inimodelname.replace("_tmp_",""),
 		    tpms=False)
+        """
 
         outfile = inimodelname + ".depb"
         os.system("rm -rf " + outfile)

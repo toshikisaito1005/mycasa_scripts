@@ -320,21 +320,25 @@ for i in [1]:
 		print("# thres_clean = " + thres_clean)
 		#
 		### imaging 7m-only
-		print("### processing 7m-only map of " + title)
 		imagename = this_dir_sim + "/sim_" + galname + "_7m_" + wt
 		done = glob.glob(imagename + ".image")
 		if not done:
+			print("### processing 7m-only map of " + title)
 			eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,thres_clean)
+		else:
+			print("### skip 7m-only map of " + title)
 		#
 		### imaging CAF feather
 		print("### processing CAF feather map of " + title)
 		imaging_caf(this_dir_sim, galname, tpname, wt)
 		#
 		### imaging CBF tp2vis
-		print("### processing CBF tp2vis map of " + title)
 		tpvis = this_dir_sim + "/sim_" + galname + ".sd.ms"
 		imagename = this_dir_sim + "/sim_" + galname + "_tp2vis_" + wt
-		eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,thres_clean,tpvis=tpvis)
+		done = glob.glob(imagename + ".image")
+		if not done:
+			print("### processing CBF tp2vis map of " + title)
+			eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,thres_clean,tpvis=tpvis)
 		#
 		### imaging CDF tpmodel
 		print("### processing CDF tpmodel map of " + title)
@@ -353,9 +357,16 @@ for i in [1]:
 		os.system("cp -r " + inversemask + " " + inversemask.split("/")[-1])
 		rms_tp = imstat(imagename=sdimage,mask=inversemask.split("/")[-1])["rms"][0]
 		#
-		os.system("rm -rf " + sdimage.replace("_tmp_",""))
+		tpstartmodel = sdimage.replace("_tmp_","")
+		os.system("rm -rf " + tpstartmodel)
 		expr = "iif(IM0>=" + str(rms_tp) + ",IM0*IM1/" + str(beamarea_tp) + ",0.0)"
-		immath(imagename=[sdimage,pbimage], mode="evalexpr", expr=expr, outfile=sdimage.replace("_tmp_",""))
+		immath(imagename=[sdimage,pbimage], mode="evalexpr", expr=expr, outfile=tpstartmodel)
+		imhead(imagename=tpstartmodel, mode="put", hdkey="bunit", hdvalue="Jy/pixel")
 		#
-		imhead(imagename=sdimage.replace("_tmp_",""), mode="put", hdkey="bunit", hdvalue="Jy/pixel")
+		imagename = this_dir_sim + "/sim_" + galname + "_tpmodel_" + wt
+		eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,thres_clean,startmodel=tpstartmodel)
+		#
+		os.system("rm -rf " + cafimage + imagename + ".image.pbcor")
+		impbcor(imagename=imagename+".image", outfile=imagename+".image.pbcor", pbimage=imagename+".pb")
+
 
