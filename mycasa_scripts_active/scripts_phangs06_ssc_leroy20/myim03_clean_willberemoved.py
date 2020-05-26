@@ -238,7 +238,7 @@ for i in range(len(dir_sim)):
     rms = dirty_map(dir_sim[i],galname,wt,width,start,ra,dec,
 		    weighting,robust,dir_mask,imsize)
   """
-  
+  """
     ### model TP data
     tpname = dir_sim[i] + "/sim_" + galname + ".sd.tp2vis.input"
 
@@ -262,6 +262,7 @@ for i in range(len(dir_sim)):
 		    imsize,
 		    startmodel="",
 		    tpms=False)
+    """
 
     ### CAF
     if 1 in do_steps:
