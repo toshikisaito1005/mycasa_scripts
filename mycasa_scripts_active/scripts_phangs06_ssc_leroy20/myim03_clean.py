@@ -173,7 +173,7 @@ def eazy_tclean(
 	nchan,
 	hybridmaskimage,
 	niter,
-	thres_clean,
+	rms,
 	tpvis=None,
 	startmodel="",
 	):
@@ -188,7 +188,7 @@ def eazy_tclean(
 	#
 	# tclean
 	os.system("rm -rf " + imagename + "*")
-	print("# multiscale clean down to 3 sigma")
+	print("# multiscale clean down to 4 sigma")
 	tclean(
 		vis = vis,
 		imagename = imagename,
@@ -199,7 +199,7 @@ def eazy_tclean(
 		width = width,
 		start = start,
 		niter = niter,
-		threshold = str(float(thres_clean.replace("Jy",""))*3.0) + "Jy",
+		threshold = str(rms*4.0) + "Jy",
 		#cyclefactor = 4,
 		interactive = False,
 		imsize = imsize,
@@ -218,7 +218,7 @@ def eazy_tclean(
 		mask = hybridmaskimage,
 		gain = 0.2,
 		)
-	print("# singlescale clean down to 1 sigma")
+	print("# singlescale clean down to 2.0 sigma")
 	tclean(
 		vis = vis,
 		imagename = imagename,
@@ -229,7 +229,7 @@ def eazy_tclean(
 		width = width,
 		start = start,
 		niter = niter,
-		threshold = thres_clean,
+		threshold = str(rms*2.0) + "Jy",
 		#cyclefactor = 4,
 		interactive = False,
 		imsize = imsize,
@@ -263,7 +263,6 @@ def get_dirty_rms(
 	robust,
 	nchan,
 	hybridmaskimage,
-	snr,
 	):
 	done = glob.glob(imagename + ".image")
 	if not done:
@@ -279,15 +278,13 @@ def get_dirty_rms(
 			robust,
 			nchan,
 			hybridmaskimage)
-		thres_clean = str(rms*snr) + "Jy"
 	else:
 		print("### skip dirty map of " + title)
 		os.system("cp -r " + imagename + ".inversemask" + " " + (imagename + ".inversemask").split("/")[-1])
 		rms = imstat(imagename=imagename+".image",mask=(imagename+".inversemask").split("/")[-1])["rms"][0]
 		os.system("rm -rf " + (imagename+".inversemask").split("/")[-1])
-		thres_clean = str(rms*snr) + "Jy"
 
-	return thres_clean
+	return rms
 
 def imaging_caf(
 	this_dir_sim,
@@ -329,7 +326,7 @@ def imaging_cdf(
 	nchan,
 	hybridmaskimage,
 	niter,
-	thres_clean,
+	rms,
 	):
 	sdimage = this_dir_sim + "/sim_" + galname + ".sd.startmodel_tmp_"
 	pbimage = this_dir_sim + "/sim_" + galname + "_7m_" + wt + ".pb"
@@ -352,7 +349,7 @@ def imaging_cdf(
 	immath(imagename=[sdimage,pbimage], mode="evalexpr", expr=expr, outfile=tpstartmodel)
 	imhead(imagename=tpstartmodel, mode="put", hdkey="bunit", hdvalue="Jy/pixel")
 	#
-	eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,thres_clean,startmodel=tpstartmodel)
+	eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,rms,startmodel=tpstartmodel)
 	#
 	os.system("rm -rf " + imagename + ".image.pbcor")
 	impbcor(imagename=imagename+".image", outfile=imagename+".image.pbcor", pbimage=imagename+".pb")
@@ -388,15 +385,14 @@ for i in range(len(dir_sim)):
 		hybridmaskimage = hybridmaskimage[0]
 		### measure 7m-only rms
 		imagename = this_dir_sim + "/dirty_" + galname + "_7m_" + wt
-		thres_clean = get_dirty_rms(imagename,title,vis,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,snr)
-		print("# thres_clean = " + thres_clean)
+		rms = get_dirty_rms(imagename,title,vis,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage)
 		#
 		### imaging 7m-only
 		imagename = this_dir_sim + "/sim_" + galname + "_7m_" + wt
 		done = glob.glob(imagename + ".image")
 		if not done:
 			print("### processing 7m-only map of " + title)
-			eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,thres_clean)
+			eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,rms)
 		else:
 			print("### skip 7m-only map of " + title)
 		#
@@ -410,7 +406,7 @@ for i in range(len(dir_sim)):
 		done = glob.glob(imagename + ".image")
 		if not done:
 			print("### processing CBF tp2vis map of " + title)
-			eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,thres_clean,tpvis=tpvis)
+			eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,rms,tpvis=tpvis)
 		else:
 			print("### skip CBF tp2vis map of " + title)
 		#
@@ -419,7 +415,7 @@ for i in range(len(dir_sim)):
 		done = glob.glob(imagename + ".image")
 		if not done:
 			print("### processing CDF tpmodel map of " + title)
-			imaging_cdf(this_dir_sim,galname,wt,tpname,vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,thres_clean)
+			imaging_cdf(this_dir_sim,galname,wt,tpname,vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,rms)
 		else:
 			print("### skip CDF tpmodel map of " + title)
 
