@@ -314,7 +314,7 @@ def imaging_cdf(
 	bmin = imhead(sdimage,mode="list")["beamminor"]["value"]
 	beamarea_tp = (bmaj*bmin*np.pi) / (4*np.log(2)) / area_pix_arcsec
 	#
-	inversemask = this_dir_sim + "/sim_" + galname + "_7m_" + wt + ".inversemask"
+	inversemask = this_dir_sim + "/dirty_" + galname + "_7m_" + wt + ".inversemask"
 	os.system("cp -r " + inversemask + " " + inversemask.split("/")[-1])
 	rms_tp = imstat(imagename=sdimage,mask=inversemask.split("/")[-1])["rms"][0]
 	#
@@ -395,4 +395,5 @@ for i in [1]:
 		else:
 			print("### skip CDF tpmodel map of " + title)
 
-
+os.system("rm -rf *.last")
+os.system("rm -rf inverse.mask")
