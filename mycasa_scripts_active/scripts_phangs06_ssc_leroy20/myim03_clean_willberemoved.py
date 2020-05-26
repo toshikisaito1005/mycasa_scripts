@@ -291,7 +291,7 @@ for i in range(len(dir_sim)):
                 outfile = imagename+".pbcor",
 	        pbimage = dir_sim[i]+"/sim_"+galname+"_7m_"+wt+".pb")
     """
-    
+    """
     ### CBF
     if 2 in do_steps:
 	print("### start CBF for " + title)
@@ -311,6 +311,7 @@ for i in range(len(dir_sim)):
 		    imsize,
 		    startmodel="",
 		    tpms=True)
+    """
 
     ### CDF
     if 3 in do_steps:

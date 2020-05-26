@@ -212,7 +212,7 @@ def eazy_tclean(
 		nchan = nchan,
 		cycleniter = 50,
 		usemask = "user",
-		restoringbeam = "common",
+		restoringbeam = "",
 		startmodel = startmodel,
 		mask = hybridmaskimage,
 		gain = 0.2,
@@ -297,7 +297,8 @@ mosaic_def2 = np.r_[np.loadtxt("mosaic_definitions.txt",dtype="S20",usecols=(0,1
 #
 dir_sim = glob.glob(dir_proj + "*")
 dir_mask = dir_proj + "../v3p3_hybridmask/"
-for i in range(len(dir_sim)):
+#for i in range(len(dir_sim)):
+for i in [0]:
 	#
 	this_dir_sim = dir_sim[i]
 	# get info
@@ -331,7 +332,12 @@ for i in range(len(dir_sim)):
 		#
 		### imaging CBF tp2vis
 		print("### processing CBF tp2vis map of " + title)
+		tpvis = this_dir_sim + "/sim_" + galname + ".sd.ms"
 		imagename = this_dir_sim + "/sim_" + galname + "_tp2vis_" + wt
-		eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,thres_clean)
+		eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,thres_clean,tpvis=tpvis)
+		#
+		### imaging CDF tpmodel
+		print("### processing CDF tpmodel map of " + title)
+
 
 
