@@ -298,7 +298,8 @@ for i in range(len(dir_sim)):
 		print("### processing 7m-only map of " + title)
 		imagename = this_dir_sim + "/sim_" + galname + "_7m_" + wt
 		eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,thres_clean)
-
+		#
+		### imaging CAF feather
 
 
 
