@@ -300,6 +300,18 @@ for i in range(len(dir_sim)):
 		eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,thres_clean)
 		#
 		### imaging CAF feather
+		print("### processing CAF feather map of " + title)
+		sdimage = this_dir_sim + "/sim_" + galname + ".sd.startmodel_tmp_"
+		os.system("rm -rf " + sdimage)
+		imregrid(imagename = tpname,
+			template = imagename + ".pb",
+			output = sdimage)
+
+		depbsdimage = this_dir_sim + "/sim_" + galname + ".sd.startmodel.depb"
+		os.system("rm -rf " + depbsdimage)
+		immath(imagename = [inimodelname, imagename + ".pb"],
+		expr = "IM0*IM1",
+		outfile = depbsdimage)
 
 
 
