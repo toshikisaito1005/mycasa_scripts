@@ -278,7 +278,6 @@ for i in range(len(dir_sim)):
         immath(imagename = [inimodelname, dir_sim[i]+"/sim_"+galname+"_7m_"+wt+".pb"],
                expr = "IM0*IM1",
 	       outfile= outfile)
-    """
 
 	print("### start CAF for " + title)
         imagename = dir_sim[i]+"/sim_"+galname+"_caf_"+wt+".image"
@@ -291,7 +290,8 @@ for i in range(len(dir_sim)):
         impbcor(imagename = imagename,
                 outfile = imagename+".pbcor",
 	        pbimage = dir_sim[i]+"/sim_"+galname+"_7m_"+wt+".pb")
-
+    """
+    
     ### CBF
     if 2 in do_steps:
 	print("### start CBF for " + title)

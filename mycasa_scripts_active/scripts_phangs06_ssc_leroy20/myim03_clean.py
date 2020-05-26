@@ -265,7 +265,6 @@ def imaging_caf(
 	this_dir_sim,
 	galname,
 	tpname,
-	imagename,
 	wt,
 	):
 	sdimage = this_dir_sim + "/sim_" + galname + ".sd.startmodel_tmp_"
@@ -322,10 +321,17 @@ for i in range(len(dir_sim)):
 		### imaging 7m-only
 		print("### processing 7m-only map of " + title)
 		imagename = this_dir_sim + "/sim_" + galname + "_7m_" + wt
-		eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,thres_clean)
+		done = glob.glob(imagename + ".image")
+		if not done:
+			eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,thres_clean)
 		#
 		### imaging CAF feather
 		print("### processing CAF feather map of " + title)
-		imaging_caf(this_dir_sim,galname,tpname,imagename,wt)
+		imaging_caf(this_dir_sim, galname, tpname, wt)
+		#
+		### imaging CBF tp2vis
+		print("### processing CBF tp2vis map of " + title)
+		imagename = this_dir_sim + "/sim_" + galname + "_tp2vis_" + wt
+		eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,thres_clean)
 
 
