@@ -199,7 +199,7 @@ def eazy_tclean(
 		start = start,
 		niter = niter,
 		threshold = thres_clean,
-		cyclefactor = 4,
+		#cyclefactor = 4,
 		interactive = False,
 		imsize = imsize,
 		cell = "1.0arcsec",
@@ -210,7 +210,7 @@ def eazy_tclean(
 		deconvolver = "multiscale",
 		scales = [0,2,5],
 		nchan = nchan,
-		cycleniter = 50,
+		#cycleniter = 50,
 		usemask = "user",
 		restoringbeam = "",
 		startmodel = startmodel,
@@ -338,6 +338,15 @@ for i in [1]:
 		#
 		### imaging CDF tpmodel
 		print("### processing CDF tpmodel map of " + title)
-
+		sdimage = this_dir_sim + "/sim_" + galname + ".sd.startmodel_tmp_"
+		pbimage = this_dir_sim + "/sim_" + galname + "_7m_" + wt + ".pb"
+		os.system("rm -rf " + sdimage)
+		imregrid(imagename=tpname, template=pbimage, output=sdimage)
+		#
+		size_pix = abs(imhead(sdimage,mode="list")["cdelt1"])
+		area_pix_arcsec = (size_pix * 3600 * 180 / np.pi) ** 2
+		bmaj = imhead(sdimage,mode="list")["beammajor"]["value"]
+		bmin = imhead(sdimage,mode="list")["beamminor"]["value"]
+		beamarea_tp = (bmaj*bmin*np.pi) / (4*np.log(2)) / area_pix_arcsec
 
 

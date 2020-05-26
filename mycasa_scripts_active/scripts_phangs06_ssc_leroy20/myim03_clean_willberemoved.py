@@ -317,6 +317,7 @@ for i in range(len(dir_sim)):
     if 3 in do_steps:
         # define filename
 	print("### start CDF for " + title)
+        """
         templatename = dir_sim[i]+"/sim_"+galname+"_7m_"+wt+".pb"
         inimodelname = dir_sim[i] + "/sim_" + galname + ".sd.startmodel_tmp_"
 
@@ -325,6 +326,7 @@ for i in range(len(dir_sim)):
         imregrid(imagename = tpname,
                  template = templatename,
 	         output = inimodelname)
+        """
 
         size_pix = abs(imhead(inimodelname,mode="list")["cdelt1"])
         area_pix_arcsec = (size_pix * 3600 * 180 / np.pi) ** 2
