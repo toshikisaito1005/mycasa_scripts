@@ -188,6 +188,37 @@ def eazy_tclean(
 	#
 	# tclean
 	os.system("rm -rf " + imagename + "*")
+	print("# multiscale clean")
+	tclean(
+		vis = vis,
+		imagename = imagename,
+		field = "",
+		specmode = "cube",
+		restfreq = "230.53800GHz",
+		outframe = "LSRK",
+		width = width,
+		start = start,
+		niter = niter,
+		threshold = float(thres_clean.replace("Jy",""))*3.0 + "Jy",
+		#cyclefactor = 4,
+		interactive = False,
+		imsize = imsize,
+		cell = "1.0arcsec",
+		phasecenter = phasecenter,
+		weighting = weighting,
+		robust = robust,
+		gridder = "mosaic",
+		deconvolver = "multiscale",
+		scales = [0,2,5],
+		nchan = nchan,
+		#cycleniter = 50,
+		usemask = "user",
+		restoringbeam = "",
+		startmodel = startmodel,
+		mask = hybridmaskimage,
+		gain = 0.2,
+		)
+	print("# singlescale clean")
 	tclean(
 		vis = vis,
 		imagename = imagename,
@@ -207,15 +238,14 @@ def eazy_tclean(
 		weighting = weighting,
 		robust = robust,
 		gridder = "mosaic",
-		deconvolver = "multiscale",
-		scales = [0,2,5],
+		deconvolver = "hogbom",
 		nchan = nchan,
 		#cycleniter = 50,
 		usemask = "user",
 		restoringbeam = "",
 		startmodel = startmodel,
 		mask = hybridmaskimage,
-		gain = 0.2,
+		gain = 0.1,
 		)
 	#
 	os.system("rm -rf "+imagename+".image.pbcor")
