@@ -223,7 +223,7 @@ def eazy_tclean(
 		outfile = imagename+".image.pbcor",
 		pbimage = imagename+".pb")
 
-def imaging_7m(
+def get_dirty_rms(
 	imagename,
 	title,
 	vis,
@@ -291,7 +291,8 @@ for i in range(len(dir_sim)):
 		hybridmaskimage = hybridmaskimage[0]
 		### measure 7m-only rms
 		imagename = this_dir_sim + "/dirty_" + galname + "_7m_" + wt
-		thres_clean = imaging_7m(imagename,title,vis,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,snr)
+		thres_clean = get_dirty_rms(imagename,title,vis,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,snr)
+		print("# thres_clean = " + thres_clean)
 		#
 		### imaging 7m-only
 		print("### processing 7m-only map of " + title)
