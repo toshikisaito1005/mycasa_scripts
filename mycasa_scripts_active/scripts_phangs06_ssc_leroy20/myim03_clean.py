@@ -285,6 +285,50 @@ def imaging_caf(
 	os.system("rm -rf " + cafimage + ".pbcor")
 	impbcor(imagename=cafimage, outfile=cafimage+".pbcor", pbimage=pbimage)
 
+def imaging_cdf(
+	this_dir_sim,
+	galname,
+	wt,
+	tpname,
+	vis,
+	imagename,
+	width,
+	start,
+	imsize,
+	phasecenter,
+	weighting,
+	robust,
+	nchan,
+	hybridmaskimage,
+	niter,
+	thres_clean,
+	):
+	sdimage = this_dir_sim + "/sim_" + galname + ".sd.startmodel_tmp_"
+	pbimage = this_dir_sim + "/sim_" + galname + "_7m_" + wt + ".pb"
+	os.system("rm -rf " + sdimage)
+	imregrid(imagename=tpname, template=pbimage, output=sdimage)
+	#
+	size_pix = abs(imhead(sdimage,mode="list")["cdelt1"])
+	area_pix_arcsec = (size_pix * 3600 * 180 / np.pi) ** 2
+	bmaj = imhead(sdimage,mode="list")["beammajor"]["value"]
+	bmin = imhead(sdimage,mode="list")["beamminor"]["value"]
+	beamarea_tp = (bmaj*bmin*np.pi) / (4*np.log(2)) / area_pix_arcsec
+	#
+	inversemask = this_dir_sim + "/sim_" + galname + "_7m_" + wt + ".inversemask"
+	os.system("cp -r " + inversemask + " " + inversemask.split("/")[-1])
+	rms_tp = imstat(imagename=sdimage,mask=inversemask.split("/")[-1])["rms"][0]
+	#
+	tpstartmodel = sdimage.replace("_tmp_","")
+	os.system("rm -rf " + tpstartmodel)
+	expr = "iif(IM0>=" + str(rms_tp) + ",IM0*IM1/" + str(beamarea_tp) + ",0.0)"
+	immath(imagename=[sdimage,pbimage], mode="evalexpr", expr=expr, outfile=tpstartmodel)
+	imhead(imagename=tpstartmodel, mode="put", hdkey="bunit", hdvalue="Jy/pixel")
+	#
+	eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,thres_clean,startmodel=tpstartmodel)
+	#
+	os.system("rm -rf " + imagename + ".image.pbcor")
+	impbcor(imagename=imagename+".image", outfile=imagename+".image.pbcor", pbimage=imagename+".pb")
+
 
 ##############################
 ### main
@@ -339,34 +383,16 @@ for i in [1]:
 		if not done:
 			print("### processing CBF tp2vis map of " + title)
 			eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,thres_clean,tpvis=tpvis)
+		else:
+			print("### skip CBF tp2vis map of " + title)
 		#
 		### imaging CDF tpmodel
-		print("### processing CDF tpmodel map of " + title)
-		sdimage = this_dir_sim + "/sim_" + galname + ".sd.startmodel_tmp_"
-		pbimage = this_dir_sim + "/sim_" + galname + "_7m_" + wt + ".pb"
-		os.system("rm -rf " + sdimage)
-		imregrid(imagename=tpname, template=pbimage, output=sdimage)
-		#
-		size_pix = abs(imhead(sdimage,mode="list")["cdelt1"])
-		area_pix_arcsec = (size_pix * 3600 * 180 / np.pi) ** 2
-		bmaj = imhead(sdimage,mode="list")["beammajor"]["value"]
-		bmin = imhead(sdimage,mode="list")["beamminor"]["value"]
-		beamarea_tp = (bmaj*bmin*np.pi) / (4*np.log(2)) / area_pix_arcsec
-		#
-		inversemask = this_dir_sim + "/sim_" + galname + "_7m_" + wt + ".inversemask"
-		os.system("cp -r " + inversemask + " " + inversemask.split("/")[-1])
-		rms_tp = imstat(imagename=sdimage,mask=inversemask.split("/")[-1])["rms"][0]
-		#
-		tpstartmodel = sdimage.replace("_tmp_","")
-		os.system("rm -rf " + tpstartmodel)
-		expr = "iif(IM0>=" + str(rms_tp) + ",IM0*IM1/" + str(beamarea_tp) + ",0.0)"
-		immath(imagename=[sdimage,pbimage], mode="evalexpr", expr=expr, outfile=tpstartmodel)
-		imhead(imagename=tpstartmodel, mode="put", hdkey="bunit", hdvalue="Jy/pixel")
-		#
 		imagename = this_dir_sim + "/sim_" + galname + "_tpmodel_" + wt
-		eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,thres_clean,startmodel=tpstartmodel)
-		#
-		os.system("rm -rf " + cafimage + imagename + ".image.pbcor")
-		impbcor(imagename=imagename+".image", outfile=imagename+".image.pbcor", pbimage=imagename+".pb")
+		done = glob.glob(imagename + ".image")
+		if not done:
+			print("### processing CDF tpmodel map of " + title)
+			imaging_cdf(this_dir_sim,galname,wt,tpname,vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,thres_clean)
+		else:
+			print("### skip CDF tpmodel map of " + title)
 
 
