@@ -74,9 +74,10 @@ def get_co_intensities(
 	data_co10_tmp = imval(image_co10,box=box)["data"].flatten()
 	data_co21_tmp = imval(image_co21,box=box)["data"].flatten()
 	# distance
-	data_ra = imval(image_co10,box=box)["coords"][:,:,0].flatten()
-	data_dec = imval(image_co10,box=box)["coords"][:,:,1].flatten()
+	data_ra = imval(image_co10,box=box)["coords"][:,:,0].flatten() * 180 / np.pi
+	data_dec = imval(image_co10,box=box)["coords"][:,:,1].flatten() * 180 / np.pi
 	data_dist = distance(data_ra, data_dec, pa, inc, cnt_ra, cnt_dec, scale)
+	print("# " + str(np.min(data_dist)))
 	print("# " + str(np.median(data_dist)))
 	# cut pixel = 0
 	cut_data = np.where((data_co10_tmp>0) & (data_co21_tmp>0) & (data_dist>def_nucleus))
