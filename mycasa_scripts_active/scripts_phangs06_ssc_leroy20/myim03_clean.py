@@ -218,7 +218,7 @@ def eazy_tclean(
 		mask = hybridmaskimage,
 		gain = 0.2,
 		)
-	print("# singlescale clean down to 2.0 sigma")
+	print("# singlescale clean down to 1.0 sigma")
 	tclean(
 		vis = vis,
 		imagename = imagename,
@@ -229,7 +229,7 @@ def eazy_tclean(
 		width = width,
 		start = start,
 		niter = niter,
-		threshold = str(rms*2.0) + "Jy",
+		threshold = str(rms*1.0) + "Jy",
 		cyclefactor = 4,
 		interactive = False,
 		imsize = imsize,
