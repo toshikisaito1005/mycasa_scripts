@@ -140,11 +140,11 @@ p84_out_norm = weighted_percentile(data_outmask_norm_all, 0.84)
 print("# p16_in = " + str(np.round(p16_in,2)))
 print("# p50_in = " + str(np.round(p50_in,2)))
 print("# p84_in = " + str(np.round(p84_in,2)))
-print("# width_in = " + str(np.round(p84_in,2)) - np.round(p16_in,2))
+print("# width_in = " + str(np.round(p84_in,2) - np.round(p16_in,2)))
 print("# p16_out = " + str(np.round(p16_out,2)))
 print("# p50_out = " + str(np.round(p50_out,2)))
 print("# p84_out = " + str(np.round(p84_out,2)))
-print("# width_out = " + str(np.round(p84_out,2)) - np.round(p16_out,2))
+print("# width_out = " + str(np.round(p84_out,2) - np.round(p16_out,2)))
 
 
 ### plot
