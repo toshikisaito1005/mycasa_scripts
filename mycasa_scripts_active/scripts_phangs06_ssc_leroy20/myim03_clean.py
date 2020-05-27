@@ -10,8 +10,8 @@ robust = 0.5
 width = "" # "2.6km/s"
 nchan = 1 # 96
 niter = 500000
-thres_ngc0628 = 0
-
+skip = ["ngc0628"]
+only = ["ngc0628"]
 
 ##############################
 ### def
@@ -367,6 +367,17 @@ mosaic_def2 = np.r_[np.loadtxt("mosaic_definitions.txt",dtype="S20",usecols=(0,1
 #
 dir_sim = glob.glob(dir_proj + "*")
 dir_mask = dir_proj + "../v3p3_hybridmask/"
+#
+# apply skip
+for i in range(len(skip)):
+	dir_sim = [s for s in dir_sim if skip[i] not in s]
+#
+# apply skip
+if only:
+	dir_sim = []
+	for i in range(len(only)):
+		dir_sim.append(glob.glob(dir_proj + "*" + only[i]))
+#
 for i in range(len(dir_sim)):
 #for i in [1]:
 	#
