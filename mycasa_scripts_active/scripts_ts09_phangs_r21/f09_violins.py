@@ -26,12 +26,43 @@ gals = ["ngc0628",
 beam = [[4.0,8.0,12.0,16.0,20.0],
         [8.0,12.0,16.0,20.0,24.0],
         [4.0,8.0,12.0,16.0,20.0]]
+scales = [44/1.0, 52/1.3, 103/1.4]
+cnt_ras = [24.174, 170.063, 185.729]
+cnt_decs = [15.783, 12.9914, 15.8223]
+pas = [180-21.1, 180-172.4, 180-157.8]
+incs = [90-8.7, 90-56.2, 90-35.1]
 
 
 #####################
 ### functions
 #####################
-def get_co_intensities(image_co10,image_co21,beamfloat):
+def distance(x, y, pa, inc, ra_cnt, dec_cnt, scale):
+    """
+    myim10
+    """
+    tilt_cos = math.cos(math.radians(pa))
+    tilt_sin = math.sin(math.radians(pa))
+    
+    x_tmp = x - ra_cnt
+    y_tmp = y - dec_cnt
+    
+    x_new = (x_tmp*tilt_cos - y_tmp*tilt_sin)
+    y_new = (x_tmp*tilt_sin + y_tmp*tilt_cos) * 1/math.sin(math.radians(inc))
+    
+    r = np.sqrt(x_new**2 + y_new**2) * 3600 * scale # arcsec * pc/arcsec
+    
+    return r
+
+def get_co_intensities(
+	image_co10,
+	image_co21,
+	beamfloat,
+	pa,
+	inc,
+	cnt_ra,
+	cnt_dec,
+	scale,
+	):
 	"""
 	"""
 	# get image shape
@@ -40,6 +71,10 @@ def get_co_intensities(image_co10,image_co21,beamfloat):
 	# imval
 	data_co10_tmp = imval(image_co10,box=box)["data"].flatten()
 	data_co21_tmp = imval(image_co21,box=box)["data"].flatten()
+	# distance
+	data_ra = imval(image_co10,box=box)["coords"][:,:,0].flatten()
+	data_dec = imval(image_co10,box=box)["coords"][:,:,1].flatten()
+	data_dist = distance(data_ra, data_dec, pa, inc, cnt_ra, cnt_dec, scale)
 	# cut pixel = 0
 	cut_data = np.where((data_co10_tmp>0) & (data_co21_tmp>0))
 	data_co10 = data_co10_tmp[cut_data]
@@ -314,7 +349,7 @@ for i in range(len(gals)):
 		image_co21 = dir_gal + "_co21/co21_" + beamname + ".moment0"
 		#
 		# get values
-		co10, co21 = get_co_intensities(image_co10,image_co21,beamfloat)
+		co10, co21 = get_co_intensities(image_co10,image_co21,beamfloat,pa,inc,cnt_ra,cnt_dec,scale)
 		r21 = co21/co10
 		#
 		# stats
