@@ -83,13 +83,14 @@ def get_co_intensities(
 	cut_data = np.where((data_co10_tmp>0) & (data_co21_tmp>0) & (data_dist>def_nucleus/2.))
 	data_co10 = data_co10_tmp[cut_data]
 	data_co21 = data_co21_tmp[cut_data]
+	data_dist = data_dist[cut_data]
 	# Jy-to-K
 	co10_jy2k = 1.222e6 / beamfloat**2 / 115.27120**2
 	co21_jy2k = 1.222e6 / beamfloat**2 / 230.53800**2
 	data_co10_Kelvin = data_co10 * co10_jy2k
 	data_co21_Kelvin = data_co21 * co21_jy2k
 
-	return data_co10_Kelvin, data_co21_Kelvin
+	return data_co10_Kelvin, data_co21_Kelvin, data_dist
 
 def weighted_percentile(
 	data,
@@ -353,7 +354,7 @@ for i in range(len(gals)):
 		image_co21 = dir_gal + "_co21/co21_" + beamname + ".moment0"
 		#
 		# get values
-		co10, co21 = get_co_intensities(image_co10,image_co21,beamfloat,pas[i],incs[i],cnt_ras[i],cnt_decs[i],scales[i],def_nucleus[i])
+		co10, co21, dist = get_co_intensities(image_co10,image_co21,beamfloat,pas[i],incs[i],cnt_ras[i],cnt_decs[i],scales[i],def_nucleus[i])
 		r21 = co21/co10
 		#
 		# stats
@@ -370,8 +371,12 @@ for i in range(len(gals)):
 		statslist_r21_wco10.append(stats_r21_wco10)
 		statslist_r21_wco21.append(stats_r21_wco21)
 		#
-		figure = plt.figure(figsize=(10,10))
-		plt.scatter(np.log10(co21), np.log10(r21))
+		figure = plt.figure(figsize=(10,5))
+		gs = gridspec.GridSpec(nrows=8, ncols=16)
+		ax1 = plt.subplot(gs[0:7,0:7])
+		ax2 = plt.subplot(gs[0:7,7:16])
+		ax1.scatter(np.log10(co21), np.log10(r21))
+		ax2.scatter(dist, np.log10(r21))
 		plt.savefig(dir_proj+"test_"+str(i)+"_"+str(j)+".png",dpi=200)
 		#
 	# plot
