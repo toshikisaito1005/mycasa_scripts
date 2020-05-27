@@ -371,6 +371,7 @@ for i in range(len(gals)):
 		statslist_r21_wco10.append(stats_r21_wco10)
 		statslist_r21_wco21.append(stats_r21_wco21)
 		#
+		"""
 		figure = plt.figure(figsize=(10,5))
 		gs = gridspec.GridSpec(nrows=8, ncols=16)
 		ax1 = plt.subplot(gs[0:7,0:7])
@@ -378,6 +379,7 @@ for i in range(len(gals)):
 		ax1.scatter(np.log10(co21), np.log10(r21))
 		ax2.scatter(dist, np.log10(r21))
 		plt.savefig(dir_proj+"test_"+str(i)+"_"+str(j)+".png",dpi=200)
+		"""
 		#
 	# plot
 	color = cm.brg(i/2.5)
