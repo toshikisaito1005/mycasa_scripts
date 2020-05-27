@@ -5,13 +5,17 @@ import datetime
 a=datetime.datetime.now()
 
 
+##############################
+### parameters
+##############################
 dir_proj = "/Users/saito/data/myproj_active/proj_phangs06_ssc/sim_phangs/"
 robust = 0.5
-width = "" # "2.6km/s"
-nchan = 1 # 96
+width = ""
+nchan = 1
 niter = 500000
 skip = ["ngc0628"]
-only = ["ngc0628"]
+only = []
+
 
 ##############################
 ### def
@@ -376,7 +380,8 @@ for i in range(len(skip)):
 if only:
 	dir_sim = []
 	for i in range(len(only)):
-		dir_sim.append(glob.glob(dir_proj + "*" + only[i]))
+		dir_sim.extend(glob.glob(dir_proj + "*" + only[i]))
+	dir_sim = np.array(dir_sim)
 #
 for i in range(len(dir_sim)):
 #for i in [1]:
