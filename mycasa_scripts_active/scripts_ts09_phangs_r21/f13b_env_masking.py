@@ -161,9 +161,9 @@ p16_4 = weighted_percentile(data_mask4_all, 0.16)
 p50_4 = weighted_percentile(data_mask4_all, 0.5)
 p84_4 = weighted_percentile(data_mask4_all, 0.84)
 #
-p16_34 = weighted_percentile(data_mask3_all.tolist().extend(data_mask4_all.tolist()), 0.16)
-p50_34 = weighted_percentile(data_mask3_all.tolist().extend(data_mask4_all.tolist()), 0.5)
-p84_34 = weighted_percentile(data_mask3_all.tolist().extend(data_mask4_all.tolist()), 0.84)
+p16_34 = weighted_percentile(np.r_[data_mask3_all, data_mask4_all], 0.16)
+p50_34 = weighted_percentile(np.r_[data_mask3_all, data_mask4_all], 0.5)
+p84_34 = weighted_percentile(np.r_[data_mask3_all, data_mask4_all], 0.84)
 
 
 ###
