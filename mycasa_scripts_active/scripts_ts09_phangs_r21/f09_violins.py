@@ -77,10 +77,10 @@ def get_co_intensities(
 	data_ra = imval(image_co10,box=box)["coords"][:,:,0].flatten() * 180 / np.pi
 	data_dec = imval(image_co10,box=box)["coords"][:,:,1].flatten() * 180 / np.pi
 	data_dist = distance(data_ra, data_dec, pa, inc, cnt_ra, cnt_dec, scale)
-	print("# " + str(np.min(data_dist)))
-	print("# " + str(np.median(data_dist)))
+	#print("# " + str(np.min(data_dist)))
+	#print("# " + str(np.median(data_dist)))
 	# cut pixel = 0
-	cut_data = np.where((data_co10_tmp>0) & (data_co21_tmp>0) & (data_dist>def_nucleus))
+	cut_data = np.where((data_co10_tmp>0) & (data_co21_tmp>0) & (data_dist>def_nucleus/2.))
 	data_co10 = data_co10_tmp[cut_data]
 	data_co21 = data_co21_tmp[cut_data]
 	# Jy-to-K
@@ -369,6 +369,10 @@ for i in range(len(gals)):
 		statslist_r21.append(stats_r21) # [p84, mean, p50, mode, p16]
 		statslist_r21_wco10.append(stats_r21_wco10)
 		statslist_r21_wco21.append(stats_r21_wco21)
+		#
+		figure = plt.figure(figsize=(10,10))
+		plt.scatter(np.log10(co21), np.log10(r21))
+		plt.savefig(dir_proj+"test_"+str(i)+"_"+str(j)+".png",dpi=200)
 		#
 	# plot
 	color = cm.brg(i/2.5)
