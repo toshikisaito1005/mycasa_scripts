@@ -31,6 +31,7 @@ cnt_ras = [24.174, 170.063, 185.729]
 cnt_decs = [15.783, 12.9914, 15.8223]
 pas = [180-21.1, 180-172.4, 180-157.8]
 incs = [90-8.7, 90-56.2, 90-35.1]
+def_nucleus = [50*44./1.0,50*52./1.3,30*103/1.4]
 
 
 #####################
@@ -62,6 +63,7 @@ def get_co_intensities(
 	cnt_ra,
 	cnt_dec,
 	scale,
+	def_nucleus,
 	):
 	"""
 	"""
@@ -75,8 +77,9 @@ def get_co_intensities(
 	data_ra = imval(image_co10,box=box)["coords"][:,:,0].flatten()
 	data_dec = imval(image_co10,box=box)["coords"][:,:,1].flatten()
 	data_dist = distance(data_ra, data_dec, pa, inc, cnt_ra, cnt_dec, scale)
+	print("# " + str(np.median(data_dist)))
 	# cut pixel = 0
-	cut_data = np.where((data_co10_tmp>0) & (data_co21_tmp>0))
+	cut_data = np.where((data_co10_tmp>0) & (data_co21_tmp>0) & (data_dist>def_nucleus))
 	data_co10 = data_co10_tmp[cut_data]
 	data_co21 = data_co21_tmp[cut_data]
 	# Jy-to-K
@@ -349,7 +352,7 @@ for i in range(len(gals)):
 		image_co21 = dir_gal + "_co21/co21_" + beamname + ".moment0"
 		#
 		# get values
-		co10, co21 = get_co_intensities(image_co10,image_co21,beamfloat,pa,inc,cnt_ra,cnt_dec,scale)
+		co10, co21 = get_co_intensities(image_co10,image_co21,beamfloat,pas[i],incs[i],cnt_ras[i],cnt_decs[i],scales[i],def_nucleus[i])
 		r21 = co21/co10
 		#
 		# stats
