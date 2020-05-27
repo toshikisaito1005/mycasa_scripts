@@ -160,7 +160,33 @@ p84_3 = weighted_percentile(data_mask3_all, 0.84)
 p16_4 = weighted_percentile(data_mask4_all, 0.16)
 p50_4 = weighted_percentile(data_mask4_all, 0.5)
 p84_4 = weighted_percentile(data_mask4_all, 0.84)
+#
+p16_34 = weighted_percentile(data_mask3_all.tolist().extend(data_mask4_all.tolist()), 0.16)
+p50_34 = weighted_percentile(data_mask3_all.tolist().extend(data_mask4_all.tolist()), 0.5)
+p84_34 = weighted_percentile(data_mask3_all.tolist().extend(data_mask4_all.tolist()), 0.84)
 
+
+###
+print("# p16_0 = " + str(np.round(p16_0,2)))
+print("# p50_0 = " + str(np.round(p50_0,2)))
+print("# p84_0 = " + str(np.round(p84_0,2)))
+print("# width_0 = " + str(np.round(p84_0,2) - np.round(p16_0,2)))
+print("# p16_1 = " + str(np.round(p16_1,2)))
+print("# p50_1 = " + str(np.round(p50_1,2)))
+print("# p84_1 = " + str(np.round(p84_1,2)))
+print("# width_1 = " + str(np.round(p84_1,2) - np.round(p16_1,2)))
+print("# p16_2 = " + str(np.round(p16_2,2)))
+print("# p50_2 = " + str(np.round(p50_2,2)))
+print("# p84_2 = " + str(np.round(p84_2,2)))
+print("# width_2 = " + str(np.round(p84_2,2) - np.round(p16_2,2)))
+print("# p16_3 = " + str(np.round(p16_3,2)))
+print("# p50_3 = " + str(np.round(p50_3,2)))
+print("# p84_3 = " + str(np.round(p84_3,2)))
+print("# width_3 = " + str(np.round(p84_3,2) - np.round(p16_3,2)))
+print("# p16_34 = " + str(np.round(p16_34,2)))
+print("# p50_34 = " + str(np.round(p50_34,2)))
+print("# p84_34 = " + str(np.round(p84_34,2)))
+print("# width_34 = " + str(np.round(p84_34,2) - np.round(p16_34,2)))
 
 
 ### plot
