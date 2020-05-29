@@ -301,10 +301,14 @@ def imaging_caf(
 	os.system("rm -rf " + sdimage)
 	imregrid(imagename=tpname, template=pbimage, output=sdimage)
 	#
-	depbsdimage = this_dir_sim + "/sim_" + galname + ".sd.startmodel.depb"
+	depbsdimage = this_dir_sim + "/sim_" + galname + ".sd.image.depb"
 	os.system("rm -rf " + depbsdimage)
 	immath(imagename=[sdimage,pbimage], expr="IM0*IM1", outfile=depbsdimage)
 	os.system("rm -rf " + sdimage)
+	#
+	ia.open(depbsdimage)
+	ia.replacemaskedpixels(0., update=True)
+	ia.close()
 	#
 	cafimage = this_dir_sim + "/sim_" + galname + "_feather_" + wt + ".image"
 	intname  = this_dir_sim + "/sim_" + galname + "_7m_" + wt + ".image"
