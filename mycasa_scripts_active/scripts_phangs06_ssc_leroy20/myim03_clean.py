@@ -14,7 +14,7 @@ width = ""
 nchan = 1
 niter = 500000
 skip = ["ngc0628"]
-only = []
+only = [] # ["ngc0628"]
 
 
 ##############################
@@ -302,13 +302,18 @@ def imaging_caf(
 	imregrid(imagename=tpname, template=pbimage, output=sdimage)
 	#
 	depbsdimage = this_dir_sim + "/sim_" + galname + ".sd.image.depb"
-	os.system("rm -rf " + depbsdimage)
-	immath(imagename=[sdimage,pbimage], expr="IM0*IM1", outfile=depbsdimage)
+	os.system("rm -rf " + depbsdimage + "_tmp")
+	immath(imagename=[sdimage,pbimage], expr="IM0*IM1", outfile=depbsdimage + "_tmp")
 	os.system("rm -rf " + sdimage)
 	#
-	ia.open(depbsdimage)
+	ia.open(depbsdimage + "_tmp")
 	ia.replacemaskedpixels(0., update=True)
 	ia.close()
+	#
+	immath(depbsdimage + "_tmp",
+		expr = "iif(IM0>=0,IM0,0)",
+		outfile = depbsdimage)
+	os.system("rm -rf " + depbsdimage + "_tmp")
 	#
 	cafimage = this_dir_sim + "/sim_" + galname + "_feather_" + wt + ".image"
 	intname  = this_dir_sim + "/sim_" + galname + "_7m_" + wt + ".image"
@@ -353,14 +358,18 @@ def imaging_cdf(
 	os.system("rm -rf " + inversemask.split("/")[-1])
 	#
 	tpstartmodel = sdimage.replace("_tmp_","")
-	os.system("rm -rf " + tpstartmodel)
+	os.system("rm -rf " + tpstartmodel + "_tmp")
 	expr = "iif(IM0>=" + str(rms_tp) + ",IM0*IM1/" + str(beamarea_tp) + ",0.0)"
-	immath(imagename=[sdimage,pbimage], mode="evalexpr", expr=expr, outfile=tpstartmodel)
-	imhead(imagename=tpstartmodel, mode="put", hdkey="bunit", hdvalue="Jy/pixel")
+	immath(imagename=[sdimage,pbimage], mode="evalexpr", expr=expr, outfile=tpstartmodel + "_tmp")
+	imhead(imagename=tpstartmodel + "_tmp", mode="put", hdkey="bunit", hdvalue="Jy/pixel")
 	#
-	ia.open(tpstartmodel)
+	ia.open(tpstartmodel + "_tmp")
 	ia.replacemaskedpixels(0., update=True)
 	ia.close()
+	immath(imagename = tpstartmodel + "_tmp",
+		expr = "iif(IM0>=0,IM0,0)",
+		outfile = tpstartmodel)
+	os.system("rm -rf " + tpstartmodel + "_tmp")
 	#
 	eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,rms,startmodel=tpstartmodel)
 	#
