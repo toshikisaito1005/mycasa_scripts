@@ -1,19 +1,10 @@
-      52 - mycasa_scripts_active/scripts_phangs06_ssc_leroy20/myim03_clean.py
+      56 - mycasa_scripts_active/scripts_phangs06_ssc_leroy20/myim03_clean.py
       11 - mycasa_scripts_active/scripts_phangs06_ssc_leroy20/oldf01_images.py
       11 - mycasa_scripts_active/scripts_phangs06_ssc_leroy20/myim01_makemodel.py
-      10 - mycasa_scripts_active/scripts_ts09_phangs_r21/f00_all_final_eps.sh
        8 - mycasa_scripts_active/scripts_ts09_phangs_r21/f09_violins.py
        8 - mycasa_scripts_active/scripts_phangs06_ssc_leroy20/myim02_makems.py
-       7 - mycasa_scripts_active/scripts_ts09_phangs_r21/f12_othermasks.py
-       6 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim12d_combine_env_masks.py
-       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/f13b_env_masking.py
-       5 - mycasa_scripts_active/scripts_ts09_phangs_r21/f13a_gmc_masking.py
-       4 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim13_piechart_masking.py
        4 - mycasa_scripts_active/scripts_phangs06_ssc_leroy20/f00_all_final_eps.sh
-       3 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim14_extract_param_best.py
-       3 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim12a_env_arm_masking.py
-       3 - mycasa_scripts_active/scripts_ts09_phangs_r21/f13c_piechart_masking.py
+       3 - mycasa_scripts_active/scripts_ts09_phangs_r21/f13a_gmc_masking.py
        3 - mycasa_scripts_active/scripts_phangs06_ssc_leroy20/mosaic_definitions.txt
-       2 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim12c_env_bar_masking.py
-       2 - mycasa_scripts_active/scripts_ts09_phangs_r21/myim12b_env_bulge_masking.py
+       2 - mycasa_scripts_active/scripts_ts09_phangs_r21/f13b_env_masking.py
        2 - mycasa_scripts_active/scripts_phangs06_ssc_leroy20/oldmyim01_prepare_image.py
