@@ -14,7 +14,7 @@ width = ""
 nchan = 1
 niter = 500000
 skip = ["ngc0628"]
-only = []
+only = ["ngc0628"]
 
 
 ##############################
@@ -215,7 +215,7 @@ def eazy_tclean(
 		deconvolver = "multiscale",
 		scales = [0,2,5],
 		nchan = nchan,
-		cycleniter = 50,
+		cycleniter = 100,
 		usemask = "user",
 		restoringbeam = "",
 		startmodel = startmodel,
@@ -244,7 +244,7 @@ def eazy_tclean(
 		gridder = "mosaic",
 		deconvolver = "hogbom",
 		nchan = nchan,
-		cycleniter = 50,
+		cycleniter = 100,
 		usemask = "user",
 		restoringbeam = "",
 		gain = 0.1,
@@ -353,6 +353,10 @@ def imaging_cdf(
 	expr = "iif(IM0>=" + str(rms_tp) + ",IM0*IM1/" + str(beamarea_tp) + ",0.0)"
 	immath(imagename=[sdimage,pbimage], mode="evalexpr", expr=expr, outfile=tpstartmodel)
 	imhead(imagename=tpstartmodel, mode="put", hdkey="bunit", hdvalue="Jy/pixel")
+	#
+	ia.open(tpstartmodel)
+	ia.replacemaskedpixels(0., update=True)
+	ia.close()
 	#
 	eazy_tclean(vis,imagename,width,start,imsize,phasecenter,weighting,robust,nchan,hybridmaskimage,niter,rms,startmodel=tpstartmodel)
 	#
