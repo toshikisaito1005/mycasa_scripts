@@ -64,10 +64,20 @@ def biggersize(
     exportfits(imagename="template.im",
                fitsimage="template.fits",
                overwrite=True)
-
+    #
     importfits(fitsimage="template.fits",
-               imagename="template.image")
-
+               imagename="template.image_tmp")
+    #
+    # blank to 0
+    ia.open("template.image_tmp")
+    ia.replacemaskedpixels(0., update=True)
+    ia.close()
+    #
+    immath("template.image_tmp",
+        expr = "iif(IM0>=0,IM0,0)",
+        outfile = "template.image")
+    os.system("rm -rf template.image_tmp")
+    #
     # regrid
     os.system("rm -rf "+output)
     imregrid(imagename=imagename,
@@ -75,7 +85,7 @@ def biggersize(
              output=output,
              axes=[0,1])
 
-    os.system("rm -rf template.image")
+    os.system("rm -rf template.im* template.fits")
     ia.close()
     cl.close()
 
