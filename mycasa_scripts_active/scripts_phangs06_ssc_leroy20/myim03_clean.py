@@ -387,7 +387,7 @@ mosaic_def2 = np.loadtxt("multipart_fields.txt",dtype="S20",usecols=(0,1,2))
 mosaic_def2 = np.r_[np.loadtxt("mosaic_definitions.txt",dtype="S20",usecols=(0,1,2)),mosaic_def2]
 #
 dir_sim = glob.glob(dir_proj + "*")
-dir_mask = dir_proj + "../v3p3_hybridmask/"
+dir_mask = dir_proj + "../v3p4_hybridmask/"
 #
 # apply skip
 for i in range(len(skip)):
