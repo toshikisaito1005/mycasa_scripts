@@ -66,8 +66,7 @@ def biggersize(
                overwrite=True)
     #
     importfits(fitsimage="template.fits",
-               imagename="template.image_tmp")
-    #
+               imagename="template.image")
     #
     # regrid
     os.system("rm -rf "+output)
@@ -76,7 +75,7 @@ def biggersize(
              output=output,
              axes=[0,1])
 
-    os.system("rm -rf template.im* template.fits")
+    os.system("rm -rf template.image template.fits")
     ia.close()
     cl.close()
 
@@ -153,6 +152,7 @@ for i in range(len(imagenames)):
     ia.replacemaskedpixels(0., update=True)
     ia.close()
     #
+    os.system("rm -rf " + outfile1 + ".bigger")
     immath(outfile1 + ".bigger_tmp",
         expr = "iif(IM0>=0,IM0,0)",
         outfile = outfile1 + ".bigger")
