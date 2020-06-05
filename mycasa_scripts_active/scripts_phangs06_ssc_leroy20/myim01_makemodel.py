@@ -20,7 +20,7 @@ def biggersize(
     num_x_pix = imhead(imagename,mode="list")["shape"][0]
     num_y_pix = imhead(imagename,mode="list")["shape"][1]
     pix_radian = imhead(imagename,mode="list")["cdelt2"]
-    obsfreq = imhead(imagename,mode="list")["crval4"]/1e9
+    obsfreq = 230.53800 # imhead(imagename,mode="list")["crval4"]/1e9
     pix_arcsec = round(pix_radian * 3600 * 180 / np.pi, 3)
 
     # create tempalte image
@@ -83,7 +83,7 @@ def biggersize(
 ### main
 ##############################
 ### directories
-dir_mask = dir_project + "v3p3_hybridmask/"
+dir_mask = dir_project + "v3p4_hybridmask/"
 dir_data = dir_project + "v3p4_tpeak/"
 
 
