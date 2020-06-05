@@ -120,12 +120,17 @@ for i in range(len(imagenames)):
   factor = 1.222e+6 / bmaj**2 / 230.53800**2
   #
   maskname = glob.glob(dir_mask + this_image.split("/")[-1].split("12m")[0] + "*_hybridmask.image")
+  maskname.extend(glob.glob(dir_mask + this_image.split("/")[-1].split("12m")[0] + "*_hybridmask.mask"))
+
   if maskname:
     maskname = maskname[0]
     #
+    if ".mask" in maskname:
+        maskname2 = maskname.replace(".mask",".mask2")
+    else:
     maskname2 = maskname.replace(".image",".mask2")
-    os.system("rm -rf " + maskname2)
-    immoments(imagename=maskname, outfile=maskname2)
+        os.system("rm -rf " + maskname2)
+        immoments(imagename=maskname, outfile=maskname2)
     #
     expr = "iif(IM1>=1.0,"+"IM0/"+str(factor)+",0.0)"
     #
