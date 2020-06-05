@@ -170,7 +170,7 @@ for i in range(len(imagenames)):
     imhead(imagename=outfile5, mode="put", hdkey="bunit", hdvalue="Jy/pixel")
     imhead(imagename=outfile5, mode="del", hdkey="beammajor")
     #
-    os.system("rm -rf " + maskname)
+    # os.system("rm -rf " + maskname)
     os.system("rm -rf " + outfile3)
     #
     maskname3 = maskname.replace(".image",".mask2.smooth")
