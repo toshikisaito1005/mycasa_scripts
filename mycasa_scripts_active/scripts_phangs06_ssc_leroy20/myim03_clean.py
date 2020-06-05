@@ -365,9 +365,9 @@ def imaging_cdf(
 	immath(imagename=[sdimage,pbimage], mode="evalexpr", expr=expr, outfile=tpstartmodel + "_tmp")
 	imhead(imagename=tpstartmodel + "_tmp", mode="put", hdkey="bunit", hdvalue="Jy/pixel")
 	#
-	ia.open(tpstartmodel + "_tmp")
-	ia.replacemaskedpixels(0., update=True)
-	ia.close()
+	#ia.open(tpstartmodel + "_tmp")
+	#ia.replacemaskedpixels(0., update=True)
+	#ia.close()
 	immath(imagename = tpstartmodel + "_tmp",
 		expr = "iif(IM0>=0,IM0,0)",
 		outfile = tpstartmodel)
