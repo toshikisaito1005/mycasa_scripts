@@ -14,6 +14,7 @@ tpbeam = "28.5arcsec"
 ##############################
 def biggersize(
     imagename,
+    output,
     ):
     # get native grid information
     num_x_pix = imhead(imagename,mode="list")["shape"][0]
@@ -29,7 +30,7 @@ def biggersize(
     blc_dec = blc_dec_tmp.replace(".","d",1).replace(".","m",1)+"s"
     beamsize=round(imhead(imagename,"list")["beammajor"]["value"], 2)
     pix_size=round(beamsize/4.53, 2)
-    size_x = int(21. * 300. / obsfreq / pix_size)
+    size_x = np.max([num_x_pix, num_y_pix]) * pix_arcsec / pix_size * 1.5
     size_y = size_x
     c = SkyCoord(blc_ra, blc_dec)
     ra_dgr = str(c.ra.degree)
@@ -67,6 +68,15 @@ def biggersize(
     importfits(fitsimage="template.fits",
                imagename="template.image")
 
+    # regrid
+    os.system("rm -rf "+output)
+    imregrid(imagename=imagename,
+             template="template.image",
+             output=output,
+             axes=[0,1])
+
+    ia.close()
+    cl.close()
 
 ##############################
 ### main
@@ -134,11 +144,12 @@ for i in range(len(imagenames)):
     imhead(imagename=outfile2, mode="put", hdkey="bunit", hdvalue="Jy/pixel")
     imhead(imagename=outfile1, mode="put", hdkey="bunit", hdvalue="Jy/beam")
     # make imsize of outfile1 bigger
-
+    os.system("rm -rf " + outfile1 + ".bigger")
+    biggersize(outfile1, outfile1 + ".bigger")
     #
     outfile3 = this_image.replace(".image",".jypb.smooth_tmp_")
     os.system("rm -rf " + outfile3)
-    imsmooth(imagename=outfile1, major=tpbeam, minor=tpbeam, pa="0deg", outfile=outfile3)
+    imsmooth(imagename=outfile1+".bigger", major=tpbeam, minor=tpbeam, pa="0deg", outfile=outfile3)
     #
     cell = np.abs(imhead(outfile3,mode='list')['cdelt1']) * 180.*3600./np.pi
     nbin = int(28.5 / 4.5 / cell)
