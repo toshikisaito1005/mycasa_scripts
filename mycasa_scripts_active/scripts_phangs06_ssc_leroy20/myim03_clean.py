@@ -13,6 +13,7 @@ robust = 0.5
 width = ""
 nchan = 1
 niter = 500000
+only = ["ngc0628"]
 #only = ['ic1954', 'ic5273', 'ngc0685', 'ngc1087', 'ngc1097', 'ngc1317', 'ngc1365', 'ngc1385', 'ngc1433', 'ngc1511', 'ngc1512', 'ngc1546', 'ngc1559', 'ngc1566', 'ngc1637', 'ngc1672', 'ngc1792', 'ngc2090', 'ngc2283', 'ngc5643']
 #only = ['ngc2566', 'ngc2835', 'ngc2903', 'ngc2997', 'ngc3137', 'ngc3239', 'ngc3351', 'ngc3507', 'ngc3511', 'ngc3521', 'ngc3596', 'ngc3621', 'ngc3626', 'ngc3627', 'ngc4207', 'ngc4254', 'ngc4293', 'ngc4303', 'ngc4321', 'ngc4424']
 #only = ['ngc4457', 'ngc4496a', 'ngc4535', 'ngc4536', 'ngc4540', 'ngc4548', 'ngc4571', 'ngc4579', 'ngc4689', 'ngc4694', 'ngc4731', 'ngc4781', 'ngc4826', 'ngc4941', 'ngc4951', 'ngc5042', 'ngc5068', 'ngc5134', 'ngc5248', 'ngc5530']
