@@ -6,7 +6,7 @@ from astropy.coordinates import SkyCoord
 
 
 dir_project = "/Users/saito/data/myproj_active/proj_phangs06_ssc/"
-tpbeam = "28.5arcsec"
+tpbeam = "28.6arcsec"
 
 
 ##############################
@@ -75,6 +75,7 @@ def biggersize(
              output=output,
              axes=[0,1])
 
+    os.system("rm -rf template.image")
     ia.close()
     cl.close()
 
@@ -170,7 +171,7 @@ for i in range(len(imagenames)):
     imhead(imagename=outfile5, mode="put", hdkey="bunit", hdvalue="Jy/pixel")
     imhead(imagename=outfile5, mode="del", hdkey="beammajor")
     #
-    # os.system("rm -rf " + maskname)
+    os.system("rm -rf " + maskname)
     os.system("rm -rf " + outfile3)
     #
     maskname3 = maskname.replace(".image",".mask2.smooth")
