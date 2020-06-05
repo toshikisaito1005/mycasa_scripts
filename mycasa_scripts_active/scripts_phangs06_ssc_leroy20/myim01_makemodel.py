@@ -30,7 +30,7 @@ def biggersize(
     blc_dec = blc_dec_tmp.replace(".","d",1).replace(".","m",1)+"s"
     beamsize=round(imhead(imagename,"list")["beammajor"]["value"], 2)
     pix_size=round(beamsize/4.53, 2)
-    size_x = np.max([num_x_pix, num_y_pix]) * pix_arcsec / pix_size * 1.5
+    size_x = np.max([num_x_pix, num_y_pix]) * pix_arcsec / pix_size * 2.5
     size_y = size_x
     c = SkyCoord(blc_ra, blc_dec)
     ra_dgr = str(c.ra.degree)
