@@ -68,15 +68,6 @@ def biggersize(
     importfits(fitsimage="template.fits",
                imagename="template.image_tmp")
     #
-    # blank to 0
-    ia.open("template.image_tmp")
-    ia.replacemaskedpixels(0., update=True)
-    ia.close()
-    #
-    immath("template.image_tmp",
-        expr = "iif(IM0>=0,IM0,0)",
-        outfile = "template.image")
-    os.system("rm -rf template.image_tmp")
     #
     # regrid
     os.system("rm -rf "+output)
@@ -155,8 +146,17 @@ for i in range(len(imagenames)):
     imhead(imagename=outfile2, mode="put", hdkey="bunit", hdvalue="Jy/pixel")
     imhead(imagename=outfile1, mode="put", hdkey="bunit", hdvalue="Jy/beam")
     # make imsize of outfile1 bigger
-    os.system("rm -rf " + outfile1 + ".bigger")
-    biggersize(outfile1, outfile1 + ".bigger")
+    os.system("rm -rf " + outfile1 + ".bigger_tmp")
+    biggersize(outfile1, outfile1 + ".bigger_tmp")
+    # blank to 0
+    ia.open(outfile1 + ".bigger_tmp")
+    ia.replacemaskedpixels(0., update=True)
+    ia.close()
+    #
+    immath(outfile1 + ".bigger_tmp",
+        expr = "iif(IM0>=0,IM0,0)",
+        outfile = outfile1 + ".bigger")
+    os.system("rm -rf " + outfile1 + ".bigger_tmp")
     #
     outfile3 = this_image.replace(".image",".jypb.smooth_tmp_")
     os.system("rm -rf " + outfile3)
