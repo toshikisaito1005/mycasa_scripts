@@ -19,12 +19,12 @@ if not done:
     os.mkdir(dir_data + "../../eps/")
 
 
-imagenames = glob.glob(dir_data + "*.image")
+imagenames = glob.glob(dir_data + "*.smooth")
 for i in range(len(imagenames)):
-	done = glob.glob(imagenames[i].replace(".image",".fits"))
+	done = glob.glob(imagenames[i].replace(".smooth",".smooth.fits"))
 	if not done:
 		exportfits(imagename = imagenames[i],
-			fitsimage = imagenames[i].replace(".image",".fits"))
+			fitsimage = imagenames[i].replace(".smooth",".smooth.fits"))
 
 
 #####################
@@ -52,7 +52,7 @@ imagename_contour = "sim_ngc0628_skymodel.smooth.fits"
 #
 imagename_color = "sim_ngc0628_skymodel.smooth.fits"
 title = "Convolved Model"
-output = "../eps/ngc0628_skymodel.png"
+output = "../../eps/ngc0628_skymodel.png"
 #
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
