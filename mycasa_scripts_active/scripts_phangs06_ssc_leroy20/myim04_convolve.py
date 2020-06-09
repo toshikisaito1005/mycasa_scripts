@@ -23,11 +23,13 @@ for i in range(len(skymodels)):
 	# smooth
 	print("# smooth skymodel " + galname)
 	outfile = dir_gal + "sim_" + galname + "_skymodel.smooth"
-	os.system("rm -rf " + outfile)
-	imsmooth(imagename=skymodels[i], targetres=True, major="10.0arcsec", minor="10.0arcsec", pa="0deg", outfile=outfile)
+	os.system("rm -rf " + outfile + "*")
+	imsmooth(imagename=skymodels[i], targetres=True, major="10.0arcsec", minor="10.0arcsec", pa="0deg", outfile=outfile+"_tmp")
 	# cut
-	thres = str(imstat(outfile)["max"][0] * 0.01)
-	immath()
+	thres = str(imstat(outfile+"_tmp")["max"][0] * 0.01)
+	immath(imagename=outfile+"_tmp", expr="iif(IM0>"+thres+"IM0,0.0)", outfile=outfile)
+	os.system("rm -rf " + outfile + "_tmp")
+	skymodel = outfile
 	#
 	os.system("rm -rf " + outfile + ".fits")
 	exportfits(imagename=outfile, fitsimage=outfile+".fits")
@@ -39,7 +41,9 @@ for i in range(len(skymodels)):
 	for j in range(len(imagenames)):
 		print("# smooth sim image " + str(j) + " " + galname)
 		outfile = imagenames[j].replace(".image",".smooth")
-		os.system("rm -rf " + outfile)
-		imsmooth(imagename=imagenames[j], targetres=True, major="10.0arcsec", minor="10.0arcsec", pa="0deg", outfile=outfile)
+		os.system("rm -rf " + outfile + "*")
+		imsmooth(imagename=imagenames[j], targetres=True, major="10.0arcsec", minor="10.0arcsec", pa="0deg", outfile=outfile+"_tmp")
+		immath(imagename=[outfile+"_tmp",skymodel], expr="iif(IM1>"+thres+"IM0,0.0)", outfile=outfile)
+		os.system("rm -rf " + outfile + "_tmp")
 
 os.system("rm -rf *.last")
