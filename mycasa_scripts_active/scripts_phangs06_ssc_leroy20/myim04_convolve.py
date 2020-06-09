@@ -25,6 +25,9 @@ for i in range(len(skymodels)):
 	outfile = dir_gal + "sim_" + galname + "_skymodel.smooth"
 	os.system("rm -rf " + outfile)
 	imsmooth(imagename=skymodels[i], targetres=True, major="10.0arcsec", minor="10.0arcsec", pa="0deg", outfile=outfile)
+	# cut
+	thres = str(imstat(outfile)["max"][0] * 0.01)
+	immath()
 	#
 	os.system("rm -rf " + outfile + ".fits")
 	exportfits(imagename=outfile, fitsimage=outfile+".fits")

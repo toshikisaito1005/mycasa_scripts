@@ -76,9 +76,9 @@ myim.fits2eps(dir_data = dir_data,
 
 ### 7m-only
 #
-imagename_color = galname + "/sim_ngc0628_7m_br.smooth.pbcor.clip.fits"
+imagename_color = "sim_ngc0628_7m_br.smooth.fits"
 title = "Convolved 7m-only"
-output = "../eps/ngc0628_7m.png"
+output = "../../eps/ngc0628_7m.png"
 #
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
@@ -98,29 +98,6 @@ myim.fits2eps(dir_data = dir_data,
               xlim = xlim,
               ylim = ylim,
               clim = clim)
-#
-imagename_color = galname + "/sim_ngc0628_7m_br.smooth.pbcor.difference.fits"
-title = "7m-only - Model"
-output = "../eps/ngc0628_diff_7m.png"
-#
-myim.fits2eps(dir_data = dir_data,
-              imagename_color = imagename_color,
-              imagename_contour = imagename_contour,
-              ra_center = ra_center,
-              dec_center = dec_center,
-              title = title,
-              colorbar_label = colorbar_label,
-              output = output,
-              colorscale = colorscale,
-              colorlog = colorlog,
-              color_contour = color_contour,
-              color_beam = color_beam,
-              colorbar = colorbar,
-              value = value,
-              contour = contour,
-              xlim = xlim,
-              ylim = ylim,
-              clim = clim_diff)
 
 
 ### CAF
