@@ -33,7 +33,7 @@ for i in range(len(dir_gals)):
        #
        shape = imhead(image_7m,mode="list")["shape"]
        box = "0,0,"+str(shape[0]-1)+","+str(shape[1]-1)
-       pixsize = abs(imhead(fidelity_7m,mode="list")["cdelt1"])*180/np.pi*3600
+       pixsize = abs(imhead(image_7m,mode="list")["cdelt1"])*180/np.pi*3600
        pixarea = pixsize**2
        #
        image_model = imval(image_model,box=box)["data"].flatten()
