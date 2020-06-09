@@ -25,9 +25,10 @@ for i in range(len(skymodels)):
 	outfile = dir_gal + "sim_" + galname + "_skymodel.smooth"
 	os.system("rm -rf " + outfile + "*")
 	imsmooth(imagename=skymodels[i], targetres=True, major="10.0arcsec", minor="10.0arcsec", pa="0deg", outfile=outfile+"_tmp")
+	#
 	# cut
 	thres = str(imstat(outfile+"_tmp")["max"][0] * 0.01)
-	immath(imagename=outfile+"_tmp", expr="iif(IM0>"+thres+"IM0,0.0)", outfile=outfile)
+	immath(imagename=outfile+"_tmp", expr="iif(IM0>"+thres+",IM0,0.0)", outfile=outfile)
 	os.system("rm -rf " + outfile + "_tmp")
 	skymodel = outfile
 	#
@@ -36,6 +37,7 @@ for i in range(len(skymodels)):
 	os.system("rm -rf " + outfile)
 	importfits(fitsimage=outfile+".fits", imagename=outfile, defaultaxes=True, defaultaxesvalues=["RA","Dec","Frequency","Stokes"])
 	os.system("rm -rf " + outfile + ".fits")
+	#
 	# smooth
 	imagenames = glob.glob(dir_gal + "sim_*.image")
 	for j in range(len(imagenames)):
@@ -43,7 +45,12 @@ for i in range(len(skymodels)):
 		outfile = imagenames[j].replace(".image",".smooth")
 		os.system("rm -rf " + outfile + "*")
 		imsmooth(imagename=imagenames[j], targetres=True, major="10.0arcsec", minor="10.0arcsec", pa="0deg", outfile=outfile+"_tmp")
-		immath(imagename=[outfile+"_tmp",skymodel], expr="iif(IM1>"+thres+"IM0,0.0)", outfile=outfile)
+		#
+		done = glob.glob(skymodel.replace(".smooth","_regrid.smooth"))
+		if not done:
+			imregrid(imagename=skymodel,template=outfile+"_tmp",output=skymodel.replace(".smooth","_regrid.smooth"))
+		#
+		immath(imagename=[outfile+"_tmp",skymodel.replace(".smooth","_regrid.smooth")], expr="iif(IM1>"+thres+",IM0,0.0)", outfile=outfile)
 		os.system("rm -rf " + outfile + "_tmp")
 
 os.system("rm -rf *.last")
