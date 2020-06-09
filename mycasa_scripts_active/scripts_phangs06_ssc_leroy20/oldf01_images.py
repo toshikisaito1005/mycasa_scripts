@@ -9,13 +9,18 @@ plt.ioff()
 
 reload(myim)
 
-dir_data = "/Users/saito/data/myproj_active/proj_phangs06_ssc/data_old/"
+
+dir_data = "/Users/saito/data/myproj_active/proj_phangs06_ssc/sim_phangs/sim_ngc0628/"
 galname = "ngc0628"
 
 
-done = glob.glob(dir_data + "../eps/")
+done = glob.glob(dir_data + "../../eps/")
 if not done:
-    os.mkdir(dir_data + "../eps/")
+    os.mkdir(dir_data + "../../eps/")
+
+
+imagenames = glob.glob(dir_data + "*.image")
+for i in range(len(imagenames)):
 
 
 #####################
@@ -36,7 +41,7 @@ colorlog = False
 colorscale = "rainbow"
 colorbar_label = "(Jy beam$^{-1}$ km s$^{-1}$)"
 contour = np.array([0.15, 0.35, 0.55, 0.75, 0.95])
-imagename_contour = galname + "/sim_ngc0628_skymodel.smooth.fits"
+imagename_contour = "sim_ngc0628_skymodel.smooth.fits"
 
 
 ### model
