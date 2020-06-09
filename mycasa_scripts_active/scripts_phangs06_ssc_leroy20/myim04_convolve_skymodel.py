@@ -20,5 +20,10 @@ for i in range(len(skymodels)):
 	galname = skymodels[i].split("/")[-1].split("_")[0]
 	dir_gal = dir_proj + "../sim_phangs/sim_" + galname + "/"
 	# smooth
-	imsmoith(imagename = skymodels[i],
-		)
+	print("# smooth skymodel " + galname)
+	outfile = dir_gal + "sim_" + galname + "_skymodel.smooth"
+	os.system("rm -rf " + outfile)
+	imsmooth(imagename=skymodels[i], targetres=True, major="10.0arcsec", minor="10.0arcsec", pa="0deg", outfile=outfile)
+	# smooth
+	imagenames = glob.glob(dir_gal + "sim_*.image")
+	imsmooth(imagename=skymodels[i], targetres=True, major="10.0arcsec", minor="10.0arcsec", pa="0deg", outfile=outfile)
