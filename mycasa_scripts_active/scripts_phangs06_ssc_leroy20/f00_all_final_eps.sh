@@ -6,6 +6,10 @@ convert +append -border 0x0 $dir_data"ngc0628_skymodel.png" $dir_data"ngc0628_7m
 convert +append -border 0x0 $dir_data"ngc0628_tp2vis.png" $dir_data"ngc0628_tpmodel.png" $dir_data"ngc0628_feather.png" $dir_data"fig_ssc_01b.png"
 convert -append -border 0x0 $dir_data"fig_ssc_01a.png" $dir_data"fig_ssc_01b.png" eps2:$dir_data"ssc_image_ngc0628.eps"
 
+convert +append -border 0x0 $dir_data"ngc1097_skymodel.png" $dir_data"ngc1097_7m.png" $dir_data"fig_ssc_01a.png"
+convert +append -border 0x0 $dir_data"ngc1097_tp2vis.png" $dir_data"ngc1097_tpmodel.png" $dir_data"ngc1097_feather.png" $dir_data"fig_ssc_01b.png"
+convert -append -border 0x0 $dir_data"fig_ssc_01a.png" $dir_data"fig_ssc_01b.png" eps2:$dir_data"ssc_image_ngc0628.eps"
+
 rm -rf $dir_data"ngc0628_skymodel.png" $dir_data"ngc0628_7m.png" $dir_data"fig_ssc_01a.png"
 rm -rf $dir_data"ngc0628_tp2vis.png" $dir_data"ngc0628_tpmodel.png" $dir_data"ngc0628_feather.png" $dir_data"fig_ssc_01b.png"
 

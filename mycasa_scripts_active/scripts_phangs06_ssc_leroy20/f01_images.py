@@ -10,8 +10,8 @@ plt.ioff()
 reload(myim)
 
 
-dir_data = "/Users/saito/data/myproj_active/proj_phangs06_ssc/sim_phangs/sim_ngc0628/"
-galname = "ngc0628"
+galname = "ngc1097" # "ngc0628"
+dir_data = "/Users/saito/data/myproj_active/proj_phangs06_ssc/sim_phangs/sim_" + galname + "/"
 
 
 done = glob.glob(dir_data + "../../eps/")
@@ -34,9 +34,16 @@ for i in range(len(imagenames)):
 # ra_center = "01:36:41.8"
 # dec_center = "15.47.0.0"
 # clim = [0, 3.93731]
-
-xlim = [-150, 150]
-ylim = [150, -150]
+#contour = np.array([0.02,0.04,0.08,0.16,0.32,0.64,0.96])
+#xlim = [-150, 150]
+#ylim = [150, -150]
+ra_center = "02:46:19.088"
+dec_center = "-30.16.30.099"
+clim = [0, 10]
+contour = np.array([0.15, 0.35, 0.55, 0.75, 0.95])
+xlim = [-120, 120]
+ylim = [120, -120]
+###
 value = None
 color_contour = "black"
 color_beam = "white"
@@ -44,7 +51,6 @@ colorbar = True
 colorlog = False
 colorscale = "rainbow"
 colorbar_label = "(Jy beam$^{-1}$ km s$^{-1}$)"
-contour = np.array([0.15, 0.35, 0.55, 0.75, 0.95])
 imagename_contour = "sim_"+galname+"_skymodel_regrid.smooth.fits"
 
 
