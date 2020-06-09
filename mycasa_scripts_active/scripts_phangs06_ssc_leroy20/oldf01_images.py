@@ -21,6 +21,10 @@ if not done:
 
 imagenames = glob.glob(dir_data + "*.image")
 for i in range(len(imagenames)):
+	done = glob.glob(imagenames[i].replace(".image",".fits"))
+	if not done:
+		exportfits(imagename = imagenames[i],
+			fitsimage = imagenames[i].replace(".image",".fits"))
 
 
 #####################
@@ -46,7 +50,7 @@ imagename_contour = "sim_ngc0628_skymodel.smooth.fits"
 
 ### model
 #
-imagename_color = galname + "/sim_ngc0628_skymodel.smooth.fits"
+imagename_color = "sim_ngc0628_skymodel.smooth.fits"
 title = "Convolved Model"
 output = "../eps/ngc0628_skymodel.png"
 #
