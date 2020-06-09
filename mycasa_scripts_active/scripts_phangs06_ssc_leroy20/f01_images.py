@@ -31,12 +31,12 @@ for i in range(len(imagenames)):
 ### Main Procedure
 #####################
 ### common
-ra_center = "01:36:41.8"
-dec_center = "15.47.0.0"
+# ra_center = "01:36:41.8"
+# dec_center = "15.47.0.0"
+# clim = [0, 3.93731]
+
 xlim = [-150, 150]
 ylim = [150, -150]
-clim = [0, 3.93731]
-clim_diff = [-1.0, 0.3]
 value = None
 color_contour = "black"
 color_beam = "white"
@@ -45,14 +45,14 @@ colorlog = False
 colorscale = "rainbow"
 colorbar_label = "(Jy beam$^{-1}$ km s$^{-1}$)"
 contour = np.array([0.15, 0.35, 0.55, 0.75, 0.95])
-imagename_contour = "sim_ngc0628_skymodel_regrid.smooth.fits"
+imagename_contour = "sim_"+galname+"_skymodel_regrid.smooth.fits"
 
 
 ### model
 #
-imagename_color = "sim_ngc0628_skymodel_regrid.smooth.fits"
+imagename_color = "sim_"+galname+"_skymodel_regrid.smooth.fits"
 title = "Convolved Model"
-output = "../../eps/ngc0628_skymodel.png"
+output = "../../eps/"+galname+"_skymodel.png"
 #
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
@@ -76,9 +76,9 @@ myim.fits2eps(dir_data = dir_data,
 
 ### 7m-only
 #
-imagename_color = "sim_ngc0628_7m_br.smooth.fits"
+imagename_color = "sim_"+galname+"_7m_br.smooth.fits"
 title = "Convolved 7m-only"
-output = "../../eps/ngc0628_7m.png"
+output = "../../eps/"+galname+"_7m.png"
 #
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
@@ -102,9 +102,9 @@ myim.fits2eps(dir_data = dir_data,
 
 ### CAF
 #
-imagename_color = "sim_ngc0628_feather_br.smooth.fits"
+imagename_color = "sim_"+galname+"_feather_br.smooth.fits"
 title = "Convolved Feather"
-output = "../../eps/ngc0628_feather.png"
+output = "../../eps/"+galname+"_feather.png"
 #
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
@@ -128,9 +128,9 @@ myim.fits2eps(dir_data = dir_data,
 
 ### CBF
 #
-imagename_color = "sim_ngc0628_tp2vis_br.smooth.fits"
+imagename_color = "sim_"+galname+"_tp2vis_br.smooth.fits"
 title = "Convolved tp2vis"
-output = "../../eps/ngc0628_tp2vis.png"
+output = "../../eps/"+galname+"_tp2vis.png"
 #
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
@@ -154,9 +154,9 @@ myim.fits2eps(dir_data = dir_data,
 
 ### CDF
 #
-imagename_color = "sim_ngc0628_tpmodel_br.smooth.fits"
+imagename_color = "sim_"+galname+"_tpmodel_br.smooth.fits"
 title = "Convolved TPmodel"
-output = "../../eps/ngc0628_tpmodel.png"
+output = "../../eps/"+galname+"_tpmodel.png"
 #
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
