@@ -58,7 +58,7 @@ def plotter(
        #
        plt.xlabel("CO Size Diameter (arcsec)")
        plt.ylabel(ylabel)
-       plt.xlim([0,300])
+       plt.xlim([0.001,300])
        plt.ylim(ylim)
        plt.legend(ncol=2)
        #plt.grid(axis="both")
