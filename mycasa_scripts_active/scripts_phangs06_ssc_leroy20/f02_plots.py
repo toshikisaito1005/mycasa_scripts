@@ -58,7 +58,7 @@ def plotter(
        #
        plt.xlabel("CO Size Diameter (arcsec)")
        plt.ylabel(ylabel)
-       plt.xlim([0.001,300])
+       plt.xlim([0,300])
        plt.ylim(ylim)
        plt.legend(ncol=2)
        #plt.grid(axis="both")
@@ -68,6 +68,6 @@ def plotter(
 #####################
 ### Main Procedure
 #####################
-plotter("list_median.txt", dir_data+"ssc_fidelity_vs_size.png", [0,55], "Fidelity Median", 1)
+plotter("list_median.txt", dir_data+"ssc_fidelity_vs_size.png", [0.001,55], "Fidelity Median", 1)
 plotter("list_diff_total.txt", dir_data+"ssc_diff_total_vs_size.png", [-0.3,1.7], "Total Flux Difference")
 plotter("list_diff_peak.txt", dir_data+"ssc_diff_vs_size.png", [-0.3,1.7], "Peak Flux Difference")

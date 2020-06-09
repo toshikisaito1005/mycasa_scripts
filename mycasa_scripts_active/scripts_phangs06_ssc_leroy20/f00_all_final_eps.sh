@@ -14,9 +14,8 @@ convert $dir_data"fig_fidelity_vs_circ_diameter.png" eps2:$dir_data"ssc_fidelity
 
 ### figure
 convert -crop 0x345+0+0 $dir_data"ssc_fidelity_vs_size.png" $dir_data"ssc_fidelity_vs_sizeb.png"
+convert -crop 0x345+0+0 $dir_data"ssc_diff_total_vs_size.png" $dir_data"ssc_diff_total_vs_sizeb.png"
 
-convert $dir_data"ssc_fidelity_vs_size.png" eps2:$dir_data"ssc_fidelity_vs_size.eps"
-convert $dir_data"ssc_diff_vs_size.png" eps2:$dir_data"ssc_diff_vs_size.eps"
-convert $dir_data"ssc_diff_total_vs_size.png" eps2:$dir_data"ssc_diff_total_vs_size.eps"
+convert -append -border 0x0 $dir_data"ssc_fidelity_vs_sizeb.png" $dir_data"ssc_diff_total_vs_sizeb.png" $dir_data"ssc_diff_vs_size.png" eps2:$dir_data"ssc_results.eps"
 
-rm -rf $dir_data"ssc_fidelity_vs_size.png" $dir_data"ssc_diff_vs_size.png" $dir_data"ssc_diff_total_vs_size.png"
+rm -rf $dir_data"ssc_fidelity_vs_size.png" $dir_data"ssc_fidelity_vs_sizeb.png" $dir_data"ssc_diff_total_vs_size.png" $dir_data"ssc_diff_total_vs_sizeb.png" $dir_data"ssc_diff_vs_size.png"
