@@ -37,9 +37,9 @@ def plotter(
        plt.subplots_adjust(bottom=0.15, left=0.07, right=0.95, top=0.95)
        #
        median_7m, disp_7m = np.round(np.median(data[:,1]),npround), np.round(np.std(data[:,1]),npround)
-       median_feather, disp_feather = np.round(np.median(data[:,2]),npround), np.round(np.std(data[:,2]),npround)
-       median_tp2vis, disp_tp2vis = np.round(np.median(data[:,3]),npround), np.round(np.std(data[:,3]),npround)
-       median_tpmodel, disp_tpmodel = np.round(np.median(data[:,4]),npround), np.round(np.std(data[:,4]),npround)
+       median_feather, disp_feather = np.round(np.mean(data[:,2]),npround), np.round(np.std(data[:,2]),npround)
+       median_tp2vis, disp_tp2vis = np.round(np.mean(data[:,3]),npround), np.round(np.std(data[:,3]),npround)
+       median_tpmodel, disp_tpmodel = np.round(np.mean(data[:,4]),npround), np.round(np.std(data[:,4]),npround)
        #
        plt.plot([0,300],[median_7m,median_7m],"--",c=cm.gnuplot(0/3.5),lw=2)
        plt.plot([0,300],[median_feather,median_feather],"--",c=cm.gnuplot(1/3.5),lw=2)
