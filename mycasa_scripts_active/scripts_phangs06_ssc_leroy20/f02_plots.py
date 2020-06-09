@@ -17,7 +17,12 @@ dir_gals = glob.glob(dir_data + "sim_*/")
 dir_gals.sort()
 
 
+list_fidelity_7m = []
+list_fidelity_feather = []
+list_fidelity_tp2vis = []
+list_fidelity_tpmodel = []
 for i in range(len(dir_gals)):
+       print("# processing " + dir_gals[i].split("/")[-2])
        #
        fidelity_7m = glob.glob(dir_gals[i] + "*7m*.fidelity")[0]
        fidelity_feather = glob.glob(dir_gals[i] + "*feather*.fidelity")[0]
@@ -43,10 +48,16 @@ for i in range(len(dir_gals)):
        #
        fidelity_tp2vis = imval(fidelity_tp2vis,box=box)["data"].flatten()
        fidelity_tp2vis[np.isnan(fidelity_tp2vis)] = 0
-       fidelity_tp2vis = np.median(fidelity_tp2vis[fidelity_tp2vis>0])
+       median_fidelity_tp2vis = np.median(fidelity_tp2vis[fidelity_tp2vis>0])
        #
        fidelity_tpmodel = imval(fidelity_tpmodel,box=box)["data"].flatten()
        fidelity_tpmodel[np.isnan(fidelity_tpmodel)] = 0
-       fidelity_tpmodel = np.median(fidelity_tpmodel[fidelity_tpmodel>0])
+       fmedian_idelity_tpmodel = np.median(fidelity_tpmodel[fidelity_tpmodel>0])
+       #
+       list_fidelity_7m.append(median_fidelity_7m)
+       list_fidelity_feather.append(median_fidelity_feather)
+       list_fidelity_tp2vis.append(median_fidelity_tp2vis)
+       list_fidelity_tpmodel.append(median_fidelity_tpmodel)
+
 
 os.system("rm -rf *.last")
