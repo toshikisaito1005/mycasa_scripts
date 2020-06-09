@@ -37,6 +37,7 @@ for i in range(len(dir_gals)):
        #
        shape = imhead(fidelity_7m,mode="list")["shape"]
        box = "0,0,"+str(shape[0]-1)+","+str(shape[1]-1)
+       
        #
        fidelity_7m = imval(fidelity_7m,box=box)["data"].flatten()
        fidelity_7m[np.isnan(fidelity_7m)] = 0
