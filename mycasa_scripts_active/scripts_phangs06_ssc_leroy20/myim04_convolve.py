@@ -16,8 +16,7 @@ dir_proj = "/Users/saito/data/myproj_active/proj_phangs06_ssc/v3p4_tpeak/"
 skymodels = glob.glob(dir_proj + "*.skymodel")
 skymodels.sort()
 
-#for i in range(len(skymodels)):
-for i in [26]:
+for i in range(len(skymodels)):
 	galname = skymodels[i].split("/")[-1].split("_")[0]
 	print("### processing " + galname + " " + str(i) + "/" + str(len(skymodels)))
 	dir_gal = dir_proj + "../sim_phangs/sim_" + galname + "/"
