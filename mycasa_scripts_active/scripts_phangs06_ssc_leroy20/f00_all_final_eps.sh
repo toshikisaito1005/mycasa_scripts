@@ -11,3 +11,5 @@ rm -rf $dir_data"ngc0628_tp2vis.png" $dir_data"ngc0628_tpmodel.png" $dir_data"ng
 
 ### figure 0
 convert dir_data"fig_fidelity_vs_circ_diameter.png" eps2:$dir_data"ssc_fidelity_vs_size.eps"
+
+convert dir_data"ssc_fidelity_vs_size.png" eps2:dir_data"ssc_fidelity_vs_size.eps"

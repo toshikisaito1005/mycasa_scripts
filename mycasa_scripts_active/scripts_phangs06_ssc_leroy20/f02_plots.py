@@ -32,7 +32,7 @@ def plotter(
        ):
        data = np.loadtxt(txtdata)
        #
-       fig = plt.figure(figsize=(12,4))
+       fig = plt.figure(figsize=(15,4))
        plt.rcParams["font.size"] = 16
        plt.subplots_adjust(bottom=0.15, left=0.07, right=0.95, top=0.95)
        #
@@ -61,6 +61,7 @@ def plotter(
        plt.xlim([0,300])
        plt.ylim(ylim)
        plt.legend(ncol=2)
+       #plt.grid(axis="both")
        plt.savefig(output)
 
 
@@ -69,4 +70,4 @@ def plotter(
 #####################
 plotter("list_median.txt", dir_data+"ssc_fidelity_vs_size.png", [0,55], "Fidelity Median", 1)
 plotter("list_diff_total.txt", dir_data+"ssc_diff_total_vs_size.png", [-0.3,1.7], "Total Flux Difference")
-
+plotter("list_diff_peak.txt", dir_data+"ssc_diff_vs_size.png", [-0.3,1.7], "Peak Flux Difference")
