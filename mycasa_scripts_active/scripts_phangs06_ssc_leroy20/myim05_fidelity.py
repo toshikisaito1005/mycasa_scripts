@@ -13,4 +13,5 @@ dir_gals = glob.glob(dir_data + "sim_*/")
 dir_gals.sort()
 
 
-imagenames = glob.glob(dir_gals[i] + "*.smooth")
+imagenames = glob.glob(dir_gals[i] + "*_br.smooth")
+skymodel = glob.glob(dir_gals[i] + "*_skymodel_regrid.smooth")[0]
