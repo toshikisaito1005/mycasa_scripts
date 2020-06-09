@@ -3,6 +3,7 @@ import re
 import sys
 import glob
 import scipy
+import numpy as np
 import mycasaimaging_tools as myim
 import matplotlib.pyplot as plt
 plt.ioff()
@@ -32,4 +33,20 @@ for i in range(len(dir_gals)):
        shape = imhead(fidelity_7m,mode="list")["shape"]
        box = "0,0,"+str(shape[0]-1)+","+str(shape[1]-1)
        #
-       fidelity_7m = imval(fidelity_7m,box=box)
+       fidelity_7m = imval(fidelity_7m,box=box)["data"].flatten()
+       fidelity_7m[np.isnan(fidelity_7m)] = 0
+       median_fidelity_7m = np.median(fidelity_7m[fidelity_7m>0])
+       #
+       fidelity_feather = imval(fidelity_feather,box=box)["data"].flatten()
+       fidelity_feather[np.isnan(fidelity_feather)] = 0
+       median_fidelity_feather = np.median(fidelity_feather[fidelity_feather>0])
+       #
+       fidelity_tp2vis = imval(fidelity_tp2vis,box=box)["data"].flatten()
+       fidelity_tp2vis[np.isnan(fidelity_tp2vis)] = 0
+       fidelity_tp2vis = np.median(fidelity_tp2vis[fidelity_tp2vis>0])
+       #
+       fidelity_tpmodel = imval(fidelity_tpmodel,box=box)["data"].flatten()
+       fidelity_tpmodel[np.isnan(fidelity_tpmodel)] = 0
+       fidelity_tpmodel = np.median(fidelity_tpmodel[fidelity_tpmodel>0])
+
+os.system("rm -rf *.last")
