@@ -39,10 +39,10 @@ for i in range(len(skymodels)):
 	os.system("rm -rf " + outfile + ".fits")
 	#
 	# smooth
-	imagenames = glob.glob(dir_gal + "sim_*.image")
+	imagenames = glob.glob(dir_gal + "sim_*.pbcor")
 	for j in range(len(imagenames)):
 		print("# smooth sim image " + str(j) + " " + galname)
-		outfile = imagenames[j].replace(".image",".smooth")
+		outfile = imagenames[j].replace(".pbcor",".smooth")
 		os.system("rm -rf " + outfile + "*")
 		imsmooth(imagename=imagenames[j], targetres=True, major="10.0arcsec", minor="10.0arcsec", pa="0deg", outfile=outfile+"_tmp")
 		#

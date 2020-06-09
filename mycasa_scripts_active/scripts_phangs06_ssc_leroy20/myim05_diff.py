@@ -8,7 +8,7 @@ plt.ioff()
 
 
 #####
-dir_data = "/Users/saito/data/myproj_active/proj_phangs06_ssc/data_old/"
+dir_data = "/Users/saito/data/myproj_active/proj_phangs06_ssc/sim_phangs/"
 gals = ["ngc0628"]
 i=0
 
@@ -50,8 +50,8 @@ if not done:
 
 galname = gals[i]
 #
-imagenames = glob.glob(dir_data + galname + "/*.smooth.pbcor")
-template = glob.glob(dir_data + galname + "/*_skymodel.smooth")[0]
+imagenames = glob.glob(dir_data + galname + "/*.smooth")
+template = glob.glob(dir_data + galname + "/*_skymodel*regrid*")[0]
 #
 for i in range(len(imagenames)):
     ###
