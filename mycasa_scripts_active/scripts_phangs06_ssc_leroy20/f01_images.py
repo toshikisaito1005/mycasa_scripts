@@ -10,7 +10,7 @@ plt.ioff()
 reload(myim)
 
 
-galname = "ngc1097" # "ngc0628"
+galname = "ngc1097" # "ngc0628" "ngc1097"
 dir_data = "/Users/saito/data/myproj_active/proj_phangs06_ssc/sim_phangs/sim_" + galname + "/"
 
 
@@ -31,18 +31,20 @@ for i in range(len(imagenames)):
 ### Main Procedure
 #####################
 ### common
-# ra_center = "01:36:41.8"
-# dec_center = "15.47.0.0"
-# clim = [0, 3.93731]
-#contour = np.array([0.02,0.04,0.08,0.16,0.32,0.64,0.96])
-#xlim = [-150, 150]
-#ylim = [150, -150]
+"""
+ra_center = "01:36:41.8"
+dec_center = "15.47.0.0"
+clim = [0, 3.93731]
+contour = np.array([0.15, 0.35, 0.55, 0.75, 0.95])
+xlim = [-150, 150]
+ylim = [150, -150]
+"""
 ra_center = "02:46:19.088"
 dec_center = "-30.16.30.099"
 clim = [0, 10]
-contour = np.array([0.15, 0.35, 0.55, 0.75, 0.95])
-xlim = [-120, 120]
-ylim = [120, -120]
+contour = np.array([0.02,0.04,0.08,0.16,0.32,0.64,0.96])
+xlim = [-135, 135]
+ylim = [135, -135]
 ###
 value = None
 color_contour = "black"
@@ -161,7 +163,7 @@ myim.fits2eps(dir_data = dir_data,
 ### CDF
 #
 imagename_color = "sim_"+galname+"_tpmodel_br.smooth.fits"
-title = "Convolved TPmodel"
+title = "Convolved tpmodel"
 output = "../../eps/"+galname+"_tpmodel.png"
 #
 myim.fits2eps(dir_data = dir_data,
