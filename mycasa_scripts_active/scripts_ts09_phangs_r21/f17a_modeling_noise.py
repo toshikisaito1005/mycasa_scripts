@@ -280,6 +280,7 @@ def add_noise(
 	best_lognorm_co21,
 	log_co21_noise_k,
 	xbins_co21,
+	nbins,
 	):
 	"""
 	"""
@@ -288,13 +289,13 @@ def add_noise(
 	for i in range(len(xbins_co10)):
 		for j in range(len(xbins_co21)):
 			# create binned data
-			if i<=37:
-				if j<=37:
+			if i<=nbins-3:
+				if j<=nbins-3:
 					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]) & (best_lognorm_co21>=xbins_co21[j]) & (best_lognorm_co21<xbins_co21[j+1]))
 				else:
 					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]) & (best_lognorm_co21>=xbins_co21[j]))
 			else:
-				if j<37:
+				if j<nbins-3:
 					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co21>=xbins_co21[j]) & (best_lognorm_co21<xbins_co21[j+1]))
 				else:
 					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co21>=xbins_co21[j]))
@@ -443,7 +444,7 @@ def get_best_co21_parameter(
 			log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
 			log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
 			#
-			log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise = add_noise(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10, log_co21_mom0_k_model_scatter, log_co21_noise_k, xbins_co21)
+			log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise = add_noise(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10, log_co21_mom0_k_model_scatter, log_co21_noise_k, xbins_co21, nbins)
 			#
 			cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<range_co10_input[1]) & (log_co21_mom0_k_model_scatter_noise>range_co21_input[0]) & (log_co21_mom0_k_model_scatter_noise<range_co21_input[1]))
 			log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
@@ -521,7 +522,7 @@ def create_best_models(
 	#
 	### log_co_mom0_k_model_scatter_noise
 	log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise = \
-		add_noise(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10, log_co21_mom0_k_model_scatter, log_co21_noise_k, xbins_co21)
+		add_noise(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10, log_co21_mom0_k_model_scatter, log_co21_noise_k, xbins_co21, nbins)
 	#
 	### cut
 	cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0])) # & (log_co21_mom0_k_model_scatter>range_co21_input[0]))
