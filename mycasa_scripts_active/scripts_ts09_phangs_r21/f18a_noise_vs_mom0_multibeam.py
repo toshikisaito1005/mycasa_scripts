@@ -20,7 +20,7 @@ freqco10 = 115.27120
 freqco21 = 230.53800
 nbins = 40
 percentile = 84
-beams = ["20p0"]
+beams = ["20p0", "16p0"]
 scales = [44/1.0, 52/1.3, 103/1.4]
 cnt_ras = [24.174, 170.063, 185.729]
 cnt_decs = [15.783, 12.9914, 15.8223]
@@ -101,7 +101,7 @@ def getdata(
 	#
 	data_ra  = r21.import_data(co10_mom0, mode="coords", index=0)
 	data_dec = r21.import_data(co10_mom0, mode="coords", index=1)
-	dist = distance(data_ra, data_dec, pa, inc, cnt_ra, cnt_dec, scale)
+	dist = r21.distance(data_ra, data_dec, pa, inc, cnt_ra, cnt_dec, scale)
 	#
 	# select data
 	cut_all = np.where((data_co10_mom0>0) & (data_co10_noise>0) & (data_co21_mom0>0) & (data_co21_noise>0) & (dist>def_nucleus))
@@ -564,7 +564,7 @@ for j in range(len(beams)):
 	### plot noise vs. mom-0
 	log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21, pa, inc, cnt_ra, cnt_dec, scale, def_nucleus)
 	p84_co10, p50_co10, p16_co10, p84_co21, p50_co21, p16_co21 = print_things(log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k)
-	#xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile)
+	xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile)
 
 
 	#####################
