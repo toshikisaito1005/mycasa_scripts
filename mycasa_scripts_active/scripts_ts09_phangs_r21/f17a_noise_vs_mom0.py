@@ -78,6 +78,9 @@ def getdata(
 	data_co21_mom0  = r21.import_data(co21_mom0, mode="data")
 	data_co21_noise = r21.import_data(co21_noise, mode="data")
 	#
+	data_ra  = r21.import_data(co10_mom0, mode="data")
+	data_dec = r21.import_data(co10_mom0, mode="data")
+	#
 	# select data
 	cut_all = np.where((data_co10_mom0>0) & (data_co10_noise>0) & (data_co21_mom0>0) & (data_co21_noise>0))
 	#
