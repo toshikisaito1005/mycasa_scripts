@@ -15,6 +15,10 @@ import scripts_phangs_r21 as r21
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 galname = "ngc0628"
+
+
+
+
 i = 0
 freqco10 = 115.27120
 freqco21 = 230.53800
@@ -554,12 +558,13 @@ def print_boot(
 ### plot noise
 #####################
 for j in range(len(beams)):
-	this_beam = beams[j]
 	### get filenames
+	this_beam = beams[j]
 	co10_mom0  = dir_proj + galname + "_co10/co10_" + this_beam + ".moment0"
 	co10_noise = dir_proj + galname + "_co10/co10_" + this_beam + ".moment0.noise"
 	co21_mom0  = dir_proj + galname + "_co21/co21_" + this_beam + ".moment0"
 	co21_noise = dir_proj + galname + "_co21/co21_" + this_beam + ".moment0.noise"
+	"""
 	#
 	### plot noise vs. mom-0
 	log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21, pa, inc, cnt_ra, cnt_dec, scale, def_nucleus)
@@ -734,6 +739,7 @@ for j in range(len(beams)):
 		np.savetxt(dir_proj+"eps/bootstrap_co10_models_"+galname+"_"+this_beam+".txt", np.array(list_best_co10_parameter))
 		np.savetxt(dir_proj+"eps/bootstrap_co21_models_"+galname+"_"+this_beam+".txt", np.array(list_best_co21_parameter))
 		#
+	"""
 
 
 #
