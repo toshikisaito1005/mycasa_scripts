@@ -37,7 +37,17 @@ def_nucleus = [50*44./1.0, 50*52./1.3*1.5, 30*103/1.4]
 #####################
 ### functions
 #####################
-def get_co_intensities(image_co10,image_co21,beamfloat):
+def get_co_intensities(
+	image_co10,
+	image_co21,
+	beamfloat,
+	pa,
+	inc,
+	cnt_ra,
+	cnt_dec,
+	scale,
+	def_nucleus,
+	):
 	"""
 	"""
 	# get image shape
@@ -46,17 +56,24 @@ def get_co_intensities(image_co10,image_co21,beamfloat):
 	# imval
 	data_co10_tmp = imval(image_co10,box=box)["data"].flatten()
 	data_co21_tmp = imval(image_co21,box=box)["data"].flatten()
+	# distance
+	data_ra = imval(image_co10,box=box)["coords"][:,:,0].flatten() * 180 / np.pi
+	data_dec = imval(image_co10,box=box)["coords"][:,:,1].flatten() * 180 / np.pi
+	data_dist = distance(data_ra, data_dec, pa, inc, cnt_ra, cnt_dec, scale)
+	#print("# " + str(np.min(data_dist)))
+	#print("# " + str(np.median(data_dist)))
 	# cut pixel = 0
-	cut_data = np.where((data_co10_tmp>0) & (data_co21_tmp>0))
+	cut_data = np.where((data_co10_tmp>0) & (data_co21_tmp>0) & (data_dist>def_nucleus/2.))
 	data_co10 = data_co10_tmp[cut_data]
 	data_co21 = data_co21_tmp[cut_data]
+	data_dist = data_dist[cut_data]
 	# Jy-to-K
 	co10_jy2k = 1.222e6 / beamfloat**2 / 115.27120**2
 	co21_jy2k = 1.222e6 / beamfloat**2 / 230.53800**2
 	data_co10_Kelvin = data_co10 * co10_jy2k
 	data_co21_Kelvin = data_co21 * co21_jy2k
 
-	return data_co10_Kelvin, data_co21_Kelvin
+	return data_co10_Kelvin, data_co21_Kelvin, data_dist
 
 def weighted_percentile(
 	data,
@@ -151,7 +168,7 @@ for i in range(len(gals)):
 		image_co21 = dir_gal + "_co21/co21_" + beamname + ".moment0"
 		#
 		# get values
-		co10, co21 = get_co_intensities(image_co10,image_co21,beamfloat)
+		co10, co21, dist = get_co_intensities(image_co10,image_co21,beamfloat,pas[i],incs[i],cnt_ras[i],cnt_decs[i],scales[i],def_nucleus[i])
 		r21 = co21/co10
 		#
 		# stats
