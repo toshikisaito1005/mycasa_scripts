@@ -103,7 +103,7 @@ def getdata(
 	dist = distance(data_ra, data_dec, pa, inc, cnt_ra, cnt_dec, scale)
 	#
 	# select data
-	cut_all = np.where((data_co10_mom0>0) & (data_co10_noise>0) & (data_co21_mom0>0) & (data_co21_noise>0))
+	cut_all = np.where((data_co10_mom0>0) & (data_co10_noise>0) & (data_co21_mom0>0) & (data_co21_noise>0) & (dist>def_nucleus))
 	#
 	data_co10_mom0  = data_co10_mom0[cut_all]
 	data_co10_noise = data_co10_noise[cut_all]
