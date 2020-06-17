@@ -564,8 +564,8 @@ for j in range(len(beams)):
 	co10_noise = dir_proj + galname + "_co10/co10_" + this_beam + ".moment0.noise"
 	co21_mom0  = dir_proj + galname + "_co21/co21_" + this_beam + ".moment0"
 	co21_noise = dir_proj + galname + "_co21/co21_" + this_beam + ".moment0.noise"
-	"""
 	#
+	"""
 	### plot noise vs. mom-0
 	log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21, pa, inc, cnt_ra, cnt_dec, scale, def_nucleus)
 	p84_co10, p50_co10, p16_co10, p84_co21, p50_co21, p16_co21 = print_things(log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k)
