@@ -101,6 +101,8 @@ def getdata(
 	data_ra  = r21.import_data(co10_mom0, mode="coords", index=0)
 	data_dec = r21.import_data(co10_mom0, mode="coords", index=1)
 	dist = distance(data_ra, data_dec, pa, inc, cnt_ra, cnt_dec, scale)
+	print(str(len(dist[dist>def_nucleus])))
+	print(str(len(dist)))
 	#
 	# select data
 	cut_all = np.where((data_co10_mom0>0) & (data_co10_noise>0) & (data_co21_mom0>0) & (data_co21_noise>0) & (dist>def_nucleus))
@@ -569,7 +571,8 @@ xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise
 #####################
 list_best_co10_parameter = []
 list_best_co21_parameter = []
-for i in range(1000):
+#for i in range(1000):
+for i in range(1):
 	print("### bootstrap " + str(i+1).zfill(3) + "/100")
 	os.system("rm -rf " + dir_proj + "eps/best_co10_model_parameter.txt")
 	os.system("rm -rf " + dir_proj + "eps/best_co21_model_parameter.txt")
