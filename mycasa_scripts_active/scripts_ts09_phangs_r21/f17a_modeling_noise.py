@@ -15,14 +15,10 @@ import scripts_phangs_r21 as r21
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 galname = "ngc0628"
-
-
-
-
 i = 0
 freqco10 = 115.27120
 freqco21 = 230.53800
-nbins = 10 # 40
+nbins = [10]
 percentile = 84
 beams = ["20p0"]
 scales = [44/1.0, 52/1.3, 103/1.4]
@@ -32,6 +28,7 @@ pas = [180-21.1, 180-172.4, 180-157.8]
 incs = [90-8.7, 90-56.2, 90-35.1]
 def_nucleus = [50*44./1.0, 50*52./1.3*1.5, 30*103/1.4]
 #
+nbins = nbins[i]
 scale = scales[i]
 cnt_ra = cnt_ras[i]
 cnt_dec = cnt_decs[i]
@@ -256,13 +253,14 @@ def add_noise_co10(
 	best_lognorm_co10,
 	log_co10_noise_k,
 	xbins_co10,
+	nbins,
 	):
 	"""
 	"""
 	list_output_co10 = []
 	for i in range(len(xbins_co10)):
 			# create binned data
-			if i<=37:
+			if i<=nbins-3:
 				cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]))
 			else:
 				cut_all = np.where((best_lognorm_co10>=xbins_co10[i]))
@@ -358,7 +356,7 @@ def get_best_co10_parameter(
 				if np.mean(log_co10_mom0_k_model_scatter)-np.mean(log_co10_mom0_k_model)>0.2:
 					print("### co10_model_scatter - co10_model = " + str(np.mean(log_co10_mom0_k_model_scatter) - np.mean(log_co10_mom0_k_model)))
 				#
-				log_co10_mom0_k_model_scatter_noise = add_noise_co10(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10)
+				log_co10_mom0_k_model_scatter_noise = add_noise_co10(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10, nbins)
 				#
 				cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0]) & (log_co10_mom0_k_model_scatter<range_co10_input[1]))
 				log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
@@ -569,7 +567,6 @@ for j in range(len(beams)):
 	log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21, pa, inc, cnt_ra, cnt_dec, scale, def_nucleus)
 	p84_co10, p50_co10, p16_co10, p84_co21, p50_co21, p16_co21 = print_things(log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k)
 	xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile)
-	"""
 
 	#####################
 	### modeling
@@ -739,7 +736,6 @@ for j in range(len(beams)):
 		np.savetxt(dir_proj+"eps/bootstrap_co10_models_"+galname+"_"+this_beam+".txt", np.array(list_best_co10_parameter))
 		np.savetxt(dir_proj+"eps/bootstrap_co21_models_"+galname+"_"+this_beam+".txt", np.array(list_best_co21_parameter))
 		#
-	"""
 
 
 #
