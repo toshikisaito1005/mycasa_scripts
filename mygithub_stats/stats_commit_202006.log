@@ -1,4 +1,5 @@
       17 - mycasa_scripts_active/scripts_phangs06_ssc_leroy20/f02_plots.py
+      12 - mycasa_scripts_active/scripts_ts09_phangs_r21/f17a_modeling_noise.py
       11 - mycasa_scripts_active/scripts_phangs06_ssc_leroy20/myim01_makemodel.py
        8 - mycasa_scripts_active/scripts_phangs06_ssc_leroy20/myim04_convolve.py
        8 - mycasa_scripts_active/scripts_phangs06_ssc_leroy20/myim03_clean.py
@@ -9,3 +10,4 @@
        3 - mycasa_scripts_active/scripts_phangs06_ssc_leroy20/myim05_fidelity.py
        3 - mycasa_scripts_active/scripts_phangs06_ssc_leroy20/list_median.txt
        3 - mycasa_scripts_active/scripts_phangs06_ssc_leroy20/list_diff_total.txt
+       2 - mycasa_scripts_active/scripts_ts09_phangs_r21/f10b_disp.py
