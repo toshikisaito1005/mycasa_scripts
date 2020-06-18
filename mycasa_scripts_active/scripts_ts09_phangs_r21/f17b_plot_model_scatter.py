@@ -31,9 +31,9 @@ r21_scatter_cut = np.log10(10**co21_scatter_cut/10**co10_scatter_cut)
 
 ###
 xwdith_co10 = co10_scatter.max() - co10_scatter_cut.min()
-xlim_co10 = [co10_scatter.min(), co10_scatter_cut.max()]
+xlim_co10 = [co10_scatter_cut.min(), co10_scatter_cut.max()]
 xwdith_co21 = co21_scatter.max() - co21_scatter_cut.min()
-xlim_co21 = [co21_scatter.min(), co21_scatter_cut.max()]
+xlim_co21 = [co21_scatter_cut.min(), co21_scatter_cut.max()]
 
 ###
 n_scatter, _ = np.histogram(co10_scatter, bins=bins, range=xlim_co10)
