@@ -12,7 +12,7 @@ plt.ioff()
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 gals = ["ngc0628", "ngc3627", "ngc4321"]
 scales = [44/1.0, 52/1.3, 103/1.4]
-ylim = [0,1.4]
+ylim = [0.6,1.1]
 
 
 #####################
@@ -66,7 +66,7 @@ def get_beam_ratios(co10images,co21images):
 plt.figure(figsize=(10,10))
 plt.rcParams["font.size"] = 22
 plt.ylim(ylim)
-plt.ylabel("CO(1-0) Flux Recovery")
+plt.ylabel("Flux Recovery")
 plt.xlabel("Spatial Resolution (kpc)")
 plt.legend(loc = "lower right")
 plt.grid(color="grey")
@@ -78,21 +78,21 @@ for i in range(len(gals)):
     freq = 115.27120 # GHz
     data = get_beam_intensities(images_co10,freq)
     # plot
-    plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "o", markersize=15, markeredgewidth=0, lw=0, c=cm.brg(i/2.5), label=galanme)
-    plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "-", lw=5, c=cm.brg(i/2.5), alpha=0.5)
+    #plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "o", markersize=10, markeredgewidth=0, lw=0, c=cm.brg(i/2.5))
+    plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "-", lw=5, c=cm.brg(i/2.5), alpha=0.5, label=galanme+" CO(1-0)")
     #
 plt.legend(loc="lower right")
-plt.savefig(dir_data + "eps/missingflux_co10.png", dpi=100)
+#plt.savefig(dir_data + "eps/missingflux_co10.png", dpi=100)
 
 
 ### co21
-plt.figure(figsize=(10,10))
-plt.rcParams["font.size"] = 22
-plt.ylim(ylim)
-plt.ylabel("CO(2-1) Flux Recovery")
-plt.xlabel("Spatial Resolution (kpc)")
-plt.legend(loc = "lower right")
-plt.grid(color="grey")
+#plt.figure(figsize=(10,10))
+#plt.rcParams["font.size"] = 22
+#plt.ylim(ylim)
+#plt.ylabel("CO(2-1) Flux Recovery")
+#plt.xlabel("Spatial Resolution (kpc)")
+#plt.legend(loc = "lower right")
+#plt.grid(color="grey")
 #
 for i in range(len(gals)):
     # get data
@@ -101,33 +101,9 @@ for i in range(len(gals)):
     freq = 230.53800 # GHz
     data = get_beam_intensities(images_co21,freq)
     # plot
-    plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "o", markersize=15, markeredgewidth=0, lw=0, c=cm.brg(i/2.5), label=galanme)
-    plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "-", lw=5, c=cm.brg(i/2.5), alpha=0.5)
+    #plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "o", markersize=10, markeredgewidth=0, lw=0, c=cm.brg(i/2.5))
+    plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "--", lw=5, c=cm.brg(i/2.5), alpha=0.5, label=galanme+" CO(1-0)")
     #
 plt.legend(loc="lower right")
 plt.savefig(dir_data + "eps/missingflux_co21.png", dpi=100)
-
-
-### r21
-plt.figure(figsize=(10,10))
-plt.rcParams["font.size"] = 22
-plt.ylim(ylim)
-plt.ylabel("Line Ratio Recovery")
-plt.xlabel("Spatial Resolution (kpc)")
-plt.legend(loc = "lower right")
-plt.grid(color="grey")
-#
-for i in range(len(gals)):
-    # get data
-    galanme = gals[i].replace("ngc","NGC ")
-    images_co10 = glob.glob(dir_data + gals[i] + "_co10/co10*.moment0")
-    images_co21 = glob.glob(dir_data + gals[i] + "_co21/co21*.moment0")
-    data = get_beam_ratios(images_co10,images_co21)
-    # plot
-    plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "o", markersize=15, markeredgewidth=0, lw=0, c=cm.brg(i/2.5), label=galanme)
-    plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "-", lw=5, c=cm.brg(i/2.5), alpha=0.5)
-    #
-plt.legend(loc="lower right")
-plt.savefig(dir_data + "eps/missingflux_r21.png", dpi=100)
-
 
