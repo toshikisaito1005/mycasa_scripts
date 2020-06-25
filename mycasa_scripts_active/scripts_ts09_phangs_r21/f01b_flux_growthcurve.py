@@ -12,7 +12,7 @@ plt.ioff()
 dir_data = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 gals = ["ngc0628", "ngc3627", "ngc4321"]
 scales = [44/1.0, 52/1.3, 103/1.4]
-ylim = [0.6,1.1]
+ylim = [0.71,1.1]
 
 
 #####################
@@ -102,7 +102,7 @@ for i in range(len(gals)):
     data = get_beam_intensities(images_co21,freq)
     # plot
     #plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "o", markersize=10, markeredgewidth=0, lw=0, c=cm.brg(i/2.5))
-    plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "--", lw=5, c=cm.brg(i/2.5), alpha=0.5, label=galanme+" CO(1-0)")
+    plt.plot(data[:,0]*(scales[i]/1000), data[:,2], "--", lw=5, c=cm.brg(i/2.5), alpha=0.5, label=galanme+" CO(2-1)")
     #
 plt.legend(loc="lower right")
 plt.savefig(dir_data + "eps/missingflux_co21.png", dpi=100)
