@@ -167,8 +167,11 @@ rm -rf $dir_data"histo_mask_env.png" $dir_data"histo_mask_envb.png"
 rm -rf $dir_data"histo_mask_piechart.png" $dir_data"histo_mask_piechartb.png"
 
 ### figure 13b
-convert -crop 1270x620+40+80 $dir_data"scatter_mask_gmc.png" $dir_data"scatter_mask_gmcb.png"
+convert -crop 2000x585+40+80 $dir_data"scatter_mask_gmc.png" $dir_data"scatter_mask_gmcb.png"
+convert -crop 2000x585+40+80 $dir_data"scatter_piechart.png" $dir_data"scatter_piechart.png"
+convert -crop 2000x650+40+80 $dir_data"scatter_mask_env.png" $dir_data"scatter_mask_env.png"
 
+convert -append -border 0x0 $dir_data"scatter_mask_gmcb.png" $dir_data"scatter_piechart.png" $dir_data"scatter_mask_env.png" eps2:$dir_data"fig13b.eps"
 
 ### figure 14
 convert -crop 2250x900+120+50 $dir_data"fig_r21_vs_dist.png" $dir_data"fig_r21_vs_distb.png"
