@@ -84,8 +84,13 @@ for i in range(len(txtfile)):
     co10 = co10[cut_all]
     co21 = co21[cut_all]
     #
-    data_inmask  = data[gmcmask==1]
+    data_inmask = data[gmcmask==1]
+    co10_inmask = co10[gmcmask==1]
+    co21_inmask = co21[gmcmask==1]
+    #
     data_outmask = data[gmcmask==0]
+    co10_outmask = co10[gmcmask==0]
+    co21_outmask = co21[gmcmask==0]
     #
     data_inmask_norm = data_inmask / np.median(data_inmask)
     data_inmask_all.extend(data_inmask)
@@ -224,18 +229,18 @@ ax3.grid(axis="both")
 plt.rcParams["font.size"] = 11
 plt.rcParams["legend.fontsize"] = 9
 #
-ax1.scatter(np.log10(co10_outmask_all[0]),np.log10(co21_outmask_all[0]), c=cm.PiYG(1/1.))
-ax1.scatter(np.log10(co10_inmask_all[0]),np.log10(co21_inmask_all[0]), c=cm.PiYG(0/1.))
+ax1.scatter(np.log10(co10_outmask_all[0]),np.log10(co21_outmask_all[0]), c=cm.PiYG(1/1.), alpha=0.2, linewidths=0)
+ax1.scatter(np.log10(co10_inmask_all[0]),np.log10(co21_inmask_all[0]), c=cm.PiYG(0/1.), alpha=0.2, linewidths=0)
 ax1.set_xlim([-0.0,2.1])
 ax1.set_ylim([-0.3,1.8])
 #
-ax2.scatter(np.log10(co10_outmask_all[1]),np.log10(co21_outmask_all[1]), c=cm.PiYG(1/1.))
-ax2.scatter(np.log10(co10_inmask_all[1]),np.log10(co21_inmask_all[1]), c=cm.PiYG(0/1.))
+ax2.scatter(np.log10(co10_outmask_all[1]),np.log10(co21_outmask_all[1]), c=cm.PiYG(1/1.), alpha=0.2, linewidths=0)
+ax2.scatter(np.log10(co10_inmask_all[1]),np.log10(co21_inmask_all[1]), c=cm.PiYG(0/1.), alpha=0.2, linewidths=0)
 ax2.set_xlim([-0.0,3.2])
 ax2.set_ylim([-0.5,2.7])
 #
-ax3.scatter(np.log10(co10_outmask_all[2]),np.log10(co21_outmask_all[2]), c=cm.PiYG(1/1.))
-ax3.scatter(np.log10(co10_inmask_all[2]),np.log10(co21_inmask_all[2]), c=cm.PiYG(0/1.))
+ax3.scatter(np.log10(co10_outmask_all[2]),np.log10(co21_outmask_all[2]), c=cm.PiYG(1/1.), alpha=0.2, linewidths=0)
+ax3.scatter(np.log10(co10_inmask_all[2]),np.log10(co21_inmask_all[2]), c=cm.PiYG(0/1.), alpha=0.2, linewidths=0)
 ax3.set_xlim([-0.0,3.0])
 ax3.set_ylim([-0.3,2.7])
 # save
