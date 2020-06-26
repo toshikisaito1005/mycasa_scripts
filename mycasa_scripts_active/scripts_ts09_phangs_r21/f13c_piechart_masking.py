@@ -232,17 +232,17 @@ plt.rcParams["legend.fontsize"] = 9
 ax1.scatter(np.log10(co10_outmask_all[0]),np.log10(co21_outmask_all[0]/co10_outmask_all[0]), c=cm.PiYG(1/1.), alpha=0.2, linewidths=0, s=5)
 ax1.scatter(np.log10(co10_inmask_all[0]),np.log10(co21_inmask_all[0]/co10_inmask_all[0]), c=cm.PiYG(0/1.), alpha=0.2, linewidths=0, s=5)
 ax1.set_xlim([-0.0,2.1])
-ax1.set_ylim([-0.3,1.8])
+ax1.set_ylim([-1.2,0.5])
 #
 ax2.scatter(np.log10(co10_outmask_all[1]),np.log10(co21_outmask_all[1]/co10_outmask_all[1]), c=cm.PiYG(1/1.), alpha=0.2, linewidths=0, s=5)
 ax2.scatter(np.log10(co10_inmask_all[1]),np.log10(co21_inmask_all[1]/co10_inmask_all[1]), c=cm.PiYG(0/1.), alpha=0.2, linewidths=0, s=5)
 ax2.set_xlim([-0.0,3.2])
-ax2.set_ylim([-0.5,2.7])
+ax2.set_ylim([-1.0,0.7])
 #
 ax3.scatter(np.log10(co10_outmask_all[2]),np.log10(co21_outmask_all[2]/co10_outmask_all[2]), c=cm.PiYG(1/1.), alpha=0.2, linewidths=0, s=5)
 ax3.scatter(np.log10(co10_inmask_all[2]),np.log10(co21_inmask_all[2]/co10_inmask_all[2]), c=cm.PiYG(0/1.), alpha=0.2, linewidths=0, s=5)
 ax3.set_xlim([-0.0,3.0])
-ax3.set_ylim([-0.3,2.7])
+ax3.set_ylim([-1.2,0.7])
 # save
 plt.savefig(dir_product+"scatter_piechart.png",dpi=200)
 
