@@ -229,19 +229,33 @@ ax3.grid(axis="both")
 plt.rcParams["font.size"] = 11
 plt.rcParams["legend.fontsize"] = 9
 #
-ax1.scatter(np.log10(co10_inmask_all[0]),np.log10(co21_inmask_all[0]/co10_inmask_all[0]), c="red", alpha=0.2, linewidths=0, s=5)
-ax1.scatter(np.log10(co10_outmask_all[0]),np.log10(co21_outmask_all[0]/co10_outmask_all[0]), c="blue", alpha=0.2, linewidths=0, s=5)
+ax1.scatter(np.log10(co10_inmask_all[0]),np.log10(co21_inmask_all[0]/co10_inmask_all[0]), c="grey", alpha=0.2, linewidths=0, s=5)
+ax1.scatter(np.log10(co10_outmask_all[0]),np.log10(co21_outmask_all[0]/co10_outmask_all[0]), c="grey", alpha=0.2, linewidths=0, s=5)
 ax1.set_xlim([-0.0,2.1])
 ax1.set_ylim([-1.2,0.5])
 #
-H, xedges, yedges = np.histogram2d(np.log10(co10_inmask_all[0]),np.log10(co21_inmask_all[0]/co10_inmask_all[0]),bins=10,range=([-0.0,2.1],[-1.2,0.5]))
-extent = [xedges[0],xedges[-1],yedges[0],yedges[-1]]
-ax1.contour(H/H.max()*100,levels=[3,4,7],extent=extent,colors=["red"],zorder=1,linewidths=2.5,alpha=1.0)
+H, xedges, yedges = np.histogram2d(np.log10(co21_inmask_all[0]/co10_inmask_all[0]),np.log10(co10_inmask_all[0]),bins=20,range=([-1.2,0.5],[-0.0,2.1]))
+extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
+ax1.contour(H/H.max()*100,levels=[16,32,64],extent=extent,colors=["red"],zorder=1,linewidths=1.5,alpha=1.0)
+#
+H, xedges, yedges = np.histogram2d(np.log10(co21_outmask_all[0]/co10_outmask_all[0]),np.log10(co10_outmask_all[0]),bins=20,range=([-1.2,0.5],[-0.0,2.1]))
+extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
+ax1.contour(H/H.max()*100,levels=[16,32,64],extent=extent,colors=["blue"],zorder=1,linewidths=1.5,alpha=1.0)
+
 #
 ax2.scatter(np.log10(co10_inmask_all[1]),np.log10(co21_inmask_all[1]/co10_inmask_all[1]), c="red", alpha=0.2, linewidths=0, s=5)
 ax2.scatter(np.log10(co10_outmask_all[1]),np.log10(co21_outmask_all[1]/co10_outmask_all[1]), c="blue", alpha=0.2, linewidths=0, s=5)
 ax2.set_xlim([-0.0,3.2])
 ax2.set_ylim([-1.0,0.7])
+#
+H, xedges, yedges = np.histogram2d(np.log10(co21_inmask_all[0]/co10_inmask_all[0]),np.log10(co10_inmask_all[0]),bins=20,range=([-1.2,0.5],[-0.0,2.1]))
+extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
+ax1.contour(H/H.max()*100,levels=[16,32,64],extent=extent,colors=["red"],zorder=1,linewidths=1.5,alpha=1.0)
+#
+H, xedges, yedges = np.histogram2d(np.log10(co21_outmask_all[0]/co10_outmask_all[0]),np.log10(co10_outmask_all[0]),bins=20,range=([-1.2,0.5],[-0.0,2.1]))
+extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
+ax1.contour(H/H.max()*100,levels=[16,32,64],extent=extent,colors=["blue"],zorder=1,linewidths=1.5,alpha=1.0)
+
 #
 ax3.scatter(np.log10(co10_inmask_all[2]),np.log10(co21_inmask_all[2]/co10_inmask_all[2]), c="red", alpha=0.2, linewidths=0, s=5)
 ax3.scatter(np.log10(co10_outmask_all[2]),np.log10(co21_outmask_all[2]/co10_outmask_all[2]), c="blue", alpha=0.2, linewidths=0, s=5)
