@@ -231,8 +231,8 @@ plt.rcParams["legend.fontsize"] = 9
 #
 xlim = [-0.5,1.8]
 ylim = [-1.2,0.5]
-levels = [20,50,80]
-bins_contour = 25
+levels = [10,45,80]
+bins_contour = 20
 ax1.scatter(np.log10(co21_inmask_all[0]),np.log10(co21_inmask_all[0]/co10_inmask_all[0]), c="grey", alpha=0.2, linewidths=0, s=5)
 ax1.scatter(np.log10(co21_outmask_all[0]),np.log10(co21_outmask_all[0]/co10_outmask_all[0]), c="grey", alpha=0.2, linewidths=0, s=5)
 ax1.set_xlim(xlim)
