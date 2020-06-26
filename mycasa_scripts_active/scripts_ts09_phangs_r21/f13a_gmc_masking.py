@@ -20,6 +20,7 @@ dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 nbins = 40
 def_nucleus = [50*44./1.0,50*52./1.3,30*103/1.4]
 xlim = [0,1.45]
+beamsizes = [4.0,8.0,4.0]
 
 
 #####################
@@ -101,10 +102,12 @@ for i in range(len(txtfile)):
     #
     data_all.extend(data)
     #
-    co10_inmask_all.append(co10_inmask)
-    co21_inmask_all.append(co21_inmask)
-    co10_outmask_all.append(co10_outmask)
-    co21_outmask_all.append(co21_outmask)
+    Jy2K_co10 = 1.222e6 / beamsizes[i]**2 / 115.27120**2
+    Jy2K_co21 = 1.222e6 / beamsizes[i]**2 / 230.53800**2
+    co10_inmask_all.append(co10_inmask * Jy2K_co10)
+    co21_inmask_all.append(co21_inmask * Jy2K_co21)
+    co10_outmask_all.append(co10_outmask * Jy2K_co10)
+    co21_outmask_all.append(co21_outmask * Jy2K_co21)
 
 #
 data_inmask_all = np.array(data_inmask_all)
@@ -217,7 +220,7 @@ plt.savefig(dir_product+"histo_mask_gmc.png",dpi=200)
 figure = plt.figure(figsize=(10,4))
 gs = gridspec.GridSpec(nrows=8, ncols=24)
 plt.subplots_adjust(bottom=0.22, left=0.05, right=0.98, top=0.88)
-ax1 = plt.subplot(gs[0:8,0:8])
+ax1 = plt.subplot(gs[0:8,1:8])
 ax2 = plt.subplot(gs[0:8,9:16])
 ax3 = plt.subplot(gs[0:8,17:24])
 ax1.grid(axis="both")
@@ -228,18 +231,18 @@ plt.rcParams["legend.fontsize"] = 9
 #
 ax1.scatter(np.log10(co10_inmask_all[0]),np.log10(co21_inmask_all[0]), c="red")
 ax1.scatter(np.log10(co10_outmask_all[0]),np.log10(co21_outmask_all[0]), c="blue")
-ax1.set_xlim([-0.7,1.8])
-ax1.set_ylim([-0.7,1.8])
+ax1.set_xlim([-0.0,2.1])
+ax1.set_ylim([-0.3,1.8])
 #
 ax2.scatter(np.log10(co10_inmask_all[1]),np.log10(co21_inmask_all[1]), c="red")
 ax2.scatter(np.log10(co10_outmask_all[1]),np.log10(co21_outmask_all[1]), c="blue")
-ax2.set_xlim([-0.5,2.7])
+ax2.set_xlim([-0.0,3.2])
 ax2.set_ylim([-0.5,2.7])
 #
 ax3.scatter(np.log10(co10_inmask_all[2]),np.log10(co21_inmask_all[2]), c="red")
 ax3.scatter(np.log10(co10_outmask_all[2]),np.log10(co21_outmask_all[2]), c="blue")
-ax3.set_xlim([-0.7,2.7])
-ax3.set_ylim([-0.7,2.7])
+ax3.set_xlim([-0.3,2.7])
+ax3.set_ylim([-0.3,2.7])
 # save
 plt.savefig(dir_product+"scatter_mask_gmc.png",dpi=200)
 
