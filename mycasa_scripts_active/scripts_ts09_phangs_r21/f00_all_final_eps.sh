@@ -166,6 +166,9 @@ rm -rf $dir_data"histo_mask_gmc.png" $dir_data"histo_mask_gmcb.png"
 rm -rf $dir_data"histo_mask_env.png" $dir_data"histo_mask_envb.png"
 rm -rf $dir_data"histo_mask_piechart.png" $dir_data"histo_mask_piechartb.png"
 
+### figure 13b
+convert -crop 1270x620+40+80 $dir_data"scatter_mask_gmc.png" $dir_data"scatter_mask_gmcb.png"
+
 
 ### figure 14
 convert -crop 2250x900+120+50 $dir_data"fig_r21_vs_dist.png" $dir_data"fig_r21_vs_distb.png"
