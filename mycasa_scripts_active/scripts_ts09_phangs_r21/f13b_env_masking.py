@@ -319,6 +319,7 @@ plt.rcParams["legend.fontsize"] = 9
 #
 xlim = [-0.0,2.1]
 ylim = [-1.2,0.5]
+levels = [20,40,80]
 ax1.scatter(np.log10(co21_mask0_all[0]),np.log10(co21_mask0_all[0]/co10_mask0_all[0]), c=cm.gnuplot(0/3.5), alpha=0.2, linewidths=0, s=5)
 ax1.scatter(np.log10(co21_mask1_all[0]),np.log10(co21_mask1_all[0]/co10_mask1_all[0]), c=cm.gnuplot(1/3.5), alpha=0.2, linewidths=0, s=5)
 ax1.scatter(np.log10(co21_mask2_all[0]),np.log10(co21_mask2_all[0]/co10_mask2_all[0]), c=cm.gnuplot(2/3.5), alpha=0.2, linewidths=0, s=5)
@@ -326,13 +327,14 @@ ax1.scatter(np.log10(co21_mask3_all[0]),np.log10(co21_mask3_all[0]/co10_mask3_al
 ax1.set_xlim(xlim)
 ax1.set_ylim(ylim)
 #
-H, xedges, yedges = np.histogram2d(np.log10(co21_mask0_all[0]/co10_mask0_all[0]),np.log10(co10_mask0_all[0]),bins=15,range=(xlim,xlim))
+H, xedges, yedges = np.histogram2d(np.log10(co21_inmask_all[1]/co10_inmask_all[1]),np.log10(co21_inmask_all[1]),bins=20,range=([-1.0,0.7],[-0.0,3.2]))
 extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
-ax1.contour(H/H.max()*100,levels=[16,32,64],extent=extent,colors=["red"],zorder=1,linewidths=1.5,alpha=1.0)
+ax2.contour(H/H.max()*100,levels=levels,extent=extent,colors=["red"],zorder=1,linewidths=1.5,alpha=1.0)
 
 #
 xlim = [-0.0,3.2]
 ylim = [-1.0,0.7]
+levels = [20,40,80]
 ax2.scatter(np.log10(co21_mask0_all[1]),np.log10(co21_mask0_all[1]/co10_mask0_all[1]), c=cm.gnuplot(0/3.5), alpha=0.2, linewidths=0, s=5)
 ax2.scatter(np.log10(co21_mask1_all[1]),np.log10(co21_mask1_all[1]/co10_mask1_all[1]), c=cm.gnuplot(1/3.5), alpha=0.2, linewidths=0, s=5)
 ax2.scatter(np.log10(co21_mask2_all[1]),np.log10(co21_mask2_all[1]/co10_mask2_all[1]), c=cm.gnuplot(2/3.5), alpha=0.2, linewidths=0, s=5)
@@ -343,6 +345,7 @@ ax2.set_ylim(ylim)
 #
 xlim = [-0.0,3.0]
 ylim = [-1.2,0.7]
+levels = [20,40,80]
 ax3.scatter(np.log10(co21_mask0_all[2]),np.log10(co21_mask0_all[2]/co10_mask0_all[2]), c=cm.gnuplot(0/3.5), alpha=0.2, linewidths=0, s=5)
 ax3.scatter(np.log10(co21_mask1_all[2]),np.log10(co21_mask1_all[2]/co10_mask1_all[2]), c=cm.gnuplot(1/3.5), alpha=0.2, linewidths=0, s=5)
 ax3.scatter(np.log10(co21_mask2_all[2]),np.log10(co21_mask2_all[2]/co10_mask2_all[2]), c=cm.gnuplot(2/3.5), alpha=0.2, linewidths=0, s=5)
