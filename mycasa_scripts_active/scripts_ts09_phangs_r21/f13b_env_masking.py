@@ -320,40 +320,39 @@ plt.rcParams["legend.fontsize"] = 9
 xlim = [-0.5,1.8]
 ylim = [-1.2,0.5]
 levels = [10,45,80]
-bins_contour = 20
+bins_contour = 15
 ax1.set_xlim(xlim)
 ax1.set_ylim(ylim)
-co21_masks_all = [np.log10(co21_mask0_all[0], np.log10(co21_mask1_all[0], np.log10(co21_mask2_all[0], np.log10(co21_mask3_all[0]]
-r21_masks_all = []
-ax1.scatter(np.log10(co21_mask0_all[0]),np.log10(co21_mask0_all[0]/co10_mask0_all[0]), c="grey", alpha=0.2, linewidths=0, s=5)
-ax1.scatter(np.log10(co21_mask1_all[0]),np.log10(co21_mask1_all[0]/co10_mask1_all[0]), c="grey", alpha=0.2, linewidths=0, s=5)
-ax1.scatter(np.log10(co21_mask2_all[0]),np.log10(co21_mask2_all[0]/co10_mask2_all[0]), c="grey", alpha=0.2, linewidths=0, s=5)
-ax1.scatter(np.log10(co21_mask3_all[0]),np.log10(co21_mask3_all[0]/co10_mask3_all[0]), c="grey", alpha=0.2, linewidths=0, s=5)
-#
+co21_masks_all = [np.log10(co21_mask0_all[0]), np.log10(co21_mask1_all[0]), np.log10(co21_mask2_all[0]), np.log10(co21_mask3_all[0])]
+r21_masks_all = [np.log10(co21_mask0_all[0]/co10_mask0_all[0]), np.log10(co21_mask1_all[0]/co10_mask1_all[0]), np.log10(co21_mask2_all[0]/co10_mask2_all[0]), np.log10(co21_mask3_all[0]/co10_mask3_all[0])]
 for i in range(4):
-    H, xedges, yedges = np.histogram2d(np.log10(co21_mask0_all[0]/co10_mask0_all[0]),np.log10(co21_mask0_all[0]),bins=bins_contour,range=(ylim,xlim))
+    ax1.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
+    H, xedges, yedges = np.histogram2d(r21_masks_all[i],co21_masks_all[i],bins=bins_contour,range=(ylim,xlim))
     extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
-    ax1.contour(H/H.max()*100,levels=levels,extent=extent,colors=[cm.gnuplot(0/3.5)],zorder=1,linewidths=1.5,alpha=1.0)
+    ax1.contour(H/H.max()*100,levels=levels,extent=extent,colors=[cm.gnuplot(i/3.5)],zorder=1e9,linewidths=1.5,alpha=1.0)
 
 #
 xlim = [-0.3,2.7]
 ylim = [-1.0,0.7]
-ax2.scatter(np.log10(co21_mask0_all[1]),np.log10(co21_mask0_all[1]/co10_mask0_all[1]), c=cm.gnuplot(0/3.5), alpha=0.2, linewidths=0, s=5)
-ax2.scatter(np.log10(co21_mask1_all[1]),np.log10(co21_mask1_all[1]/co10_mask1_all[1]), c=cm.gnuplot(1/3.5), alpha=0.2, linewidths=0, s=5)
-ax2.scatter(np.log10(co21_mask2_all[1]),np.log10(co21_mask2_all[1]/co10_mask2_all[1]), c=cm.gnuplot(2/3.5), alpha=0.2, linewidths=0, s=5)
-ax2.scatter(np.log10(co21_mask3_all[1]),np.log10(co21_mask3_all[1]/co10_mask3_all[1]), c=cm.gnuplot(3/3.5), alpha=0.2, linewidths=0, s=5)
-ax2.set_xlim(xlim)
-ax2.set_ylim(ylim)
+co21_masks_all = [np.log10(co21_mask0_all[1]), np.log10(co21_mask1_all[1]), np.log10(co21_mask2_all[1]), np.log10(co21_mask3_all[1])]
+r21_masks_all = [np.log10(co21_mask0_all[1]/co10_mask0_all[1]), np.log10(co21_mask1_all[1]/co10_mask1_all[1]), np.log10(co21_mask2_all[1]/co10_mask2_all[1]), np.log10(co21_mask3_all[1]/co10_mask3_all[1])]
+for i in range(4):
+    ax2.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
+    H, xedges, yedges = np.histogram2d(r21_masks_all[i],co21_masks_all[i],bins=bins_contour,range=(ylim,xlim))
+    extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
+    ax2.contour(H/H.max()*100,levels=levels,extent=extent,colors=[cm.gnuplot(i/3.5)],zorder=1e9,linewidths=1.5,alpha=1.0)
 
 #
 xlim = [-0.3,2.7]
 ylim = [-1.2,0.4]
-ax3.scatter(np.log10(co21_mask0_all[2]),np.log10(co21_mask0_all[2]/co10_mask0_all[2]), c=cm.gnuplot(0/3.5), alpha=0.2, linewidths=0, s=5)
-ax3.scatter(np.log10(co21_mask1_all[2]),np.log10(co21_mask1_all[2]/co10_mask1_all[2]), c=cm.gnuplot(1/3.5), alpha=0.2, linewidths=0, s=5)
-ax3.scatter(np.log10(co21_mask2_all[2]),np.log10(co21_mask2_all[2]/co10_mask2_all[2]), c=cm.gnuplot(2/3.5), alpha=0.2, linewidths=0, s=5)
-ax3.scatter(np.log10(co21_mask3_all[2]),np.log10(co21_mask3_all[2]/co10_mask3_all[2]), c=cm.gnuplot(3/3.5), alpha=0.2, linewidths=0, s=5)
-ax3.set_xlim(xlim)
-ax3.set_ylim(ylim)
+co21_masks_all = [np.log10(co21_mask0_all[1]), np.log10(co21_mask1_all[1]), np.log10(co21_mask2_all[1]), np.log10(co21_mask3_all[1])]
+r21_masks_all = [np.log10(co21_mask0_all[1]/co10_mask0_all[1]), np.log10(co21_mask1_all[1]/co10_mask1_all[1]), np.log10(co21_mask2_all[1]/co10_mask2_all[1]), np.log10(co21_mask3_all[1]/co10_mask3_all[1])]
+for i in range(4):
+    ax3.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
+    H, xedges, yedges = np.histogram2d(r21_masks_all[i],co21_masks_all[i],bins=bins_contour,range=(ylim,xlim))
+    extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
+    ax3.contour(H/H.max()*100,levels=levels,extent=extent,colors=[cm.gnuplot(i/3.5)],zorder=1e9,linewidths=1.5,alpha=1.0)
+
 # save
 plt.savefig(dir_product+"scatter_mask_env.png",dpi=200)
 
