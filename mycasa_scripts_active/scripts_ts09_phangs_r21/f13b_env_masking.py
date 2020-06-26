@@ -314,6 +314,10 @@ ax3 = plt.subplot(gs[0:8,17:24])
 ax1.grid(axis="both")
 ax2.grid(axis="both")
 ax3.grid(axis="both")
+ax1.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
+ax2.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
+ax3.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
+ax1.set_ylabel("log $R_{21}$")
 plt.rcParams["font.size"] = 11
 plt.rcParams["legend.fontsize"] = 9
 #

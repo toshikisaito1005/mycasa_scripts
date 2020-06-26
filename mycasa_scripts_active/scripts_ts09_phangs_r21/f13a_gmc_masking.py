@@ -226,6 +226,10 @@ ax3 = plt.subplot(gs[0:8,17:24])
 ax1.grid(axis="both")
 ax2.grid(axis="both")
 ax3.grid(axis="both")
+ax1.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
+ax2.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
+ax3.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
+ax1.set_ylabel("log $R_{21}$")
 plt.rcParams["font.size"] = 11
 plt.rcParams["legend.fontsize"] = 9
 #
@@ -252,10 +256,10 @@ ax2.set_ylim(ylim)
 co21_masks_all = [np.log10(co21_inmask_all[1]), np.log10(co21_outmask_all[1])]
 r21_masks_all = [np.log10(co21_inmask_all[1]/co10_inmask_all[1]), np.log10(co21_outmask_all[1]/co10_outmask_all[1])]
 for i in range(2):
-    ax1.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
+    ax2.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
     H, xedges, yedges = np.histogram2d(r21_masks_all[i],co21_masks_all[i],bins=bins_contour,range=(ylim,xlim))
     extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
-    ax1.contour(H/H.max()*100,levels=levels,extent=extent,colors=[colors[i]],zorder=1e9,linewidths=2,alpha=1.0)
+    ax2.contour(H/H.max()*100,levels=levels,extent=extent,colors=[colors[i]],zorder=1e9,linewidths=2,alpha=1.0)
 
 #
 xlim = [-0.3,2.7]
@@ -265,10 +269,10 @@ ax3.set_ylim(ylim)
 co21_masks_all = [np.log10(co21_inmask_all[2]), np.log10(co21_outmask_all[2])]
 r21_masks_all = [np.log10(co21_inmask_all[2]/co10_inmask_all[2]), np.log10(co21_outmask_all[2]/co10_outmask_all[2])]
 for i in range(2):
-    ax1.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
+    ax3.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
     H, xedges, yedges = np.histogram2d(r21_masks_all[i],co21_masks_all[i],bins=bins_contour,range=(ylim,xlim))
     extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
-    ax1.contour(H/H.max()*100,levels=levels,extent=extent,colors=[colors[i]],zorder=1e9,linewidths=2,alpha=1.0)
+    ax3.contour(H/H.max()*100,levels=levels,extent=extent,colors=[colors[i]],zorder=1e9,linewidths=2,alpha=1.0)
 
 # save
 plt.savefig(dir_product+"scatter_mask_gmc.png",dpi=200)
