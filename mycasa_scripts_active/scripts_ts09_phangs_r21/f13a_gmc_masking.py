@@ -65,6 +65,10 @@ data_inmask_all = []
 data_inmask_norm_all = []
 data_outmask_all = []
 data_outmask_norm_all = []
+co10_inmask_all = []
+co21_inmask_all = []
+co10_outmask_all = []
+co21_outmask_all = []
 for i in range(len(txtfile)):
     dist = np.loadtxt(txtfile[i])[:,0]
     data = np.loadtxt(txtfile[i])[:,9]
@@ -96,6 +100,12 @@ for i in range(len(txtfile)):
     data_outmask_norm_all.extend(data_outmask_norm)
     #
     data_all.extend(data)
+    #
+    co10_inmask_all.append(co10_inmask)
+    co21_inmask_all.append(co21_inmask)
+    co10_outmask_all.append(co10_outmask)
+    co21_outmask_all.append(co21_outmask)
+
 #
 data_inmask_all = np.array(data_inmask_all)
 data_inmask_norm_all = np.array(data_inmask_norm_all)
@@ -201,5 +211,20 @@ ax2.set_title("Fraction")
 
 # save
 plt.savefig(dir_product+"histo_mask_gmc.png",dpi=200)
+
+
+# plot scatter
+figure = plt.figure(figsize=(10,10))
+gs = gridspec.GridSpec(nrows=8, ncols=8)
+plt.subplots_adjust(bottom=0.22, left=0.05, right=0.98, top=0.88)
+ax1 = plt.subplot(gs[0:8,0:8])
+ax1.grid(axis="both")
+plt.rcParams["font.size"] = 11
+plt.rcParams["legend.fontsize"] = 9
+#
+ax1.scatter(np.log10(co10_inmask_all[0]),np.log10(co21_inmask_all[0]), c="red")
+ax1.scatter(np.log10(co10_outmask_all[0]),np.log10(co21_outmask_all[0]), c="blue")
+# save
+plt.savefig(dir_product+"scatter_mask_gmc.png",dpi=200)
 
 os.system("rm -rf *.last")
