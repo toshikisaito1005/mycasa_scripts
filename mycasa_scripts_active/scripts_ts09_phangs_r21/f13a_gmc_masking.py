@@ -233,18 +233,18 @@ xlim = [-0.5,1.8]
 ylim = [-1.2,0.5]
 levels = [10,45,80]
 bins_contour = 20
+colors = ["red","blue"]
 ax1.scatter(np.log10(co21_inmask_all[0]),np.log10(co21_inmask_all[0]/co10_inmask_all[0]), c="grey", alpha=0.2, linewidths=0, s=5)
 ax1.scatter(np.log10(co21_outmask_all[0]),np.log10(co21_outmask_all[0]/co10_outmask_all[0]), c="grey", alpha=0.2, linewidths=0, s=5)
 ax1.set_xlim(xlim)
 ax1.set_ylim(ylim)
-#
-H, xedges, yedges = np.histogram2d(np.log10(co21_inmask_all[0]/co10_inmask_all[0]),np.log10(co21_inmask_all[0]),bins=bins_contour,range=(ylim,xlim))
-extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
-ax1.contour(H/H.max()*100,levels=levels,extent=extent,colors=["red"],zorder=1,linewidths=1.5,alpha=1.0)
-#
-H, xedges, yedges = np.histogram2d(np.log10(co21_outmask_all[0]/co10_outmask_all[0]),np.log10(co21_outmask_all[0]),bins=bins_contour,range=(ylim,xlim))
-extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
-ax1.contour(H/H.max()*100,levels=levels,extent=extent,colors=["blue"],zorder=1,linewidths=1.5,alpha=1.0)
+co21_masks_all = [co21_inmask_all[0], co21_outmask_all[0]]
+r21_masks_all = [np.log10(co21_inmask_all[0]/co10_inmask_all[0]), np.log10(co21_outmask_all[0]/co10_outmask_all[0])]
+for i in range(4):
+    ax1.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
+    H, xedges, yedges = np.histogram2d(r21_masks_all[i],co21_masks_all[i],bins=bins_contour,range=(ylim,xlim))
+    extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
+    ax1.contour(H/H.max()*100,levels=levels,extent=extent,colors=[colors[i]],zorder=1e9,linewidths=2,alpha=1.0)
 
 #
 xlim = [-0.3,2.7]
@@ -256,7 +256,7 @@ ax2.set_ylim(ylim)
 #
 H, xedges, yedges = np.histogram2d(np.log10(co21_inmask_all[1]/co10_inmask_all[1]),np.log10(co21_inmask_all[1]),bins=bins_contour,range=(ylim,xlim))
 extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
-ax2.contour(H/H.max()*100,levels=levels,extent=extent,colors=["red"],zorder=1,linewidths=1.5,alpha=1.0)
+ax2.contour(H/H.max()*100,levels=levels,extent=extent,colors=["red"],zorder=1,linewidths=2,alpha=1.0)
 #
 H, xedges, yedges = np.histogram2d(np.log10(co21_outmask_all[1]/co10_outmask_all[1]),np.log10(co21_outmask_all[1]),bins=bins_contour,range=(ylim,xlim))
 extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
