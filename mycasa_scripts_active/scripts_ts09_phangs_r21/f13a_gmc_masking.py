@@ -238,8 +238,8 @@ ax2.set_ylim([-0.5,2.7])
 #
 ax3.scatter(np.log10(co10_inmask_all[2]),np.log10(co21_inmask_all[2]), c="red")
 ax3.scatter(np.log10(co10_outmask_all[2]),np.log10(co21_outmask_all[2]), c="blue")
-ax3.set_xlim([-0.5,2.7])
-ax3.set_ylim([-0.5,2.7])
+ax3.set_xlim([-0.7,2.7])
+ax3.set_ylim([-0.7,2.7])
 # save
 plt.savefig(dir_product+"scatter_mask_gmc.png",dpi=200)
 
