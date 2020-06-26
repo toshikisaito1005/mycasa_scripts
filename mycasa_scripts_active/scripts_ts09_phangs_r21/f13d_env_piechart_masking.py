@@ -162,13 +162,13 @@ for i in range(len(txtfile)):
 
 
 # plot scatter
-figure = plt.figure(figsize=(10,4))
-gs = gridspec.GridSpec(nrows=8, ncols=24)
+figure = plt.figure(figsize=(10,3))
+gs = gridspec.GridSpec(nrows=8, ncols=32)
 plt.subplots_adjust(bottom=0.22, left=0.05, right=0.98, top=0.88)
 ax1 = plt.subplot(gs[0:8,1:8])
 ax2 = plt.subplot(gs[0:8,9:16])
 ax3 = plt.subplot(gs[0:8,17:24])
-ax4 = plt.subplot(gs[0:8,25:30])
+ax4 = plt.subplot(gs[0:8,25:32])
 ax1.grid(axis="both")
 ax2.grid(axis="both")
 ax3.grid(axis="both")
@@ -186,7 +186,7 @@ xlim = [-0.5,1.8]
 ylim = [-1.2,0.5]
 levels = [10,45,80]
 bins_contour = 20
-colors = [cm.gnuplot(0/3.),cm.gnuplot(0/3.),cm.gnuplot(1/3.),cm.gnuplot(1/3.),cm.gnuplot(2/3.),cm.gnuplot(2/3.),cm.gnuplot(3/3.),cm.gnuplot(3/3.)]
+colors = [cm.gnuplot(0/3.5),cm.gnuplot(1/3.5),cm.gnuplot(2/3.5),cm.gnuplot(3/3.5),cm.gnuplot(0/3.5),cm.gnuplot(1/3.5),cm.gnuplot(2/3.5),cm.gnuplot(3/3.5)]
 ax1.set_xlim(xlim)
 ax1.set_ylim(ylim)
 co21_masks_all = [np.log10(co21_mask0in_all[0]), np.log10(co21_mask1in_all[0]), np.log10(co21_mask2in_all[0]), np.log10(co21_mask3in_all[0]),
@@ -198,15 +198,15 @@ for i in range(8):
     ax.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
     H, xedges, yedges = np.histogram2d(r21_masks_all[i],co21_masks_all[i],bins=bins_contour,range=(ylim,xlim))
     extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
-    if i%2==0:
+    if i<=3:
         ax.contour(H/H.max()*100,levels=levels,extent=extent,colors=[colors[i]],zorder=1e9,linewidths=2,alpha=1.0)
     else:
-        ax.contour(H/H.max()*100,"--",levels=levels,extent=extent,colors=[colors[i]],zorder=1e9,linewidths=2,alpha=1.0)
+        ax.contour(H/H.max()*100,levels=levels,extent=extent,colors=[colors[i]],zorder=1e9,linewidths=1,alpha=0.5)
 
 # save
 plt.savefig(dir_product+"scatter_mask_env_piechart_ngc0628.png",dpi=200)
 
-"""
+
 #
 xlim = [-0.3,2.7]
 ylim = [-1.0,0.7]
@@ -220,11 +220,15 @@ for i in range(8):
     ax2.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
     H, xedges, yedges = np.histogram2d(r21_masks_all[i],co21_masks_all[i],bins=bins_contour,range=(ylim,xlim))
     extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
-    if i%2==0:
-        ax2.contour(H/H.max()*100,levels=levels,extent=extent,colors=[colors[i]],zorder=1e9,linewidths=2,alpha=1.0)
+    if i<=3:
+        ax.contour(H/H.max()*100,levels=levels,extent=extent,colors=[colors[i]],zorder=1e9,linewidths=2,alpha=1.0)
     else:
-        ax2.contour(H/H.max()*100,levels=levels,extent=extent,colors=[colors[i]],zorder=1e9,linewidths=1,alpha=1.0)
+        ax.contour(H/H.max()*100,levels=levels,extent=extent,colors=[colors[i]],zorder=1e9,linewidths=1,alpha=0.5)
 
+# save
+plt.savefig(dir_product+"scatter_mask_env_piechart_ngc3627.png",dpi=200)
+
+"""
 #
 xlim = [-0.3,2.7]
 ylim = [-1.2,0.4]
