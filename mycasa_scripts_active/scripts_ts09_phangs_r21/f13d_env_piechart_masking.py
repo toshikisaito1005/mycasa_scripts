@@ -102,32 +102,32 @@ for i in range(len(txtfile)):
     co10 = np.loadtxt(txtfile[i])[:,1]
     co21 = np.loadtxt(txtfile[i])[:,3]
     #
-    data_mask0in = data[np.where((gmcmask==0) & piechartmask==1)]
-    data_mask1in = data[np.where((gmcmask==1) & piechartmask==1)]
-    data_mask2in = data[np.where((gmcmask==2) & piechartmask==1)]
-    data_mask3in = data[np.where((gmcmask>=3) & piechartmask==1)]
-    data_mask0out = data[np.where((gmcmask==0) & piechartmask==0)]
-    data_mask1out = data[np.where((gmcmask==1) & piechartmask==0)]
-    data_mask2out = data[np.where((gmcmask==2) & piechartmask==0)]
-    data_mask3out = data[np.where((gmcmask>=3) & piechartmask==0)]
+    data_mask0in = data[np.where((gmcmask==0) & (piechartmask==1))]
+    data_mask1in = data[np.where((gmcmask==1) & (piechartmask==1))]
+    data_mask2in = data[np.where((gmcmask==2) & (piechartmask==1))]
+    data_mask3in = data[np.where((gmcmask>=3) & (piechartmask==1))]
+    data_mask0out = data[np.where((gmcmask==0) & (piechartmask==0))]
+    data_mask1out = data[np.where((gmcmask==1) & (piechartmask==0))]
+    data_mask2out = data[np.where((gmcmask==2) & (piechartmask==0))]
+    data_mask3out = data[np.where((gmcmask>=3) & (piechartmask==0))]
     #
-    co10_mask0in = co10[np.where((gmcmask==0) & piechartmask==1)]
-    co10_mask1in = co10[np.where((gmcmask==1) & piechartmask==1)]
-    co10_mask2in = co10[np.where((gmcmask==2) & piechartmask==1)]
-    co10_mask3in = co10[np.where((gmcmask>=3) & piechartmask==1)]
-    co10_mask0out = co10[np.where((gmcmask==0) & piechartmask==0)]
-    co10_mask1out = co10[np.where((gmcmask==1) & piechartmask==0)]
-    co10_mask2out = co10[np.where((gmcmask==2) & piechartmask==0)]
-    co10_mask3out = co10[np.where((gmcmask>=3) & piechartmask==0)]
+    co10_mask0in = co10[np.where((gmcmask==0) & (piechartmask==1))]
+    co10_mask1in = co10[np.where((gmcmask==1) & (piechartmask==1))]
+    co10_mask2in = co10[np.where((gmcmask==2) & (piechartmask==1))]
+    co10_mask3in = co10[np.where((gmcmask>=3) & (piechartmask==1))]
+    co10_mask0out = co10[np.where((gmcmask==0) & (piechartmask==0))]
+    co10_mask1out = co10[np.where((gmcmask==1) & (piechartmask==0))]
+    co10_mask2out = co10[np.where((gmcmask==2) & (piechartmask==0))]
+    co10_mask3out = co10[np.where((gmcmask>=3) & (piechartmask==0))]
     #
-    co21_mask0in = co21[np.where((gmcmask==0) & piechartmask==1)]
-    co21_mask1in = co21[np.where((gmcmask==1) & piechartmask==1)]
-    co21_mask2in = co21[np.where((gmcmask==2) & piechartmask==1)]
-    co21_mask3in = co21[np.where((gmcmask>=3) & piechartmask==1)]
-    co21_mask0out = co21[np.where((gmcmask==0) & piechartmask==0)]
-    co21_mask1out = co21[np.where((gmcmask==1) & piechartmask==0)]
-    co21_mask2out = co21[np.where((gmcmask==2) & piechartmask==0)]
-    co21_mask3out = co21[np.where((gmcmask>=3) & piechartmask==0)]
+    co21_mask0in = co21[np.where((gmcmask==0) & (piechartmask==1))]
+    co21_mask1in = co21[np.where((gmcmask==1) & (piechartmask==1))]
+    co21_mask2in = co21[np.where((gmcmask==2) & (piechartmask==1))]
+    co21_mask3in = co21[np.where((gmcmask>=3) & (piechartmask==1))]
+    co21_mask0out = co21[np.where((gmcmask==0) & (piechartmask==0))]
+    co21_mask1out = co21[np.where((gmcmask==1) & (piechartmask==0))]
+    co21_mask2out = co21[np.where((gmcmask==2) & (piechartmask==0))]
+    co21_mask3out = co21[np.where((gmcmask>=3) & (piechartmask==0))]
     #
     data_all.extend(data)
     data_mask0in_all.extend(data_mask0in)
@@ -182,6 +182,7 @@ xlim = [-0.5,1.8]
 ylim = [-1.2,0.5]
 levels = [10,45,80]
 bins_contour = 20
+colors = [cm.gist_rainbow(0/3.)]
 ax1.set_xlim(xlim)
 ax1.set_ylim(ylim)
 co21_masks_all = [np.log10(co21_mask0in_all[0]), np.log10(co21_mask1in_all[0]), np.log10(co21_mask2in_all[0]), np.log10(co21_mask3in_all[0]),
@@ -192,7 +193,7 @@ for i in range(8):
     ax1.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
     H, xedges, yedges = np.histogram2d(r21_masks_all[i],co21_masks_all[i],bins=bins_contour,range=(ylim,xlim))
     extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
-    ax1.contour(H/H.max()*100,levels=levels,extent=extent,colors=[cm.gnuplot(i/3.5)],zorder=1e9,linewidths=2,alpha=1.0)
+    ax1.contour(H/H.max()*100,levels=levels,extent=extent,colors=[cm.gist_rainbow(i/8.)],zorder=1e9,linewidths=2,alpha=1.0)
 
 #
 xlim = [-0.3,2.7]
@@ -207,24 +208,24 @@ for i in range(8):
     ax2.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
     H, xedges, yedges = np.histogram2d(r21_masks_all[i],co21_masks_all[i],bins=bins_contour,range=(ylim,xlim))
     extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
-    ax2.contour(H/H.max()*100,levels=levels,extent=extent,colors=[cm.gnuplot(i/3.5)],zorder=1e9,linewidths=2,alpha=1.0)
+    ax2.contour(H/H.max()*100,levels=levels,extent=extent,colors=[cm.gist_rainbow(i/8.)],zorder=1e9,linewidths=2,alpha=1.0)
 
 #
 xlim = [-0.3,2.7]
 ylim = [-1.2,0.4]
 ax3.set_xlim(xlim)
 ax3.set_ylim(ylim)
-co21_masks_all = [np.log10(co21_mask0in_all[1]), np.log10(co21_mask1in_all[1]), np.log10(co21_mask2in_all[1]), np.log10(co21_mask3in_all[1]),
-                  np.log10(co21_mask0out_all[1]), np.log10(co21_mask1out_all[1]), np.log10(co21_mask2out_all[1]), np.log10(co21_mask3out_all[1])]
-r21_masks_all = [np.log10(co21_mask0in_all[1]/co10_mask0in_all[1]), np.log10(co21_mask1in_all[1]/co10_mask1in_all[1]), np.log10(co21_mask2in_all[1]/co10_mask2in_all[1]), np.log10(co21_mask3in_all[1]/co10_mask3in_all[1]),
-                 np.log10(co21_mask0out_all[1]/co10_mask0out_all[1]), np.log10(co21_mask1out_all[1]/co10_mask1out_all[1]), np.log10(co21_mask2out_all[1]/co10_mask2out_all[1]), np.log10(co21_mask3out_all[1]/co10_mask3out_all[1])]
+co21_masks_all = [np.log10(co21_mask0in_all[2]), np.log10(co21_mask1in_all[2]), np.log10(co21_mask2in_all[2]), np.log10(co21_mask3in_all[2]),
+                  np.log10(co21_mask0out_all[2]), np.log10(co21_mask1out_all[2]), np.log10(co21_mask2out_all[2]), np.log10(co21_mask3out_all[2])]
+r21_masks_all = [np.log10(co21_mask0in_all[2]/co10_mask0in_all[2]), np.log10(co21_mask1in_all[2]/co10_mask1in_all[2]), np.log10(co21_mask2in_all[2]/co10_mask2in_all[2]), np.log10(co21_mask3in_all[2]/co10_mask3in_all[2]),
+                 np.log10(co21_mask0out_all[2]/co10_mask0out_all[2]), np.log10(co21_mask1out_all[2]/co10_mask1out_all[2]), np.log10(co21_mask2out_all[2]/co10_mask2out_all[2]), np.log10(co21_mask3out_all[2]/co10_mask3out_all[2])]
 for i in range(8):
     ax3.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
     H, xedges, yedges = np.histogram2d(r21_masks_all[i],co21_masks_all[i],bins=bins_contour,range=(ylim,xlim))
     extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
-    ax3.contour(H/H.max()*100,levels=levels,extent=extent,colors=[cm.gnuplot(i/3.5)],zorder=1e9,linewidths=2,alpha=1.0)
+    ax3.contour(H/H.max()*100,levels=levels,extent=extent,colors=[cm.gist_rainbow(i/8.)],zorder=1e9,linewidths=2,alpha=1.0)
 
 # save
-plt.savefig(dir_product+"scatter_mask_env.png",dpi=200)
+plt.savefig(dir_product+"scatter_mask_env_piechart.png",dpi=200)
 
 os.system("rm -rf *.last")
