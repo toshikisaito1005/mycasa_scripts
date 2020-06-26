@@ -162,13 +162,13 @@ for i in range(len(txtfile)):
 
 
 # plot scatter 0628
-figure = plt.figure(figsize=(10,3))
+figure = plt.figure(figsize=(9,3))
 gs = gridspec.GridSpec(nrows=8, ncols=32)
 plt.subplots_adjust(bottom=0.22, left=0.05, right=0.98, top=0.88)
 ax1 = plt.subplot(gs[0:8,1:8])
-ax2 = plt.subplot(gs[0:8,9:16])
-ax3 = plt.subplot(gs[0:8,17:24])
-ax4 = plt.subplot(gs[0:8,25:32])
+ax2 = plt.subplot(gs[0:8,8:16])
+ax3 = plt.subplot(gs[0:8,16:24])
+ax4 = plt.subplot(gs[0:8,24:32])
 ax1.grid(axis="both")
 ax2.grid(axis="both")
 ax3.grid(axis="both")
@@ -178,6 +178,8 @@ ax2.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
 ax3.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
 ax4.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
 ax2.tick_params(labelleft=False)
+ax3.tick_params(labelleft=False)
+ax4.tick_params(labelleft=False)
 ax1.set_ylabel("log $R_{21}$")
 plt.rcParams["font.size"] = 11
 plt.rcParams["legend.fontsize"] = 9
@@ -215,13 +217,13 @@ plt.savefig(dir_product+"scatter_mask_env_piechart_ngc0628.png",dpi=200)
 
 
 # plot scatter 3637
-figure = plt.figure(figsize=(10,3))
+figure = plt.figure(figsize=(9,3))
 gs = gridspec.GridSpec(nrows=8, ncols=32)
 plt.subplots_adjust(bottom=0.22, left=0.05, right=0.98, top=0.88)
 ax1 = plt.subplot(gs[0:8,1:8])
-ax2 = plt.subplot(gs[0:8,9:16])
-ax3 = plt.subplot(gs[0:8,17:24])
-ax4 = plt.subplot(gs[0:8,25:32])
+ax2 = plt.subplot(gs[0:8,8:16])
+ax3 = plt.subplot(gs[0:8,16:24])
+ax4 = plt.subplot(gs[0:8,24:32])
 ax1.grid(axis="both")
 ax2.grid(axis="both")
 ax3.grid(axis="both")
@@ -230,6 +232,9 @@ ax1.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
 ax2.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
 ax3.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
 ax4.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
+ax2.tick_params(labelleft=False)
+ax3.tick_params(labelleft=False)
+ax4.tick_params(labelleft=False)
 ax1.set_ylabel("log $R_{21}$")
 plt.rcParams["font.size"] = 11
 plt.rcParams["legend.fontsize"] = 9
@@ -264,14 +269,14 @@ plt.savefig(dir_product+"scatter_mask_env_piechart_ngc3627.png",dpi=200)
 
 
 
-# plot scatter 3637
-figure = plt.figure(figsize=(10,3))
+# plot scatter 4321
+figure = plt.figure(figsize=(9,3))
 gs = gridspec.GridSpec(nrows=8, ncols=32)
 plt.subplots_adjust(bottom=0.22, left=0.05, right=0.98, top=0.88)
 ax1 = plt.subplot(gs[0:8,1:8])
-ax2 = plt.subplot(gs[0:8,9:16])
-ax3 = plt.subplot(gs[0:8,17:24])
-ax4 = plt.subplot(gs[0:8,25:32])
+ax2 = plt.subplot(gs[0:8,8:16])
+ax3 = plt.subplot(gs[0:8,16:24])
+ax4 = plt.subplot(gs[0:8,24:32])
 ax1.grid(axis="both")
 ax2.grid(axis="both")
 ax3.grid(axis="both")
@@ -280,6 +285,9 @@ ax1.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
 ax2.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
 ax3.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
 ax4.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
+ax2.tick_params(labelleft=False)
+ax3.tick_params(labelleft=False)
+ax4.tick_params(labelleft=False)
 ax1.set_ylabel("log $R_{21}$")
 plt.rcParams["font.size"] = 11
 plt.rcParams["legend.fontsize"] = 9
