@@ -66,17 +66,17 @@ data_mask0_all = []
 data_mask1_all = []
 data_mask2_all = []
 data_mask3_all = []
-data_mask4_all = []
+#data_mask4_all = []
 co10_mask0_all = []
 co10_mask1_all = []
 co10_mask2_all = []
 co10_mask3_all = []
-co10_mask4_all = []
+#co10_mask4_all = []
 co21_mask0_all = []
 co21_mask1_all = []
 co21_mask2_all = []
 co21_mask3_all = []
-co21_mask4_all = []
+#co21_mask4_all = []
 for i in range(len(txtfile)):
     dist = np.loadtxt(txtfile[i])[:,0]
     data = np.loadtxt(txtfile[i])[:,9]
@@ -93,24 +93,24 @@ for i in range(len(txtfile)):
     data_mask1 = data[gmcmask==1]
     data_mask2 = data[gmcmask==2]
     data_mask3 = data[gmcmask>=3]
-    data_mask4 = data[gmcmask==4]
-    co10_mask0 = data[gmcmask==0]
-    co10_mask1 = data[gmcmask==1]
-    co10_mask2 = data[gmcmask==2]
-    co10_mask3 = data[gmcmask>=3]
-    co10_mask4 = data[gmcmask==4]
-    co21_mask0 = data[gmcmask==0]
-    co21_mask1 = data[gmcmask==1]
-    co21_mask2 = data[gmcmask==2]
-    co21_mask3 = data[gmcmask>=3]
-    co21_mask4 = data[gmcmask==4]
+    #data_mask4 = data[gmcmask==4]
+    co10_mask0 = co10[gmcmask==0]
+    co10_mask1 = co10[gmcmask==1]
+    co10_mask2 = co10[gmcmask==2]
+    co10_mask3 = co10[gmcmask>=3]
+    #co10_mask4 = data[gmcmask==4]
+    co21_mask0 = co21[gmcmask==0]
+    co21_mask1 = co21[gmcmask==1]
+    co21_mask2 = co21[gmcmask==2]
+    co21_mask3 = co21[gmcmask>=3]
+    #co21_mask4 = data[gmcmask==4]
     #
     data_all.extend(data)
     data_mask0_all.extend(data_mask0)
     data_mask1_all.extend(data_mask1)
     data_mask2_all.extend(data_mask2)
     data_mask3_all.extend(data_mask3)
-    data_mask4_all.extend(data_mask4)
+    #data_mask4_all.extend(data_mask4)
     #
     Jy2K_co10 = 1.222e6 / beamsizes[i]**2 / 115.27120**2
     Jy2K_co21 = 1.222e6 / beamsizes[i]**2 / 230.53800**2
@@ -118,19 +118,19 @@ for i in range(len(txtfile)):
     co10_mask1_all.append(co10_mask1 * Jy2K_co10)
     co10_mask2_all.append(co10_mask2 * Jy2K_co10)
     co10_mask3_all.append(co10_mask3 * Jy2K_co10)
-    co10_mask4_all.append(co10_mask4 * Jy2K_co10)
+    #co10_mask4_all.append(co10_mask4 * Jy2K_co10)
     co21_mask0_all.append(co21_mask0 * Jy2K_co21)
     co21_mask1_all.append(co21_mask1 * Jy2K_co21)
     co21_mask2_all.append(co21_mask2 * Jy2K_co21)
     co21_mask3_all.append(co21_mask3 * Jy2K_co21)
-    co21_mask4_all.append(co21_mask4 * Jy2K_co21)
+    #co21_mask4_all.append(co21_mask4 * Jy2K_co21)
 #
 data_all = np.array(data_all)
 data_mask0_all = np.array(data_mask0_all)
 data_mask1_all = np.array(data_mask1_all)
 data_mask2_all = np.array(data_mask2_all)
 data_mask3_all = np.array(data_mask3_all)
-data_mask4_all = np.array(data_mask4_all)
+#data_mask4_all = np.array(data_mask4_all)
 
 
 ### histogram and stats
@@ -166,6 +166,7 @@ x_3o, y_3o = np.delete(histo_mask3_all[1],-1),histo_mask3_all[0]
 x_3 = x_3o
 y_3 = y_3o / float(sum(y_3o))
 #
+"""
 ## 4
 #
 histo_mask4_all = np.histogram(data_mask4_all, bins=nbins, range=(xlim), weights=None)
@@ -173,6 +174,7 @@ x_4o, y_4o = np.delete(histo_mask4_all[1],-1),histo_mask4_all[0]
 x_4 = x_4o
 y_4 = y_4o / float(sum(y_4o))
 #
+"""
 
 ###
 ##
@@ -192,6 +194,7 @@ p84_2 = weighted_percentile(data_mask2_all, 0.84)
 p16_3 = weighted_percentile(data_mask3_all, 0.16)
 p50_3 = weighted_percentile(data_mask3_all, 0.5)
 p84_3 = weighted_percentile(data_mask3_all, 0.84)
+"""
 #
 p16_4 = weighted_percentile(data_mask4_all, 0.16)
 p50_4 = weighted_percentile(data_mask4_all, 0.5)
@@ -200,7 +203,7 @@ p84_4 = weighted_percentile(data_mask4_all, 0.84)
 p16_34 = weighted_percentile(np.r_[data_mask3_all, data_mask4_all], 0.16)
 p50_34 = weighted_percentile(np.r_[data_mask3_all, data_mask4_all], 0.5)
 p84_34 = weighted_percentile(np.r_[data_mask3_all, data_mask4_all], 0.84)
-
+"""
 
 ###
 print("# p16_0 = " + str(np.round(p16_0,2)))
@@ -219,11 +222,12 @@ print("# p16_3 = " + str(np.round(p16_3,2)))
 print("# p50_3 = " + str(np.round(p50_3,2)))
 print("# p84_3 = " + str(np.round(p84_3,2)))
 print("# width_3 = " + str(np.round(p84_3,2) - np.round(p16_3,2)))
+"""
 print("# p16_34 = " + str(np.round(p16_34,2)))
 print("# p50_34 = " + str(np.round(p50_34,2)))
 print("# p84_34 = " + str(np.round(p84_34,2)))
 print("# width_34 = " + str(np.round(p84_34,2) - np.round(p16_34,2)))
-
+"""
 
 ### plot
 figure = plt.figure(figsize=(10,2))
@@ -237,7 +241,7 @@ plt.rcParams["font.size"] = 11
 plt.rcParams["legend.fontsize"] = 9
 
 # ax1
-ylim = [0.0001, np.r_[y_0, y_1, y_2, y_3, y_4].max()*1.4]
+ylim = [0.0001, np.r_[y_0, y_1, y_2, y_3].max()*1.4]
 ax1.step(x_0, y_0, color=cm.gnuplot(0/3.5), lw=1, alpha=1.0, where="mid")
 ax1.bar(x_0, y_0, lw=0, color=cm.gnuplot(0/3.5), alpha=0.2, width=x_0[1]-x_0[0], align="center", label="inter-arm")
 ax1.plot(p50_0, ylim[1]*0.95, "o", markeredgewidth=0, c=cm.gnuplot(0/3.5), markersize=7, zorder=1)
@@ -314,22 +318,25 @@ plt.rcParams["font.size"] = 11
 plt.rcParams["legend.fontsize"] = 9
 #
 ax1.scatter(np.log10(co10_mask0_all[0]),np.log10(co21_mask0_all[0]), c=cm.gnuplot(0/3.5))
-ax1.scatter(np.log10(co10_mask0_all[1]),np.log10(co21_mask0_all[1]), c=cm.gnuplot(0/3.5))
-ax1.scatter(np.log10(co10_mask0_all[2]),np.log10(co21_mask0_all[2]), c=cm.gnuplot(0/3.5))
-ax1.scatter(np.log10(co10_mask0_all[3]),np.log10(co21_mask0_all[3]), c=cm.gnuplot(0/3.5))
-ax1.scatter(np.log10(co10_mask0_all[4]),np.log10(co21_mask0_all[4]), c=cm.gnuplot(0/3.5))
-ax1.set_xlim([-0.0,2.1])
-ax1.set_ylim([-0.3,1.8])
+ax1.scatter(np.log10(co10_mask1_all[0]),np.log10(co21_mask1_all[0]), c=cm.gnuplot(1/3.5))
+ax1.scatter(np.log10(co10_mask2_all[0]),np.log10(co21_mask2_all[0]), c=cm.gnuplot(2/3.5))
+ax1.scatter(np.log10(co10_mask3_all[0]),np.log10(co21_mask3_all[0]), c=cm.gnuplot(3/3.5))
+#ax1.set_xlim([-0.0,2.1])
+#ax1.set_ylim([-0.3,1.8])
 #
-ax2.scatter(np.log10(co10_inmask_all[1]),np.log10(co21_inmask_all[1]), c="red")
-ax2.scatter(np.log10(co10_outmask_all[1]),np.log10(co21_outmask_all[1]), c="blue")
-ax2.set_xlim([-0.0,3.2])
-ax2.set_ylim([-0.5,2.7])
+ax2.scatter(np.log10(co10_mask0_all[1]),np.log10(co21_mask0_all[1]), c=cm.gnuplot(0/3.5))
+ax2.scatter(np.log10(co10_mask1_all[1]),np.log10(co21_mask1_all[1]), c=cm.gnuplot(1/3.5))
+ax2.scatter(np.log10(co10_mask2_all[1]),np.log10(co21_mask2_all[1]), c=cm.gnuplot(2/3.5))
+ax2.scatter(np.log10(co10_mask3_all[1]),np.log10(co21_mask3_all[1]), c=cm.gnuplot(3/3.5))
+#ax2.set_xlim([-0.0,3.2])
+#ax2.set_ylim([-0.5,2.7])
 #
-ax3.scatter(np.log10(co10_inmask_all[2]),np.log10(co21_inmask_all[2]), c="red")
-ax3.scatter(np.log10(co10_outmask_all[2]),np.log10(co21_outmask_all[2]), c="blue")
-ax3.set_xlim([-0.0,3.0])
-ax3.set_ylim([-0.3,2.7])
+ax3.scatter(np.log10(co10_mask0_all[2]),np.log10(co21_mask0_all[2]), c=cm.gnuplot(0/3.5))
+ax3.scatter(np.log10(co10_mask1_all[2]),np.log10(co21_mask1_all[2]), c=cm.gnuplot(1/3.5))
+ax3.scatter(np.log10(co10_mask2_all[2]),np.log10(co21_mask2_all[2]), c=cm.gnuplot(2/3.5))
+ax3.scatter(np.log10(co10_mask3_all[2]),np.log10(co21_mask3_all[2]), c=cm.gnuplot(3/3.5))
+#ax3.set_xlim([-0.0,3.0])
+#ax3.set_ylim([-0.3,2.7])
 # save
 plt.savefig(dir_product+"scatter_mask_env.png",dpi=200)
 
