@@ -52,8 +52,8 @@ ra_center = "12:21:54.934"
 dec_center = "4.28.24.497"
 clim = [0, 5.0]
 contour = np.array([0.02,0.04,0.08,0.16,0.32,0.64,0.96])
-xlim = [-80, 80]
-ylim = [80, -80]
+xlim = [-85, 85]
+ylim = [85, -85]
 ###
 value = None
 color_contour = "black"
