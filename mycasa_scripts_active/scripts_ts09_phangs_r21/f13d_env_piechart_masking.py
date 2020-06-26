@@ -163,12 +163,12 @@ for i in range(len(txtfile)):
 
 # plot scatter 0628
 figure = plt.figure(figsize=(9,3))
-gs = gridspec.GridSpec(nrows=8, ncols=32)
+gs = gridspec.GridSpec(nrows=8, ncols=33)
 plt.subplots_adjust(bottom=0.22, left=0.05, right=0.98, top=0.88)
-ax1 = plt.subplot(gs[0:8,1:8])
-ax2 = plt.subplot(gs[0:8,8:16])
-ax3 = plt.subplot(gs[0:8,16:24])
-ax4 = plt.subplot(gs[0:8,24:32])
+ax1 = plt.subplot(gs[0:8,1:9])
+ax2 = plt.subplot(gs[0:8,9:17])
+ax3 = plt.subplot(gs[0:8,17:25])
+ax4 = plt.subplot(gs[0:8,25:33])
 ax1.grid(axis="both")
 ax2.grid(axis="both")
 ax3.grid(axis="both")
@@ -222,12 +222,12 @@ plt.savefig(dir_product+"scatter_mask_env_piechart_ngc0628.png",dpi=200)
 
 # plot scatter 3637
 figure = plt.figure(figsize=(9,3))
-gs = gridspec.GridSpec(nrows=8, ncols=32)
+gs = gridspec.GridSpec(nrows=8, ncols=33)
 plt.subplots_adjust(bottom=0.22, left=0.05, right=0.98, top=0.88)
-ax1 = plt.subplot(gs[0:8,1:8])
-ax2 = plt.subplot(gs[0:8,8:16])
-ax3 = plt.subplot(gs[0:8,16:24])
-ax4 = plt.subplot(gs[0:8,24:32])
+ax1 = plt.subplot(gs[0:8,1:9])
+ax2 = plt.subplot(gs[0:8,9:17])
+ax3 = plt.subplot(gs[0:8,17:25])
+ax4 = plt.subplot(gs[0:8,25:33])
 ax1.grid(axis="both")
 ax2.grid(axis="both")
 ax3.grid(axis="both")
@@ -260,7 +260,10 @@ r21_masks_all = [np.log10(co21_mask0in_all[1]/co10_mask0in_all[1]), np.log10(co2
                  np.log10(co21_mask0out_all[1]/co10_mask0out_all[1]), np.log10(co21_mask1out_all[1]/co10_mask1out_all[1]), np.log10(co21_mask2out_all[1]/co10_mask2out_all[1]), np.log10(co21_mask3out_all[1]/co10_mask3out_all[1])]
 for i in range(8):
     ax = axlist[i]
-    ax.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
+    ax1.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
+    ax2.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
+    ax3.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
+    ax4.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
     H, xedges, yedges = np.histogram2d(r21_masks_all[i],co21_masks_all[i],bins=bins_contour,range=(ylim,xlim))
     extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
     if i<=3:
@@ -275,12 +278,12 @@ plt.savefig(dir_product+"scatter_mask_env_piechart_ngc3627.png",dpi=200)
 
 # plot scatter 4321
 figure = plt.figure(figsize=(9,3))
-gs = gridspec.GridSpec(nrows=8, ncols=32)
+gs = gridspec.GridSpec(nrows=8, ncols=33)
 plt.subplots_adjust(bottom=0.22, left=0.05, right=0.98, top=0.88)
-ax1 = plt.subplot(gs[0:8,1:8])
-ax2 = plt.subplot(gs[0:8,8:16])
-ax3 = plt.subplot(gs[0:8,16:24])
-ax4 = plt.subplot(gs[0:8,24:32])
+ax1 = plt.subplot(gs[0:8,1:9])
+ax2 = plt.subplot(gs[0:8,9:17])
+ax3 = plt.subplot(gs[0:8,17:25])
+ax4 = plt.subplot(gs[0:8,25:33])
 ax1.grid(axis="both")
 ax2.grid(axis="both")
 ax3.grid(axis="both")
@@ -313,7 +316,10 @@ r21_masks_all = [np.log10(co21_mask0in_all[2]/co10_mask0in_all[2]), np.log10(co2
                  np.log10(co21_mask0out_all[2]/co10_mask0out_all[2]), np.log10(co21_mask1out_all[2]/co10_mask1out_all[2]), np.log10(co21_mask2out_all[2]/co10_mask2out_all[2]), np.log10(co21_mask3out_all[2]/co10_mask3out_all[2])]
 for i in range(8):
     ax = axlist[i]
-    ax.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
+    ax1.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
+    ax2.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
+    ax3.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
+    ax4.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
     H, xedges, yedges = np.histogram2d(r21_masks_all[i],co21_masks_all[i],bins=bins_contour,range=(ylim,xlim))
     extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
     if i<=3:

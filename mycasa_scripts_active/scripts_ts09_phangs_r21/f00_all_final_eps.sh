@@ -173,6 +173,13 @@ convert -crop 2000x650+40+80 $dir_data"scatter_mask_env.png" $dir_data"scatter_m
 
 convert -append -border 0x0 $dir_data"scatter_mask_gmcb.png" $dir_data"scatter_piechart.png" $dir_data"scatter_mask_env.png" eps2:$dir_data"fig13b.eps"
 
+### figure 13c
+convert -crop 2000x585+5+65 $dir_data"scatter_mask_env_piechart_ngc0628.png" $dir_data"scatter_mask_env_piechart_ngc0628b.png"
+convert -crop 2000x585+5+65 $dir_data"scatter_mask_env_piechart_ngc3627.png" $dir_data"scatter_mask_env_piechart_ngc3627b.png"
+convert -crop 2000x650+5+65 $dir_data"scatter_mask_env_piechart_ngc4321.png" $dir_data"scatter_mask_env_piechart_ngc4321b.png"
+
+convert -append -border 0x0 $dir_data"scatter_mask_env_piechart_ngc0628b.png" $dir_data"scatter_mask_env_piechart_ngc3627b.png" $dir_data"scatter_mask_env_piechart_ngc4321b.png" eps2:$dir_data"fig13c.eps"
+
 ### figure 14
 convert -crop 2250x900+120+50 $dir_data"fig_r21_vs_dist.png" $dir_data"fig_r21_vs_distb.png"
 convert -crop 2250x860+120+90 $dir_data"fig_r21_vs_disp.png" $dir_data"fig_r21_vs_dispb.png"
