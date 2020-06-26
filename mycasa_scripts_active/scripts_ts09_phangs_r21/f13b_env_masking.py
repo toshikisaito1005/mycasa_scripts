@@ -317,26 +317,38 @@ ax3.grid(axis="both")
 plt.rcParams["font.size"] = 11
 plt.rcParams["legend.fontsize"] = 9
 #
-ax1.scatter(np.log10(co10_mask0_all[0]),np.log10(co21_mask0_all[0]/co10_mask0_all[0]), c=cm.gnuplot(0/3.5), alpha=0.2, linewidths=0, s=5)
-ax1.scatter(np.log10(co10_mask1_all[0]),np.log10(co21_mask1_all[0]/co10_mask1_all[0]), c=cm.gnuplot(1/3.5), alpha=0.2, linewidths=0, s=5)
-ax1.scatter(np.log10(co10_mask2_all[0]),np.log10(co21_mask2_all[0]/co10_mask2_all[0]), c=cm.gnuplot(2/3.5), alpha=0.2, linewidths=0, s=5)
-ax1.scatter(np.log10(co10_mask3_all[0]),np.log10(co21_mask3_all[0]/co10_mask3_all[0]), c=cm.gnuplot(3/3.5), alpha=0.2, linewidths=0, s=5)
-ax1.set_xlim([-0.0,2.1])
-ax1.set_ylim([-1.2,0.5])
+xlim = [-0.0,2.1]
+ylim = [-1.2,0.5]
+ax1.scatter(np.log10(co21_mask0_all[0]),np.log10(co21_mask0_all[0]/co10_mask0_all[0]), c=cm.gnuplot(0/3.5), alpha=0.2, linewidths=0, s=5)
+ax1.scatter(np.log10(co21_mask1_all[0]),np.log10(co21_mask1_all[0]/co10_mask1_all[0]), c=cm.gnuplot(1/3.5), alpha=0.2, linewidths=0, s=5)
+ax1.scatter(np.log10(co21_mask2_all[0]),np.log10(co21_mask2_all[0]/co10_mask2_all[0]), c=cm.gnuplot(2/3.5), alpha=0.2, linewidths=0, s=5)
+ax1.scatter(np.log10(co21_mask3_all[0]),np.log10(co21_mask3_all[0]/co10_mask3_all[0]), c=cm.gnuplot(3/3.5), alpha=0.2, linewidths=0, s=5)
+ax1.set_xlim(xlim)
+ax1.set_ylim(ylim)
 #
-ax2.scatter(np.log10(co10_mask0_all[1]),np.log10(co21_mask0_all[1]/co10_mask0_all[1]), c=cm.gnuplot(0/3.5), alpha=0.2, linewidths=0, s=5)
-ax2.scatter(np.log10(co10_mask1_all[1]),np.log10(co21_mask1_all[1]/co10_mask1_all[1]), c=cm.gnuplot(1/3.5), alpha=0.2, linewidths=0, s=5)
-ax2.scatter(np.log10(co10_mask2_all[1]),np.log10(co21_mask2_all[1]/co10_mask2_all[1]), c=cm.gnuplot(2/3.5), alpha=0.2, linewidths=0, s=5)
-ax2.scatter(np.log10(co10_mask3_all[1]),np.log10(co21_mask3_all[1]/co10_mask3_all[1]), c=cm.gnuplot(3/3.5), alpha=0.2, linewidths=0, s=5)
-ax2.set_xlim([-0.0,3.2])
-ax2.set_ylim([-1.0,0.7])
+H, xedges, yedges = np.histogram2d(np.log10(co21_mask0_all[0]/co10_mask0_all[0]),np.log10(co10_mask0_all[0]),bins=15,range=(xlim,xlim))
+extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
+ax1.contour(H/H.max()*100,levels=[16,32,64],extent=extent,colors=["red"],zorder=1,linewidths=1.5,alpha=1.0)
+
 #
-ax3.scatter(np.log10(co10_mask0_all[2]),np.log10(co21_mask0_all[2]/co10_mask0_all[2]), c=cm.gnuplot(0/3.5), alpha=0.2, linewidths=0, s=5)
-ax3.scatter(np.log10(co10_mask1_all[2]),np.log10(co21_mask1_all[2]/co10_mask1_all[2]), c=cm.gnuplot(1/3.5), alpha=0.2, linewidths=0, s=5)
-ax3.scatter(np.log10(co10_mask2_all[2]),np.log10(co21_mask2_all[2]/co10_mask2_all[2]), c=cm.gnuplot(2/3.5), alpha=0.2, linewidths=0, s=5)
-ax3.scatter(np.log10(co10_mask3_all[2]),np.log10(co21_mask3_all[2]/co10_mask3_all[2]), c=cm.gnuplot(3/3.5), alpha=0.2, linewidths=0, s=5)
-ax3.set_xlim([-0.0,3.0])
-ax3.set_ylim([-1.2,0.7])
+xlim = [-0.0,3.2]
+ylim = [-1.0,0.7]
+ax2.scatter(np.log10(co21_mask0_all[1]),np.log10(co21_mask0_all[1]/co10_mask0_all[1]), c=cm.gnuplot(0/3.5), alpha=0.2, linewidths=0, s=5)
+ax2.scatter(np.log10(co21_mask1_all[1]),np.log10(co21_mask1_all[1]/co10_mask1_all[1]), c=cm.gnuplot(1/3.5), alpha=0.2, linewidths=0, s=5)
+ax2.scatter(np.log10(co21_mask2_all[1]),np.log10(co21_mask2_all[1]/co10_mask2_all[1]), c=cm.gnuplot(2/3.5), alpha=0.2, linewidths=0, s=5)
+ax2.scatter(np.log10(co21_mask3_all[1]),np.log10(co21_mask3_all[1]/co10_mask3_all[1]), c=cm.gnuplot(3/3.5), alpha=0.2, linewidths=0, s=5)
+ax2.set_xlim(xlim)
+ax2.set_ylim(ylim)
+
+#
+xlim = [-0.0,3.0]
+ylim = [-1.2,0.7]
+ax3.scatter(np.log10(co21_mask0_all[2]),np.log10(co21_mask0_all[2]/co10_mask0_all[2]), c=cm.gnuplot(0/3.5), alpha=0.2, linewidths=0, s=5)
+ax3.scatter(np.log10(co21_mask1_all[2]),np.log10(co21_mask1_all[2]/co10_mask1_all[2]), c=cm.gnuplot(1/3.5), alpha=0.2, linewidths=0, s=5)
+ax3.scatter(np.log10(co21_mask2_all[2]),np.log10(co21_mask2_all[2]/co10_mask2_all[2]), c=cm.gnuplot(2/3.5), alpha=0.2, linewidths=0, s=5)
+ax3.scatter(np.log10(co21_mask3_all[2]),np.log10(co21_mask3_all[2]/co10_mask3_all[2]), c=cm.gnuplot(3/3.5), alpha=0.2, linewidths=0, s=5)
+ax3.set_xlim(xlim)
+ax3.set_ylim(ylim)
 # save
 plt.savefig(dir_product+"scatter_mask_env.png",dpi=200)
 
