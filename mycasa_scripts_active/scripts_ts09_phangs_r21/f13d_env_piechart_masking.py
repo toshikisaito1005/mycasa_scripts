@@ -202,9 +202,13 @@ co21_masks_all = [np.log10(co21_mask0in_all[0]), np.log10(co21_mask1in_all[0]), 
                   np.log10(co21_mask0out_all[0]), np.log10(co21_mask1out_all[0]), np.log10(co21_mask2out_all[0]), np.log10(co21_mask3out_all[0])]
 r21_masks_all = [np.log10(co21_mask0in_all[0]/co10_mask0in_all[0]), np.log10(co21_mask1in_all[0]/co10_mask1in_all[0]), np.log10(co21_mask2in_all[0]/co10_mask2in_all[0]), np.log10(co21_mask3in_all[0]/co10_mask3in_all[0]),
                  np.log10(co21_mask0out_all[0]/co10_mask0out_all[0]), np.log10(co21_mask1out_all[0]/co10_mask1out_all[0]), np.log10(co21_mask2out_all[0]/co10_mask2out_all[0]), np.log10(co21_mask3out_all[0]/co10_mask3out_all[0])]
+co21_masks_all_list = [s.tolist() for s in co21_masks_all]
 for i in range(8):
     ax = axlist[i]
-    ax.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
+    ax1.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
+    ax2.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
+    ax3.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
+    ax4.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
     H, xedges, yedges = np.histogram2d(r21_masks_all[i],co21_masks_all[i],bins=bins_contour,range=(ylim,xlim))
     extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
     if i<=3:
