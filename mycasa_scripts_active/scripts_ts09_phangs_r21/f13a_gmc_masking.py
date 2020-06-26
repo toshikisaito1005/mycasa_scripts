@@ -69,14 +69,23 @@ for i in range(len(txtfile)):
     dist = np.loadtxt(txtfile[i])[:,0]
     data = np.loadtxt(txtfile[i])[:,9]
     gmcmask = np.loadtxt(txtfile[i])[:,16]
+    co10 = np.loadtxt(txtfile[i])[:,1]
+    co21 = np.loadtxt(txtfile[i])[:,3]
     #
     cut_all = np.where(data>0) # np.where((data>0) & (dist>def_nucleus[i]))
     dist = dist[cut_all]
     data = data[cut_all]
     gmcmask = gmcmask[cut_all]
+    co10 = co10[cut_all]
+    co21 = co21[cut_all]
     #
-    data_inmask  = data[gmcmask==1]
+    data_inmask = data[gmcmask==1]
+    co10_inmask = co10[gmcmask==1]
+    co21_inmask = co21[gmcmask==1]
+    #
     data_outmask = data[gmcmask==0]
+    co10_outmask = co10[gmcmask==0]
+    co21_outmask = co21[gmcmask==0]
     #
     data_inmask_norm = data_inmask / np.median(data_inmask)
     data_inmask_all.extend(data_inmask)
