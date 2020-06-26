@@ -20,6 +20,7 @@ dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 nbins = 40
 def_nucleus = [50*44./1.0,50*52./1.3,30*103/1.4]
 xlim = [0,1.45]
+beamsizes = [4.0,8.0,4.0]
 
 
 #####################
@@ -66,6 +67,16 @@ data_mask1_all = []
 data_mask2_all = []
 data_mask3_all = []
 data_mask4_all = []
+co10_mask0_all = []
+co10_mask1_all = []
+co10_mask2_all = []
+co10_mask3_all = []
+co10_mask4_all = []
+co21_mask0_all = []
+co21_mask1_all = []
+co21_mask2_all = []
+co21_mask3_all = []
+co21_mask4_all = []
 for i in range(len(txtfile)):
     dist = np.loadtxt(txtfile[i])[:,0]
     data = np.loadtxt(txtfile[i])[:,9]
@@ -75,12 +86,24 @@ for i in range(len(txtfile)):
     dist = dist[cut_all]
     data = data[cut_all]
     gmcmask = gmcmask[cut_all]
+    co10 = np.loadtxt(txtfile[i])[:,1]
+    co21 = np.loadtxt(txtfile[i])[:,3]
     #
     data_mask0 = data[gmcmask==0]
     data_mask1 = data[gmcmask==1]
     data_mask2 = data[gmcmask==2]
     data_mask3 = data[gmcmask>=3]
     data_mask4 = data[gmcmask==4]
+    co10_mask0 = data[gmcmask==0]
+    co10_mask1 = data[gmcmask==1]
+    co10_mask2 = data[gmcmask==2]
+    co10_mask3 = data[gmcmask>=3]
+    co10_mask4 = data[gmcmask==4]
+    co21_mask0 = data[gmcmask==0]
+    co21_mask1 = data[gmcmask==1]
+    co21_mask2 = data[gmcmask==2]
+    co21_mask3 = data[gmcmask>=3]
+    co21_mask4 = data[gmcmask==4]
     #
     data_all.extend(data)
     data_mask0_all.extend(data_mask0)
@@ -88,6 +111,19 @@ for i in range(len(txtfile)):
     data_mask2_all.extend(data_mask2)
     data_mask3_all.extend(data_mask3)
     data_mask4_all.extend(data_mask4)
+    #
+    Jy2K_co10 = 1.222e6 / beamsizes[i]**2 / 115.27120**2
+    Jy2K_co21 = 1.222e6 / beamsizes[i]**2 / 230.53800**2
+    co10_mask0_all.append(co10_mask0 * Jy2K_co10)
+    co10_mask1_all.append(co10_mask1 * Jy2K_co10)
+    co10_mask2_all.append(co10_mask2 * Jy2K_co10)
+    co10_mask3_all.append(co10_mask3 * Jy2K_co10)
+    co10_mask4_all.append(co10_mask4 * Jy2K_co10)
+    co21_mask0_all.append(co21_mask0 * Jy2K_co21)
+    co21_mask1_all.append(co21_mask1 * Jy2K_co21)
+    co21_mask2_all.append(co21_mask2 * Jy2K_co21)
+    co21_mask3_all.append(co21_mask3 * Jy2K_co21)
+    co21_mask4_all.append(co21_mask4 * Jy2K_co21)
 #
 data_all = np.array(data_all)
 data_mask0_all = np.array(data_mask0_all)
@@ -262,5 +298,39 @@ ax2.set_title("Fraction")
 
 # save
 plt.savefig(dir_product+"histo_mask_env.png",dpi=200)
+
+
+# plot scatter
+figure = plt.figure(figsize=(10,4))
+gs = gridspec.GridSpec(nrows=8, ncols=24)
+plt.subplots_adjust(bottom=0.22, left=0.05, right=0.98, top=0.88)
+ax1 = plt.subplot(gs[0:8,1:8])
+ax2 = plt.subplot(gs[0:8,9:16])
+ax3 = plt.subplot(gs[0:8,17:24])
+ax1.grid(axis="both")
+ax2.grid(axis="both")
+ax3.grid(axis="both")
+plt.rcParams["font.size"] = 11
+plt.rcParams["legend.fontsize"] = 9
+#
+ax1.scatter(np.log10(co10_mask0_all[0]),np.log10(co21_mask0_all[0]), c=cm.gnuplot(0/3.5))
+ax1.scatter(np.log10(co10_mask0_all[1]),np.log10(co21_mask0_all[1]), c=cm.gnuplot(0/3.5))
+ax1.scatter(np.log10(co10_mask0_all[2]),np.log10(co21_mask0_all[2]), c=cm.gnuplot(0/3.5))
+ax1.scatter(np.log10(co10_mask0_all[3]),np.log10(co21_mask0_all[3]), c=cm.gnuplot(0/3.5))
+ax1.scatter(np.log10(co10_mask0_all[4]),np.log10(co21_mask0_all[4]), c=cm.gnuplot(0/3.5))
+ax1.set_xlim([-0.0,2.1])
+ax1.set_ylim([-0.3,1.8])
+#
+ax2.scatter(np.log10(co10_inmask_all[1]),np.log10(co21_inmask_all[1]), c="red")
+ax2.scatter(np.log10(co10_outmask_all[1]),np.log10(co21_outmask_all[1]), c="blue")
+ax2.set_xlim([-0.0,3.2])
+ax2.set_ylim([-0.5,2.7])
+#
+ax3.scatter(np.log10(co10_inmask_all[2]),np.log10(co21_inmask_all[2]), c="red")
+ax3.scatter(np.log10(co10_outmask_all[2]),np.log10(co21_outmask_all[2]), c="blue")
+ax3.set_xlim([-0.0,3.0])
+ax3.set_ylim([-0.3,2.7])
+# save
+plt.savefig(dir_product+"scatter_mask_env.png",dpi=200)
 
 os.system("rm -rf *.last")
