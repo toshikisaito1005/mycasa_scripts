@@ -161,7 +161,60 @@ for i in range(len(txtfile)):
 
 
 
-# plot scatter
+# plot scatter 0628
+figure = plt.figure(figsize=(10,3))
+gs = gridspec.GridSpec(nrows=8, ncols=32)
+plt.subplots_adjust(bottom=0.22, left=0.05, right=0.98, top=0.88)
+ax1 = plt.subplot(gs[0:8,1:8])
+ax2 = plt.subplot(gs[0:8,9:16])
+ax3 = plt.subplot(gs[0:8,17:24])
+ax4 = plt.subplot(gs[0:8,25:32])
+ax1.grid(axis="both")
+ax2.grid(axis="both")
+ax3.grid(axis="both")
+ax4.grid(axis="both")
+ax1.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
+ax2.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
+ax3.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
+ax4.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
+ax2.tick_params(labelleft=False)
+ax1.set_ylabel("log $R_{21}$")
+plt.rcParams["font.size"] = 11
+plt.rcParams["legend.fontsize"] = 9
+#
+axlist = [ax1,ax2,ax3,ax4,ax1,ax2,ax3,ax4]
+xlim = [-0.5,1.8]
+ylim = [-1.2,0.5]
+levels = [10,45,80]
+bins_contour = 20
+colors = [cm.gnuplot(0/3.5),cm.gnuplot(1/3.5),cm.gnuplot(2/3.5),cm.gnuplot(3/3.5),cm.gnuplot(0/3.5),cm.gnuplot(1/3.5),cm.gnuplot(2/3.5),cm.gnuplot(3/3.5)]
+ax1.set_xlim(xlim)
+ax2.set_xlim(xlim)
+ax3.set_xlim(xlim)
+ax4.set_xlim(xlim)
+ax1.set_ylim(ylim)
+ax2.set_ylim(ylim)
+ax3.set_ylim(ylim)
+ax4.set_ylim(ylim)
+co21_masks_all = [np.log10(co21_mask0in_all[0]), np.log10(co21_mask1in_all[0]), np.log10(co21_mask2in_all[0]), np.log10(co21_mask3in_all[0]),
+                  np.log10(co21_mask0out_all[0]), np.log10(co21_mask1out_all[0]), np.log10(co21_mask2out_all[0]), np.log10(co21_mask3out_all[0])]
+r21_masks_all = [np.log10(co21_mask0in_all[0]/co10_mask0in_all[0]), np.log10(co21_mask1in_all[0]/co10_mask1in_all[0]), np.log10(co21_mask2in_all[0]/co10_mask2in_all[0]), np.log10(co21_mask3in_all[0]/co10_mask3in_all[0]),
+                 np.log10(co21_mask0out_all[0]/co10_mask0out_all[0]), np.log10(co21_mask1out_all[0]/co10_mask1out_all[0]), np.log10(co21_mask2out_all[0]/co10_mask2out_all[0]), np.log10(co21_mask3out_all[0]/co10_mask3out_all[0])]
+for i in range(8):
+    ax = axlist[i]
+    ax.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
+    H, xedges, yedges = np.histogram2d(r21_masks_all[i],co21_masks_all[i],bins=bins_contour,range=(ylim,xlim))
+    extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
+    if i<=3:
+        ax.contour(H/H.max()*100,levels=levels,extent=extent,colors=[colors[i]],zorder=1e9,linewidths=2,alpha=1.0)
+    else:
+        ax.contour(H/H.max()*100,levels=levels,extent=extent,colors=[colors[i]],zorder=1e9,linewidths=1,alpha=0.5)
+
+# save
+plt.savefig(dir_product+"scatter_mask_env_piechart_ngc0628.png",dpi=200)
+
+
+# plot scatter 3637
 figure = plt.figure(figsize=(10,3))
 gs = gridspec.GridSpec(nrows=8, ncols=32)
 plt.subplots_adjust(bottom=0.22, left=0.05, right=0.98, top=0.88)
@@ -182,17 +235,20 @@ plt.rcParams["font.size"] = 11
 plt.rcParams["legend.fontsize"] = 9
 #
 axlist = [ax1,ax2,ax3,ax4,ax1,ax2,ax3,ax4]
-xlim = [-0.5,1.8]
-ylim = [-1.2,0.5]
-levels = [10,45,80]
-bins_contour = 20
-colors = [cm.gnuplot(0/3.5),cm.gnuplot(1/3.5),cm.gnuplot(2/3.5),cm.gnuplot(3/3.5),cm.gnuplot(0/3.5),cm.gnuplot(1/3.5),cm.gnuplot(2/3.5),cm.gnuplot(3/3.5)]
+xlim = [-0.3,2.7]
+ylim = [-1.0,0.7]
 ax1.set_xlim(xlim)
+ax2.set_xlim(xlim)
+ax3.set_xlim(xlim)
+ax4.set_xlim(xlim)
 ax1.set_ylim(ylim)
-co21_masks_all = [np.log10(co21_mask0in_all[0]), np.log10(co21_mask1in_all[0]), np.log10(co21_mask2in_all[0]), np.log10(co21_mask3in_all[0]),
-                  np.log10(co21_mask0out_all[0]), np.log10(co21_mask1out_all[0]), np.log10(co21_mask2out_all[0]), np.log10(co21_mask3out_all[0])]
-r21_masks_all = [np.log10(co21_mask0in_all[0]/co10_mask0in_all[0]), np.log10(co21_mask1in_all[0]/co10_mask1in_all[0]), np.log10(co21_mask2in_all[0]/co10_mask2in_all[0]), np.log10(co21_mask3in_all[0]/co10_mask3in_all[0]),
-                 np.log10(co21_mask0out_all[0]/co10_mask0out_all[0]), np.log10(co21_mask1out_all[0]/co10_mask1out_all[0]), np.log10(co21_mask2out_all[0]/co10_mask2out_all[0]), np.log10(co21_mask3out_all[0]/co10_mask3out_all[0])]
+ax2.set_ylim(ylim)
+ax3.set_ylim(ylim)
+ax4.set_ylim(ylim)
+co21_masks_all = [np.log10(co21_mask0in_all[1]), np.log10(co21_mask1in_all[1]), np.log10(co21_mask2in_all[1]), np.log10(co21_mask3in_all[1]),
+                  np.log10(co21_mask0out_all[1]), np.log10(co21_mask1out_all[1]), np.log10(co21_mask2out_all[1]), np.log10(co21_mask3out_all[1])]
+r21_masks_all = [np.log10(co21_mask0in_all[1]/co10_mask0in_all[1]), np.log10(co21_mask1in_all[1]/co10_mask1in_all[1]), np.log10(co21_mask2in_all[1]/co10_mask2in_all[1]), np.log10(co21_mask3in_all[1]/co10_mask3in_all[1]),
+                 np.log10(co21_mask0out_all[1]/co10_mask0out_all[1]), np.log10(co21_mask1out_all[1]/co10_mask1out_all[1]), np.log10(co21_mask2out_all[1]/co10_mask2out_all[1]), np.log10(co21_mask3out_all[1]/co10_mask3out_all[1])]
 for i in range(8):
     ax = axlist[i]
     ax.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
@@ -204,20 +260,48 @@ for i in range(8):
         ax.contour(H/H.max()*100,levels=levels,extent=extent,colors=[colors[i]],zorder=1e9,linewidths=1,alpha=0.5)
 
 # save
-plt.savefig(dir_product+"scatter_mask_env_piechart_ngc0628.png",dpi=200)
+plt.savefig(dir_product+"scatter_mask_env_piechart_ngc3627.png",dpi=200)
 
 
+
+# plot scatter 3637
+figure = plt.figure(figsize=(10,3))
+gs = gridspec.GridSpec(nrows=8, ncols=32)
+plt.subplots_adjust(bottom=0.22, left=0.05, right=0.98, top=0.88)
+ax1 = plt.subplot(gs[0:8,1:8])
+ax2 = plt.subplot(gs[0:8,9:16])
+ax3 = plt.subplot(gs[0:8,17:24])
+ax4 = plt.subplot(gs[0:8,25:32])
+ax1.grid(axis="both")
+ax2.grid(axis="both")
+ax3.grid(axis="both")
+ax4.grid(axis="both")
+ax1.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
+ax2.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
+ax3.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
+ax4.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
+ax1.set_ylabel("log $R_{21}$")
+plt.rcParams["font.size"] = 11
+plt.rcParams["legend.fontsize"] = 9
 #
+axlist = [ax1,ax2,ax3,ax4,ax1,ax2,ax3,ax4]
 xlim = [-0.3,2.7]
-ylim = [-1.0,0.7]
+ylim = [-1.2,0.4]
+ax1.set_xlim(xlim)
 ax2.set_xlim(xlim)
+ax3.set_xlim(xlim)
+ax4.set_xlim(xlim)
+ax1.set_ylim(ylim)
 ax2.set_ylim(ylim)
-co21_masks_all = [np.log10(co21_mask0in_all[1]), np.log10(co21_mask1in_all[1]), np.log10(co21_mask2in_all[1]), np.log10(co21_mask3in_all[1]),
-                  np.log10(co21_mask0out_all[1]), np.log10(co21_mask1out_all[1]), np.log10(co21_mask2out_all[1]), np.log10(co21_mask3out_all[1])]
-r21_masks_all = [np.log10(co21_mask0in_all[1]/co10_mask0in_all[1]), np.log10(co21_mask1in_all[1]/co10_mask1in_all[1]), np.log10(co21_mask2in_all[1]/co10_mask2in_all[1]), np.log10(co21_mask3in_all[1]/co10_mask3in_all[1]),
-                 np.log10(co21_mask0out_all[1]/co10_mask0out_all[1]), np.log10(co21_mask1out_all[1]/co10_mask1out_all[1]), np.log10(co21_mask2out_all[1]/co10_mask2out_all[1]), np.log10(co21_mask3out_all[1]/co10_mask3out_all[1])]
+ax3.set_ylim(ylim)
+ax4.set_ylim(ylim)
+co21_masks_all = [np.log10(co21_mask0in_all[2]), np.log10(co21_mask1in_all[2]), np.log10(co21_mask2in_all[2]), np.log10(co21_mask3in_all[2]),
+                  np.log10(co21_mask0out_all[2]), np.log10(co21_mask1out_all[2]), np.log10(co21_mask2out_all[2]), np.log10(co21_mask3out_all[2])]
+r21_masks_all = [np.log10(co21_mask0in_all[2]/co10_mask0in_all[2]), np.log10(co21_mask1in_all[2]/co10_mask1in_all[2]), np.log10(co21_mask2in_all[2]/co10_mask2in_all[2]), np.log10(co21_mask3in_all[2]/co10_mask3in_all[2]),
+                 np.log10(co21_mask0out_all[2]/co10_mask0out_all[2]), np.log10(co21_mask1out_all[2]/co10_mask1out_all[2]), np.log10(co21_mask2out_all[2]/co10_mask2out_all[2]), np.log10(co21_mask3out_all[2]/co10_mask3out_all[2])]
 for i in range(8):
-    ax2.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
+    ax = axlist[i]
+    ax.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
     H, xedges, yedges = np.histogram2d(r21_masks_all[i],co21_masks_all[i],bins=bins_contour,range=(ylim,xlim))
     extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
     if i<=3:
@@ -226,26 +310,6 @@ for i in range(8):
         ax.contour(H/H.max()*100,levels=levels,extent=extent,colors=[colors[i]],zorder=1e9,linewidths=1,alpha=0.5)
 
 # save
-plt.savefig(dir_product+"scatter_mask_env_piechart_ngc3627.png",dpi=200)
-
-"""
-#
-xlim = [-0.3,2.7]
-ylim = [-1.2,0.4]
-ax3.set_xlim(xlim)
-ax3.set_ylim(ylim)
-co21_masks_all = [np.log10(co21_mask0in_all[2]), np.log10(co21_mask1in_all[2]), np.log10(co21_mask2in_all[2]), np.log10(co21_mask3in_all[2]),
-                  np.log10(co21_mask0out_all[2]), np.log10(co21_mask1out_all[2]), np.log10(co21_mask2out_all[2]), np.log10(co21_mask3out_all[2])]
-r21_masks_all = [np.log10(co21_mask0in_all[2]/co10_mask0in_all[2]), np.log10(co21_mask1in_all[2]/co10_mask1in_all[2]), np.log10(co21_mask2in_all[2]/co10_mask2in_all[2]), np.log10(co21_mask3in_all[2]/co10_mask3in_all[2]),
-                 np.log10(co21_mask0out_all[2]/co10_mask0out_all[2]), np.log10(co21_mask1out_all[2]/co10_mask1out_all[2]), np.log10(co21_mask2out_all[2]/co10_mask2out_all[2]), np.log10(co21_mask3out_all[2]/co10_mask3out_all[2])]
-for i in range(8):
-    ax3.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
-    H, xedges, yedges = np.histogram2d(r21_masks_all[i],co21_masks_all[i],bins=bins_contour,range=(ylim,xlim))
-    extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
-    if i%2==0:
-        ax3.contour(H/H.max()*100,levels=levels,extent=extent,colors=[colors[i]],zorder=1e9,linewidths=2,alpha=1.0)
-    else:
-        ax3.contour(H/H.max()*100,levels=levels,extent=extent,colors=[colors[i]],zorder=1e9,linewidths=1,alpha=1.0)
-"""
+plt.savefig(dir_product+"scatter_mask_env_piechart_ngc4321.png",dpi=200)
 
 os.system("rm -rf *.last")
