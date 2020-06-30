@@ -63,7 +63,7 @@ color_beam = "white"
 colorbar = True
 colorlog = False
 colorscale = "rainbow"
-colorbar_label = "(Jy beam$^{-1}$ km s$^{-1}$)"
+colorbar_label = "(Jy beam$^{-1}$)"
 imagename_contour = "sim_"+galname+"_skymodel_regrid.smooth.fits"
 
 
@@ -96,7 +96,8 @@ myim.fits2eps(dir_data = dir_data,
 #
 imagename_color = "sim_"+galname+".sd.startmodel.fits"
 title = "TP"
-output = "../../eps/"+galname+"_startmodel.png"
+output = "../../eps/"+galname+"_tp.png"
+colorbar_label = "(Jy pixel$^{-1}$)"
 #
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
@@ -120,6 +121,7 @@ myim.fits2eps(dir_data = dir_data,
 
 ### 7m-only
 #
+colorbar_label = "(Jy beam$^{-1}$)"
 imagename_color = "sim_"+galname+"_7m_br.smooth.fits"
 title = "Convolved 7m-only"
 output = "../../eps/"+galname+"_7m.png"
