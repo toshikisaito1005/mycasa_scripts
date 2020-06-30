@@ -10,7 +10,7 @@ plt.ioff()
 reload(myim)
 
 
-galname = "ngc0628" # "ngc0628" "ngc1097"
+galname = "ngc1097" # "ngc0628" "ngc1097"
 dir_data = "/Users/saito/data/myproj_active/proj_phangs06_ssc/sim_phangs/sim_" + galname + "/"
 
 
