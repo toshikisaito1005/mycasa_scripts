@@ -31,6 +31,7 @@ for i in range(len(imagenames)):
 ### Main Procedure
 #####################
 ### common
+"""
 # ngc0628
 ra_center = "01:36:41.8"
 dec_center = "15.47.0.0"
@@ -46,6 +47,7 @@ clim = [0, 10]
 contour = np.array([0.02,0.04,0.08,0.16,0.32,0.64,0.96])
 xlim = [-135, 135]
 ylim = [135, -135]
+"""
 # ngc4303
 ra_center = "12:21:54.934"
 dec_center = "4.28.24.497"
@@ -89,6 +91,31 @@ myim.fits2eps(dir_data = dir_data,
               xlim = xlim,
               ylim = ylim,
               clim = clim)
+
+### TP
+#
+imagename_color = "sim_"+galname+".sd.startmodel.fits"
+title = "TP"
+output = "../../eps/"+galname+"_startmodel.png"
+#
+myim.fits2eps(dir_data = dir_data,
+              imagename_color = imagename_color,
+              imagename_contour = imagename_contour,
+              ra_center = ra_center,
+              dec_center = dec_center,
+              title = title,
+              colorbar_label = colorbar_label,
+              output = output,
+              colorscale = colorscale,
+              colorlog = colorlog,
+              color_contour = color_contour,
+              color_beam = color_beam,
+              colorbar = colorbar,
+              value = value,
+              contour = contour,
+              xlim = xlim,
+              ylim = ylim,
+              clim = [0,0.0468065])
 
 
 ### 7m-only
