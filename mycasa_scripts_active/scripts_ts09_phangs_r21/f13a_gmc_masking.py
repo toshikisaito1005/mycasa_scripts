@@ -104,8 +104,8 @@ for i in range(len(txtfile)):
     #
     Jy2K_co10 = 1.222e6 / beamsizes[i]**2 / 115.27120**2
     Jy2K_co21 = 1.222e6 / beamsizes[i]**2 / 230.53800**2
-    co10_inmask_all.append(co10_inmask * Jy2K_co10)
-    co21_inmask_all.append(co21_inmask * Jy2K_co21)
+    co10_inmask_all.append(co10_inmask * Jy2K_co10 / np.median(co10_inmask * Jy2K_co10))
+    co21_inmask_all.append(co21_inmask * Jy2K_co21 / np.median())
     co10_outmask_all.append(co10_outmask * Jy2K_co10)
     co21_outmask_all.append(co21_outmask * Jy2K_co21)
 
