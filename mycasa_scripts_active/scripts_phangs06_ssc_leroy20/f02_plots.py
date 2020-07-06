@@ -52,10 +52,10 @@ def plotter(
        label_tp2vis = "tp2vis (" + str(median_tp2vis) + "$\pm$" + str(disp_tp2vis) + ")"
        label_tpmodel = "tpmodel (" + str(median_tpmodel) + "$\pm$" + str(disp_tpmodel) + ")"
        #
-       plt.scatter(data[:,0]*2, data[:,1], color=cm.gnuplot(0/3.5), s=60, alpha=0.7, lw=1, marker="o", label=label_7m)
-       plt.scatter(data[:,0]*2, data[:,2], color=cm.gnuplot(1/3.5), s=60, alpha=0.7, lw=1, marker="v", label=label_feather)
-       plt.scatter(data[:,0]*2, data[:,3], color=cm.gnuplot(2/3.5), s=60, alpha=0.7, lw=1, marker="s", label=label_tp2vis)
-       plt.scatter(data[:,0]*2, data[:,4], color=cm.gnuplot(3/3.5), s=60, alpha=0.7, lw=1, marker="D", label=label_tpmodel)
+       plt.scatter(data[:,0]*2, data[:,1], color=cm.gnuplot(0/3.5), s=60, alpha=0.7, lw=2, marker="o", label=label_7m)
+       plt.scatter(data[:,0]*2, data[:,2], color=cm.gnuplot(1/3.5), s=60, alpha=0.7, lw=2, marker="v", label=label_feather)
+       plt.scatter(data[:,0]*2, data[:,3], color=cm.gnuplot(2/3.5), s=60, alpha=0.7, lw=2, marker="s", label=label_tp2vis)
+       plt.scatter(data[:,0]*2, data[:,4], color=cm.gnuplot(3/3.5), s=60, alpha=0.7, lw=2, marker="D", label=label_tpmodel)
        #
        plt.xlabel("CO Size Diameter (arcsec)")
        plt.ylabel(ylabel)
