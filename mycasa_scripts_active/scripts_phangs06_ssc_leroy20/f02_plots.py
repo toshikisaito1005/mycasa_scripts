@@ -51,15 +51,16 @@ def plotter(
        label_tp2vis = "tp2vis (" + str(median_tp2vis) + " $\pm$ " + str(disp_tp2vis) + ")"
        label_tpmodel = "tpmodel (" + str(median_tpmodel) + " $\pm$ " + str(disp_tpmodel) + ")"
        #
-       plt.scatter(data[:,0]*2, data[:,1], color=cm.gnuplot(0/3.5), s=40, alpha=0.7, lw=1, marker="o", label=label_7m)
-       plt.scatter(data[:,0]*2, data[:,2], color=cm.gnuplot(1/3.5), s=40, alpha=0.7, lw=1, marker="v", label=label_feather)
-       plt.scatter(data[:,0]*2, data[:,3], color=cm.gnuplot(2/3.5), s=40, alpha=0.7, lw=1, marker="s", label=label_tp2vis)
-       plt.scatter(data[:,0]*2, data[:,4], color=cm.gnuplot(3/3.5), s=40, alpha=0.7, lw=1, marker="D", label=label_tpmodel)
+       plt.scatter(data[:,0]*2, data[:,1], color=cm.gnuplot(0/3.5), s=60, alpha=0.7, lw=1, marker="o", label=label_7m)
+       plt.scatter(data[:,0]*2, data[:,2], color=cm.gnuplot(1/3.5), s=60, alpha=0.7, lw=1, marker="v", label=label_feather)
+       plt.scatter(data[:,0]*2, data[:,3], color=cm.gnuplot(2/3.5), s=60, alpha=0.7, lw=1, marker="s", label=label_tp2vis)
+       plt.scatter(data[:,0]*2, data[:,4], color=cm.gnuplot(3/3.5), s=60, alpha=0.7, lw=1, marker="D", label=label_tpmodel)
        #
        plt.xlabel("CO Size Diameter (arcsec)")
        plt.ylabel(ylabel)
        plt.xlim([0,300])
        plt.ylim(ylim)
+       plt.yscale("log")
        plt.legend(ncol=2)
        #plt.grid(axis="both")
        plt.savefig(output)
@@ -68,6 +69,6 @@ def plotter(
 #####################
 ### Main Procedure
 #####################
-plotter("list_median.txt", dir_data+"ssc_fidelity_vs_size.png", [0.001,55], "Fidelity Median", 1)
+plotter("list_median.txt", dir_data+"ssc_fidelity_vs_size.png", [0.7,500], "Fidelity Median", 1)
 plotter("list_diff_total.txt", dir_data+"ssc_diff_total_vs_size.png", [-0.3,1.7], "Total Flux Difference")
-plotter("list_diff_peak.txt", dir_data+"ssc_diff_vs_size.png", [-0.3,1.7], "Peak Flux Difference")
+plotter("list_diff_peak.txt", dir_data+"ssc_diff_vs_size.png", [-0.3,1.7], "Peak Intensity Difference")
