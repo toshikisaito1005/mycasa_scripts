@@ -47,10 +47,10 @@ def plotter(
        plt.plot([0,300],[median_tp2vis,median_tp2vis],"--",c=cm.gnuplot(2/3.5),lw=2)
        plt.plot([0,300],[median_tpmodel,median_tpmodel],"--",c=cm.gnuplot(3/3.5),lw=2)
        #
-       label_7m = "7m-only (" + str(median_7m) + "$\pm$" + str(disp_7m) + ")"
-       label_feather = "feather (" + str(median_feather) + "$\pm$" + str(disp_feather) + ")"
-       label_tp2vis = "tp2vis (" + str(median_tp2vis) + "$\pm$" + str(disp_tp2vis) + ")"
-       label_tpmodel = "tpmodel (" + str(median_tpmodel) + "$\pm$" + str(disp_tpmodel) + ")"
+       label_7m = "7m-only (" + str(median_7m).replace("-","$-$") + "$\pm$" + str(disp_7m) + ")"
+       label_feather = "feather (" + str(median_feather).replace("-","$-$") + "$\pm$" + str(disp_feather) + ")"
+       label_tp2vis = "tp2vis (" + str(median_tp2vis).replace("-","$-$") + "$\pm$" + str(disp_tp2vis) + ")"
+       label_tpmodel = "tpmodel (" + str(median_tpmodel).replace("-","$-$") + "$\pm$" + str(disp_tpmodel) + ")"
        #
        plt.scatter(data[:,0]*2, data[:,1], color=cm.gnuplot(0/3.5), s=60, alpha=0.7, lw=2, marker="o", label=label_7m)
        plt.scatter(data[:,0]*2, data[:,2], color=cm.gnuplot(1/3.5), s=60, alpha=0.7, lw=2, marker="v", label=label_feather)
