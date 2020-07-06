@@ -34,6 +34,7 @@ def plotter(
        #
        fig = plt.figure(figsize=(15,4))
        plt.rcParams["font.size"] = 16
+       plt.rcParams["legend.fontsize"] = 16
        plt.subplots_adjust(bottom=0.15, left=0.07, right=0.95, top=0.95)
        #
        median_7m, disp_7m = np.round(np.median(data[:,1]),npround), np.round(np.std(data[:,1]),npround)
@@ -60,8 +61,9 @@ def plotter(
        plt.ylabel(ylabel)
        plt.xlim([0,300])
        plt.ylim(ylim)
+       plt.grid(axis="both")
        plt.yscale("log")
-       plt.legend(ncol=2)
+       plt.legend(ncol=4)
        #plt.grid(axis="both")
        plt.savefig(output)
 
@@ -69,6 +71,6 @@ def plotter(
 #####################
 ### Main Procedure
 #####################
-plotter("list_median.txt", dir_data+"ssc_fidelity_vs_size.png", [0.7,500], "Fidelity Median", 1)
+plotter("list_median.txt", dir_data+"ssc_fidelity_vs_size.png", [0.7,100], "Fidelity Median", 1)
 plotter("list_diff_total.txt", dir_data+"ssc_diff_total_vs_size.png", [-0.3,1.7], "Total Flux Difference")
 plotter("list_diff_peak.txt", dir_data+"ssc_diff_vs_size.png", [-0.3,1.7], "Peak Intensity Difference")
