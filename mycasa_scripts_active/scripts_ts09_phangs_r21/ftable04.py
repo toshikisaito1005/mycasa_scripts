@@ -7,6 +7,8 @@ import numpy as np
 #####################
 txtfile = glob.glob("fig_r21_vs_dist*.txt")
 txtfile.extend(glob.glob("fig_r21_vs_disp*.txt"))
+txtfile.extend(glob.glob("fig_r21_vs_w*.txt"))
+txtfile.extend(glob.glob("fig_r21_vs_ratio*.txt"))
 
 
 #####################
@@ -72,7 +74,7 @@ def extract_onerow(txtdata):
 ### main
 #####################
 table04 = []
-for i in [0,2,4,6,8]:
+for i in [0,2,4,6,8,10,12]:
 	#
 	txtfile1 = txtfile[i]
 	txtfile2 = txtfile[i+1]
