@@ -5,7 +5,8 @@ import numpy as np
 #####################
 ### parameters
 #####################
-txtfile = glob.glob("fig_r21_vs_*.txt")
+txtfile = glob.glob("fig_r21_vs_dist*.txt")
+txtfile.extend(glob.glob("fig_r21_vs_disp*.txt"))
 
 
 #####################
