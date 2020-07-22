@@ -328,7 +328,7 @@ def get_best_co10_parameter(
 	#
 	range_popt1   = popt[1] + np.linspace(-0.005, 0.010, 11)
 	range_popt2   = popt[2] + np.linspace(-0.010, 0.010, 11)
-	range_scatter = np.logspace(np.log10(0.01), np.log10(1), 11)
+	range_scatter = np.logspace(np.log10(0.01), np.log10(1.5), 11) # np.logspace(np.log10(0.01), np.log10(1), 11) ngc628
 	#
 	list_popt1 = []
 	list_popt2 = []
@@ -401,9 +401,9 @@ def get_best_co21_parameter(
 	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
 	#num_co21 = len(log_co21_mom0_k)
 	#
-	range_slope = np.linspace(0.95, 1.15, 16)
-	range_intercept = np.linspace(-0.45, -0.00, 11)
-	range_scatter = np.logspace(np.log10(0.5), np.log10(1.3), 11)
+	range_slope = np.linspace(0.95, 1.15, 16) # np.linspace(1.05, 1.15, 16)
+	range_intercept = np.linspace(-0.45, -0.00, 11) # np.linspace(-0.45, -0.20, 11)
+	range_scatter = np.logspace(np.log10(0.5), np.log10(1.8), 11) # np.logspace(np.log10(0.5), np.log10(1.3), 11)
 	#
 	best_mean = best_co10_parameter[0]
 	best_disp = best_co10_parameter[1]
