@@ -17,7 +17,7 @@ dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 galname, i = "ngc3627", 1
 freqco10 = 115.27120
 freqco21 = 230.53800
-nbins = [40,40,40] # 10, 10, 20, 30
+nbins = [40,20,40] # 10, 10, 20, 30
 percentile = 84
 beams = ["08p0"] # "20p0", "16p0", "12p0", "08p0"
 scales = [44/1.0, 52/1.3, 103/1.4]
@@ -192,6 +192,11 @@ def plotter_noise(
 	ax1.set_ylabel("CO(1-0) mom-0 noise (K.km/s)")
 	ax2.set_ylabel("CO(2-1) mom-0 noise (K.km/s)")
 	plt.rcParams["font.size"] = 16
+	#
+	print(len(log_co10_mom0_k))
+	print(len(log_co10_noise_k))
+	print(len(log_co21_mom0_k))
+	print(len(log_co21_noise_k))
 	#
 	# ax1
 	ax1.scatter(log_co10_mom0_k, log_co10_noise_k, c="black", alpha=0.5)
