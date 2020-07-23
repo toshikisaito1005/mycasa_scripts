@@ -20,8 +20,8 @@ if not done:
 ### Main Procedure
 #####################
 
-ra_center = "12:14:12.823"
-dec_center = "-47.13.42.928"
+ra_center = "12:14:12.923"
+dec_center = "-47.13.43.7"
 xlim = [-10, 10]
 ylim = [10, -10]
 value = None

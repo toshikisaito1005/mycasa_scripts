@@ -204,8 +204,8 @@ def fits2eps(dir_data, imagename_color, imagename_contour, ra_center,
     dec_newcenter = dec_pixcenter - dec_newcenter_offset
     ra_size = hdu_list[0].header["NAXIS1"]
     dec_size = hdu_list[0].header["NAXIS2"]
-    print(hdu_list[0].data[0,:,:])
-    image_data = hdu_list[0].data[0,0,:,:]
+    image_data = hdu_list[0].data[:,:] # .data[0,0,:,:]
+    print(image_data)
     xmin_col = (+ 0.5 - ra_newcenter) * ra_pixsize
     xmax_col = (ra_size + 0.5 - ra_newcenter) * ra_pixsize
     ymin_col = (+ 1.5 - dec_newcenter) * dec_pixsize
@@ -238,7 +238,7 @@ def fits2eps(dir_data, imagename_color, imagename_contour, ra_center,
         cbar.set_label(colorbar_label)
     contour_file = dir_data + imagename_contour
     hdu_contour = fits.open(contour_file)
-    contour_data = hdu_contour[0].data[0,0,:,:]
+    contour_data = hdu_list[0].data[:,:] # .data[0,0,:,:]
     if value != None:
         value_contour = value
     else:
