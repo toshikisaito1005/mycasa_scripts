@@ -27,6 +27,7 @@ if not done:
 #####################
 ### Main Procedure
 #####################
+"""
 # eso267
 ra_center = "12:14:12.923"
 dec_center = "-47.13.43.85"
@@ -195,15 +196,44 @@ myim.fits2eps(dir_data = dir_data,
               ylim = ylim)
 
 # ic4518w
-ra_center = "14:57:44.462"
-dec_center = "-43.07.52.879"
-xlim = [-13, 13]
-ylim = [13, -13]
+ra_center = "14:57:41.222"
+dec_center = "-43.07.56.0"
+xlim = [-9.2, 9.2]
+ylim = [9.2, -9.2]
 value = None
 imagename_contour = "data/ic4518w_12m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
 title = "IC4518W"
 output = "eps/ic4518w_m0.png"
+myim.fits2eps(dir_data = dir_data,
+              imagename_color = imagename_color,
+              imagename_contour = imagename_contour,
+              ra_center = ra_center,
+              dec_center = dec_center,
+              title = title,
+              colorbar_label = colorbar_label,
+              output = output,
+              colorscale = colorscale,
+              colorlog = colorlog,
+              color_contour = color_contour,
+              color_beam = color_beam,
+              colorbar = colorbar,
+              value = value,
+              contour = contour,
+              xlim = xlim,
+              ylim = ylim)
+"""
+
+# ic5179
+ra_center = "22:16:09.07"
+dec_center = "-36.50.36.948"
+xlim = [-15, 15]
+ylim = [15, -15]
+value = None
+imagename_contour = "data/ic5179_12m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
+imagename_color = imagename_contour
+title = "IC5179"
+output = "eps/ic5179_m0.png"
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
               imagename_contour = imagename_contour,
