@@ -21,7 +21,7 @@ if not done:
 #####################
 
 ra_center = "12:14:12.923"
-dec_center = "-47.13.43.7"
+dec_center = "-47.13.43.85"
 xlim = [-10, 10]
 ylim = [10, -10]
 value = None
@@ -29,9 +29,9 @@ imagename_contour = "data/eso267_12m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.
 imagename_color = imagename_contour
 contour = [0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
 title = "ESO 267-G030"
-colorscale = "PuBu"
-color_contour = "black"
-color_beam = "white"
+colorscale = "gnuplot"
+color_contour = "white"
+color_beam = "black"
 colorlog = False
 colorbar = True
 colorbar_label = "(K km s$^{-1}$)"
