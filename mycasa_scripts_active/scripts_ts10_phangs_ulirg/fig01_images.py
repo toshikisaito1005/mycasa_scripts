@@ -362,18 +362,74 @@ myim.fits2eps(dir_data = dir_data,
               contour = contour,
               xlim = xlim,
               ylim = ylim)
-"""
 
 # ngc1614
-ra_center = "13:02:20.717"
-dec_center = "-15.46.01.729"
-xlim = [-16, 16]
-ylim = [16, -16]
+ra_center = "04:34:00.47"
+dec_center = "-8.34.44.0"
+xlim = [-12, 12]
+ylim = [12, -12]
 value = None
 imagename_contour = "data/ngc1614_12m+7m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
 title = "NGC 1614"
 output = "eps/ngc1614_m0.png"
+myim.fits2eps(dir_data = dir_data,
+              imagename_color = imagename_color,
+              imagename_contour = imagename_contour,
+              ra_center = ra_center,
+              dec_center = dec_center,
+              title = title,
+              colorbar_label = colorbar_label,
+              output = output,
+              colorscale = colorscale,
+              colorlog = colorlog,
+              color_contour = color_contour,
+              color_beam = color_beam,
+              colorbar = colorbar,
+              value = value,
+              contour = contour,
+              xlim = xlim,
+              ylim = ylim)
+
+# ngc1614
+ra_center = "04:34:00.47"
+dec_center = "-8.34.44.0"
+xlim = [-12, 12]
+ylim = [12, -12]
+value = None
+imagename_contour = "data/ngc1614_12m+7m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
+imagename_color = imagename_contour
+title = "NGC 1614"
+output = "eps/ngc1614_m0.png"
+myim.fits2eps(dir_data = dir_data,
+              imagename_color = imagename_color,
+              imagename_contour = imagename_contour,
+              ra_center = ra_center,
+              dec_center = dec_center,
+              title = title,
+              colorbar_label = colorbar_label,
+              output = output,
+              colorscale = colorscale,
+              colorlog = colorlog,
+              color_contour = color_contour,
+              color_beam = color_beam,
+              colorbar = colorbar,
+              value = value,
+              contour = contour,
+              xlim = xlim,
+              ylim = ylim)
+"""
+
+# ngc2369
+ra_center = "04:34:00.47"
+dec_center = "-8.34.44.0"
+xlim = [-12, 12]
+ylim = [12, -12]
+value = None
+imagename_contour = "data/ngc2369_12m+7m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
+imagename_color = imagename_contour
+title = "NGC 2369"
+output = "eps/ngc2369_m0.png"
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
               imagename_contour = imagename_contour,
