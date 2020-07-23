@@ -533,10 +533,10 @@ myim.fits2eps(dir_data = dir_data,
 """
 
 # ngc6240
-ra_center = "13:39:52.91"
-dec_center = "0.50.25.2"
-xlim = [-14, 14]
-ylim = [14, -14]
+ra_center = "16:52:58.85"
+dec_center = "2.24.02.6"
+xlim = [-7, 7]
+ylim = [7, -7]
 value = None
 imagename_contour = "data/ngc6240_12m+7m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
