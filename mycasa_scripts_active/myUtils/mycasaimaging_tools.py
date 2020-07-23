@@ -246,7 +246,7 @@ def fits2eps(dir_data, imagename_color, imagename_contour, ra_center,
     contour2 = map(lambda x: x * value_contour, contour)
     plt.contour(contour_data, levels = contour2,
                 extent = [xmin_cnt, xmax_cnt, ymax_cnt, ymin_cnt],
-                colors = color_contour)
+                colors = color_contour, linewidths = [0.5])
     if showbeam==True:
         bmaj = imhead(image_file, "list")["beammajor"]["value"]
         bmin = imhead(image_file, "list")["beamminor"]["value"]
