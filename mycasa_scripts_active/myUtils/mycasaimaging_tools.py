@@ -205,7 +205,6 @@ def fits2eps(dir_data, imagename_color, imagename_contour, ra_center,
     ra_size = hdu_list[0].header["NAXIS1"]
     dec_size = hdu_list[0].header["NAXIS2"]
     image_data = hdu_list[0].data[:,:] # .data[0,0,:,:]
-    print(image_data)
     xmin_col = (+ 0.5 - ra_newcenter) * ra_pixsize
     xmax_col = (ra_size + 0.5 - ra_newcenter) * ra_pixsize
     ymin_col = (+ 1.5 - dec_newcenter) * dec_pixsize
