@@ -222,18 +222,74 @@ myim.fits2eps(dir_data = dir_data,
               contour = contour,
               xlim = xlim,
               ylim = ylim)
-"""
 
 # ic5179
 ra_center = "22:16:09.07"
-dec_center = "-36.50.36.948"
-xlim = [-15, 15]
-ylim = [15, -15]
+dec_center = "-36.50.38.2"
+xlim = [-14, 14]
+ylim = [14, -14]
 value = None
 imagename_contour = "data/ic5179_12m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
 title = "IC5179"
 output = "eps/ic5179_m0.png"
+myim.fits2eps(dir_data = dir_data,
+              imagename_color = imagename_color,
+              imagename_contour = imagename_contour,
+              ra_center = ra_center,
+              dec_center = dec_center,
+              title = title,
+              colorbar_label = colorbar_label,
+              output = output,
+              colorscale = colorscale,
+              colorlog = colorlog,
+              color_contour = color_contour,
+              color_beam = color_beam,
+              colorbar = colorbar,
+              value = value,
+              contour = contour,
+              xlim = xlim,
+              ylim = ylim)
+
+# iras06592
+ra_center = "06:59:40.245"
+dec_center = "-63.17.52.70"
+xlim = [-6, 6]
+ylim = [6, -6]
+value = None
+imagename_contour = "data/iras06592_12m+7m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
+imagename_color = imagename_contour
+title = "IRAS 06592-6313"
+output = "eps/iras06592_m0.png"
+myim.fits2eps(dir_data = dir_data,
+              imagename_color = imagename_color,
+              imagename_contour = imagename_contour,
+              ra_center = ra_center,
+              dec_center = dec_center,
+              title = title,
+              colorbar_label = colorbar_label,
+              output = output,
+              colorscale = colorscale,
+              colorlog = colorlog,
+              color_contour = color_contour,
+              color_beam = color_beam,
+              colorbar = colorbar,
+              value = value,
+              contour = contour,
+              xlim = xlim,
+              ylim = ylim)
+"""
+
+# irasf10409
+ra_center = "06:59:40.245"
+dec_center = "-63.17.52.70"
+xlim = [-6, 6]
+ylim = [6, -6]
+value = None
+imagename_contour = "data/irasf10409_12m+7m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
+imagename_color = imagename_contour
+title = "IRAS F10409-4556"
+output = "eps/irasf10409_m0.png"
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
               imagename_contour = imagename_contour,
