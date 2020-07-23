@@ -11,6 +11,14 @@ plt.ioff()
 reload(myim)
 
 dir_data = "/Users/saito/data/myproj_active/proj_ts10_phangs_ulirgs/"
+contour = [0.01, 0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
+value = None
+colorscale = "gnuplot"
+color_contour = "white"
+color_beam = "black"
+colorlog = False
+colorbar = True
+colorbar_label = "(K km s$^{-1}$)"
 
 done = glob.glob(dir_data + "eps/")
 if not done:
@@ -22,19 +30,11 @@ if not done:
 # eso267
 ra_center = "12:14:12.923"
 dec_center = "-47.13.43.85"
-xlim = [-10, 10]
-ylim = [10, -10]
-value = None
+xlim = [-9, 9]
+ylim = [9, -9]
 imagename_contour = "data/eso267_12m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
-contour = [0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
 title = "ESO 267-G030"
-colorscale = "gnuplot"
-color_contour = "white"
-color_beam = "black"
-colorlog = False
-colorbar = True
-colorbar_label = "(K km s$^{-1}$)"
 output = "eps/eso267_m0.png"
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
@@ -62,14 +62,7 @@ ylim = [10, -10]
 value = None
 imagename_contour = "data/eso297g011_12m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
-contour = [0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
 title = "ESO 297-G011"
-colorscale = "gnuplot"
-color_contour = "white"
-color_beam = "black"
-colorlog = False
-colorbar = True
-colorbar_label = "(K km s$^{-1}$)"
 output = "eps/eso297g011_m0.png"
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
@@ -97,14 +90,7 @@ ylim = [5, -5]
 value = None
 imagename_contour = "data/eso297g012_12m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
-contour = [0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
 title = "ESO 297-G012"
-colorscale = "gnuplot"
-color_contour = "white"
-color_beam = "black"
-colorlog = False
-colorbar = True
-colorbar_label = "(K km s$^{-1}$)"
 output = "eps/eso297g012_m0.png"
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
@@ -125,21 +111,14 @@ myim.fits2eps(dir_data = dir_data,
               ylim = ylim)
 
 # eso297g012
-ra_center = "01:36:24.185"
-dec_center = "-37.20.25.45"
-xlim = [-5, 5]
-ylim = [5, -5]
+ra_center = "13:02:52.337"
+dec_center = "-23.55.18.5"
+xlim = [-6, 6]
+ylim = [6, -6]
 value = None
-imagename_contour = "data/eso507_12m_co21_pbcorr_trimmed_k_res150pc_strict_mom0"
+imagename_contour = "data/eso507_12m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
-contour = [0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 0.96]
 title = "ESO 507-G070"
-colorscale = "gnuplot"
-color_contour = "white"
-color_beam = "black"
-colorlog = False
-colorbar = True
-colorbar_label = "(K km s$^{-1}$)"
 output = "eps/eso507_m0.png"
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
