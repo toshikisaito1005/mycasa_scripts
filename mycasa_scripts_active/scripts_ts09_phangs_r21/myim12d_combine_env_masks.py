@@ -33,7 +33,20 @@ for i in range(len(gals)):
     immath(imagename = fitsimages,
       expr = "iif(IM1>0, IM1*2, IM0)",
       outfile = output)
-  else:
+  elif galname=="ngc4321":
+    os.system("rm -rf " + output + "_tmp")
+    immath(imagename = fitsimages,
+      expr = "iif(IM1>0, IM1*2, IM0)",
+      outfile = output + "_tmp")
+    #
+    os.system("rm -rf " + output + "_tmp2")
+    immath(imagename = [output + "_tmp", fits_bar[0]],
+      expr = "iif(IM1>0, IM1*3, IM0)",
+      outfile = output)
+    #
+    os.system("rm -rf " + output + "_tmp*")
+    #
+  elif galname=="ngc3627":
     os.system("rm -rf " + output + "_tmp")
     immath(imagename = fitsimages,
       expr = "iif(IM1>0, IM1*2, IM0)",
@@ -50,7 +63,7 @@ for i in range(len(gals)):
       outfile = output)
     #
     os.system("rm -rf " + output + "_tmp*")
-
+    #
   os.system("rm -rf " + dir_project + galname + "_r21/" + output.replace(".image",".fits"))
   exportfits(imagename = output,
     fitsimage = dir_project + galname + "_r21/" + output.replace(".image",".fits"))
