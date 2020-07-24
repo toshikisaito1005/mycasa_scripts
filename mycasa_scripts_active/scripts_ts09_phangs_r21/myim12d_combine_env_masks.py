@@ -36,10 +36,10 @@ for i in range(len(gals)):
   elif galname=="ngc4321":
     os.system("rm -rf " + output + "_tmp")
     immath(imagename = fitsimages,
-      expr = "iif(IM1>0, IM1*2, IM0)",
+      expr = "iif(IM2>0, IM2*2, IM0)",
       outfile = output + "_tmp")
     #
-    os.system("rm -rf " + output + "_tmp2")
+    os.system("rm -rf " + output)
     immath(imagename = [output + "_tmp", fits_bar[0]],
       expr = "iif(IM1>0, IM1*3, IM0)",
       outfile = output)
