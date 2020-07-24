@@ -530,7 +530,6 @@ myim.fits2eps(dir_data = dir_data,
               contour = contour,
               xlim = xlim,
               ylim = ylim)
-"""
 
 # ngc6240
 ra_center = "16:52:58.85"
@@ -542,6 +541,35 @@ imagename_contour = "data/ngc6240_12m+7m_co21_pbcorr_trimmed_k_res150pc_strict_m
 imagename_color = imagename_contour
 title = "NGC 6240"
 output = "eps/ngc6240_m0.png"
+myim.fits2eps(dir_data = dir_data,
+              imagename_color = imagename_color,
+              imagename_contour = imagename_contour,
+              ra_center = ra_center,
+              dec_center = dec_center,
+              title = title,
+              colorbar_label = colorbar_label,
+              output = output,
+              colorscale = colorscale,
+              colorlog = colorlog,
+              color_contour = color_contour,
+              color_beam = color_beam,
+              colorbar = colorbar,
+              value = value,
+              contour = contour,
+              xlim = xlim,
+              ylim = ylim)
+"""
+
+# eso319
+ra_center = "16:52:58.85"
+dec_center = "2.24.02.6"
+xlim = [-7, 7]
+ylim = [7, -7]
+value = None
+imagename_contour = "data/eso319_12m+7m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
+imagename_color = imagename_contour
+title = "ESO 319"
+output = "eps/eso319_m0.png"
 myim.fits2eps(dir_data = dir_data,
               imagename_color = imagename_color,
               imagename_contour = imagename_contour,
