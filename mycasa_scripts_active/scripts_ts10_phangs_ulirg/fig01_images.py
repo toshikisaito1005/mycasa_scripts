@@ -561,8 +561,8 @@ myim.fits2eps(dir_data = dir_data,
 """
 
 # eso319
-ra_center = "16:52:58.85"
-dec_center = "2.24.02.6"
+ra_center = "11:27:54.079"
+dec_center = "-41.36.52.288"
 xlim = [-7, 7]
 ylim = [7, -7]
 value = None
