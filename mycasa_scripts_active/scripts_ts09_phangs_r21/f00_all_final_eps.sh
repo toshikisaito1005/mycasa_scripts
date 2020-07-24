@@ -139,7 +139,7 @@ convert -append -border 0x0 $dir_data"ngc0628_r21_maskb.png" $dir_data"ngc3627_r
 convert -append -border 0x0 $dir_data"ngc0628_cloud_maskb.png" $dir_data"ngc3627_cloud_maskb.png" $dir_data"ngc4321_cloud_maskb.png" $dir_data"fig12b.png"
 convert -append -border 0x0 $dir_data"ngc0628_env_maskb.png" $dir_data"ngc3627_env_maskb.png" $dir_data"ngc4321_env_maskb.png" $dir_data"fig12c.png"
 convert -append -border 0x0 $dir_data"ngc0628_piechart_maskb.png" $dir_data"ngc3627_piechart_maskb.png" $dir_data"ngc4321_piechart_maskb.png" $dir_data"fig12d.png"
-convert +append -border 0x0 $dir_data"fig12a.png" $dir_data"fig12b.png" $dir_data"fig12c.png" $dir_data"fig12d.png" eps2:$dir_data"fig12.eps"
+convert +append -border 0x0 $dir_data"fig12a.png" $dir_data"fig12b.png" $dir_data"fig12c.png" $dir_data"fig12d.png" $dir_data"fig12.png"
 
 rm -rf $dir_data"ngc0628_r21_mask.png" $dir_data"ngc0628_r21_maskb.png"
 rm -rf $dir_data"ngc3627_r21_mask.png" $dir_data"ngc3627_r21_maskb.png"
