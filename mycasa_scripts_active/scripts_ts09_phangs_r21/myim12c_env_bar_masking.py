@@ -14,11 +14,13 @@ dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 spiral_fits = ["NGC3627_mask_large_barends.image",
 				       "NGC3627_mask_large_barends.image"]
 mom0_fits = ["../../ngc3627_r21/r21_08p0.moment0",
-			       "../../ngc3627_r21/r21_08p0.moment0"]
+			       "../../ngc3627_r21/r21_08p0.moment0",
+             "../../ngc3627_r21/r21_08p0.moment0"]
 output = ["../../ngc3627_r21/env_bar_08p0.mask.fits",
 		      "../../ngc3627_r21/env_barend_08p0.mask.fits"]
 expr = ["iif(IM0==2,1,0)",
-        "iif(IM0==4,1,0)"]
+        "iif(IM0==4,1,0)",
+        "iif(IM01>,1,0)"]
 
 
 #####################
