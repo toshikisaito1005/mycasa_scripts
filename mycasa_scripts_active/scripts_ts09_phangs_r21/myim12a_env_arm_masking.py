@@ -12,7 +12,7 @@ from astropy.coordinates import SkyCoord
 dir_fits = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/data_other/env_masks/"
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 spiral_fits = ["NGC0628_mask_v5_sp_arms.image",    # >0
-				       "NGC3627_mask_large_barends.image", # 5
+				       "NGC3627_large_barends_sp1500pc.image", # 5
 				       "NGC4321_mask_v5_sp_arms.image"]    # >0
 mom0_fits = ["../../ngc0628_r21/r21_04p0.moment0",
 			 "../../ngc3627_r21/r21_08p0.moment0",
