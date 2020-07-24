@@ -28,7 +28,7 @@ for i in range(len(gals)):
   fits_barend = glob.glob(dir_project + galname + "_r21/env_*barend_*.fits")
   fitsimages = np.r_[fits_arm, fits_bulge, fits_bar, fits_barend]
   #
-  if galname!="ngc3627":
+  if galname=="ngc0628":
     os.system("rm -rf " + output)
     immath(imagename = fitsimages,
       expr = "iif(IM1>0, IM1*2, IM0)",
