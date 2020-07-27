@@ -68,8 +68,8 @@ for i in range(len(galaxy)):
 	#
 plt.legend(ncol=4, loc="upper left")
 plt.grid()
-plt.xlabel(r"$\Sigma_{mol,150pc}$ ($M_{\odot}$ pc$^{-2}$)")
-plt.ylabel(r"$\sigma_{mol,150pc}$ (km s$^{-1}$)")
+plt.xlabel(r"$\Sigma_{\mathsf{mol,150pc}}$ ($M_{\odot}$ pc$^{-2}$)")
+plt.ylabel(r"$\sigma_{\mathsf{mol,150pc}}$ (km s$^{-1}$)")
 plt.savefig(dir_eps+"scatter_all.png",dpi=200)
 
 os.system("rm -rf *.last")
