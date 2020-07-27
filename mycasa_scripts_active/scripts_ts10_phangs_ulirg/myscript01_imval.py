@@ -27,4 +27,13 @@ for i in range(len(galaxy)):
 	K_to_Jy = 1 / (1.222e6 / this_beamsize**2 / 230.53800**2)
 	# imval
 	this_data = imval(this_mom0, box=box)
-	this_data = this_data["data"]
+	this_shape = this_data["data"].shape
+	this_data = this_data["data"].reshape(this_shape)
+	# figure
+	fig, ax = plt.subplots(ncols=1, sharey=True, figsize=(8, 8))
+	fig.subplots_adjust(hspace=0.5, left=0.07, right=0.93)
+	hb = ax.hexbin(x, y, gridsize=50, cmap='inferno')
+	ax.axis([xmin, xmax, ymin, ymax])
+	ax.set_title("Hexagon binning")
+	cb = fig.colorbar(hb, ax=ax)
+	cb.set_label('counts')
