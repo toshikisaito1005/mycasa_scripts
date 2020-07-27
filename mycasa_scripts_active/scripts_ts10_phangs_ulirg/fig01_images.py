@@ -31,8 +31,8 @@ if not done:
 # eso267
 ra_center = "12:14:12.923"
 dec_center = "-47.13.43.85"
-xlim = [-9.5, 9.5]
-ylim = [9.5, -9.5]
+xlim = [-27.36, 27.36] # [-9.5, 9.5]
+ylim = [27.36, -27.36] # [9.5, -9.5]
 imagename_contour = "data/eso267_12m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
 title = "ESO 267-G030"
@@ -587,33 +587,5 @@ myim.fits2eps(dir_data = dir_data,
               xlim = xlim,
               ylim = ylim)
 """
-
-# eso319
-ra_center = "11:27:54.079"
-dec_center = "-41.36.52.788"
-xlim = [-5, 5]
-ylim = [5, -5]
-value = None
-imagename_contour = "data/eso319_12m+7m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
-imagename_color = imagename_contour
-title = "ESO 319"
-output = "eps/eso319_m0.png"
-myim.fits2eps(dir_data = dir_data,
-              imagename_color = imagename_color,
-              imagename_contour = imagename_contour,
-              ra_center = ra_center,
-              dec_center = dec_center,
-              title = title,
-              colorbar_label = colorbar_label,
-              output = output,
-              colorscale = colorscale,
-              colorlog = colorlog,
-              color_contour = color_contour,
-              color_beam = color_beam,
-              colorbar = colorbar,
-              value = value,
-              contour = contour,
-              xlim = xlim,
-              ylim = ylim)
 
 os.system("rm -rf *.last")
