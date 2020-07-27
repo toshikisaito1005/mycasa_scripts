@@ -56,14 +56,14 @@ for i in range(len(galaxy)):
 # plot
 fig, ax = plt.subplots(1, 1)
 plt.rcParams["font.size"] = 14
-plt.rcParams["legend.fontsize"] = 11
+plt.rcParams["legend.fontsize"] = 10
 ax.set_xlim([0,4.5])
 ax.set_ylim([0,3])
 for i in range(len(galaxy)):
 	this_galaxy = galaxy[i]
 	this_m0 = list_m0[i]
 	this_ew = list_ew[i]
-	c = cm.gnuplot(i/float(len(galaxy)))
+	c = cm.jet(i/float(len(galaxy)))
 	ax.scatter(this_m0, this_ew, c=c, linewidths=0, alpha=0.4, label=this_galaxy)
 	#
 plt.legend(ncol=4)
