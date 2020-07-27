@@ -31,8 +31,8 @@ if not done:
 # eso267
 ra_center = "12:14:12.923"
 dec_center = "-47.13.43.85"
-xlim = [-27.36, 27.36] # [-9.5, 9.5]
-ylim = [27.36, -27.36] # [9.5, -9.5]
+xlim = [-13.68, 13.68] # [-9.5, 9.5]
+ylim = [13.68, -13.68] # [9.5, -9.5]
 imagename_contour = "data/eso267_12m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
 title = "ESO 267-G030"
@@ -58,7 +58,7 @@ myim.fits2eps(dir_data = dir_data,
 # eso297g011
 ra_center = "01:36:23.415"
 dec_center = "-37.19.17.6"
-xlim = [-28.92, 28.92] # [-9.5, 9.5]
+xlim = [-14.46, 28.92] # [-9.5, 9.5]
 ylim = [28.92, -28.92] # [9.5, -9.5]
 value = None
 imagename_contour = "data/eso297g011_12m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
@@ -282,8 +282,8 @@ myim.fits2eps(dir_data = dir_data,
 # irasf10409
 ra_center = "10:43:07.677"
 dec_center = "-46.12.44.3"
-xlim = [] # [-12, 12]
-ylim = [] # [12, -12]
+xlim = [-23.52, 23.52] # [-12, 12]
+ylim = [23.52, -23.52] # [12, -12]
 value = None
 imagename_contour = "data/irasf10409_12m+7m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
@@ -310,8 +310,8 @@ myim.fits2eps(dir_data = dir_data,
 # irasf17138
 ra_center = "17:16:35.791"
 dec_center = "-10.20.37.885"
-xlim = [] # [-11, 11]
-ylim = [] # [11, -11]
+xlim = [-28.92, 28.92] # [-11, 11]
+ylim = [28.92, -28.92] # [11, -11]
 value = None
 imagename_contour = "data/irasf17138_12m+7m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
