@@ -12,7 +12,7 @@ import matplotlib.patches as mpatches
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts10_phangs_ulirgs/data/"
 dir_eps = "/Users/saito/data/myproj_active/proj_ts10_phangs_ulirgs/eps/"
-galaxy = ["eso267"]
+galaxy = ['eso267', 'eso297g011', 'eso297g012', 'eso319', 'eso507', 'eso557', 'ic4518e', 'ic4518w', 'ic5179', 'iras06592', 'irasf10409', 'irasf17138', 'mcg02', 'ngc1614', 'ngc2369', 'ngc3110', 'ngc3256', 'ngc5257', 'ngc6240']
 
 #####################
 ### Main Procedure
@@ -41,11 +41,13 @@ for i in range(len(galaxy)):
 	# hexbin
 	fig, ax = plt.subplots(1, 1)
 	hex_m0 = ax.hexbin(x, y, C=z_m0, gridsize=gridsize)
-	hex_m0 = hex_m0.get_array()
+	hex_m0 = np.log10(hex_m0.get_array())
 	hex_ew = ax.hexbin(x, y, C=z_ew, gridsize=gridsize)
-	hex_ew = hex_m0.get_array()
+	hex_ew = np.log10(hex_ew.get_array())
 	# plt.savefig(dir_eps+"test.png",dpi=200)
 	#
 	fig, ax = plt.subplots(1, 1)
 	ax.scatter(hex_m0,hex_ew)
-	plt.savefig(dir_eps+"test.png",dpi=200)
+	ax.set_xlim([0,4])
+	ax.set_ylim([0,3])
+	plt.savefig(dir_eps+"scatter_"+this_galaxy+".png",dpi=200)
