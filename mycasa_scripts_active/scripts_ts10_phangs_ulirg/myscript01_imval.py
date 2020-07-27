@@ -18,7 +18,12 @@ for i in range(len(galaxy)):
 	this_galaxy = galaxy[i]
 	this_mom0 = glob.glob(dir_proj + this_galaxy + "*_mom0.fits")[0]
 	# get box
-	shape = imhead(this_mom0,mode="list")["shape"]
+	this_header = imhead(this_mom0,mode="list")
+	shape = this_header["shape"]
 	box = "0,0," + str(shape[0]) + "," + str(shape[1])
-	# get beam and pixel size
-	
+	# K_to_Jy conversion factor
+	this_beamsize = this_header["beammajor"]["value"] # arcsec
+	this_pixelsize = abs(this_header["cdelt1"]) * 3600 * 180 / np.pi # arcsec
+	K_to_Jy = 1 / (1.222e6 / this_beamsize**2 / 230.53800**2)
+	# imval
+	data = imval()
