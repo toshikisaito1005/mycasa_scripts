@@ -26,3 +26,4 @@ for i in range(len(galaxy)):
 	this_pixelsize = abs(this_header["cdelt1"]) * 3600 * 180 / np.pi # arcsec
 	K_to_Jy = 1 / (1.222e6 / this_beamsize**2 / 230.53800**2)
 	# imval
+	
