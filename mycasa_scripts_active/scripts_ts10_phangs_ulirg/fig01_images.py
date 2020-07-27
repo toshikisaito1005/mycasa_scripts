@@ -114,8 +114,8 @@ myim.fits2eps(dir_data = dir_data,
 # eso507
 ra_center = "13:02:52.337"
 dec_center = "-23.55.18.5"
-xlim = [] # [-5.1, 5.1]
-ylim = [] # [5.1, -5.1]
+xlim = [-23.52, 23.52] # [-5.1, 5.1]
+ylim = [23.52, -23.52] # [5.1, -5.1]
 value = None
 imagename_contour = "data/eso507_12m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
@@ -142,8 +142,8 @@ myim.fits2eps(dir_data = dir_data,
 # eso557
 ra_center = "06:31:47.245"
 dec_center = "-17.37.17.45"
-xlim = [] # [-6, 6]
-ylim = [] # [6, -6]
+xlim = [-23.52, 23.52] # [-6, 6]
+ylim = [23.52, -23.52] # [6, -6]
 value = None
 imagename_contour = "data/eso557_12m+7m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
@@ -170,8 +170,8 @@ myim.fits2eps(dir_data = dir_data,
 # ic4518e
 ra_center = "14:57:44.462"
 dec_center = "-43.07.52.879"
-xlim = [] # [-13, 13]
-ylim = [] # [13, -13]
+xlim = [-32.7, 32.7] # [-13, 13]
+ylim = [32.7, -32.7] # [13, -13]
 value = None
 imagename_contour = "data/ic4518e_12m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
@@ -198,8 +198,8 @@ myim.fits2eps(dir_data = dir_data,
 # ic4518w
 ra_center = "14:57:41.222"
 dec_center = "-43.07.56.0"
-xlim = [] # [-9.2, 9.2]
-ylim = [] # [9.2, -9.2]
+xlim = [-32.7, 32.7] # [-9.2, 9.2]
+ylim = [32.7, -32.7] # [9.2, -9.2]
 value = None
 imagename_contour = "data/ic4518w_12m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
@@ -226,8 +226,8 @@ myim.fits2eps(dir_data = dir_data,
 # ic5179
 ra_center = "22:16:09.07"
 dec_center = "-36.50.38.2"
-xlim = [] # [-14, 14]
-ylim = [] # [14, -14]
+xlim = [-44.4, 44.4] # [-14, 14]
+ylim = [44.4, -44.4] # [14, -14]
 value = None
 imagename_contour = "data/ic5179_12m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
@@ -254,8 +254,8 @@ myim.fits2eps(dir_data = dir_data,
 # iras06592
 ra_center = "06:59:40.245"
 dec_center = "-63.17.52.70"
-xlim = [] # [-6, 6]
-ylim = [] # [6, -6]
+xlim = [-22.5, 22.5] # [-6, 6]
+ylim = [22.5, -22.5] # [6, -6]
 value = None
 imagename_contour = "data/iras06592_12m+7m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
