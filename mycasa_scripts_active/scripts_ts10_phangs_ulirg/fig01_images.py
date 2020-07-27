@@ -366,8 +366,8 @@ myim.fits2eps(dir_data = dir_data,
 # ngc1614
 ra_center = "04:34:00.47"
 dec_center = "-8.34.44.0"
-xlim = [] # [-12, 12]
-ylim = [] # [12, -12]
+xlim = [-16.38, 16.38] # [-12, 12]
+ylim = [16.38, -16.38] # [12, -12]
 value = None
 imagename_contour = "data/ngc1614_12m+7m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
@@ -394,8 +394,8 @@ myim.fits2eps(dir_data = dir_data,
 # ngc2369
 ra_center = "07:16:37.76"
 dec_center = "-62.20.38.35"
-xlim = [] # [-14.5, 14.5]
-ylim = [] # [14.5, -14.5]
+xlim = [-24.39, 24.39] # [-14.5, 14.5]
+ylim = [24.39, -24.39] # [14.5, -14.5]
 value = None
 imagename_contour = "data/ngc2369_12m+7m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
@@ -422,8 +422,8 @@ myim.fits2eps(dir_data = dir_data,
 # ngc3110
 ra_center = "10:04:02.135"
 dec_center = "-6.28.28.75"
-xlim = [] # [-18, 18]
-ylim = [] # [18, -18]
+xlim = [-15.36, 15.36] # [-18, 18]
+ylim = [15.36, -15.36] # [18, -18]
 value = None
 imagename_contour = "data/ngc3110_12m+7m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
@@ -450,8 +450,8 @@ myim.fits2eps(dir_data = dir_data,
 # ngc3256
 ra_center = "10:27:51.3"
 dec_center = "-43.54.16.732"
-xlim = [] # [-24, 24]
-ylim = [] # [24, -24]
+xlim = [-27.06*1.25, 27.06*1.25] # [-24, 24]
+ylim = [27.06*1.25, -27.06*1.25] # [24, -24]
 value = None
 imagename_contour = "data/ngc3256_12m+7m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
@@ -478,8 +478,8 @@ myim.fits2eps(dir_data = dir_data,
 # ngc5257
 ra_center = "13:39:52.91"
 dec_center = "0.50.25.2"
-xlim = [] # [-14, 14]
-ylim = [] # [14, -14]
+xlim = [-11.25*1.25, 11.25*1.25] # [-14, 14]
+ylim = [11.25*1.25, -11.25*1.25] # [14, -14]
 value = None
 imagename_contour = "data/ngc5257_12m+7m_co21_pbcorr_trimmed_k_res150pc_strict_mom0.fits"
 imagename_color = imagename_contour
