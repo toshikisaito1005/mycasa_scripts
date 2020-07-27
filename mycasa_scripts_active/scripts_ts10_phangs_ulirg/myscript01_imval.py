@@ -4,6 +4,8 @@ import sys
 import glob
 import scipy
 import numpy as np
+import matplotlib.patches as mpatches
+
 
 #####################
 ### Parameter
@@ -30,5 +32,5 @@ for i in range(len(galaxy)):
 	this_data = imval(this_mom0, box=box)["data"]
 	# plot
 	fig, ax = plt.subplots(1, 1)
-	test = ax.imshow(this_data)
+	ax.imshow(this_data)
 	plt.savefig(dir_eps+"test.png",dpi=200)
