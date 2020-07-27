@@ -56,13 +56,13 @@ list_wp84 = []
 for i in range(len(galaxy)):
 	this_galaxy = galaxy[i]
 	this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
-	this_m0 = this_data[0]
-	this_ew = this_data[1]
+	this_m0 = this_data[:,0]
+	this_ew = this_data[:,1]
 	this_pturb = this_m0 * this_ew**2
 	#
-	wp50 = weighted_percentile(this_pturb,50,this_m0)
-	wp16 = weighted_percentile(this_pturb,16,this_m0)
-	wp84 = weighted_percentile(this_pturb,84,this_m0)
+	wp50 = weighted_percentile(this_pturb,0.50,this_m0)
+	wp16 = weighted_percentile(this_pturb,0.16,this_m0)
+	wp84 = weighted_percentile(this_pturb,0.84,this_m0)
 	#
 	list_wp16.append(wp16)
 	list_wp50.append(wp50)
@@ -74,12 +74,13 @@ plt.rcParams["font.size"] = 14
 plt.rcParams["legend.fontsize"] = 10
 #ax.set_xlim([0,4.5])
 #ax.set_ylim([0,3.2])
-plt.scatter(len(galaxy), list_wp50)
+plt.xticks(np.array(range(len(galaxy)))+1, galaxy)
+plt.scatter(np.array(range(len(galaxy)))+1, list_wp50)
 
 
 plt.grid()
 #plt.xlabel(r"$\Sigma_{\mathsf{mol,150pc}}$ ($M_{\odot}$ pc$^{-2}$)")
 #plt.ylabel(r"$\sigma_{\mathsf{mol,150pc}}$ (km s$^{-1}$)")
-plt.savefig(dir_eps+"scatter_all.png",dpi=200)
+plt.savefig(dir_eps+"plot_pturb_all.png",dpi=200)
 
 os.system("rm -rf *.last")
