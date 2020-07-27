@@ -12,7 +12,12 @@ import matplotlib.patches as mpatches
 ### Parameter
 #####################
 dir_eps = "/Users/saito/data/myproj_active/proj_ts10_phangs_ulirgs/eps/"
-galaxy = ['eso267', 'eso297g011', 'eso297g012', 'eso319', 'eso507', 'eso557', 'ic4518e', 'ic4518w', 'ic5179', 'iras06592', 'irasf10409', 'irasf17138', 'mcg02', 'ngc1614', 'ngc2369', 'ngc3110', 'ngc3256', 'ngc5257', 'ngc6240']
+galaxy = ['eso319', 'eso297g011', 'eso297g012', 'ngc2369', 'mcg02',
+          'ic4518e', 'ic4518w', 'ic5179', 'iras06592',
+          'eso267', 'eso557', 'irasf10409', 'irasf17138',
+          'eso507', 'ngc1614', 
+
+'ngc3256', 'ngc5257', 'ngc6240']
 
 
 #####################
