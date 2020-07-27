@@ -37,4 +37,5 @@ for i in range(len(galaxy)):
 	# plot
 	fig, ax = plt.subplots(1, 1)
 	hexdata = ax.hexbin(x, y, C=z, gridsize=gridsize)
-	plt.savefig(dir_eps+"test.png",dpi=200)
+	hexdata = hexdata.get_array()
+	# plt.savefig(dir_eps+"test.png",dpi=200)
