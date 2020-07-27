@@ -73,21 +73,22 @@ for i in range(len(galaxy)):
 fig, ax = plt.subplots(1, 1)
 plt.rcParams["font.size"] = 14
 plt.rcParams["legend.fontsize"] = 10
-#ax.set_xlim([0,4.5])
+plt.subplots_adjust(bottom=0.25, left=0.10, right=0.95, top=0.95)
+#
+ax.set_xlim([0,len(galaxy)+1])
 #ax.set_ylim([0,3.2])
-ax.scatter(np.array(range(len(galaxy)))+1, list_wp50, s=100)
+ax.scatter(np.array(range(len(galaxy)))+1, list_wp50, s=100, c="black")
 for i in range(len(galaxy)):
 	ax.plot([i+1, i+1], [list_wp16[i], list_wp84[i]], lw=4, c="black")
 #
-ax.plot([1,len(galaxy)], [np.median(list_wp50), np.median(list_wp50)], "--", c="red")
+ax.plot([0,len(galaxy)+1], [np.median(list_wp50), np.median(list_wp50)], "--", c="red")
 #
 plt.legend(ncol=4, loc="upper left")
 plt.grid()
 plt.yscale("log")
 plt.xticks(np.array(range(len(galaxy)))+1, galaxy)
-plt.xticks(rotation=45)
-#plt.xlabel(r"$\Sigma_{\mathsf{mol,150pc}}$ ($M_{\odot}$ pc$^{-2}$)")
-#plt.ylabel(r"$\sigma_{\mathsf{mol,150pc}}$ (km s$^{-1}$)")
+plt.xticks(rotation=70)
+plt.ylabel(r"$P_{\mathsf{turb,150pc}}$ (K km s$^{-1}$)")
 plt.savefig(dir_eps+"plot_pturb_all.png",dpi=200)
 
 os.system("rm -rf *.last")
