@@ -64,10 +64,12 @@ for i in range(len(galaxy)):
 	this_m0 = list_m0[i]
 	this_ew = list_ew[i]
 	c = cm.jet(i/float(len(galaxy)))
-	ax.scatter(this_m0, this_ew, c=c, linewidths=0, alpha=0.4, label=this_galaxy)
+	ax.scatter(np.log10(10**this_m0*0.8), this_ew, c=c, linewidths=0, alpha=0.4, label=this_galaxy)
 	#
 plt.legend(ncol=4, loc="upper left")
 plt.grid()
+plt.xlabel(r"$\Sigma_{mol,150pc}$ ($M_{\odot}$ pc$^{-2}$)")
+plt.ylabel(r"$\sigma_{mol,150pc}$ (km s$^{-1}$)")
 plt.savefig(dir_eps+"scatter_all.png",dpi=200)
 
 os.system("rm -rf *.last")
