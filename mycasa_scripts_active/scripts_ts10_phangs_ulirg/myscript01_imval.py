@@ -24,8 +24,11 @@ for i in range(len(galaxy)):
 	this_header = imhead(this_mom0,mode="list")
 	shape = this_header["shape"]
 	box = "0,0," + str(shape[0]-1) + "," + str(shape[1]-1)
-	# gridsize
-	gridsize = shape[0]
+	# K_to_Jy conversion factor
+	this_beamsize = this_header["beammajor"]["value"] # arcsec
+	this_pixelsize = abs(this_header["cdelt1"]) * 3600 * 180 / np.pi # arcsec
+	this_beamsize_per_pix = this_beamsize / this_pixelsize
+	gridsize = (int(shape[0] / this_beamsize_per_pix), int(shape[1] / this_beamsize_per_pix))
 	# imval
 	this_data = imval(this_mom0, box=box)
 	x = this_data["coords"][:,:,0].flatten()
@@ -33,5 +36,5 @@ for i in range(len(galaxy)):
 	z = this_data["data"].flatten()
 	# plot
 	fig, ax = plt.subplots(1, 1)
-	ax.hexbin(x, y, C=z)
+	hexdata = ax.hexbin(x, y, C=z, gridsize=gridsize)
 	plt.savefig(dir_eps+"test.png",dpi=200)
