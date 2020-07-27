@@ -273,6 +273,112 @@ def fits2eps(dir_data, imagename_color, imagename_contour, ra_center,
     plt.savefig(dir_data + output, dpi = 100)
 
 
+def fits2eps_phangs(dir_data, imagename_color, imagename_contour, ra_center,
+        dec_center, title, colorbar_label, output, colorscale,
+        colorlog = False, value = None, colorbar = False,
+        contour = [0.1], color_contour = "k", color_beam = "b",
+        xlim = ([-30, 30]), ylim = ([30, -30]), clim = None, nucleus=None, showbeam=True):
+    """
+    test
+    """
+    ra_center_define = (float(ra_center.split(":")[0]) \
+                       + float(ra_center.split(":")[1]) / 60. \
+                       + float(ra_center.split(":")[2]) / 3600. ) \
+                       * 15.
+    if dec_center.split(".")[0][0] == "-":
+        dec_center_define = float(dec_center.split(".")[0]) \
+                            - float(dec_center.split(".")[1]) / 60. \
+                            - float(dec_center.split(".")[2] + "." + dec_center.split(".")[3]) / 3600.
+    else:
+        dec_center_define = float(dec_center.split(".")[0]) \
+                            + float(dec_center.split(".")[1]) / 60. \
+                            + float(dec_center.split(".")[2] + "." + dec_center.split(".")[3]) / 3600.
+    image_file = dir_data + imagename_color
+    datamax = imhead(image_file, "list")["datamax"]
+    hdu_list = fits.open(image_file)
+    ra_imagecenter = hdu_list[0].header["CRVAL1"]
+    dec_imagecenter = hdu_list[0].header["CRVAL2"]
+    ra_pixsize = abs(hdu_list[0].header["CDELT1"]) * 3600
+    dec_pixsize = abs(hdu_list[0].header["CDELT2"]) * 3600
+    print(ra_pixsize, dec_pixsize)
+    ra_pixcenter = hdu_list[0].header["CRPIX1"]
+    dec_pixcenter = hdu_list[0].header["CRPIX2"]
+    dec_newcenter_offset = (dec_imagecenter - dec_center_define) \
+                           * 3600 / dec_pixsize
+    ra_newcenter_offset = (ra_imagecenter - ra_center_define) \
+                           * 3600 / ra_pixsize
+    ra_newcenter = ra_pixcenter - ra_newcenter_offset
+    dec_newcenter = dec_pixcenter - dec_newcenter_offset
+    ra_size = hdu_list[0].header["NAXIS1"]
+    dec_size = hdu_list[0].header["NAXIS2"]
+    image_data = hdu_list[0].data[:,:] # .data[0,0,:,:] # .data[:,:]
+    xmin_col = (+ 0.5 - ra_newcenter) * ra_pixsize
+    xmax_col = (ra_size + 0.5 - ra_newcenter) * ra_pixsize
+    ymin_col = (+ 1.5 - dec_newcenter) * dec_pixsize
+    ymax_col = (dec_size + 1.5 - dec_newcenter) * dec_pixsize
+    xmin_cnt = (+ 1.0 - ra_newcenter) * ra_pixsize
+    xmax_cnt = (ra_size + 1.0 - ra_newcenter) * ra_pixsize
+    ymin_cnt = (+ 1.0 - dec_newcenter) * dec_pixsize
+    ymax_cnt = (dec_size + 1.0 - dec_newcenter) * dec_pixsize
+    plt.figure()
+    plt.rcParams["font.size"] = 14
+    if colorlog == True:
+        plt.imshow(image_data,
+                   norm = LogNorm(vmin = 0.02 * datamax,
+                                  vmax = datamax),
+                   cmap = colorscale,
+                   extent = [xmin_col, xmax_col, ymin_col, ymax_col])
+    else:
+        plt.imshow(image_data,
+                   cmap = colorscale,
+                   extent = [xmin_col, xmax_col, ymin_col, ymax_col])
+    plt.xlim(xlim)
+    plt.ylim(ylim)
+    if clim != None:
+        plt.clim(clim)
+    plt.title(title)
+    plt.xlabel("x-offset (arcsec)")
+    plt.ylabel("y-offset (arcsec)")
+    if colorbar == True:
+        cbar = plt.colorbar()
+        cbar.set_label(colorbar_label)
+    contour_file = dir_data + imagename_contour
+    hdu_contour = fits.open(contour_file)
+    contour_data = hdu_contour[0].data[:,:] # .data[0,0,:,:] # .data[:,:]
+    if value != None:
+        value_contour = value
+    else:
+        value_contour = imhead(contour_file, "list")["datamax"]
+    contour2 = map(lambda x: x * value_contour, contour)
+    plt.contour(contour_data, levels = contour2,
+                extent = [xmin_cnt, xmax_cnt, ymax_cnt, ymin_cnt],
+                colors = color_contour, linewidths = [0.5])
+    if showbeam==True:
+        bmaj = imhead(image_file, "list")["beammajor"]["value"]
+        bmin = imhead(image_file, "list")["beamminor"]["value"]
+        bpa = imhead(image_file, "list")["beampa"]["value"]
+        ax = plt.axes()
+        e = patches.Ellipse(xy = (min(xlim) * 0.8,
+                                  max(ylim) * 0.8),
+                            width = bmin,
+                            height = bmaj,
+                            angle = bpa * -1,
+                            fc = color_beam)
+        ax.add_patch(e)
+    if nucleus!=None:
+        e2 = patches.Ellipse(xy = (0, 0),
+                             width = nucleus,
+                             height = nucleus,
+                             angle = 0,
+                             fill = False,
+                             edgecolor = "black",
+                             alpha = 0.5,
+                             #ls = ":",
+                             lw = 5)
+        ax.add_patch(e2)
+    #plt.grid()
+    plt.savefig(dir_data + output, dpi = 100)
+
 """
 def pv_rotate(dir_data, imagename, pa):
     myia.close()
