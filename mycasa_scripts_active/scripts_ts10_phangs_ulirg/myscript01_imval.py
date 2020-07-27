@@ -54,11 +54,14 @@ for i in range(len(galaxy)):
 
 # plot
 fig, ax = plt.subplots(1, 1)
-ax.set_xlim([0,4])
+ax.set_xlim([0,4.5])
 ax.set_ylim([0,3])
 for i in range(len(galaxy)):
 	this_galaxy = galaxy[i]
-	ax.scatter(hex_m0, hex_ew, label=this_galaxy)
+	ax.scatter(list_m0[i], list_ew[i], linewidths=0, alpha=0.4, label=this_galaxy)
+	#
+plt.legend()
+plt.grid()
 plt.savefig(dir_eps+"scatter_all.png",dpi=200)
 
 os.system("rm -rf *.last")
