@@ -9,6 +9,7 @@ import numpy as np
 ### Parameter
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts10_phangs_ulirgs/data/"
+dir_eps = "/Users/saito/data/myproj_active/proj_ts10_phangs_ulirgs/eps/"
 galaxy = ["eso267"]
 
 #####################
@@ -26,4 +27,8 @@ for i in range(len(galaxy)):
 	this_pixelsize = abs(this_header["cdelt1"]) * 3600 * 180 / np.pi # arcsec
 	K_to_Jy = 1 / (1.222e6 / this_beamsize**2 / 230.53800**2)
 	# imval
-
+	this_data = imval(this_mom0, box=box)["data"]
+	# plot
+	fig, ax = plt.subplots(1, 1)
+	test = ax.imshow(this_data)
+	plt.savefig(dir_eps+"test.png",dpi=200)
