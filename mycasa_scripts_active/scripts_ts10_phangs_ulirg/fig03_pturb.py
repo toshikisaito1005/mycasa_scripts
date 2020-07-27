@@ -16,9 +16,43 @@ galaxy = ['eso267', 'eso297g011', 'eso297g012', 'eso319', 'eso507', 'eso557', 'i
 
 
 #####################
+### functions
+#####################
+def weighted_percentile(
+    data,
+    percentile,
+    weights=None,
+    ):
+    """
+    Args:
+        data (list or numpy.array): data
+        weights (list or numpy.array): weights
+    """
+    if weights==None:
+        w_median = np.percentile(data,percentile*100)
+    else:
+        data, weights = np.array(data).squeeze(), np.array(weights).squeeze()
+        s_data, s_weights = map(np.array, zip(*sorted(zip(data, weights))))
+        midpoint = percentile * sum(s_weights)
+        if any(weights > midpoint):
+            w_median = (data[weights == np.max(weights)])[0]
+        else:
+            cs_weights = np.cumsum(s_weights)
+            idx = np.where(cs_weights <= midpoint)[0][-1]
+            if cs_weights[idx] == midpoint:
+                w_median = np.mean(s_data[idx:idx+2])
+            else:
+                w_median = s_data[idx+1]
+
+    return w_median
+
+
+#####################
 ### Main Procedure
 #####################
-list_pturb = []
+list_wp16 = []
+list_wp50 = []
+list_wp84 = []
 for i in range(len(galaxy)):
 	this_galaxy = galaxy[i]
 	this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
@@ -26,23 +60,26 @@ for i in range(len(galaxy)):
 	this_ew = this_data[1]
 	this_pturb = this_m0 * this_ew**2
 	#
-	list_pturb.append(this_pturb)
+	wp50 = weighted_percentile(this_pturb,50,this_m0)
+	wp16 = weighted_percentile(this_pturb,16,this_m0)
+	wp84 = weighted_percentile(this_pturb,84,this_m0)
 	#
-y = [np.median(s) for s in list_pturb]
-
+	list_wp16.append(wp16)
+	list_wp50.append(wp50)
+	list_wp84.append(wp84)
+	#
+# figure
 fig, ax = plt.subplots(1, 1)
 plt.rcParams["font.size"] = 14
 plt.rcParams["legend.fontsize"] = 10
 #ax.set_xlim([0,4.5])
 #ax.set_ylim([0,3.2])
-plt.errorbar(len(galaxy), list_pturb)
-
-
+plt.scatter(len(galaxy), list_wp50)
 
 
 plt.grid()
-plt.xlabel(r"$\Sigma_{\mathsf{mol,150pc}}$ ($M_{\odot}$ pc$^{-2}$)")
-plt.ylabel(r"$\sigma_{\mathsf{mol,150pc}}$ (km s$^{-1}$)")
+#plt.xlabel(r"$\Sigma_{\mathsf{mol,150pc}}$ ($M_{\odot}$ pc$^{-2}$)")
+#plt.ylabel(r"$\sigma_{\mathsf{mol,150pc}}$ (km s$^{-1}$)")
 plt.savefig(dir_eps+"scatter_all.png",dpi=200)
 
 os.system("rm -rf *.last")
