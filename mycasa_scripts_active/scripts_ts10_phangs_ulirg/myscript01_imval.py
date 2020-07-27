@@ -20,10 +20,11 @@ for i in range(len(galaxy)):
 	# get box
 	this_header = imhead(this_mom0,mode="list")
 	shape = this_header["shape"]
-	box = "0,0," + str(shape[0]) + "," + str(shape[1])
+	box = "0,0," + str(shape[0]-1) + "," + str(shape[1]-1)
 	# K_to_Jy conversion factor
 	this_beamsize = this_header["beammajor"]["value"] # arcsec
 	this_pixelsize = abs(this_header["cdelt1"]) * 3600 * 180 / np.pi # arcsec
 	K_to_Jy = 1 / (1.222e6 / this_beamsize**2 / 230.53800**2)
 	# imval
-	data = imval()
+	this_data = imval(this_mom0, box=box)
+	this_data = this_data["data"]
