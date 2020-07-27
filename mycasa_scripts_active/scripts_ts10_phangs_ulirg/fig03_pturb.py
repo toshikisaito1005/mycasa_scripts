@@ -68,19 +68,21 @@ for i in range(len(galaxy)):
 	list_wp50.append(wp50)
 	list_wp84.append(wp84)
 	#
+
 # figure
 fig, ax = plt.subplots(1, 1)
 plt.rcParams["font.size"] = 14
 plt.rcParams["legend.fontsize"] = 10
 #ax.set_xlim([0,4.5])
 #ax.set_ylim([0,3.2])
-ax.scatter(np.array(range(len(galaxy)))+1, list_wp50)
+ax.scatter(np.array(range(len(galaxy)))+1, list_wp50, s=100)
 for i in range(len(galaxy)):
-	ax.plot([i+1, i+1], [list_wp16[i], list_wp84[i]])
+	ax.plot([i+1, i+1], [list_wp16[i], list_wp84[i]], lw=4, c="black")
+#
+ax.plot([1,len(galaxy)], [np.median(list_wp50), np.median(list_wp50)], "--", c="red")
 #
 plt.legend(ncol=4, loc="upper left")
 plt.grid()
-plt.xscale("log")
 plt.yscale("log")
 plt.xticks(np.array(range(len(galaxy)))+1, galaxy)
 plt.xticks(rotation=45)
