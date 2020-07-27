@@ -45,9 +45,9 @@ for i in range(len(galaxy)):
 	# hexbin
 	fig, ax = plt.subplots(1, 1)
 	hex_m0 = ax.hexbin(x, y, C=z_m0, gridsize=gridsize)
-	hex_m0 = np.log10(hex_m0.get_array())
+	hex_m0 = hex_m0.get_array()
 	hex_ew = ax.hexbin(x, y, C=z_ew, gridsize=gridsize)
-	hex_ew = np.log10(hex_ew.get_array())
+	hex_ew = hex_ew.get_array()
 	# plt.savefig(dir_eps+"test.png",dpi=200)
 	# output
 	np.savetxt(dir_eps+"scatter_"+this_galaxy+".txt",np.c_[hex_m0,hex_ew])

@@ -74,11 +74,16 @@ plt.rcParams["font.size"] = 14
 plt.rcParams["legend.fontsize"] = 10
 #ax.set_xlim([0,4.5])
 #ax.set_ylim([0,3.2])
-plt.xticks(np.array(range(len(galaxy)))+1, galaxy)
-plt.scatter(np.array(range(len(galaxy)))+1, list_wp50)
-
-
+ax.scatter(np.array(range(len(galaxy)))+1, list_wp50)
+for i in range(len(galaxy)):
+	ax.plot([i+1, i+1], [list_wp16[i], list_wp84[i]])
+#
+plt.legend(ncol=4, loc="upper left")
 plt.grid()
+plt.xscale("log")
+plt.yscale("log")
+plt.xticks(np.array(range(len(galaxy)))+1, galaxy)
+plt.xticks(rotation=45)
 #plt.xlabel(r"$\Sigma_{\mathsf{mol,150pc}}$ ($M_{\odot}$ pc$^{-2}$)")
 #plt.ylabel(r"$\sigma_{\mathsf{mol,150pc}}$ (km s$^{-1}$)")
 plt.savefig(dir_eps+"plot_pturb_all.png",dpi=200)

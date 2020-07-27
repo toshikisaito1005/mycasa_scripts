@@ -21,18 +21,20 @@ galaxy = ['eso267', 'eso297g011', 'eso297g012', 'eso319', 'eso507', 'eso557', 'i
 fig, ax = plt.subplots(1, 1)
 plt.rcParams["font.size"] = 14
 plt.rcParams["legend.fontsize"] = 10
-ax.set_xlim([0,4.5])
-ax.set_ylim([0,3.2])
+ax.set_xlim([10**0,10**4.5])
+ax.set_ylim([10**0,10**3.2])
 for i in range(len(galaxy)):
 	this_galaxy = galaxy[i]
 	this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
 	this_m0 = this_data[:,0]
 	this_ew = this_data[:,1]
 	c = cm.jet(i/float(len(galaxy)))
-	ax.scatter(np.log10(10**this_m0*0.8), this_ew, c=c, linewidths=0, alpha=0.4, label=this_galaxy)
+	ax.scatter(this_m0*0.8, this_ew, c=c, linewidths=0, alpha=0.4, label=this_galaxy)
 	#
 plt.legend(ncol=4, loc="upper left")
 plt.grid()
+plt.xscale("log")
+plt.yscale("log")
 plt.xlabel(r"$\Sigma_{\mathsf{mol,150pc}}$ ($M_{\odot}$ pc$^{-2}$)")
 plt.ylabel(r"$\sigma_{\mathsf{mol,150pc}}$ (km s$^{-1}$)")
 plt.savefig(dir_eps+"plot_scatter_all.png",dpi=200)
