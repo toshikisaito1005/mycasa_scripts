@@ -19,19 +19,30 @@ phangs = [s.split("/")[-1].split("_12m")[0] for s in glob.glob(dir_proj + "../da
 
 
 #####################
+### def
+#####################
+def getdata(listgal):
+	list_m0 = []
+	list_ew = []
+	for i in range(len(listgal)):
+		this_galaxy = listgal[i]
+		this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
+		this_m0.extend(this_data[:,0])
+		this_ew.extend(this_data[:,1])
+
+	list_m0 = np.array(this_m0)
+	list_ew = np.array(this_ew)
+
+	return list_m0, list_ew
+
+#####################
 ### Main Procedure
 #####################
 ### get data
-lirg_m0 = []
-lirg_ew = []
-for i in range(len(galaxy)):
-	this_galaxy = galaxy[i]
-	this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
-	this_m0.extend(this_data[:,0])
-	this_ew.extend(this_data[:,1])
+lirg_m0, lirg_ew = getdata(galaxy)
+phangs_m0, phangs_ew = getdata(phangs)
 
-lirg_m0 = np.array(this_m0)
-lirg_ew = np.array(this_ew)
+
 
 ### plot
 figure = plt.figure(figsize=(10,10))
