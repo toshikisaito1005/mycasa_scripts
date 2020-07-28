@@ -28,16 +28,16 @@ ax3 = plt.subplot(gs[8:9,0:8])
 plt.rcParams["font.size"] = 18
 plt.rcParams["legend.fontsize"] = 16
 plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95) 
-ax1.set_xlim([10**0,10**4.5])
-ax1.set_ylim([10**0,10**3.2])
 for i in range(len(galaxy)):
 	this_galaxy = galaxy[i]
 	this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
 	this_m0 = this_data[:,0]
 	this_ew = this_data[:,1]
-	ax1.scatter(this_m0*0.8, this_ew, c="pink", linewidths=0)
+	ax1.scatter(this_m0*0.8, this_ew, c="pink", s=40, linewidths=0)
 	#
 # ax1
+ax1.set_xlim([10**0,10**4.5])
+ax1.set_ylim([10**0,10**2.4])
 ax1.grid()
 ax1.set_xscale("log")
 ax1.set_yscale("log")
