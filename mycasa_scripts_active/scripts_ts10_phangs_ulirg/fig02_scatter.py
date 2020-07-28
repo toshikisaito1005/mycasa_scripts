@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import matplotlib.patches as mpatches
-
+plt.ioff()
 
 #####################
 ### Parameter
@@ -22,6 +22,7 @@ galaxy = ['eso267', 'eso297g011', 'eso297g012', 'eso319', 'eso507', 'eso557', 'i
 fig, ax = plt.subplots(1, 1)
 plt.rcParams["font.size"] = 14
 plt.rcParams["legend.fontsize"] = 10
+plt.subplots_adjust(bottom=0.10, left=0.15, right=0.95, top=0.95) 
 ax.set_xlim([10**0,10**4.5])
 ax.set_ylim([10**0,10**3.2])
 for i in range(len(galaxy)):
@@ -31,7 +32,7 @@ for i in range(len(galaxy)):
 	this_ew = this_data[:,1]
 	#c = cm.jet(i/float(len(galaxy)))
 	#ax.scatter(this_m0*0.8, this_ew, c=c, linewidths=0, alpha=0.4, label=this_galaxy)
-	ax.scatter(this_m0*0.8, this_ew, c="pink", linewidths=0, alpha=0.4)
+	ax.scatter(this_m0*0.8, this_ew, c="pink", linewidths=0)
 	#
 plt.legend(ncol=4, loc="upper left")
 plt.grid()
