@@ -12,12 +12,10 @@ import matplotlib.patches as mpatches
 ### Parameter
 #####################
 dir_eps = "/Users/saito/data/myproj_active/proj_ts10_phangs_ulirgs/eps/"
-galaxy = ['eso319', 'eso297g011', 'eso297g012', 'ngc2369', 'mcg02',
-          'ic4518e', 'ic4518w', 'ic5179', 'iras06592',
-          'eso267', 'eso557', 'irasf10409', 'irasf17138',
-          'eso507', 'ngc1614', 
-
-'ngc3256', 'ngc5257', 'ngc6240']
+galaxy = ['eso297g011', 'eso297g012', 'ic4518e', 'ic4518w', 'eso319',
+          'ngc2369', 'mcg02', 'ic5179', 'iras06592',
+          'eso267', 'eso557', 'irasf10409', 'ngc5257', 'ngc3110', 'irasf17138',
+          'eso507', 'ngc3256', 'ngc1614', 'ngc6240']
 
 
 #####################
@@ -92,7 +90,7 @@ plt.legend(ncol=4, loc="upper left")
 plt.grid()
 plt.yscale("log")
 plt.xticks(np.array(range(len(galaxy)))+1, galaxy)
-plt.xticks(rotation=70)
+plt.xticks(rotation=60)
 plt.ylabel(r"$P_{\mathsf{turb,150pc}}$ (K km s$^{-1}$)")
 plt.savefig(dir_eps+"plot_pturb_all.png",dpi=200)
 
