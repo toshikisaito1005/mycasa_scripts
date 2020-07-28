@@ -392,7 +392,7 @@ list_median_nocut = [10**np.median(s) for s in list_log_r21_mom0_k_model_scatter
 list_width_nocut = [10**np.percentile(s,84)-10**np.percentile(s,16) for s in list_log_r21_mom0_k_model_scatter_noise_nocut]
 
 
-"""
+#"""
 ###
 figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=22, ncols=8)
@@ -510,7 +510,7 @@ np.savetxt(dir_proj + "eps/ngc0628_model_scatter_noise.txt", np.c_[log_co10_mom0
 #
 np.savetxt(dir_proj + "eps/ngc0628_model_scatter_cut.txt", np.c_[log_co10_mom0_k_model_scatter_cut, log_co21_mom0_k_model_scatter_cut])
 np.savetxt(dir_proj + "eps/ngc0628_model_scatter_noise_cut.txt", np.c_[log_co10_mom0_k_model_scatter_noise_cut, log_co21_mom0_k_model_scatter_noise_cut])
-"""
+#"""
 
 #
 os.system("rm -rf *.last")
