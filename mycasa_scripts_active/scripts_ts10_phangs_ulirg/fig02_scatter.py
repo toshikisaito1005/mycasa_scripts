@@ -81,9 +81,9 @@ ax1.text(-0.8, 2.52, title_phangs, color="skyblue")
 ax1.text(-0.8, 2.34, title_ulirg, color="indianred")
 # plot ax1 contour
 # X, Y, Z = density_estimation(phangs_m0, phangs_ew, xlim, ylim)
-ax1.contour(X, Y, Z, [0.01,0.1,1], colors=["darkturquoise"], linewidths=[3.5])
-A, B, C = density_estimation(phangs_m0, phangs_ew, xlim, ylim)
-ax1.contour(X, Y, Z, [0.01,0.1,1], colors=["darkturquoise"], linewidths=[3.5])
+ax1.contourf(X, Y, Z, [0.015,0.15,1.5], colors=["darkturquoise"], linewidths=[3.5], alpha=0.1)
+# A, B, C = density_estimation(lirg_m0, lirg_ew, xlim, ylim)
+ax1.contourf(A, B, C, [0.05,0.2,1.0], colors=["firebrick"], linewidths=[3.5])
 # set ax1 scatter
 ax1.set_xlim(xlim)
 ax1.set_ylim(ylim)
