@@ -22,7 +22,7 @@ title_ulirg = str(len(galaxy)) + r" nearby (U)LIRGs ($\alpha_{\mathsf{CO}}$ = 0.
 title_phangs = str(len(phangs)) + r" nearby MS galaxies ($\alpha_{\mathsf{CO}}$ = 4.3)"
 xlim = [-1,4.5]
 ylim = [-0.1,2.7]
-
+bins = 20
 
 #####################
 ### def
@@ -86,6 +86,13 @@ ax1.contour(X, Y, Z, [0.015,0.15,1.5,Z.max()], colors=["blue"], linewidths=[0.5]
 # A, B, C = density_estimation(lirg_m0, lirg_ew, xlim, ylim)
 ax1.contourf(A, B, C, [0.05,0.2,1.0,C.max()], colors=[cm.Reds(3/4.),cm.Reds(3.3/4.),cm.Reds(3.6/4.),cm.Reds(3.9/4.)], linewidths=[1], alpha=0.5)
 ax1.contour(A, B, C, [0.05,0.2,1.0,C.max()], colors=["red"], linewidths=[0.5], alpha=0.3)
+# plot ax2 right
+histo = np.histogram(phangs_ew, bins=bins, range=ylim)
+x = np.delete(histo[1],-1)
+y = histo[0]/(histo[0].max()*1.05)
+height = (ylim[1]-ylim[0])/bins
+ax1.plot(y, x, drawstyle="steps", color="grey", lw=0.5)
+ax1.barh(x, y, height=height, lw=0, color=color, alpha=0.4)
 # set ax1 scatter
 ax1.set_xlim(xlim)
 ax1.set_ylim(ylim)
