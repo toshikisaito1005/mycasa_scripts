@@ -59,9 +59,9 @@ def getdata(listgal, alphaco):
 #####################
 ### get data
 print("# get lirg data")
-lirg_m0, lirg_ew = getdata(galaxy, 0.8)
+#lirg_m0, lirg_ew = getdata(galaxy, 0.8)
 print("# get phangs data")
-phangs_m0, phangs_ew = getdata(phangs, 4.3)
+#phangs_m0, phangs_ew = getdata(phangs, 4.3)
 
 ### plot
 print("# plot")
@@ -75,13 +75,15 @@ plt.rcParams["font.size"] = 20
 plt.rcParams["legend.fontsize"] = 18
 plt.subplots_adjust(bottom=0.15, left=0.20, right=0.90, top=0.85) 
 # plot ax1 scatter
-ax1.scatter(phangs_m0, phangs_ew, c="darkturquoise", s=40, linewidths=0)
+ax1.scatter(phangs_m0, phangs_ew, c="powderblue", s=40, linewidths=0)
 ax1.scatter(lirg_m0, lirg_ew, c="indianred", s=40, linewidths=0)
-ax1.text(-0.8, 2.52, title_phangs, color="darkturquoise")
+ax1.text(-0.8, 2.52, title_phangs, color="skyblue")
 ax1.text(-0.8, 2.34, title_ulirg, color="indianred")
 # plot ax1 contour
-X, Y, Z = density_estimation(phangs_m0, phangs_ew, xlim, ylim)
-ax1.contour(X, Y, Z, colors=["blue"])
+# X, Y, Z = density_estimation(phangs_m0, phangs_ew, xlim, ylim)
+ax1.contour(X, Y, Z, [0.01,0.1,1], colors=["darkturquoise"], linewidths=[3.5])
+A, B, C = density_estimation(phangs_m0, phangs_ew, xlim, ylim)
+ax1.contour(X, Y, Z, [0.01,0.1,1], colors=["darkturquoise"], linewidths=[3.5])
 # set ax1 scatter
 ax1.set_xlim(xlim)
 ax1.set_ylim(ylim)
