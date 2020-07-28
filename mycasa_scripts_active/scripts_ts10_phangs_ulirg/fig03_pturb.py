@@ -16,6 +16,10 @@ galaxy = ['eso297g011', 'eso297g012', 'ic4518e', 'ic4518w', 'eso319',
           'ngc2369', 'mcg02', 'ic5179', 'iras06592',
           'eso267', 'eso557', 'irasf10409', 'ngc5257', 'ngc3110', 'irasf17138',
           'eso507', 'ngc3256', 'ngc1614', 'ngc6240']
+galname1 = [s.replace("eso","ESO ").replace("ngc","NGC ").replace("mcg","NGC ") for s in galaxy]
+galname2 = [s.replace("e","E").replace("w","W").replace("ic","IC") for s in galname1]
+galname = [s.replace("iras","IRAS ").replace("f","F").replace("g","-G") for s in galname2]
+
 
 
 #####################
@@ -89,8 +93,8 @@ ax.plot([0,len(galaxy)+1], [np.median(list_wp50), np.median(list_wp50)], "--", c
 plt.legend(ncol=4, loc="upper left")
 plt.grid()
 plt.yscale("log")
-plt.xticks(np.array(range(len(galaxy)))+1, galaxy)
-plt.xticks(rotation=60)
+plt.xticks(np.array(range(len(galaxy)))+1, galname)
+plt.xticks(rotation=65)
 plt.ylabel(r"$P_{\mathsf{turb,150pc}}$ (K km s$^{-1}$)")
 plt.savefig(dir_eps+"plot_pturb_all.png",dpi=200)
 
