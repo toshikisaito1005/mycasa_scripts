@@ -4,6 +4,7 @@ import sys
 import glob
 import scipy
 import numpy as np
+import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import matplotlib.patches as mpatches
 
@@ -28,8 +29,9 @@ for i in range(len(galaxy)):
 	this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
 	this_m0 = this_data[:,0]
 	this_ew = this_data[:,1]
-	c = cm.jet(i/float(len(galaxy)))
-	ax.scatter(this_m0*0.8, this_ew, c=c, linewidths=0, alpha=0.4, label=this_galaxy)
+	#c = cm.jet(i/float(len(galaxy)))
+	#ax.scatter(this_m0*0.8, this_ew, c=c, linewidths=0, alpha=0.4, label=this_galaxy)
+	ax.scatter(this_m0*0.8, this_ew, c="pink", linewidths=0, alpha=0.4)
 	#
 plt.legend(ncol=4, loc="upper left")
 plt.grid()
