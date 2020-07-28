@@ -415,7 +415,17 @@ for i in range(len(list_log_co21_mom0_k_model_scatter_noise)):
 	list_log_r21_mom0_k_model_scatter_noise_nocut.append(log_r21_mom0_k_model_scatter_noise_nocut)
 
 
+#
 list_median_nocut = [10**np.median(s) for s in list_log_r21_mom0_k_model_scatter_noise_nocut]
+list_median_wco10_nocut = []
+list_median_wco21_nocut = []
+for i in range(list_log_r21_mom0_k_model_scatter_noise_nocut):
+	list_median_wco10_nocut.append(weighted_percentile(10**list_log_r21_mom0_k_model_scatter_noise_nocut[i], 0.50, 10**list_log_co10_mom0_k_model_scatter_noise[i]))
+	list_median_wco21_nocut.append(weighted_percentile(10**list_log_r21_mom0_k_model_scatter_noise_nocut[i], 0.50, 10**list_log_co21_mom0_k_model_scatter_noise[i]))
+
+
+list_median_wco21_nocut
+
 list_width_nocut = [10**np.percentile(s,84)-10**np.percentile(s,16) for s in list_log_r21_mom0_k_model_scatter_noise_nocut]
 
 
