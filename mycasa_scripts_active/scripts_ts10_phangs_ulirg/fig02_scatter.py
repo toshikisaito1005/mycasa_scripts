@@ -30,8 +30,10 @@ def getdata(listgal):
 		this_m0.extend(this_data[:,0])
 		this_ew.extend(this_data[:,1])
 
-	list_m0 = np.array(this_m0)
-	list_ew = np.array(this_ew)
+	#
+	cut_data = np.where((this_m0>0) & (this_ew>0))
+	list_m0 = np.array(this_m0[cut_data])
+	list_ew = np.array(this_ew[cut_data])
 
 	return list_m0, list_ew
 
@@ -54,7 +56,7 @@ plt.rcParams["font.size"] = 18
 plt.rcParams["legend.fontsize"] = 16
 plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95) 
 # plot
-ax1.scatter(lirg_m0*0.8, lirg_ew, c="pink", s=40, linewidths=0)
+ax1.scatter(lirg_m0*0.8, lirg_ew, c="pink", s=40, alpha=0.4, linewidths=0)
 # ax1
 ax1.set_xlim([10**0,10**4.5])
 ax1.set_ylim([10**0,10**2.4])
