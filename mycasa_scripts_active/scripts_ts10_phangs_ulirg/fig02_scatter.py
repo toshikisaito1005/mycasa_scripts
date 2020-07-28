@@ -63,7 +63,8 @@ plt.subplots_adjust(bottom=0.15, left=0.20, right=0.90, top=0.85)
 # plot
 ax1.scatter(phangs_m0*4.3, phangs_ew, c="darkturquoise", s=40, linewidths=0)
 ax1.scatter(lirg_m0*0.8, lirg_ew, c="indianred", s=40, linewidths=0)
-# ax1
+ax1.text(10**-0.8, 10**2.2, "test")
+# ax1 scatter
 ax1.set_xlim([10**-1,10**4.5])
 ax1.set_ylim([10**-0.1,10**2.4])
 ax1.grid()
@@ -71,12 +72,17 @@ ax1.tick_params(labelbottom=False)
 ax1.set_xscale("log")
 ax1.set_yscale("log")
 ax1.set_ylabel(r"$\sigma_{\mathsf{mol,150pc}}$ (km s$^{-1}$)")
-# ax2
+# ax2 right
 ax2.tick_params(labelbottom=False,labelleft=False)
 ax2.spines["top"].set_visible(False)
 ax2.spines["bottom"].set_visible(False)
 ax2.tick_params(top=False,bottom=False)
-# ax3
+ax2b.tick_params(labelbottom=False)
+ax2b.spines["top"].set_visible(False)
+ax2b.spines["bottom"].set_visible(False)
+ax2b.tick_params(top=False,bottom=False)
+ax2b.set_ylabel(r"$\sigma_{\mathsf{mol,150pc}}$ (km s$^{-1}$)")
+# ax3 bottom
 ax3.tick_params(labelleft=False)
 ax3.spines["left"].set_visible(False)
 ax3.spines["right"].set_visible(False)
