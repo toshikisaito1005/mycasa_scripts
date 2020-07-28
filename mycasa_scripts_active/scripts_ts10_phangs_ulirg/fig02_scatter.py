@@ -22,7 +22,7 @@ title_ulirg = str(len(galaxy)) + r" nearby (U)LIRGs ($\alpha_{\mathsf{CO}}$ = 0.
 title_phangs = str(len(phangs)) + r" nearby MS galaxies ($\alpha_{\mathsf{CO}}$ = 4.3)"
 xlim = [-1,4.5]
 ylim = [-0.1,2.7]
-bins = 20
+bins = 40
 
 #####################
 ### def
@@ -91,8 +91,22 @@ histo = np.histogram(phangs_ew, bins=bins, range=ylim)
 x = np.delete(histo[1],-1)
 y = histo[0]/(histo[0].max()*1.05)
 height = (ylim[1]-ylim[0])/bins
-ax1.plot(y, x, drawstyle="steps", color="grey", lw=0.5)
-ax1.barh(x, y, height=height, lw=0, color=color, alpha=0.4)
+ax2.plot(y, x, drawstyle="steps", color="grey", lw=0.5)
+ax2.barh(x, y, height=height, lw=0, color="skyblue", alpha=0.5)
+#
+histo = np.histogram(lirg_ew, bins=bins, range=ylim)
+x = np.delete(histo[1],-1)
+y = histo[0]/(histo[0].max()*1.05)
+height = (ylim[1]-ylim[0])/bins
+ax2.plot(y, x, drawstyle="steps", color="grey", lw=0.5)
+ax2.barh(x, y, height=height, lw=0, color="indianred", alpha=0.5)
+# plot ax3 bottom
+histo = np.histogram(phangs_m0, bins=bins, range=xlim)
+y = np.delete(histo[1],-1)
+x = histo[0]/(histo[0].max()*1.05)
+width = (xlim[1]-xlim[0])/bins
+ax.plot(y ,x, drawstyle="steps-mid", color="grey", lw=0.5)
+ax.bar(y, x, width=width, lw=0, color=color, alpha=0.4, bottom=i, align="center")
 # set ax1 scatter
 ax1.set_xlim(xlim)
 ax1.set_ylim(ylim)
@@ -100,6 +114,7 @@ ax1.grid()
 ax1.tick_params(labelbottom=False)
 ax1.set_ylabel(r"$\sigma_{\mathsf{mol,150pc}}$ (km s$^{-1}$)")
 # set ax2 right
+ax2.set_ylim(ylim)
 ax2.tick_params(labelbottom=False,labelleft=False)
 ax2.spines["top"].set_visible(False)
 ax2.spines["bottom"].set_visible(False)
@@ -110,6 +125,7 @@ ax2b.spines["bottom"].set_visible(False)
 ax2b.tick_params(top=False,bottom=False)
 ax2b.set_ylabel(r"$\sigma_{\mathsf{mol,150pc}}$ (km s$^{-1}$)")
 # set ax3 bottom
+ax3.set_xlim(xlim)
 ax3.tick_params(labelleft=False)
 ax3.spines["left"].set_visible(False)
 ax3.spines["right"].set_visible(False)
