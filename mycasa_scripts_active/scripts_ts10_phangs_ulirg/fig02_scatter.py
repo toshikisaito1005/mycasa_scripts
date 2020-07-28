@@ -14,6 +14,7 @@ plt.ioff()
 #####################
 ### Parameter
 #####################
+dir_proj = "/Users/saito/data/myproj_active/proj_ts10_phangs_ulirgs/data/"
 dir_eps = "/Users/saito/data/myproj_active/proj_ts10_phangs_ulirgs/eps/"
 galaxy = [s.split("/")[-1].split("_12m")[0] for s in glob.glob(dir_proj + "*mom0*")]
 phangs = [s.split("/")[-1].split("_12m")[0] for s in glob.glob(dir_proj + "../data_phangs/*mom0*")]
@@ -71,7 +72,7 @@ ax1.scatter(lirg_m0*0.8, lirg_ew, c="indianred", s=40, linewidths=0)
 ax1.text(10**-0.8, 10**2.52, title_phangs, color="darkturquoise")
 ax1.text(10**-0.8, 10**2.34, title_ulirg, color="indianred")
 # plot ax1 contour
-X, Y = np.meshgrid(phangs_m0*4.3, phangs_ew)
+# X, Y = np.meshgrid(phangs_m0*4.3, phangs_ew)
 
 # set ax1 scatter
 ax1.set_xlim(xlim)
