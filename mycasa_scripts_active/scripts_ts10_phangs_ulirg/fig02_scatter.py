@@ -27,7 +27,7 @@ ax2 = plt.subplot(gs[0:8,8:9])
 ax3 = plt.subplot(gs[8:9,0:8])
 plt.rcParams["font.size"] = 18
 plt.rcParams["legend.fontsize"] = 16
-plt.subplots_adjust(bottom=0.10, left=0.15, right=0.95, top=0.95) 
+plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95) 
 ax1.set_xlim([10**0,10**4.5])
 ax1.set_ylim([10**0,10**3.2])
 for i in range(len(galaxy)):
@@ -37,12 +37,14 @@ for i in range(len(galaxy)):
 	this_ew = this_data[:,1]
 	ax1.scatter(this_m0*0.8, this_ew, c="pink", linewidths=0)
 	#
-plt.legend(ncol=4, loc="upper left")
-plt.grid()
+# ax1
+ax1.grid()
 ax1.set_xscale("log")
 ax1.set_yscale("log")
 ax1.set_xlabel(r"$\Sigma_{\mathsf{mol,150pc}}$ ($M_{\odot}$ pc$^{-2}$)")
 ax1.set_ylabel(r"$\sigma_{\mathsf{mol,150pc}}$ (km s$^{-1}$)")
+#
+plt.legend(ncol=4, loc="upper left")
 plt.savefig(dir_eps+"plot_scatter_all.png",dpi=200)
 
 os.system("rm -rf *.last")
