@@ -20,6 +20,15 @@ galaxy = ['eso267', 'eso297g011', 'eso297g012', 'eso319', 'eso507', 'eso557', 'i
 #####################
 ### Main Procedure
 #####################
+### get data
+this_m0 = []
+this_ew = []
+for i in range(len(galaxy)):
+	this_galaxy = galaxy[i]
+	this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
+	this_m0.extend(this_data[:,0])
+	this_ew.extend(this_data[:,1])
+
 figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=9, ncols=9)
 ax1 = plt.subplot(gs[0:8,0:8])
@@ -28,13 +37,8 @@ ax3 = plt.subplot(gs[8:9,0:8])
 plt.rcParams["font.size"] = 18
 plt.rcParams["legend.fontsize"] = 16
 plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95) 
-for i in range(len(galaxy)):
-	this_galaxy = galaxy[i]
-	this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
-	this_m0 = this_data[:,0]
-	this_ew = this_data[:,1]
-	ax1.scatter(this_m0*0.8, this_ew, c="pink", s=40, linewidths=0)
-	#
+# plot
+ax1.scatter(this_m0*0.8, this_ew, c="pink", s=40, linewidths=0)
 # ax1
 ax1.set_xlim([10**0,10**4.5])
 ax1.set_ylim([10**0,10**2.4])
