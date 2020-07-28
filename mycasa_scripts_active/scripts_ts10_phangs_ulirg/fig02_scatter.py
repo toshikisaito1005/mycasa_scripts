@@ -10,6 +10,7 @@ import matplotlib.gridspec as gridspec
 import matplotlib.patches as mpatches
 plt.ioff()
 
+
 #####################
 ### Parameter
 #####################
@@ -18,6 +19,11 @@ galaxy = [s.split("/")[-1].split("_12m")[0] for s in glob.glob(dir_proj + "*mom0
 phangs = [s.split("/")[-1].split("_12m")[0] for s in glob.glob(dir_proj + "../data_phangs/*mom0*")]
 title_ulirg = str(len(galaxy)) + r" nearby (U)LIRGs ($\alpha_{\mathsf{CO}}$ = 0.8)"
 title_phangs = str(len(phangs)) + r" nearby MS galaxies ($\alpha_{\mathsf{CO}}$ = 4.3)"
+bins_contour = 40
+xlim = [10**-1,10**4.5]
+ylim = [10**-0.1,10**2.7]
+levels = [10,45,90]
+
 
 #####################
 ### def
@@ -61,20 +67,24 @@ ax2b = ax2.twinx()
 plt.rcParams["font.size"] = 20
 plt.rcParams["legend.fontsize"] = 18
 plt.subplots_adjust(bottom=0.15, left=0.20, right=0.90, top=0.85) 
-# plot
+# plot ax1 scatter
 ax1.scatter(phangs_m0*4.3, phangs_ew, c="darkturquoise", s=40, linewidths=0)
 ax1.scatter(lirg_m0*0.8, lirg_ew, c="indianred", s=40, linewidths=0)
 ax1.text(10**-0.8, 10**2.52, title_phangs, color="darkturquoise")
 ax1.text(10**-0.8, 10**2.34, title_ulirg, color="indianred")
-# ax1 scatter
-ax1.set_xlim([10**-1,10**4.5])
-ax1.set_ylim([10**-0.1,10**2.7])
+# plot ax1 contour
+H, xedges, yedges = np.histogram2d(phangs_ew,phangs_m0*4.3,bins=bins_contour,range=(ylim,xlim))
+extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
+ax1.contour(H/H.max()*100,levels=levels,extent=extent,colors=["blue"],zorder=1e11,linewidths=2,alpha=1.0)
+# set ax1 scatter
+ax1.set_xlim(xlim)
+ax1.set_ylim(ylim)
 ax1.grid()
 ax1.tick_params(labelbottom=False)
 ax1.set_xscale("log")
 ax1.set_yscale("log")
 ax1.set_ylabel(r"$\sigma_{\mathsf{mol,150pc}}$ (km s$^{-1}$)")
-# ax2 right
+# set ax2 right
 ax2.tick_params(labelbottom=False,labelleft=False)
 ax2.spines["top"].set_visible(False)
 ax2.spines["bottom"].set_visible(False)
@@ -84,7 +94,7 @@ ax2b.spines["top"].set_visible(False)
 ax2b.spines["bottom"].set_visible(False)
 ax2b.tick_params(top=False,bottom=False)
 ax2b.set_ylabel(r"$\sigma_{\mathsf{mol,150pc}}$ (km s$^{-1}$)")
-# ax3 bottom
+# set ax3 bottom
 ax3.tick_params(labelleft=False)
 ax3.spines["left"].set_visible(False)
 ax3.spines["right"].set_visible(False)
