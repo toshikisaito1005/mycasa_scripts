@@ -17,10 +17,10 @@ dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 galname = "ngc0628"
 freqco10 = 115.27120
 freqco21 = 230.53800
-nbins = 40
+nbins = 10
 percentile = 84
 
-beams = ["16p0"] # ["04p0","08p0","12p0","16p0","20p0"]
+beams = ["20p0"] # ["04p0","08p0","12p0","16p0","20p0"]
 
 
 #####################
@@ -218,13 +218,13 @@ def add_noise(
 	for i in range(len(xbins_co10)):
 		for j in range(len(xbins_co21)):
 			# create binned data
-			if i<=37:
-				if j<=37:
+			if i<=len(xbins_co10)-2:
+				if j<=len(xbins_co10)-2:
 					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]) & (best_lognorm_co21>=xbins_co21[j]) & (best_lognorm_co21<xbins_co21[j+1]))
 				else:
 					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]) & (best_lognorm_co21>=xbins_co21[j]))
 			else:
-				if j<37:
+				if j<len(xbins_co10)-2:
 					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co21>=xbins_co21[j]) & (best_lognorm_co21<xbins_co21[j+1]))
 				else:
 					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co21>=xbins_co21[j]))
@@ -339,10 +339,10 @@ for i in range(len(beams)):
 
 
 	### get filenames
-	co10_mom0  = dir_proj + galname + "_co10/co10_04p0.moment0"
-	co10_noise = dir_proj + galname + "_co10/co10_04p0.moment0.noise"
-	co21_mom0  = dir_proj + galname + "_co21/co21_04p0.moment0"
-	co21_noise = dir_proj + galname + "_co21/co21_04p0.moment0.noise"
+	co10_mom0  = dir_proj + galname + "_co10/co10_"+beams[i]+".moment0"
+	co10_noise = dir_proj + galname + "_co10/co10_"+beams[i]+".moment0.noise"
+	co21_mom0  = dir_proj + galname + "_co21/co21_"+beams[i]+".moment0"
+	co21_noise = dir_proj + galname + "_co21/co21_"+beams[i]+".moment0.noise"
 
 
 	### plot noise vs. mom-0
