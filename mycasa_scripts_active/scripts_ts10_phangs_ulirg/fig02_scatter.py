@@ -35,7 +35,7 @@ def density_estimation(m1, m2,xlim,ylim):
     Z = np.reshape(kernel(positions).T, X.shape)
     return X, Y, Z
 
-def getdata(listgal):
+def getdata(listgal, alphaco):
 	list_m0 = []
 	list_ew = []
 	for i in range(len(listgal)):
@@ -49,7 +49,7 @@ def getdata(listgal):
 	list_ew = np.array(list_ew)
 	#
 	cut_data = np.where((list_m0>0) & (list_ew>0))
-	list_m0 = np.log10(list_m0[cut_data])
+	list_m0 = np.log10(list_m0[cut_data] * alphaco)
 	list_ew = np.log10(list_ew[cut_data])
 
 	return list_m0, list_ew
@@ -59,9 +59,9 @@ def getdata(listgal):
 #####################
 ### get data
 print("# get lirg data")
-lirg_m0, lirg_ew = getdata(galaxy)
+lirg_m0, lirg_ew = getdata(galaxy, 0.8)
 print("# get phangs data")
-phangs_m0, phangs_ew = getdata(phangs)
+phangs_m0, phangs_ew = getdata(phangs, 4.3)
 
 ### plot
 print("# plot")
@@ -75,20 +75,18 @@ plt.rcParams["font.size"] = 20
 plt.rcParams["legend.fontsize"] = 18
 plt.subplots_adjust(bottom=0.15, left=0.20, right=0.90, top=0.85) 
 # plot ax1 scatter
-ax1.scatter(np.log10(10**phangs_m0*4.3), phangs_ew, c="darkturquoise", s=40, linewidths=0)
-ax1.scatter(np.log10(lirg_m0*0.8), lirg_ew, c="indianred", s=40, linewidths=0)
-ax1.text(0.8, 2.52, title_phangs, color="darkturquoise")
+ax1.scatter(phangs_m0, phangs_ew, c="darkturquoise", s=40, linewidths=0)
+ax1.scatter(lirg_m0, lirg_ew, c="indianred", s=40, linewidths=0)
+ax1.text(-0.8, 2.52, title_phangs, color="darkturquoise")
 ax1.text(-0.8, 2.34, title_ulirg, color="indianred")
 # plot ax1 contour
-X, Y, Z = density_estimation(phangs_m0*4.3, phangs_ew, xlim, ylim)
-ax1.contour(X, Y, Z)  
+X, Y, Z = density_estimation(phangs_m0, phangs_ew, xlim, ylim)
+ax1.contour(X, Y, Z, colors=["blue"])
 # set ax1 scatter
 ax1.set_xlim(xlim)
 ax1.set_ylim(ylim)
 ax1.grid()
 ax1.tick_params(labelbottom=False)
-#ax1.set_xscale("log")
-#ax1.set_yscale("log")
 ax1.set_ylabel(r"$\sigma_{\mathsf{mol,150pc}}$ (km s$^{-1}$)")
 # set ax2 right
 ax2.tick_params(labelbottom=False,labelleft=False)
