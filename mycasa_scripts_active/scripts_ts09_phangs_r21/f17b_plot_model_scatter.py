@@ -100,14 +100,14 @@ ax1.set_ylabel("S.D. of log $I_{CO(2-1)}$ (K km s$^{-1}$)")
 ax2.set_ylabel("S.D. of log $R_{21}$")
 #
 # ax1
-ax1.plot(n0628_xaxis_co10, n0628_std_scatter, "-", color=cm.brg(0/2.5), alpha=0.5, lw=4, label="NGC 0628 Model with Scatter")
-ax1.plot(n0628_xaxis_co10, n0628_std_scatter_cut, "--", color=cm.brg(0/2.5), alpha=0.5, lw=4, label="NGC 0628 Model with Scatter (sensitivity-limited)")
+ax1.plot(n0628_xaxis_co10, n0628_std_scatter, "-", color=cm.brg(0/2.5), alpha=0.5, lw=4, label="NGC 0628")
+ax1.plot(n0628_xaxis_co10, n0628_std_scatter_cut, "--", color=cm.brg(0/2.5), alpha=0.5, lw=4, label="NGC 0628 (sensitivity-limited)")
 #
-ax1.plot(n3627_xaxis_co10, n3627_std_scatter, "-", color=cm.brg(1/2.5), alpha=0.5, lw=4, label="NGC 3627 Model with Scatter")
-ax1.plot(n3627_xaxis_co10, n3627_std_scatter_cut, "--", color=cm.brg(1/2.5), alpha=0.5, lw=4, label="NGC 3627 Model with Scatter (sensitivity-limited)")
+ax1.plot(n3627_xaxis_co10, n3627_std_scatter, "-", color=cm.brg(1/2.5), alpha=0.5, lw=4, label="NGC 3627")
+ax1.plot(n3627_xaxis_co10, n3627_std_scatter_cut, "--", color=cm.brg(1/2.5), alpha=0.5, lw=4, label="NGC 3627 (sensitivity-limited)")
 #
-ax1.plot(n4321_xaxis_co10, n4321_std_scatter, "-", color=cm.brg(2/2.5), alpha=0.5, lw=4, label="NGC 4321 Model with Scatter")
-ax1.plot(n4321_xaxis_co10, n4321_std_scatter_cut, "--", color=cm.brg(2/2.5), alpha=0.5, lw=4, label="NGC 4321 Model with Scatter (sensitivity-limited)")
+ax1.plot(n4321_xaxis_co10, n4321_std_scatter, "-", color=cm.brg(2/2.5), alpha=0.5, lw=4, label="NGC 4321")
+ax1.plot(n4321_xaxis_co10, n4321_std_scatter_cut, "--", color=cm.brg(2/2.5), alpha=0.5, lw=4, label="NGC 4321 (sensitivity-limited)")
 ax1.set_xlim(xlim_co10)
 ax1.set_ylim([0,0.6])
 ax1.legend()
