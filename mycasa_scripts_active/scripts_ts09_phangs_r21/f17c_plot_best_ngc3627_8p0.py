@@ -17,7 +17,7 @@ dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 galname = "ngc3627"
 freqco10 = 115.27120
 freqco21 = 230.53800
-nbins = 40
+nbins = 30 # 40 0628 # 
 percentile = 84
 
 beams = ["08p0"] # ["04p0","08p0","12p0","16p0","20p0"]
@@ -324,8 +324,8 @@ list_log_r21_mom0_k_model_scatter = []
 list_log_r21_mom0_k_model_scatter_noise = []
 for i in range(len(beams)):
 	### get best fit values
-	dataco10 = np.loadtxt(dir_proj + "eps/bootstrap_co10_models_ngc0628_"+beams[i]+".txt")
-	dataco21 = np.loadtxt(dir_proj + "eps/bootstrap_co21_models_ngc0628_"+beams[i]+".txt")
+	dataco10 = np.loadtxt(dir_proj + "eps/bootstrap_co10_models_"+galname+"_"+beams[i]+".txt")
+	dataco21 = np.loadtxt(dir_proj + "eps/bootstrap_co21_models_"+galname+"_"+beams[i]+".txt")
 	best_co10_parameter = np.median(dataco10, axis=0)
 	best_co21_parameter = np.median(dataco21, axis=0)
 
@@ -339,10 +339,11 @@ for i in range(len(beams)):
 
 
 	### get filenames
-	co10_mom0  = dir_proj + galname + "_co10/co10_04p0.moment0"
-	co10_noise = dir_proj + galname + "_co10/co10_04p0.moment0.noise"
-	co21_mom0  = dir_proj + galname + "_co21/co21_04p0.moment0"
-	co21_noise = dir_proj + galname + "_co21/co21_04p0.moment0.noise"
+	this_beam = beams[i]
+	co10_mom0  = dir_proj + galname + "_co10/co10_"+this_beam+".moment0"
+	co10_noise = dir_proj + galname + "_co10/co10_"+this_beam+".moment0.noise"
+	co21_mom0  = dir_proj + galname + "_co21/co21_"+this_beam+".moment0"
+	co21_noise = dir_proj + galname + "_co21/co21_"+this_beam+".moment0.noise"
 
 
 	### plot noise vs. mom-0
@@ -504,13 +505,14 @@ plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21_"+galname+".png",dpi=200)
 #
 
 #
-#np.savetxt(dir_proj + "eps/ngc0628_model.txt", np.c_[log_co10_mom0_k_model, log_co21_mom0_k_model])
+#np.savetxt(dir_proj + "eps/"+galname+"_model.txt", np.c_[log_co10_mom0_k_model, log_co21_mom0_k_model])
 np.savetxt(dir_proj + "eps/"+galname+"_model_scatter.txt", np.c_[log_co10_mom0_k_model_scatter, log_co21_mom0_k_model_scatter])
-np.savetxt(dir_proj + "eps/ngc0628_model_scatter_noise.txt", np.c_[log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise])
+np.savetxt(dir_proj + "eps/"+galname+"_model_scatter_noise.txt", np.c_[log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise])
 #
-np.savetxt(dir_proj + "eps/ngc0628_model_scatter_cut.txt", np.c_[log_co10_mom0_k_model_scatter_cut, log_co21_mom0_k_model_scatter_cut])
-np.savetxt(dir_proj + "eps/ngc0628_model_scatter_noise_cut.txt", np.c_[log_co10_mom0_k_model_scatter_noise_cut, log_co21_mom0_k_model_scatter_noise_cut])
+np.savetxt(dir_proj + "eps/"+galname+"_model_scatter_cut.txt", np.c_[log_co10_mom0_k_model_scatter_cut, log_co21_mom0_k_model_scatter_cut])
+np.savetxt(dir_proj + "eps/"+galname+"_model_scatter_noise_cut.txt", np.c_[log_co10_mom0_k_model_scatter_noise_cut, log_co21_mom0_k_model_scatter_noise_cut])
 #"""
+
 
 #
 os.system("rm -rf *.last")
