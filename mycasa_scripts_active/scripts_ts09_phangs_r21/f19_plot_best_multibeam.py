@@ -14,13 +14,13 @@ import scripts_phangs_r21 as r21
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-galname = "ngc3627"
+galname = "ngc0628"
 freqco10 = 115.27120
 freqco21 = 230.53800
-nbins = 30 # 40 0628 # 30 3627 # 40 4321
+nbins = [40, 30, 20, 10, 10]
 percentile = 84
 
-beams = ["04p0"] # ["04p0","08p0","12p0","16p0","20p0"]
+beams = ["04p0","08p0","12p0","16p0","20p0"]
 
 
 #####################
@@ -324,6 +324,7 @@ list_log_r21_mom0_k_model_scatter = []
 list_log_r21_mom0_k_model_scatter_noise = []
 for i in range(len(beams)):
 	### get best fit values
+	nbin = nbins[i]
 	dataco10 = np.loadtxt(dir_proj + "eps/bootstrap_co10_models_"+galname+"_"+beams[i]+".txt")
 	dataco21 = np.loadtxt(dir_proj + "eps/bootstrap_co21_models_"+galname+"_"+beams[i]+".txt")
 	best_co10_parameter = np.median(dataco10, axis=0)
@@ -349,7 +350,7 @@ for i in range(len(beams)):
 	### plot noise vs. mom-0
 	log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21)
 	p84_co10, p50_co10, p16_co10, p84_co21, p50_co21, p16_co21 = print_things(log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k)
-	xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile, galname)
+	xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbin, percentile, galname)
 
 
 	### create best models
@@ -391,127 +392,6 @@ for i in range(len(list_log_co21_mom0_k_model_scatter_noise)):
 
 list_median_nocut = [10**np.median(s) for s in list_log_r21_mom0_k_model_scatter_noise_nocut]
 list_width_nocut = [10**np.percentile(s,84)-10**np.percentile(s,16) for s in list_log_r21_mom0_k_model_scatter_noise_nocut]
-
-
-#"""
-###
-figure = plt.figure(figsize=(10,10))
-gs = gridspec.GridSpec(nrows=22, ncols=8)
-plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
-ax1 = plt.subplot(gs[0:6,0:8])
-ax2 = plt.subplot(gs[8:14,0:8])
-ax3 = plt.subplot(gs[16:22,0:8])
-ax1.grid(axis="x")
-ax2.grid(axis="x")
-ax3.grid(axis="x")
-ax1.set_xlabel("log $I_{CO(1-0)}$ (K km s$^{-1}$)")
-ax2.set_xlabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
-ax3.set_xlabel("log $R_{21}$")
-plt.rcParams["font.size"] = 20
-plt.rcParams["legend.fontsize"] = 18
-#
-# ax1
-ax1.hist(log_co10_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=range_co10_input, label="Observed Data")
-histo = ax1.hist(log_co10_mom0_k_model_scatter_noise_cut, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co10_input, label="Model with Scatter+Noise")
-histomax = histo[0].max()
-ax1.set_xlim([0.01,2.5])
-ax1.set_ylim([0,histomax*1.3])
-ax1.legend(loc = "upper right")
-ax1.plot(np.median(log_co10_mom0_k), histomax*1.1, "o", color="grey", markersize=10, markeredgewidth=0)
-ax1.plot([np.percentile(log_co10_mom0_k,16),np.percentile(log_co10_mom0_k,84)], [histomax*1.1,histomax*1.1], "-", color="grey", lw=3)
-ax1.plot(np.median(log_co10_mom0_k_model_scatter_noise_cut), histomax*1.2, "o", color="red", markersize=10, markeredgewidth=0)
-ax1.plot([np.percentile(log_co10_mom0_k_model_scatter_noise_cut,16),np.percentile(log_co10_mom0_k_model_scatter_noise_cut,84)], [histomax*1.2,histomax*1.2], "-", color="red", lw=3)
-#
-# ax2
-ax2.hist(log_co21_mom0_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=range_co21_input)
-histo = ax2.hist(log_co21_mom0_k_model_scatter_noise_cut, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=range_co21_input)
-histomax = histo[0].max()
-ax2.set_xlim([-0.49,2.1])
-ax2.set_ylim([0,histomax*1.3])
-ax2.plot(np.median(log_co21_mom0_k), histomax*1.1, "o", color="grey", markersize=10, markeredgewidth=0)
-ax2.plot([np.percentile(log_co21_mom0_k,16),np.percentile(log_co21_mom0_k,84)], [histomax*1.1,histomax*1.1], "-", color="grey", lw=3)
-ax2.plot(np.median(log_co21_mom0_k_model_scatter_noise_cut), histomax*1.2, "o", color="red", markersize=10, markeredgewidth=0)
-ax2.plot([np.percentile(log_co21_mom0_k_model_scatter_noise_cut,16),np.percentile(log_co21_mom0_k_model_scatter_noise_cut,84)], [histomax*1.2,histomax*1.2], "-", color="red", lw=3)
-#
-# ax3
-ax3.hist(log_r21_mom_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0)
-histo = ax3.hist(log_r21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=[-1.0,0.5])
-histomax = histo[0].max()
-ax3.set_xlim([-0.99,0.5])
-ax3.set_ylim([0,histomax*1.3])
-ax3.plot(np.median(log_r21_mom_k), histomax*1.1, "o", color="grey", markersize=10, markeredgewidth=0)
-ax3.plot([np.percentile(log_r21_mom_k,16),np.percentile(log_r21_mom_k,84)], [histomax*1.1,histomax*1.1], "-", color="grey", lw=3)
-ax3.plot(np.median(log_r21_mom0_k_model_scatter_noise), histomax*1.2, "o", color="red", markersize=10, markeredgewidth=0)
-ax3.plot([np.percentile(log_r21_mom0_k_model_scatter_noise,16),np.percentile(log_r21_mom0_k_model_scatter_noise,84)], [histomax*1.2,histomax*1.2], "-", color="red", lw=3)
-#
-plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo_"+galname+".png",dpi=200)
-
-
-### plot co10 vs co21
-figure = plt.figure(figsize=(10,10))
-gs = gridspec.GridSpec(nrows=8, ncols=8)
-plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
-ax1 = plt.subplot(gs[0:8,0:8])
-ax1.grid(axis="both")
-ax1.set_xlabel("log $I_{CO(1-0)}$ (K km s$^{-1}$)")
-ax1.set_ylabel("log $I_{CO(2-1)}$ (K km s$^{-1}$)")
-plt.rcParams["font.size"] = 20
-plt.rcParams["legend.fontsize"] = 18
-#
-binx, mean, std = get_binned_dist(log_co10_mom0_k_model_scatter_noise_cut, log_co21_mom0_k_model_scatter_noise_cut, range_co10_input)
-ax1.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
-#
-# ax1
-ax1.plot(log_co10_mom0_k_model, log_co21_mom0_k_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=-1e18, label="Model")
-ax1.plot(log_co10_mom0_k_model_scatter_cut, log_co21_mom0_k_model_scatter_cut, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=-1e20, label="Model with Scatter")
-ax1.plot(log_co10_mom0_k_model_scatter_noise_cut, log_co21_mom0_k_model_scatter_noise_cut, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=-1e22, label="Model with Scatter+Noise")
-ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0, zorder=-1e24, label="Observed Data")
-ax1.plot([-0.5,3.0], [-0.5,3.0], "k--", lw=5)
-ax1.set_xlim([0.2,1.8])
-ax1.set_ylim([-0.3,1.8])
-#
-ax1.legend(loc = "upper left")
-plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0_"+galname+".png",dpi=200)
-
-
-### plot co21 vs r21
-r21 = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k)
-r21_model = np.log10(10**log_co21_mom0_k_model/10**log_co10_mom0_k_model)
-r21_model_scatter = np.log10(10**log_co21_mom0_k_model_scatter_cut/10**log_co10_mom0_k_model_scatter_cut)
-r21_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise_cut/10**log_co10_mom0_k_model_scatter_noise_cut)
-#
-figure = plt.figure(figsize=(10,10))
-gs = gridspec.GridSpec(nrows=8, ncols=8)
-plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
-ax1 = plt.subplot(gs[0:8,0:8])
-ax1.grid(axis="both")
-ax1.set_xlabel("log CO(2-1) mom-0 (K km s$^{-1}$)")
-ax1.set_ylabel("log $R_{21}$")
-plt.rcParams["font.size"] = 20
-plt.rcParams["legend.fontsize"] = 18
-#
-binx, mean, std = get_binned_dist(log_co21_mom0_k_model_scatter_noise_cut, r21_model_scatter_noise, range_co21_input)
-ax1.errorbar(binx, mean, yerr = std, color = "dimgrey", ecolor = "dimgrey", lw=4)
-#
-# ax1
-ax1.plot(log_co21_mom0_k_model, r21_model, "o", color="black", alpha=1.0, markersize=5, markeredgewidth=0, zorder=-1e18)
-ax1.plot(log_co21_mom0_k_model_scatter_cut, r21_model_scatter, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=-1e20)
-ax1.plot(log_co21_mom0_k_model_scatter_noise_cut, r21_model_scatter_noise, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=-1e22)
-ax1.plot(log_co21_mom0_k, r21, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0, zorder=-1e24)
-ax1.set_xlim([-0.3,1.8])
-ax1.set_ylim([-1.2,0.5])
-#
-plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21_"+galname+".png",dpi=200)
-#
-
-#
-#np.savetxt(dir_proj + "eps/"+galname+"_model.txt", np.c_[log_co10_mom0_k_model, log_co21_mom0_k_model])
-np.savetxt(dir_proj + "eps/"+galname+"_model_scatter.txt", np.c_[log_co10_mom0_k_model_scatter, log_co21_mom0_k_model_scatter])
-np.savetxt(dir_proj + "eps/"+galname+"_model_scatter_noise.txt", np.c_[log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise])
-#
-np.savetxt(dir_proj + "eps/"+galname+"_model_scatter_cut.txt", np.c_[log_co10_mom0_k_model_scatter_cut, log_co21_mom0_k_model_scatter_cut])
-np.savetxt(dir_proj + "eps/"+galname+"_model_scatter_noise_cut.txt", np.c_[log_co10_mom0_k_model_scatter_noise_cut, log_co21_mom0_k_model_scatter_noise_cut])
-#"""
 
 
 #
