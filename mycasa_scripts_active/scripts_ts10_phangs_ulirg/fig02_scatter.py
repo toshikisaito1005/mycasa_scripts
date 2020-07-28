@@ -16,7 +16,7 @@ plt.ioff()
 dir_eps = "/Users/saito/data/myproj_active/proj_ts10_phangs_ulirgs/eps/"
 galaxy = [s.split("/")[-1].split("_12m")[0] for s in glob.glob(dir_proj + "*mom0*")]
 phangs = [s.split("/")[-1].split("_12m")[0] for s in glob.glob(dir_proj + "../data_phangs/*mom0*")]
-title_ulirg = str(len(galaxy)) + " nearby (U)LIRGs"
+title_ulirg = str(len(galaxy)) + r" nearby (U)LIRGs ($\alpha_{\mathsf{CO}}$ = 0.8)"
 title_phangs = str(len(phangs)) + r" nearby MS galaxies ($\alpha_{\mathsf{CO}}$ = 4.3)"
 
 #####################
@@ -64,10 +64,11 @@ plt.subplots_adjust(bottom=0.15, left=0.20, right=0.90, top=0.85)
 # plot
 ax1.scatter(phangs_m0*4.3, phangs_ew, c="darkturquoise", s=40, linewidths=0)
 ax1.scatter(lirg_m0*0.8, lirg_ew, c="indianred", s=40, linewidths=0)
-ax1.text(10**-0.8, 10**2.4, title_phangs, color="darkturquoise")
+ax1.text(10**-0.8, 10**2.52, title_phangs, color="darkturquoise")
+ax1.text(10**-0.8, 10**2.34, title_ulirg, color="indianred")
 # ax1 scatter
 ax1.set_xlim([10**-1,10**4.5])
-ax1.set_ylim([10**-0.1,10**2.6])
+ax1.set_ylim([10**-0.1,10**2.7])
 ax1.grid()
 ax1.tick_params(labelbottom=False)
 ax1.set_xscale("log")
