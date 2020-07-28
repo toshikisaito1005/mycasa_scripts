@@ -118,7 +118,7 @@ ax2.plot(n4321_xaxis_co21, n4321_std_r21scatter, "-", color=cm.brg(2/2.5), alpha
 ax2.plot(n0628_xaxis_co21, n0628_std_r21scatter_cut, "--", color=cm.brg(0/2.5), alpha=0.5, lw=4)
 ax2.plot(n3627_xaxis_co21, n3627_std_r21scatter_cut, "--", color=cm.brg(1/2.5), alpha=0.5, lw=4)
 ax2.plot(n4321_xaxis_co21, n4321_std_r21scatter_cut, "--", color=cm.brg(2/2.5), alpha=0.5, lw=4)
-ax2.set_xlim(xlim_co21)
+ax2.set_xlim([-0.2,2.0])
 ax2.set_ylim([0,0.25])
 #
 plt.savefig(dir_proj + "eps/model_scatter.png",dpi=200)
