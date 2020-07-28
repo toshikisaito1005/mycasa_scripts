@@ -25,6 +25,7 @@ def getdata(listgal):
 	list_m0 = []
 	list_ew = []
 	for i in range(len(listgal)):
+		print(str(i) + "/" + str(len(listgal)))
 		this_galaxy = listgal[i]
 		this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
 		list_m0.extend(this_data[:,0])
@@ -43,12 +44,13 @@ def getdata(listgal):
 ### Main Procedure
 #####################
 ### get data
-lirg_m0, lirg_ew = getdata(galaxy)
-phangs_m0, phangs_ew = getdata(phangs)
-
-
+print("# get lirg data")
+#lirg_m0, lirg_ew = getdata(galaxy)
+print("# get phangs data")
+#phangs_m0, phangs_ew = getdata(phangs)
 
 ### plot
+print("# plot")
 figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=9, ncols=9)
 ax1 = plt.subplot(gs[0:8,0:8])
@@ -59,9 +61,10 @@ plt.rcParams["legend.fontsize"] = 16
 plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95) 
 # plot
 ax1.scatter(lirg_m0*0.8, lirg_ew, c="pink", s=40, alpha=0.4, linewidths=0)
+ax1.scatter(phangs_m0*4.3, phangs_ew, c="skyblue", s=40, alpha=0.4, linewidths=0)
 # ax1
-ax1.set_xlim([10**0,10**4.5])
-ax1.set_ylim([10**0,10**2.4])
+ax1.set_xlim([10**-1,10**4.5])
+ax1.set_ylim([10**-0.8,10**2.4])
 ax1.grid()
 ax1.set_xscale("log")
 ax1.set_yscale("log")
