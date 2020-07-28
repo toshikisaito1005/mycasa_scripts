@@ -3,6 +3,7 @@ import re
 import sys
 import glob
 import scipy
+import math
 import numpy as np
 
 
@@ -30,14 +31,17 @@ for i in range(len(galaxy)):
 	this_mom0 = glob.glob(dir_proj + this_galaxy + "*_mom0.fits")[0]
 	# imsmooth
 	outfile = dir_smooth + this_mom0.replace(".fits","_smooth.image")
+	os.system("rm -rf " + outfile + "_tmp")
 	imsmooth(imagename = this_mom0,
 		targetres = True,
 		major = beam,
 		minor = beam,
 		pa = "0deg",
 		outfile = outfile + "_tmp")
-	#
-	
+	# imrebin
+	beamsize = float(beam.replace("arcsec",""))
+	pixelsize = abs(imhead(outfile+"_tmp",mode="list")["cdelt1"]) * 3600*180/np.pi
+	factor = math.floor(beamsize/pixelsize/4.0)
 
 
 os.system("rm -rf *.last")
