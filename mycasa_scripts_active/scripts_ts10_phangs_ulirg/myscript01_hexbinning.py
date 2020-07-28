@@ -20,7 +20,6 @@ phangs = [s.split("/")[-1].split("_12m")[0] for s in glob.glob(dir_proj + "../da
 #####################
 ### Main Procedure
 #####################
-"""
 for i in range(len(galaxy)):
 	this_galaxy = galaxy[i]
 	print("# working on " + this_galaxy)
@@ -52,8 +51,8 @@ for i in range(len(galaxy)):
 	plt.savefig(dir_eps+"hex_"+this_galaxy+".png",dpi=200)
 	# output
 	np.savetxt(dir_eps+"scatter_"+this_galaxy+".txt",np.c_[hex_m0,hex_ew])
-"""
 
+"""
 for i in range(len(phangs)):
 	this_galaxy = phangs[i]
 	print("# working on " + this_galaxy)
@@ -86,5 +85,6 @@ for i in range(len(phangs)):
 	hex_ew = hex_ew.get_array()
 	# output
 	np.savetxt(dir_eps+"scatter_"+this_galaxy+".txt",np.c_[hex_m0,hex_ew])
+"""
 
 os.system("rm -rf *.last")

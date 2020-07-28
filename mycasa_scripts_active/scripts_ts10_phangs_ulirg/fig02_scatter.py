@@ -14,23 +14,24 @@ plt.ioff()
 ### Parameter
 #####################
 dir_eps = "/Users/saito/data/myproj_active/proj_ts10_phangs_ulirgs/eps/"
-galaxy = ['eso267', 'eso297g011', 'eso297g012', 'eso319', 'eso507', 'eso557', 'ic4518e', 'ic4518w', 'ic5179', 'iras06592', 'irasf10409', 'irasf17138', 'mcg02', 'ngc1614', 'ngc2369', 'ngc3110', 'ngc3256', 'ngc5257', 'ngc6240']
+galaxy = [s.split("/")[-1].split("_12m")[0] for s in glob.glob(dir_proj + "*mom0*")]
+phangs = [s.split("/")[-1].split("_12m")[0] for s in glob.glob(dir_proj + "../data_phangs/*mom0*")]
 
 
 #####################
 ### Main Procedure
 #####################
 ### get data
-this_m0 = []
-this_ew = []
+lirg_m0 = []
+lirg_ew = []
 for i in range(len(galaxy)):
 	this_galaxy = galaxy[i]
 	this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
 	this_m0.extend(this_data[:,0])
 	this_ew.extend(this_data[:,1])
 
-this_m0 = np.array(this_m0)
-this_ew = np.array(this_ew)
+lirg_m0 = np.array(this_m0)
+lirg_ew = np.array(this_ew)
 
 ### plot
 figure = plt.figure(figsize=(10,10))
@@ -42,7 +43,7 @@ plt.rcParams["font.size"] = 18
 plt.rcParams["legend.fontsize"] = 16
 plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95) 
 # plot
-ax1.scatter(this_m0*0.8, this_ew, c="pink", s=40, linewidths=0)
+ax1.scatter(lirg_m0*0.8, lirg_ew, c="pink", s=40, linewidths=0)
 # ax1
 ax1.set_xlim([10**0,10**4.5])
 ax1.set_ylim([10**0,10**2.4])

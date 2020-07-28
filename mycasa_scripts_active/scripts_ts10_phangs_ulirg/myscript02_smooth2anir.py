@@ -12,7 +12,8 @@ import numpy as np
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts10_phangs_ulirgs/data/"
 dir_eps = "/Users/saito/data/myproj_active/proj_ts10_phangs_ulirgs/eps/"
-galaxy = ['eso557', 'ic4518e', 'ic4518w', 'ic5179', 'iras06592', 'ngc1614', 'ngc5257']
+galaxy = ['eso557', 'ic4518e', 'ic4518w', 'ic5179',
+          'iras06592', 'ngc1614', 'ngc5257']
 beam = "0.8arcsec"
 
 #####################
