@@ -16,56 +16,70 @@ bins = 25
 
 
 #####################
+### def
+#####################
+def extract_scatter(model_scatter, model_scatter_cut):
+	###
+	data_scatter_ngc0628 = np.loadtxt(model_scatter)
+	co10_scatter = data_scatter_ngc0628[:,0]
+	co21_scatter = data_scatter_ngc0628[:,1]
+	r21_scatter = np.log10(10**co21_scatter/10**co10_scatter)
+	#
+	data_scatter_cut_ngc0628 = np.loadtxt(model_scatter_cut)
+	co10_scatter_cut = data_scatter_cut_ngc0628[:,0]
+	co21_scatter_cut = data_scatter_cut_ngc0628[:,1]
+	r21_scatter_cut = np.log10(10**co21_scatter_cut/10**co10_scatter_cut)
+
+	###
+	xwdith_co10 = co10_scatter.max() - co10_scatter_cut.min()
+	xlim_co10 = [co10_scatter_cut.min(), co10_scatter_cut.max()]
+	xwdith_co21 = co21_scatter.max() - co21_scatter_cut.min()
+	xlim_co21 = [co21_scatter_cut.min(), co21_scatter_cut.max()]
+
+	###
+	n_scatter, _ = np.histogram(co10_scatter, bins=bins, range=xlim_co10)
+	sy_scatter, _ = np.histogram(co10_scatter, bins=bins, weights=co21_scatter, range=xlim_co10)
+	sy2_scatter, _ = np.histogram(co10_scatter, bins=bins, weights=co21_scatter*co21_scatter, range=xlim_co10)
+	#
+	n_scatter_cut, _ = np.histogram(co10_scatter_cut, bins=bins, range=xlim_co10)
+	sy_scatter_cut, _ = np.histogram(co10_scatter_cut, bins=bins, weights=co21_scatter_cut, range=xlim_co10)
+	sy2_scatter_cut, _ = np.histogram(co10_scatter_cut, bins=bins, weights=co21_scatter_cut*co21_scatter_cut, range=xlim_co10)
+	xaxis_co10 = (_[1:] + _[:-1])/2
+	#
+	n_r21scatter, _ = np.histogram(co21_scatter, bins=bins, range=xlim_co21)
+	sy_r21scatter, _ = np.histogram(co21_scatter, bins=bins, weights=r21_scatter, range=xlim_co21)
+	sy2_r21scatter, _ = np.histogram(co21_scatter, bins=bins, weights=r21_scatter*r21_scatter, range=xlim_co21)
+	#
+	n_r21scatter_cut, _ = np.histogram(co21_scatter_cut, bins=bins, range=xlim_co21)
+	sy_r21scatter_cut, _ = np.histogram(co21_scatter_cut, bins=bins, weights=r21_scatter_cut, range=xlim_co21)
+	sy2_r21scatter_cut, _ = np.histogram(co21_scatter_cut, bins=bins, weights=r21_scatter_cut*r21_scatter_cut, range=xlim_co21)
+	xaxis_co21 = (_[1:] + _[:-1])/2
+
+	###
+	mean_scatter = sy_scatter / n_scatter
+	std_scatter = np.sqrt(sy2_scatter/n_scatter - mean_scatter*mean_scatter)
+	#
+	mean_scatter_cut = sy_scatter_cut / n_scatter_cut
+	std_scatter_cut = np.sqrt(sy2_scatter_cut/n_scatter_cut - mean_scatter_cut*mean_scatter_cut)
+	#
+	mean_r21scatter = sy_r21scatter / n_r21scatter
+	std_r21scatter = np.sqrt(sy2_r21scatter/n_r21scatter - mean_r21scatter*mean_r21scatter)
+	#
+	mean_r21scatter_cut = sy_r21scatter_cut / n_r21scatter_cut
+	std_r21scatter_cut = np.sqrt(sy2_r21scatter_cut/n_r21scatter_cut - mean_r21scatter_cut*mean_r21scatter_cut)
+
+	return xaxis_co10, xaxis_co21, std_scatter, std_scatter_cut, std_r21scatter, std_r21scatter_cut
+
+
+#####################
 ### main
 #####################
 ###
-data_scatter_ngc0628 = np.loadtxt(dir_proj + "eps/ngc0628_model_scatter.txt")
-co10_scatter = data_scatter_ngc0628[:,0]
-co21_scatter = data_scatter_ngc0628[:,1]
-r21_scatter = np.log10(10**co21_scatter/10**co10_scatter)
-#
-data_scatter_cut_ngc0628 = np.loadtxt(dir_proj + "eps/ngc0628_model_scatter_cut.txt")
-co10_scatter_cut = data_scatter_cut_ngc0628[:,0]
-co21_scatter_cut = data_scatter_cut_ngc0628[:,1]
-r21_scatter_cut = np.log10(10**co21_scatter_cut/10**co10_scatter_cut)
+n0628_xaxis_co10, n0628_xaxis_co21, n0628_std_scatter, n0628_std_scatter_cut, n0628_std_r21scatter, n0628_std_r21scatter_cut = \
+	extract_scatter(dir_proj + "eps/ngc0628_model_scatter.txt", dir_proj + "eps/ngc0628_model_scatter_cut.txt")
 
-###
-xwdith_co10 = co10_scatter.max() - co10_scatter_cut.min()
-xlim_co10 = [co10_scatter_cut.min(), co10_scatter_cut.max()]
-xwdith_co21 = co21_scatter.max() - co21_scatter_cut.min()
-xlim_co21 = [co21_scatter_cut.min(), co21_scatter_cut.max()]
-
-###
-n_scatter, _ = np.histogram(co10_scatter, bins=bins, range=xlim_co10)
-sy_scatter, _ = np.histogram(co10_scatter, bins=bins, weights=co21_scatter, range=xlim_co10)
-sy2_scatter, _ = np.histogram(co10_scatter, bins=bins, weights=co21_scatter*co21_scatter, range=xlim_co10)
-#
-n_scatter_cut, _ = np.histogram(co10_scatter_cut, bins=bins, range=xlim_co10)
-sy_scatter_cut, _ = np.histogram(co10_scatter_cut, bins=bins, weights=co21_scatter_cut, range=xlim_co10)
-sy2_scatter_cut, _ = np.histogram(co10_scatter_cut, bins=bins, weights=co21_scatter_cut*co21_scatter_cut, range=xlim_co10)
-xaxis_co10 = (_[1:] + _[:-1])/2
-#
-n_r21scatter, _ = np.histogram(co21_scatter, bins=bins, range=xlim_co21)
-sy_r21scatter, _ = np.histogram(co21_scatter, bins=bins, weights=r21_scatter, range=xlim_co21)
-sy2_r21scatter, _ = np.histogram(co21_scatter, bins=bins, weights=r21_scatter*r21_scatter, range=xlim_co21)
-#
-n_r21scatter_cut, _ = np.histogram(co21_scatter_cut, bins=bins, range=xlim_co21)
-sy_r21scatter_cut, _ = np.histogram(co21_scatter_cut, bins=bins, weights=r21_scatter_cut, range=xlim_co21)
-sy2_r21scatter_cut, _ = np.histogram(co21_scatter_cut, bins=bins, weights=r21_scatter_cut*r21_scatter_cut, range=xlim_co21)
-xaxis_co21 = (_[1:] + _[:-1])/2
-
-###
-mean_scatter = sy_scatter / n_scatter
-std_scatter = np.sqrt(sy2_scatter/n_scatter - mean_scatter*mean_scatter)
-#
-mean_scatter_cut = sy_scatter_cut / n_scatter_cut
-std_scatter_cut = np.sqrt(sy2_scatter_cut/n_scatter_cut - mean_scatter_cut*mean_scatter_cut)
-#
-mean_r21scatter = sy_r21scatter / n_r21scatter
-std_r21scatter = np.sqrt(sy2_r21scatter/n_r21scatter - mean_r21scatter*mean_r21scatter)
-#
-mean_r21scatter_cut = sy_r21scatter_cut / n_r21scatter_cut
-std_r21scatter_cut = np.sqrt(sy2_r21scatter_cut/n_r21scatter_cut - mean_r21scatter_cut*mean_r21scatter_cut)
+n0628_xaxis_co10, n0628_xaxis_co21, n0628_std_scatter, n0628_std_scatter_cut, n0628_std_r21scatter, n0628_std_r21scatter_cut = \
+	extract_scatter(dir_proj + "eps/ngc0628_model_scatter.txt", dir_proj + "eps/ngc0628_model_scatter_cut.txt")
 
 #
 plt.figure(figsize=(10,8))
