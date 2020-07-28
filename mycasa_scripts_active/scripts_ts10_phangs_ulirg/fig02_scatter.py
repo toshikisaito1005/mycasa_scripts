@@ -56,6 +56,7 @@ gs = gridspec.GridSpec(nrows=9, ncols=9)
 ax1 = plt.subplot(gs[0:7,0:7])
 ax2 = plt.subplot(gs[0:7,7:9])
 ax3 = plt.subplot(gs[7:9,0:7])
+ax2b = ax2.twinx()
 plt.rcParams["font.size"] = 20
 plt.rcParams["legend.fontsize"] = 18
 plt.subplots_adjust(bottom=0.15, left=0.20, right=0.90, top=0.85) 
@@ -72,8 +73,14 @@ ax1.set_yscale("log")
 ax1.set_ylabel(r"$\sigma_{\mathsf{mol,150pc}}$ (km s$^{-1}$)")
 # ax2
 ax2.tick_params(labelbottom=False,labelleft=False)
+ax2.spines["top"].set_visible(False)
+ax2.spines["bottom"].set_visible(False)
+ax2.tick_params(top=False,bottom=False)
 # ax3
 ax3.tick_params(labelleft=False)
+ax3.spines["left"].set_visible(False)
+ax3.spines["right"].set_visible(False)
+ax3.tick_params(left=False,right=False)
 ax3.set_xlabel(r"$\Sigma_{\mathsf{mol,150pc}}$ ($M_{\odot}$ pc$^{-2}$)")
 #
 plt.legend(ncol=4, loc="upper left")
