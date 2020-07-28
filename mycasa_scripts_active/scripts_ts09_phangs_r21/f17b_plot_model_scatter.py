@@ -68,7 +68,7 @@ mean_r21scatter_cut = sy_r21scatter_cut / n_r21scatter_cut
 std_r21scatter_cut = np.sqrt(sy2_r21scatter_cut/n_r21scatter_cut - mean_r21scatter_cut*mean_r21scatter_cut)
 
 #
-plt.figure(figsize=(10,10))
+plt.figure(figsize=(10,8))
 plt.rcParams["font.size"] = 16
 plt.rcParams["legend.fontsize"] = 14
 plt.subplots_adjust(bottom=0.05, left=0.10, right=0.98, top=0.95)
