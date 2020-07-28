@@ -18,7 +18,7 @@ beam = "0.8arcsec"
 #####################
 ### Main Procedure
 #####################
-dir_smooth = dir_proj + "../data_0p8"
+dir_smooth = dir_proj + "../data_0p8/"
 done = glob.glob(dir_smooth)
 if not done:
 	os.mkdir(dir_smooth)
@@ -29,8 +29,8 @@ for i in range(len(galaxy)):
 	this_galaxy = galaxy[i]
 	print("# working on " + this_galaxy)
 	this_mom0 = glob.glob(dir_proj + this_galaxy + "*_mom0.fits")[0]
-	# imsmooth
-	outfile = dir_smooth + this_mom0.replace(".fits","_smooth.image")
+	### imsmooth
+	outfile = dir_smooth + this_mom0.split("/")[-1].replace(".fits","_smooth.image")
 	os.system("rm -rf " + outfile + "_tmp")
 	imsmooth(imagename = this_mom0,
 		targetres = True,
@@ -38,10 +38,16 @@ for i in range(len(galaxy)):
 		minor = beam,
 		pa = "0deg",
 		outfile = outfile + "_tmp")
-	# imrebin
+	### imrebin
 	beamsize = float(beam.replace("arcsec",""))
 	pixelsize = abs(imhead(outfile+"_tmp",mode="list")["cdelt1"]) * 3600*180/np.pi
 	factor = math.floor(beamsize/pixelsize/4.0)
+	#
+	os.system("rm -rf " + outfile)
+	imrebin(imagename = outfile + "_tmp",
+		outfile = outfile,
+		factor = [factor, factor])
+	os.system("rm -rf " + outfile + "_tmp")
 
 
 os.system("rm -rf *.last")
