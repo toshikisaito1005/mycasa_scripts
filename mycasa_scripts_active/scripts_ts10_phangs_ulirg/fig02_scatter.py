@@ -6,6 +6,7 @@ import scipy
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
+import matplotlib.gridspec as gridspec
 import matplotlib.patches as mpatches
 plt.ioff()
 
@@ -19,27 +20,29 @@ galaxy = ['eso267', 'eso297g011', 'eso297g012', 'eso319', 'eso507', 'eso557', 'i
 #####################
 ### Main Procedure
 #####################
-fig, ax = plt.subplots(1, 1)
-plt.rcParams["font.size"] = 14
-plt.rcParams["legend.fontsize"] = 10
+figure = plt.figure(figsize=(10,10))
+gs = gridspec.GridSpec(nrows=9, ncols=9)
+ax1 = plt.subplot(gs[0:8,0:8])
+ax2 = plt.subplot(gs[0:8,8:9])
+ax3 = plt.subplot(gs[8:9,0:8])
+plt.rcParams["font.size"] = 18
+plt.rcParams["legend.fontsize"] = 16
 plt.subplots_adjust(bottom=0.10, left=0.15, right=0.95, top=0.95) 
-ax.set_xlim([10**0,10**4.5])
-ax.set_ylim([10**0,10**3.2])
+ax1.set_xlim([10**0,10**4.5])
+ax1.set_ylim([10**0,10**3.2])
 for i in range(len(galaxy)):
 	this_galaxy = galaxy[i]
 	this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
 	this_m0 = this_data[:,0]
 	this_ew = this_data[:,1]
-	#c = cm.jet(i/float(len(galaxy)))
-	#ax.scatter(this_m0*0.8, this_ew, c=c, linewidths=0, alpha=0.4, label=this_galaxy)
-	ax.scatter(this_m0*0.8, this_ew, c="pink", linewidths=0)
+	ax1.scatter(this_m0*0.8, this_ew, c="pink", linewidths=0)
 	#
 plt.legend(ncol=4, loc="upper left")
 plt.grid()
-plt.xscale("log")
-plt.yscale("log")
-plt.xlabel(r"$\Sigma_{\mathsf{mol,150pc}}$ ($M_{\odot}$ pc$^{-2}$)")
-plt.ylabel(r"$\sigma_{\mathsf{mol,150pc}}$ (km s$^{-1}$)")
+ax1.set_xscale("log")
+ax1.set_yscale("log")
+ax1.set_xlabel(r"$\Sigma_{\mathsf{mol,150pc}}$ ($M_{\odot}$ pc$^{-2}$)")
+ax1.set_ylabel(r"$\sigma_{\mathsf{mol,150pc}}$ (km s$^{-1}$)")
 plt.savefig(dir_eps+"plot_scatter_all.png",dpi=200)
 
 os.system("rm -rf *.last")
