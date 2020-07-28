@@ -424,13 +424,9 @@ list_median_wco21_nocut = []
 list_width_wco21_nocut = []
 for i in range(len(list_log_r21_mom0_k_model_scatter_noise_nocut)):
 	list_median_wco10_nocut.append(weighted_percentile(10**list_log_r21_mom0_k_model_scatter_noise_nocut[i], 0.50, 10**np.array(list_log_co10_mom0_k_model_scatter_noise[i])))
-	list_p16_wco10_nocut.append(weighted_percentile(10**list_log_r21_mom0_k_model_scatter_noise_nocut[i], 0.16, 10**np.array(list_log_co10_mom0_k_model_scatter_noise[i])))
-	list_p84_wco10_nocut.append(weighted_percentile(10**list_log_r21_mom0_k_model_scatter_noise_nocut[i], 0.84, 10**np.array(list_log_co10_mom0_k_model_scatter_noise[i])))
+	list_width_wco10_nocut.append(weighted_percentile(10**list_log_r21_mom0_k_model_scatter_noise_nocut[i], 0.16, 10**np.array(list_log_co10_mom0_k_model_scatter_noise[i])) - weighted_percentile(10**list_log_r21_mom0_k_model_scatter_noise_nocut[i], 0.84, 10**np.array(list_log_co10_mom0_k_model_scatter_noise[i])))
 	list_median_wco21_nocut.append(weighted_percentile(10**list_log_r21_mom0_k_model_scatter_noise_nocut[i], 0.50, 10**np.array(list_log_co21_mom0_k_model_scatter_noise[i])))
-	list_p16_wco21_nocut.append(weighted_percentile(10**list_log_r21_mom0_k_model_scatter_noise_nocut[i], 0.16, 10**np.array(list_log_co21_mom0_k_model_scatter_noise[i])))
-	list_p84_wco21_nocut.append(weighted_percentile(10**list_log_r21_mom0_k_model_scatter_noise_nocut[i], 0.84, 10**np.array(list_log_co21_mom0_k_model_scatter_noise[i])))
-
-
+	list_width_wco21_nocut.append(weighted_percentile(10**list_log_r21_mom0_k_model_scatter_noise_nocut[i], 0.16, 10**np.array(list_log_co21_mom0_k_model_scatter_noise[i])) - weighted_percentile(10**list_log_r21_mom0_k_model_scatter_noise_nocut[i], 0.84, 10**np.array(list_log_co21_mom0_k_model_scatter_noise[i])))
 
 
 #
