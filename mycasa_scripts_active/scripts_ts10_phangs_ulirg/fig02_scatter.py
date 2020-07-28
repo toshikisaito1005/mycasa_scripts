@@ -27,6 +27,14 @@ ylim = [10**-0.1,10**2.7]
 #####################
 ### def
 #####################
+def density_estimation(m1, m2,xlim,ylim):
+    X, Y = np.mgrid[xlim[0]:xlim[1]:100j, ylim[0]:ylim[1]:100j]                                                     
+    positions = np.vstack([X.ravel(), Y.ravel()])                                                       
+    values = np.vstack([m1, m2])                                                                        
+    kernel = scipy.stats.gaussian_kde(values)                                                                 
+    Z = np.reshape(kernel(positions).T, X.shape)
+    return X, Y, Z
+
 def getdata(listgal):
 	list_m0 = []
 	list_ew = []
@@ -72,8 +80,8 @@ ax1.scatter(lirg_m0*0.8, lirg_ew, c="indianred", s=40, linewidths=0)
 ax1.text(10**-0.8, 10**2.52, title_phangs, color="darkturquoise")
 ax1.text(10**-0.8, 10**2.34, title_ulirg, color="indianred")
 # plot ax1 contour
-# X, Y = np.meshgrid(phangs_m0*4.3, phangs_ew)
-
+# X, Y, Z = density_estimation(phangs_m0*4.3, phangs_ew, xlim, ylim)
+ax.imshow(np.rot90(Z), cmap=plt.gnuplot,extent=[xmin, xmax, ymin, ymax])
 # set ax1 scatter
 ax1.set_xlim(xlim)
 ax1.set_ylim(ylim)
