@@ -68,13 +68,13 @@ mean_r21scatter_cut = sy_r21scatter_cut / n_r21scatter_cut
 std_r21scatter_cut = np.sqrt(sy2_r21scatter_cut/n_r21scatter_cut - mean_r21scatter_cut*mean_r21scatter_cut)
 
 #
-plt.figure(figsize=(12,4))
-plt.rcParams["font.size"] = 14
-plt.rcParams["legend.fontsize"] = 11
-plt.subplots_adjust(bottom=0.15, left=0.07, right=0.98, top=0.95)
-gs = gridspec.GridSpec(nrows=5, ncols=15)
-ax1 = plt.subplot(gs[0:5,0:7])
-ax2 = plt.subplot(gs[0:5,8:15])
+plt.figure(figsize=(10,10))
+plt.rcParams["font.size"] = 16
+plt.rcParams["legend.fontsize"] = 14
+plt.subplots_adjust(bottom=0.05, left=0.10, right=0.98, top=0.95)
+gs = gridspec.GridSpec(nrows=20, ncols=20)
+ax1 = plt.subplot(gs[0:8,0:20])
+ax2 = plt.subplot(gs[10:18,0:20])
 ax1.grid(axis='both')
 ax2.grid(axis='both')
 ax1.set_xlabel("log $I_{CO(1-0)}$ (K km s$^{-1}$)")
