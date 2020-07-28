@@ -19,10 +19,8 @@ galaxy = [s.split("/")[-1].split("_12m")[0] for s in glob.glob(dir_proj + "*mom0
 phangs = [s.split("/")[-1].split("_12m")[0] for s in glob.glob(dir_proj + "../data_phangs/*mom0*")]
 title_ulirg = str(len(galaxy)) + r" nearby (U)LIRGs ($\alpha_{\mathsf{CO}}$ = 0.8)"
 title_phangs = str(len(phangs)) + r" nearby MS galaxies ($\alpha_{\mathsf{CO}}$ = 4.3)"
-bins_contour = 40
 xlim = [10**-1,10**4.5]
 ylim = [10**-0.1,10**2.7]
-levels = [10,45,90]
 
 
 #####################
@@ -73,9 +71,8 @@ ax1.scatter(lirg_m0*0.8, lirg_ew, c="indianred", s=40, linewidths=0)
 ax1.text(10**-0.8, 10**2.52, title_phangs, color="darkturquoise")
 ax1.text(10**-0.8, 10**2.34, title_ulirg, color="indianred")
 # plot ax1 contour
-H, xedges, yedges = np.histogram2d(phangs_ew,phangs_m0*4.3,bins=bins_contour,range=(ylim,xlim))
-extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
-ax1.contour(H/H.max()*100,levels=levels,extent=extent,colors=["blue"],zorder=1e11,linewidths=2,alpha=1.0)
+X, Y = np.meshgrid(phangs_m0*4.3, phangs_ew)
+
 # set ax1 scatter
 ax1.set_xlim(xlim)
 ax1.set_ylim(ylim)
