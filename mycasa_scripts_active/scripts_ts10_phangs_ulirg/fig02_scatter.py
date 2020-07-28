@@ -60,8 +60,8 @@ plt.rcParams["font.size"] = 20
 plt.rcParams["legend.fontsize"] = 18
 plt.subplots_adjust(bottom=0.15, left=0.20, right=0.90, top=0.85) 
 # plot
-ax1.scatter(phangs_m0*4.3, phangs_ew, c="lightgrey", s=40, linewidths=0)
-ax1.scatter(lirg_m0*0.8, lirg_ew, c="orangered", s=40, linewidths=0)
+ax1.scatter(phangs_m0*4.3, phangs_ew, c="darkturquoise", s=40, linewidths=0)
+ax1.scatter(lirg_m0*0.8, lirg_ew, c="indianred", s=40, linewidths=0)
 # ax1
 ax1.set_xlim([10**-1,10**4.5])
 ax1.set_ylim([10**-0.1,10**2.4])
