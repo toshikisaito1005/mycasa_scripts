@@ -29,6 +29,10 @@ for i in range(len(galaxy)):
 	this_m0.extend(this_data[:,0])
 	this_ew.extend(this_data[:,1])
 
+this_m0 = np.array(this_m0)
+this_ew = np.array(this_ew)
+
+### plot
 figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=9, ncols=9)
 ax1 = plt.subplot(gs[0:8,0:8])
