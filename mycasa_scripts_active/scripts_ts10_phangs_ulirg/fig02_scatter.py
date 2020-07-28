@@ -27,13 +27,15 @@ def getdata(listgal):
 	for i in range(len(listgal)):
 		this_galaxy = listgal[i]
 		this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
-		this_m0.extend(this_data[:,0])
-		this_ew.extend(this_data[:,1])
-
+		list_m0.extend(this_data[:,0])
+		list_ew.extend(this_data[:,1])
 	#
-	cut_data = np.where((this_m0>0) & (this_ew>0))
-	list_m0 = np.array(this_m0[cut_data])
-	list_ew = np.array(this_ew[cut_data])
+	list_m0 = np.array(list_m0)
+	list_ew = np.array(list_ew)
+	#
+	cut_data = np.where((list_m0>0) & (list_ew>0))
+	list_m0 = list_m0[cut_data]
+	list_ew = list_ew[cut_data]
 
 	return list_m0, list_ew
 
