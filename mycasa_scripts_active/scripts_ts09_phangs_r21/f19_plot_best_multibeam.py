@@ -218,13 +218,13 @@ def add_noise(
 	for i in range(len(xbins_co10)):
 		for j in range(len(xbins_co21)):
 			# create binned data
-			if i<=27: # 37 0628
-				if j<=27: # 37 0628
+			if i<=len(xbins_co10)-2:
+				if j<=len(xbins_co10)-2:
 					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]) & (best_lognorm_co21>=xbins_co21[j]) & (best_lognorm_co21<xbins_co21[j+1]))
 				else:
 					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]) & (best_lognorm_co21>=xbins_co21[j]))
 			else:
-				if j<27: # 37 0628
+				if j<len(xbins_co10)-2:
 					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co21>=xbins_co21[j]) & (best_lognorm_co21<xbins_co21[j+1]))
 				else:
 					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co21>=xbins_co21[j]))
