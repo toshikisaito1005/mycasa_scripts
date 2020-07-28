@@ -21,6 +21,9 @@ galname2 = [s.replace("e","E").replace("w","W").replace("ic","IC") for s in galn
 galname3 = [s.replace("iras","IRAS ").replace("f","F").replace("g","-G") for s in galname2]
 galname4 = [s.replace("319","319-G022").replace("507","507-G070") for s in galname3]
 galname5 = [s.replace("557","557-G002").replace("06592","06592-6313") for s in galname4]
+galname6 = [s.replace("10409","10409-4556").replace("17138","17138-1017") for s in galname5]
+galname = [s.replace("-02","-02-33-098").replace("267","267-G030") for s in galname6]
+
 
 
 #####################
@@ -81,7 +84,7 @@ for i in range(len(galaxy)):
 fig, ax = plt.subplots(1, 1)
 plt.rcParams["font.size"] = 14
 plt.rcParams["legend.fontsize"] = 10
-plt.subplots_adjust(bottom=0.25, left=0.10, right=0.95, top=0.95)
+plt.subplots_adjust(bottom=0.35, left=0.10, right=0.95, top=0.95)
 #
 ax.set_xlim([0,len(galaxy)+1])
 #ax.set_ylim([0,3.2])
