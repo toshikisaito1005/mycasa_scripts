@@ -116,16 +116,14 @@ plt.subplots_adjust(bottom=0.05, left=0.07, right=0.99, top=0.95)
 #
 ax.set_xlim([-1,len(galaxy)+1])
 ax.set_ylim(ylim)
-ax.scatter(np.array(range(len(galaxy)))+1, list_wp50, s=100, c="indianred")
+ax.scatter(np.array(range(len(galaxy)))+1, list_wp50, s=40, c="white", lw=1, edgecolors="indianred", zorder=1e9)
 for i in range(len(galaxy)):
-    ax.plot([i+1, i+1], [list_wp16[i], list_wp84[i]], lw=4, c="indianred")
+    ax.plot([i+1, i+1], [list_wp16[i], list_wp84[i]], lw=1, c="indianred")
     ax.text(i+1-0.2, list_wp50[i], galname[i], rotation=90, horizontalalignment="right", fontsize=8, color="indianred")
     #
-ax.scatter(0, phangs_wp50, s=100, c="white", lw=1)
-ax.plot([0, 0], [phangs_wp16, phangs_wp84], lw=1, markeredgecolor="skyblue")
+ax.scatter(0, phangs_wp50, s=40, c="white", lw=1, edgecolors="skyblue", zorder=1e9)
+ax.plot([0, 0], [phangs_wp16, phangs_wp84], lw=1, c="skyblue")
 ax.text(-0.2, list_wp50[i], "PHANGS MS galaxies", rotation=90, horizontalalignment="right", fontsize=8, color="skyblue")
-#
-ax.plot([0,len(galaxy)+1], [np.median(list_wp50), np.median(list_wp50)], "--", c="indianred")
 #
 plt.legend(ncol=4, loc="upper left")
 plt.tick_params(labelbottom=False)
