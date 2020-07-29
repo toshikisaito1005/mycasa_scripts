@@ -44,8 +44,7 @@ scales = [365,345,345,325,425,425,325,325,225,445,425,345,305,305,205,325,185,44
 #####################
 ### Main Procedure
 #####################
-#for i in range(len(galaxy)):
-for i in [0]:
+for i in range(len(galaxy)):
 	this_galaxy = galaxy[i]
 	print("# working on " + this_galaxy)
 	this_center = centers[i][0]
@@ -69,18 +68,27 @@ for i in [0]:
 	this_data = imval(this_mom0, box=box)
 	x = this_data["coords"][:,:,0].flatten() * 180/np.pi - ra_center
 	y = this_data["coords"][:,:,1].flatten() * 180/np.pi - dec_center
-	r = np.sqrt(x**2 + y**2) * this_scale/1000 # radius in kpc units
+	z_r = np.sqrt(x**2 + y**2) * 3600 * this_scale / 1000 # radius in kpc units
 	z_m0 = this_data["data"].flatten()
+	z_m0[np.isnan(z_m0)] = 0
 	# imval ew
 	this_data = imval(this_ew, box=box)
 	z_ew = this_data["data"].flatten()
+	z_ew[np.isnan(z_ew)] = 0
+	# cut data
+	cut_data = np.where((z_m0>0) & (z_ew>0))
+	x = x[cut_data]
+	y = y[cut_data]
+	z_r = z_r[cut_data]
+	z_m0 = z_m0[cut_data]
+	z_ew = z_ew[cut_data]
 	# hexbin
 	fig, ax = plt.subplots(1, 1)
 	hex_m0 = ax.hexbin(x, y, C=z_m0, gridsize=gridsize)
 	hex_m0 = hex_m0.get_array()
 	hex_ew = ax.hexbin(x, y, C=z_ew, gridsize=gridsize)
 	hex_ew = hex_ew.get_array()
-	hex_r = ax.hexbin(x, y, C=r, gridsize=gridsize)
+	hex_r = ax.hexbin(x, y, C=z_r, gridsize=gridsize)
 	hex_r = hex_r.get_array()
 	#plt.savefig(dir_eps+"hex_"+this_galaxy+".png",dpi=200)
 	# output
