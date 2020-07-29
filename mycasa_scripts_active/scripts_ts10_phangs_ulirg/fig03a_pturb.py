@@ -170,7 +170,7 @@ gs = gridspec.GridSpec(nrows=9, ncols=9)
 ax = plt.subplot(gs[0:9,0:9])
 plt.rcParams["font.size"] = 10
 plt.rcParams["legend.fontsize"] = 10
-plt.subplots_adjust(bottom=0.05, left=0.05, right=0.99, top=0.95)
+plt.subplots_adjust(bottom=0.05, left=0.06, right=0.99, top=0.95)
 # plot individual
 ax.scatter(np.array(range(len(galaxy)))+1, list_wp50, s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9)
 ax.scatter(np.array(range(len(galaxy)))+1, list_wp50_center, s=40, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9)
