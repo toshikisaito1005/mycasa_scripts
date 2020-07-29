@@ -159,7 +159,7 @@ for i in range(len(phangs)):
     phangs_m0.extend(this_m0)
     phangs_ew.extend(this_ew)
     #
-phangs_pturb = calc_virial(np.array(lirg_m0), np.array(lirg_ew))
+phangs_pturb = calc_virial(np.array(phangs_m0), np.array(phangs_ew))
 phangs_wp50 = weighted_percentile(phangs_pturb,0.50,phangs_m0)
 phangs_wp16 = weighted_percentile(phangs_pturb,0.16,phangs_m0)
 phangs_wp84 = weighted_percentile(phangs_pturb,0.84,phangs_m0)
