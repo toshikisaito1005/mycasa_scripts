@@ -22,7 +22,7 @@ title_inner = "central 1kpc of (U)LIRGs " # ($\alpha_{\mathsf{CO}}$ = 0.8)"
 title_outer = "outside of (U)LIRGs " # ($\alpha_{\mathsf{CO}}$ = 0.8)"
 xlim = [-1,4.5]
 ylim = [-0.1,2.7]
-bins = 40
+bins = 60
 central = 0.5 # kpc radius
 
 #####################
@@ -95,14 +95,14 @@ ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.04, ylim[0]+(ylim[1]-ylim[0])*0.93, title_i
 # ax1.contourf(A, B, C, [0.05,0.2,1.0,C.max()], colors=[cm.Reds(3/4.),cm.Reds(3.3/4.),cm.Reds(3.6/4.),cm.Reds(3.9/4.)], linewidths=[1], alpha=0.5)
 # ax1.contour(A, B, C, [0.05,0.2,1.0,C.max()], colors=["red"], linewidths=[0.5], alpha=0.3)
 # plot ax2 right
-histo = np.histogram(inner_m0, bins=bins, range=ylim)
+histo = np.histogram(inner_ew, bins=bins, range=ylim)
 x = np.delete(histo[1],-1)
 y = histo[0]/(histo[0].max()*1.05)
 height = (ylim[1]-ylim[0])/bins
 ax2b.plot(y, x, drawstyle="steps", color="grey", lw=0.5)
 ax2b.barh(x, y, height=height, lw=0, color="indianred", alpha=0.5)
 #
-histo = np.histogram(outer_m0, bins=bins, range=ylim)
+histo = np.histogram(outer_ew, bins=bins, range=ylim)
 x = np.delete(histo[1],-1)
 y = histo[0]/(histo[0].max()*1.05)
 height = (ylim[1]-ylim[0])/bins
@@ -115,6 +115,13 @@ x = histo[0]/(histo[0].max()*1.05)
 width = (xlim[1]-xlim[0])/bins
 ax3.plot(y ,x, drawstyle="steps-mid", color="grey", lw=0.5)
 ax3.bar(y, x, width=width, lw=0, color="indianred", alpha=0.5, align="center")
+#
+histo = np.histogram(outer_m0, bins=bins, range=xlim)
+y = np.delete(histo[1],-1)
+x = histo[0]/(histo[0].max()*1.05)
+width = (xlim[1]-xlim[0])/bins
+ax3.plot(y ,x, drawstyle="steps-mid", color="grey", lw=0.5)
+ax3.bar(y, x, width=width, lw=0, color="grey", alpha=0.5, align="center")
 # set ax1 scatter
 ax1.set_xlim(xlim)
 ax1.set_ylim(ylim)

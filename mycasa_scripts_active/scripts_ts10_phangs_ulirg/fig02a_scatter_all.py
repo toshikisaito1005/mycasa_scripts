@@ -22,7 +22,7 @@ title_ulirg = str(len(galaxy)) + r" nearby (U)LIRGs " # ($\alpha_{\mathsf{CO}}$ 
 title_phangs = str(len(phangs)) + r" nearby MS galaxies " # ($\alpha_{\mathsf{CO}}$ = 4.3)"
 xlim = [-1,4.5]
 ylim = [-0.1,2.7]
-bins = 40
+bins = 60
 
 #####################
 ### def
@@ -91,15 +91,15 @@ histo = np.histogram(phangs_ew, bins=bins, range=ylim)
 x = np.delete(histo[1],-1)
 y = histo[0]/(histo[0].max()*1.05)
 height = (ylim[1]-ylim[0])/bins
-ax2.plot(y, x, drawstyle="steps", color="grey", lw=0.5)
-ax2.barh(x, y, height=height, lw=0, color="skyblue", alpha=0.5)
+ax2b.plot(y, x, drawstyle="steps", color="grey", lw=0.5)
+ax2b.barh(x, y, height=height, lw=0, color="skyblue", alpha=0.5)
 #
 histo = np.histogram(lirg_ew, bins=bins, range=ylim)
 x = np.delete(histo[1],-1)
 y = histo[0]/(histo[0].max()*1.05)
 height = (ylim[1]-ylim[0])/bins
-ax2.plot(y, x, drawstyle="steps", color="grey", lw=0.5)
-ax2.barh(x, y, height=height, lw=0, color="indianred", alpha=0.5)
+ax2b.plot(y, x, drawstyle="steps", color="grey", lw=0.5)
+ax2b.barh(x, y, height=height, lw=0, color="indianred", alpha=0.5)
 # plot ax3 bottom
 histo = np.histogram(phangs_m0, bins=bins, range=xlim)
 y = np.delete(histo[1],-1)

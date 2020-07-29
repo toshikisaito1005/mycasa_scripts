@@ -9,3 +9,5 @@ for var in ${galname1[@]} ${galname2[@]} ${galname3[@]}
 do
 convert -crop 710x560+40+30 $dir_data$var"_m0.png" $dir_data$var"_m0_clip.png"
 done
+
+### figure 2
