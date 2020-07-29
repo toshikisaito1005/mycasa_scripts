@@ -68,20 +68,24 @@ list_wp16 = []
 list_wp50 = []
 list_wp84 = []
 for i in range(len(galaxy)):
-	this_galaxy = galaxy[i]
-	this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
-	this_m0 = this_data[:,0]
-	this_ew = this_data[:,1]
-	this_pturb = this_m0 * this_ew**2
-	#
-	wp50 = weighted_percentile(this_pturb,0.50,this_m0)
-	wp16 = weighted_percentile(this_pturb,0.16,this_m0)
-	wp84 = weighted_percentile(this_pturb,0.84,this_m0)
-	#
-	list_wp16.append(wp16)
-	list_wp50.append(wp50)
-	list_wp84.append(wp84)
-	#
+    this_galaxy = galaxy[i]
+    this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
+    this_m0 = this_data[:,0]
+    this_ew = this_data[:,1]
+    this_pturb = this_m0 * this_ew**2
+    #
+    cut_data = np.where((this_pturb>0) & (this_m0>0))
+    this_m0 = this_m0[cut_data]
+    this_pturb = this_pturb[cut_data]
+    #
+    wp50 = weighted_percentile(this_pturb,0.50,this_m0)
+    wp16 = weighted_percentile(this_pturb,0.16,this_m0)
+    wp84 = weighted_percentile(this_pturb,0.84,this_m0)
+    #
+    list_wp16.append(wp16)
+    list_wp50.append(wp50)
+    list_wp84.append(wp84)
+    #
 phangs_m0 = []
 phangs_ew = []
 for i in range(len(phangs)):
@@ -91,10 +95,14 @@ for i in range(len(phangs)):
     this_ew = this_data[:,1]
     this_pturb = this_m0 * this_ew**2
     #
+    cut_data = np.where((this_pturb>0e) & (this_m0>0))
+    this_m0 = this_m0[cut_data]
+    this_pturb = this_pturb[cut_data]
+    #
     phangs_m0.extend(this_m0)
     phangs_ew.extend(this_ew)
     #
-phangs_pturb = phangs_m0 * phangs_ew**2
+phangs_pturb = np.array(phangs_m0) * np.array(phangs_ew)**2
 phangs_wp50 = weighted_percentile(phangs_pturb,0.50,phangs_m0)
 phangs_wp16 = weighted_percentile(phangs_pturb,0.16,phangs_m0)
 phangs_wp84 = weighted_percentile(phangs_pturb,0.84,phangs_m0)
@@ -109,14 +117,16 @@ plt.subplots_adjust(bottom=0.05, left=0.07, right=0.99, top=0.95)
 #
 ax.set_xlim([-1,len(galaxy)+1])
 ax.set_ylim(ylim)
-ax.scatter(np.array(range(len(galaxy)))+1, list_wp50, s=100, c="black")
+ax.scatter(np.array(range(len(galaxy)))+1, list_wp50, s=100, c="indianred")
 for i in range(len(galaxy)):
-    ax.plot([i+1, i+1], [list_wp16[i], list_wp84[i]], lw=4, c="black")
-    ax.text(i+1-0.2, list_wp50[i], galname[i], rotation=90, horizontalalignment="right", fontsize=8)
+    ax.plot([i+1, i+1], [list_wp16[i], list_wp84[i]], lw=4, c="indianred")
+    ax.text(i+1-0.2, list_wp50[i], galname[i], rotation=90, horizontalalignment="right", fontsize=8, color="indianred")
     #
-ax.plot([i+1, i+1], [phangs_wp16[i], list_wp84[i]], lw=4, c="black")
+ax.scatter(-1, phangs_wp50, s=100, c="skyblue")
+ax.plot([-1, -1], [phangs_wp16, phangs_wp84], lw=4, c="skyblue")
+ax.text(-1.2, list_wp50[i], "PHANGS MS galaxies", rotation=90, horizontalalignment="right", fontsize=8, color="skyblue")
 #
-ax.plot([-1,len(galaxy)+1], [np.median(list_wp50), np.median(list_wp50)], "--", c="red")
+ax.plot([-1,len(galaxy)+1], [np.median(list_wp50), np.median(list_wp50)], "--", c="indianred")
 #
 plt.legend(ncol=4, loc="upper left")
 plt.tick_params(labelbottom=False)
