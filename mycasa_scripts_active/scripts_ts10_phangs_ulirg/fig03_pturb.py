@@ -83,26 +83,26 @@ for i in range(len(galaxy)):
 	#
 
 # figure
-figure = plt.figure(figsize=(10,3))
+figure = plt.figure(figsize=(10,2))
 gs = gridspec.GridSpec(nrows=9, ncols=9)
 ax = plt.subplot(gs[0:9,0:9])
-plt.rcParams["font.size"] = 14
+plt.rcParams["font.size"] = 10
 plt.rcParams["legend.fontsize"] = 10
-plt.subplots_adjust(bottom=0.05, left=0.10, right=0.99, top=0.95)
+plt.subplots_adjust(bottom=0.05, left=0.07, right=0.99, top=0.95)
 #
 ax.set_xlim([0,len(galaxy)+1])
 ax.set_ylim(ylim)
 ax.scatter(np.array(range(len(galaxy)))+1, list_wp50, s=100, c="black")
 for i in range(len(galaxy)):
-	ax.plot([i+1, i+1], [list_wp16[i], list_wp84[i]], lw=4, c="black")
-    ax.text(i+1, list_wp16[i], , horizontalalignment="right")
+    ax.plot([i+1, i+1], [list_wp16[i], list_wp84[i]], lw=4, c="black")
+    ax.text(i+1-0.2, list_wp50[i], galname[i], rotation=90, horizontalalignment="right", fontsize=8)
 
 #
 ax.plot([0,len(galaxy)+1], [np.median(list_wp50), np.median(list_wp50)], "--", c="red")
 #
 plt.legend(ncol=4, loc="upper left")
 plt.tick_params(labelbottom=False)
-plt.grid()
+plt.grid(axis="y")
 plt.yscale("log")
 plt.xticks(np.array(range(len(galaxy)))+1, galname)
 plt.xticks(rotation=90)
