@@ -20,7 +20,7 @@ galaxy = ['eso297g011', 'eso297g012', 'ic4518e', 'ic4518w', 'eso319',
           'eso267', 'eso557', 'irasf10409', 'ngc5257', 'ngc3110', 'irasf17138',
           'eso507', 'ngc3256', 'ngc1614', 'ngc6240']
 phangs = [s.split("/")[-1].split("_12m")[0] for s in glob.glob(dir_eps + "../data_phangs/*mom0*")]
-ylim = [10**0,10**9.5]
+ylim = [0,100]
 
 galname1 = [s.replace("eso","ESO ").replace("ngc","NGC ").replace("mcg","MCG-") for s in galaxy]
 galname2 = [s.replace("e","E").replace("w","W").replace("ic","IC") for s in galname1]
@@ -62,12 +62,12 @@ def weighted_percentile(
 
     return w_median
 
-def calc_pturb(
+def calc_virial(
     density,
     ew,
     dbeam=150, # pc
     ):
-    pturb = 3.3e4 * (density/100.) * (ew/10.)**2 * (dbeam/150.)**-1
+    pturb = 3.1 * (density/100.)**-1 * (ew/10.)**2 * (dbeam/150.)**-1
 
     return pturb
 
@@ -92,7 +92,7 @@ for i in range(len(galaxy)):
     this_m0 = this_data[:,0]
     this_ew = this_data[:,1]
     this_r = this_data[:,2]
-    this_pturb = calc_pturb(this_m0, this_ew)
+    this_pturb = calc_virial(this_m0, this_ew)
     #
     cut_data = np.where((this_pturb>0) & (this_m0>0))
     this_m0 = this_m0[cut_data]
@@ -116,7 +116,7 @@ for i in range(len(galaxy)):
     this_m0 = this_data[:,0]
     this_ew = this_data[:,1]
     this_r = this_data[:,2]
-    this_pturb = calc_pturb(this_m0, this_ew)
+    this_pturb = calc_virial(this_m0, this_ew)
     #
     cut_data = np.where((this_pturb>0) & (this_m0>0) & (this_r<=0.5))
     this_m0 = this_m0[cut_data]
@@ -134,12 +134,12 @@ for i in range(len(galaxy)):
     list_wp50_center.append(wp50)
     list_wp84_center.append(wp84)
     #
-lirg_pturb = calc_pturb(np.array(lirg_m0), np.array(lirg_ew))
+lirg_pturb = calc_virial(np.array(lirg_m0), np.array(lirg_ew))
 lirg_wp50 = weighted_percentile(lirg_pturb,0.50,lirg_m0)
 lirg_wp16 = weighted_percentile(lirg_pturb,0.16,lirg_m0)
 lirg_wp84 = weighted_percentile(lirg_pturb,0.84,lirg_m0)
 #
-lirg_pturb_center = calc_pturb(np.array(lirg_m0_center), np.array(lirg_ew_center))
+lirg_pturb_center = calc_virial(np.array(lirg_m0_center), np.array(lirg_ew_center))
 lirg_wp50_center = weighted_percentile(lirg_pturb_center,0.50,lirg_m0_center)
 lirg_wp16_center = weighted_percentile(lirg_pturb_center,0.16,lirg_m0_center)
 lirg_wp84_center = weighted_percentile(lirg_pturb_center,0.84,lirg_m0_center)
@@ -196,8 +196,8 @@ plt.tick_params(labelbottom=False)
 plt.grid(axis="y")
 plt.yscale("log")
 plt.xticks(np.r_[np.array([-0.2,0.2]), np.array(range(1,20,1))])
-plt.yticks([10**0,10**2,10**4,10**6,10**8],[0,2,4,6,8])
-plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K cm$^{-3}$)")
-plt.savefig(dir_eps+"plot_pturb_all.png",dpi=200)
+#plt.yticks([10**0,10**2,10**4,10**6,10**8],[0,2,4,6,8])
+plt.ylabel(r"log $\alpha_{\mathsf{vir,150pc}}$")
+plt.savefig(dir_eps+"plot_vir_all.png",dpi=200)
 
 os.system("rm -rf *.last")
