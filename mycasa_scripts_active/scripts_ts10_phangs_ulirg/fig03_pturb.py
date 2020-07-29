@@ -67,6 +67,8 @@ def weighted_percentile(
 list_wp16 = []
 list_wp50 = []
 list_wp84 = []
+lirg_m0 = []
+lirg_ew = []
 for i in range(len(galaxy)):
     this_galaxy = galaxy[i]
     this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
@@ -78,6 +80,9 @@ for i in range(len(galaxy)):
     this_m0 = this_m0[cut_data]
     this_pturb = this_pturb[cut_data]
     #
+    lirg_m0.extend(this_m0)
+    lirg_ew.extend(this_ew)
+    #
     wp50 = weighted_percentile(this_pturb,0.50,this_m0)
     wp16 = weighted_percentile(this_pturb,0.16,this_m0)
     wp84 = weighted_percentile(this_pturb,0.84,this_m0)
@@ -86,6 +91,11 @@ for i in range(len(galaxy)):
     list_wp50.append(wp50)
     list_wp84.append(wp84)
     #
+lirg_pturb = np.array(lirg_m0) * np.array(lirg_ew)**2
+lirg_wp50 = weighted_percentile(lirg_pturb,0.50,lirg_m0)
+lirg_wp16 = weighted_percentile(lirg_pturb,0.16,lirg_m0)
+lirg_wp84 = weighted_percentile(lirg_pturb,0.84,lirg_m0)
+#
 phangs_m0 = []
 phangs_ew = []
 for i in range(len(phangs)):
@@ -113,15 +123,20 @@ ax = plt.subplot(gs[0:9,0:9])
 plt.rcParams["font.size"] = 10
 plt.rcParams["legend.fontsize"] = 10
 plt.subplots_adjust(bottom=0.05, left=0.07, right=0.99, top=0.95)
-# plot
+# plot individual
 ax.scatter(np.array(range(len(galaxy)))+1, list_wp50, s=20, c="white", lw=1, edgecolors="indianred", zorder=1e9)
 for i in range(len(galaxy)):
     ax.plot([i+1, i+1], [list_wp16[i], list_wp84[i]], lw=1, c="indianred")
     ax.text(i+1-0.15, list_wp50[i], galname[i], rotation=90, horizontalalignment="right", fontsize=8, color="indianred")
     #
-ax.scatter(0, phangs_wp50, s=20, c="white", lw=1, edgecolors="skyblue", zorder=1e9)
-ax.plot([0, 0], [phangs_wp16, phangs_wp84], lw=1, c="skyblue")
-ax.text(0, 10**5.8, "PHANGS", rotation=90, horizontalalignment="center", verticalalignment="bottom", fontsize=8, color="skyblue")
+# plot total
+ax.scatter(-0.25, phangs_wp50, s=20, c="white", lw=1, edgecolors="skyblue", zorder=1e9)
+ax.plot([-0.25, -0.25], [phangs_wp16, phangs_wp84], lw=1, c="skyblue")
+ax.text(-0.25, 10**5.8, "PHANGS", rotation=90, horizontalalignment="center", verticalalignment="bottom", fontsize=8, color="skyblue")
+ax.scatter(0.25, lirg_wp50, s=20, c="white", lw=1, edgecolors="indianred", zorder=1e9)
+ax.plot([0.25, 0.25], [lirg_wp16, lirg_wp84], lw=1, c="indianred")
+ax.text(0.25, 10**5.8, "(U)LIRGs", rotation=90, horizontalalignment="center", verticalalignment="bottom", fontsize=8, color="indianred")
+ax.plot([],[])
 # set
 ax.set_xlim([-0.5,len(galaxy)+0.5])
 ax.set_ylim(ylim)
