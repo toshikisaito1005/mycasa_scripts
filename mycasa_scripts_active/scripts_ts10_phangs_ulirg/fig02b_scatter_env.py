@@ -81,10 +81,8 @@ plt.rcParams["font.size"] = 20
 plt.rcParams["legend.fontsize"] = 18
 plt.subplots_adjust(bottom=0.15, left=0.20, right=0.90, top=0.85) 
 # plot ax1 scatter
-ax1.scatter(lirg_m0[lirg_r<=central], lirg_ew[lirg_r<=central], c="indianred", s=40, linewidths=0)
-ax1.text(-0.8, 2.34, title_ulirg+"("+str("{:,}".format(len(lirg_m0[lirg_r<=central])))+")", color="indianred")
-ax1.scatter(lirg_m0[lirg_r>central], lirg_ew[lirg_r>central], c="grey", s=40, linewidths=0)
-ax1.text(-0.8, 2.52, title_ulirg+"("+str("{:,}".format(len(lirg_m0[lirg_r>central])))+")", color="grey")
+ax1.scatter(lirg_m0, lirg_ew, c=lirg_r, cmap=cm.gnuplot, s=40, linewidths=0)
+ax1.text(-0.8, 2.52, title_ulirg+"("+str("{:,}".format(len(lirg_m0[lirg_r<=central])))+")", color="indianred")
 # plot ax1 contour
 # A, B, C = density_estimation(lirg_m0[lirg_r<=central], lirg_ew[lirg_r<=central], xlim, ylim)
 # ax1.contourf(A, B, C, [0.05,0.2,1.0,C.max()], colors=[cm.Reds(3/4.),cm.Reds(3.3/4.),cm.Reds(3.6/4.),cm.Reds(3.9/4.)], linewidths=[1], alpha=0.5)
@@ -94,8 +92,8 @@ histo = np.histogram(lirg_ew[lirg_r<=central], bins=bins, range=ylim)
 x = np.delete(histo[1],-1)
 y = histo[0]/(histo[0].max()*1.05)
 height = (ylim[1]-ylim[0])/bins
-ax2.plot(y, x, drawstyle="steps", color="grey", lw=0.5)
-ax2.barh(x, y, height=height, lw=0, color="indianred", alpha=0.5)
+ax2b.plot(y, x, drawstyle="steps", color="grey", lw=0.5)
+ax2b.barh(x, y, height=height, lw=0, color="indianred", alpha=0.5)
 # plot ax3 bottom
 histo = np.histogram(lirg_m0[lirg_r<=central], bins=bins, range=xlim)
 y = np.delete(histo[1],-1)
@@ -110,12 +108,12 @@ ax1.grid()
 ax1.tick_params(labelbottom=False)
 ax1.set_ylabel(r"$\sigma_{\mathsf{mol,150pc}}$ (km s$^{-1}$)")
 # set ax2 right
-ax2.set_ylim(ylim)
-ax2.grid(axis="y")
 ax2.tick_params(labelbottom=False,labelleft=False)
 ax2.spines["top"].set_visible(False)
 ax2.spines["bottom"].set_visible(False)
 ax2.tick_params(top=False,bottom=False)
+ax2b.set_ylim(ylim)
+ax2b.grid(axis="y")
 ax2b.tick_params(labelbottom=False)
 ax2b.spines["top"].set_visible(False)
 ax2b.spines["bottom"].set_visible(False)
