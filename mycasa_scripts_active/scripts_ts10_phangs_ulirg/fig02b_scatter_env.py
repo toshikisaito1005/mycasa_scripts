@@ -18,7 +18,8 @@ dir_proj = "/Users/saito/data/myproj_active/proj_ts10_phangs_ulirgs/data/"
 dir_eps = "/Users/saito/data/myproj_active/proj_ts10_phangs_ulirgs/eps/"
 galaxy = [s.split("/")[-1].split("_12m")[0] for s in glob.glob(dir_proj + "*mom0*")]
 galaxy_exclude = ["ic4518e", "mcg02-33-098", "ngc3256"]
-title_ulirg = str(len(galaxy)) + r" nearby (U)LIRGs " # ($\alpha_{\mathsf{CO}}$ = 0.8)"
+title_inner = "central 1kpc of nearby (U)LIRGs " # ($\alpha_{\mathsf{CO}}$ = 0.8)"
+title_outer = "outer region of nearby (U)LIRGs " # ($\alpha_{\mathsf{CO}}$ = 0.8)"
 xlim = [-1,4.5]
 ylim = [-0.1,2.7]
 bins = 40
@@ -68,6 +69,10 @@ for i in range(len(galaxy_exclude)):
 ### get data
 print("# get lirg data")
 lirg_m0, lirg_ew, lirg_r = getdata(galaxy, 0.8)
+outer_m0 = lirg_m0[lirg_r>central]
+outer_ew = lirg_ew[lirg_r>central]
+inner_m0 = lirg_m0[lirg_r<=central]
+inner_ew = lirg_ew[lirg_r<=central]
 
 ### plot
 print("# plot")
@@ -81,8 +86,10 @@ plt.rcParams["font.size"] = 20
 plt.rcParams["legend.fontsize"] = 18
 plt.subplots_adjust(bottom=0.15, left=0.20, right=0.90, top=0.85) 
 # plot ax1 scatter
-ax1.scatter(lirg_m0, lirg_ew, c=lirg_r, cmap=cm.gnuplot, s=40, linewidths=0)
-ax1.text(-0.8, 2.52, title_ulirg+"("+str("{:,}".format(len(lirg_m0[lirg_r<=central])))+")", color="indianred")
+ax1.scatter(outer_m0, outer_ew, c="grey", s=40, linewidths=0)
+ax1.text(-0.8, 2.52, title_outer+"("+str("{:,}".format(len(outer_m0))+")"), color="grey")
+ax1.scatter(inner_m0, inner_ew, c="grey", s=40, linewidths=0)
+ax1.text(-0.8, 2.52, title_inner+"("+str("{:,}".format(len(inner_m0))+")"), color="indianred")
 # plot ax1 contour
 # A, B, C = density_estimation(lirg_m0[lirg_r<=central], lirg_ew[lirg_r<=central], xlim, ylim)
 # ax1.contourf(A, B, C, [0.05,0.2,1.0,C.max()], colors=[cm.Reds(3/4.),cm.Reds(3.3/4.),cm.Reds(3.6/4.),cm.Reds(3.9/4.)], linewidths=[1], alpha=0.5)
