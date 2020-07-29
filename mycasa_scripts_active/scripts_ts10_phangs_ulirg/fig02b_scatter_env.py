@@ -61,9 +61,9 @@ def getdata(listgal, alphaco):
 #####################
 ### Main Procedure
 #####################
+### remove galaxies without clear nucleus
 for i in range(len(galaxy_exclude)):
 	galaxy.remove(galaxy_exclude[i])
-
 
 ### get data
 print("# get lirg data")
@@ -82,11 +82,13 @@ plt.rcParams["legend.fontsize"] = 18
 plt.subplots_adjust(bottom=0.15, left=0.20, right=0.90, top=0.85) 
 # plot ax1 scatter
 ax1.scatter(lirg_m0[lirg_r<=central], lirg_ew[lirg_r<=central], c="indianred", s=40, linewidths=0)
-ax1.text(-0.8, 2.34, title_ulirg+"("+str("{:,}".format(len(lirg_m0)))+")", color="indianred")
+ax1.text(-0.8, 2.34, title_ulirg+"("+str("{:,}".format(len(lirg_m0[lirg_r<=central])))+")", color="indianred")
+ax1.scatter(lirg_m0[lirg_r>central], lirg_ew[lirg_r>central], c="grey", s=40, linewidths=0)
+ax1.text(-0.8, 2.52, title_ulirg+"("+str("{:,}".format(len(lirg_m0[lirg_r>central])))+")", color="grey")
 # plot ax1 contour
-#A, B, C = density_estimation(lirg_m0, lirg_ew, xlim, ylim)
-ax1.contourf(A, B, C, [0.05,0.2,1.0,C.max()], colors=[cm.Reds(3/4.),cm.Reds(3.3/4.),cm.Reds(3.6/4.),cm.Reds(3.9/4.)], linewidths=[1], alpha=0.5)
-ax1.contour(A, B, C, [0.05,0.2,1.0,C.max()], colors=["red"], linewidths=[0.5], alpha=0.3)
+# A, B, C = density_estimation(lirg_m0[lirg_r<=central], lirg_ew[lirg_r<=central], xlim, ylim)
+# ax1.contourf(A, B, C, [0.05,0.2,1.0,C.max()], colors=[cm.Reds(3/4.),cm.Reds(3.3/4.),cm.Reds(3.6/4.),cm.Reds(3.9/4.)], linewidths=[1], alpha=0.5)
+# ax1.contour(A, B, C, [0.05,0.2,1.0,C.max()], colors=["red"], linewidths=[0.5], alpha=0.3)
 # plot ax2 right
 histo = np.histogram(lirg_ew[lirg_r<=central], bins=bins, range=ylim)
 x = np.delete(histo[1],-1)
