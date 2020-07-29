@@ -5,8 +5,10 @@ import glob
 import scipy
 import numpy as np
 import matplotlib.cm as cm
+import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import matplotlib.patches as mpatches
+plt.ioff()
 
 
 #####################
@@ -85,6 +87,7 @@ for i in range(len(galaxy)):
     #
     cut_data = np.where((this_pturb>0) & (this_m0>0))
     this_m0 = this_m0[cut_data]
+    this_ew = this_ew[cut_data]
     this_pturb = this_pturb[cut_data]
     #
     lirg_m0.extend(this_m0)
@@ -108,6 +111,7 @@ for i in range(len(galaxy)):
     #
     cut_data = np.where((this_pturb>0) & (this_m0>0) & (this_r<=0.5))
     this_m0 = this_m0[cut_data]
+    this_ew = this_ew[cut_data]
     this_pturb = this_pturb[cut_data]
     #
     lirg_m0_center.extend(this_m0)
@@ -160,6 +164,7 @@ plt.rcParams["legend.fontsize"] = 10
 plt.subplots_adjust(bottom=0.05, left=0.05, right=0.99, top=0.95)
 # plot individual
 ax.scatter(np.array(range(len(galaxy)))+1, list_wp50, s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9)
+ax.scatter(np.array(range(len(galaxy)))+1, list_wp50_center, s=20, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9)
 for i in range(len(galaxy)):
     ax.plot([i+1, i+1], [list_wp16[i], list_wp84[i]], lw=1, c="indianred")
     ax.text(i+1-0.15, list_wp50[i], galname[i], rotation=90, horizontalalignment="right", fontsize=8, color="indianred")
