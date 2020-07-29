@@ -5,6 +5,7 @@ import glob
 import scipy
 import numpy as np
 import matplotlib.cm as cm
+import matplotlib.gridspec as gridspec
 import matplotlib.patches as mpatches
 
 
@@ -16,6 +17,8 @@ galaxy = ['eso297g011', 'eso297g012', 'ic4518e', 'ic4518w', 'eso319',
           'ngc2369', 'mcg02', 'ic5179', 'iras06592',
           'eso267', 'eso557', 'irasf10409', 'ngc5257', 'ngc3110', 'irasf17138',
           'eso507', 'ngc3256', 'ngc1614', 'ngc6240']
+ylim = [10**0,10**9]
+
 galname1 = [s.replace("eso","ESO ").replace("ngc","NGC ").replace("mcg","MCG-") for s in galaxy]
 galname2 = [s.replace("e","E").replace("w","W").replace("ic","IC") for s in galname1]
 galname3 = [s.replace("iras","IRAS ").replace("f","F").replace("g","-G") for s in galname2]
@@ -23,7 +26,6 @@ galname4 = [s.replace("319","319-G022").replace("507","507-G070") for s in galna
 galname5 = [s.replace("557","557-G002").replace("06592","06592-6313") for s in galname4]
 galname6 = [s.replace("10409","10409-4556").replace("17138","17138-1017") for s in galname5]
 galname = [s.replace("-02","-02-33-098").replace("267","267-G030") for s in galname6]
-
 
 
 #####################
@@ -81,20 +83,25 @@ for i in range(len(galaxy)):
 	#
 
 # figure
-fig, ax = plt.subplots(1, 1)
+figure = plt.figure(figsize=(10,3))
+gs = gridspec.GridSpec(nrows=9, ncols=9)
+ax = plt.subplot(gs[0:9,0:9])
 plt.rcParams["font.size"] = 14
 plt.rcParams["legend.fontsize"] = 10
-plt.subplots_adjust(bottom=0.35, left=0.10, right=0.95, top=0.95)
+plt.subplots_adjust(bottom=0.05, left=0.10, right=0.99, top=0.95)
 #
 ax.set_xlim([0,len(galaxy)+1])
-#ax.set_ylim([0,3.2])
+ax.set_ylim(ylim)
 ax.scatter(np.array(range(len(galaxy)))+1, list_wp50, s=100, c="black")
 for i in range(len(galaxy)):
 	ax.plot([i+1, i+1], [list_wp16[i], list_wp84[i]], lw=4, c="black")
+    ax.text(i+1, list_wp16[i], , horizontalalignment="right")
+
 #
 ax.plot([0,len(galaxy)+1], [np.median(list_wp50), np.median(list_wp50)], "--", c="red")
 #
 plt.legend(ncol=4, loc="upper left")
+plt.tick_params(labelbottom=False)
 plt.grid()
 plt.yscale("log")
 plt.xticks(np.array(range(len(galaxy)))+1, galname)
