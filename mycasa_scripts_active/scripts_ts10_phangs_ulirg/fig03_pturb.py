@@ -164,7 +164,7 @@ plt.rcParams["legend.fontsize"] = 10
 plt.subplots_adjust(bottom=0.05, left=0.05, right=0.99, top=0.95)
 # plot individual
 ax.scatter(np.array(range(len(galaxy)))+1, list_wp50, s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9)
-ax.scatter(np.array(range(len(galaxy)))+1, list_wp50_center, s=20, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9)
+ax.scatter(np.array(range(len(galaxy)))+1, list_wp50_center, s=40, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9)
 for i in range(len(galaxy)):
     ax.plot([i+1, i+1], [list_wp16[i], list_wp84[i]], lw=1, c="indianred")
     ax.text(i+1-0.15, list_wp50[i], galname[i], rotation=90, horizontalalignment="right", fontsize=8, color="indianred")
@@ -173,9 +173,11 @@ for i in range(len(galaxy)):
 ax.scatter(-0.2, phangs_wp50, s=30, c="skyblue", lw=1, edgecolors="skyblue", zorder=1e9)
 ax.plot([-0.2, -0.2], [phangs_wp16, phangs_wp84], lw=2, c="skyblue")
 ax.text(-0.2, 10**5.8, "PHANGS", rotation=90, horizontalalignment="center", verticalalignment="bottom", fontsize=8, color="skyblue", weight='bold')
-ax.scatter(0.2, lirg_wp50, s=30, c="indianred", lw=1, edgecolors="indianred", zorder=1e9)
+ax.scatter(0.2, lirg_wp50, s=30, c="indianred", lw=1, edgecolors="indianred", zorder=1e9, marker="s")
+ax.scatter(0.2, lirg_wp50_center, s=60, c="indianred", lw=1, edgecolors="indianred", zorder=1e9, marker="*")
 ax.plot([0.2, 0.2], [lirg_wp16, lirg_wp84], lw=2, c="indianred")
 ax.text(0.2, 10**4.5, "(U)LIRGs", rotation=90, horizontalalignment="center", verticalalignment="top", fontsize=8, color="indianred", weight='bold')
+#
 ax.plot([0.5,0.5], ylim, "black")
 # set
 ax.set_xlim([-0.5,len(galaxy)+0.5])
