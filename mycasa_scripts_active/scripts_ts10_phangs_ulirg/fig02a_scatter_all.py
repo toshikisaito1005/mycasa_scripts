@@ -59,7 +59,7 @@ def getdata(listgal, alphaco):
 #####################
 ### get data
 print("# get lirg data")
-#lirg_m0, lirg_ew = getdata(galaxy, 0.8)
+lirg_m0, lirg_ew = getdata(galaxy, 0.8)
 print("# get phangs data")
 #phangs_m0, phangs_ew = getdata(phangs, 4.3)
 
@@ -77,13 +77,13 @@ plt.subplots_adjust(bottom=0.15, left=0.20, right=0.90, top=0.85)
 # plot ax1 scatter
 ax1.scatter(phangs_m0, phangs_ew, c="powderblue", s=40, linewidths=0)
 ax1.scatter(lirg_m0, lirg_ew, c="indianred", s=40, linewidths=0)
-ax1.text(-0.8, 2.52, title_phangs+"("+str("{:,}".format(len(phangs_m0)))+")", color="skyblue")
-ax1.text(-0.8, 2.34, title_ulirg+"("+str("{:,}".format(len(lirg_m0)))+")", color="indianred")
+ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.04, ylim[0]+(ylim[1]-ylim[0])*0.93, title_phangs+"("+str("{:,}".format(len(phangs_m0)))+")", color="skyblue")
+ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.04, ylim[0]+(ylim[1]-ylim[0])*0.87, title_ulirg+"("+str("{:,}".format(len(lirg_m0)))+")", color="indianred")
 # plot ax1 contour
 #X, Y, Z = density_estimation(phangs_m0, phangs_ew, xlim, ylim)
 ax1.contourf(X, Y, Z, [0.015,0.15,1.5,Z.max()], colors=[cm.Blues(1/4.),cm.Blues(2/4.),cm.Blues(3/4.),cm.Blues(4/4.)], linewidths=[1], alpha=0.5)
 ax1.contour(X, Y, Z, [0.015,0.15,1.5,Z.max()], colors=["blue"], linewidths=[0.5], alpha=0.3)
-#A, B, C = density_estimation(lirg_m0, lirg_ew, xlim, ylim)
+A, B, C = density_estimation(lirg_m0, lirg_ew, xlim, ylim)
 ax1.contourf(A, B, C, [0.05,0.2,1.0,C.max()], colors=[cm.Reds(3/4.),cm.Reds(3.3/4.),cm.Reds(3.6/4.),cm.Reds(3.9/4.)], linewidths=[1], alpha=0.5)
 ax1.contour(A, B, C, [0.05,0.2,1.0,C.max()], colors=["red"], linewidths=[0.5], alpha=0.3)
 # plot ax2 right
