@@ -6,6 +6,7 @@ import scipy
 import numpy as np
 import matplotlib.cm as cm
 import matplotlib.patches as mpatches
+from astropy.coordinates import SkyCoord
 
 
 #####################
@@ -36,7 +37,7 @@ centers = [[12:14:12.821, -47.13.42.928], # eso267
 		   [13:39:52.916, 0.50.24.481], # ngc5257
 		   [16:52:58.893, 2.24.03.792], # ngc6240
 		   ]
-scales = [365,345,345,325,425,425,325,325,'ic5179','iras06592','irasf10409','irasf17138','mcg02-33-098','ngc1614','ngc2369','ngc3110','ngc3256','ngc5257','ngc6240']
+scales = [365,345,345,325,425,425,325,325,225,445,425,345,305,305,205,325,185,445,485]
 
 #####################
 ### Main Procedure
@@ -44,6 +45,10 @@ scales = [365,345,345,325,425,425,325,325,'ic5179','iras06592','irasf10409','ira
 #for i in range(len(galaxy)):
 for i in [0]:
 	this_galaxy = galaxy[i]
+	this_center = centers[i]
+	this_scale = scales[i]
+	c = SkyCoord
+	#
 	print("# working on " + this_galaxy)
 	this_mom0 = glob.glob(dir_proj + this_galaxy + "*_mom0.fits")[0]
 	this_ew = glob.glob(dir_proj + this_galaxy + "*_ew.fits")[0]
