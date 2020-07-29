@@ -113,9 +113,7 @@ ax = plt.subplot(gs[0:9,0:9])
 plt.rcParams["font.size"] = 10
 plt.rcParams["legend.fontsize"] = 10
 plt.subplots_adjust(bottom=0.05, left=0.07, right=0.99, top=0.95)
-#
-ax.set_xlim([-1,len(galaxy)+1])
-ax.set_ylim(ylim)
+# plot
 ax.scatter(np.array(range(len(galaxy)))+1, list_wp50, s=40, c="white", lw=1, edgecolors="indianred", zorder=1e9)
 for i in range(len(galaxy)):
     ax.plot([i+1, i+1], [list_wp16[i], list_wp84[i]], lw=1, c="indianred")
@@ -123,15 +121,17 @@ for i in range(len(galaxy)):
     #
 ax.scatter(0, phangs_wp50, s=40, c="white", lw=1, edgecolors="skyblue", zorder=1e9)
 ax.plot([0, 0], [phangs_wp16, phangs_wp84], lw=1, c="skyblue")
-ax.text(-0.2, list_wp50[i], "PHANGS MS galaxies", rotation=90, horizontalalignment="right", fontsize=8, color="skyblue")
-#
+ax.text(+0.2, list_wp50[i], "PHANGS MS galaxies", rotation=90, horizontalalignment="right", verticalalignment="center", fontsize=8, color="skyblue")
+# set
+ax.set_xlim([-0.5,len(galaxy)+0.5])
+ax.set_ylim(ylim)
 plt.legend(ncol=4, loc="upper left")
 plt.tick_params(labelbottom=False)
 plt.grid(axis="y")
 plt.yscale("log")
-plt.xticks(range(-1,20,1))
+plt.xticks(range(0,20,1))
 plt.yticks([10**0,10**2,10**4,10**6,10**8],[0,2,4,6,8])
-plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K km s$^{-1}$)")
+plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K cm$^{-3}$)")
 plt.savefig(dir_eps+"plot_pturb_all.png",dpi=200)
 
 os.system("rm -rf *.last")
