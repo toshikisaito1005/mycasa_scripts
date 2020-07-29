@@ -116,13 +116,13 @@ phangs_wp50 = weighted_percentile(phangs_pturb,0.50,phangs_m0)
 phangs_wp16 = weighted_percentile(phangs_pturb,0.16,phangs_m0)
 phangs_wp84 = weighted_percentile(phangs_pturb,0.84,phangs_m0)
 
-# figure
+### figure
 figure = plt.figure(figsize=(10,2))
 gs = gridspec.GridSpec(nrows=9, ncols=9)
 ax = plt.subplot(gs[0:9,0:9])
 plt.rcParams["font.size"] = 10
 plt.rcParams["legend.fontsize"] = 10
-plt.subplots_adjust(bottom=0.05, left=0.03, right=0.99, top=0.95)
+plt.subplots_adjust(bottom=0.05, left=0.05, right=0.99, top=0.95)
 # plot individual
 ax.scatter(np.array(range(len(galaxy)))+1, list_wp50, s=20, c="white", lw=1, edgecolors="indianred", zorder=1e9)
 for i in range(len(galaxy)):
@@ -130,12 +130,12 @@ for i in range(len(galaxy)):
     ax.text(i+1-0.15, list_wp50[i], galname[i], rotation=90, horizontalalignment="right", fontsize=8, color="indianred")
     #
 # plot total
-ax.scatter(-0.25, phangs_wp50, s=20, c="skyblue", lw=1, edgecolors="skyblue", zorder=1e9)
-ax.plot([-0.25, -0.25], [phangs_wp16, phangs_wp84], lw=1, c="skyblue")
-ax.text(-0.25, 10**5.8, "PHANGS", rotation=90, horizontalalignment="center", verticalalignment="bottom", fontsize=8, color="skyblue")
-ax.scatter(0.25, lirg_wp50, s=20, c="indianred", lw=1, edgecolors="indianred", zorder=1e9)
-ax.plot([0.25, 0.25], [lirg_wp16, lirg_wp84], lw=1, c="indianred")
-ax.text(0.25, 10**4.5, "(U)LIRGs", rotation=90, horizontalalignment="center", verticalalignment="top", fontsize=8, color="indianred")
+ax.scatter(-0.25, phangs_wp50, s=30, c="skyblue", lw=1, edgecolors="skyblue", zorder=1e9)
+ax.plot([-0.25, -0.25], [phangs_wp16, phangs_wp84], lw=2, c="skyblue")
+ax.text(-0.25, 10**5.8, "PHANGS", rotation=90, horizontalalignment="center", verticalalignment="bottom", fontsize=8, color="skyblue", weight='bold')
+ax.scatter(0.25, lirg_wp50, s=30, c="indianred", lw=1, edgecolors="indianred", zorder=1e9)
+ax.plot([0.25, 0.25], [lirg_wp16, lirg_wp84], lw=2, c="indianred")
+ax.text(0.25, 10**4.5, "(U)LIRGs", rotation=90, horizontalalignment="center", verticalalignment="top", fontsize=8, color="indianred", weight='bold')
 ax.plot([0.5,0.5], ylim, "black")
 # set
 ax.set_xlim([-0.5,len(galaxy)+0.5])
