@@ -11,3 +11,6 @@ convert -crop 710x560+40+30 $dir_data$var"_m0.png" $dir_data$var"_m0_clip.png"
 done
 
 ### figure 2
+convert -crop 1800x1570+200+280 $dir_data"plot_scatter_all.png" $dir_data"plot_scatter_all.png"
+convert -crop 1800x1570+200+280 $dir_data"plot_scatter_env.png" $dir_data"plot_scatter_env.png"
+convert +append -border 0x0 $dir_data"plot_scatter_all.png" $dir_data"plot_scatter_env.png" $dir_data"plot_scatter.png"
