@@ -62,6 +62,13 @@ def weighted_percentile(
 
     return w_median
 
+def calc_pturb(
+    m0,
+    ew,
+    dbeam
+    ):
+    d
+
 
 #####################
 ### Main Procedure
