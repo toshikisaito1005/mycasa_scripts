@@ -17,6 +17,7 @@ galaxy = ['eso297g011', 'eso297g012', 'ic4518e', 'ic4518w', 'eso319',
           'ngc2369', 'mcg02', 'ic5179', 'iras06592',
           'eso267', 'eso557', 'irasf10409', 'ngc5257', 'ngc3110', 'irasf17138',
           'eso507', 'ngc3256', 'ngc1614', 'ngc6240']
+phangs = [s.split("/")[-1].split("_12m")[0] for s in glob.glob(dir_proj + "../data_phangs/*mom0*")]
 ylim = [10**0,10**9]
 
 galname1 = [s.replace("eso","ESO ").replace("ngc","NGC ").replace("mcg","MCG-") for s in galaxy]
@@ -81,6 +82,22 @@ for i in range(len(galaxy)):
 	list_wp50.append(wp50)
 	list_wp84.append(wp84)
 	#
+phangs_m0 = []
+phangs_ew = []
+for i in range(len(phangs)):
+    this_galaxy = phangs[i]
+    this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
+    this_m0 = this_data[:,0]
+    this_ew = this_data[:,1]
+    this_pturb = this_m0 * this_ew**2
+    #
+    phangs_m0.extend(this_m0)
+    phangs_ew.extend(this_ew)
+    #
+phangs_pturb = phangs_m0 * phangs_ew**2
+phangs_wp50 = weighted_percentile(phangs_pturb,0.50,phangs_m0)
+phangs_wp16 = weighted_percentile(phangs_pturb,0.16,phangs_m0)
+phangs_wp84 = weighted_percentile(phangs_pturb,0.84,phangs_m0)
 
 # figure
 figure = plt.figure(figsize=(10,2))
@@ -96,7 +113,8 @@ ax.scatter(np.array(range(len(galaxy)))+1, list_wp50, s=100, c="black")
 for i in range(len(galaxy)):
     ax.plot([i+1, i+1], [list_wp16[i], list_wp84[i]], lw=4, c="black")
     ax.text(i+1-0.2, list_wp50[i], galname[i], rotation=90, horizontalalignment="right", fontsize=8)
-
+    #
+ax.plot([i+1, i+1], [phangs_wp16[i], list_wp84[i]], lw=4, c="black")
 #
 ax.plot([-1,len(galaxy)+1], [np.median(list_wp50), np.median(list_wp50)], "--", c="red")
 #
