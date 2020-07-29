@@ -93,11 +93,10 @@ for i in range(len(phangs)):
     this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
     this_m0 = this_data[:,0]
     this_ew = this_data[:,1]
-    this_pturb = this_m0 * this_ew**2
     #
-    cut_data = np.where((this_pturb>0e) & (this_m0>0))
+    cut_data = np.where((this_ew>0) & (this_m0>0))
     this_m0 = this_m0[cut_data]
-    this_pturb = this_pturb[cut_data]
+    this_ew = this_ew[cut_data]
     #
     phangs_m0.extend(this_m0)
     phangs_ew.extend(this_ew)
@@ -122,11 +121,11 @@ for i in range(len(galaxy)):
     ax.plot([i+1, i+1], [list_wp16[i], list_wp84[i]], lw=4, c="indianred")
     ax.text(i+1-0.2, list_wp50[i], galname[i], rotation=90, horizontalalignment="right", fontsize=8, color="indianred")
     #
-ax.scatter(-1, phangs_wp50, s=100, c="skyblue")
-ax.plot([-1, -1], [phangs_wp16, phangs_wp84], lw=4, c="skyblue")
-ax.text(-1.2, list_wp50[i], "PHANGS MS galaxies", rotation=90, horizontalalignment="right", fontsize=8, color="skyblue")
+ax.scatter(0, phangs_wp50, s=100, c="white", lw=1)
+ax.plot([0, 0], [phangs_wp16, phangs_wp84], lw=1, markeredgecolor="skyblue")
+ax.text(-0.2, list_wp50[i], "PHANGS MS galaxies", rotation=90, horizontalalignment="right", fontsize=8, color="skyblue")
 #
-ax.plot([-1,len(galaxy)+1], [np.median(list_wp50), np.median(list_wp50)], "--", c="indianred")
+ax.plot([0,len(galaxy)+1], [np.median(list_wp50), np.median(list_wp50)], "--", c="indianred")
 #
 plt.legend(ncol=4, loc="upper left")
 plt.tick_params(labelbottom=False)
