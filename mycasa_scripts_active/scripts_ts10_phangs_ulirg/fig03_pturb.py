@@ -114,12 +114,12 @@ plt.rcParams["font.size"] = 10
 plt.rcParams["legend.fontsize"] = 10
 plt.subplots_adjust(bottom=0.05, left=0.07, right=0.99, top=0.95)
 # plot
-ax.scatter(np.array(range(len(galaxy)))+1, list_wp50, s=30, c="white", lw=1, edgecolors="indianred", zorder=1e9)
+ax.scatter(np.array(range(len(galaxy)))+1, list_wp50, s=20, c="white", lw=1, edgecolors="indianred", zorder=1e9)
 for i in range(len(galaxy)):
     ax.plot([i+1, i+1], [list_wp16[i], list_wp84[i]], lw=1, c="indianred")
     ax.text(i+1-0.15, list_wp50[i], galname[i], rotation=90, horizontalalignment="right", fontsize=8, color="indianred")
     #
-ax.scatter(0, phangs_wp50, s=30, c="white", lw=1, edgecolors="skyblue", zorder=1e9)
+ax.scatter(0, phangs_wp50, s=20, c="white", lw=1, edgecolors="skyblue", zorder=1e9)
 ax.plot([0, 0], [phangs_wp16, phangs_wp84], lw=1, c="skyblue")
 ax.text(0, 10**5.8, "PHANGS", rotation=90, horizontalalignment="center", verticalalignment="bottom", fontsize=8, color="skyblue")
 # set
