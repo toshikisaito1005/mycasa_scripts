@@ -90,7 +90,7 @@ plt.rcParams["font.size"] = 10
 plt.rcParams["legend.fontsize"] = 10
 plt.subplots_adjust(bottom=0.05, left=0.07, right=0.99, top=0.95)
 #
-ax.set_xlim([0,len(galaxy)+1])
+ax.set_xlim([-1,len(galaxy)+1])
 ax.set_ylim(ylim)
 ax.scatter(np.array(range(len(galaxy)))+1, list_wp50, s=100, c="black")
 for i in range(len(galaxy)):
@@ -98,15 +98,15 @@ for i in range(len(galaxy)):
     ax.text(i+1-0.2, list_wp50[i], galname[i], rotation=90, horizontalalignment="right", fontsize=8)
 
 #
-ax.plot([0,len(galaxy)+1], [np.median(list_wp50), np.median(list_wp50)], "--", c="red")
+ax.plot([-1,len(galaxy)+1], [np.median(list_wp50), np.median(list_wp50)], "--", c="red")
 #
 plt.legend(ncol=4, loc="upper left")
 plt.tick_params(labelbottom=False)
 plt.grid(axis="y")
 plt.yscale("log")
-plt.xticks(np.array(range(len(galaxy)))+1, galname)
-plt.xticks(rotation=90)
-plt.ylabel(r"$P_{\mathsf{turb,150pc}}$ (K km s$^{-1}$)")
+plt.xticks(range(-1,20,1))
+plt.yticks([10**0,10**2,10**4,10**6,10**8],[0,2,4,6,8])
+plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K km s$^{-1}$)")
 plt.savefig(dir_eps+"plot_pturb_all.png",dpi=200)
 
 os.system("rm -rf *.last")
