@@ -117,7 +117,7 @@ phangs_wp16 = weighted_percentile(phangs_pturb,0.16,phangs_m0)
 phangs_wp84 = weighted_percentile(phangs_pturb,0.84,phangs_m0)
 
 ### figure
-figure = plt.figure(figsize=(10,5))
+figure = plt.figure(figsize=(10,2))
 gs = gridspec.GridSpec(nrows=9, ncols=9)
 ax = plt.subplot(gs[0:9,0:9])
 plt.rcParams["font.size"] = 10
