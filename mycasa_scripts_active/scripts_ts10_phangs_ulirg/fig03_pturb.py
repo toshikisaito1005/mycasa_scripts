@@ -17,7 +17,7 @@ galaxy = ['eso297g011', 'eso297g012', 'ic4518e', 'ic4518w', 'eso319',
           'ngc2369', 'mcg02', 'ic5179', 'iras06592',
           'eso267', 'eso557', 'irasf10409', 'ngc5257', 'ngc3110', 'irasf17138',
           'eso507', 'ngc3256', 'ngc1614', 'ngc6240']
-phangs = [s.split("/")[-1].split("_12m")[0] for s in glob.glob(dir_proj + "../data_phangs/*mom0*")]
+phangs = [s.split("/")[-1].split("_12m")[0] for s in glob.glob(dir_eps + "../data_phangs/*mom0*")]
 ylim = [10**0,10**9]
 
 galname1 = [s.replace("eso","ESO ").replace("ngc","NGC ").replace("mcg","MCG-") for s in galaxy]
@@ -69,11 +69,18 @@ list_wp50 = []
 list_wp84 = []
 lirg_m0 = []
 lirg_ew = []
+list_wp16_center = []
+list_wp50_center = []
+list_wp84_center = []
+lirg_m0_center = []
+lirg_ew_center = []
 for i in range(len(galaxy)):
+    ### all
     this_galaxy = galaxy[i]
     this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
     this_m0 = this_data[:,0]
     this_ew = this_data[:,1]
+    this_r = this_data[:,2]
     this_pturb = this_m0 * this_ew**2
     #
     cut_data = np.where((this_pturb>0) & (this_m0>0))
@@ -91,10 +98,38 @@ for i in range(len(galaxy)):
     list_wp50.append(wp50)
     list_wp84.append(wp84)
     #
+    ### center
+    this_galaxy = galaxy[i]
+    this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
+    this_m0 = this_data[:,0]
+    this_ew = this_data[:,1]
+    this_r = this_data[:,2]
+    this_pturb = this_m0 * this_ew**2
+    #
+    cut_data = np.where((this_pturb>0) & (this_m0>0) & (this_r<=0.5))
+    this_m0 = this_m0[cut_data]
+    this_pturb = this_pturb[cut_data]
+    #
+    lirg_m0_center.extend(this_m0)
+    lirg_ew_center.extend(this_ew)
+    #
+    wp50 = weighted_percentile(this_pturb,0.50,this_m0)
+    wp16 = weighted_percentile(this_pturb,0.16,this_m0)
+    wp84 = weighted_percentile(this_pturb,0.84,this_m0)
+    #
+    list_wp16_center.append(wp16)
+    list_wp50_center.append(wp50)
+    list_wp84_center.append(wp84)
+    #
 lirg_pturb = np.array(lirg_m0) * np.array(lirg_ew)**2
 lirg_wp50 = weighted_percentile(lirg_pturb,0.50,lirg_m0)
 lirg_wp16 = weighted_percentile(lirg_pturb,0.16,lirg_m0)
 lirg_wp84 = weighted_percentile(lirg_pturb,0.84,lirg_m0)
+#
+lirg_pturb_center = np.array(lirg_m0_center) * np.array(lirg_ew_center)**2
+lirg_wp50_center = weighted_percentile(lirg_pturb_center,0.50,lirg_m0_center)
+lirg_wp16_center = weighted_percentile(lirg_pturb_center,0.16,lirg_m0_center)
+lirg_wp84_center = weighted_percentile(lirg_pturb_center,0.84,lirg_m0_center)
 #
 phangs_m0 = []
 phangs_ew = []
