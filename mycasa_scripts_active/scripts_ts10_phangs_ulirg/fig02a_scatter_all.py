@@ -142,6 +142,8 @@ ax3.spines["right"].set_visible(False)
 ax3.tick_params(left=False,right=False)
 ax3.set_xlabel(r"log $\Sigma_{\mathsf{mol,150pc}}$ ($M_{\odot}$ pc$^{-2}$)")
 #
+ax1.
+#
 plt.legend(ncol=4, loc="upper left")
 plt.savefig(dir_eps+"plot_scatter_all.png",dpi=200)
 
