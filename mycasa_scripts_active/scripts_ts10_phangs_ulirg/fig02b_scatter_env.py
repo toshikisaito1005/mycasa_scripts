@@ -17,6 +17,7 @@ plt.ioff()
 dir_proj = "/Users/saito/data/myproj_active/proj_ts10_phangs_ulirgs/data/"
 dir_eps = "/Users/saito/data/myproj_active/proj_ts10_phangs_ulirgs/eps/"
 galaxy = [s.split("/")[-1].split("_12m")[0] for s in glob.glob(dir_proj + "*mom0*")]
+galaxy_exclude = ["ic4518e", "mcg02-33-098", "ngc3256"]
 title_ulirg = str(len(galaxy)) + r" nearby (U)LIRGs " # ($\alpha_{\mathsf{CO}}$ = 0.8)"
 xlim = [-1,4.5]
 ylim = [-0.1,2.7]
@@ -60,6 +61,10 @@ def getdata(listgal, alphaco):
 #####################
 ### Main Procedure
 #####################
+for i in range(len(galaxy_exclude)):
+	galaxy.remove(galaxy_exclude[i])
+
+
 ### get data
 print("# get lirg data")
 lirg_m0, lirg_ew, lirg_r = getdata(galaxy, 0.8)
@@ -76,21 +81,21 @@ plt.rcParams["font.size"] = 20
 plt.rcParams["legend.fontsize"] = 18
 plt.subplots_adjust(bottom=0.15, left=0.20, right=0.90, top=0.85) 
 # plot ax1 scatter
-ax1.scatter(lirg_m0[lirg_r<=1.0], lirg_ew[lirg_r<=1.0], c="indianred", s=40, linewidths=0)
+ax1.scatter(lirg_m0[lirg_r<=central], lirg_ew[lirg_r<=central], c="indianred", s=40, linewidths=0)
 ax1.text(-0.8, 2.34, title_ulirg+"("+str("{:,}".format(len(lirg_m0)))+")", color="indianred")
 # plot ax1 contour
 #A, B, C = density_estimation(lirg_m0, lirg_ew, xlim, ylim)
 ax1.contourf(A, B, C, [0.05,0.2,1.0,C.max()], colors=[cm.Reds(3/4.),cm.Reds(3.3/4.),cm.Reds(3.6/4.),cm.Reds(3.9/4.)], linewidths=[1], alpha=0.5)
 ax1.contour(A, B, C, [0.05,0.2,1.0,C.max()], colors=["red"], linewidths=[0.5], alpha=0.3)
 # plot ax2 right
-histo = np.histogram(lirg_ew[lirg_r<=1.0], bins=bins, range=ylim)
+histo = np.histogram(lirg_ew[lirg_r<=central], bins=bins, range=ylim)
 x = np.delete(histo[1],-1)
 y = histo[0]/(histo[0].max()*1.05)
 height = (ylim[1]-ylim[0])/bins
 ax2.plot(y, x, drawstyle="steps", color="grey", lw=0.5)
 ax2.barh(x, y, height=height, lw=0, color="indianred", alpha=0.5)
 # plot ax3 bottom
-histo = np.histogram(lirg_m0[lirg_r<=1.0], bins=bins, range=xlim)
+histo = np.histogram(lirg_m0[lirg_r<=central], bins=bins, range=xlim)
 y = np.delete(histo[1],-1)
 x = histo[0]/(histo[0].max()*1.05)
 width = (xlim[1]-xlim[0])/bins
