@@ -17,9 +17,9 @@ dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 galname, i = "ngc3627", 1
 freqco10 = 115.27120
 freqco21 = 230.53800
-nbins = [20] # 10, 10, 20, 30, 40 # 30, 20, 20, 10, 10 # 40, 30, 25, 20, 15
+nbins = [10] # 10, 10, 20, 30, 40 # 30, 20, 20, 10, 10 # 40, 30, 25, 20, 15
 percentile = 84
-beams = ["16p0"] # "20p0", "16p0", "12p0", "08p0"
+beams = ["20p0"] # "20p0", "16p0", "12p0", "08p0"
 scales = [44/1.0, 52/1.3, 103/1.4]
 cnt_ras = [24.174, 170.063, 185.729]
 cnt_decs = [15.783, 12.9914, 15.8223]
@@ -405,7 +405,7 @@ def get_best_co21_parameter(
 	#
 	range_slope = np.linspace(0.95, 1.10, 16) #1.05-1.40, 1.05-1.40, 1.05-1.30, 1.05-1.30, 1.05-1.30 (n0628), 0.95-1.10 (n3627),     # np.linspace(0.95, 1.15, 16)
 	range_intercept = np.linspace(-0.40, 0.10, 11) # -0.45-020 (n0628), -0.40-0.10      # np.linspace(-0.45, -0.00, 11)
-	range_scatter = np.logspace(np.log10(2.0), np.log10(3.0), 11) # 0.5-1.8, 0.5-1.3, 0.5-1.0, 0.0-0.5, 0.0-0.2 (n0628), 2.5-3.5, 2.5-3.5 (n3627)
+	range_scatter = np.logspace(np.log10(1.5), np.log10(2.5), 11) # 0.5-1.8, 0.5-1.3, 0.5-1.0, 0.0-0.5, 0.0-0.2 (n0628), 2.5-3.5, 2.5-3.5, 2.0-3.0 (n3627)
 	#
 	best_mean = best_co10_parameter[0]
 	best_disp = best_co10_parameter[1]
