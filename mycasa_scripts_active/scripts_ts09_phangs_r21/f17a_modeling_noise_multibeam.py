@@ -14,19 +14,19 @@ import scripts_phangs_r21 as r21
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-galname, i = "ngc3627", 1
+galname, i = "ngc4321", 2
 freqco10 = 115.27120
 freqco21 = 230.53800
-nbins = [10] # 10, 10, 20, 30, 40 # 30, 20, 20, 10, 10 # 40, 30, 25, 20, 15
+nbins = [40] # 10, 10, 20, 30, 40 # 30, 20, 20, 10, 10 # 40, 30, 25, 20, 15
 percentile = 84
-beams = ["24p0"] # "20p0", "16p0", "12p0", "08p0"
+beams = ["04p0"] # "20p0", "16p0", "12p0", "08p0"
 scales = [44/1.0, 52/1.3, 103/1.4]
 cnt_ras = [24.174, 170.063, 185.729]
 cnt_decs = [15.783, 12.9914, 15.8223]
 pas = [180-21.1, 180-172.4, 180-157.8]
 incs = [90-8.7, 90-56.2, 90-35.1]
 def_nucleus = [50*44./1.0, 50*52./1.3*1.5, 30*103/1.4]
-intensitylims = [[-0.5,2.0], [0.0,2.5]]
+intensitylims = [[-0.5,2.0], [0.0,2.5], [0.0,2.0]]
 #
 nbins = nbins[0]
 scale = scales[i]
@@ -403,9 +403,9 @@ def get_best_co21_parameter(
 	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
 	#num_co21 = len(log_co21_mom0_k)
 	#
-	range_slope = np.linspace(0.95, 1.10, 16) #1.05-1.40, 1.05-1.40, 1.05-1.30, 1.05-1.30, 1.05-1.30 (n0628), 0.95-1.10 (n3627),     # np.linspace(0.95, 1.15, 16)
-	range_intercept = np.linspace(-0.40, 0.10, 11) # -0.45-020 (n0628), -0.40-0.10      # np.linspace(-0.45, -0.00, 11)
-	range_scatter = np.logspace(np.log10(1.5), np.log10(2.5), 11) # 0.5-1.8, 0.5-1.3, 0.5-1.0, 0.0-0.5, 0.0-0.2 (n0628), 2.5-3.5, 2.5-3.5, 2.0-3.0 (n3627)
+	range_slope = np.linspace(1.05, 1.15, 16) #1.05-1.40, 1.05-1.40, 1.05-1.30, 1.05-1.30, 1.05-1.30 (n0628), 0.95-1.10 (n3627),     # np.linspace(0.95, 1.15, 16)
+	range_intercept = np.linspace(-1.00, -0.50, 11) # -0.45-020 (n0628), -0.40-0.10      # np.linspace(-0.45, -0.00, 11)
+	range_scatter = np.logspace(np.log10(0.5), np.log10(1.8), 11) # 0.5-1.8, 0.5-1.3, 0.5-1.0, 0.0-0.5, 0.0-0.2 (n0628), 2.5-3.5, 2.5-3.5, 2.0-3.0, 1.5-2.5, 1.5-2.5 (n3627)
 	#
 	best_mean = best_co10_parameter[0]
 	best_disp = best_co10_parameter[1]
