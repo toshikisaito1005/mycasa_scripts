@@ -405,7 +405,7 @@ def get_best_co21_parameter(
 	#
 	range_slope = np.linspace(0.95, 1.10, 16) #1.05-1.40, 1.05-1.40, 1.05-1.30, 1.05-1.30, 1.05-1.30 (n0628), 0.95-1.10 (n3627),     # np.linspace(0.95, 1.15, 16)
 	range_intercept = np.linspace(-0.40, 0.10, 11) # -0.45-020 (n0628), -0.40-0.10      # np.linspace(-0.45, -0.00, 11)
-	range_scatter = np.logspace(np.log10(2.5), np.log10(3.5), 11) # 0.5-1.8, 0.5-1.3, 0.5-1.0, 0.0-0.5, 0.0-0.2 (n0628), 2.0-3.0 (n3627)
+	range_scatter = np.logspace(np.log10(2.5), np.log10(3.5), 11) # 0.5-1.8, 0.5-1.3, 0.5-1.0, 0.0-0.5, 0.0-0.2 (n0628), 2.5-3.5 (n3627)
 	#
 	best_mean = best_co10_parameter[0]
 	best_disp = best_co10_parameter[1]
