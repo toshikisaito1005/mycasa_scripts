@@ -14,7 +14,7 @@ import scripts_phangs_r21 as r21
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-galname, i = "ngc3627", `
+galname, i = "ngc3627", 1
 freqco10 = 115.27120
 freqco21 = 230.53800
 nbins = [30] # 10, 10, 20, 30, 40 # 30, 20, 20, 10, 10 # 40, 30, 25, 20, 15
@@ -401,9 +401,9 @@ def get_best_co21_parameter(
 	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
 	#num_co21 = len(log_co21_mom0_k)
 	#
-	range_slope = np.linspace(1.10, 1.30, 16) #1.40, 1.40, 1.3 (n0628),      # np.linspace(1.05, 1.15, 16) # np.linspace(0.95, 1.15, 16)
-	range_intercept = np.linspace(-1.20, -0.00, 16) # -1.20, -0.00, 16 (n0628),       # np.linspace(-0.45, -0.20, 11) # np.linspace(-0.45, -0.00, 11)
-	range_scatter = np.logspace(np.log10(0.01), np.log10(0.2), 11) # 0.5-1.8, 0.5-1.3, 0.5-1.0, 0.0-0.5, 0.0-0.2 n0628
+	range_slope = np.linspace(1.05, 1.15, 16) #1.40, 1.40, 1.3 (n0628),      # np.linspace(1.05, 1.15, 16) # np.linspace(0.95, 1.15, 16)
+	range_intercept = np.linspace(-0.45, -0.20, 11) # -1.20, -0.00, 16 (n0628),       # np.linspace(-0.45, -0.20, 11) # np.linspace(-0.45, -0.00, 11)
+	range_scatter = np.logspace(np.log10(0.5), np.log10(1.8), 11) # 0.5-1.8, 0.5-1.3, 0.5-1.0, 0.0-0.5, 0.0-0.2 (n0628),
 	#
 	best_mean = best_co10_parameter[0]
 	best_disp = best_co10_parameter[1]
