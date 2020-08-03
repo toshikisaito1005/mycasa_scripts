@@ -26,7 +26,7 @@ cnt_decs = [15.783, 12.9914, 15.8223]
 pas = [180-21.1, 180-172.4, 180-157.8]
 incs = [90-8.7, 90-56.2, 90-35.1]
 def_nucleus = [50*44./1.0, 50*52./1.3*1.5, 30*103/1.4]
-intensitylims = [[-0.5,2.0], [0.5,3.0]]
+intensitylims = [[-0.5,2.0], [0.0,2.5]]
 #
 nbins = nbins[0]
 scale = scales[i]
@@ -403,7 +403,7 @@ def get_best_co21_parameter(
 	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
 	#num_co21 = len(log_co21_mom0_k)
 	#
-	range_slope = np.linspace(1.05, 1.15, 16) #1.05-1.40, 1.05-1.40, 1.05-1.30, 1.05-1.30, 1.05-1.30 (n0628),      # np.linspace(1.05, 1.15, 16) # np.linspace(0.95, 1.15, 16)
+	range_slope = np.linspace(0.95, 1.15, 16) #1.05-1.40, 1.05-1.40, 1.05-1.30, 1.05-1.30, 1.05-1.30 (n0628), 0.95-1.15 (n3627),     # np.linspace(0.95, 1.15, 16)
 	range_intercept = np.linspace(-0.45, -0.20, 11) # -1.20, -0.00, 16 (n0628),       # np.linspace(-0.45, -0.20, 11) # np.linspace(-0.45, -0.00, 11)
 	range_scatter = np.logspace(np.log10(1.0), np.log10(2.0), 11) # 0.5-1.8, 0.5-1.3, 0.5-1.0, 0.0-0.5, 0.0-0.2 (n0628), 1.0-1.8 (n3627)
 	#
