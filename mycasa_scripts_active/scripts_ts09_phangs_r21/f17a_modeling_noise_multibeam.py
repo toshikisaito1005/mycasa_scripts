@@ -27,7 +27,7 @@ pas = [180-21.1, 180-172.4, 180-157.8]
 incs = [90-8.7, 90-56.2, 90-35.1]
 def_nucleus = [50*44./1.0, 50*52./1.3*1.5, 30*103/1.4]
 #
-nbins = nbins
+nbins = nbins[0]
 scale = scales[i]
 cnt_ra = cnt_ras[i]
 cnt_dec = cnt_decs[i]
