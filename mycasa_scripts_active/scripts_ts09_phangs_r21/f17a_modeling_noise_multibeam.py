@@ -26,6 +26,7 @@ cnt_decs = [15.783, 12.9914, 15.8223]
 pas = [180-21.1, 180-172.4, 180-157.8]
 incs = [90-8.7, 90-56.2, 90-35.1]
 def_nucleus = [50*44./1.0, 50*52./1.3*1.5, 30*103/1.4]
+intensitylims = [[-0.5,2.0], [0.5,3.0]]
 #
 nbins = nbins[0]
 scale = scales[i]
@@ -34,6 +35,7 @@ cnt_dec = cnt_decs[i]
 pa = pas[i]
 inc = incs[i]
 def_nucleus = def_nucleus[i]
+intensitylim = intensitylims[i]
 
 
 #####################
@@ -401,7 +403,7 @@ def get_best_co21_parameter(
 	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
 	#num_co21 = len(log_co21_mom0_k)
 	#
-	range_slope = np.linspace(1.05, 1.15, 16) #1.40, 1.40, 1.3 (n0628),      # np.linspace(1.05, 1.15, 16) # np.linspace(0.95, 1.15, 16)
+	range_slope = np.linspace(1.05, 1.15, 16) #1.05-1.40, 1.05-1.40, 1.05-1.30, 1.05-1.30, 1.05-1.30 (n0628),      # np.linspace(1.05, 1.15, 16) # np.linspace(0.95, 1.15, 16)
 	range_intercept = np.linspace(-0.45, -0.20, 11) # -1.20, -0.00, 16 (n0628),       # np.linspace(-0.45, -0.20, 11) # np.linspace(-0.45, -0.00, 11)
 	range_scatter = np.logspace(np.log10(1.0), np.log10(2.0), 11) # 0.5-1.8, 0.5-1.3, 0.5-1.0, 0.0-0.5, 0.0-0.2 (n0628), 1.0-1.8 (n3627)
 	#
@@ -697,8 +699,8 @@ for j in range(len(beams)):
 		ax1.plot(log_co10_mom0_k_model_scatter_noise_cut, log_co21_mom0_k_model_scatter_noise_cut, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=-1e22, label="Model with Scatter+Noise")
 		ax1.plot(log_co10_mom0_k, log_co21_mom0_k, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0, zorder=-1e24, label="Observed Data")
 		ax1.plot([-0.5,3.0], [-0.5,3.0], "k--", lw=5)
-		ax1.set_xlim([-0.5,2.0])
-		ax1.set_ylim([-0.5,2.0])
+		ax1.set_xlim(intensitylim)
+		ax1.set_ylim(intensitylim)
 		#
 		ax1.legend(loc = "upper left")
 		plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0_"+galname+"_"+this_beam+".png",dpi=200)
@@ -727,7 +729,7 @@ for j in range(len(beams)):
 		ax1.plot(log_co21_mom0_k_model_scatter_cut, r21_model_scatter, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=-1e20)
 		ax1.plot(log_co21_mom0_k_model_scatter_noise_cut, r21_model_scatter_noise, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=-1e22)
 		ax1.plot(log_co21_mom0_k, r21, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0, zorder=-1e24)
-		ax1.set_xlim([-0.5,2.0])
+		ax1.set_xlim(intensitylim)
 		ax1.set_ylim([-1.2,0.5])
 		#
 		plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21_"+galname+"_"+this_beam+".png",dpi=200)
