@@ -161,6 +161,7 @@ convert -crop 1970x320+15+0 $dir_data"histo_mask_piechart.png" $dir_data"histo_m
 convert -crop 1970x400+15+0 $dir_data"histo_mask_env.png" $dir_data"histo_mask_envb.png"
 
 convert -append -border 0x0 $dir_data"histo_mask_gmcb.png" $dir_data"histo_mask_piechartb.png" $dir_data"histo_mask_envb.png" eps2:$dir_data"fig13.eps"
+convert -append -border 0x0 $dir_data"histo_mask_gmcb.png" $dir_data"histo_mask_piechartb.png" $dir_data"histo_mask_envb.png" $dir_data"fig13.png"
 
 rm -rf $dir_data"histo_mask_gmc.png" $dir_data"histo_mask_gmcb.png"
 rm -rf $dir_data"histo_mask_env.png" $dir_data"histo_mask_envb.png"
@@ -172,6 +173,7 @@ convert -crop 2000x585+40+80 $dir_data"scatter_piechart.png" $dir_data"scatter_p
 convert -crop 2000x650+40+80 $dir_data"scatter_mask_env.png" $dir_data"scatter_mask_env.png"
 
 convert -append -border 0x0 $dir_data"scatter_mask_gmcb.png" $dir_data"scatter_piechart.png" $dir_data"scatter_mask_env.png" eps2:$dir_data"fig13b.eps"
+convert -append -border 0x0 $dir_data"scatter_mask_gmcb.png" $dir_data"scatter_piechart.png" $dir_data"scatter_mask_env.png" $dir_data"fig13b.png"
 
 ### figure 13c
 convert -crop 2000x450+5+55 $dir_data"scatter_mask_env_piechart_ngc0628.png" $dir_data"scatter_mask_env_piechart_ngc0628b.png"
