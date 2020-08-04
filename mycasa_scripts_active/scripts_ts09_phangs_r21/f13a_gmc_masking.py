@@ -93,11 +93,11 @@ for i in range(len(txtfile)):
     co10_outmask = co10[gmcmask==0]
     co21_outmask = co21[gmcmask==0]
     #
-    data_inmask_norm = data_inmask / np.median(data_inmask)
+    data_inmask_norm = data_inmask / np.median(data)
     data_inmask_all.extend(data_inmask)
     data_inmask_norm_all.extend(data_inmask_norm)
     #
-    data_outmask_norm = data_outmask / np.median(data_outmask)
+    data_outmask_norm = data_outmask / np.median(data)
     data_outmask_all.extend(data_outmask)
     data_outmask_norm_all.extend(data_outmask_norm)
     #
@@ -125,14 +125,14 @@ histo_all = np.histogram(data_all, bins=nbins, range=(xlim), weights=None)
 x_all, y_all = np.delete(histo_all[1],-1),histo_all[0]
 ## in
 #
-histo_inmask_all = np.histogram(data_inmask_all, bins=nbins, range=(xlim), weights=None)
+histo_inmask_all = np.histogram(data_inmask_norm_all, bins=nbins, range=(xlim), weights=None)
 x_ino, y_ino = np.delete(histo_inmask_all[1],-1),histo_inmask_all[0]
 x_in = x_ino
 y_in = y_ino / float(sum(y_ino))
 #
 ## out
 #
-histo_outmask_all = np.histogram(data_outmask_all, bins=nbins, range=(xlim), weights=None)
+histo_outmask_all = np.histogram(data_outmask_norm_all, bins=nbins, range=(xlim), weights=None)
 x_outo, y_outo = np.delete(histo_outmask_all[1],-1),histo_outmask_all[0]
 x_out = x_outo
 y_out = y_outo / float(sum(y_outo))
@@ -185,7 +185,7 @@ plt.rcParams["legend.fontsize"] = 9
 ylim = [0.0001, np.r_[y_in, y_out].max()*1.4]
 ax1.step(x_in, y_in, color=cm.bwr(1/1.), lw=1, alpha=1.0, where="mid")
 ax1.bar(x_in, y_in, lw=0, color=cm.bwr(1/1.), alpha=0.2, width=x_in[1]-x_in[0], align="center", label="inside mask")
-ax1.plot(p50_in, ylim[1]*0.95, "o", markeredgewidth=0, c=cm.bwr(1/1.), markersize=7, zorder=1)
+ax1.plot(p50_in_norm, ylim[1]*0.95, "o", markeredgewidth=0, c=cm.bwr(1/1.), markersize=7, zorder=1)
 ax1.plot([p16_in, p84_in], [ylim[1]*0.95, ylim[1]*0.95], "-", c=cm.bwr(1/1.), lw=2, zorder=0)
 #
 ax1.step(x_out, y_out, color=cm.bwr(0/1.), lw=1, alpha=1.0, where="mid")
