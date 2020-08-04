@@ -196,6 +196,7 @@ ax1.plot([p16_out_norm, p84_out_norm], [ylim[1]*0.88, ylim[1]*0.88], "-", c=cm.b
 ax1.set_xlabel("Normed$R_{21}$")
 ax1.set_xlim([x_in.min(),x_in.max()])
 ax1.set_ylim(ylim)
+ax1.legend()
 ax1.set_title("Cloud Masked Histogram")
 
 # ax2
@@ -210,7 +211,6 @@ ax2.bar(x_in, -1*(1-fraction), color=cm.bwr(0/1.), alpha=0.2, width=x_in[1]-x_in
 ax2.set_xlabel("Normed $R_{21}$")
 ax2.set_xlim([x_in.min(),x_in.max()])
 ax2.set_ylim([0.0001,1])
-ax2.legend()
 ax2.set_title("Fraction")
 
 # save

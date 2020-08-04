@@ -235,7 +235,7 @@ plt.rcParams["font.size"] = 11
 plt.rcParams["legend.fontsize"] = 9
 
 # ax1
-ylim = [0.0001, np.r_[y_0, y_1, y_2, y_3].max()*1.4]
+ylim = [0.0001, np.r_[y_0, y_1, y_2, y_3].max()*1.45]
 ax1.step(x_0, y_0, color=cm.gnuplot(0/3.5), lw=1, alpha=1.0, where="mid")
 ax1.bar(x_0, y_0, lw=0, color=cm.gnuplot(0/3.5), alpha=0.2, width=x_0[1]-x_0[0], align="center", label="inter-arm")
 ax1.plot(p50_0, ylim[1]*0.95, "o", markeredgewidth=0, c=cm.gnuplot(0/3.5), markersize=7, zorder=1)
@@ -263,10 +263,11 @@ ax1.plot(p50_4, ylim[1]*0.67, "o", markeredgewidth=0, c=cm.gnuplot(4/5.), marker
 ax1.plot([p16_4, p84_4], [ylim[1]*0.67, ylim[1]*0.67], "-", c=cm.gnuplot(4/5.), lw=2, zorder=0)
 """
 #
-ax1.set_xlabel("$R_{21}$")
+ax1.set_xlabel("Normed $R_{21}$")
 ax1.set_xlim([x_0.min(),x_0.max()])
 ax1.set_ylim(ylim)
-ax1.set_title("Histogram with Environmental Mask")
+ax1.legend(ncol=1)
+ax1.set_title("Environmental Masked Histogram")
 
 # ax2
 fraction_0 = y_0.astype(float)/(y_0+y_1+y_2+y_3)
@@ -288,10 +289,9 @@ ax2.bar(x_0, fraction_2, bottom=fraction_0+fraction_1, color=cm.gnuplot(2/3.5), 
 ax2.bar(x_0, fraction_3, bottom=fraction_0+fraction_1+fraction_2, color=cm.gnuplot(3/3.5), alpha=0.2, width=x_3[1]-x_3[0], align="center", lw=0, label="bar/bar-end")
 
 #
-ax2.set_xlabel("$R_{21}$")
+ax2.set_xlabel("Normed $R_{21}$")
 ax2.set_xlim([x_0.min(),x_0.max()])
 ax2.set_ylim([0.0001,1])
-ax2.legend(ncol=2)
 ax2.set_title("Fraction")
 
 # save
