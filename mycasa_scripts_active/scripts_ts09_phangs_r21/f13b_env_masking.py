@@ -321,6 +321,8 @@ levels = [10,45,80]
 bins_contour = 20
 ax1.set_xlim(xlim)
 ax1.set_ylim(ylim)
+ax1.legend(loc="upper left")
+ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.03, ylim[0]+(ylim[1]-ylim[0])*0.9, "NGC 0628 (Environmental Mask)")
 co21_masks_all = [np.log10(co21_mask0_all[0]), np.log10(co21_mask1_all[0]), np.log10(co21_mask2_all[0]), np.log10(co21_mask3_all[0])]
 r21_masks_all = [np.log10(co21_mask0_all[0]/co10_mask0_all[0]), np.log10(co21_mask1_all[0]/co10_mask1_all[0]), np.log10(co21_mask2_all[0]/co10_mask2_all[0]), np.log10(co21_mask3_all[0]/co10_mask3_all[0])]
 for i in range(4):
@@ -334,6 +336,8 @@ xlim = [-0.3,2.7]
 ylim = [-1.0,0.7]
 ax2.set_xlim(xlim)
 ax2.set_ylim(ylim)
+ax2.legend(loc="upper left")
+ax2.text(xlim[0]+(xlim[1]-xlim[0])*0.03, ylim[0]+(ylim[1]-ylim[0])*0.9, "NGC 3627 (Environmental Mask)")
 co21_masks_all = [np.log10(co21_mask0_all[1]), np.log10(co21_mask1_all[1]), np.log10(co21_mask2_all[1]), np.log10(co21_mask3_all[1])]
 r21_masks_all = [np.log10(co21_mask0_all[1]/co10_mask0_all[1]), np.log10(co21_mask1_all[1]/co10_mask1_all[1]), np.log10(co21_mask2_all[1]/co10_mask2_all[1]), np.log10(co21_mask3_all[1]/co10_mask3_all[1])]
 for i in range(4):
@@ -347,6 +351,8 @@ xlim = [-0.3,2.7]
 ylim = [-1.2,0.4]
 ax3.set_xlim(xlim)
 ax3.set_ylim(ylim)
+ax3.legend(loc="upper left")
+ax3.text(xlim[0]+(xlim[1]-xlim[0])*0.03, ylim[0]+(ylim[1]-ylim[0])*0.9, "NGC 4321 (Environmental Mask)")
 co21_masks_all = [np.log10(co21_mask0_all[2]), np.log10(co21_mask1_all[2]), np.log10(co21_mask2_all[2]), np.log10(co21_mask3_all[2])]
 r21_masks_all = [np.log10(co21_mask0_all[2]/co10_mask0_all[2]), np.log10(co21_mask1_all[2]/co10_mask1_all[2]), np.log10(co21_mask2_all[2]/co10_mask2_all[2]), np.log10(co21_mask3_all[2]/co10_mask3_all[2])]
 for i in range(4):

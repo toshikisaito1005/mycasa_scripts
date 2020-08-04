@@ -239,6 +239,8 @@ levels = [10,45,80]
 bins_contour = 20
 ax1.set_xlim(xlim)
 ax1.set_ylim(ylim)
+ax1.legend(loc="upper left")
+ax1.text(xlim[0]+(xlim[1]-xlim[0])*0.03, ylim[0]+(ylim[1]-ylim[0])*0.9, "NGC 0628 (HII Region Mask)")
 co21_masks_all = [np.log10(co21_inmask_all[0]), np.log10(co21_outmask_all[0])]
 r21_masks_all = [np.log10(co21_inmask_all[0]/co10_inmask_all[0]), np.log10(co21_outmask_all[0]/co10_outmask_all[0])]
 for i in range(2):
@@ -252,6 +254,8 @@ xlim = [-0.3,2.7]
 ylim = [-1.0,0.7]
 ax2.set_xlim(xlim)
 ax2.set_ylim(ylim)
+ax2.legend(loc="upper left")
+ax2.text(xlim[0]+(xlim[1]-xlim[0])*0.03, ylim[0]+(ylim[1]-ylim[0])*0.9, "NGC 3627 (HII Region Mask)")
 co21_masks_all = [np.log10(co21_inmask_all[1]), np.log10(co21_outmask_all[1])]
 r21_masks_all = [np.log10(co21_inmask_all[1]/co10_inmask_all[1]), np.log10(co21_outmask_all[1]/co10_outmask_all[1])]
 for i in range(2):
@@ -265,6 +269,8 @@ xlim = [-0.3,2.7]
 ylim = [-1.2,0.4]
 ax3.set_xlim(xlim)
 ax3.set_ylim(ylim)
+ax3.legend(loc="upper left")
+ax3.text(xlim[0]+(xlim[1]-xlim[0])*0.03, ylim[0]+(ylim[1]-ylim[0])*0.9, "NGC 4321 (HII Region Mask)")
 co21_masks_all = [np.log10(co21_inmask_all[2]), np.log10(co21_outmask_all[2])]
 r21_masks_all = [np.log10(co21_inmask_all[2]/co10_inmask_all[2]), np.log10(co21_outmask_all[2]/co10_outmask_all[2])]
 for i in range(2):
