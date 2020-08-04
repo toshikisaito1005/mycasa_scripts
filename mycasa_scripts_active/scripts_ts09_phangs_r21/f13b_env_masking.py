@@ -19,7 +19,7 @@ plt.ioff()
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 nbins = 40
 def_nucleus = [50*44./1.0,50*52./1.3,30*103/1.4]
-xlim = [0,2.5]
+xlim = [0,2.2]
 beamsizes = [4.0,8.0,4.0]
 
 
@@ -252,7 +252,7 @@ ax1.plot(p50_2, ylim[1]*0.81, "o", markeredgewidth=0, c=cm.gnuplot(2/3.5), marke
 ax1.plot([p16_2, p84_2], [ylim[1]*0.81, ylim[1]*0.81], "-", c=cm.gnuplot(2/3.5), lw=2, zorder=0)
 #
 ax1.step(x_3, y_3, color=cm.gnuplot(3/3.5), lw=1, alpha=1.0, where="mid")
-ax1.bar(x_3, y_3, lw=0, color=cm.gnuplot(3/3.5), alpha=0.2, width=x_3[1]-x_3[0], align="center", label="bar + bar-end")
+ax1.bar(x_3, y_3, lw=0, color=cm.gnuplot(3/3.5), alpha=0.2, width=x_3[1]-x_3[0], align="center", label="bar/bar-end")
 ax1.plot(p50_3, ylim[1]*0.74, "o", markeredgewidth=0, c=cm.gnuplot(3/3.5), markersize=7, zorder=1)
 ax1.plot([p16_3, p84_3], [ylim[1]*0.74, ylim[1]*0.74], "-", c=cm.gnuplot(3/3.5), lw=2, zorder=0)
 """
