@@ -245,7 +245,7 @@ for i in range(2):
     ax1.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
     H, xedges, yedges = np.histogram2d(r21_masks_all[i],co21_masks_all[i],bins=bins_contour,range=(ylim,xlim))
     extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
-    ax1.contour(H/H.max()*100,levels=levels,extent=extent,colors=[cm.PiYG(i/1.)],zorder=1e9,linewidths=2,alpha=1.0)
+    ax1.contour(H/H.max()*100,levels=levels,extent=extent,colors=[cm.PiYG(abs(i/1.-1))],zorder=1e9,linewidths=2,alpha=1.0)
 
 #
 xlim = [-0.3,2.7]
@@ -258,7 +258,7 @@ for i in range(2):
     ax2.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
     H, xedges, yedges = np.histogram2d(r21_masks_all[i],co21_masks_all[i],bins=bins_contour,range=(ylim,xlim))
     extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
-    ax2.contour(H/H.max()*100,levels=levels,extent=extent,colors=[cm.PiYG(i/1.)],zorder=1e9,linewidths=2,alpha=1.0)
+    ax2.contour(H/H.max()*100,levels=levels,extent=extent,colors=[cm.PiYG(abs(i/1.-1))],zorder=1e9,linewidths=2,alpha=1.0)
 
 #
 xlim = [-0.3,2.7]
@@ -271,7 +271,7 @@ for i in range(2):
     ax3.scatter(co21_masks_all[i], r21_masks_all[i], c="grey", alpha=0.2, linewidths=0, s=5, zorder=1)
     H, xedges, yedges = np.histogram2d(r21_masks_all[i],co21_masks_all[i],bins=bins_contour,range=(ylim,xlim))
     extent = [yedges[0],yedges[-1],xedges[0],xedges[-1]]
-    ax3.contour(H/H.max()*100,levels=levels,extent=extent,colors=[cm.PiYG(i/1.)],zorder=1e9,linewidths=2,alpha=1.0)
+    ax3.contour(H/H.max()*100,levels=levels,extent=extent,colors=[cm.PiYG(abs(i/1.-1))],zorder=1e9,linewidths=2,alpha=1.0)
 # save
 plt.savefig(dir_product+"scatter_piechart.png",dpi=200)
 
