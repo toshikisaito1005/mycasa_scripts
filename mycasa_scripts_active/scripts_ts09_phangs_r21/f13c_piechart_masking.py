@@ -192,10 +192,11 @@ ax1.bar(x_out, y_out, lw=0, color=cm.PiYG(0/1.), alpha=0.2, width=x_out[1]-x_out
 ax1.plot(p50_out_norm, ylim[1]*0.88, "o", markeredgewidth=0, c=cm.PiYG(0/1.), markersize=7, zorder=1)
 ax1.plot([p16_out_norm, p84_out_norm], [ylim[1]*0.88, ylim[1]*0.88], "-", c=cm.PiYG(0/1.), lw=2, zorder=0)
 #
-ax1.set_xlabel("$R_{21}$")
+ax1.set_xlabel("Normed $R_{21}$")
 ax1.set_xlim([x_in.min(),x_in.max()])
 ax1.set_ylim(ylim)
-ax1.set_title("Histogram with HII Region")
+ax1.legend()
+ax1.set_title("HII Region Masked Histogram")
 
 # ax2
 fraction = y_ino.astype(float)/(y_ino+y_outo)
@@ -206,10 +207,9 @@ ax2.step(x_in, fraction, color="black", lw=1, where="mid")
 ax2.bar(x_in, fraction, color=cm.PiYG(1/1.), alpha=0.2, width=x_in[1]-x_in[0], align="center", lw=0, label="inside mask")
 ax2.bar(x_in, -1*(1-fraction), color=cm.PiYG(0/1.), alpha=0.2, width=x_in[1]-x_in[0], align="center", lw=0, bottom=1.0, label="outside mask")
 #
-ax2.set_xlabel("$R_{21}$")
+ax2.set_xlabel("Normed $R_{21}$")
 ax2.set_xlim([x_in.min(),x_in.max()])
 ax2.set_ylim([0.0001,1])
-ax2.legend(loc="lower right")
 ax2.set_title("Fraction")
 
 # save
