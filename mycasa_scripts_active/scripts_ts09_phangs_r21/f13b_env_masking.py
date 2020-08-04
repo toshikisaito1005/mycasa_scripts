@@ -19,7 +19,7 @@ plt.ioff()
 dir_product = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/eps/"
 nbins = 40
 def_nucleus = [50*44./1.0,50*52./1.3,30*103/1.4]
-xlim = [0,1.45]
+xlim = [0,2.5]
 beamsizes = [4.0,8.0,4.0]
 
 
@@ -105,11 +105,10 @@ for i in range(len(txtfile)):
     co21_mask3 = co21[gmcmask>=3]
     #co21_mask4 = data[gmcmask==4]
     #
-    data_all.extend(data)
-    data_mask0_all.extend(data_mask0)
-    data_mask1_all.extend(data_mask1)
-    data_mask2_all.extend(data_mask2)
-    data_mask3_all.extend(data_mask3)
+    data_mask0_all.extend(data_mask0 / np.median(data))
+    data_mask1_all.extend(data_mask1 / np.median(data))
+    data_mask2_all.extend(data_mask2 / np.median(data))
+    data_mask3_all.extend(data_mask3 / np.median(data))
     #data_mask4_all.extend(data_mask4)
     #
     Jy2K_co10 = 1.222e6 / beamsizes[i]**2 / 115.27120**2
@@ -125,7 +124,6 @@ for i in range(len(txtfile)):
     co21_mask3_all.append(co21_mask3 * Jy2K_co21)
     #co21_mask4_all.append(co21_mask4 * Jy2K_co21)
 #
-data_all = np.array(data_all)
 data_mask0_all = np.array(data_mask0_all)
 data_mask1_all = np.array(data_mask1_all)
 data_mask2_all = np.array(data_mask2_all)
@@ -134,10 +132,6 @@ data_mask3_all = np.array(data_mask3_all)
 
 
 ### histogram and stats
-## all
-#
-histo_all = np.histogram(data_all, bins=nbins, range=(xlim), weights=None)
-x_all, y_all = np.delete(histo_all[1],-1),histo_all[0]
 ## 0
 #
 histo_mask0_all = np.histogram(data_mask0_all, bins=nbins, range=(xlim), weights=None)
