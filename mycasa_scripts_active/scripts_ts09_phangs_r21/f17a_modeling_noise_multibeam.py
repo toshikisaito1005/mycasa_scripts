@@ -41,7 +41,7 @@ range_slopes_co21 = [[1.10,1.25], # [1.10,1.25], 1.05-1.40, 1.05-1.30, 1.05-1.30
 range_intercepts_co21 = [[-0.80,-0.30], # [-0.80,-0.30]
 						 [], # -0.40-0.10
 						 []] # -1.00--0.50, -1.00--0.50, -0.80--0.00, -0.80--0.00
-range_scatters_co21 = [[np.log10(1.3),np.log10(1.8)], # [np.log10(1.0),np.log10(1.8)], 0.5-1.3, 0.5-1.0, 0.0-0.5, 0.0-0.2
+range_scatters_co21 = [[np.log10(1.3),np.log10(1.6)], # [np.log10(1.0),np.log10(1.8)], 0.5-1.3, 0.5-1.0, 0.0-0.5, 0.0-0.2
 					   [], # 2.5-3.5, 2.5-3.5, 2.0-3.0, 1.5-2.5, 1.5-2.5
 					   []] # 0.5-1.8, 0.5-1.8, 0.5-1.3, 0.5-1.3, 0.2-1.0
 #
@@ -602,7 +602,7 @@ for j in range(len(beams)):
 	#####################
 	list_best_co10_parameter = []
 	list_best_co21_parameter = []
-	for i in range(10):
+	for i in range(100):
 		print("### bootstrap " + str(i+1).zfill(3) + "/100")
 		os.system("rm -rf " + dir_proj + "eps/best_co10_model_parameter.txt")
 		os.system("rm -rf " + dir_proj + "eps/best_co21_model_parameter.txt")
