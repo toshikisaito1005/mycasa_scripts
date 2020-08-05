@@ -17,10 +17,10 @@ dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 galname = "ngc0628"
 freqco10 = 115.27120
 freqco21 = 230.53800
-nbins = 10
+nbins = 40
 percentile = 84
 
-beams = ["20p0"] # ["04p0","08p0","12p0","16p0","20p0"]
+beams = ["08p0"] # ["04p0","08p0","12p0","16p0","20p0"]
 
 
 #####################
