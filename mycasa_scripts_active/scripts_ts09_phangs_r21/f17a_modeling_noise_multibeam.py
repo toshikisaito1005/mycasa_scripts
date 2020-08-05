@@ -17,7 +17,7 @@ dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 galname, i = "ngc0628", 0
 freqco10 = 115.27120
 freqco21 = 230.53800
-nbins = [30] # 40, 30, 20, 10, 10 # 30, 20, 20, 10, 10 # 40, 30, 25, 20, 15
+nbins = [40] # 40, 30, 20, 10, 10 # 30, 20, 20, 10, 10 # 40, 30, 25, 20, 15
 percentile = 84
 beams = ["08p0"] # "20p0", "16p0", "12p0", "08p0"
 scales = [44/1.0, 52/1.3, 103/1.4]
@@ -34,9 +34,12 @@ range_scatters_co10 = [[np.log10(0.01), np.log10(1.5)],
 range_slopes_co21 = [[1.05, 1.40], #1.05-1.40, 1.05-1.40, 1.05-1.30, 1.05-1.30, 1.05-1.30
 					 [], # 0.95-1.10
 					 []] # 1.00-1.15
-range_intercepts_co21 = [[], #  -0.45-0.20
+range_intercepts_co21 = [[-0.45, 0.20],
 						 [], # -0.40-0.10
 						 []] # -1.00--0.50, -1.00--0.50, -0.80--0.00, -0.80--0.00
+range_scatters_co21 = [[np.log10(0.5), np.log10(1.8)], # 0.5-1.8, 0.5-1.3, 0.5-1.0, 0.0-0.5, 0.0-0.2
+					   [], # 2.5-3.5, 2.5-3.5, 2.0-3.0, 1.5-2.5, 1.5-2.5
+					   []] # 0.5-1.8, 0.5-1.8, 0.5-1.3, 0.5-1.3, 0.2-1.0
 #
 nbins = nbins[0]
 scale = scales[i]
@@ -50,6 +53,7 @@ intensitylim = intensitylims[i]
 range_scatter_co10 = range_scatters_co10[i]
 range_slope_co21 = range_slopes_co21[i]
 range_intercept_co21 = range_intercepts_co21[i]
+range_scatter_co21 = range_scatters_co21[i]
 
 
 #####################
@@ -423,7 +427,7 @@ def get_best_co21_parameter(
 	#
 	range_slope = np.linspace(range_slope_co21[0], range_slope_co21[1], 16)
 	range_intercept = np.linspace(range_intercept_co21[0], range_intercept_co21[1], 11)
-	range_scatter = np.logspace(range_scatter_co21[0], np.log10(1.0), 11) # 0.5-1.8, 0.5-1.3, 0.5-1.0, 0.0-0.5, 0.0-0.2 (n0628), 2.5-3.5, 2.5-3.5, 2.0-3.0, 1.5-2.5, 1.5-2.5 (n3627), 0.5-1.8, 0.5-1.8, 0.5-1.3, 0.5-1.3, 0.2-1.0
+	range_scatter = np.logspace(range_scatter_co21[0], range_scatter_co21[1], 11)
 	#
 	best_mean = best_co10_parameter[0]
 	best_disp = best_co10_parameter[1]
@@ -593,7 +597,7 @@ for j in range(len(beams)):
 	#####################
 	list_best_co10_parameter = []
 	list_best_co21_parameter = []
-	for i in range(100):
+	for i in range(1):
 		print("### bootstrap " + str(i+1).zfill(3) + "/100")
 		os.system("rm -rf " + dir_proj + "eps/best_co10_model_parameter.txt")
 		os.system("rm -rf " + dir_proj + "eps/best_co21_model_parameter.txt")
@@ -602,7 +606,7 @@ for j in range(len(beams)):
 		#log_co10_mom0_k_model_for_co21, log_co10_mom0_k_model_scatter_for_co21 = get_best_co10_parameter(dir_proj, log_co10_mom0_k, log_co10_noise_k, xbins_co10, nbins, best_co10_parameter)
 		#
 		### get best parameters for co21 model
-		best_co21_parameter = get_best_co21_parameter(dir_proj, best_co10_parameter, log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, nbins)
+		best_co21_parameter = get_best_co21_parameter(dir_proj, best_co10_parameter, log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, nbins, range_slope_co21, range_intercept_co21, range_scatter_co21)
 		#
 		### output
 		list_best_co10_parameter.append(best_co10_parameter.tolist())
