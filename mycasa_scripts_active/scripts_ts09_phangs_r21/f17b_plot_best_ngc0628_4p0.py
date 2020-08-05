@@ -9,18 +9,34 @@ plt.ioff()
 #
 import scripts_phangs_r21 as r21
 
+# n0628: 04p0
+# n3627: 08p0
+# n4321: 04p0
+
 
 #####################
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-galname = "ngc3627"
+galname = "ngc4321"
 freqco10 = 115.27120
 freqco21 = 230.53800
 nbins = 30
 percentile = 84
-
 beams = ["08p0"] # ["04p0","08p0","12p0","16p0","20p0"]
+scales = [44/1.0, 52/1.3, 103/1.4]
+cnt_ras = [24.174, 170.063, 185.729]
+cnt_decs = [15.783, 12.9914, 15.8223]
+pas = [180-21.1, 180-172.4, 180-157.8]
+incs = [90-8.7, 90-56.2, 90-35.1]
+def_nucleus = [50*44./1.0, 50*52./1.3*1.5, 30*103/1.4]
+#
+scale = scales[i]
+cnt_ra = cnt_ras[i]
+cnt_dec = cnt_decs[i]
+pa = pas[i]
+inc = incs[i]
+def_nucleus = def_nucleus[i]
 
 
 #####################
@@ -67,6 +83,12 @@ def getdata(
 	co21_noise,
 	freqco10,
 	freqco21,
+	pa,
+	inc,
+	cnt_ra,
+	cnt_dec,
+	scale,
+	def_nucleus,
 	):
 	"""
 	"""
