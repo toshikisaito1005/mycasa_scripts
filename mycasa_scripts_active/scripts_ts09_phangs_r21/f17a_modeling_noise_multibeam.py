@@ -17,11 +17,11 @@ dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 galname, i = "ngc0628", 0
 freqco10 = 115.27120
 freqco21 = 230.53800
-nbins = [30, # 40, 30, 20, 10, 10
+nbins = [20, # 40, 30, 30, 20, 10
 		 30, # 30, 20, 20, 10, 10
 		 40] # 40, 30, 25, 20, 15
 percentile = 84
-beams = [["12p0"], # n0628
+beams = [["16p0"], # n0628
 		 ["08p0"], # n3627
 		 ["04p0"]] # n4321
 scales = [44/1.0, 52/1.3, 103/1.4]
