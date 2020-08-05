@@ -353,7 +353,7 @@ for i in range(len(beams)):
 	dataco21 = np.loadtxt(dir_proj + "eps/bootstrap_co21_models_"+galname+"_"+beams[i]+".txt")
 	best_co10_parameter = np.median(dataco10, axis=0)
 	best_co21_parameter = np.median(dataco21, axis=0)
-	best_co21_parameter[2] = best_co21_parameter[2]
+	best_co21_parameter[2] = best_co21_parameter[2]-0.10
 
 	### print parameters
 	print("### co10 norm mean     = " + str(np.round(np.percentile(dataco10, 16, axis=0)[0], 3)) + ", " + str(np.round(np.percentile(dataco10, 50, axis=0)[0], 3)) + ", " + str(np.round(np.percentile(dataco10, 84, axis=0)[0], 3)))
