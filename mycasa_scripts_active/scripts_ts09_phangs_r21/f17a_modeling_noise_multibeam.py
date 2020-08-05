@@ -14,7 +14,7 @@ import scripts_phangs_r21 as r21
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-galname, i = "ngc0628", 0
+galname, i = "ngc3627", 1 # "ngc0628", 0
 freqco10 = 115.27120
 freqco21 = 230.53800
 nbins = [40, # 40, 30, 20, 10, 10
@@ -36,7 +36,7 @@ range_scatters_co10 = [[np.log10(0.01), np.log10(1.5)],
 					   [np.log10(0.01), np.log10(1.5)],
 					   [np.log10(0.01), np.log10(1.5)]]
 range_slopes_co21 = [[1.12,1.18], # [1.12,1.18], 1.05-1.40, 1.05-1.30, 1.05-1.30, 1.05-1.30
-					 [], # 0.95-1.10
+					 [0.95,1.10], # [0.95,1.10]
 					 []] # 1.00-1.15
 range_intercepts_co21 = [[-0.60,-0.30], # [-0.60,-0.30]
 						 [], # -0.40-0.10
