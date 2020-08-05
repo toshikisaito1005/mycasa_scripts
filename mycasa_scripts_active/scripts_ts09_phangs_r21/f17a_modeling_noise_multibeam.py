@@ -33,7 +33,7 @@ intensitylims = [[-0.5,2.0], [0.0,2.5], [0.0,2.0]]
 range_scatters_co10 = [[np.log10(0.01), np.log10(1.5)],
 					   [np.log10(0.01), np.log10(1.5)],
 					   [np.log10(0.01), np.log10(1.5)]]
-range_slopes_co21 = [[1.05, 1.40], #1.05-1.40, 1.05-1.40, 1.05-1.30, 1.05-1.30, 1.05-1.30
+range_slopes_co21 = [[1.05, 1.40], # [1.10, 1.40], 1.05-1.40, 1.05-1.30, 1.05-1.30, 1.05-1.30
 					 [], # 0.95-1.10
 					 []] # 1.00-1.15
 range_intercepts_co21 = [[-0.45, 0.20],
@@ -599,7 +599,7 @@ for j in range(len(beams)):
 	#####################
 	list_best_co10_parameter = []
 	list_best_co21_parameter = []
-	for i in range(1):
+	for i in range(5):
 		print("### bootstrap " + str(i+1).zfill(3) + "/100")
 		os.system("rm -rf " + dir_proj + "eps/best_co10_model_parameter.txt")
 		os.system("rm -rf " + dir_proj + "eps/best_co21_model_parameter.txt")
@@ -645,10 +645,10 @@ for j in range(len(beams)):
 		ax6 = plt.subplot(gs[6:8,5:9])
 		ax1.hist(histdata10[:,0], range=[0.735, 0.745], bins=11)
 		ax2.hist(histdata10[:,1], range=[-0.015+0.2848, 0.015+0.2848], bins=11)
-		ax3.hist(np.log10(np.array(histdata10[:,2])), range=[-3.0, 0.0], bins=11)
-		ax4.hist(histdata21[:,0], range=[1.05, 1.15],bins=11)
-		ax5.hist(histdata21[:,1], range=[-0.45, -0.20], bins=11)
-		ax6.hist(np.log10(np.array(histdata21[:,2])), range=[-0.30, 0.12], bins=11)
+		ax3.hist(np.log10(np.array(histdata10[:,2])), range=range_scatter_co10, bins=11)
+		ax4.hist(histdata21[:,0], range=range_slope_co21, bins=11)
+		ax5.hist(histdata21[:,1], range=range_intercept_co21, bins=11)
+		ax6.hist(np.log10(np.array(histdata21[:,2])), range=range_scatter_co21, bins=11)
 		ax1.set_title("co10 norm mean at niter = " + str(i+1))
 		ax2.set_title("co10 norm disp")
 		ax3.set_title("log co10 scatter")
