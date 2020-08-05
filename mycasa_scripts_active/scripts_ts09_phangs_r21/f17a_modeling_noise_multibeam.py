@@ -17,9 +17,11 @@ dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 galname, i = "ngc0628", 0
 freqco10 = 115.27120
 freqco21 = 230.53800
-nbins = [40] # 40, 30, 20, 10, 10 # 30, 20, 20, 10, 10 # 40, 30, 25, 20, 15
+nbins = [40, # 40, 30, 20, 10, 10
+		 30, # 30, 20, 20, 10, 10
+		 40] # 40, 30, 25, 20, 15
 percentile = 84
-beams = ["08p0"] # "20p0", "16p0", "12p0", "08p0"
+beams = ["04p0"] # "20p0", "16p0", "12p0", "08p0"
 scales = [44/1.0, 52/1.3, 103/1.4]
 cnt_ras = [24.174, 170.063, 185.729]
 cnt_decs = [15.783, 12.9914, 15.8223]
@@ -41,7 +43,7 @@ range_scatters_co21 = [[np.log10(0.5), np.log10(1.8)], # 0.5-1.8, 0.5-1.3, 0.5-1
 					   [], # 2.5-3.5, 2.5-3.5, 2.0-3.0, 1.5-2.5, 1.5-2.5
 					   []] # 0.5-1.8, 0.5-1.8, 0.5-1.3, 0.5-1.3, 0.2-1.0
 #
-nbins = nbins[0]
+nbins = nbins[i]
 scale = scales[i]
 cnt_ra = cnt_ras[i]
 cnt_dec = cnt_decs[i]
@@ -425,7 +427,7 @@ def get_best_co21_parameter(
 	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
 	#num_co21 = len(log_co21_mom0_k)
 	#
-	range_slope = np.linspace(range_slope_co21[0], range_slope_co21[1], 16)
+	range_slope = np.linspace(range_slope_co21[0], range_slope_co21[1], 11)
 	range_intercept = np.linspace(range_intercept_co21[0], range_intercept_co21[1], 11)
 	range_scatter = np.logspace(range_scatter_co21[0], range_scatter_co21[1], 11)
 	#
