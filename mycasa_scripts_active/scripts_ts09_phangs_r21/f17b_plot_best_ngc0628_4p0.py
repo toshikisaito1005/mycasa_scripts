@@ -18,7 +18,7 @@ import scripts_phangs_r21 as r21
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-galname, i = "ngc3627", 1
+galname, i = "ngc0628", 0
 freqco10 = 115.27120
 freqco21 = 230.53800
 nbins = 30
