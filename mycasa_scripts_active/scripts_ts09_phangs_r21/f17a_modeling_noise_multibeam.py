@@ -28,6 +28,8 @@ incs = [90-8.7, 90-56.2, 90-35.1]
 def_nucleus = [50*44./1.0, 50*52./1.3*1.5, 30*103/1.4]
 intensitylims = [[-0.5,2.0], [0.0,2.5], [0.0,2.0]]
 #
+range_scatter = np.logspace(np.log10(0.01), np.log10(1.5), 11)
+#
 nbins = nbins[0]
 scale = scales[i]
 cnt_ra = cnt_ras[i]
@@ -321,6 +323,7 @@ def get_best_co10_parameter(
 	log_co10_noise_k,
 	xbins_co10,
 	nbins,
+	range_scatter,
 	best_parameters=None,
 	):
 	# prepare
@@ -330,7 +333,7 @@ def get_best_co10_parameter(
 	#
 	range_popt1   = popt[1] + np.linspace(-0.005, 0.010, 11)
 	range_popt2   = popt[2] + np.linspace(-0.010, 0.010, 11)
-	range_scatter = np.logspace(np.log10(0.01), np.log10(1.5), 11) # np.logspace(np.log10(0.01), np.log10(1.5), 11) ngc628
+	range_scatter = range_scatter # np.logspace(np.log10(0.01), np.log10(1.5), 11) # np.logspace(np.log10(0.01), np.log10(1.5), 11) ngc628
 	#
 	list_popt1 = []
 	list_popt2 = []
