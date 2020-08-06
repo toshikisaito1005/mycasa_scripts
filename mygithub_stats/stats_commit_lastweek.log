@@ -1,10 +1,5 @@
-      36 - mycasa_scripts_active/scripts_ts09_phangs_r21/f17a_modeling_noise_multibeam.py
-      12 - mycasa_scripts_active/scripts_ts10_phangs_ulirg/fig02a_scatter_all.py
-      11 - mycasa_scripts_active/scripts_ts10_phangs_ulirg/fig02b_scatter_env.py
-      10 - mycasa_scripts_active/scripts_ts10_phangs_ulirg/myscript01_hexbinning.py
+      49 - mycasa_scripts_active/scripts_ts09_phangs_r21/f17a_modeling_noise_multibeam.py
+      12 - mycasa_scripts_active/scripts_ts09_phangs_r21/f17b_plot_best_ngc0628_4p0.py
        7 - mycasa_scripts_active/scripts_ts09_phangs_r21/f13a_gmc_masking.py
-       5 - mycasa_scripts_active/scripts_ts10_phangs_ulirg/fig03b_virial.py
        4 - mycasa_scripts_active/scripts_ts09_phangs_r21/f13c_piechart_masking.py
        4 - mycasa_scripts_active/scripts_ts09_phangs_r21/f13b_env_masking.py
-       3 - mycasa_scripts_active/scripts_ts10_phangs_ulirg/f00_all_final_eps.sh
-       2 - mycasa_scripts_active/scripts_ts10_phangs_ulirg/fig03a_pturb.py
