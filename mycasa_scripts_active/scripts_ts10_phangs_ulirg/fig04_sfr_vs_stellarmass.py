@@ -42,8 +42,8 @@ for i in range(len(galname)):
 		name = name[0]
 		this_name.append(name)
 	#
-	if this_name:
-		print("# " + str(i) + " " + ", ".join(this_name))
+	if name:
+		print("# " + galname[i].rjust(17) + ", " + ", ".join(name))
 
 """
 for i in range(len(nednames)):
