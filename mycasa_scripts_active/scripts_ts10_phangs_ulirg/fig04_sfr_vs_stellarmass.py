@@ -33,8 +33,8 @@ data = ascii.read(dir_data + "apjaaf21at1_mrt.txt")
 nednames = data["Name"]
 
 
-for i in range(len(nednames)):
-#for i in [1]:
+# for i in range(len(nednames)):
+for i in [145]:
 	result_table = Ned.query_region(galnames[i], radius=30 * u.arcsec)
 	this_names = result_table["Object Name"]
 	#
@@ -53,7 +53,7 @@ for i in range(len(nednames)):
 			search_name = this_name[j]
 			if search_name in galname:
 				print(search_name)
-			elif search_name.replace("IRAS","").strip(" ") in galname:
-				print(search_name)
+	elif galname.replace("IRAS","").strip(" ") in galnames:
+		print(search_name)
 
 
