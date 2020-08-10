@@ -56,4 +56,4 @@ for i in range(len(nednames)):
 				this_mstar = str(data["logMstar"][i])
 				print("# " + search_name.rjust(15) + ", logSFR = " + this_sfr.ljust(4) + ", logMstar = " + this_mstar.ljust(4))
 
-print()
+print("#     F10409-4556, logSFR = 1.41, logMstar = 11.15")
