@@ -188,9 +188,9 @@ ax.scatter(0.2, lirg_wp50_center, s=60, c="indianred", lw=1, edgecolors="indianr
 ax.plot([0.2, 0.2], [lirg_wp16, lirg_wp84], lw=2, c="indianred")
 ax.text(0.2, 10**5, "(U)LIRGs", rotation=90, horizontalalignment="center", verticalalignment="top", fontsize=8, color="indianred", weight='bold')
 #
-ax.plot([-0.5,-0.5], [0.1,100], "black")
+ax.plot([-0.5,-0.5], [0.1,100], "black", lw=2)
 ax.plot([0.5,0.5], [0.1,100], "black")
-ax.plot([len(galaxy)+0.5,len(galaxy)+0.5], [0.1,100], "black")
+ax.plot([len(galaxy)+0.5,len(galaxy)+0.5], [0.1,100], "black", lw=2)
 # set
 ax.set_xlim([-0.5,len(galaxy)+0.5])
 ax.set_ylim(ylim)
