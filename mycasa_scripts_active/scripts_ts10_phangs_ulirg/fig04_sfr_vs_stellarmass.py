@@ -33,5 +33,8 @@ plt.rcParams["font.size"] = 20
 plt.rcParams["legend.fontsize"] = 18
 plt.subplots_adjust(bottom=0.15, left=0.20, right=0.90, top=0.85) 
 #
-plt
-ax1.scatter(lirg_m0, lirg_ew, c="indianred", s=40, linewidths=0)
+ax1.scatter(logMstar, logSFR, c="indianred", s=40, linewidths=0)
+#
+plt.xlim([9,12])
+plt.ylim([-1,2])
+plt.savefig(dir_eps+"plot_sfr_vs_mstar.png",dpi=200)
