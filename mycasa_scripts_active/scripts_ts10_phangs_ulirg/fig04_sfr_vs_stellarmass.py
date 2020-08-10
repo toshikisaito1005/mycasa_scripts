@@ -32,18 +32,15 @@ galname = [s.replace("-02"," -02-33-098").replace("267","267- G 030") for s in g
 data = ascii.read(dir_data + "apjaaf21at1_mrt.txt")
 nednames = data["Name"]
 
-this_name = []
-for i in range(len(galname)):
+#for i in range(len(galname)):
+for i in [17]:
 	result_table = Ned.query_region(galname[i], radius=30 * u.arcsec)
 	this_names = result_table["Object Name"]
 	name = [s for s in this_names if "IRAS" in s]
 	name.sort(lambda x,y: cmp(len(x), len(y)))
 	if len(name)>0:
 		name = name[0]
-		this_name.append(name)
-	#
-	if name:
-		print("# " + galname[i].rjust(17) + ", " + ", ".join(name))
+		print("# " + galname[i].rjust(17) + ", " + name)
 
 """
 for i in range(len(nednames)):
