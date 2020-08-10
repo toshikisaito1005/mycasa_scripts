@@ -85,8 +85,7 @@ list_wp50_center = []
 list_wp84_center = []
 lirg_m0_center = []
 lirg_ew_center = []
-# for i in range(len(galaxy)):
-for i in [5]:
+for i in range(len(galaxy)):
     print(galaxy[i])
     ### all
     this_galaxy = galaxy[i]
