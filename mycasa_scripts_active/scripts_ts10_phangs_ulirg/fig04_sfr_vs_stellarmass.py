@@ -54,6 +54,6 @@ for i in range(len(nednames)):
 			if search_name in galname:
 				this_sfr = str(data["logSFR"][i])
 				this_mstar = str(data["logMstar"][i])
-				print("# " + search_name.rjust(15) + ", logSFR = " + this_sfr + ", logMstar = " + this_mstar)
+				print("# " + search_name.rjust(15) + ", logSFR = " + this_sfr.ljust(4) + ", logMstar = " + this_mstar.ljust(4))
 
-
+print()
