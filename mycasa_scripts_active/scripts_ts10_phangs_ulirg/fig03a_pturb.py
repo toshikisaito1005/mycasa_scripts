@@ -181,7 +181,7 @@ for i in range(len(galaxy)):
 # plot total
 ax.scatter(-0.2, phangs_wp50, s=30, c="skyblue", lw=1, edgecolors="skyblue", zorder=1e9)
 ax.plot([-0.2, -0.2], [phangs_wp16, phangs_wp84], lw=2, c="skyblue")
-ax.text(-0.2, 10**5.8, "PHANGS", rotation=90, horizontalalignment="center", verticalalignment="bottom", fontsize=8, color="skyblue", weight='bold')
+ax.text(-0.2, 10**6.2, "PHANGS", rotation=90, horizontalalignment="center", verticalalignment="bottom", fontsize=8, color="skyblue", weight='bold')
 ax.scatter(0.2, lirg_wp50, s=30, c="indianred", lw=1, edgecolors="indianred", zorder=1e9, marker="s")
 ax.scatter(0.2, lirg_wp50_center, s=60, c="indianred", lw=1, edgecolors="indianred", zorder=1e9, marker="*")
 ax.plot([0.2, 0.2], [lirg_wp16, lirg_wp84], lw=2, c="indianred")
