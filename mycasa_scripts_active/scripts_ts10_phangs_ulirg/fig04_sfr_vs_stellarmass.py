@@ -48,9 +48,12 @@ for i in range(len(nednames)):
 			this_name.append(name)
 	#
 	if this_name:
-		list_this_name = ", ".join(this_name)
-		print("# " + str(i) + " " + list_this_name)
-		for j in range(len(list_this_name)):
-			
+		# print("# " + str(i) + " " + list_this_name)
+		for j in range(len(this_name)):
+			search_name = this_name[j]
+			if search_name in galname:
+				print(search_name)
+			elif search_name.replace("IRAS  ","").split("-")[0] in galname:
+				print(search_name)
 
 
