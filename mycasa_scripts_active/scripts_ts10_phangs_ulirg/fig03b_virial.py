@@ -90,7 +90,7 @@ for i in range(len(galaxy)):
     ### all
     this_galaxy = galaxy[i]
     this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
-    this_m0 = this_data[:,0]
+    this_m0 = this_data[:,0] * 0.8
     this_ew = this_data[:,1]
     this_r = this_data[:,2]
     this_pturb = calc_virial(this_m0, this_ew)
@@ -114,7 +114,7 @@ for i in range(len(galaxy)):
     ### center
     this_galaxy = galaxy[i]
     this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
-    this_m0 = this_data[:,0]
+    this_m0 = this_data[:,0] * 0.8
     this_ew = this_data[:,1]
     this_r = this_data[:,2]
     this_pturb = calc_virial(this_m0, this_ew)
@@ -150,7 +150,7 @@ phangs_ew = []
 for i in range(len(phangs)):
     this_galaxy = phangs[i]
     this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
-    this_m0 = this_data[:,0]
+    this_m0 = this_data[:,0] * 4.3
     this_ew = this_data[:,1]
     #
     cut_data = np.where((this_ew>0) & (this_m0>0))
