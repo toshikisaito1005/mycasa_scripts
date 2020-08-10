@@ -56,4 +56,8 @@ for i in range(len(nednames)):
 				this_mstar = str(data["logMstar"][i])
 				print("# " + search_name.rjust(15) + ", logSFR = " + this_sfr.ljust(4) + ", logMstar = " + this_mstar.ljust(4))
 
+print("#     F06592-6313, logSFR = 1.31, logMstar = 10.66")
 print("#     F10409-4556, logSFR = 1.41, logMstar = 11.15")
+print("#     F17138-1017, logSFR = 1.58, logMstar = 10.72")
+
+'eso297g011', 'eso297g012', 'ic4518e', 'ic4518w', 'ngc5257'
