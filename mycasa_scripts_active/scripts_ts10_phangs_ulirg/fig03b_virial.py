@@ -67,7 +67,7 @@ def calc_virial(
     ew,
     dbeam=150, # pc
     ):
-    pturb = 3.1 * (10**density/100.)**-1 * (10**ew/10.)**2 * (dbeam/150.)**-1
+    pturb = 3.1 * (density/100.)**-1 * (ew/10.)**2 * (dbeam/150.)**-1
 
     return pturb
 
