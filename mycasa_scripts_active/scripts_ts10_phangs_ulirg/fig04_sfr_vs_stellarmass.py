@@ -26,19 +26,25 @@ galname3 = [s.replace("iras","IRAS ").replace("f","F").replace("g","-G") for s i
 galname4 = [s.replace("319","319-G022").replace("507","507-G070") for s in galname3]
 galname5 = [s.replace("557","557-G002").replace("06592","06592-6313") for s in galname4]
 galname6 = [s.replace("10409","10409-4556").replace("17138","17138-1017") for s in galname5]
-galname = [s.replace("-02","-02-33-098").replace("267","267-G030") for s in galname6]
+galname = [s.replace("-02"," -02-33-098").replace("267","267-G030") for s in galname6]
 
 #
 data = ascii.read(dir_data + "apjaaf21at1_mrt.txt")
 galnames = data["Name"]
 
 #for i in range(len(galnames)):
-for i in [0]:
+for i in [1]:
 	result_table = Ned.query_region(galnames[i], radius=30 * u.arcsec)
 	this_names = result_table["Object Name"]
 	this_name = [s for s in this_names if "NGC" in s]
-	this_name.append([s for s in this_names if "ESO" in s])
-	this_name.append([s for s in this_names if "IC" in s])
-	this_name.append([s for s in this_names if "MCG" in s])
-	this_name.append([s for s in this_names if "IRAS" in s])
+	this_name = 
+
+	this_name.extend([s for s in this_names if "ESO" in s])
+	this_name.extend([s for s in this_names if "IC" in s])
+	this_name.extend([s for s in this_names if "MCG" in s])
+	this_name.extend([s for s in this_names if "IRAS" in s])
 	this_name = [s for s in this_name if s != []]
+	if this_name:
+		print(this_name)
+
+
