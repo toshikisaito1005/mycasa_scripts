@@ -38,22 +38,15 @@ for i in [1]:
 	this_names = result_table["Object Name"]
 	#
 	this_name = []
-	for j in ["NGC","ESO","IC","MCG","IRAS"]:
-		name = [s for s in this_names if "NGC" in s]
-		name = name.sort(lambda x,y: cmp(len(x), len(y)))
-	this_name = [s for s in this_names if "NGC" in s]
-	this_name = this_name.sort(lambda x,y: cmp(len(x), len(y)))
+	list_name = ["NGC","ESO","IC","MCG","IRAS"]
+	for j in range(len(list_name)):
+		name = [s for s in this_names if list_name[j] in s]
+		name.sort(lambda x,y: cmp(len(x), len(y)))
+		if len(name)>1:
+			name = name[0]
+			this_name.append(name)
 	#
-	this_eso.extend([s for s in this_names if "ESO" in s])
-	#
-	this_ic.extend([s for s in this_names if "IC" in s])
-	#
-	this_name.extend([s for s in this_names if "MCG" in s])
-	#
-	this_name.extend([s for s in this_names if "IRAS" in s])
-	#
-	this_name = [s for s in this_name if s != []]
 	if this_name:
-		print(this_name)
+		print(name)
 
 
