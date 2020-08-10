@@ -67,7 +67,7 @@ def calc_virial(
     ew,
     dbeam=150, # pc
     ):
-    pturb = 3.1 * (density/100.)**-1 * (ew/10.)**2 * (dbeam/150.)**-1
+    pturb = 3.1 * (10**density/100.)**-1 * (10**ew/10.)**2 * (dbeam/150.)**-1
 
     return pturb
 
@@ -86,6 +86,7 @@ list_wp84_center = []
 lirg_m0_center = []
 lirg_ew_center = []
 for i in range(len(galaxy)):
+    print(galaxy[i])
     ### all
     this_galaxy = galaxy[i]
     this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
