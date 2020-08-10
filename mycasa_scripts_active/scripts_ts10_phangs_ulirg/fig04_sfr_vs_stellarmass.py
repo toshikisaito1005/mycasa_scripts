@@ -23,16 +23,30 @@ galaxy = ['eso297g011', 'eso297g012', 'ic4518e', 'ic4518w', 'eso319',
 galname1 = [s.replace("eso","ESO ").replace("ngc","NGC ").replace("mcg","MCG-") for s in galaxy]
 galname2 = [s.replace("e","E").replace("w","W").replace("ic","IC") for s in galname1]
 galname3 = [s.replace("iras","IRAS ").replace("f","F").replace("g","-G") for s in galname2]
-galname4 = [s.replace("319","319-G022").replace("507","507-G070") for s in galname3]
-galname5 = [s.replace("557","557-G002").replace("06592","06592-6313") for s in galname4]
-galname6 = [s.replace("10409","10409-4556").replace("17138","17138-1017") for s in galname5]
-galname = [s.replace("-02"," -02-33-098").replace("267","267-G030") for s in galname6]
+galname4 = [s.replace("319","319- G 022").replace("507","507- G 070") for s in galname3]
+galname5 = [s.replace("557","557- G 002").replace("06592"," 06592-6313") for s in galname4]
+galname6 = [s.replace("10409"," 10409-4556").replace("17138"," 17138-1017") for s in galname5]
+galname = [s.replace("-02"," -02-33-098").replace("267","267- G 030") for s in galname6]
 
 #
 data = ascii.read(dir_data + "apjaaf21at1_mrt.txt")
-galnames = data["Name"]
+nednames = data["Name"]
 
-for i in range(len(galnames)):
+this_name = []
+for i in range(len(galname)):
+	result_table = Ned.query_region(galname[i], radius=30 * u.arcsec)
+	this_names = result_table["Object Name"]
+	name = [s for s in this_names if "IRAS" in s]
+	name.sort(lambda x,y: cmp(len(x), len(y)))
+	if len(name)>0:
+		name = name[0]
+		this_name.append(name)
+	#
+	if this_name:
+		print("# " + str(i) + " " + ", ".join(this_name))
+
+"""
+for i in range(len(nednames)):
 #for i in [1]:
 	result_table = Ned.query_region(galnames[i], radius=30 * u.arcsec)
 	this_names = result_table["Object Name"]
@@ -47,6 +61,7 @@ for i in range(len(galnames)):
 			this_name.append(name)
 	#
 	if this_name:
-		print("# " + str(i) + " " + ",".join(this_name))
-
+		print("# " + str(i) + " " + ", ".join(this_name))
+		if 
+"""
 
