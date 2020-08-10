@@ -60,4 +60,5 @@ print("#     F06592-6313, logSFR = 1.31, logMstar = 10.66")
 print("#     F10409-4556, logSFR = 1.41, logMstar = 11.15")
 print("#     F17138-1017, logSFR = 1.58, logMstar = 10.72")
 
-'eso297g011', 'eso297g012', 'ic4518e', 'ic4518w', 'ngc5257'
+# not available in Shangguan+18 and U+12; eso297g011', 'eso297g012', 'ic4518e', 'ic4518w'
+# available in U+12; 'ngc5257/8' 
