@@ -36,13 +36,22 @@ galnames = data["Name"]
 for i in [1]:
 	result_table = Ned.query_region(galnames[i], radius=30 * u.arcsec)
 	this_names = result_table["Object Name"]
+	#
+	this_name = []
+	for j in ["NGC","ESO","IC","MCG","IRAS"]:
+		name = [s for s in this_names if "NGC" in s]
+		name = name.sort(lambda x,y: cmp(len(x), len(y)))
 	this_name = [s for s in this_names if "NGC" in s]
-	this_name = 
-
-	this_name.extend([s for s in this_names if "ESO" in s])
-	this_name.extend([s for s in this_names if "IC" in s])
+	this_name = this_name.sort(lambda x,y: cmp(len(x), len(y)))
+	#
+	this_eso.extend([s for s in this_names if "ESO" in s])
+	#
+	this_ic.extend([s for s in this_names if "IC" in s])
+	#
 	this_name.extend([s for s in this_names if "MCG" in s])
+	#
 	this_name.extend([s for s in this_names if "IRAS" in s])
+	#
 	this_name = [s for s in this_name if s != []]
 	if this_name:
 		print(this_name)
