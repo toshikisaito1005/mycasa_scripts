@@ -20,7 +20,7 @@ galaxy = ['eso297g011', 'eso297g012', 'ic4518e', 'ic4518w', 'eso319',
           'eso267', 'eso557', 'irasf10409', 'ngc5257', 'ngc3110', 'irasf17138',
           'eso507', 'ngc3256', 'ngc1614', 'ngc6240']
 phangs = [s.split("/")[-1].split("_12m")[0] for s in glob.glob(dir_eps + "../data_phangs/*mom0*")]
-ylim = [0,100]
+ylim = [0.1,100]
 
 galname1 = [s.replace("eso","ESO ").replace("ngc","NGC ").replace("mcg","MCG-") for s in galaxy]
 galname2 = [s.replace("e","E").replace("w","W").replace("ic","IC") for s in galname1]
@@ -188,9 +188,7 @@ ax.scatter(0.2, lirg_wp50_center, s=60, c="indianred", lw=1, edgecolors="indianr
 ax.plot([0.2, 0.2], [lirg_wp16, lirg_wp84], lw=2, c="indianred")
 ax.text(0.2, 10**5, "(U)LIRGs", rotation=90, horizontalalignment="center", verticalalignment="top", fontsize=8, color="indianred", weight='bold')
 #
-ax.plot([-0.5,-0.5], [0.1,100], "black", lw=2)
 ax.plot([0.5,0.5], [0.1,100], "black")
-ax.plot([len(galaxy)+0.5,len(galaxy)+0.5], [0.1,100], "black", lw=2)
 # set
 ax.set_xlim([-0.5,len(galaxy)+0.5])
 ax.set_ylim(ylim)
@@ -199,7 +197,7 @@ plt.tick_params(labelbottom=False)
 plt.grid(axis="y")
 plt.yscale("log")
 plt.xticks(np.r_[np.array([-0.2,0.2]), np.array(range(1,20,1))])
-#plt.yticks([10**0,10**2,10**4,10**6,10**8],[0,2,4,6,8])
+plt.yticks([10**-1,10**0,10**1,10**2],[-1,0,1,2])
 plt.ylabel(r"log $\alpha_{\mathsf{vir,150pc}}$")
 plt.savefig(dir_eps+"plot_vir_all.png",dpi=200)
 
