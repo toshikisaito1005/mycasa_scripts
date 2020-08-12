@@ -300,6 +300,8 @@ def create_best_models(
 	#
 	### log_co_mom0_k_model_scatter
 	# add scatter
+	co10_scatter = abs(co10_scatter)
+	co21_scatter = abs(co21_scatter)
 	log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, co10_scatter)
 	log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, co21_scatter)
 	print("### co10_best_model_scatter mean = " + str(np.mean(log_co10_mom0_k_model_scatter)))
