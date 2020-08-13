@@ -73,7 +73,7 @@ list_virial = list_all[:,6:10].astype("float64")
 phangs_all = []
 for i in range(len(phangs)):
 #for i in [0]:
-	this_galaxy = galaxy[i]
+	this_galaxy = phangs[i]
 	print("# working on " + this_galaxy)
 	# get image
 	this_mom0 = glob.glob(dir_proj + "../data_phangs/" + this_galaxy + "*_mom0_150pc.fits")[0]
@@ -103,8 +103,8 @@ phangs_all = np.array(phangs_all)
 phangs_all = phangs_all[phangs_all[:,1].argsort()]
 phangs_name = phangs_all[:,0]
 phangs_r = phangs_all[:,1].astype("float64")
-phangs_pturb = phangs_all[:,2:6].astype("float64")
-phangs_virial = phangs_all[:,6:10].astype("float64")
+phangs_pturb = phangs_all[:,2:5].astype("float64")
+phangs_virial = phangs_all[:,5:8].astype("float64")
 
 
 # plot
@@ -123,9 +123,7 @@ ax.scatter(list_r, list_pturb[:,3], s=40, marker="*", c="white", lw=1, edgecolor
 #    ax.plot([list_r[i], list_r[i]], [list_pturb[i,0], list_pturb[i,2]], lw=1, c="indianred")
 #
 ax.plot(phangs_r, phangs_pturb[:,1], c="indianred")
-ax.plot(phangs_r, phangs_pturb[:,3], "--", c="indianred")
 ax.scatter(phangs_r, phangs_pturb[:,1], s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9)
-ax.scatter(phangs_r, phangs_pturb[:,3], s=40, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9)
 #
 plt.xscale("log")
 plt.yscale("log")

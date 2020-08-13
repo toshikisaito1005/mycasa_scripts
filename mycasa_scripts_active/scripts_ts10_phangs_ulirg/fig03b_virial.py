@@ -152,10 +152,11 @@ phangs_m0 = []
 phangs_ew = []
 for i in range(len(phangs)):
     this_galaxy = phangs[i]
+    print(this_galaxy)
     this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
     this_m0 = this_data[:,0] * 4.3
     this_ew = this_data[:,1]
-    this_pturb = calc_pturb(this_m0, this_ew)
+    this_pturb = calc_virial(this_m0, this_ew)
     #
     cut_data = np.where((this_ew>0) & (this_m0>0))
     this_m0 = this_m0[cut_data]
@@ -220,7 +221,7 @@ header = "galname virial16 virial50 virial84 virial50(center)"
 np.savetxt("list_virial.txt", list_save, fmt="%s", header=header)
 #
 list_save = np.c_[phangs,list_phangs_wp16,list_phangs_wp50,list_phangs_wp84]
-header = "galname pturb16 pturb50 pturb84"
-np.savetxt("list_pturb_phangs.txt", list_save, fmt="%s", header=header)
+header = "galname virial16 virial50 virial84"
+np.savetxt("list_virial_phangs.txt", list_save, fmt="%s", header=header)
 
 os.system("rm -rf *.last")
