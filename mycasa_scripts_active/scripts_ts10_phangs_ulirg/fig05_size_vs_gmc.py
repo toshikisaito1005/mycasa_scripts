@@ -87,10 +87,35 @@ ax.scatter(list_r, list_pturb[:,3], s=40, marker="*", c="white", lw=1, edgecolor
 #
 plt.xscale("log")
 plt.yscale("log")
-plt.xlim([0.5,10])
-plt.xlabel(r"CO Radius (kpc)")
+plt.xlim([0.6,4.5])
+plt.xlabel(r"log CO Radius (kpc)")
 plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K cm$^{-3}$)")
 plt.savefig(dir_eps+"plot_size_pturb.png",dpi=200)
+
+
+# plot
+figure = plt.figure(figsize=(5,5))
+gs = gridspec.GridSpec(nrows=9, ncols=9)
+ax = plt.subplot(gs[0:9,0:9])
+plt.rcParams["font.size"] = 10
+plt.rcParams["legend.fontsize"] = 10
+plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95)
+#
+ax.plot(list_r, list_virial[:,1], c="indianred")
+ax.plot(list_r, list_virial[:,3], "--", c="indianred")
+ax.scatter(list_r, list_virial[:,1], s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9)
+ax.scatter(list_r, list_virial[:,3], s=40, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9)
+#for i in range(len(galaxy)):
+#    ax.plot([list_r[i], list_r[i]], [list_pturb[i,0], list_pturb[i,2]], lw=1, c="indianred")
+#
+plt.xscale("log")
+plt.yscale("log")
+plt.xlim([0.6,4.5])
+plt.ylim([3,40])
+plt.xlabel(r"log CO Radius (kpc)")
+plt.ylabel(r"log $\alpha_{\mathsf{vir,150pc}}$")
+plt.savefig(dir_eps+"plot_size_virial.png",dpi=200)
+
 
 #
 os.system("rm -rf *last")
