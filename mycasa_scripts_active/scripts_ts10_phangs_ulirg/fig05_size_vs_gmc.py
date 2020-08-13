@@ -76,7 +76,7 @@ for i in range(len(phangs)):
 	this_galaxy = galaxy[i]
 	print("# working on " + this_galaxy)
 	# get image
-	this_mom0 = glob.glob(dir_proj + "../data_phangs/" + this_galaxy + "*_mom0.fits")[0]
+	this_mom0 = glob.glob(dir_proj + "../data_phangs/" + this_galaxy + "*_mom0_150pc.fits")[0]
 	# get box
 	this_header = imhead(this_mom0,mode="list")
 	shape = this_header["shape"]
@@ -121,6 +121,11 @@ ax.scatter(list_r, list_pturb[:,1], s=20, marker="s", c="white", lw=1, edgecolor
 ax.scatter(list_r, list_pturb[:,3], s=40, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9)
 #for i in range(len(galaxy)):
 #    ax.plot([list_r[i], list_r[i]], [list_pturb[i,0], list_pturb[i,2]], lw=1, c="indianred")
+#
+ax.plot(phangs_r, phangs_pturb[:,1], c="indianred")
+ax.plot(phangs_r, phangs_pturb[:,3], "--", c="indianred")
+ax.scatter(phangs_r, phangs_pturb[:,1], s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9)
+ax.scatter(phangs_r, phangs_pturb[:,3], s=40, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9)
 #
 plt.xscale("log")
 plt.yscale("log")

@@ -205,5 +205,9 @@ plt.savefig(dir_eps+"plot_vir_all.png",dpi=200)
 list_save = np.c_[galaxy,list_wp16,list_wp50,list_wp84,list_wp50_center]
 header = "galname virial16 virial50 virial84 virial50(center)"
 np.savetxt("list_virial.txt", list_save, fmt="%s", header=header)
+#
+list_save = np.c_[phangs,phangs_wp16,phangs_wp50,phangs_wp84]
+header = "galname pturb16 pturb50 pturb84 pturb50(center)"
+np.savetxt("list_pturb_phangs.txt", list_save, fmt="%s", header=header)
 
 os.system("rm -rf *.last")

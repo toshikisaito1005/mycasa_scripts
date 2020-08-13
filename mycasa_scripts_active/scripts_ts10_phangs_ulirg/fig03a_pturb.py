@@ -144,6 +144,9 @@ lirg_wp50_center = weighted_percentile(lirg_pturb_center,0.50,lirg_m0_center)
 lirg_wp16_center = weighted_percentile(lirg_pturb_center,0.16,lirg_m0_center)
 lirg_wp84_center = weighted_percentile(lirg_pturb_center,0.84,lirg_m0_center)
 #
+phangs_wp16 = []
+phangs_wp50 = []
+phangs_wp84 = []
 phangs_m0 = []
 phangs_ew = []
 for i in range(len(phangs)):
@@ -158,6 +161,14 @@ for i in range(len(phangs)):
     #
     phangs_m0.extend(this_m0)
     phangs_ew.extend(this_ew)
+    #
+    wp50 = weighted_percentile(this_pturb,0.50,this_m0)
+    wp16 = weighted_percentile(this_pturb,0.16,this_m0)
+    wp84 = weighted_percentile(this_pturb,0.84,this_m0)
+    #
+    phangs_wp16.append(wp16)
+    phangs_wp50.append(wp50)
+    phangs_wp84.append(wp84)
     #
 phangs_pturb = np.array(phangs_m0) * np.array(phangs_ew)**2
 phangs_wp50 = weighted_percentile(phangs_pturb,0.50,phangs_m0)
@@ -204,5 +215,9 @@ plt.savefig(dir_eps+"plot_pturb_all.png",dpi=200)
 list_save = np.c_[galaxy,list_wp16,list_wp50,list_wp84,list_wp50_center]
 header = "galname pturb16 pturb50 pturb84 pturb50(center)"
 np.savetxt("list_pturb.txt", list_save, fmt="%s", header=header)
+#
+list_save = np.c_[phangs,phangs_wp16,phangs_wp50,phangs_wp84]
+header = "galname pturb16 pturb50 pturb84 pturb50(center)"
+np.savetxt("list_pturb_phangs.txt", list_save, fmt="%s", header=header)
 
 os.system("rm -rf *.last")
