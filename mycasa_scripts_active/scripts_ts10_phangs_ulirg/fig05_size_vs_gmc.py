@@ -52,6 +52,6 @@ for i in [0]:
 	galarea = sum(this_data["mask"].flatten()) * pixarea
 	radius = np.sqrt(galarea / np.pi)
 	# get pturb
-	data = np.loadtxt("list_pturb.txt", dtype="int64")
+	data = np.loadtxt("list_pturb.txt", dtype="str")
 
 os.system("rm -rf *last")
