@@ -32,6 +32,7 @@ galname = [s.replace("mcg02","mcg-02-33-098").replace("267","267-G030") for s in
 #####################
 ### Main Procedure
 #####################
+###
 list_all = []
 for i in range(len(galaxy)):
 #for i in [0]:
@@ -67,6 +68,43 @@ list_name = list_all[:,0]
 list_r = list_all[:,1].astype("float64")
 list_pturb = list_all[:,2:6].astype("float64")
 list_virial = list_all[:,6:10].astype("float64")
+
+###
+phangs_all = []
+for i in range(len(phangs)):
+#for i in [0]:
+	this_galaxy = galaxy[i]
+	print("# working on " + this_galaxy)
+	# get image
+	this_mom0 = glob.glob(dir_proj + "../data_phangs/" + this_galaxy + "*_mom0.fits")[0]
+	# get box
+	this_header = imhead(this_mom0,mode="list")
+	shape = this_header["shape"]
+	box = "0,0," + str(shape[0]-1) + "," + str(shape[1]-1)
+	# pixel size in parsec
+	this_scale = 150/this_header["beammajor"]["value"]
+	pixsize = abs(this_header["cdelt1"])*3600*180/np.pi * this_scale / 1000.
+	pixarea  = pixsize**2
+	# galarea in kpc^2
+	this_data = imval(this_mom0, box=box)
+	galarea = sum(this_data["mask"].flatten()) * pixarea
+	radius = np.sqrt(galarea / np.pi)
+	# get pturb
+	data = np.loadtxt("list_pturb.txt", dtype="str")
+	this_pturb = data[data[:,0]==this_galaxy][:,1:]
+	# get virial
+	data = np.loadtxt("list_virial.txt", dtype="str")
+	this_virial = data[data[:,0]==this_galaxy][:,1:]
+	# combine list
+	this_list = np.c_[np.array(this_galaxy),radius,this_pturb,this_virial][0]
+	phangs_all.append(this_list.tolist())
+	#
+phangs_all = np.array(phangs_all)
+phangs_all = phangs_all[phangs_all[:,1].argsort()]
+phangs_name = phangs_all[:,0]
+phangs_r = phangs_all[:,1].astype("float64")
+phangs_pturb = phangs_all[:,2:6].astype("float64")
+phangs_virial = phangs_all[:,6:10].astype("float64")
 
 
 # plot
