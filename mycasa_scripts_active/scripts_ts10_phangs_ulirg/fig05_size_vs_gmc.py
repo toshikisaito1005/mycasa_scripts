@@ -122,14 +122,15 @@ ax.scatter(list_r, list_pturb[:,3], s=40, marker="*", c="white", lw=1, edgecolor
 #for i in range(len(galaxy)):
 #    ax.plot([list_r[i], list_r[i]], [list_pturb[i,0], list_pturb[i,2]], lw=1, c="indianred")
 #
-ax.plot(phangs_r, phangs_pturb[:,1], c="skyblue")
 ax.scatter(phangs_r, phangs_pturb[:,1], s=20, marker="s", c="white", lw=1, edgecolors="skyblue", zorder=1e9)
 #
 plt.xscale("log")
 plt.yscale("log")
-#plt.xlim([0.6,4.5])
+plt.xlim([0.6,20])
+plt.ylim([10**2,10**9])
 plt.xlabel(r"log CO Radius (kpc)")
 plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K cm$^{-3}$)")
+plt.yticks([10**2,10**3,10**4,10**5,10**6,10**7,10**8,10**9],[2,3,4,5,6,7,8,9])
 plt.savefig(dir_eps+"plot_size_pturb.png",dpi=200)
 
 
