@@ -200,4 +200,8 @@ plt.yticks([10**0,10**2,10**4,10**6,10**8],[0,2,4,6,8])
 plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K cm$^{-3}$)")
 plt.savefig(dir_eps+"plot_pturb_all.png",dpi=200)
 
+# save txt
+list_save = np.c_[galname,list_wp16,list_wp50,list_wp84,list_wp50_center]
+np.savetxt()
+
 os.system("rm -rf *.last")
