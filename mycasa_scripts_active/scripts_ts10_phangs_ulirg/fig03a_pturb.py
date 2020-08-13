@@ -88,6 +88,7 @@ lirg_ew_center = []
 for i in range(len(galaxy)):
     ### all
     this_galaxy = galaxy[i]
+    print(this_galaxy)
     this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
     this_m0 = this_data[:,0] * 0.8
     this_ew = this_data[:,1]
@@ -144,20 +145,23 @@ lirg_wp50_center = weighted_percentile(lirg_pturb_center,0.50,lirg_m0_center)
 lirg_wp16_center = weighted_percentile(lirg_pturb_center,0.16,lirg_m0_center)
 lirg_wp84_center = weighted_percentile(lirg_pturb_center,0.84,lirg_m0_center)
 #
-phangs_wp16 = []
-phangs_wp50 = []
-phangs_wp84 = []
+list_phangs_wp16 = []
+list_phangs_wp50 = []
+list_phangs_wp84 = []
 phangs_m0 = []
 phangs_ew = []
 for i in range(len(phangs)):
     this_galaxy = phangs[i]
+    print(this_galaxy)
     this_data = np.loadtxt(dir_eps+"scatter_"+this_galaxy+".txt")
     this_m0 = this_data[:,0] * 4.3
     this_ew = this_data[:,1]
+    this_pturb = calc_pturb(this_m0, this_ew)
     #
     cut_data = np.where((this_ew>0) & (this_m0>0))
     this_m0 = this_m0[cut_data]
     this_ew = this_ew[cut_data]
+    this_pturb = this_pturb[cut_data]
     #
     phangs_m0.extend(this_m0)
     phangs_ew.extend(this_ew)
@@ -166,9 +170,9 @@ for i in range(len(phangs)):
     wp16 = weighted_percentile(this_pturb,0.16,this_m0)
     wp84 = weighted_percentile(this_pturb,0.84,this_m0)
     #
-    phangs_wp16.append(wp16)
-    phangs_wp50.append(wp50)
-    phangs_wp84.append(wp84)
+    list_phangs_wp16.append(wp16)
+    list_phangs_wp50.append(wp50)
+    list_phangs_wp84.append(wp84)
     #
 phangs_pturb = np.array(phangs_m0) * np.array(phangs_ew)**2
 phangs_wp50 = weighted_percentile(phangs_pturb,0.50,phangs_m0)
@@ -216,8 +220,8 @@ list_save = np.c_[galaxy,list_wp16,list_wp50,list_wp84,list_wp50_center]
 header = "galname pturb16 pturb50 pturb84 pturb50(center)"
 np.savetxt("list_pturb.txt", list_save, fmt="%s", header=header)
 #
-list_save = np.c_[phangs,phangs_wp16,phangs_wp50,phangs_wp84]
-header = "galname pturb16 pturb50 pturb84 pturb50(center)"
+list_save = np.c_[phangs,list_phangs_wp16,list_phangs_wp50,list_phangs_wp84]
+header = "galname pturb16 pturb50 pturb84"
 np.savetxt("list_pturb_phangs.txt", list_save, fmt="%s", header=header)
 
 os.system("rm -rf *.last")
