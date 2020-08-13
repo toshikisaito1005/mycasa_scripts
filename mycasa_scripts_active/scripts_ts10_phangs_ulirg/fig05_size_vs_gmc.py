@@ -90,10 +90,10 @@ for i in range(len(phangs)):
 	galarea = sum(this_data["mask"].flatten()) * pixarea
 	radius = np.sqrt(galarea / np.pi)
 	# get pturb
-	data = np.loadtxt("list_pturb.txt", dtype="str")
+	data = np.loadtxt("list_pturb_phangs.txt", dtype="str")
 	this_pturb = data[data[:,0]==this_galaxy][:,1:]
 	# get virial
-	data = np.loadtxt("list_virial.txt", dtype="str")
+	data = np.loadtxt("list_virial_phangs.txt", dtype="str")
 	this_virial = data[data[:,0]==this_galaxy][:,1:]
 	# combine list
 	this_list = np.c_[np.array(this_galaxy),radius,this_pturb,this_virial][0]
@@ -122,12 +122,12 @@ ax.scatter(list_r, list_pturb[:,3], s=40, marker="*", c="white", lw=1, edgecolor
 #for i in range(len(galaxy)):
 #    ax.plot([list_r[i], list_r[i]], [list_pturb[i,0], list_pturb[i,2]], lw=1, c="indianred")
 #
-ax.plot(phangs_r, phangs_pturb[:,1], c="indianred")
-ax.scatter(phangs_r, phangs_pturb[:,1], s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9)
+ax.plot(phangs_r, phangs_pturb[:,1], c="skyblue")
+ax.scatter(phangs_r, phangs_pturb[:,1], s=20, marker="s", c="white", lw=1, edgecolors="skyblue", zorder=1e9)
 #
 plt.xscale("log")
 plt.yscale("log")
-plt.xlim([0.6,4.5])
+#plt.xlim([0.6,4.5])
 plt.xlabel(r"log CO Radius (kpc)")
 plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K cm$^{-3}$)")
 plt.savefig(dir_eps+"plot_size_pturb.png",dpi=200)
