@@ -77,6 +77,7 @@ plt.rcParams["font.size"] = 10
 plt.rcParams["legend.fontsize"] = 10
 plt.subplots_adjust(bottom=0.10, left=0.10, right=0.95, top=0.95)
 #
+ax.plot(list_r, list_pturb[:,1])
 ax.scatter(list_r, list_pturb[:,1], s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9)
 ax.scatter(list_r, list_pturb[:,3], s=40, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9)
 for i in range(len(galaxy)):
