@@ -150,12 +150,16 @@ ax.scatter(list_r, list_virial[:,3], s=40, marker="*", c="white", lw=1, edgecolo
 #for i in range(len(galaxy)):
 #    ax.plot([list_r[i], list_r[i]], [list_pturb[i,0], list_pturb[i,2]], lw=1, c="indianred")
 #
+ax.scatter(phangs_r, phangs_virial[:,1], s=20, marker="s", c="white", lw=1, edgecolors="skyblue", zorder=1e9)
+#
 plt.xscale("log")
 plt.yscale("log")
-plt.xlim([0.6,4.5])
-plt.ylim([3,40])
+plt.xlim([0.6,20])
+plt.ylim([1.5,40])
 plt.xlabel(r"log CO Radius (kpc)")
 plt.ylabel(r"log $\alpha_{\mathsf{vir,150pc}}$")
+plt.xticks([10**0,10**1],[1,2])
+plt.yticks([10**np.log10(3),10**1,10**np.log10(30)],[3,10,30])
 plt.savefig(dir_eps+"plot_size_virial.png",dpi=200)
 
 
