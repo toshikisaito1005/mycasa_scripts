@@ -20,3 +20,6 @@ convert +append -border 0x0 $dir_data"plot_scatter_all.png" $dir_data"plot_scatt
 
 ### figure 3
 convert -append -border 0x0 $dir_data"plot_pturb_all.png" $dir_data"plot_vir_all.png" $dir_product"plot_pturb_vir.png"
+
+### figure 4
+convert +append -border 0x0 $dir_data"plot_size_pturb.png" $dir_data"plot_size_virial.png" $dir_product"plot_size.png"
