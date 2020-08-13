@@ -53,5 +53,11 @@ for i in [0]:
 	radius = np.sqrt(galarea / np.pi)
 	# get pturb
 	data = np.loadtxt("list_pturb.txt", dtype="str")
+	this_pturb = data[data[:,0]==this_galaxy][:,1:]
+	# get virial
+	data = np.loadtxt("list_virial.txt", dtype="str")
+	this_virial = data[data[:,0]==this_galaxy][:,1:]
+	# combine list
+	this_list = np.c_[this_galaxy,radius,this_pturb,this_virial]
 
 os.system("rm -rf *last")
