@@ -45,6 +45,13 @@ for i in [0]:
 	shape = this_header["shape"]
 	box = "0,0," + str(shape[0]-1) + "," + str(shape[1]-1)
 	# pixel size in parsec
-	pixsize = abs(this_header["cdelt1"])*3600*180/np.pi
-	#
+	pixsize = abs(this_header["cdelt1"])*3600*180/np.pi * this_scale / 1000.
+	pixarea  = pixsize**2
+	# galarea in kpc^2
 	this_data = imval(this_mom0, box=box)
+	galarea = sum(this_data["mask"].flatten()) * pixarea
+	radius = np.sqrt(galarea / np.pi)
+	# get pturb
+	data = np.loadtxt("list_pturb.txt", dtype="int64")
+
+os.system("rm -rf *last")
