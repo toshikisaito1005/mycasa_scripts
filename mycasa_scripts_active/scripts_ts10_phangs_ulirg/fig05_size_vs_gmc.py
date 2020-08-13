@@ -130,7 +130,7 @@ plt.xlim([0.6,20])
 plt.ylim([10**2,10**9])
 plt.xlabel(r"log CO Radius (kpc)")
 plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K cm$^{-3}$)")
-plt.xticks([10**np.log10(0.6),10**0,10**1,10**np.log10(20)],[0,1,2])
+plt.xticks([10**0,10**1],[1,2])
 plt.yticks([10**2,10**3,10**4,10**5,10**6,10**7,10**8,10**9],[2,3,4,5,6,7,8,9])
 plt.savefig(dir_eps+"plot_size_pturb.png",dpi=200)
 
