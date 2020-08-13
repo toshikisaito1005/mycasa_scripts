@@ -64,9 +64,9 @@ for i in range(len(galaxy)):
 	#
 list_all = np.array(list_all)
 list_name = list_all[:,0]
-list_r = list_all[:,1]
-list_pturb = list_all[:,2:6]
-list_virial = list_all[:,6:10]
+list_r = list_all[:,1].astype("float64")
+list_pturb = list_all[:,2:6].astype("float64")
+list_virial = list_all[:,6:10].astype("float64")
 
 
 # plot
@@ -77,8 +77,10 @@ plt.rcParams["font.size"] = 10
 plt.rcParams["legend.fontsize"] = 10
 plt.subplots_adjust(bottom=0.05, left=0.06, right=0.99, top=0.95)
 #
-ax.scatter(list_r, )
-
+ax.scatter(list_r, list_pturb[:,1], s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9)
+#
+plt.yscale("log")
+plt.savefig(dir_eps+"plot_size_pturb.png",dpi=200)
 
 #
 os.system("rm -rf *last")
