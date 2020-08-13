@@ -16,7 +16,7 @@ plt.ioff()
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts10_phangs_ulirgs/data/"
 dir_eps = "/Users/saito/data/myproj_active/proj_ts10_phangs_ulirgs/eps/"
-galaxy = ['eso267','eso297g011','eso297g012','eso319','eso507','eso557','ic4518e','ic4518w','ic5179','iras06592','irasf10409','irasf17138','mcg02-33-098','ngc1614','ngc2369','ngc3110','ngc3256','ngc5257','ngc6240']
+galaxy = ['eso267','eso297g011','eso297g012','eso319','eso507','eso557','ic4518e','ic4518w','ic5179','iras06592','irasf10409','irasf17138','mcg02','ngc1614','ngc2369','ngc3110','ngc3256','ngc5257','ngc6240']
 phangs = [s.split("/")[-1].split("_12m")[0] for s in glob.glob(dir_eps + "../data_phangs/*mom0*")]
 ylim = [0.1,100]
 scales = [365,345,345,325,425,425,325,325,225,445,425,345,305,305,205,325,185,445,485]
@@ -27,14 +27,15 @@ galname3 = [s.replace("iras","IRAS ").replace("f","F").replace("g","-G") for s i
 galname4 = [s.replace("319","319-G022").replace("507","507-G070") for s in galname3]
 galname5 = [s.replace("557","557-G002").replace("06592","06592-6313") for s in galname4]
 galname6 = [s.replace("10409","10409-4556").replace("17138","17138-1017") for s in galname5]
-galname = [s.replace("-02","-02-33-098").replace("267","267-G030") for s in galname6]
+galname = [s.replace("mcg02","mcg-02-33-098").replace("267","267-G030") for s in galname6]
 
 
 #####################
 ### Main Procedure
 #####################
-#for i in range(len(galaxy)):
-for i in [0]:
+list_all = []
+for i in range(len(galaxy)):
+#for i in [0]:
 	this_galaxy = galaxy[i]
 	this_scale = scales[i]
 	print("# working on " + this_galaxy)
@@ -58,6 +59,7 @@ for i in [0]:
 	data = np.loadtxt("list_virial.txt", dtype="str")
 	this_virial = data[data[:,0]==this_galaxy][:,1:]
 	# combine list
-	this_list = np.c_[this_galaxy,radius,this_pturb,this_virial]
+	this_list = np.c_[np.array(this_galaxy),radius,this_pturb,this_virial][0]
+	list_all.append(this_list)
 
 os.system("rm -rf *last")
