@@ -60,6 +60,25 @@ for i in range(len(galaxy)):
 	this_virial = data[data[:,0]==this_galaxy][:,1:]
 	# combine list
 	this_list = np.c_[np.array(this_galaxy),radius,this_pturb,this_virial][0]
-	list_all.append(this_list)
+	list_all.append(this_list.tolist())
+	#
+list_all = np.array(list_all)
+list_name = list_all[:,0]
+list_r = list_all[:,1]
+list_pturb = list_all[:,2:6]
+list_virial = list_all[:,6:10]
 
+
+# plot
+figure = plt.figure(figsize=(10,10))
+gs = gridspec.GridSpec(nrows=9, ncols=9)
+ax = plt.subplot(gs[0:9,0:9])
+plt.rcParams["font.size"] = 10
+plt.rcParams["legend.fontsize"] = 10
+plt.subplots_adjust(bottom=0.05, left=0.06, right=0.99, top=0.95)
+#
+ax.scatter(list_r, )
+
+
+#
 os.system("rm -rf *last")
