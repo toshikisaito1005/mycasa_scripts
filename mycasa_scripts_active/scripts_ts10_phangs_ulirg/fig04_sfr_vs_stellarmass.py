@@ -20,7 +20,7 @@ dir_eps = "/Users/saito/data/myproj_active/proj_ts10_phangs_ulirgs/eps/"
 #####################
 ### Main Procedure
 #####################
-data = np.loadtxt("fig04_data.txt")
+data = np.loadtxt("list_sfr_stellar.txt")
 logSFR = data[:,0]
 logMstar = data[:,1]
 

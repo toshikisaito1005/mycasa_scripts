@@ -201,4 +201,9 @@ plt.yticks([10**-1,10**0,10**1,10**2],[-1,0,1,2])
 plt.ylabel(r"log $\alpha_{\mathsf{vir,150pc}}$")
 plt.savefig(dir_eps+"plot_vir_all.png",dpi=200)
 
+# save txt
+list_save = np.c_[galname,list_wp16,list_wp50,list_wp84,list_wp50_center]
+header = "galname virial16 virial50 virial84 virial50(center)"
+np.savetxt("list_virial.txt", list_save, fmt="%s", header=header)
+
 os.system("rm -rf *.last")

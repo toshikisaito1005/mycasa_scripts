@@ -1,15 +1,12 @@
-# logSFR logMstar
-1.76 10.85
-1.29 10.7
-1.26 10.96
-1.46 11.03
-1.69 10.92
-1.18 10.59
-1.3  11.07
-1.21 10.72
-1.59 10.92
-1.99 11.5
-1.31 10.99
-1.31 10.66
-1.41 11.15
-1.58 10.72
+import os
+import re
+import sys
+import glob
+import scipy
+import numpy as np
+import matplotlib.cm as cm
+import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
+import matplotlib.patches as mpatches
+plt.ioff()
+
