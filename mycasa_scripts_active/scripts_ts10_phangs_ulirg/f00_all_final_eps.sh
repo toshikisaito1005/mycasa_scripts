@@ -22,16 +22,17 @@ convert +append -border 0x0 $dir_data"plot_scatter_all.png" $dir_data"plot_scatt
 convert -append -border 0x0 $dir_data"plot_pturb_all.png" $dir_data"plot_vir_all.png" $dir_product"plot_pturb_vir.png"
 
 ### figure 4
-convert -crop 720x500+50+15 $dir_data"plot_size_pturb.png" $dir_data"plot_size_pturbb.png"
-convert -crop 720x580+50+15 $dir_data"plot_size_virial.png" $dir_data"plot_size_virialb.png"
+convert -crop 720x490+50+25 $dir_data"plot_size_pturb.png" $dir_data"plot_size_pturbb.png"
+convert -crop 720x570+50+25 $dir_data"plot_size_virial.png" $dir_data"plot_size_virialb.png"
 
-convert -crop 630x500+140+15 $dir_data"plot_mass_pturb.png" $dir_data"plot_mass_pturbb.png"
-convert -crop 630x580+140+15 $dir_data"plot_mass_virial.png" $dir_data"plot_mass_virialb.png"
+convert -crop 630x490+140+25 $dir_data"plot_mass_pturb.png" $dir_data"plot_mass_pturbb.png"
+convert -crop 630x570+140+25 $dir_data"plot_mass_virial.png" $dir_data"plot_mass_virialb.png"
 
-convert -crop 630x500+140+15 $dir_data"plot_deltams_pturb.png" $dir_data"plot_deltams_pturbb.png"
-convert -crop 630x580+140+15 $dir_data"plot_deltams_virial.png" $dir_data"plot_deltams_virialb.png"
-
+convert -crop 630x490+140+25 $dir_data"plot_deltams_pturb.png" $dir_data"plot_deltams_pturbb.png"
+convert -crop 630x570+140+25 $dir_data"plot_deltams_virial.png" $dir_data"plot_deltams_virialb.png"
 
 convert +append -border 0x0 $dir_data"plot_size_pturbb.png" $dir_data"plot_mass_pturbb.png" $dir_data"plot_deltams_pturbb.png" $dir_data"plot_size1.png"
+convert +append -border 0x0 $dir_data"plot_size_virialb.png" $dir_data"plot_mass_virialb.png" $dir_data"plot_deltams_virialb.png" $dir_data"plot_size2.png"
+convert -append -border 0x0 $dir_data"plot_size1.png" $dir_data"plot_size2.png" $dir_product"plot_scatter.png"
 
 ### 
