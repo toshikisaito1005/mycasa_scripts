@@ -110,9 +110,9 @@ phangs_virial = phangs_all[:,5:8].astype("float64")
 # plot
 figure = plt.figure(figsize=(5,3))
 gs = gridspec.GridSpec(nrows=9, ncols=9)
-ax = plt.subplot(gs[0:7,0:9])
+ax = plt.subplot(gs[0:9,0:7])
 plt.rcParams["font.size"] = 10
-plt.rcParams["legend.fontsize"] = 10
+plt.rcParams["legend.fontsize"] = 8
 plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95)
 #
 ax.plot(list_r, list_pturb[:,1], c="indianred")
@@ -140,7 +140,7 @@ plt.savefig(dir_eps+"plot_size_pturb.png",dpi=200)
 # plot
 figure = plt.figure(figsize=(5,3))
 gs = gridspec.GridSpec(nrows=9, ncols=9)
-ax = plt.subplot(gs[0:7,0:9])
+ax = plt.subplot(gs[0:9,0:7])
 plt.rcParams["font.size"] = 10
 plt.rcParams["legend.fontsize"] = 10
 plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95)
@@ -159,7 +159,7 @@ plt.xscale("log")
 plt.yscale("log")
 plt.xlim([0.6,20])
 plt.ylim([1.5,40])
-plt.xlabel(r"log CO Radius (kpc)")
+plt.xlabel(r"log $r_{\mathsf{circ,CO}}$ (kpc)")
 plt.ylabel(r"log $\alpha_{\mathsf{vir,150pc}}$")
 plt.xticks([10**0,10**1],[1,2])
 plt.yticks([10**np.log10(3),10**1,10**np.log10(30)],[3,10,30])
