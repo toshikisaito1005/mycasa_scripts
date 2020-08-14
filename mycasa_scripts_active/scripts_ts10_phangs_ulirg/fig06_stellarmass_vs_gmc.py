@@ -111,6 +111,8 @@ for i in range(len(phangs)):
 	this_list = np.c_[np.array(this_galaxy),radius,this_pturb,this_virial][0]
 	phangs_all.append(this_list.tolist())
 	#
+	phangs_name
+	#
 phangs_all = np.array(phangs_all)
 phangs_all = phangs_all[phangs_all[:,1].argsort()]
 phangs_name = phangs_all[:,0]
