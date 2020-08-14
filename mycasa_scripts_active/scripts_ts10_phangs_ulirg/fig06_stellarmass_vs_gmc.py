@@ -227,7 +227,7 @@ plt.xlim([10**8.9,10**12])
 plt.ylim([1.5,40])
 plt.xlabel(r"log $M_{\star}$ ($M_{\odot}$)")
 plt.ylabel(r"log $\alpha_{\mathsf{vir,150pc}}$")
-plt.xticks([10**9,10**10,10**11],[9,10,11,12])
+plt.xticks([10**9,10**10,10**11],[9,10,11])
 plt.yticks([10**np.log10(3),10**1,10**np.log10(30)],[3,10,30])
 plt.savefig(dir_eps+"plot_mass_virial.png",dpi=200)
 
