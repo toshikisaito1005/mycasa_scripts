@@ -70,6 +70,8 @@ for i in range(len(galaxy)):
 	# get virial
 	data = np.loadtxt("list_virial.txt", dtype="str")
 	this_virial = data[data[:,0]==this_galaxy][:,1:]
+	#
+	
 	# combine list
 	this_list = np.c_[np.array(this_galaxy),radius,this_pturb,this_virial][0]
 	list_all.append(this_list.tolist())
@@ -107,11 +109,13 @@ for i in range(len(phangs)):
 	# get virial
 	data = np.loadtxt("list_virial_phangs.txt", dtype="str")
 	this_virial = data[data[:,0]==this_galaxy][:,1:]
-	# combine list
-	this_list = np.c_[np.array(this_galaxy),radius,this_pturb,this_virial][0]
-	phangs_all.append(this_list.tolist())
 	#
-	phangs_name
+	index = np.where(phangs_name==this_galaxy)[0][0]
+	stellarmass = phangs_logMstar[index]
+	sfr = phangs_logSFR[index]
+	# combine list
+	this_list = np.c_[np.array(this_galaxy),radius,this_pturb,this_virial,stellarmass,sfr][0]
+	phangs_all.append(this_list.tolist())
 	#
 phangs_all = np.array(phangs_all)
 phangs_all = phangs_all[phangs_all[:,1].argsort()]
