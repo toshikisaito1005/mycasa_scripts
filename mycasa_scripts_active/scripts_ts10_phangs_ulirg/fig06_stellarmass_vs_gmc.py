@@ -34,6 +34,7 @@ galname = [s.replace("mcg02","mcg-02-33-098").replace("267","267-G030") for s in
 #####################
 ###
 data = np.loadtxt("list_sfr_stellar.txt", dtype="str")
+lirg_name = data[:,0]
 lirg_logSFR = 10**data[:,1].astype("float64")
 lirg_logMstar = 10**data[:,1].astype("float64")
 #
@@ -70,8 +71,14 @@ for i in range(len(galaxy)):
 	# get virial
 	data = np.loadtxt("list_virial.txt", dtype="str")
 	this_virial = data[data[:,0]==this_galaxy][:,1:]
+	#
+	index = np.where(lirg_name==this_galaxy)
+	if index:
+		index = index[0][0]
+	stellarmass = lirg_logMstar[index]
+	sfr = lirg_logSFR[index]
 	# combine list
-	this_list = np.c_[np.array(this_galaxy),radius,this_pturb,this_virial][0]
+	this_list = np.c_[np.array(this_galaxy),radius,this_pturb,this_virial,stellarmass,sfr][0]
 	list_all.append(this_list.tolist())
 	#
 list_all = np.array(list_all)
