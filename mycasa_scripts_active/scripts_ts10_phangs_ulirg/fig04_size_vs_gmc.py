@@ -108,7 +108,7 @@ phangs_virial = phangs_all[:,5:8].astype("float64")
 
 
 # plot
-figure = plt.figure(figsize=(5,5))
+figure = plt.figure(figsize=(5,3))
 gs = gridspec.GridSpec(nrows=9, ncols=9)
 ax = plt.subplot(gs[0:9,0:9])
 plt.rcParams["font.size"] = 10
@@ -136,7 +136,7 @@ plt.savefig(dir_eps+"plot_size_pturb.png",dpi=200)
 
 
 # plot
-figure = plt.figure(figsize=(5,5))
+figure = plt.figure(figsize=(5,3))
 gs = gridspec.GridSpec(nrows=9, ncols=9)
 ax = plt.subplot(gs[0:9,0:9])
 plt.rcParams["font.size"] = 10
