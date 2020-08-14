@@ -172,7 +172,7 @@ plt.xlim([10**8.9,10**12])
 plt.ylim([10**2.1,10**9.2])
 plt.xlabel(r"log $M_{\star}$ ($M_{\odot}$)")
 plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K cm$^{-3}$)")
-plt.xticks([10**9,10**10,10**11,10**12],[9,10,11,12])
+plt.xticks([10**9,10**10,10**11],[9,10,11])
 plt.yticks([10**3,10**4,10**5,10**6,10**7,10**8,10**9],[3,4,5,6,7,8,9])
 plt.savefig(dir_eps+"plot_mass_pturb.png",dpi=200)
 
@@ -202,6 +202,7 @@ plt.xlabel(r"log $\Delta_{\mathsf{MS}}$")
 plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K cm$^{-3}$)")
 plt.xticks([10**-1,10**0,10**1],[-1,0,1])
 plt.yticks([10**3,10**4,10**5,10**6,10**7,10**8,10**9],[3,4,5,6,7,8,9])
+ax.text(10**-1,10**8,"Mass-selected sample \n(10.3 < log $M_{\star}$ < 11.1)")
 plt.savefig(dir_eps+"plot_deltams_pturb.png",dpi=200)
 
 
@@ -226,7 +227,7 @@ plt.xlim([10**8.9,10**12])
 plt.ylim([1.5,40])
 plt.xlabel(r"log $M_{\star}$ ($M_{\odot}$)")
 plt.ylabel(r"log $\alpha_{\mathsf{vir,150pc}}$")
-plt.xticks([10**9,10**10,10**11,10**12],[9,10,11,12])
+plt.xticks([10**9,10**10,10**11],[9,10,11,12])
 plt.yticks([10**np.log10(3),10**1,10**np.log10(30)],[3,10,30])
 plt.savefig(dir_eps+"plot_mass_virial.png",dpi=200)
 
@@ -253,6 +254,7 @@ plt.xlabel(r"log $\Delta_{\mathsf{MS}}$")
 plt.ylabel(r"log $\alpha_{\mathsf{vir,150pc}}$")
 plt.xticks([10**-1,10**0,10**1],[-1,0,1])
 plt.yticks([10**np.log10(3),10**1,10**np.log10(30)],[3,10,30])
+ax.text(10**-1,23,"Mass-selected sample \n(10.3 < log $M_{\star}$ < 11.1)")
 plt.savefig(dir_eps+"plot_deltams_virial.png",dpi=200)
 
 
