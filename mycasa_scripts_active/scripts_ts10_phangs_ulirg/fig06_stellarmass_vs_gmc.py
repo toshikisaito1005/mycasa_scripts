@@ -90,7 +90,7 @@ list_name = list_all[:,0]
 list_r = list_all[:,1].astype("float64")
 list_pturb = list_all[:,2:6].astype("float64")
 list_virial = list_all[:,6:10].astype("float64")
-list_mass = list_all[:,11].astype("float64")
+list_mass = list_all[:,10].astype("float64")
 
 
 ###
@@ -133,7 +133,7 @@ phangs_name = phangs_all[:,0]
 phangs_r = phangs_all[:,1].astype("float64")
 phangs_pturb = phangs_all[:,2:5].astype("float64")
 phangs_virial = phangs_all[:,5:8].astype("float64")
-phangs_mass = phangs_all[:,9].astype("float64")
+phangs_mass = phangs_all[:,8].astype("float64")
 
 
 # plot
@@ -155,11 +155,10 @@ plt.xscale("log")
 plt.yscale("log")
 #plt.xlim([0.6,20])
 plt.ylim([10**2,10**9])
-plt.xlabel(r"log $r_{\mathsf{circ,CO}}$ (kpc)")
+plt.xlabel(r"log $M_{\star}$ ($M_{\odot}$)")
 plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K cm$^{-3}$)")
-plt.xticks([10**0,10**1],[1,2])
+#plt.xticks([10**0,10**1],[1,2])
 plt.yticks([10**2,10**3,10**4,10**5,10**6,10**7,10**8,10**9],[2,3,4,5,6,7,8,9])
-plt.legend(loc="upper right", ncol=2)
 plt.savefig(dir_eps+"plot_mass_pturb.png",dpi=200)
 
 
