@@ -36,7 +36,7 @@ galname = [s.replace("mcg02","mcg-02-33-098").replace("267","267-G030") for s in
 data = np.loadtxt("list_sfr_stellar.txt", dtype="str")
 lirg_name = data[:,0]
 lirg_logSFR = 10**data[:,1].astype("float64")
-lirg_logMstar = 10**data[:,1].astype("float64")
+lirg_logMstar = 10**data[:,2].astype("float64")
 #
 hdu_list = fits.open(dir_eps + "../data_other/phangs_sample_table_v1p5.fits", memmap=True)
 evt_data = Table(hdu_list[1].data)
@@ -72,13 +72,11 @@ for i in range(len(galaxy)):
 	data = np.loadtxt("list_virial.txt", dtype="str")
 	this_virial = data[data[:,0]==this_galaxy][:,1:]
 	#
-	index = np.where(lirg_name==this_galaxy)
-	print(index)
-	if not index:
-		index = index[0][0]
+	index = np.where(lirg_name==this_galaxy)[0]
+	if index:
+		index = index[0]
 		stellarmass = lirg_logMstar[index]
 		sfr = lirg_logSFR[index]
-		print(stellarmass)
 	else:
 		stellarmass = 0
 		sfr = 0
@@ -92,6 +90,8 @@ list_name = list_all[:,0]
 list_r = list_all[:,1].astype("float64")
 list_pturb = list_all[:,2:6].astype("float64")
 list_virial = list_all[:,6:10].astype("float64")
+list_mass = list_all[11].astype("float64")
+
 
 ###
 phangs_all = []
@@ -133,6 +133,7 @@ phangs_name = phangs_all[:,0]
 phangs_r = phangs_all[:,1].astype("float64")
 phangs_pturb = phangs_all[:,2:5].astype("float64")
 phangs_virial = phangs_all[:,5:8].astype("float64")
+phangs_mass = list_all[9].astype("float64")
 
 
 # plot
@@ -146,10 +147,10 @@ plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95)
 ax.plot(list_r, list_pturb[:,1], c="indianred")
 ax.plot(list_r, list_pturb[:,3], "--", c="indianred")
 #
-ax.scatter(phangs_r, phangs_pturb[:,1], s=10, marker="o", c="white", lw=1, edgecolors="skyblue", zorder=1e9, label="PHANGS")
+ax.scatter(phangs_mass, phangs_pturb[:,1], s=10, marker="o", c="white", lw=1, edgecolors="skyblue", zorder=1e9, label="PHANGS")
 #
-ax.scatter(list_r, list_pturb[:,1], s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9, label="(U)LIRGs")
-ax.scatter(list_r, list_pturb[:,3], s=40, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9, label="(U)LIRG centers")
+ax.scatter(list_mass, list_pturb[:,1], s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9, label="(U)LIRGs")
+ax.scatter(list_mass, list_pturb[:,3], s=40, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9, label="(U)LIRG centers")
 #for i in range(len(galaxy)):
 #    ax.plot([list_r[i], list_r[i]], [list_pturb[i,0], list_pturb[i,2]], lw=1, c="indianred")
 #
@@ -162,7 +163,7 @@ plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K cm$^{-3}$)")
 plt.xticks([10**0,10**1],[1,2])
 plt.yticks([10**2,10**3,10**4,10**5,10**6,10**7,10**8,10**9],[2,3,4,5,6,7,8,9])
 plt.legend(loc="upper right", ncol=2)
-plt.savefig(dir_eps+"plot_size_pturb.png",dpi=200)
+plt.savefig(dir_eps+"plot_mass_pturb.png",dpi=200)
 
 
 # plot
@@ -176,7 +177,7 @@ plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95)
 ax.plot(list_r, list_virial[:,1], c="indianred")
 ax.plot(list_r, list_virial[:,3], "--", c="indianred")
 #
-ax.scatter(phangs_r, phangs_virial[:,1], s=10, marker="o", c="white", lw=1, edgecolors="skyblue", zorder=1e9)
+ax.scatter(phangs_mass, phangs_virial[:,1], s=10, marker="o", c="white", lw=1, edgecolors="skyblue", zorder=1e9)
 #
 ax.scatter(list_r, list_virial[:,1], s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9)
 ax.scatter(list_r, list_virial[:,3], s=40, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9)
