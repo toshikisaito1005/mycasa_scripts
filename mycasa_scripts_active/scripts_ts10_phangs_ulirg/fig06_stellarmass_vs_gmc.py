@@ -73,10 +73,10 @@ for i in range(len(galaxy)):
 	this_virial = data[data[:,0]==this_galaxy][:,1:]
 	#
 	index = np.where(lirg_name==this_galaxy)
-	if index:
+	if not index:
 		index = index[0][0]
-	stellarmass = lirg_logMstar[index]
-	sfr = lirg_logSFR[index]
+		stellarmass = lirg_logMstar[index]
+		sfr = lirg_logSFR[index]
 	# combine list
 	this_list = np.c_[np.array(this_galaxy),radius,this_pturb,this_virial,stellarmass,sfr][0]
 	list_all.append(this_list.tolist())
