@@ -186,8 +186,8 @@ plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95)
 #
 ax.scatter(phangs_delta, phangs_pturb[:,1], s=10, marker="o", c="white", lw=1, edgecolors="skyblue", zorder=1e9, label="PHANGS")
 #
-ax.scatter(list_delta, list_pturb[:,1], s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9, label="(U)LIRGs")
-ax.scatter(list_delta, list_pturb[:,3], s=40, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9, label="(U)LIRG centers")
+ax.scatter(list_delta[list_mass>10**np.log10(10.3)], list_pturb[:,1][list_mass>10**np.log10(10.3)], s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9, label="(U)LIRGs")
+ax.scatter(list_delta[list_mass>10**np.log10(10.3)], list_pturb[:,3][list_mass>10**np.log10(10.3)], s=40, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9, label="(U)LIRG centers")
 #for i in range(len(galaxy)):
 #    ax.plot([list_r[i], list_r[i]], [list_pturb[i,0], list_pturb[i,2]], lw=1, c="indianred")
 #
