@@ -168,7 +168,7 @@ ax.scatter(list_mass, list_pturb[:,3], s=40, marker="*", c="white", lw=1, edgeco
 #
 plt.xscale("log")
 plt.yscale("log")
-#plt.xlim([0.6,20])
+plt.xlim([10**8.9,10**12])
 plt.ylim([10**2,10**9])
 plt.xlabel(r"log $M_{\star}$ ($M_{\odot}$)")
 plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K cm$^{-3}$)")
@@ -193,7 +193,7 @@ ax.scatter(list_delta, list_pturb[:,3], s=40, marker="*", c="white", lw=1, edgec
 #
 plt.xscale("log")
 plt.yscale("log")
-ax.set_xlim([10**-1,10**1.5])
+ax.set_xlim([10**-1.1,10**1.5])
 ax.set_ylim([10**2,10**9])
 plt.xlabel(r"log $\Delta_{\mathsf{MS}}$")
 plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K cm$^{-3}$)")
@@ -219,13 +219,38 @@ ax.scatter(list_mass, list_virial[:,3], s=40, marker="*", c="white", lw=1, edgec
 #
 plt.xscale("log")
 plt.yscale("log")
-#plt.xlim([0.6,20])
+plt.xlim([10**8.9,10**12])
 plt.ylim([1.5,40])
 plt.xlabel(r"log $M_{\star}$ ($M_{\odot}$)")
 plt.ylabel(r"log $\alpha_{\mathsf{vir,150pc}}$")
-#plt.xticks([10**0,10**1],[1,2])
+plt.xticks([10**9,10**10,10**11,10**12],[9,10,11,12])
 plt.yticks([10**np.log10(3),10**1,10**np.log10(30)],[3,10,30])
 plt.savefig(dir_eps+"plot_mass_virial.png",dpi=200)
+
+# plot
+figure = plt.figure(figsize=(5,3))
+gs = gridspec.GridSpec(nrows=9, ncols=9)
+ax = plt.subplot(gs[0:9,0:7])
+plt.rcParams["font.size"] = 10
+plt.rcParams["legend.fontsize"] = 8
+plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95)
+#
+ax.scatter(phangs_delta, phangs_virial[:,1], s=10, marker="o", c="white", lw=1, edgecolors="skyblue", zorder=1e9, label="PHANGS")
+#
+ax.scatter(list_delta, list_virial[:,1], s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9, label="(U)LIRGs")
+ax.scatter(list_delta, list_virial[:,3], s=40, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9, label="(U)LIRG centers")
+#for i in range(len(galaxy)):
+#    ax.plot([list_r[i], list_r[i]], [list_pturb[i,0], list_pturb[i,2]], lw=1, c="indianred")
+#
+plt.xscale("log")
+plt.yscale("log")
+ax.set_xlim([10**-1.1,10**1.5])
+plt.ylim([1.5,40])
+plt.xlabel(r"log $\Delta_{\mathsf{MS}}$")
+plt.ylabel(r"log $\alpha_{\mathsf{vir,150pc}}$")
+plt.xticks([10**-1,10**0,10**1],[-1,0,1])
+plt.yticks([10**np.log10(3),10**1,10**np.log10(30)],[3,10,30])
+plt.savefig(dir_eps+"plot_deltams_virial.png",dpi=200)
 
 
 #
