@@ -31,8 +31,6 @@ evt_data = Table(hdu_list[1].data)
 phangs_logSFR = evt_data["props_sfr"] # np.log10(evt_data["props_sfr"])
 phangs_logMstar = evt_data["props_mstar"] # np.log10(evt_data["props_mstar"])
 
-print(hdu_list[1].columns)
-
 #
 figure = plt.figure(figsize=(5,3))
 gs = gridspec.GridSpec(nrows=9, ncols=9)
