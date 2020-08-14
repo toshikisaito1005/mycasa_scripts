@@ -191,13 +191,13 @@ ax.scatter(list_delta, list_pturb[:,3], s=40, marker="*", c="white", lw=1, edgec
 #for i in range(len(galaxy)):
 #    ax.plot([list_r[i], list_r[i]], [list_pturb[i,0], list_pturb[i,2]], lw=1, c="indianred")
 #
-#plt.xscale("log")
+plt.xscale("log")
 plt.yscale("log")
-#plt.xlim([0.6,20])
-plt.ylim([10**2,10**9])
+ax.set_xlim([10**-1,10**1.5])
+ax.set_ylim([10**2,10**9])
 plt.xlabel(r"log $\Delta_{\mathsf{MS}}$")
 plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K cm$^{-3}$)")
-#plt.xticks([10**9,10**10,10**11,10**12],[9,10,11,12])
+plt.xticks([10**-1,10**0,10**1],[-1,0,1])
 plt.yticks([10**2,10**3,10**4,10**5,10**6,10**7,10**8,10**9],[2,3,4,5,6,7,8,9])
 plt.savefig(dir_eps+"plot_deltams_pturb.png",dpi=200)
 
