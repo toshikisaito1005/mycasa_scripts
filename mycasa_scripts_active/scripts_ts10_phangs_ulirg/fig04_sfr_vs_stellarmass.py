@@ -8,7 +8,7 @@ import matplotlib.cm as cm
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import matplotlib.patches as mpatches
-import astropy.io.fits as fits
+from astropy.io import fits
 plt.ioff()
 
 
@@ -25,8 +25,8 @@ data = np.loadtxt("list_sfr_stellar.txt")
 lirg_logSFR = data[:,0]
 lirg_logMstar = data[:,1]
 #
-hdulist = fits.open(dir_eps + "../data_other/phangs_sample_table_v1p5.fits")
-
+hdu_list = fits.open(dir_eps + "../data_other/phangs_sample_table_v1p5.fits", memmap=True)
+hdu_list.info()
 
 #
 figure = plt.figure(figsize=(10,10))
