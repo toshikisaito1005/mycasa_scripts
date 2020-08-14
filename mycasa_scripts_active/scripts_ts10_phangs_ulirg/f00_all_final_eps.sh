@@ -33,6 +33,9 @@ convert -crop 630x570+140+25 $dir_data"plot_deltams_virial.png" $dir_data"plot_d
 
 convert +append -border 0x0 $dir_data"plot_size_pturbb.png" $dir_data"plot_mass_pturbb.png" $dir_data"plot_deltams_pturbb.png" $dir_data"plot_size1.png"
 convert +append -border 0x0 $dir_data"plot_size_virialb.png" $dir_data"plot_mass_virialb.png" $dir_data"plot_deltams_virialb.png" $dir_data"plot_size2.png"
-convert -append -border 0x0 $dir_data"plot_size1.png" $dir_data"plot_size2.png" $dir_product"plot_scatter.png"
+convert -append -border 0x0 $dir_data"plot_size1.png" $dir_data"plot_size2.png" $dir_product"plot_comparison.png"
+
+rm -rf $dir_data"plot_size_pturbb.png" $dir_data"plot_mass_pturbb.png" $dir_data"plot_deltams_pturbb.png" $dir_data"plot_size1.png"
+rm -rf $dir_data"plot_size_virialb.png" $dir_data"plot_mass_virialb.png" $dir_data"plot_deltams_virialb.png" $dir_data"plot_size2.png"
 
 ### 
