@@ -33,9 +33,9 @@ galname = [s.replace("mcg02","mcg-02-33-098").replace("267","267-G030") for s in
 ### Main Procedure
 #####################
 ###
-data = np.loadtxt("list_sfr_stellar.txt")
-lirg_logSFR = 10**data[:,0]
-lirg_logMstar = 10**data[:,1]
+data = np.loadtxt("list_sfr_stellar.txt", dtype="str")
+lirg_logSFR = 10**data[:,1].astype("float64")
+lirg_logMstar = 10**data[:,1].astype("float64")
 #
 hdu_list = fits.open(dir_eps + "../data_other/phangs_sample_table_v1p5.fits", memmap=True)
 evt_data = Table(hdu_list[1].data)
@@ -70,8 +70,6 @@ for i in range(len(galaxy)):
 	# get virial
 	data = np.loadtxt("list_virial.txt", dtype="str")
 	this_virial = data[data[:,0]==this_galaxy][:,1:]
-	#
-	
 	# combine list
 	this_list = np.c_[np.array(this_galaxy),radius,this_pturb,this_virial][0]
 	list_all.append(this_list.tolist())

@@ -23,8 +23,8 @@ dir_eps = "/Users/saito/data/myproj_active/proj_ts10_phangs_ulirgs/eps/"
 ### Main Procedure
 #####################
 data = np.loadtxt("list_sfr_stellar.txt")
-lirg_logSFR = 10**data[:,0]
-lirg_logMstar = 10**data[:,1]
+lirg_logSFR = 10**data[:,1].astype("float64")
+lirg_logMstar = 10**data[:,2]
 #
 hdu_list = fits.open(dir_eps + "../data_other/phangs_sample_table_v1p5.fits", memmap=True)
 evt_data = Table(hdu_list[1].data)
