@@ -144,11 +144,11 @@ ax.scatter(list_r, list_pturb[:,3], s=40, marker="*", c="white", lw=1, edgecolor
 plt.xscale("log")
 plt.yscale("log")
 plt.xlim([0.6,20])
-plt.ylim([10**2.1,10**9.1])
+plt.ylim([10**2.1,10**9.2])
 plt.xlabel(r"log $r_{\mathsf{circ,CO}}$ (kpc)")
 plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K cm$^{-3}$)")
 plt.xticks([10**0,10**1],[1,2])
-plt.yticks([10**2,10**3,10**4,10**5,10**6,10**7,10**8,10**9],[2,3,4,5,6,7,8,9])
+plt.yticks([10**3,10**4,10**5,10**6,10**7,10**8,10**9],[3,4,5,6,7,8,9])
 plt.legend(loc="upper right", ncol=2)
 plt.savefig(dir_eps+"plot_size_pturb.png",dpi=200)
 
