@@ -35,7 +35,7 @@ nednames = data["Name"]
 
 for i in range(len(nednames)):
 # for i in [145]:
-	result_table = Ned.query_region(galname[i], radius=30 * u.arcsec)
+	result_table = Ned.query_region(nednames[i], radius=30 * u.arcsec)
 	this_names = result_table["Object Name"]
 	#
 	this_name = []
@@ -54,11 +54,11 @@ for i in range(len(nednames)):
 			if search_name in galname:
 				this_sfr = str(data["logSFR"][i])
 				this_mstar = str(data["logMstar"][i])
-				print("# " + search_name.rjust(15) + ", logSFR = " + this_sfr.ljust(4) + ", logMstar = " + this_mstar.ljust(4))
+				print(this_sfr.ljust(4) + " " + this_mstar.ljust(4) + " # " + search_name)
 
-print("#     F06592-6313, logSFR = 1.31, logMstar = 10.66")
-print("#     F10409-4556, logSFR = 1.41, logMstar = 11.15")
-print("#     F17138-1017, logSFR = 1.58, logMstar = 10.72")
+print("1.31 10.66, # F06592-6313")
+print("1.41 11.15, # F10409-4556")
+print("1.58 10.72, # F17138-1017")
 
 # not available in Shangguan+18 and U+12; eso297g011', 'eso297g012', 'ic4518e', 'ic4518w'
 # available in U+12; 'ngc5257/8' 
