@@ -110,7 +110,7 @@ phangs_virial = phangs_all[:,5:8].astype("float64")
 # plot
 figure = plt.figure(figsize=(5,3))
 gs = gridspec.GridSpec(nrows=9, ncols=9)
-ax = plt.subplot(gs[0:9,0:9])
+ax = plt.subplot(gs[0:7,0:9])
 plt.rcParams["font.size"] = 10
 plt.rcParams["legend.fontsize"] = 10
 plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95)
@@ -129,7 +129,7 @@ plt.xscale("log")
 plt.yscale("log")
 plt.xlim([0.6,20])
 plt.ylim([10**2,10**9])
-plt.xlabel(r"log CO Radius (kpc)")
+plt.xlabel(r"log $r_{\mathsf{circ,CO}}$ (kpc)")
 plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K cm$^{-3}$)")
 plt.xticks([10**0,10**1],[1,2])
 plt.yticks([10**2,10**3,10**4,10**5,10**6,10**7,10**8,10**9],[2,3,4,5,6,7,8,9])
@@ -140,7 +140,7 @@ plt.savefig(dir_eps+"plot_size_pturb.png",dpi=200)
 # plot
 figure = plt.figure(figsize=(5,3))
 gs = gridspec.GridSpec(nrows=9, ncols=9)
-ax = plt.subplot(gs[0:9,0:9])
+ax = plt.subplot(gs[0:7,0:9])
 plt.rcParams["font.size"] = 10
 plt.rcParams["legend.fontsize"] = 10
 plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95)
