@@ -118,10 +118,10 @@ plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95)
 ax.plot(list_r, list_pturb[:,1], c="indianred")
 ax.plot(list_r, list_pturb[:,3], "--", c="indianred")
 #
-ax.scatter(phangs_r, phangs_pturb[:,1], s=10, marker="o", c="white", lw=1, edgecolors="skyblue", zorder=1e9)
+ax.scatter(phangs_r, phangs_pturb[:,1], s=10, marker="o", c="white", lw=1, edgecolors="skyblue", zorder=1e9, label="PHANGS")
 #
-ax.scatter(list_r, list_pturb[:,1], s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9)
-ax.scatter(list_r, list_pturb[:,3], s=40, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9)
+ax.scatter(list_r, list_pturb[:,1], s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9, label="(U)LIRGs")
+ax.scatter(list_r, list_pturb[:,3], s=40, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9, label="(U)LIRG centers")
 #for i in range(len(galaxy)):
 #    ax.plot([list_r[i], list_r[i]], [list_pturb[i,0], list_pturb[i,2]], lw=1, c="indianred")
 #
@@ -133,6 +133,7 @@ plt.xlabel(r"log CO Radius (kpc)")
 plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K cm$^{-3}$)")
 plt.xticks([10**0,10**1],[1,2])
 plt.yticks([10**2,10**3,10**4,10**5,10**6,10**7,10**8,10**9],[2,3,4,5,6,7,8,9])
+plt.legend(loc="upper right", ncol=2)
 plt.savefig(dir_eps+"plot_size_pturb.png",dpi=200)
 
 
