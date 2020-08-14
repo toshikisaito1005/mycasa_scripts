@@ -28,8 +28,8 @@ lirg_logMstar = data[:,1]
 #
 hdu_list = fits.open(dir_eps + "../data_other/phangs_sample_table_v1p5.fits", memmap=True)
 evt_data = Table(hdu_list[1].data)
-phangs_logMstar = evt_data["props_mstar"]
-phangs_logMstar = evt_data["props_mstar"]
+phangs_logSFR = np.log10(evt_data["props_sfr"])
+phangs_logMstar = np.log10(evt_data["props_mstar"])
 
 print(hdu_list[1].columns)
 
@@ -41,8 +41,9 @@ plt.rcParams["font.size"] = 20
 plt.rcParams["legend.fontsize"] = 18
 plt.subplots_adjust(bottom=0.15, left=0.20, right=0.90, top=0.85) 
 #
-ax1.scatter(logMstar, logSFR, c="indianred", s=40, linewidths=0)
+ax1.scatter(lirg_logMstar, lirg_logSFR, c="indianred", s=40, linewidths=0)
+ax1.scatter(phangs_logMstar, phangs_logSFR, c="indianred", s=40, linewidths=0)
 #
-plt.xlim([9,12])
-plt.ylim([-1,2])
+#plt.xlim([9,12])
+#plt.ylim([-1,2])
 plt.savefig(dir_eps+"plot_sfr_vs_mstar.png",dpi=200)
