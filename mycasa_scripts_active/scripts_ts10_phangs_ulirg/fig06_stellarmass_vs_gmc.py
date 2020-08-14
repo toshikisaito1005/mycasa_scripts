@@ -32,9 +32,12 @@ galname = [s.replace("mcg02","mcg-02-33-098").replace("267","267-G030") for s in
 #####################
 ### def
 #####################
-def deltaMS(mass):
-	log_expected_sfr = np.log10((-0.32*(np.log10(mass)-np.log10(10**10))-10.17) + np.log10(mass))
-	return log_expected_sfr
+def deltaMS(sfr,mass):
+	log_sfr_ms = (-0.32*(np.log10(mass)-np.log10(10**10))-10.17) + np.log10(mass)
+	ms_offset = np.log10(sfr) - log_sfr_ms
+
+	return ms_offset
+
 
 #####################
 ### Main Procedure
@@ -98,6 +101,8 @@ list_r = list_all[:,1].astype("float64")
 list_pturb = list_all[:,2:6].astype("float64")
 list_virial = list_all[:,6:10].astype("float64")
 list_mass = list_all[:,10].astype("float64")
+list_sfr = list_all[:,11].astype("float64")
+list_delta = deltaMS(list_sfr,list_mass)
 
 
 ###
@@ -141,6 +146,8 @@ phangs_r = phangs_all[:,1].astype("float64")
 phangs_pturb = phangs_all[:,2:5].astype("float64")
 phangs_virial = phangs_all[:,5:8].astype("float64")
 phangs_mass = phangs_all[:,8].astype("float64")
+phangs_sfr = phangs_all[:,9].astype("float64")
+phangs_delta = deltaMS(phangs_sfr,phangs_mass)
 
 
 # plot
@@ -167,6 +174,31 @@ plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K cm$^{-3}$)")
 plt.xticks([10**9,10**10,10**11,10**12],[9,10,11,12])
 plt.yticks([10**2,10**3,10**4,10**5,10**6,10**7,10**8,10**9],[2,3,4,5,6,7,8,9])
 plt.savefig(dir_eps+"plot_mass_pturb.png",dpi=200)
+
+# plot
+figure = plt.figure(figsize=(5,3))
+gs = gridspec.GridSpec(nrows=9, ncols=9)
+ax = plt.subplot(gs[0:9,0:7])
+plt.rcParams["font.size"] = 10
+plt.rcParams["legend.fontsize"] = 8
+plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95)
+#
+ax.scatter(phangs_delta, phangs_pturb[:,1], s=10, marker="o", c="white", lw=1, edgecolors="skyblue", zorder=1e9, label="PHANGS")
+#
+ax.scatter(list_delta, list_pturb[:,1], s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9, label="(U)LIRGs")
+ax.scatter(list_delta, list_pturb[:,3], s=40, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9, label="(U)LIRG centers")
+#for i in range(len(galaxy)):
+#    ax.plot([list_r[i], list_r[i]], [list_pturb[i,0], list_pturb[i,2]], lw=1, c="indianred")
+#
+plt.xscale("log")
+plt.yscale("log")
+#plt.xlim([0.6,20])
+plt.ylim([10**2,10**9])
+plt.xlabel(r"log $M_{\star}$ ($M_{\odot}$)")
+plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K cm$^{-3}$)")
+plt.xticks([10**9,10**10,10**11,10**12],[9,10,11,12])
+plt.yticks([10**2,10**3,10**4,10**5,10**6,10**7,10**8,10**9],[2,3,4,5,6,7,8,9])
+plt.savefig(dir_eps+"plot_deltams_pturb.png",dpi=200)
 
 
 # plot
