@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import matplotlib.patches as mpatches
 from astropy.io import fits
+from astropy.table import Table
 plt.ioff()
 
 
@@ -26,7 +27,11 @@ lirg_logSFR = data[:,0]
 lirg_logMstar = data[:,1]
 #
 hdu_list = fits.open(dir_eps + "../data_other/phangs_sample_table_v1p5.fits", memmap=True)
-hdu_list.info()
+evt_data = Table(hdu_list[1].data)
+phangs_logMstar = evt_data["props_mstar"]
+phangs_logMstar = evt_data["props_mstar"]
+
+print(hdu_list[1].columns)
 
 #
 figure = plt.figure(figsize=(10,10))
