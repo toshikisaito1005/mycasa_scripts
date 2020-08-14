@@ -54,12 +54,12 @@ for i in range(len(nednames)):
 			if search_name in galname:
 				this_sfr = str(data["logSFR"][i])
 				this_mstar = str(data["logMstar"][i])
-				this_name = search_name.replace("","")
-				print(this_sfr.ljust(4) + " " + this_mstar.ljust(4) + " # " + search_name)
+				this_name = search_name.replace("NGC ","ngc").replace("ESO ","eso").replace("IC ","ic").replace("MCG -02","mcg02").split("-")[0]
+				print(this_name + " " + this_sfr.ljust(4) + " " + this_mstar.ljust(4))
 
-print("1.31 10.66 # F06592-6313")
-print("1.41 11.15 # F10409-4556")
-print("1.58 10.72 # F17138-1017")
+print("f06592 1.31 10.66")
+print("f10409 1.41 11.15")
+print("f17138 1.58 10.72")
 
 # not available in Shangguan+18 and U+12; eso297g011', 'eso297g012', 'ic4518e', 'ic4518w'
 # available in U+12; 'ngc5257/8' 
