@@ -44,8 +44,10 @@ plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95)
 ax1.scatter(lirg_logMstar, lirg_logSFR, c="indianred", s=20, marker="s", linewidths=0)
 ax1.scatter(phangs_logMstar, phangs_logSFR, c="skyblue", s=10, marker="o", linewidths=0)
 #
+ax1.plot([], [], "k-")
+#
 plt.xlim([10**9,10**11.5])
-plt.ylim([10**-1.5,10**2.1])
+plt.ylim([10**-1.8,10**2.1])
 plt.xscale("log")
 plt.yscale("log")
 plt.savefig(dir_eps+"plot_sfr_vs_mstar.png",dpi=200)
