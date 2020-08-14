@@ -35,7 +35,7 @@ nednames = data["Name"]
 
 for i in range(len(nednames)):
 # for i in [145]:
-	result_table = Ned.query_region(galnames[i], radius=30 * u.arcsec)
+	result_table = Ned.query_region(galname[i], radius=30 * u.arcsec)
 	this_names = result_table["Object Name"]
 	#
 	this_name = []
