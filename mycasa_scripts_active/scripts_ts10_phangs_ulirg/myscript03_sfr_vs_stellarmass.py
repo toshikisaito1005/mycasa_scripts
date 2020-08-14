@@ -56,9 +56,9 @@ for i in range(len(nednames)):
 				this_mstar = str(data["logMstar"][i])
 				print(this_sfr.ljust(4) + " " + this_mstar.ljust(4) + " # " + search_name)
 
-print("1.31 10.66, # F06592-6313")
-print("1.41 11.15, # F10409-4556")
-print("1.58 10.72, # F17138-1017")
+print("1.31 10.66 # F06592-6313")
+print("1.41 11.15 # F10409-4556")
+print("1.58 10.72 # F17138-1017")
 
 # not available in Shangguan+18 and U+12; eso297g011', 'eso297g012', 'ic4518e', 'ic4518w'
 # available in U+12; 'ngc5257/8' 
