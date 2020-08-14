@@ -45,9 +45,9 @@ ax1.scatter(lirg_logMstar, lirg_logSFR, c="indianred", s=20, marker="s", lw=1, z
 ax1.scatter(phangs_logMstar, phangs_logSFR, c="skyblue", s=10, marker="o", lw=1, zorder=1e9, label="PHANGS")
 #
 ax1.plot([10**9,10**11.7], [0.14125375446227556,9.6827785626124676], "--", lw=2, c="grey")
-ax1.text(10**np.log10(10**11.2),2,"z=0 MS")
+ax1.text(10**np.log10(10**11.2),10,"z=0 MS",rotation=14.5)
 ax1.plot([10**9,10**11.7], [0.14125375446227556*10,9.6827785626124676*10], "--", lw=2, c="grey")
-
+ax1.text(10**np.log10(10**9.2),8,"+1 dex from MS",rotation=14.5)
 #
 ax1.set_xlim([10**9,10**11.7])
 ax1.set_ylim([10**-1.8,10**2.2])
