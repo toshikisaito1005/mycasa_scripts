@@ -90,7 +90,7 @@ list_name = list_all[:,0]
 list_r = list_all[:,1].astype("float64")
 list_pturb = list_all[:,2:6].astype("float64")
 list_virial = list_all[:,6:10].astype("float64")
-list_mass = list_all[11].astype("float64")
+list_mass = list_all[:,11].astype("float64")
 
 
 ###
@@ -133,7 +133,7 @@ phangs_name = phangs_all[:,0]
 phangs_r = phangs_all[:,1].astype("float64")
 phangs_pturb = phangs_all[:,2:5].astype("float64")
 phangs_virial = phangs_all[:,5:8].astype("float64")
-phangs_mass = list_all[9].astype("float64")
+phangs_mass = list_all[:,9].astype("float64")
 
 
 # plot
@@ -156,7 +156,7 @@ ax.scatter(list_mass, list_pturb[:,3], s=40, marker="*", c="white", lw=1, edgeco
 #
 plt.xscale("log")
 plt.yscale("log")
-plt.xlim([0.6,20])
+#plt.xlim([0.6,20])
 plt.ylim([10**2,10**9])
 plt.xlabel(r"log $r_{\mathsf{circ,CO}}$ (kpc)")
 plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K cm$^{-3}$)")
@@ -179,20 +179,20 @@ ax.plot(list_r, list_virial[:,3], "--", c="indianred")
 #
 ax.scatter(phangs_mass, phangs_virial[:,1], s=10, marker="o", c="white", lw=1, edgecolors="skyblue", zorder=1e9)
 #
-ax.scatter(list_r, list_virial[:,1], s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9)
-ax.scatter(list_r, list_virial[:,3], s=40, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9)
+ax.scatter(list_mass, list_virial[:,1], s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9)
+ax.scatter(list_mass, list_virial[:,3], s=40, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9)
 #for i in range(len(galaxy)):
 #    ax.plot([list_r[i], list_r[i]], [list_pturb[i,0], list_pturb[i,2]], lw=1, c="indianred")
 #
 plt.xscale("log")
 plt.yscale("log")
-plt.xlim([0.6,20])
+#plt.xlim([0.6,20])
 plt.ylim([1.5,40])
 plt.xlabel(r"log $r_{\mathsf{circ,CO}}$ (kpc)")
 plt.ylabel(r"log $\alpha_{\mathsf{vir,150pc}}$")
 plt.xticks([10**0,10**1],[1,2])
 plt.yticks([10**np.log10(3),10**1,10**np.log10(30)],[3,10,30])
-plt.savefig(dir_eps+"plot_size_virial.png",dpi=200)
+plt.savefig(dir_eps+"plot_mass_virial.png",dpi=200)
 
 
 #
