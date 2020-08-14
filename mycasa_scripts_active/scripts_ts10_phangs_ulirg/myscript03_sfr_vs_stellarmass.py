@@ -54,6 +54,12 @@ for i in range(len(nednames)):
 			if search_name in galname:
 				this_sfr = str(data["logSFR"][i])
 				this_mstar = str(data["logMstar"][i])
+				search_name.replace("eso","ESO ").replace("ngc","NGC ").replace("mcg","MCG-").replace("e","E").replace("w","W").replace("ic","IC ")
+				galname3 = [s.replace("iras","IRAS ").replace("f","F").replace("g","-G") for s in galname2]
+				galname4 = [s.replace("319","319- G 022").replace("507","507- G 070") for s in galname3]
+				galname5 = [s.replace("557","557- G 002").replace("06592","06592-6313") for s in galname4]
+				galname6 = [s.replace("10409","10409-4556").replace("17138","17138-1017") for s in galname5]
+				search_name = [s.replace("-02"," -02-33-098").replace("267","267- G 030") for s in galname6]
 				print(this_sfr.ljust(4) + " " + this_mstar.ljust(4) + " # " + search_name)
 
 print("1.31 10.66 # F06592-6313")
