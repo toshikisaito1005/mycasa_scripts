@@ -41,13 +41,14 @@ plt.rcParams["font.size"] = 10
 plt.rcParams["legend.fontsize"] = 10
 plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95)
 #
-ax1.scatter(lirg_logMstar, lirg_logSFR, c="indianred", s=20, marker="s", linewidths=0)
-ax1.scatter(phangs_logMstar, phangs_logSFR, c="skyblue", s=10, marker="o", linewidths=0)
+ax1.scatter(lirg_logMstar, lirg_logSFR, c="indianred", s=40, marker="s", linewidths=0)
+ax1.scatter(phangs_logMstar, phangs_logSFR, c="skyblue", s=20, marker="o", linewidths=0)
 #
-ax1.plot([], [], "k-")
+ax1.plot([10**9,10**11.7], [0.14125375446227556,9.6827785626124676], "--", lw=2, c="grey")
 #
-plt.xlim([10**9,10**11.5])
-plt.ylim([10**-1.8,10**2.1])
+ax1.set_xlim([10**9,10**11.7])
+ax1.set_ylim([10**-1.8,10**2.2])
 plt.xscale("log")
 plt.yscale("log")
 plt.savefig(dir_eps+"plot_sfr_vs_mstar.png",dpi=200)
+
