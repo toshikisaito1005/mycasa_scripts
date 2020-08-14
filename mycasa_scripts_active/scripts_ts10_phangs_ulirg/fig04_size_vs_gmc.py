@@ -117,12 +117,13 @@ plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95)
 #
 ax.plot(list_r, list_pturb[:,1], c="indianred")
 ax.plot(list_r, list_pturb[:,3], "--", c="indianred")
+#
+ax.scatter(phangs_r, phangs_pturb[:,1], s=10, marker="o", c="white", lw=1, edgecolors="skyblue", zorder=1e9)
+#
 ax.scatter(list_r, list_pturb[:,1], s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9)
 ax.scatter(list_r, list_pturb[:,3], s=40, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9)
 #for i in range(len(galaxy)):
 #    ax.plot([list_r[i], list_r[i]], [list_pturb[i,0], list_pturb[i,2]], lw=1, c="indianred")
-#
-ax.scatter(phangs_r, phangs_pturb[:,1], s=20, marker="o", c="white", lw=1, edgecolors="skyblue", zorder=1e9)
 #
 plt.xscale("log")
 plt.yscale("log")
@@ -145,12 +146,13 @@ plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95)
 #
 ax.plot(list_r, list_virial[:,1], c="indianred")
 ax.plot(list_r, list_virial[:,3], "--", c="indianred")
+#
+ax.scatter(phangs_r, phangs_virial[:,1], s=10, marker="o", c="white", lw=1, edgecolors="skyblue", zorder=1e9)
+#
 ax.scatter(list_r, list_virial[:,1], s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9)
 ax.scatter(list_r, list_virial[:,3], s=40, marker="*", c="white", lw=1, edgecolors="indianred", zorder=1e9)
 #for i in range(len(galaxy)):
 #    ax.plot([list_r[i], list_r[i]], [list_pturb[i,0], list_pturb[i,2]], lw=1, c="indianred")
-#
-ax.scatter(phangs_r, phangs_virial[:,1], s=20, marker="o", c="white", lw=1, edgecolors="skyblue", zorder=1e9)
 #
 plt.xscale("log")
 plt.yscale("log")
