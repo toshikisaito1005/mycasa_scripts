@@ -133,7 +133,7 @@ phangs_name = phangs_all[:,0]
 phangs_r = phangs_all[:,1].astype("float64")
 phangs_pturb = phangs_all[:,2:5].astype("float64")
 phangs_virial = phangs_all[:,5:8].astype("float64")
-phangs_mass = list_all[:,9].astype("float64")
+phangs_mass = phangs_all[:,9].astype("float64")
 
 
 # plot
@@ -143,9 +143,6 @@ ax = plt.subplot(gs[0:9,0:7])
 plt.rcParams["font.size"] = 10
 plt.rcParams["legend.fontsize"] = 8
 plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95)
-#
-ax.plot(list_r, list_pturb[:,1], c="indianred")
-ax.plot(list_r, list_pturb[:,3], "--", c="indianred")
 #
 ax.scatter(phangs_mass, phangs_pturb[:,1], s=10, marker="o", c="white", lw=1, edgecolors="skyblue", zorder=1e9, label="PHANGS")
 #
