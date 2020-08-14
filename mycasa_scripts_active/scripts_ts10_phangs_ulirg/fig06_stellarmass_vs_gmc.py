@@ -33,6 +33,18 @@ galname = [s.replace("mcg02","mcg-02-33-098").replace("267","267-G030") for s in
 ### Main Procedure
 #####################
 ###
+data = np.loadtxt("list_sfr_stellar.txt")
+lirg_logSFR = 10**data[:,0]
+lirg_logMstar = 10**data[:,1]
+#
+hdu_list = fits.open(dir_eps + "../data_other/phangs_sample_table_v1p5.fits", memmap=True)
+evt_data = Table(hdu_list[1].data)
+phangs_name = evt_data["name"]
+phangs_logSFR = evt_data["props_sfr"] # np.log10(evt_data["props_sfr"])
+phangs_logMstar = evt_data["props_mstar"] # np.log10(evt_data["props_mstar"])
+
+
+###
 list_all = []
 for i in range(len(galaxy)):
 #for i in [0]:
