@@ -34,11 +34,11 @@ phangs_logMstar = np.log10(evt_data["props_mstar"])
 print(hdu_list[1].columns)
 
 #
-figure = plt.figure(figsize=(10,10))
+figure = plt.figure(figsize=(5,3))
 gs = gridspec.GridSpec(nrows=9, ncols=9)
 ax1 = plt.subplot(gs[0:9,0:9])
-plt.rcParams["font.size"] = 20
-plt.rcParams["legend.fontsize"] = 18
+plt.rcParams["font.size"] = 10
+plt.rcParams["legend.fontsize"] = 10
 plt.subplots_adjust(bottom=0.15, left=0.20, right=0.90, top=0.85) 
 #
 ax1.scatter(lirg_logMstar, lirg_logSFR, c="indianred", s=80, linewidths=0)
