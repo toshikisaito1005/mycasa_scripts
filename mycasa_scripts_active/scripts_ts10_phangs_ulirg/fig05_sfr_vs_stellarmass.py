@@ -41,8 +41,8 @@ plt.rcParams["font.size"] = 10
 plt.rcParams["legend.fontsize"] = 10
 plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95)
 #
-ax1.scatter(lirg_logMstar, lirg_logSFR, c="indianred", s=40, marker="s", linewidths=0)
-ax1.scatter(phangs_logMstar, phangs_logSFR, c="skyblue", s=20, marker="o", linewidths=0)
+ax1.scatter(lirg_logMstar, lirg_logSFR, c="indianred", s=30, marker="s", linewidths=0, zorder=1e9)
+ax1.scatter(phangs_logMstar, phangs_logSFR, c="skyblue", s=20, marker="o", linewidths=0, zorder=1e9)
 #
 ax1.plot([10**9,10**11.7], [0.14125375446227556,9.6827785626124676], "--", lw=2, c="grey")
 ax1.plot([10**9,10**11.7], [0.14125375446227556*10,9.6827785626124676*10], "--", lw=2, c="grey")
