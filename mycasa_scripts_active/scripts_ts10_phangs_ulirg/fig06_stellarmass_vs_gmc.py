@@ -30,6 +30,13 @@ galname = [s.replace("mcg02","mcg-02-33-098").replace("267","267-G030") for s in
 
 
 #####################
+### def
+#####################
+def deltaMS(mass):
+	log_expected_sfr = np.log10((-0.32*(np.log10(mass)-np.log10(10**10))-10.17) + np.log10(mass))
+	return log_expected_sfr
+
+#####################
 ### Main Procedure
 #####################
 ###
@@ -157,7 +164,7 @@ plt.yscale("log")
 plt.ylim([10**2,10**9])
 plt.xlabel(r"log $M_{\star}$ ($M_{\odot}$)")
 plt.ylabel(r"log $P_{\mathsf{turb,150pc}}$ (K cm$^{-3}$)")
-#plt.xticks([10**0,10**1],[1,2])
+plt.xticks([10**9,10**10,10**11,10**12],[9,10,11,12])
 plt.yticks([10**2,10**3,10**4,10**5,10**6,10**7,10**8,10**9],[2,3,4,5,6,7,8,9])
 plt.savefig(dir_eps+"plot_mass_pturb.png",dpi=200)
 
@@ -170,9 +177,6 @@ plt.rcParams["font.size"] = 10
 plt.rcParams["legend.fontsize"] = 10
 plt.subplots_adjust(bottom=0.15, left=0.15, right=0.95, top=0.95)
 #
-ax.plot(list_r, list_virial[:,1], c="indianred")
-ax.plot(list_r, list_virial[:,3], "--", c="indianred")
-#
 ax.scatter(phangs_mass, phangs_virial[:,1], s=10, marker="o", c="white", lw=1, edgecolors="skyblue", zorder=1e9)
 #
 ax.scatter(list_mass, list_virial[:,1], s=20, marker="s", c="white", lw=1, edgecolors="indianred", zorder=1e9)
@@ -184,9 +188,9 @@ plt.xscale("log")
 plt.yscale("log")
 #plt.xlim([0.6,20])
 plt.ylim([1.5,40])
-plt.xlabel(r"log $r_{\mathsf{circ,CO}}$ (kpc)")
+plt.xlabel(r"log $M_{\star}$ ($M_{\odot}$)")
 plt.ylabel(r"log $\alpha_{\mathsf{vir,150pc}}$")
-plt.xticks([10**0,10**1],[1,2])
+#plt.xticks([10**0,10**1],[1,2])
 plt.yticks([10**np.log10(3),10**1,10**np.log10(30)],[3,10,30])
 plt.savefig(dir_eps+"plot_mass_virial.png",dpi=200)
 
