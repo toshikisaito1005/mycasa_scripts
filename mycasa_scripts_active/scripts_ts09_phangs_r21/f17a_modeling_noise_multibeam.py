@@ -14,10 +14,10 @@ import scripts_phangs_r21 as r21
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-galname, i = "ngc0628", 0
+galname, i = "ngc3627", 1
 freqco10 = 115.27120
 freqco21 = 230.53800
-nbins = [10, # 40, 30, 30, 10, 10
+nbins = [0, # 40, 30, 30, 10, 10
 		 30, # 30, 20, 20, 10, 10
 		 25] # 40, 30, 25, 20, 15
 percentile = 84
