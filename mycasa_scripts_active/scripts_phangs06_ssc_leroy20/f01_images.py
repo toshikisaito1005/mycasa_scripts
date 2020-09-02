@@ -10,7 +10,7 @@ plt.ioff()
 reload(myim)
 
 
-galname = "ngc1097" # "ngc0628" "ngc1097"
+galname = "ngc0628" # "ngc0628" "ngc1097"
 dir_data = "/Users/saito/data/myproj_active/proj_phangs06_ssc/sim_phangs/sim_" + galname + "/"
 
 
@@ -37,8 +37,8 @@ if galname=="ngc0628":
        dec_center = "15.47.0.0"
        clim = [0, 3.93731]
        contour = np.array([0.15, 0.35, 0.55, 0.75, 0.95])
-       xlim = [-150, 150]
-       ylim = [150, -150]
+       xlim = [-149, 149]
+       ylim = [149, -149]
 elif galname=="ngc1097":
        # ngc1097
        ra_center = "02:46:19.088"
