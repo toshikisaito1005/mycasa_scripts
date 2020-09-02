@@ -10,7 +10,7 @@ plt.ioff()
 reload(myim)
 
 
-galname = "ngc4303" # "ngc0628" "ngc1097"
+galname = "ngc1097" # "ngc0628" "ngc1097"
 dir_data = "/Users/saito/data/myproj_active/proj_phangs06_ssc/sim_phangs/sim_" + galname + "/"
 
 
@@ -31,33 +31,31 @@ for i in range(len(imagenames)):
 ### Main Procedure
 #####################
 ### common
+if galname=="ngc0628":
+       # ngc0628
+       ra_center = "01:36:41.8"
+       dec_center = "15.47.0.0"
+       clim = [0, 3.93731]
+       contour = np.array([0.15, 0.35, 0.55, 0.75, 0.95])
+       xlim = [-150, 150]
+       ylim = [150, -150]
+elif galname=="ngc1097":
+       # ngc1097
+       ra_center = "02:46:19.088"
+       dec_center = "-30.16.30.099"
+       clim = [0, 10]
+       contour = np.array([0.02,0.04,0.08,0.16,0.32,0.64,0.96])
+       xlim = [-135, 135]
+       ylim = [135, -135]
+elif galname=="ngc4303":
+       # ngc4303
+       ra_center = "12:21:54.934"
+       dec_center = "4.28.24.497"
+       clim = [0, 5.0]
+       contour = np.array([0.02,0.04,0.08,0.16,0.32,0.64,0.96])
+       xlim = [-84, 84]
+       ylim = [85, -83]
 
-# ngc0628
-ra_center = "01:36:41.8"
-dec_center = "15.47.0.0"
-clim = [0, 3.93731]
-contour = np.array([0.15, 0.35, 0.55, 0.75, 0.95])
-xlim = [-150, 150]
-ylim = [150, -150]
-
-"""
-# ngc1097
-ra_center = "02:46:19.088"
-dec_center = "-30.16.30.099"
-clim = [0, 10]
-contour = np.array([0.02,0.04,0.08,0.16,0.32,0.64,0.96])
-xlim = [-135, 135]
-ylim = [135, -135]
-"""
-"""
-# ngc4303
-ra_center = "12:21:54.934"
-dec_center = "4.28.24.497"
-clim = [0, 5.0]
-contour = np.array([0.02,0.04,0.08,0.16,0.32,0.64,0.96])
-xlim = [-84, 84]
-ylim = [85, -83]
-"""
 ###
 value = None
 color_contour = "black"
