@@ -9,18 +9,34 @@ plt.ioff()
 #
 import scripts_phangs_r21 as r21
 
+# n0628: 04p0
+# n3627: 08p0
+# n4321: 04p0
+
 
 #####################
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-galname = "ngc3627"
+galname, i = "ngc4321", 2
 freqco10 = 115.27120
 freqco21 = 230.53800
-nbins = 30 # 40 0628 # 30 3627 # 40 4321
+nbins = 15
 percentile = 84
-
-beams = ["04p0"] # ["04p0","08p0","12p0","16p0","20p0"]
+beams = ["20p0"] # ["04p0","08p0","12p0","16p0","20p0"]
+scales = [44/1.0, 52/1.3, 103/1.4]
+cnt_ras = [24.174, 170.063, 185.729]
+cnt_decs = [15.783, 12.9914, 15.8223]
+pas = [180-21.1, 180-172.4, 180-157.8]
+incs = [90-8.7, 90-56.2, 90-35.1]
+def_nucleus = [50*44./1.0, 50*52./1.3*1.5, 30*103/1.4]
+#
+scale = scales[i]
+cnt_ra = cnt_ras[i]
+cnt_dec = cnt_decs[i]
+pa = pas[i]
+inc = incs[i]
+def_nucleus = def_nucleus[i]
 
 
 #####################
@@ -67,6 +83,12 @@ def getdata(
 	co21_noise,
 	freqco10,
 	freqco21,
+	pa,
+	inc,
+	cnt_ra,
+	cnt_dec,
+	scale,
+	def_nucleus,
 	):
 	"""
 	"""
@@ -80,8 +102,11 @@ def getdata(
 	data_co21_mom0  = r21.import_data(co21_mom0, mode="data")
 	data_co21_noise = r21.import_data(co21_noise, mode="data")
 	#
+	data_ra  = r21.import_data(co10_mom0, mode="coords", index=0)
+	data_dec = r21.import_data(co10_mom0, mode="coords", index=1)
+	dist = r21.distance(data_ra, data_dec, pa, inc, cnt_ra, cnt_dec, scale)
 	# select data
-	cut_all = np.where((data_co10_mom0>0) & (data_co10_noise>0) & (data_co21_mom0>0) & (data_co21_noise>0))
+	cut_all = np.where((data_co10_mom0>0) & (data_co10_noise>0) & (data_co21_mom0>0) & (data_co21_noise>0) & (dist>def_nucleus))
 	#
 	data_co10_mom0  = data_co10_mom0[cut_all]
 	data_co10_noise = data_co10_noise[cut_all]
@@ -218,13 +243,13 @@ def add_noise(
 	for i in range(len(xbins_co10)):
 		for j in range(len(xbins_co21)):
 			# create binned data
-			if i<=27: # 37 0628
-				if j<=27: # 37 0628
+			if i<=len(xbins_co10)-2:
+				if j<=len(xbins_co10)-2:
 					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]) & (best_lognorm_co21>=xbins_co21[j]) & (best_lognorm_co21<xbins_co21[j+1]))
 				else:
 					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]) & (best_lognorm_co21>=xbins_co21[j]))
 			else:
-				if j<27: # 37 0628
+				if j<len(xbins_co10)-2:
 					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co21>=xbins_co21[j]) & (best_lognorm_co21<xbins_co21[j+1]))
 				else:
 					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co21>=xbins_co21[j]))
@@ -275,6 +300,8 @@ def create_best_models(
 	#
 	### log_co_mom0_k_model_scatter
 	# add scatter
+	co10_scatter = abs(co10_scatter)
+	co21_scatter = abs(co21_scatter)
 	log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, co10_scatter)
 	log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, co21_scatter)
 	print("### co10_best_model_scatter mean = " + str(np.mean(log_co10_mom0_k_model_scatter)))
@@ -328,6 +355,7 @@ for i in range(len(beams)):
 	dataco21 = np.loadtxt(dir_proj + "eps/bootstrap_co21_models_"+galname+"_"+beams[i]+".txt")
 	best_co10_parameter = np.median(dataco10, axis=0)
 	best_co21_parameter = np.median(dataco21, axis=0)
+	best_co21_parameter[2] = best_co21_parameter[2]-0.10
 
 	### print parameters
 	print("### co10 norm mean     = " + str(np.round(np.percentile(dataco10, 16, axis=0)[0], 3)) + ", " + str(np.round(np.percentile(dataco10, 50, axis=0)[0], 3)) + ", " + str(np.round(np.percentile(dataco10, 84, axis=0)[0], 3)))
@@ -339,15 +367,14 @@ for i in range(len(beams)):
 
 
 	### get filenames
-	this_beam = beams[i]
-	co10_mom0  = dir_proj + galname + "_co10/co10_"+this_beam+".moment0"
-	co10_noise = dir_proj + galname + "_co10/co10_"+this_beam+".moment0.noise"
-	co21_mom0  = dir_proj + galname + "_co21/co21_"+this_beam+".moment0"
-	co21_noise = dir_proj + galname + "_co21/co21_"+this_beam+".moment0.noise"
+	co10_mom0  = dir_proj + galname + "_co10/co10_"+beams[i]+".moment0"
+	co10_noise = dir_proj + galname + "_co10/co10_"+beams[i]+".moment0.noise"
+	co21_mom0  = dir_proj + galname + "_co21/co21_"+beams[i]+".moment0"
+	co21_noise = dir_proj + galname + "_co21/co21_"+beams[i]+".moment0.noise"
 
 
 	### plot noise vs. mom-0
-	log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21)
+	log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21, pa, inc, cnt_ra, cnt_dec, scale, def_nucleus)
 	p84_co10, p50_co10, p16_co10, p84_co21, p50_co21, p16_co21 = print_things(log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k)
 	xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile, galname)
 
@@ -512,7 +539,6 @@ np.savetxt(dir_proj + "eps/"+galname+"_model_scatter_noise.txt", np.c_[log_co10_
 np.savetxt(dir_proj + "eps/"+galname+"_model_scatter_cut.txt", np.c_[log_co10_mom0_k_model_scatter_cut, log_co21_mom0_k_model_scatter_cut])
 np.savetxt(dir_proj + "eps/"+galname+"_model_scatter_noise_cut.txt", np.c_[log_co10_mom0_k_model_scatter_noise_cut, log_co21_mom0_k_model_scatter_noise_cut])
 #"""
-
 
 #
 os.system("rm -rf *.last")
