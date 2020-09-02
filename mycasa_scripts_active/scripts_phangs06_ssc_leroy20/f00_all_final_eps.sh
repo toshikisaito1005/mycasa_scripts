@@ -4,17 +4,20 @@ dir_data="/Users/saito/data/myproj_active/proj_phangs06_ssc/eps/"
 ### figure
 convert -crop 578x520+25+25 $dir_data"ngc0628_skymodel.png" $dir_data"ngc0628_skymodelb.png"
 convert -crop 493x520+110+25 $dir_data"ngc0628_7m.png" $dir_data"ngc0628_7mb.png"
-
-convert -crop 590x563+25+25 $dir_data"ngc0628_tp2vis.png" $dir_data"ngc0628_tp2visb.png"
-convert -crop 560x563+55+25 $dir_data"ngc0628_tpmodel.png" $dir_data"ngc0628_tpmodelb.png"
-convert -crop 670x563+55+25 $dir_data"ngc0628_feather.png" $dir_data"ngc0628_featherb.png"
-
+convert -crop 578x563+25+25 $dir_data"ngc0628_tp2vis.png" $dir_data"ngc0628_tp2visb.png"
+convert -crop 493x563+110+25 $dir_data"ngc0628_tpmodel.png" $dir_data"ngc0628_tpmodelb.png"
+convert -crop 608x563+110+25 $dir_data"ngc0628_feather.png" $dir_data"ngc0628_featherb.png"
 convert +append -border 0x0 $dir_data"ngc0628_skymodelb.png" $dir_data"ngc0628_7mb.png" $dir_data"fig_ssc_01a.png"
 convert +append -border 0x0 $dir_data"ngc0628_tp2visb.png" $dir_data"ngc0628_tpmodelb.png" $dir_data"ngc0628_featherb.png" $dir_data"fig_ssc_01b.png"
 convert -append -border 0x0 $dir_data"fig_ssc_01a.png" $dir_data"fig_ssc_01b.png" $dir_data"ssc_image_ngc0628.png"
 
-convert +append -border 0x0 $dir_data"ngc4303_skymodel.png" $dir_data"ngc4303_7m.png" $dir_data"fig_ssc_01a.png"
-convert +append -border 0x0 $dir_data"ngc4303_tp2vis.png" $dir_data"ngc4303_tpmodel.png" $dir_data"ngc4303_feather.png" $dir_data"fig_ssc_01b.png"
+convert -crop 578x520+25+25 $dir_data"ngc4303_skymodel.png" $dir_data"ngc4303_skymodelb.png"
+convert -crop 493x520+110+25 $dir_data"ngc4303_7m.png" $dir_data"ngc4303_7mb.png"
+convert -crop 578x563+25+25 $dir_data"ngc4303_tp2vis.png" $dir_data"ngc4303_tp2visb.png"
+convert -crop 493x563+110+25 $dir_data"ngc4303_tpmodel.png" $dir_data"ngc4303_tpmodelb.png"
+convert -crop 608x563+110+25 $dir_data"ngc4303_feather.png" $dir_data"ngc4303_featherb.png"
+convert +append -border 0x0 $dir_data"ngc4303_skymodelb.png" $dir_data"ngc4303_7mb.png" $dir_data"fig_ssc_01a.png"
+convert +append -border 0x0 $dir_data"ngc4303_tp2visb.png" $dir_data"ngc4303_tpmodelb.png" $dir_data"ngc4303_featherb.png" $dir_data"fig_ssc_01b.png"
 convert -append -border 0x0 $dir_data"fig_ssc_01a.png" $dir_data"fig_ssc_01b.png" $dir_data"ssc_image_ngc4303.png"
 
 rm -rf $dir_data"ngc0628_skymodel.png" $dir_data"ngc0628_7m.png" $dir_data"fig_ssc_01a.png"
