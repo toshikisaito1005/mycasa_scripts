@@ -28,6 +28,8 @@ rm -rf $dir_data"ngc1097_skymodel.png" $dir_data"ngc1097_7m.png" $dir_data"fig_s
 rm -rf $dir_data"ngc1097_tp2vis.png" $dir_data"ngc1097_tpmodel.png" $dir_data"ngc1097_feather.png" $dir_data"fig_ssc_01b.png"
 rm -rf $dir_data"ngc4303_skymodel.png" $dir_data"ngc4303_7m.png" $dir_data"fig_ssc_01a.png"
 rm -rf $dir_data"ngc4303_tp2vis.png" $dir_data"ngc4303_tpmodel.png" $dir_data"ngc4303_feather.png" $dir_data"fig_ssc_01b.png"
+rm -rf $dir_data"ngc4303_skymodelb.png" $dir_data"ngc4303_7mb.png" $dir_data"fig_ssc_01a.png"
+rm -rf $dir_data"ngc4303_tp2visb.png" $dir_data"ngc4303_tpmodelb.png" $dir_data"ngc4303_featherb.png" $dir_data"fig_ssc_01b.png"
 
 ### figure
 convert $dir_data"fig_fidelity_vs_circ_diameter.png" eps2:$dir_data"ssc_fidelity_vs_size.eps"
