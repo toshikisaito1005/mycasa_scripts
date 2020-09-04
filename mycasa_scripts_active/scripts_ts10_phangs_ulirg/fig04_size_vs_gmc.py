@@ -64,6 +64,9 @@ for i in range(len(galaxy)):
 	this_data = imval(this_mom0, box=box)
 	galarea = sum(this_data["mask"].flatten()) * pixarea
 	radius = np.sqrt(galarea / np.pi)
+	# get CO area in arcsec^2 for S21A
+	s21a_area = str(abs(this_header["cdelt1"])*3600*180/np.pi)
+	print(this_galaxy + " " + s21a_area)
 	# get pturb
 	data = np.loadtxt("list_pturb.txt", dtype="str")
 	this_pturb = data[data[:,0]==this_galaxy][:,1:]
