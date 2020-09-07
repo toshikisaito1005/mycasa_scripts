@@ -11,13 +11,13 @@ from astropy.coordinates import get_sun
 # set Subaru information
 subaru = EarthLocation.from_geodetic(-155.4761*u.deg, 19.825*u.deg,4139*u.m)
 utcoffset = -10*u.hour  # Hawaii
-galname = 'IRAS F17138-1017' # 'Arp220'
+galname = 'NGC 3110' # 'NGC 1614', 'MCG-02-33-098', IRAS F17138-1017', 'Arp220'
 
 # set target information
 arp220 = SkyCoord.from_name(galname)
 
 #
-midnight = Time('2021-08-01 00:00:00') - utcoffset
+midnight = Time('2021-02-01 00:00:00') - utcoffset
 delta_midnight = np.linspace(-12, 12, 1000)*u.hour
 
 # set Sun
