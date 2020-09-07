@@ -4,6 +4,7 @@ import astropy.units as u
 from astropy.time import Time
 from astropy.coordinates import SkyCoord, EarthLocation, AltAz
 from astropy.coordinates import get_moon
+from astropy.coordinates import get_sun
 plt.ioff()
 
 
@@ -23,11 +24,10 @@ delta_midnight = np.linspace(-2, 10, 100)*u.hour
 #altazs_arp220_feb = arp220.transform_to(frame_feb)
 #altazs_arp220_feb = altazs_arp220_feb.secz
 
-# set Moon
-times_feb = midnight + delta_midnight
+# /Moon
 times_feb = get_moon(times_feb)
 moonaltazs_feb = times_feb.transform_to(times_feb)
-
+#
 arp220_altazs_feb = arp220.transform_to(times_feb)
 
 # plot
