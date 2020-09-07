@@ -11,7 +11,7 @@ from astropy.coordinates import get_sun
 # set Subaru information
 subaru = EarthLocation.from_geodetic(-155.4761*u.deg, 19.825*u.deg,4139*u.m)
 utcoffset = -10*u.hour  # Hawaii
-galname = 'ESO 297-G011' # 'NGC 3110', 'NGC 1614', 'MCG-02-33-098', 'IRAS F17138-1017', 'Arp220'
+galname = 'NGC 7130' # 'IC5179' ESO 297-G011' 'NGC 3110' 'NGC 1614' 'MCG-02-33-098' 'IRAS F17138-1017' 'Arp220'
 
 # set target information
 arp220 = SkyCoord.from_name(galname)
