@@ -5,7 +5,7 @@ from astropy.time import Time
 from astropy.coordinates import SkyCoord, EarthLocation, AltAz
 from astropy.coordinates import get_moon
 from astropy.coordinates import get_sun
-plt.ioff()
+#plt.ioff()
 
 
 # set Subaru information
@@ -33,10 +33,10 @@ arp220_altazs_feb = arp220.transform_to(frame_feb)
 
 # plot
 figure = plt.figure()
-plt.plot(delta_midnight, sunaltazs_feb.alt, color='r', label='Sun')
-plt.plot(delta_midnight, moonaltazs_feb.alt, color=[0.75]*3, ls='--', label='Moon')
-plt.scatter(delta_midnight, arp220_altazs_feb.alt,
-            c=arp220_altazs_feb.az, label='Arp220', lw=0, s=8,
+plt.plot(np.array(delta_midnight), np.array(sunaltazs_feb.alt), color='r', label='Sun')
+plt.plot(np.array(delta_midnight), np.array(moonaltazs_feb.alt), color=[0.75]*3, ls='--', label='Moon')
+plt.scatter(np.array(delta_midnight), np.array(arp220_altazs_feb.alt),
+            c=np.array(arp220_altazs_feb.az), label='Arp220', lw=0, s=8,
             cmap='viridis')
 #plt.fill_between(delta_midnight, 0, 90,
 #                 sunaltazs_feb.alt < 0, color='0.5', zorder=0)
