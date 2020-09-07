@@ -11,11 +11,10 @@ from astropy.coordinates import get_sun
 # set Subaru information
 subaru = EarthLocation.from_geodetic(-155.4761*u.deg, 19.825*u.deg,4139*u.m)
 utcoffset = -10*u.hour  # Hawaii
-time = Time('2021-02-01 23:00:00') - utcoffset
-
+galname = 'IRAS F17138-1017'
 
 # set target information
-arp220 = SkyCoord.from_name('Arp220')
+arp220 = SkyCoord.from_name(galname)
 
 #
 midnight = Time('2021-02-01 00:00:00') - utcoffset
@@ -36,7 +35,7 @@ figure = plt.figure()
 plt.plot(np.array(delta_midnight), np.array(sunaltazs_feb.alt), color='r', label='Sun')
 plt.plot(np.array(delta_midnight), np.array(moonaltazs_feb.alt), color=[0.75]*3, ls='--', label='Moon')
 plt.scatter(np.array(delta_midnight), np.array(arp220_altazs_feb.alt),
-            c=np.array(arp220_altazs_feb.az), label='Arp220', lw=0, s=8,
+            c=np.array(arp220_altazs_feb.az), label=galname, lw=0, s=8,
             cmap='viridis')
 #plt.fill_between(delta_midnight, 0, 90,
 #                 sunaltazs_feb.alt < 0, color='0.5', zorder=0)
