@@ -32,16 +32,16 @@ moonaltazs_feb = moon_feb.transform_to(frame_feb)
 arp220_altazs_feb = arp220.transform_to(frame_feb)
 
 # plot
-plt.figure()
+figure = plt.figure()
 plt.plot(delta_midnight, sunaltazs_feb.alt, color='r', label='Sun')
 plt.plot(delta_midnight, moonaltazs_feb.alt, color=[0.75]*3, ls='--', label='Moon')
 plt.scatter(delta_midnight, arp220_altazs_feb.alt,
             c=arp220_altazs_feb.az, label='Arp220', lw=0, s=8,
             cmap='viridis')
-#plt.fill_between(delta_midnight, 0*u.deg, 90*u.deg,
-#                 sunaltazs_feb.alt < -0*u.deg, color='0.5', zorder=0)
-#plt.fill_between(delta_midnight, 0*u.deg, 90*u.deg,
-#                 sunaltazs_feb.alt < -18*u.deg, color='k', zorder=0)
+#plt.fill_between(delta_midnight, 0, 90,
+#                 sunaltazs_feb.alt < 0, color='0.5', zorder=0)
+#plt.fill_between(delta_midnight, 0, 90,
+#                 sunaltazs_feb.alt < -18, color='k', zorder=0)
 plt.colorbar().set_label('Azimuth [deg]')
 plt.legend(loc='upper left')
 plt.xlim([-12, 12])
@@ -49,5 +49,6 @@ plt.xticks((np.arange(13)*2-12))
 plt.ylim([0, 90])
 plt.xlabel('Hours from Hawaii Midnight')
 plt.ylabel('Altitude [deg]')
-plt.savefig("test.png")
+plt.show()
+#plt.savefig("test.png", dpi=200)
 
