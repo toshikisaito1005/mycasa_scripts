@@ -87,7 +87,7 @@ n4321_xaxis_co10, n4321_xaxis_co21, n4321_std_scatter, n4321_std_scatter_cut, n4
 #
 plt.figure(figsize=(10,8))
 plt.rcParams["font.size"] = 16
-plt.rcParams["legend.fontsize"] = 14
+plt.rcParams["legend.fontsize"] = 12
 plt.subplots_adjust(bottom=0.05, left=0.10, right=0.98, top=0.95)
 gs = gridspec.GridSpec(nrows=20, ncols=20)
 ax1 = plt.subplot(gs[0:8,0:20])
@@ -108,9 +108,9 @@ ax1.plot(n3627_xaxis_co10, n3627_std_scatter_cut, "--", color=cm.brg(1/2.5), alp
 #
 ax1.plot(n4321_xaxis_co10, n4321_std_scatter, "-", color=cm.brg(2/2.5), alpha=0.5, lw=4, label="NGC 4321 Model with Scatter")
 ax1.plot(n4321_xaxis_co10, n4321_std_scatter_cut, "--", color=cm.brg(2/2.5), alpha=0.5, lw=4, label="NGC 4321 Model with Scatter (sensitivity-limited)")
-ax1.set_xlim(xlim_co10)
-ax1.set_ylim([0,0.6])
-ax1.legend()
+ax1.set_xlim([-0.4,1.5])
+ax1.set_ylim([0,0.8])
+ax1.legend(loc='upper right')
 # ax2
 #ax2.plot(co21_scatter,r21_scatter,"o")
 #ax2.plot(co21_scatter_cut,r21_scatter_cut,"o")
