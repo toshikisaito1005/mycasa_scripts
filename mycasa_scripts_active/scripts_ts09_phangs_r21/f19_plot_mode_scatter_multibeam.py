@@ -32,7 +32,9 @@ def get_best_params(
 	"""
 	"""
 	data = np.loadtxt(txtfile)
-	best = np..median(data, axis=0)
+	best_params = np.median(data, axis=0)
+
+	return best_params
 
 
 #####################
@@ -48,3 +50,8 @@ txt_n4321_co21 = glob.glob(dir_proj + "eps/bootstrap_co21_models_ngc4321_??p0.tx
 
 ##
 for i in range(len(nbins_n0628)):
+	n0628_best_params = get_best_params(txt_n0628_co10[i])
+
+
+
+
