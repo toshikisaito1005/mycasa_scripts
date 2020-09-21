@@ -75,6 +75,11 @@ def extract_scatter(model_scatter, model_scatter_cut):
 ### main
 #####################
 ###
+np.savetxt(np.median(co10_0628,axis=0), )
+co10_0628 = np.loadtxt(dir_proj + "eps/bootstrap_co10_models_ngc0628_04p0.txt")
+co21_0628 = np.loadtxt(dir_proj + "eps/bootstrap_co21_models_ngc0628_04p0.txt")
+
+###
 n0628_xaxis_co10, n0628_xaxis_co21, n0628_std_scatter, n0628_std_scatter_cut, n0628_std_r21scatter, n0628_std_r21scatter_cut, xlim_co10, xlim_co21 = \
 	extract_scatter(dir_proj + "eps/ngc0628_model_scatter.txt", dir_proj + "eps/ngc0628_model_scatter_cut.txt")
 
