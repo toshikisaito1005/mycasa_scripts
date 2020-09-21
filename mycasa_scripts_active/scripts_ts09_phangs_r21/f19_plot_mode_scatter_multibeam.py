@@ -127,6 +127,130 @@ def plotter_noise(
 
 	return xbins_co10, xbins_co21
 
+def create_best_models(
+	log_co10_mom0_k,
+	log_co21_mom0_k,
+	log_co10_noise_k,
+	log_co21_noise_k,
+	xbins_co10,
+	xbins_co21,
+	best_co10_parameter,
+	best_co21_parameter,
+	):
+	### co10 parameters
+	co10_mean        = best_co10_parameter[0]
+	co10_disp        = best_co10_parameter[1]
+	co10_scatter     = best_co10_parameter[2]
+	range_co10_input = [log_co10_mom0_k.min(), log_co10_mom0_k.max()]
+	num_co10         = len(log_co10_mom0_k)
+	#
+	### co21 parameters
+	co21_slope       = best_co21_parameter[0]
+	co21_intercept   = best_co21_parameter[1]
+	co21_scatter     = best_co21_parameter[2]
+	range_co21_input = [log_co21_mom0_k.min(), log_co21_mom0_k.max()]
+	num_co21         = len(log_co21_mom0_k)
+	#
+	### log_co_mom0_k_model
+	log_co10_mom0_k_model = np.random.normal(co10_mean, co10_disp, num_co10)
+	log_co10_mom0_k_model.sort()
+	#
+	log_co21_mom0_k_model = func_co10_vs_co21(log_co10_mom0_k_model, co21_slope, co21_intercept)
+	#
+	### log_co_mom0_k_model_scatter
+	# add scatter
+	co10_scatter = abs(co10_scatter)
+	co21_scatter = abs(co21_scatter)
+	log_co10_mom0_k_model_scatter = add_scatter(log_co10_mom0_k_model, co10_scatter)
+	log_co21_mom0_k_model_scatter = add_scatter(log_co21_mom0_k_model, co21_scatter)
+	print("### co10_best_model_scatter mean = " + str(np.mean(log_co10_mom0_k_model_scatter)))
+	print("### co21_best_model_scatter mean = " + str(np.mean(log_co21_mom0_k_model_scatter)))
+	#
+	# cut
+	log_co10_mom0_k_model_scatter[np.isnan(log_co10_mom0_k_model_scatter)] = 100
+	log_co21_mom0_k_model_scatter[np.isnan(log_co21_mom0_k_model_scatter)] = 100
+	cut = np.where((log_co10_mom0_k_model_scatter<100) & (log_co21_mom0_k_model_scatter<100))
+	log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+	log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
+	#
+	### log_co_mom0_k_model_scatter_noise
+	log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise = \
+		add_noise(log_co10_mom0_k_model_scatter, log_co10_noise_k, xbins_co10, log_co21_mom0_k_model_scatter, log_co21_noise_k, xbins_co21)
+	#
+	### cut
+	#cut = np.where((log_co10_mom0_k_model_scatter>range_co10_input[0])) # & (log_co21_mom0_k_model_scatter>range_co21_input[0]))
+	#log_co10_mom0_k_model_scatter = log_co10_mom0_k_model_scatter[cut]
+	#log_co21_mom0_k_model_scatter = log_co21_mom0_k_model_scatter[cut]
+	#
+	#cut = np.where((log_co10_mom0_k_model_scatter_noise>range_co10_input[0]) & (log_co10_mom0_k_model_scatter_noise<range_co10_input[1]) & (log_co21_mom0_k_model_scatter_noise>range_co21_input[0]) & (log_co21_mom0_k_model_scatter_noise<range_co21_input[1]))
+	#log_co10_mom0_k_model_scatter_noise = log_co10_mom0_k_model_scatter_noise[cut]
+	#log_co21_mom0_k_model_scatter_noise = log_co21_mom0_k_model_scatter_noise[cut]
+	#
+	### print
+	print("### co10_best_model mean = " + str(np.mean(log_co10_mom0_k_model)))
+	print("### co10_best_model_scatter mean = " + str(np.mean(log_co10_mom0_k_model_scatter)))
+	print("### co10_best_model_scatter_noise mean = " + str(np.mean(log_co10_mom0_k_model_scatter_noise)))
+	print("###")
+
+	return log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise
+
+def func_co10_vs_co21(x, a, b):
+	"""
+	"""
+	return a * x + b
+
+def add_scatter(
+	data_log,
+	sigma,
+	):
+	"""
+	"""
+	# create noise
+	num_data = len(data_log)
+	data_log_w_noise = np.log10(10**data_log + np.random.normal(0.0, sigma, num_data))
+
+	return np.array(data_log_w_noise)
+
+def add_noise(
+	best_lognorm_co10,
+	log_co10_noise_k,
+	xbins_co10,
+	best_lognorm_co21,
+	log_co21_noise_k,
+	xbins_co21,
+	):
+	"""
+	"""
+	list_output_co10 = []
+	list_output_co21 = []
+	for i in range(len(xbins_co10)):
+		for j in range(len(xbins_co21)):
+			# create binned data
+			if i<=len(xbins_co10)-2:
+				if j<=len(xbins_co10)-2:
+					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]) & (best_lognorm_co21>=xbins_co21[j]) & (best_lognorm_co21<xbins_co21[j+1]))
+				else:
+					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co10<xbins_co10[i+1]) & (best_lognorm_co21>=xbins_co21[j]))
+			else:
+				if j<len(xbins_co10)-2:
+					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co21>=xbins_co21[j]) & (best_lognorm_co21<xbins_co21[j+1]))
+				else:
+					cut_all = np.where((best_lognorm_co10>=xbins_co10[i]) & (best_lognorm_co21>=xbins_co21[j]))
+			#
+			binned_co10_data = best_lognorm_co10[cut_all]
+			num_co10_data = len(binned_co10_data)
+			#
+			binned_co21_data = best_lognorm_co21[cut_all]
+			num_co21_data = len(binned_co21_data)
+			# create noise
+			binned_co10_data_and_noise = np.log10(10**binned_co10_data + np.random.normal(0.0, 10**log_co10_noise_k[i], num_co10_data))
+			list_output_co10.extend(binned_co10_data_and_noise)
+			#
+			binned_co21_data_and_noise = np.log10(10**binned_co21_data + np.random.normal(0.0, 10**log_co21_noise_k[i], num_co21_data))
+			list_output_co21.extend(binned_co21_data_and_noise)
+
+	return np.array(list_output_co10), np.array(list_output_co21)
+
 
 #####################
 ### main
