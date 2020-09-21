@@ -20,6 +20,7 @@ freqco21 = 230.53800
 percentile = 84
 
 nbins_n0628 = [40, 30, 20, 10, 10]
+nbins_n3627 = [30, 20, 20, 10, 10]
 beams = ["04p0","08p0","12p0","16p0","20p0"]
 
 
@@ -273,6 +274,32 @@ for i in range(len(nbins_n0628)):
 	log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise = \
 		create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, n0628_co10_best_params, n0628_co21_best_params)
 	logr21 = np.log10(10**log_co21_mom0_k_model_scatter/10**log_co10_mom0_k_model_scatter)
+	#
 	width = np.percentile(logr21, 84) - np.percentile(logr21, 16)
-	print(width/0.426957211448)
+	median = np.percentile(logr21, 50)
+	if i==0:
+		width0 = width
+		median0 = median
+	print(median/median0, width/width0)
+
+
+##
+for i in range(len(nbins_n3627)):
+	n3627_co10_best_params = get_best_params(txt_n3627_co10[i])
+	n3627_co21_best_params = get_best_params(txt_n3627_co21[i])
+	#
+	log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21, pa, inc, cnt_ra, cnt_dec, scale, def_nucleus)
+	xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile, galname)
+	log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise = \
+		create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, n3627_co10_best_params, n3627_co21_best_params)
+	logr21 = np.log10(10**log_co21_mom0_k_model_scatter/10**log_co10_mom0_k_model_scatter)
+	#
+	width = np.percentile(logr21, 84) - np.percentile(logr21, 16)
+	median = np.percentile(logr21, 50)
+	if i==0:
+		width0 = width
+		median0 = median
+	print(median/median0, width/width0)
+
+
 
