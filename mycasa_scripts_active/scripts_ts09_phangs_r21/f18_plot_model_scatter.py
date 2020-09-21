@@ -76,7 +76,7 @@ def extract_scatter(model_scatter, model_scatter_cut):
 #####################
 ###
 n0628_xaxis_co10, n0628_xaxis_co21, n0628_std_scatter, n0628_std_scatter_cut, n0628_std_r21scatter, n0628_std_r21scatter_cut, xlim_co10, xlim_co21 = \
-	extract_scatter(, dir_proj + "eps/ngc0628_model_scatter_cut.txt")
+	extract_scatter(dir_proj + "eps/ngc0628_model_scatter.txt", dir_proj + "eps/ngc0628_model_scatter_cut.txt")
 
 n3627_xaxis_co10, n3627_xaxis_co21, n3627_std_scatter, n3627_std_scatter_cut, n3627_std_r21scatter, n3627_std_r21scatter_cut, _, _ = \
 	extract_scatter(dir_proj + "eps/ngc3627_model_scatter.txt", dir_proj + "eps/ngc3627_model_scatter_cut.txt")
@@ -87,7 +87,7 @@ n4321_xaxis_co10, n4321_xaxis_co21, n4321_std_scatter, n4321_std_scatter_cut, n4
 #
 plt.figure(figsize=(10,8))
 plt.rcParams["font.size"] = 16
-plt.rcParams["legend.fontsize"] = 12
+plt.rcParams["legend.fontsize"] = 14
 plt.subplots_adjust(bottom=0.05, left=0.10, right=0.98, top=0.95)
 gs = gridspec.GridSpec(nrows=20, ncols=20)
 ax1 = plt.subplot(gs[0:8,0:20])
@@ -101,22 +101,26 @@ ax2.set_ylabel("S.D. of log $R_{21}$")
 #
 # ax1
 ax1.plot(n0628_xaxis_co10, n0628_std_scatter, "-", color=cm.brg(0/2.5), alpha=0.5, lw=4, label="NGC 0628 Model with Scatter")
-ax1.plot(n0628_xaxis_co10, n0628_std_scatter_cut, "--", color=cm.brg(0/2.5), alpha=0.5, lw=4, label="NGC 0628 Model with Scatter (sensitivity-limited)")
+#ax1.plot(n0628_xaxis_co10, n0628_std_scatter_cut, "--", color=cm.brg(0/2.5), alpha=0.5, lw=4, label="NGC 0628 Model with Scatter (sensitivity-limited)")
 #
 ax1.plot(n3627_xaxis_co10, n3627_std_scatter, "-", color=cm.brg(1/2.5), alpha=0.5, lw=4, label="NGC 3627 Model with Scatter")
-ax1.plot(n3627_xaxis_co10, n3627_std_scatter_cut, "--", color=cm.brg(1/2.5), alpha=0.5, lw=4, label="NGC 3627 Model with Scatter (sensitivity-limited)")
+#ax1.plot(n3627_xaxis_co10, n3627_std_scatter_cut, "--", color=cm.brg(1/2.5), alpha=0.5, lw=4, label="NGC 3627 Model with Scatter (sensitivity-limited)")
 #
 ax1.plot(n4321_xaxis_co10, n4321_std_scatter, "-", color=cm.brg(2/2.5), alpha=0.5, lw=4, label="NGC 4321 Model with Scatter")
-ax1.plot(n4321_xaxis_co10, n4321_std_scatter_cut, "--", color=cm.brg(2/2.5), alpha=0.5, lw=4, label="NGC 4321 Model with Scatter (sensitivity-limited)")
-ax1.set_xlim([-0.4,1.5])
-ax1.set_ylim([0,0.8])
+#ax1.plot(n4321_xaxis_co10, n4321_std_scatter_cut, "--", color=cm.brg(2/2.5), alpha=0.5, lw=4, label="NGC 4321 Model with Scatter (sensitivity-limited)")
+ax1.set_xlim([0.3,2.1])
+ax1.set_ylim([0,0.6])
 ax1.legend(loc='upper right')
 # ax2
 #ax2.plot(co21_scatter,r21_scatter,"o")
 #ax2.plot(co21_scatter_cut,r21_scatter_cut,"o")
 ax2.plot(n0628_xaxis_co21, n0628_std_r21scatter, "-", color=cm.brg(0/2.5), alpha=0.5, lw=4)
-ax2.plot(n0628_xaxis_co21, n0628_std_r21scatter_cut, "--", color=cm.brg(0/2.5), alpha=0.5, lw=4)
-ax2.set_xlim(xlim_co21)
+#ax2.plot(n0628_xaxis_co21, n0628_std_r21scatter_cut, "--", color=cm.brg(0/2.5), alpha=0.5, lw=4)
+ax2.plot(n3627_xaxis_co21, n3627_std_r21scatter, "-", color=cm.brg(1/2.5), alpha=0.5, lw=4)
+#ax2.plot(n3627_xaxis_co21, n3627_std_r21scatter_cut, "--", color=cm.brg(1/2.5), alpha=0.5, lw=4)
+ax2.plot(n4321_xaxis_co21, n4321_std_r21scatter, "-", color=cm.brg(2/2.5), alpha=0.5, lw=4)
+#ax2.plot(n4321_xaxis_co21, n4321_std_r21scatter_cut, "--", color=cm.brg(2/2.5), alpha=0.5, lw=4)
+ax2.set_xlim([-0.2,2.1])
 ax2.set_ylim([0,0.25])
 #
 plt.savefig(dir_proj + "eps/model_scatter.png",dpi=200)
