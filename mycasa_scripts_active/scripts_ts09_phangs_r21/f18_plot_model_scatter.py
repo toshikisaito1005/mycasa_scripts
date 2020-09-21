@@ -68,20 +68,20 @@ def extract_scatter(model_scatter, model_scatter_cut):
 	mean_r21scatter_cut = sy_r21scatter_cut / n_r21scatter_cut
 	std_r21scatter_cut = np.sqrt(sy2_r21scatter_cut/n_r21scatter_cut - mean_r21scatter_cut*mean_r21scatter_cut)
 
-	return xaxis_co10, xaxis_co21, std_scatter, std_scatter_cut, std_r21scatter, std_r21scatter_cut
+	return xaxis_co10, xaxis_co21, std_scatter, std_scatter_cut, std_r21scatter, std_r21scatter_cut, xlim_co10, xlim_co21
 
 
 #####################
 ### main
 #####################
 ###
-n0628_xaxis_co10, n0628_xaxis_co21, n0628_std_scatter, n0628_std_scatter_cut, n0628_std_r21scatter, n0628_std_r21scatter_cut = \
+n0628_xaxis_co10, n0628_xaxis_co21, n0628_std_scatter, n0628_std_scatter_cut, n0628_std_r21scatter, n0628_std_r21scatter_cut, xlim_co10, xlim_co21 = \
 	extract_scatter(dir_proj + "eps/ngc0628_model_scatter.txt", dir_proj + "eps/ngc0628_model_scatter_cut.txt")
 
-n3627_xaxis_co10, n3627_xaxis_co21, n3627_std_scatter, n3627_std_scatter_cut, n3627_std_r21scatter, n3627_std_r21scatter_cut = \
+n3627_xaxis_co10, n3627_xaxis_co21, n3627_std_scatter, n3627_std_scatter_cut, n3627_std_r21scatter, n3627_std_r21scatter_cut, _, _ = \
 	extract_scatter(dir_proj + "eps/ngc3627_model_scatter.txt", dir_proj + "eps/ngc3627_model_scatter_cut.txt")
 
-n4321_xaxis_co10, n4321_xaxis_co21, n4321_std_scatter, n4321_std_scatter_cut, n4321_std_r21scatter, n4321_std_r21scatter_cut = \
+n4321_xaxis_co10, n4321_xaxis_co21, n4321_std_scatter, n4321_std_scatter_cut, n4321_std_r21scatter, n4321_std_r21scatter_cut, _, _ = \
 	extract_scatter(dir_proj + "eps/ngc4321_model_scatter.txt", dir_proj + "eps/ngc4321_model_scatter_cut.txt")
 
 #
