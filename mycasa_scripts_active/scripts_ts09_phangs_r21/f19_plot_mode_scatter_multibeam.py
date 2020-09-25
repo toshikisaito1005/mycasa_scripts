@@ -333,7 +333,7 @@ for i in range(len(nbins_n0628)):
 	co21_noise = dir_proj + "ngc0628_co21/co21_"+beams_n0628[i]+".moment0.noise"
 	#
 	log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21, pa, inc, cnt_ra, cnt_dec, scale, def_nucleus)
-	xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins_n0628[i], percentile, galname)
+	xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins_n0628[i], percentile, "ngc0628")
 	#
 	bootstrap_median = []
 	bootstrap_width = []
@@ -372,7 +372,7 @@ for i in range(len(nbins_n3627)):
 	co21_noise = dir_proj + "ngc3627_co21/co21_"+beams_n3627[i]+".moment0.noise"
 	#
 	log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21, pa, inc, cnt_ra, cnt_dec, scale, def_nucleus)
-	xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins_n3627[i], percentile, galname)
+	xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins_n3627[i], percentile, "ngc3627")
 	#
 	bootstrap_median = []
 	bootstrap_width = []
@@ -411,7 +411,7 @@ for i in range(len(nbins_n4321)):
 	co21_noise = dir_proj + "ngc4321_co21/co21_"+beams_n4321[i]+".moment0.noise"
 	#
 	log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21, pa, inc, cnt_ra, cnt_dec, scale, def_nucleus)
-	xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins_n4321[i], percentile, galname)
+	xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins_n4321[i], percentile, "ngc4321")
 	#
 	bootstrap_median = []
 	bootstrap_width = []
