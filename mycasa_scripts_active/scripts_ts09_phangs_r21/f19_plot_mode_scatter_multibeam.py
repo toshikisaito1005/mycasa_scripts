@@ -466,9 +466,9 @@ ax2.fill_between([float(s.replace("p",".")) for s in beams_n3627], list_median_8
 ax3.fill_between([float(s.replace("p",".")) for s in beams_n4321], list_median_84[10:15]/list_median_50[10], list_median_16[10:15]/list_median_50[10], facecolor=cm.brg(2/2.5), alpha=0.5)
 
 #
-ax1.set_ylim([0.9,1.4])
-ax2.set_ylim([0.9,1.4])
-ax3.set_ylim([0.9,1.4])
+ax1.set_ylim([0.4,1.3])
+ax2.set_ylim([0.4,1.3])
+ax3.set_ylim([0.4,1.3])
 ax1.set_xlim([2.0,35.0])
 ax2.set_xlim([6.0,35.0])
 ax3.set_xlim([2.0,35.0])
@@ -508,9 +508,9 @@ ax2.fill_between([float(s.replace("p",".")) for s in beams_n3627], list_width_84
 ax3.fill_between([float(s.replace("p",".")) for s in beams_n4321], list_width_84[10:15]/list_width_50[10], list_width_16[10:15]/list_width_50[10], facecolor=cm.brg(2/2.5), alpha=0.5)
 
 #
-ax1.set_ylim([0.3,1.4])
-ax2.set_ylim([0.3,1.4])
-ax3.set_ylim([0.3,1.4])
+ax1.set_ylim([0.3,1.2])
+ax2.set_ylim([0.3,1.2])
+ax3.set_ylim([0.3,1.2])
 ax1.set_xlim([2.0,35.0])
 ax2.set_xlim([6.0,35.0])
 ax3.set_xlim([2.0,35.0])
