@@ -398,5 +398,7 @@ for i in range(len(nbins_n4321)):
 	if i==0:
 		width0 = width
 		median0 = median
-	print(median/median0, width/width0)
+	#
+	output_median.append(median/median0)
+	output_width.append(width/width0)
 
