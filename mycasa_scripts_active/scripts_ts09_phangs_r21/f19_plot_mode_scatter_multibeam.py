@@ -433,6 +433,7 @@ for i in range(len(nbins_n4321)):
 	list_width_50.append(np.percentile(bootstrap_width,50))
 	list_width_16.append(np.percentile(bootstrap_width,16))
 
+np.savetxt()
 
 ###
 figure = plt.figure(figsize=(10,4))
