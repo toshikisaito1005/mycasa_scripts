@@ -22,7 +22,7 @@ percentile = 84
 nbins_n0628 = [40, 30, 20, 10, 10]
 nbins_n3627 = [30, 20, 20, 10, 10]
 nbins_n4321 = [40, 30, 25, 20, 15]
-beams = ["04p0","08p0","12p0","16p0","20p0"]
+beams_n0628 = ["04p0","08p0","12p0","16p0","20p0"]
 
 
 #####################
@@ -269,6 +269,10 @@ txt_n4321_co21 = glob.glob(dir_proj + "eps/bootstrap_co21_models_ngc4321_??p0.tx
 for i in range(len(nbins_n0628)):
 	n0628_co10_best_params = get_best_params(txt_n0628_co10[i])
 	n0628_co21_best_params = get_best_params(txt_n0628_co21[i])
+	co10_mom0  = dir_proj + "ngc0628_co10/co10_"+beams_n0628[i]+".moment0"
+	co10_noise = dir_proj + "ngc0628_co10/co10_"+beams_n0628[i]+".moment0.noise"
+	co21_mom0  = dir_proj + "ngc0628_co21/co21_"+beams_n0628[i]+".moment0"
+	co21_noise = dir_proj + "ngc0628_co21/co21_"+beams_n0628[i]+".moment0.noise"
 	#
 	log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21, pa, inc, cnt_ra, cnt_dec, scale, def_nucleus)
 	xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile, galname)
