@@ -7,7 +7,7 @@ from scipy import stats
 plt.ioff()
 
 #
-import scripts_phangs_r21 as r21
+import scripts_phangs_r21 as r21tool
 
 
 #####################
@@ -67,14 +67,14 @@ def getdata(
 	beamfloat = float(beamstr)
 	#
 	# get data
-	data_co10_mom0  = r21.import_data(co10_mom0, mode="data")
-	data_co10_noise = r21.import_data(co10_noise, mode="data")
-	data_co21_mom0  = r21.import_data(co21_mom0, mode="data")
-	data_co21_noise = r21.import_data(co21_noise, mode="data")
+	data_co10_mom0  = r21tool.import_data(co10_mom0, mode="data")
+	data_co10_noise = r21tool.import_data(co10_noise, mode="data")
+	data_co21_mom0  = r21tool.import_data(co21_mom0, mode="data")
+	data_co21_noise = r21tool.import_data(co21_noise, mode="data")
 	#
-	data_ra  = r21.import_data(co10_mom0, mode="coords", index=0)
-	data_dec = r21.import_data(co10_mom0, mode="coords", index=1)
-	dist = r21.distance(data_ra, data_dec, pa, inc, cnt_ra, cnt_dec, scale)
+	data_ra  = r21tool.import_data(co10_mom0, mode="coords", index=0)
+	data_dec = r21tool.import_data(co10_mom0, mode="coords", index=1)
+	dist = r21tool.distance(data_ra, data_dec, pa, inc, cnt_ra, cnt_dec, scale)
 	# select data
 	cut_all = np.where((data_co10_mom0>0) & (data_co10_noise>0) & (data_co21_mom0>0) & (data_co21_noise>0) & (dist>def_nucleus))
 	#
@@ -351,7 +351,7 @@ for i in range(len(nbins_n3627)):
 	co21_noise = dir_proj + "ngc3627_co21/co21_"+beams_n3627[i]+".moment0.noise"
 	#
 	log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21, pa, inc, cnt_ra, cnt_dec, scale, def_nucleus)
-	xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile, galname)
+	xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins_n3627[i], percentile, galname)
 	log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise = \
 		create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, n3627_co10_best_params, n3627_co21_best_params)
 	r21 = 10**log_co21_mom0_k_model_scatter/10**log_co10_mom0_k_model_scatter
@@ -380,7 +380,7 @@ for i in range(len(nbins_n4321)):
 	co21_noise = dir_proj + "ngc4321_co21/co21_"+beams_n4321[i]+".moment0.noise"
 	#
 	log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21, pa, inc, cnt_ra, cnt_dec, scale, def_nucleus)
-	xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins, percentile, galname)
+	xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins_n4321[i], percentile, galname)
 	log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise = \
 		create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, n4321_co10_best_params, n4321_co21_best_params)
 	r21 = 10**log_co21_mom0_k_model_scatter/10**log_co10_mom0_k_model_scatter
