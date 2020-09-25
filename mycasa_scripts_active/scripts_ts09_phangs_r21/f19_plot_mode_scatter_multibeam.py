@@ -1,9 +1,13 @@
 import os, re, sys, glob
 import itertools
+import matplotlib as mpl
+import matplotlib.cm as cm
 import matplotlib.pyplot as plt
+import matplotlib.patches as pat
 import matplotlib.gridspec as gridspec
 from scipy.optimize import curve_fit
 from scipy import stats
+
 plt.ioff()
 
 #
@@ -425,4 +429,18 @@ ax3.set_title("NGC 4321")
 plt.rcParams["font.size"] = 12
 
 #
-ax1.plot([float(s.replace("p",".")) for s in beams_n0628], norm_median, "o-", color=cm.brg(0/2.5), alpha=0.6, lw=2)
+ax1.plot([float(s.replace("p",".")) for s in beams_n0628], output_median[0:5], "o-", color=cm.brg(0/2.5), alpha=0.6, lw=2)
+ax2.plot([float(s.replace("p",".")) for s in beams_n3627], output_median[5:10], "o-", color=cm.brg(1/2.5), alpha=0.6, lw=2)
+ax3.plot([float(s.replace("p",".")) for s in beams_n4321], output_median[10:15], "o-", color=cm.brg(2/2.5), alpha=0.6, lw=2)
+
+#
+ax1.set_ylim([0.9,1.4])
+ax2.set_ylim([0.9,1.4])
+ax3.set_ylim([0.9,1.4])
+ax1.set_xlim([2.0,35.0])
+ax2.set_xlim([6.0,35.0])
+ax3.set_xlim([2.0,35.0])
+
+plt.savefig(dir_proj+"eps/violin_median_simu.png",dpi=300)
+
+os.system("rm -rf *.last")
