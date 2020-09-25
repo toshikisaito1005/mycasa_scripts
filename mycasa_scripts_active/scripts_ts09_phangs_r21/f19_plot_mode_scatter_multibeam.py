@@ -305,6 +305,10 @@ txt_n4321_co10 = glob.glob(dir_proj + "eps/bootstrap_co10_models_ngc4321_??p0.tx
 txt_n4321_co21 = glob.glob(dir_proj + "eps/bootstrap_co21_models_ngc4321_??p0.txt")
 
 ##
+output_median = []
+output_width = []
+
+##
 i=0
 scale = scales[i]
 cnt_ra = cnt_ras[i]
@@ -331,7 +335,9 @@ for i in range(len(nbins_n0628)):
 	if i==0:
 		width0 = width
 		median0 = median
-	print(median/median0, width/width0)
+	#
+	output_median.append(median/median0)
+	output_width.append(width/width0)
 
 
 ##
@@ -361,7 +367,9 @@ for i in range(len(nbins_n3627)):
 	if i==0:
 		width0 = width
 		median0 = median
-	print(median/median0, width/width0)
+	#
+	output_median.append(median/median0)
+	output_width.append(width/width0)
 
 ##
 i=2
