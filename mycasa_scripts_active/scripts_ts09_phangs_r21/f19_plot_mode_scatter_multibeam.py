@@ -343,8 +343,8 @@ for i in range(len(nbins_n0628)):
 			create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, n0628_co10_best_params, n0628_co21_best_params)
 		r21 = 10**log_co21_mom0_k_model_scatter/10**log_co10_mom0_k_model_scatter
 		#
-		median = np.log10(np.percentile(r21, 50))
-		width = np.log10(np.percentile(r21, 84)) - np.log10(np.percentile(r21, 16))
+		median = np.percentile(r21, 50)
+		width = np.percentile(r21, 84) - np.percentile(r21, 16)
 		bootstrap_median.append(median)
 		bootstrap_width.append(width)
 	#
@@ -382,8 +382,8 @@ for i in range(len(nbins_n3627)):
 			create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, n3627_co10_best_params, n3627_co21_best_params)
 		r21 = 10**log_co21_mom0_k_model_scatter/10**log_co10_mom0_k_model_scatter
 		#
-		median = np.log10(np.percentile(r21, 50))
-		width = np.log10(np.percentile(r21, 84)) - np.log10(np.percentile(r21, 16))
+		median = np.percentile(r21, 50)
+		width = np.percentile(r21, 84) - np.percentile(r21, 16)
 		bootstrap_median.append(median)
 		bootstrap_width.append(width)
 	#
@@ -421,8 +421,8 @@ for i in range(len(nbins_n4321)):
 			create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, n4321_co10_best_params, n4321_co21_best_params)
 		r21 = 10**log_co21_mom0_k_model_scatter/10**log_co10_mom0_k_model_scatter
 		#
-		median = np.log10(np.percentile(r21, 50))
-		width = np.log10(np.percentile(r21, 84)) - np.log10(np.percentile(r21, 16))
+		median = np.percentile(r21, 50)
+		width = np.percentile(r21, 84) - np.percentile(r21, 16)
 		bootstrap_median.append(median)
 		bootstrap_width.append(width)
 	#
@@ -466,9 +466,9 @@ ax2.fill_between([float(s.replace("p",".")) for s in beams_n3627], list_median_8
 ax3.fill_between([float(s.replace("p",".")) for s in beams_n4321], list_median_84[10:15]/list_median_50[10], list_median_16[10:15]/list_median_50[10], facecolor=cm.brg(2/2.5), alpha=0.5)
 
 #
-ax1.set_ylim([0.4,1.3])
-ax2.set_ylim([0.4,1.3])
-ax3.set_ylim([0.4,1.3])
+ax1.set_ylim([0.9,1.4])
+ax2.set_ylim([0.9,1.4])
+ax3.set_ylim([0.9,1.4])
 ax1.set_xlim([2.0,35.0])
 ax2.set_xlim([6.0,35.0])
 ax3.set_xlim([2.0,35.0])
@@ -508,9 +508,9 @@ ax2.fill_between([float(s.replace("p",".")) for s in beams_n3627], list_width_84
 ax3.fill_between([float(s.replace("p",".")) for s in beams_n4321], list_width_84[10:15]/list_width_50[10], list_width_16[10:15]/list_width_50[10], facecolor=cm.brg(2/2.5), alpha=0.5)
 
 #
-ax1.set_ylim([0.3,1.2])
-ax2.set_ylim([0.3,1.2])
-ax3.set_ylim([0.3,1.2])
+ax1.set_ylim([0.3,1.4])
+ax2.set_ylim([0.3,1.4])
+ax3.set_ylim([0.3,1.4])
 ax1.set_xlim([2.0,35.0])
 ax2.set_xlim([6.0,35.0])
 ax3.set_xlim([2.0,35.0])
