@@ -231,7 +231,7 @@ for i in range(len(gals)):
 	bars = ax.plot(list_beam, norm_median, "o-", color=color, alpha=0.6, lw=2, label=label3)
 	[bar.set_alpha(0.2) for bar in bars]
 
-	ax.set_ylim([0.9,1.4])
+	ax.set_ylim([-0.1,0.2])
 	if i==1:
 		ax.set_xlim([6.0,35.0])
 	else:
