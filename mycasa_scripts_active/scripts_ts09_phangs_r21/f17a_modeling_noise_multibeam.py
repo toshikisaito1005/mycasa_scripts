@@ -699,9 +699,9 @@ for j in range(len(beams)):
 		log_r21_mom0_k_model_scatter = np.log10(10**log_co21_mom0_k_model_scatter_cut/10**log_co10_mom0_k_model_scatter_cut)
 		log_r21_mom0_k_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise_cut/10**log_co10_mom0_k_model_scatter_noise_cut)
 		#
-		ax3.hist(log_r21_mom_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0)
-		ax3.hist(log_r21_mom0_k_model_scatter, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=[-1.0,0.5])
-		ax3.hist(log_r21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=[-1.0,0.5])
+		ax3.hist(log_r21_mom_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0, range=[log_co21_mom0_k.min(),log_co21_mom0_k.max()])
+		ax3.hist(log_r21_mom0_k_model_scatter, normed=True, color="blue", alpha=0.3, bins=nbins, lw=0, range=[log_co21_mom0_k.min(),log_co21_mom0_k.max()])
+		ax3.hist(log_r21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=[log_co21_mom0_k.min(),log_co21_mom0_k.max()])
 		ax3.set_xlim([-1.0,0.5])
 		#
 		plt.savefig(dir_proj + "eps/fig_obs_vs_model_histo_"+galname+"_"+this_beam+".png",dpi=200)
