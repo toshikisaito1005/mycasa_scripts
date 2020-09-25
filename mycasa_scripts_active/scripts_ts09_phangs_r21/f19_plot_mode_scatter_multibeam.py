@@ -463,7 +463,7 @@ ax3.plot([float(s.replace("p",".")) for s in beams_n4321], list_median_50[10:15]
 #
 ax1.fill_between([float(s.replace("p",".")) for s in beams_n0628], list_median_84[0:5]/list_median_50[0], list_median_16[0:5]/list_median_50[0], facecolor=cm.brg(0/2.5), alpha=0.5)
 ax2.fill_between([float(s.replace("p",".")) for s in beams_n3627], list_median_84[5:10]/list_median_50[5], list_median_16[5:10]/list_median_50[5], facecolor=cm.brg(1/2.5), alpha=0.5)
-ax3.fill_between([float(s.replace("p",".")) for s in beams_n4321], list_median_84[10:15]/list_median_50[10], list_median_16[5:10]/list_median_50[5], facecolor=cm.brg(1/2.5), alpha=0.5)
+ax3.fill_between([float(s.replace("p",".")) for s in beams_n4321], list_median_84[10:15]/list_median_50[10], list_median_16[10:15]/list_median_50[10], facecolor=cm.brg(2/2.5), alpha=0.5)
 
 #
 ax1.set_ylim([0.9,1.4])
@@ -500,10 +500,12 @@ plt.rcParams["font.size"] = 12
 #
 ax1.plot([float(s.replace("p",".")) for s in beams_n0628], list_width_50[0:5]/list_width_50[0], "o-", color=cm.brg(0/2.5), alpha=0.6, lw=2)
 ax2.plot([float(s.replace("p",".")) for s in beams_n3627], list_width_50[5:10]/list_width_50[5], "o-", color=cm.brg(1/2.5), alpha=0.6, lw=2)
+ax3.plot([float(s.replace("p",".")) for s in beams_n4321], list_width_50[10:15]/list_width_50[10], "o-", color=cm.brg(2/2.5), alpha=0.6, lw=2)
 
 #
 ax1.fill_between([float(s.replace("p",".")) for s in beams_n0628], list_width_84[0:5]/list_width_50[0], list_width_16[0:5]/list_width_50[0], facecolor=cm.brg(0/2.5), alpha=0.5)
 ax2.fill_between([float(s.replace("p",".")) for s in beams_n3627], list_width_84[5:10]/list_width_50[5], list_width_16[5:10]/list_width_50[5], facecolor=cm.brg(1/2.5), alpha=0.5)
+ax3.fill_between([float(s.replace("p",".")) for s in beams_n4321], list_width_84[10:15]/list_width_50[10], list_width_16[10:15]/list_width_50[10], facecolor=cm.brg(2/2.5), alpha=0.5)
 
 #
 ax1.set_ylim([0.3,1.4])
