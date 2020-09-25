@@ -219,24 +219,24 @@ for i in range(len(gals)):
 		label2=None
 		label3=None
 	#
-	norm_median = np.log10(np.array(statslist_r21)[:,2]) / np.log10(np.array(statslist_r21)[:,2][0])
+	norm_median = (np.array(statslist_r21)[:,2]) / (np.array(statslist_r21)[:,2][0])
 	bars = ax.plot(list_beam, norm_median, "o-", color=color, alpha=0.6, lw=2, label=label1)
 	[bar.set_alpha(0.6) for bar in bars]
 	#
-	norm_median = np.log10(np.array(statslist_r21_wco10)[:,2]) / np.log10(np.array(statslist_r21_wco10)[:,2][0])
+	norm_median = (np.array(statslist_r21_wco10)[:,2]) / (np.array(statslist_r21_wco10)[:,2][0])
 	bars = ax.plot(list_beam, norm_median, "o-", color=color, alpha=0.6, lw=2, label=label2)
 	[bar.set_alpha(0.4) for bar in bars]
 	#
-	norm_median = np.log10(np.array(statslist_r21_wco21)[:,2]) / np.log10(np.array(statslist_r21_wco21)[:,2][0])
+	norm_median = (np.array(statslist_r21_wco21)[:,2]) / (np.array(statslist_r21_wco21)[:,2][0])
 	bars = ax.plot(list_beam, norm_median, "o-", color=color, alpha=0.6, lw=2, label=label3)
 	[bar.set_alpha(0.2) for bar in bars]
 
-	ax.set_ylim([0.4,1.3])
+	ax.set_ylim([0.9,1.4])
 	if i==1:
 		ax.set_xlim([6.0,35.0])
 	else:
 		ax.set_xlim([2.0,35.0])
-	ax.legend(loc="lower right")
+	ax.legend(loc="upper right")
 
 plt.savefig(dir_proj+"eps/violin_median.png",dpi=300)
 
