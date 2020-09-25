@@ -37,6 +37,23 @@ def_nucleus = [50*44./1.0, 50*52./1.3*1.5, 30*103/1.4]
 #####################
 ### functions
 #####################
+def distance(x, y, pa, inc, ra_cnt, dec_cnt, scale):
+    """
+    myim10
+    """
+    tilt_cos = math.cos(math.radians(pa))
+    tilt_sin = math.sin(math.radians(pa))
+    
+    x_tmp = x - ra_cnt
+    y_tmp = y - dec_cnt
+    
+    x_new = (x_tmp*tilt_cos - y_tmp*tilt_sin)
+    y_new = (x_tmp*tilt_sin + y_tmp*tilt_cos) * 1/math.sin(math.radians(inc))
+    
+    r = np.sqrt(x_new**2 + y_new**2) * 3600 * scale # arcsec * pc/arcsec
+    
+    return r
+
 def get_co_intensities(
 	image_co10,
 	image_co21,
