@@ -331,8 +331,8 @@ for i in range(len(nbins_n0628)):
 	log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21, pa, inc, cnt_ra, cnt_dec, scale, def_nucleus)
 	xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins_n0628[i], percentile, galname)
 	#
-	list_median = []
-	list_width = []
+	bootstrap_median = []
+	bootstrap_width = []
 	for j in range(100):
 		log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise = \
 			create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, n0628_co10_best_params, n0628_co21_best_params)
@@ -340,10 +340,16 @@ for i in range(len(nbins_n0628)):
 		#
 		median = np.percentile(r21, 50)
 		width = np.percentile(r21, 84) - np.percentile(r21, 16)
-		list_median.append(median)
-		list_width.append(width)
+		bootstrap_median.append(median)
+		bootstrap_width.append(width)
 	#
-	
+	list_median_84.append(np.percentile(bootstrap_median,84))
+	list_median_50.append(np.percentile(bootstrap_median,50))
+	list_median_16.append(np.percentile(bootstrap_median,16))
+	list_width_84.append(np.percentile(bootstrap_width,84))
+	list_width_50.append(np.percentile(bootstrap_width,50))
+	list_width_16.append(np.percentile(bootstrap_width,16))
+
 
 
 
