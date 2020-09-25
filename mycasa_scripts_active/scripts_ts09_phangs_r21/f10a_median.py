@@ -239,7 +239,19 @@ for i in range(len(gals)):
 	ax.legend(loc="upper right")
 
 #
-np.loadtxt("table_modeled_r21.txt")
+list_model = np.loadtxt("table_modeled_r21.txt")
+list_median_84 = list_model[:,0]
+list_median_50 = list_model[:,1]
+list_median_16 = list_model[:,2]
+list_width_84 = list_model[:,3]
+list_width_50 = list_model[:,4]
+list_width_16 = list_model[:,5]
+ax1.plot([4,20], (list_median_50[0:5]/list_median_50[0])[0:5:4], "-", color="black", alpha=0.2, lw=2)
+ax2.plot([8,24], (list_median_50[5:10]/list_median_50[5])[0:5:4], "-", color="black", alpha=0.2, lw=2)
+ax3.plot([4,20], (list_median_50[10:15]/list_median_50[10])[0:5:4], "-", color="black", alpha=0.2, lw=2)
+ax1.fill_between([4,20], (list_median_84[0:5]/list_median_16[0])[0:5:4], (list_median_16[0:5]/list_median_84[0])[0:5:4], facecolor="black", alpha=0.2)
+ax2.fill_between([8,24], (list_median_84[5:10]/list_median_16[5])[0:5:4], (list_median_16[5:10]/list_median_84[5])[0:5:4], facecolor="black", alpha=0.2)
+ax3.fill_between([4,20], (list_median_84[10:15]/list_median_16[10])[0:5:4], (list_median_16[10:15]/list_median_84[10])[0:5:4], facecolor="black", alpha=0.2)
 
 plt.savefig(dir_proj+"eps/violin_median.png",dpi=300)
 
