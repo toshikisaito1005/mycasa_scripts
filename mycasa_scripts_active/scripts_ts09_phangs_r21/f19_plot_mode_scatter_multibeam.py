@@ -355,11 +355,7 @@ for i in range(len(nbins_n0628)):
 	list_width_50.append(np.percentile(bootstrap_width,50))
 	list_width_16.append(np.percentile(bootstrap_width,16))
 
-
-
-
-"""
-##
+#
 i=1
 scale = scales[i]
 cnt_ra = cnt_ras[i]
@@ -377,50 +373,29 @@ for i in range(len(nbins_n3627)):
 	#
 	log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21, pa, inc, cnt_ra, cnt_dec, scale, def_nucleus)
 	xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins_n3627[i], percentile, galname)
-	log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise = \
-		create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, n3627_co10_best_params, n3627_co21_best_params)
-	r21 = 10**log_co21_mom0_k_model_scatter/10**log_co10_mom0_k_model_scatter
 	#
-	width = np.percentile(r21, 84) - np.percentile(r21, 16)
-	median = np.percentile(r21, 50)
-	if i==0:
-		width0 = width
-		median0 = median
+	bootstrap_median = []
+	bootstrap_width = []
+	for j in range(100):
+		print(j)
+		log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise = \
+			create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, n3627_co10_best_params, n3627_co21_best_params)
+		r21 = 10**log_co21_mom0_k_model_scatter/10**log_co10_mom0_k_model_scatter
+		#
+		median = np.percentile(r21, 50)
+		width = np.percentile(r21, 84) - np.percentile(r21, 16)
+		bootstrap_median.append(median)
+		bootstrap_width.append(width)
 	#
-	output_median.append(median/median0)
-	output_width.append(width/width0)
+	list_median_84.append(np.percentile(bootstrap_median,84))
+	list_median_50.append(np.percentile(bootstrap_median,50))
+	list_median_16.append(np.percentile(bootstrap_median,16))
+	list_width_84.append(np.percentile(bootstrap_width,84))
+	list_width_50.append(np.percentile(bootstrap_width,50))
+	list_width_16.append(np.percentile(bootstrap_width,16))
 
-##
-i=2
-scale = scales[i]
-cnt_ra = cnt_ras[i]
-cnt_dec = cnt_decs[i]
-pa = pas[i]
-inc = incs[i]
-def_nucleus = def_nucleuss[i]
-for i in range(len(nbins_n4321)):
-	n4321_co10_best_params = get_best_params(txt_n4321_co10[i])
-	n4321_co21_best_params = get_best_params(txt_n4321_co21[i])
-	co10_mom0  = dir_proj + "ngc4321_co10/co10_"+beams_n4321[i]+".moment0"
-	co10_noise = dir_proj + "ngc4321_co10/co10_"+beams_n4321[i]+".moment0.noise"
-	co21_mom0  = dir_proj + "ngc4321_co21/co21_"+beams_n4321[i]+".moment0"
-	co21_noise = dir_proj + "ngc4321_co21/co21_"+beams_n4321[i]+".moment0.noise"
-	#
-	log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k = getdata(co10_mom0, co10_noise, co21_mom0, co21_noise, freqco10, freqco21, pa, inc, cnt_ra, cnt_dec, scale, def_nucleus)
-	xbins_co10, xbins_co21 = plotter_noise(dir_proj, log_co10_mom0_k, log_co10_noise_k, log_co21_mom0_k, log_co21_noise_k, nbins_n4321[i], percentile, galname)
-	log_co10_mom0_k_model, log_co10_mom0_k_model_scatter, log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model, log_co21_mom0_k_model_scatter, log_co21_mom0_k_model_scatter_noise = \
-		create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, n4321_co10_best_params, n4321_co21_best_params)
-	r21 = 10**log_co21_mom0_k_model_scatter/10**log_co10_mom0_k_model_scatter
-	#
-	width = np.percentile(r21, 84) - np.percentile(r21, 16)
-	median = np.percentile(r21, 50)
-	if i==0:
-		width0 = width
-		median0 = median
-	#
-	output_median.append(median/median0)
-	output_width.append(width/width0)
-"""
+
+
 
 ###
 figure = plt.figure(figsize=(10,4))
@@ -444,12 +419,13 @@ ax3.set_title("NGC 4321")
 plt.rcParams["font.size"] = 12
 
 #
-ax1.plot([float(s.replace("p",".")) for s in beams_n0628], list_median_50[0:5], "o-", color=cm.brg(0/2.5), alpha=0.6, lw=2)
-#ax2.plot([float(s.replace("p",".")) for s in beams_n3627], list_median_50[5:10], "o-", color=cm.brg(1/2.5), alpha=0.6, lw=2)
+ax1.plot([float(s.replace("p",".")) for s in beams_n0628], list_median_50[0:5]/list_median_50[0], "o-", color=cm.brg(0/2.5), alpha=0.6, lw=2)
+ax2.plot([float(s.replace("p",".")) for s in beams_n3627], list_median_50[5:10]/list_median_50[5], "o-", color=cm.brg(1/2.5), alpha=0.6, lw=2)
 #ax3.plot([float(s.replace("p",".")) for s in beams_n4321], list_median_50[10:15], "o-", color=cm.brg(2/2.5), alpha=0.6, lw=2)
 
 #
-ax1.fill_between([float(s.replace("p",".")) for s in beams_n0628], list_median_84[0:5], list_median_16[0:5], facecolor=cm.brg(0/2.5), alpha=0.5)
+ax1.fill_between([float(s.replace("p",".")) for s in beams_n0628], list_median_84[0:5]/list_median_50[0], list_median_16[0:5]/list_median_50[0], facecolor=cm.brg(0/2.5), alpha=0.5)
+ax2.fill_between([float(s.replace("p",".")) for s in beams_n3627], list_median_84[5:10]/list_median_50[5], list_median_16[5:10]/list_median_50[5], facecolor=cm.brg(1/2.5), alpha=0.5)
 
 #
 ax1.set_ylim([0.9,1.4])
@@ -484,9 +460,10 @@ ax3.set_title("NGC 4321")
 plt.rcParams["font.size"] = 12
 
 #
-ax1.plot([float(s.replace("p",".")) for s in beams_n0628], list_width_50[0:5], "o-", color=cm.brg(0/2.5), alpha=0.6, lw=2)
+ax1.plot([float(s.replace("p",".")) for s in beams_n0628], list_width_50[0:5]/list_width_50[0], "o-", color=cm.brg(0/2.5), alpha=0.6, lw=2)
 
 #
+ax1.fill_between([float(s.replace("p",".")) for s in beams_n0628], list_width_84[0:5]/list_width_50[0], list_width_16[0:5]/list_width_50[0], facecolor=cm.brg(0/2.5), alpha=0.5)
 
 #
 ax1.set_ylim([0.3,1.4])
