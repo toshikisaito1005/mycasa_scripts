@@ -343,8 +343,8 @@ for i in range(len(nbins_n0628)):
 			create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, n0628_co10_best_params, n0628_co21_best_params)
 		r21 = 10**log_co21_mom0_k_model_scatter/10**log_co10_mom0_k_model_scatter
 		#
-		median = np.percentile(r21, 50)
-		width = np.percentile(r21, 84) - np.percentile(r21, 16)
+		median = np.log10(np.percentile(r21, 50))
+		width = np.log10(np.percentile(r21, 84)) - np.log10(np.percentile(r21, 16))
 		bootstrap_median.append(median)
 		bootstrap_width.append(width)
 	#
@@ -382,8 +382,8 @@ for i in range(len(nbins_n3627)):
 			create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, n3627_co10_best_params, n3627_co21_best_params)
 		r21 = 10**log_co21_mom0_k_model_scatter/10**log_co10_mom0_k_model_scatter
 		#
-		median = np.percentile(r21, 50)
-		width = np.percentile(r21, 84) - np.percentile(r21, 16)
+		median = np.log10(np.percentile(r21, 50))
+		width = np.log10(np.percentile(r21, 84)) - np.log10(np.percentile(r21, 16))
 		bootstrap_median.append(median)
 		bootstrap_width.append(width)
 	#
@@ -421,8 +421,8 @@ for i in range(len(nbins_n4321)):
 			create_best_models(log_co10_mom0_k, log_co21_mom0_k, log_co10_noise_k, log_co21_noise_k, xbins_co10, xbins_co21, n4321_co10_best_params, n4321_co21_best_params)
 		r21 = 10**log_co21_mom0_k_model_scatter/10**log_co10_mom0_k_model_scatter
 		#
-		median = np.percentile(r21, 50)
-		width = np.percentile(r21, 84) - np.percentile(r21, 16)
+		median = np.log10(np.percentile(r21, 50))
+		width = np.log10(np.percentile(r21, 84)) - np.log10(np.percentile(r21, 16))
 		bootstrap_median.append(median)
 		bootstrap_width.append(width)
 	#

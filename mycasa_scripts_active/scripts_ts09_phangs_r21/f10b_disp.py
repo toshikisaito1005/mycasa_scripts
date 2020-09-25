@@ -210,12 +210,12 @@ for i in range(len(gals)):
 	bars = ax.plot(list_beam, norm_disp, "o-", color=color, alpha=0.6, lw=2, label=label3)
 	[bar.set_alpha(0.2) for bar in bars]
 
-	ax.set_ylim([0.3,1.3])
+	ax.set_ylim([0.3,1.2])
 	if i==1:
 		ax.set_xlim([6.0,35.0])
 	else:
 		ax.set_xlim([2.0,35.0])
-	ax.legend()
+	#ax.legend()
 
 plt.savefig(dir_proj+"eps/violin_disp.png",dpi=300)
 

@@ -98,6 +98,7 @@ rm -rf $dir_data"violin_co21.png"
 
 
 ### figure 10
+convert -append -border 0x0 $dir_data"violin_median.png" $dir_data"violin_disp.png" $dir_data"fig10.png"
 convert -append -border 0x0 $dir_data"violin_median.png" $dir_data"violin_disp.png" eps2:$dir_data"fig10.eps"
 
 rm -rf $dir_data"violin_median.png" $dir_data"violin_disp.png"
