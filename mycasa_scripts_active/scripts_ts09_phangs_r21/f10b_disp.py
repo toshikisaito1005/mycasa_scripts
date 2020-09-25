@@ -228,9 +228,9 @@ list_width_16 = list_model[:,5]
 ax1.plot([4,20], (list_width_50[0:5]/list_width_50[0])[0:5:4], "-", color="black", alpha=0.2, lw=2)
 ax2.plot([8,24], (list_width_50[5:10]/list_width_50[5])[0:5:4], "-", color="black", alpha=0.2, lw=2)
 ax3.plot([4,20], (list_width_50[10:15]/list_width_50[10])[0:5:4], "-", color="black", alpha=0.2, lw=2)
-ax1.fill_between([4,20], (list_median_84[0:5]/list_median_16[0])[0:5:4], (list_median_16[0:5]/list_median_84[0])[0:5:4], facecolor="black", alpha=0.2, lw=0)
-ax2.fill_between([8,24], (list_median_84[5:10]/list_median_16[5])[0:5:4], (list_median_16[5:10]/list_median_84[5])[0:5:4], facecolor="black", alpha=0.2, lw=0)
-ax3.fill_between([4,20], (list_median_84[10:15]/list_median_16[10])[0:5:4], (list_median_16[10:15]/list_median_84[10])[0:5:4], facecolor="black", alpha=0.2, lw=0)
+ax1.fill_between([4,20], (list_width_84[0:5]/list_width_16[0])[0:5:4], (list_width_16[0:5]/list_width_84[0])[0:5:4], facecolor="black", alpha=0.2, lw=0)
+ax2.fill_between([8,24], (list_width_84[5:10]/list_width_16[5])[0:5:4], (list_width_16[5:10]/list_width_84[5])[0:5:4], facecolor="black", alpha=0.2, lw=0)
+ax3.fill_between([4,20], (list_width_84[10:15]/list_width_16[10])[0:5:4], (list_width_16[10:15]/list_width_84[10])[0:5:4], facecolor="black", alpha=0.2, lw=0)
 
 
 plt.savefig(dir_proj+"eps/violin_disp.png",dpi=300)
