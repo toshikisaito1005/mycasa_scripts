@@ -444,15 +444,11 @@ plt.rcParams["font.size"] = 12
 
 #
 ax1.plot([float(s.replace("p",".")) for s in beams_n0628], list_median_50[0:5], "o-", color=cm.brg(0/2.5), alpha=0.6, lw=2)
-ax2.plot([float(s.replace("p",".")) for s in beams_n3627], list_median_50[5:10], "o-", color=cm.brg(1/2.5), alpha=0.6, lw=2)
-ax3.plot([float(s.replace("p",".")) for s in beams_n4321], list_median_50[10:15], "o-", color=cm.brg(2/2.5), alpha=0.6, lw=2)
+#ax2.plot([float(s.replace("p",".")) for s in beams_n3627], list_median_50[5:10], "o-", color=cm.brg(1/2.5), alpha=0.6, lw=2)
+#ax3.plot([float(s.replace("p",".")) for s in beams_n4321], list_median_50[10:15], "o-", color=cm.brg(2/2.5), alpha=0.6, lw=2)
 
 #
-ax1.fill_between(x,y1,y2,facecolor=cm.brg(0/2.5),alpha=0.5)
-
-ax1.plot([float(s.replace("p",".")) for s in beams_n0628], list_median_50[0:5], "o-", color=cm.brg(0/2.5), alpha=0.6, lw=2)
-ax2.plot([float(s.replace("p",".")) for s in beams_n3627], list_median_50[5:10], "o-", color=cm.brg(1/2.5), alpha=0.6, lw=2)
-ax3.plot([float(s.replace("p",".")) for s in beams_n4321], list_median_50[10:15], "o-", color=cm.brg(2/2.5), alpha=0.6, lw=2)
+ax1.fill_between([float(s.replace("p",".")) for s in beams_n0628], list_median_84[0:5], list_median_16[0:5], facecolor=cm.brg(0/2.5), alpha=0.5)
 
 #
 ax1.set_ylim([0.9,1.4])
@@ -487,9 +483,9 @@ ax3.set_title("NGC 4321")
 plt.rcParams["font.size"] = 12
 
 #
-ax1.plot([float(s.replace("p",".")) for s in beams_n0628], output_width[0:5], "o-", color=cm.brg(0/2.5), alpha=0.6, lw=2)
-ax2.plot([float(s.replace("p",".")) for s in beams_n3627], output_width[5:10], "o-", color=cm.brg(1/2.5), alpha=0.6, lw=2)
-ax3.plot([float(s.replace("p",".")) for s in beams_n4321], output_width[10:15], "o-", color=cm.brg(2/2.5), alpha=0.6, lw=2)
+ax1.plot([float(s.replace("p",".")) for s in beams_n0628], list_width_50[0:5], "o-", color=cm.brg(0/2.5), alpha=0.6, lw=2)
+
+#
 
 #
 ax1.set_ylim([0.3,1.4])
