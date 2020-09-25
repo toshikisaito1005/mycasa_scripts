@@ -309,8 +309,12 @@ txt_n4321_co10 = glob.glob(dir_proj + "eps/bootstrap_co10_models_ngc4321_??p0.tx
 txt_n4321_co21 = glob.glob(dir_proj + "eps/bootstrap_co21_models_ngc4321_??p0.txt")
 
 ##
-output_median = []
-output_width = []
+list_median_84 = []
+list_median_50 = []
+list_median_16 = []
+list_width_84 = []
+list_width_50 = []
+list_width_16 = []
 
 ##
 i=0
@@ -439,9 +443,16 @@ ax3.set_title("NGC 4321")
 plt.rcParams["font.size"] = 12
 
 #
-ax1.plot([float(s.replace("p",".")) for s in beams_n0628], output_median[0:5], "o-", color=cm.brg(0/2.5), alpha=0.6, lw=2)
-ax2.plot([float(s.replace("p",".")) for s in beams_n3627], output_median[5:10], "o-", color=cm.brg(1/2.5), alpha=0.6, lw=2)
-ax3.plot([float(s.replace("p",".")) for s in beams_n4321], output_median[10:15], "o-", color=cm.brg(2/2.5), alpha=0.6, lw=2)
+ax1.plot([float(s.replace("p",".")) for s in beams_n0628], list_median_50[0:5], "o-", color=cm.brg(0/2.5), alpha=0.6, lw=2)
+ax2.plot([float(s.replace("p",".")) for s in beams_n3627], list_median_50[5:10], "o-", color=cm.brg(1/2.5), alpha=0.6, lw=2)
+ax3.plot([float(s.replace("p",".")) for s in beams_n4321], list_median_50[10:15], "o-", color=cm.brg(2/2.5), alpha=0.6, lw=2)
+
+#
+ax1.fill_between(x,y1,y2,facecolor=cm.brg(0/2.5),alpha=0.5)
+
+ax1.plot([float(s.replace("p",".")) for s in beams_n0628], list_median_50[0:5], "o-", color=cm.brg(0/2.5), alpha=0.6, lw=2)
+ax2.plot([float(s.replace("p",".")) for s in beams_n3627], list_median_50[5:10], "o-", color=cm.brg(1/2.5), alpha=0.6, lw=2)
+ax3.plot([float(s.replace("p",".")) for s in beams_n4321], list_median_50[10:15], "o-", color=cm.brg(2/2.5), alpha=0.6, lw=2)
 
 #
 ax1.set_ylim([0.9,1.4])
