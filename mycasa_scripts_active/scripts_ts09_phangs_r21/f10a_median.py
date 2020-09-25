@@ -238,6 +238,9 @@ for i in range(len(gals)):
 		ax.set_xlim([2.0,22.0])
 	ax.legend(loc="upper right")
 
+#
+np.loadtxt("table_modeled_r21.txt")
+
 plt.savefig(dir_proj+"eps/violin_median.png",dpi=300)
 
 os.system("rm -rf *.last")

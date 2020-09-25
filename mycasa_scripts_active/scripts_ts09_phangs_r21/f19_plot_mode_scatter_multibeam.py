@@ -433,7 +433,8 @@ for i in range(len(nbins_n4321)):
 	list_width_50.append(np.percentile(bootstrap_width,50))
 	list_width_16.append(np.percentile(bootstrap_width,16))
 
-np.savetxt()
+list_to_save = np.c_[list_median_84, list_median_50, list_median_16, list_width_84, list_width_50, list_width_16]
+np.savetxt("table_modeled_r21.txt", list_to_save)
 
 ###
 figure = plt.figure(figsize=(10,4))
