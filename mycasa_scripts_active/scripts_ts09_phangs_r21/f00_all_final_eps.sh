@@ -226,4 +226,9 @@ rm -rf $dir_data"fig_obs_vs_model_mom0_ngc0628.png" $dir_data"fig_obs_vs_model_r
 convert $dir_data"model_scatter.png" eps2:$dir_data"fig18.eps"
 convert $dir_data"model_scatter.png" $dir_data"fig18.png"
 
+
+### figure 19
+convert -append -border 0x0 $dir_data"violin_median_simu.png" $dir_data"violin_width_simu.png" $dir_data"fig19.png"
+convert -append -border 0x0 $dir_data"violin_median_simu.png" $dir_data"violin_width_simu.png" eps2:$dir_data"fig19.eps"
+
 rm -rf $dir_data"model_scatter.png"
