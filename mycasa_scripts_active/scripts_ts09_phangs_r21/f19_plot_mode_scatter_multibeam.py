@@ -443,4 +443,41 @@ ax3.set_xlim([2.0,35.0])
 
 plt.savefig(dir_proj+"eps/violin_median_simu.png",dpi=300)
 
+
+###
+figure = plt.figure(figsize=(10,4))
+gs = gridspec.GridSpec(nrows=1, ncols=15)
+plt.subplots_adjust(bottom=0.15, left=0.07, right=0.98, top=0.90)
+ax1 = plt.subplot(gs[0:5,0:5])
+ax2 = plt.subplot(gs[0:5,5:10])
+ax3 = plt.subplot(gs[0:5,10:15])
+ax1.grid(axis="y")
+ax2.grid(axis="y")
+ax3.grid(axis="y")
+ax1.set_ylabel("Normed Median")
+ax1.set_xlabel("Beam Size (arcsec)")
+ax2.set_xlabel("Beam Size (arcsec)")
+ax3.set_xlabel("Beam Size (arcsec)")
+ax2.tick_params(labelleft=False)
+ax3.tick_params(labelleft=False)
+ax1.set_title("NGC 0628")
+ax2.set_title("NGC 3627")
+ax3.set_title("NGC 4321")
+plt.rcParams["font.size"] = 12
+
+#
+ax1.plot([float(s.replace("p",".")) for s in beams_n0628], output_width[0:5], "o-", color=cm.brg(0/2.5), alpha=0.6, lw=2)
+ax2.plot([float(s.replace("p",".")) for s in beams_n3627], output_width[5:10], "o-", color=cm.brg(1/2.5), alpha=0.6, lw=2)
+ax3.plot([float(s.replace("p",".")) for s in beams_n4321], output_width[10:15], "o-", color=cm.brg(2/2.5), alpha=0.6, lw=2)
+
+#
+ax1.set_ylim([0.3,1.4])
+ax2.set_ylim([0.3,1.4])
+ax3.set_ylim([0.3,1.4])
+ax1.set_xlim([2.0,35.0])
+ax2.set_xlim([6.0,35.0])
+ax3.set_xlim([2.0,35.0])
+
+plt.savefig(dir_proj+"eps/violin_width_simu.png",dpi=300)
+
 os.system("rm -rf *.last")
