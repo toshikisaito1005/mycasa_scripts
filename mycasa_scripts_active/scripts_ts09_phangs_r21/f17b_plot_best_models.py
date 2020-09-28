@@ -421,7 +421,7 @@ list_median_nocut = [10**np.median(s) for s in list_log_r21_mom0_k_model_scatter
 list_width_nocut = [10**np.percentile(s,84)-10**np.percentile(s,16) for s in list_log_r21_mom0_k_model_scatter_noise_nocut]
 
 
-#"""
+"""
 ###
 figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=22, ncols=8)
@@ -500,7 +500,7 @@ ax1.set_ylim([-0.3,1.8])
 #
 ax1.legend(loc = "upper left")
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_mom0_"+galname+".png",dpi=200)
-
+"""
 
 ### plot co21 vs r21
 r21 = np.log10(10**log_co21_mom0_k/10**log_co10_mom0_k)
