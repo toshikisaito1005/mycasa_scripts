@@ -21,9 +21,9 @@ dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 galname, i = "ngc0628", 0
 freqco10 = 115.27120
 freqco21 = 230.53800
-nbins = 10 # 40, 30, 40
+nbins = 40 # 40, 30, 40
 percentile = 84
-beams = ["20p0"] # 04p0, 08p0, 04p0
+beams = ["04p0"] # 04p0, 08p0, 04p0
 scales = [44/1.0, 52/1.3, 103/1.4]
 cnt_ras = [24.174, 170.063, 185.729]
 cnt_decs = [15.783, 12.9914, 15.8223]
@@ -462,7 +462,7 @@ ax2.plot([np.percentile(log_co21_mom0_k_model_scatter_noise_cut,16),np.percentil
 #
 # ax3
 ax3.hist(log_r21_mom_k, normed=True, color="black", alpha=0.5, bins=nbins, lw=0)
-histo = ax3.hist(log_r21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=[-1.0,0.5])
+histo = ax3.hist(log_r21_mom0_k_model_scatter_noise, normed=True, color="red", alpha=0.3, bins=nbins, lw=0, range=[log_r21_mom_k.min(),log_r21_mom_k.max()])
 histomax = histo[0].max()
 ax3.set_xlim([-0.99,0.5])
 ax3.set_ylim([0,histomax*1.3])
