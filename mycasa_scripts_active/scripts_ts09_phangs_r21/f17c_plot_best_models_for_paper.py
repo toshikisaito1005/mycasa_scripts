@@ -42,8 +42,8 @@ ax1.set_ylabel("log $R_{21}$")
 plt.rcParams["font.size"] = 20
 plt.rcParams["legend.fontsize"] = 18
 #
-ax1.plot(co21_high, r21_high, "o", color=cm.gnuplot(0./9.), alpha=0.5, markersize=10, markeredgewidth=0)
-ax1.plot(co21_low, r21_low, "o", color=cm.gnuplot(8./9.), alpha=0.5, markersize=10, markeredgewidth=0)
+ax1.plot(co21_high, r21_high, "o", color=cm.brg(0./2.5), alpha=0.5, markersize=10, markeredgewidth=0)
+ax1.plot(co21_low, r21_low, "o", color="black", alpha=0.5, markersize=10, markeredgewidth=0)
 ax1.set_xlim(xlim)
 ax1.set_ylim([-1.2,0.5])
 #
@@ -72,8 +72,8 @@ ax1.set_ylabel("log $R_{21}$")
 plt.rcParams["font.size"] = 20
 plt.rcParams["legend.fontsize"] = 18
 #
-ax1.plot(co21_high, r21_high, "o", color=cm.gnuplot(0./9.), alpha=0.5, markersize=10, markeredgewidth=0)
-ax1.plot(co21_low, r21_low, "o", color=cm.gnuplot(8./9.), alpha=0.5, markersize=10, markeredgewidth=0)
+ax1.plot(co21_high, r21_high, "o", color=cm.brg(1./2.5), alpha=0.5, markersize=10, markeredgewidth=0)
+ax1.plot(co21_low, r21_low, "o", color="black", alpha=0.5, markersize=10, markeredgewidth=0)
 ax1.set_xlim(xlim)
 ax1.set_ylim([-1.2,0.5])
 #
@@ -102,8 +102,8 @@ ax1.set_ylabel("log $R_{21}$")
 plt.rcParams["font.size"] = 20
 plt.rcParams["legend.fontsize"] = 18
 #
-ax1.plot(co21_high, r21_high, "o", color=cm.gnuplot(0./9.), alpha=0.5, markersize=10, markeredgewidth=0)
-ax1.plot(co21_low, r21_low, "o", color=cm.gnuplot(8./9.), alpha=0.5, markersize=10, markeredgewidth=0)
+ax1.plot(co21_high, r21_high, "o", color=cm.brg(2./2.5), alpha=0.5, markersize=10, markeredgewidth=0)
+ax1.plot(co21_low, r21_low, "o", color="black", alpha=0.5, markersize=10, markeredgewidth=0)
 ax1.set_xlim(xlim)
 ax1.set_ylim([-1.2,0.5])
 #
