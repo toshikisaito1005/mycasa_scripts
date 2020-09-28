@@ -18,12 +18,12 @@ import scripts_phangs_r21 as r21
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-galname, i = "ngc4321", 2
+galname, i = "ngc0628", 0
 freqco10 = 115.27120
 freqco21 = 230.53800
-nbins = 15 # 40, 30, 40
+nbins = 40 # 40/10, 30/10, 40/15
 percentile = 84
-beams = ["20p0"] # 04p0, 08p0, 04p0
+beams = ["04p0"] # 04p0, 08p0, 04p0
 xlim = [-0.5,1.8] # [-0.6,1.8], [-0.1,2.3], [-0.5,1.8]
 scales = [44/1.0, 52/1.3, 103/1.4]
 cnt_ras = [24.174, 170.063, 185.729]
@@ -38,6 +38,7 @@ cnt_dec = cnt_decs[i]
 pa = pas[i]
 inc = incs[i]
 def_nucleus = def_nucleus[i]
+beamstr = beams[i]
 
 
 #####################
@@ -508,7 +509,7 @@ r21_model = np.log10(10**log_co21_mom0_k_model/10**log_co10_mom0_k_model)
 r21_model_scatter = np.log10(10**log_co21_mom0_k_model_scatter_cut/10**log_co10_mom0_k_model_scatter_cut)
 r21_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise_cut/10**log_co10_mom0_k_model_scatter_noise_cut)
 #
-figure = plt.figure(figsize=(20,10))
+figure = plt.figure(figsize=(10,10))
 gs = gridspec.GridSpec(nrows=8, ncols=8)
 plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
 ax1 = plt.subplot(gs[0:8,0:8])
@@ -529,16 +530,16 @@ ax1.plot(log_co21_mom0_k, r21, "o", color="grey", alpha=1.0, markersize=5, marke
 ax1.set_xlim(xlim)
 ax1.set_ylim([-1.2,0.5])
 #
-plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21_"+galname+".png",dpi=200)
+plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21_"+galname+"_"+beamstr+".png",dpi=200)
 #
 
 #
 #np.savetxt(dir_proj + "eps/"+galname+"_model.txt", np.c_[log_co10_mom0_k_model, log_co21_mom0_k_model])
-np.savetxt(dir_proj + "eps/"+galname+"_model_scatter.txt", np.c_[log_co10_mom0_k_model_scatter, log_co21_mom0_k_model_scatter])
-np.savetxt(dir_proj + "eps/"+galname+"_model_scatter_noise.txt", np.c_[log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise])
+np.savetxt(dir_proj + "eps/"+galname+"_model_"+beamstr+"_scatter.txt", np.c_[log_co10_mom0_k_model_scatter, log_co21_mom0_k_model_scatter])
+np.savetxt(dir_proj + "eps/"+galname+"_model_"+beamstr+"_scatter_noise.txt", np.c_[log_co10_mom0_k_model_scatter_noise, log_co21_mom0_k_model_scatter_noise])
 #
-np.savetxt(dir_proj + "eps/"+galname+"_model_scatter_cut.txt", np.c_[log_co10_mom0_k_model_scatter_cut, log_co21_mom0_k_model_scatter_cut])
-np.savetxt(dir_proj + "eps/"+galname+"_model_scatter_noise_cut.txt", np.c_[log_co10_mom0_k_model_scatter_noise_cut, log_co21_mom0_k_model_scatter_noise_cut])
+np.savetxt(dir_proj + "eps/"+galname+"_model_"+beamstr+"_scatter_cut.txt", np.c_[log_co10_mom0_k_model_scatter_cut, log_co21_mom0_k_model_scatter_cut])
+np.savetxt(dir_proj + "eps/"+galname+"_model_"+beamstr+"_scatter_noise_cut.txt", np.c_[log_co10_mom0_k_model_scatter_noise_cut, log_co21_mom0_k_model_scatter_noise_cut])
 #"""
 
 #
