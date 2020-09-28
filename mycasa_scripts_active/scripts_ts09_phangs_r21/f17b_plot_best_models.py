@@ -18,13 +18,13 @@ import scripts_phangs_r21 as r21
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-galname, i = "ngc0628", 0
+galname, i = "ngc4321", 2
 freqco10 = 115.27120
 freqco21 = 230.53800
-nbins = 10 # 40, 30, 40
+nbins = 15 # 40, 30, 40
 percentile = 84
 beams = ["20p0"] # 04p0, 08p0, 04p0
-xlim = [-0.6,1.8] # [-0.6,1.8], 
+xlim = [-0.5,1.8] # [-0.6,1.8], [-0.1,2.3], [-0.5,1.8]
 scales = [44/1.0, 52/1.3, 103/1.4]
 cnt_ras = [24.174, 170.063, 185.729]
 cnt_decs = [15.783, 12.9914, 15.8223]
