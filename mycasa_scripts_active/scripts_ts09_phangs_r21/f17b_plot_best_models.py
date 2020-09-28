@@ -21,9 +21,9 @@ dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
 galname, i = "ngc0628", 0
 freqco10 = 115.27120
 freqco21 = 230.53800
-nbins = 40 # 40, 30, 40
+nbins = 10 # 40, 30, 40
 percentile = 84
-beams = ["04p0"] # 04p0, 08p0, 04p0
+beams = ["20p0"] # 04p0, 08p0, 04p0
 xlim = [-0.6,1.8] # [-0.6,1.8], 
 scales = [44/1.0, 52/1.3, 103/1.4]
 cnt_ras = [24.174, 170.063, 185.729]
@@ -508,7 +508,7 @@ r21_model = np.log10(10**log_co21_mom0_k_model/10**log_co10_mom0_k_model)
 r21_model_scatter = np.log10(10**log_co21_mom0_k_model_scatter_cut/10**log_co10_mom0_k_model_scatter_cut)
 r21_model_scatter_noise = np.log10(10**log_co21_mom0_k_model_scatter_noise_cut/10**log_co10_mom0_k_model_scatter_noise_cut)
 #
-figure = plt.figure(figsize=(10,10))
+figure = plt.figure(figsize=(20,10))
 gs = gridspec.GridSpec(nrows=8, ncols=8)
 plt.subplots_adjust(bottom=0.10, left=0.15, right=0.98, top=0.95)
 ax1 = plt.subplot(gs[0:8,0:8])
