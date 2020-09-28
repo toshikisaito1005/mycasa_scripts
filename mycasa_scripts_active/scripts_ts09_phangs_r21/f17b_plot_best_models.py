@@ -18,12 +18,13 @@ import scripts_phangs_r21 as r21
 ### parameters
 #####################
 dir_proj = "/Users/saito/data/myproj_active/proj_ts09_phangs_r21/"
-galname, i = "ngc3627", 1
+galname, i = "ngc0628", 0
 freqco10 = 115.27120
 freqco21 = 230.53800
-nbins = 10 # 40, 30, 40
+nbins = 40 # 40, 30, 40
 percentile = 84
-beams = ["24p0"] # 04p0, 08p0, 04p0
+beams = ["04p0"] # 04p0, 08p0, 04p0
+xlim = [-0.6,1.8] # [-0.6,1.8], 
 scales = [44/1.0, 52/1.3, 103/1.4]
 cnt_ras = [24.174, 170.063, 185.729]
 cnt_decs = [15.783, 12.9914, 15.8223]
@@ -525,7 +526,7 @@ ax1.plot(log_co21_mom0_k_model, r21_model, "o", color="black", alpha=1.0, marker
 ax1.plot(log_co21_mom0_k_model_scatter_cut, r21_model_scatter, "o", color="blue", alpha=0.5, markersize=5, markeredgewidth=0, zorder=-1e20)
 ax1.plot(log_co21_mom0_k_model_scatter_noise_cut, r21_model_scatter_noise, "o", color="red", alpha=0.5, markersize=5, markeredgewidth=0, zorder=-1e22)
 ax1.plot(log_co21_mom0_k, r21, "o", color="grey", alpha=1.0, markersize=5, markeredgewidth=0, zorder=-1e24)
-ax1.set_xlim([-0.3,1.8])
+ax1.set_xlim(xlim)
 ax1.set_ylim([-1.2,0.5])
 #
 plt.savefig(dir_proj + "eps/fig_obs_vs_model_r21_"+galname+".png",dpi=200)
