@@ -59,7 +59,7 @@ for i in range(len(gals)):
     #
     os.system("rm -rf " + output)
     immath(imagename = [output + "_tmp2", fits_barend[0]],
-      expr = "iif(IM1>0, IM1*4, IM0)",
+      expr = "iif(IM1>0, IM1*3, IM0)", # or IM1*4 if bar-end is needed.
       outfile = output)
     #
     os.system("rm -rf " + output + "_tmp*")
