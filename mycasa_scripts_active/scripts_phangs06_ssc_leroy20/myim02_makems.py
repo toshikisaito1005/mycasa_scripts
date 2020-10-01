@@ -32,24 +32,24 @@ for i in range(len(skymodels)):
     dir_this = "sim_" + galname
     os.system("rm -rf " + dir_this)
     print("### working on " + galname + ", "+str(i)+"/"+str(len(skymodels) - 1))
-                        default('simobserve')
-                        antennalist        =  "aca.cycle5.cfg"
-                        skymodel           =  skymodels[i]
-                        project            =  dir_this
-                        indirection        =  ""
-                        incell             =  ""
-                        mapsize            =  ["",""]
-                        incenter           =  ""
-                        inbright           =  ""
-                        setpointings       =  True
-                        integration        =  "10s"
-                        graphics           =  "none"
-                        obsmode            = "int"
-                        totaltime          =  "4h"
-                        #thermalnoise       =  ""
-                        pointingspacing    =  "0.4arcmin"
-                        overwrite          =  True
-                        simobserve()
+    default('simobserve')
+    antennalist        =  "aca.cycle5.cfg"
+    skymodel           =  skymodels[i]
+    project            =  dir_this
+    indirection        =  ""
+    incell             =  ""
+    mapsize            =  ["",""]
+    incenter           =  ""
+    inbright           =  ""
+    setpointings       =  True
+    integration        =  "10s"
+    graphics           =  "none"
+    obsmode            = "int"
+    totaltime          =  "4h"
+    #thermalnoise       =  ""
+    pointingspacing    =  "0.4arcmin"
+    overwrite          =  True
+    simobserve()
     #
     ###
     infile = tpmodels[i]

@@ -5,7 +5,8 @@ import pyfits
 import shutil
 
 dir_project = "/Users/saito/data/myproj_active/proj_phangs07_simu_for_release/"
-image_mocksky = dir_project + "sim_images/simulated_sky.fits"
+image_mocksky = "simulated_sky.fits"
+this_proj = "sim01"
 
 
 ##############################
@@ -24,7 +25,7 @@ def run_simobserve(
 		imsize = np.round(21*300/230.53800*2)
 		mapsize = [imsize, imsize]
 		pointingspacing = np.round(21*300/230.53800/2., 2)
-	elif:
+	elif array=="7m":
 		antennalist = "aca.cycle5.cfg"
 		imsize = np.round(21*300/230.53800*12./7.*2)
 		mapsize = [imsize, imsize]
@@ -53,5 +54,18 @@ def run_simobserve(
 ##############################
 ### main
 ##############################
+# initialize
+os.system("rm -rf " + this_proj)
+os.mkdir(this_proj)
+
+# path to the mocksky FITS file
 dir_mocksky = dir_project + "sim_images/"
-image_mocksky = dir_mocksky
+skymodel = glob.glob(dir_mocksky + image_mocksky)[0]
+
+# make 12m ms
+print("### making simulted 12m ms")
+run_simobserve("12m", skymodel, this_proj+"_12m")
+
+# make 7m ms
+print("### making simulted 7m ms")
+run_simobserve("7m", skymodel, this_proj+"_7m")
