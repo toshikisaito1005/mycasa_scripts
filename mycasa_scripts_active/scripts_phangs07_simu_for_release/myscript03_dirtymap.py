@@ -39,7 +39,7 @@ def dirty_continuum(
 		specmode    = "mfs",
 		restfreq    = "230.53800GHz",
 		niter       = 100,
-		threshold   = "10mJy",
+		threshold   = "1mJy",
 		interactive = False,
 		cell        = cell,
 		imsize      = imsize,
