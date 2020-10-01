@@ -16,9 +16,8 @@ this_proj = "sim01"
 def dirty_continuum(
 	vis,
 	imagename,
-	robust,
-	fov, # 120 arcsec
-	cell,
+	fov, # arcsec
+	cell, # arcsec
 	weighting="briggs",
 	robust=0.5,
 	):
@@ -55,36 +54,17 @@ def dirty_continuum(
 ##############################
 ### main
 ##############################
-"""
-# initialize
-os.system("rm -rf " + this_proj)
-os.system("rm -rf " + this_proj+"_*m")
-os.system("rm -rf " + dir_project + "/" + this_proj+"_*m")
-os.mkdir(this_proj)
-
-# path to the mocksky FITS file
-dir_mocksky = dir_project + "sim_images/"
-this_skymodel = glob.glob(dir_mocksky + image_mocksky)[0]
-
-# make 12m ms
-print("### making simulted 12m ms")
-run_simobserve("12m", this_skymodel, this_proj+"_12m")
-
-# make 7m ms
-print("### making simulted 7m ms")
-run_simobserve("7m", this_skymodel, this_proj+"_7m")
-
-# mv to the working directory
+# concat
+vis_12m = glob.glob(dir_project + this_proj + "/*12m*.ms")[0]
+vis_7m = glob.glob(dir_project + this_proj + "/*7m*.ms")[0]
 #
-os.mkdir(dir_project + this_proj)
-ms_12m = glob.glob(this_proj + "_12m/*.ms")[0]
-os.system("cp -r " + ms_12m + " " + dir_project + this_proj)
-#
-ms_7m = glob.glob(this_proj + "_7m/*.ms")[0]
-os.system("cp -r " + ms_7m + " " + dir_project + this_proj)
-#
-os.system("mv " + this_proj+"_* " + dir_project)
-"""
+dirty_continuum(
+	vis,
+	imagename,
+	fov=120,
+	cell=0.25)
+
+
 
 #
 os.system("rm -rf *.last")
