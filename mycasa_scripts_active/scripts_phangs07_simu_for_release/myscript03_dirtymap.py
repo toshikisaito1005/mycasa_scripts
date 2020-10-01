@@ -52,7 +52,6 @@ def dirty_continuum(
 		pbmask      = 0.8,
 		restoration = False,
 		startmodel  = "",
-		mask        = "",
 		pblimit     = 0.5,
 		)
 
@@ -70,21 +69,27 @@ concat(vis=[vis_12m,vis_7m], concatvis=vis_12m7m)
 
 # 7m-only dirty map
 print("### dirty map creation: 7m")
-imagename = dir_project + this_proj + "/image_sim01_7m"
+imagename = "image_sim01_7m"
 os.system("rm -rf " + imagename + "*")
+os.system("rm -rf " + dir_project + this_proj + "/" + imagename + "*")
 dirty_continuum(vis_7m, imagename, fov=120, cell="1.0arcsec", phasecenter=phasecenter)
+os.system("mv " + imagename + " " + dir_project + this_proj)
 
 # 12m-only dirty map
 print("### dirty map creation: 12m")
-imagename = dir_project + this_proj + "/image_sim01_12m"
+imagename = "image_sim01_12m"
 os.system("rm -rf " + imagename + "*")
+os.system("rm -rf " + dir_project + this_proj + "/" + imagename + "*")
 dirty_continuum(vis_12m, imagename, fov=120, cell="0.4arcsec", phasecenter=phasecenter)
+os.system("mv " + imagename + " " + dir_project + this_proj)
 
 # 12m+7m dirty map
 print("### dirty map creation: 12m+7m")
-imagename = dir_project + this_proj + "/image_sim01_12+7m"
+imagename = "image_sim01_12+7m"
 os.system("rm -rf " + imagename + "*")
+os.system("rm -rf " + dir_project + this_proj + "/" + imagename + "*")
 dirty_continuum(vis_12m7m, imagename, fov=120, cell="0.4arcsec", phasecenter=phasecenter)
+os.system("mv " + imagename + " " + dir_project + this_proj)
 
 #
 os.system("rm -rf *.last")
