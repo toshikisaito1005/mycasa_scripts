@@ -25,8 +25,9 @@ os.system("mkdir " + this_project)
 imsize = 512
 imagename = this_project + "simulated_sky.image"
 direction_center = "ICRS 12h21m54.947s 4d28m15.258s"
-direction_left   = "ICRS 12h21m55.500s 4d28m15.258s"
-direction_right  = "ICRS 12h21m54.800s 4d28m15.258s"
+
+direction_left   = "ICRS 12h21m55.280s 4d28m15.258s"
+direction_right  = "ICRS 12h21m54.614s 4d28m15.258s"
 #
 os.system("rm -rf " + imagename)
 os.system("rm -rf " + imagename.replace(".image",".fits"))
@@ -65,3 +66,5 @@ cl.done()
 exportfits(imagename=imagename,fitsimage=imagename.replace(".image",".fits"),overwrite=True)
 os.system("rm -rf " + imagename)
 importfits(fitsimage=imagename.replace(".image",".fits"),imagename=imagename,overwrite=True)
+
+os.system("rm -rf *.ast")
