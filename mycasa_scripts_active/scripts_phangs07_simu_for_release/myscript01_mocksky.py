@@ -24,10 +24,10 @@ os.system("mkdir " + this_project)
 #
 imsize = 512
 imagename = this_project + "simulated_sky.image"
-direction_center = "ICRS 12h21m54.947s 4d28m15.258s"
+direction_center = "J2000 12h21m54.947s 4d28m15.258s"
 
-direction_left   = "ICRS 12h21m55.280s 4d28m15.258s"
-direction_right  = "ICRS 12h21m54.614s 4d28m15.258s"
+direction_left   = "J2000 12h21m55.280s 4d28m15.258s"
+direction_right  = "J2000 12h21m54.614s 4d28m15.258s"
 #
 os.system("rm -rf " + imagename)
 os.system("rm -rf " + imagename.replace(".image",".fits"))

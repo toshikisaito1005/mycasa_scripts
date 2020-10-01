@@ -46,7 +46,7 @@ def dirty_continuum(
 		weighting   = weighting,
 		robust      = robust,
 		gridder     = "mosaic",
-		#deconvolver = "mfmfs",
+		deconvolver = "mfmfs",
 		#usemask     = "user",
 		restoration = False,
 		startmodel  = "",
