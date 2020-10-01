@@ -51,7 +51,6 @@ def dirty_continuum(
 		usemask     = "pb",
 		pbmask      = 0.8,
 		restoration = True,
-		startmodel  = "",
 		pblimit     = 0.5,
 		)
 
