@@ -20,6 +20,7 @@ def run_simobserve(
 	):
 	"""
 	"""
+	#
 	if array=="12m":
 		antennalist = "alma.cycle5.1.cfg"
 		pointingspacing = str(np.round(21*300/230.53800/2., 2)) + "arcsec"
@@ -54,7 +55,7 @@ def run_simobserve(
 # initialize
 os.system("rm -rf " + this_proj)
 os.system("rm -rf " + this_proj+"_*m")
-os.system("rm -rf " + dir_project + "/" + this_proj+"_*m")
+os.system("rm -rf " + dir_project + "/" + this_proj)
 os.mkdir(this_proj)
 
 # path to the mocksky FITS file
@@ -78,7 +79,8 @@ os.system("cp -r " + ms_12m + " " + dir_project + this_proj)
 ms_7m = glob.glob(this_proj + "_7m/*.ms")[0]
 os.system("cp -r " + ms_7m + " " + dir_project + this_proj)
 #
-os.system("mv " + this_proj+"_* " + dir_project)
+os.system("mv " + this_proj+"_* " + dir_project + this_proj)
 
 #
+os.system("rm -rf " + this_proj)
 os.system("rm -rf *.last")

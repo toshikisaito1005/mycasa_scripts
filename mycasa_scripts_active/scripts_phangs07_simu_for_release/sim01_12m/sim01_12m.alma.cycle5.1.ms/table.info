@@ -1,4 +1,5 @@
 Type = Measurement Set
-SubType = 
+SubType = simulator
 
 This is a MeasurementSet Table holding measurements from a Telescope
+This is a MeasurementSet Table holding simulated astronomical observations
