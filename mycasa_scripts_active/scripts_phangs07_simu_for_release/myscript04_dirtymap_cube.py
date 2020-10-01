@@ -52,6 +52,44 @@ def clean_continuum(
 		pblimit     = 0.5,
 		)
 
+def clean_cube(
+	vis,
+	imagename,
+	fov, # arcsec
+	cell, # arcsec
+	phasecenter,
+	weighting="briggs",
+	robust=0.5,
+	):
+	"""
+	"""
+	# calc imsize
+	cellfloat = float(cell.replace("arcsec",""))
+	imsize_tmp = (fov + 46.85) / cellfloat
+	imsize = 2**int(math.ceil(np.log2(imsize_tmp)))
+	print("# imsize = " + str(imsize))
+	#
+	tclean(
+		vis         = vis,
+		imagename   = imagename,
+		field       = "",
+		specmode    = "cube", # "mfs"
+		restfreq    = "230.53800GHz",
+		niter       = 1000,
+		threshold   = "1mJy",
+		interactive = False,
+		cell        = cell,
+		imsize      = imsize,
+		phasecenter = phasecenter,
+		weighting   = weighting,
+		robust      = robust,
+		gridder     = "mosaic",
+		deconvolver = "hogbom",
+		usemask     = "pb",
+		pbmask      = 0.8,
+		restoration = True,
+		pblimit     = 0.5,
+		)
 
 ##############################
 ### main
