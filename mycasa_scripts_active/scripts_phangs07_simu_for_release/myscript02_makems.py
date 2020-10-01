@@ -28,7 +28,7 @@ def run_simobserve(
 		antennalist = "aca.cycle5.cfg"
 		pointingspacing = str(np.round(21*300/230.53800*12./7./2., 2)) + "arcsec"
 	#
-	default('simobserve')
+	default("simobserve")
 	simobserve(
 		antennalist     = antennalist,
 		skymodel        = skymodel,

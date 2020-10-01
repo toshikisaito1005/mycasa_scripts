@@ -4,56 +4,52 @@ import glob
 import pyfits
 import shutil
 
+
 dir_project = "/Users/saito/data/myproj_active/proj_phangs07_simu_for_release/"
 this_proj = "sim01"
-robust = 0.5
 
 
 ##############################
 ### def
 ##############################
-def dirty_map(
+def dirty_continuum(
 	vis,
 	imagename,
 	robust,
-	width="",
-	start="",
-	imsize=512,
-	phasecenter="",
+	fov,
+	cell,
 	weighting="briggs",
+	robust=0.5,
 	):
 	"""
 	"""
 	#
-	os.system("rm -rf " + imagename + "*")
+	imsize = 
 	#
+	default("tclean")
 	tclean(
-		vis = vis,
-		imagename = imagename,
-		field = "",
-		specmode = "cube",
-		restfreq = "230.53800GHz",
-		outframe = "LSRK",
-		width = width,
-		start = start,
-		niter = 0,
-		threshold = "",
-		cyclefactor = 4,
-		interactive = False,
-		imsize = imsize,
-		cell = "1.0arcsec",
-		phasecenter = phasecenter,
-		weighting = weighting,
-		robust = robust,
-		gridder = "mosaic",
-		deconvolver = "multiscale",
-		scales = [0,2,5],
-		nchan = nchan,
-		cycleniter = 50,
-		usemask = "user",
+		vis           = vis,
+		imagename     = imagename,
+		field         = "",
+		specmode      = "mfs",
+		restfreq      = "230.53800GHz",
+		niter         = 0,
+		threshold     = "",
+		interactive   = False,
+		cell          = cell,
+		imsize        = imsize,
+		phasecenter   = "",
+		weighting     = weighting,
+		robust        = robust,
+		gridder       = "mosaic",
+		deconvolver   = "multiscale",
+		scales        = [0,2,5],
+		nchan         = nchan,
+		cycleniter    = 50,
+		usemask       = "user",
 		restoringbeam = "common",
-		startmodel = "",
-		mask = "",
+		startmodel    = "",
+		mask          = "",
 		)
 
 
