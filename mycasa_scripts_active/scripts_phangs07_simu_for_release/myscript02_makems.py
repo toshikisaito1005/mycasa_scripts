@@ -70,6 +70,7 @@ print("### making simulted 7m ms")
 run_simobserve("7m", this_skymodel, this_proj+"_7m")
 
 # mv to the working directory
+
 os.system("mv " + this_proj+"_* " + dir_project)
 
 #
