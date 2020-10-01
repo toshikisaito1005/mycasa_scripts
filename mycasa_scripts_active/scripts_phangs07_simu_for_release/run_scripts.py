@@ -1,7 +1,7 @@
 
 """
+### two point sources, mfs, large mosaic
 this_proj = "sim01"
-# size of the mocksky in pixel
 imsize = 512
 this_fov = 120
 #
@@ -10,9 +10,9 @@ execfile("myscript02_makems.py")
 execfile("myscript03_dirtymap_mfs.py")
 """
 
+### two point sources, mfs, single pointing
 this_proj = "sim02"
-# size of the mocksky in pixel
-imsize = 56
+imsize = 45
 this_fov = 30
 #
 execfile("myscript01_mocksky.py")
