@@ -22,7 +22,6 @@ os.system("mkdir " + this_project)
 
 ###
 #
-imsize = 512
 imagename = this_project + "simulated_sky.image"
 #direction_center = "J2000 12h21m54.947s 4d28m15.258s"
 direction_left   = "J2000 12h21m55.280s 4d28m15.258s"
