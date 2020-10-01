@@ -3,6 +3,7 @@ import os
 import glob
 import pyfits
 import shutil
+import math
 
 
 dir_project = "/Users/saito/data/myproj_active/proj_phangs07_simu_for_release/"
@@ -23,33 +24,31 @@ def dirty_continuum(
 	):
 	"""
 	"""
-	#
-	imsize = (fov + 46.85) / cell
+	# calc imsize
+	imsize_tmp = (fov + 46.85) / cell
+	imsize = 2**int(math.ceil(np.log2(imsize_tmp)))
 	#
 	default("tclean")
 	tclean(
-		vis           = vis,
-		imagename     = imagename,
-		field         = "",
-		specmode      = "mfs",
-		restfreq      = "230.53800GHz",
-		niter         = 0,
-		threshold     = "",
-		interactive   = False,
-		cell          = cell,
-		imsize        = imsize,
-		phasecenter   = "",
-		weighting     = weighting,
-		robust        = robust,
-		gridder       = "mosaic",
-		deconvolver   = "multiscale",
-		scales        = [0,2,5],
-		nchan         = nchan,
-		cycleniter    = 50,
-		usemask       = "user",
-		restoringbeam = "common",
-		startmodel    = "",
-		mask          = "",
+		vis         = vis,
+		imagename   = imagename,
+		field       = "",
+		specmode    = "mfs",
+		restfreq    = "230.53800GHz",
+		niter       = 0,
+		threshold   = "",
+		interactive = False,
+		cell        = cell,
+		imsize      = imsize,
+		phasecenter = "",
+		weighting   = weighting,
+		robust      = robust,
+		gridder     = "mosaic",
+		deconvolver = "mtmfs",
+		usemask     = "user",
+		restoration = False,
+		startmodel  = "",
+		mask        = "",
 		)
 
 
