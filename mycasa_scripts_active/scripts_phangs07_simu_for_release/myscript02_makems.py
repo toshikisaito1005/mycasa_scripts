@@ -34,12 +34,12 @@ def run_simobserve(
 		project         = project,
 		indirection     = "",
 		incell          = "",
-		mapsize         = ["",""], # mapsize,
+		mapsize         = ["",""],
 		incenter        = "",
 		inbright        = "",
 		setpointings    = True,
 		integration     = "10s",
-		graphics        = "none",
+		graphics        = "file",
 		obsmode         = "int",
 		totaltime       = totaltime,
 		#thermalnoise    = "",
@@ -53,6 +53,8 @@ def run_simobserve(
 ##############################
 # initialize
 os.system("rm -rf " + this_proj)
+os.system("rm -rf " + this_proj+"_*m")
+os.system("rm -rf " + dir_project + "/" + this_proj+"_*m")
 os.mkdir(this_proj)
 
 # path to the mocksky FITS file
