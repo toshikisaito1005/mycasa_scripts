@@ -67,4 +67,4 @@ exportfits(imagename=imagename,fitsimage=imagename.replace(".image",".fits"),ove
 os.system("rm -rf " + imagename)
 importfits(fitsimage=imagename.replace(".image",".fits"),imagename=imagename,overwrite=True)
 
-os.system("rm -rf *.ast")
+os.system("rm -rf *.last")
