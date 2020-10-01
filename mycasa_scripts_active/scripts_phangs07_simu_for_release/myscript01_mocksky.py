@@ -13,27 +13,37 @@ tpbeam = "28.6arcsec"
 ##############################
 ### main
 ##############################
-this_project = dir_project + this_project_name
+###
+this_project = dir_project + project_name + "/"
+os.system("rm -rf " + this_project)
+os.system("rm -rf " + this_project + ".*")
+os.system("mkdir " + this_project)
 
 
-os.system("rm -rf " + project)
-os.system("rm -rf " + project + ".*")
+###
+#
+imsize = 512
+direction_center = "ICRS 12h21m54.947s 4d28m15.258s"
 
-imsize = 256
-os.system("mkdir " + project)
-imagename = project + "/disk_model1.image"
+direction_left = "ICRS 12h21m54.947s 4d28m15.258s"
+direction_right = "ICRS 12h21m54.947s 4d28m15.258s"
+
+
+imagename = this_project + "simulated_sky.image"
+#
 os.system("rm -rf " + imagename)
 os.system("rm -rf " + imagename.replace(".image",".fits"))
-direction = "ICRS 12h21m54.947s 4d28m15.258s"
+#
 cl.done()
 cl.addcomponent(dir = direction,
-                flux = 0.1 / 67. * float(imsize**2),
-	    fluxunit = "Jy",
-	    freq = "230.53800GHz",
-	    shape = "Gaussian", 
-                majoraxis = "5arcsec",
-	    minoraxis = "5arcsec",
-	    positionangle = "45.0deg")
+				flux = 0.1 / 67. * float(imsize**2),
+				fluxunit = "Jy",
+				freq = "230.53800GHz",
+				shape = "Gaussian", 
+				        majoraxis = "5arcsec",
+				minoraxis = "5arcsec",
+				positionangle = "45.0deg")
+
 
 cl.addcomponent(dir = direction,
                 flux = 0.5 / 67. * float(imsize**2),
