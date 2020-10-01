@@ -8,6 +8,7 @@ import math
 
 dir_project = "/Users/saito/data/myproj_active/proj_phangs07_simu_for_release/"
 phasecenter = "J2000 12h21m54.947s 4d28m15.258s"
+this_fov = 120
 
 
 ##############################
@@ -64,13 +65,13 @@ vis_7m = glob.glob(dir_project + this_proj + "/" + this_proj + "_7m.ms")[0]
 print("### dirty map creation: 7m")
 imagename = dir_project + this_proj + "/" + "image_sim01_7m"
 os.system("rm -rf " + imagename + "*")
-dirty_continuum(vis_7m, imagename, fov=120, cell="1.0arcsec", phasecenter=phasecenter)
+dirty_continuum(vis_7m, imagename, fov=this_fov, cell="1.0arcsec", phasecenter=phasecenter)
 
 # 12m-only dirty map
 print("### dirty map creation: 12m")
 imagename = dir_project + this_proj + "/" + "image_sim01_12m"
 os.system("rm -rf " + imagename + "*")
-dirty_continuum(vis_12m, imagename, fov=120, cell="0.4arcsec", phasecenter=phasecenter)
+dirty_continuum(vis_12m, imagename, fov=this_fov, cell="0.4arcsec", phasecenter=phasecenter)
 
 # concat
 print("### concat")
@@ -82,7 +83,7 @@ concat(vis=[vis_12m,vis_7m], concatvis=vis_12m7m)
 print("### dirty map creation: 12m+7m")
 imagename = dir_project + this_proj + "/" + "image_sim01_12+7m"
 os.system("rm -rf " + imagename + "*")
-dirty_continuum(vis_12m7m, imagename, fov=120, cell="0.4arcsec", phasecenter=phasecenter)
+dirty_continuum(vis_12m7m, imagename, fov=this_fov, cell="0.4arcsec", phasecenter=phasecenter)
 
 #
 os.system("rm -rf *.last")

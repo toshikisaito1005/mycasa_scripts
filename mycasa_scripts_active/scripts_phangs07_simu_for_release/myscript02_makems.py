@@ -63,11 +63,11 @@ this_skymodel = glob.glob(dir_mocksky + image_mocksky)[0]
 
 # make 12m ms
 print("### making simulted 12m ms")
-run_simobserve("12m", this_skymodel, this_proj+"_12m", mapsize=this_mapsize)
+run_simobserve("12m", this_skymodel, this_proj+"_12m")
 
 # make 7m ms
 print("### making simulted 7m ms")
-run_simobserve("7m", this_skymodel, this_proj+"_7m", mapsize=this_mapsize)
+run_simobserve("7m", this_skymodel, this_proj+"_7m")
 
 # mv to the working directory
 #
