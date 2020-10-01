@@ -6,7 +6,7 @@ from astropy.coordinates import SkyCoord
 
 
 dir_project = "/Users/saito/data/myproj_active/proj_phangs07_simu_for_release/"
-project_name = "sim01"
+project_name = "sim_images"
 tpbeam = "28.6arcsec"
 
 
