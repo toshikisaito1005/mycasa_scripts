@@ -51,6 +51,12 @@ def clean_continuum(
 		restoration = True,
 		pblimit     = 0.5,
 		)
+	#
+	impbcor(
+		imagename = imagename + ".image",
+		pbimage   = imagename + ".pb",
+		outfile   = imagename + ".image.pbcor",
+		)
 
 
 ##############################
