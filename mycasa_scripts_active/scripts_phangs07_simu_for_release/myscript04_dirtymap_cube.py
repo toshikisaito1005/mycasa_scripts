@@ -74,6 +74,8 @@ def clean_cube(
 		imagename   = imagename,
 		field       = "",
 		specmode    = "cube", # "mfs"
+		nchan       = -1, # n/a
+		start       = "", #
 		restfreq    = "230.53800GHz",
 		niter       = 1000,
 		threshold   = "1mJy",

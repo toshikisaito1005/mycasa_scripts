@@ -68,13 +68,13 @@ vis_7m = glob.glob(dir_project + this_proj + "/" + this_proj + "_7m.ms")[0]
 
 # 7m-only dirty map
 print("### dirty map creation: 7m")
-imagename = dir_project + this_proj + "/" + "image_sim01_7m"
+imagename = dir_project + this_proj + "/" + "image_" + this_proj + "_7m"
 os.system("rm -rf " + imagename + "*")
 clean_continuum(vis_7m, imagename, fov=this_fov, cell="1.0arcsec", phasecenter=phasecenter)
 
 # 12m-only dirty map
 print("### dirty map creation: 12m")
-imagename = dir_project + this_proj + "/" + "image_sim01_12m"
+imagename = dir_project + this_proj + "/" + "image_" + this_proj + "_12m"
 os.system("rm -rf " + imagename + "*")
 clean_continuum(vis_12m, imagename, fov=this_fov, cell="0.4arcsec", phasecenter=phasecenter)
 
@@ -86,7 +86,7 @@ concat(vis=[vis_12m,vis_7m], concatvis=vis_12m7m)
 
 # 12m+7m dirty map
 print("### dirty map creation: 12m+7m")
-imagename = dir_project + this_proj + "/" + "image_sim01_12+7m"
+imagename = dir_project + this_proj + "/" + "image_" + this_proj + "_12+7m"
 os.system("rm -rf " + imagename + "*")
 clean_continuum(vis_12m7m, imagename, fov=this_fov, cell="0.4arcsec", phasecenter=phasecenter)
 
