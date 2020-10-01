@@ -24,8 +24,6 @@ os.system("mkdir " + this_project)
 #
 imsize = 512
 imagename = this_project + "simulated_sky.image"
-direction_center = "J2000 12h21m54.947s 4d28m15.258s"
-
 direction_left   = "J2000 12h21m55.280s 4d28m15.258s"
 direction_right  = "J2000 12h21m54.614s 4d28m15.258s"
 #
@@ -34,7 +32,6 @@ os.system("rm -rf " + imagename.replace(".image",".fits"))
 #
 cl.done()
 cl.addcomponent(dir=direction_left, flux= 0.07, fluxunit="Jy", freq="230.53800GHz", shape="point")
-cl.addcomponent(dir=direction_center, flux=0.05, fluxunit="Jy", freq="230.53800GHz", shape="point")
 cl.addcomponent(dir=direction_right, flux=0.03, fluxunit="Jy", freq="230.53800GHz", shape="point")
 ia.fromshape(imagename,[imsize,imsize,1,1],overwrite=True)
 cs=ia.coordsys()
