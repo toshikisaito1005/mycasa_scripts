@@ -44,6 +44,6 @@ execfile("myscript04_dirtymap_cube.py")
 this_proj = "sim04"
 imsize = 512
 this_fov = 120
-mapsize=["40arcsec","40arcsec"]
+mapsize=["",""]
 image_mocksky = "ngc1097_12m+7m+tp_co21_pbcorr_trimmed_k.fits"
 execfile("myscript02_makems.py")
