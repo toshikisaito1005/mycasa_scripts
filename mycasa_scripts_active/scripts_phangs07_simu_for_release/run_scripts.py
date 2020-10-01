@@ -28,7 +28,7 @@ execfile("myscript03_dirtymap_mfs.py")
 this_proj = "sim03"
 imsize = 45
 this_fov = 30
-execfile("myscript01_mocksky.py")
-execfile("myscript02_makems.py")
-#execfile("myscript04")
+#execfile("myscript01_mocksky.py")
+#execfile("myscript02_makems.py")
+execfile("myscript04_dirtymap_cube.py")
 #"""
