@@ -26,7 +26,8 @@ def dirty_continuum(
 	"""
 	"""
 	# calc imsize
-	imsize_tmp = (fov + 46.85) / cell
+	cellfloat = float(cell.replace("arcsec",""))
+	imsize_tmp = (fov + 46.85) / cellfloat
 	imsize = 2**int(math.ceil(np.log2(imsize_tmp)))
 	print("# imsize = " + str(imsize))
 	#
@@ -51,6 +52,7 @@ def dirty_continuum(
 		restoration = False,
 		startmodel  = "",
 		mask        = "",
+		pblimit     = 0.5,
 		)
 
 
@@ -69,19 +71,19 @@ concat(vis=[vis_12m,vis_7m], concatvis=vis_12m7m)
 print("### dirty map creation: 7m")
 imagename = dir_project + this_proj + "/image_sim01_7m"
 os.system("rm -rf " + imagename + "*")
-dirty_continuum(vis_7m, imagename, fov=120, cell=1.0, phasecenter=phasecenter)
+dirty_continuum(vis_7m, imagename, fov=120, cell="1.0arcsec", phasecenter=phasecenter)
 
 # 12m-only dirty map
 print("### dirty map creation: 12m")
 imagename = dir_project + this_proj + "/image_sim01_12m"
 os.system("rm -rf " + imagename + "*")
-dirty_continuum(vis_12m, imagename, fov=120, cell=0.4, phasecenter=phasecenter)
+dirty_continuum(vis_12m, imagename, fov=120, cell="0.4arcsec", phasecenter=phasecenter)
 
 # 12m+7m dirty map
 print("### dirty map creation: 12m+7m")
 imagename = dir_project + this_proj + "/image_sim01_12+7m"
 os.system("rm -rf " + imagename + "*")
-dirty_continuum(vis_12m7m, imagename, fov=120, cell=0.4, phasecenter=phasecenter)
+dirty_continuum(vis_12m7m, imagename, fov=120, cell="0.4arcsec", phasecenter=phasecenter)
 
 #
 os.system("rm -rf *.last")
