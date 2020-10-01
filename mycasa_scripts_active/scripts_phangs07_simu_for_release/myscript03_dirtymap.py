@@ -16,7 +16,7 @@ def dirty_continuum(
 	vis,
 	imagename,
 	robust,
-	fov,
+	fov, # 120 arcsec
 	cell,
 	weighting="briggs",
 	robust=0.5,
@@ -24,7 +24,7 @@ def dirty_continuum(
 	"""
 	"""
 	#
-	imsize = 
+	imsize = (fov + 46.85) / cell
 	#
 	default("tclean")
 	tclean(
