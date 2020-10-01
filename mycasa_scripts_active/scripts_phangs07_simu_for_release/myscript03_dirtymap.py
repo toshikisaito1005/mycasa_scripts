@@ -7,7 +7,6 @@ import math
 
 
 dir_project = "/Users/saito/data/myproj_active/proj_phangs07_simu_for_release/"
-this_proj = "sim01"
 phasecenter = "J2000 12h21m54.947s 4d28m15.258s"
 
 
