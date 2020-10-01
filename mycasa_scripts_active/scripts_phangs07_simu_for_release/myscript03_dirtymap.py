@@ -14,7 +14,7 @@ phasecenter = "J2000 12h21m54.947s 4d28m15.258s"
 ##############################
 ### def
 ##############################
-def dirty_continuum(
+def clean_continuum(
 	vis,
 	imagename,
 	fov, # arcsec

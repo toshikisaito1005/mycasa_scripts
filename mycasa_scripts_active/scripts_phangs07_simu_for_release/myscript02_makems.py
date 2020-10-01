@@ -7,7 +7,7 @@ import shutil
 dir_project = "/Users/saito/data/myproj_active/proj_phangs07_simu_for_release/"
 image_mocksky = "simulated_sky.fits"
 this_proj = "sim01"
-
+this_mapsize=["40arcsec","40arcsec"]
 
 ##############################
 ### def
@@ -16,6 +16,7 @@ def run_simobserve(
 	array,
 	skymodel,
 	project,
+	mapsize=["",""]
 	totaltime="6h",
 	):
 	"""
@@ -64,11 +65,11 @@ this_skymodel = glob.glob(dir_mocksky + image_mocksky)[0]
 
 # make 12m ms
 print("### making simulted 12m ms")
-run_simobserve("12m", this_skymodel, this_proj+"_12m")
+run_simobserve("12m", this_skymodel, this_proj+"_12m", mapsize=this_mapsize)
 
 # make 7m ms
 print("### making simulted 7m ms")
-run_simobserve("7m", this_skymodel, this_proj+"_7m")
+run_simobserve("7m", this_skymodel, this_proj+"_7m", mapsize=this_mapsize)
 
 # mv to the working directory
 #
