@@ -8,7 +8,7 @@ import math
 
 dir_project = "/Users/saito/data/myproj_active/proj_phangs07_simu_for_release/"
 this_proj = "sim01"
-phasecenter = "ICRS 12h21m54.947s 4d28m15.258s"
+phasecenter = "J2000 12h21m54.947s 4d28m15.258s"
 
 
 ##############################
@@ -46,7 +46,7 @@ def dirty_continuum(
 		weighting   = weighting,
 		robust      = robust,
 		gridder     = "mosaic",
-		deconvolver = "mfmfs",
+		deconvolver = "mtmfs",
 		#usemask     = "user",
 		restoration = False,
 		startmodel  = "",
