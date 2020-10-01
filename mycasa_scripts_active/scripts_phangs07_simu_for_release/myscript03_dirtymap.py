@@ -46,7 +46,7 @@ def dirty_continuum(
 		weighting   = weighting,
 		robust      = robust,
 		gridder     = "mosaic",
-		deconvolver = "mtmfs",
+		deconvolver = "mfmfs",
 		usemask     = "user",
 		restoration = False,
 		startmodel  = "",
@@ -57,6 +57,8 @@ def dirty_continuum(
 ##############################
 ### main
 ##############################
+#
+
 # concat
 print("### concat")
 vis_12m = glob.glob(dir_project + this_proj + "/" + this_proj + "_12m.ms")[0]
