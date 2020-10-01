@@ -47,7 +47,7 @@ def dirty_continuum(
 		weighting   = weighting,
 		robust      = robust,
 		gridder     = "mosaic",
-		deconvolver = "mtmfs",
+		deconvolver = "hogbom",
 		usemask     = "pb",
 		pbmask      = 0.8,
 		restoration = True,
@@ -68,6 +68,8 @@ imagename = "image_sim01_7m"
 os.system("rm -rf " + imagename + "*")
 os.system("rm -rf " + dir_project + this_proj + "/" + imagename + "*")
 dirty_continuum(vis_7m, imagename, fov=120, cell="1.0arcsec", phasecenter=phasecenter)
+print(imagename)
+
 os.system("mv " + imagename + "* " + dir_project + this_proj)
 
 # 12m-only dirty map
