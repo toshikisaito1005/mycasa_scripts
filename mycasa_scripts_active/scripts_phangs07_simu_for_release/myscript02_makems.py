@@ -20,37 +20,32 @@ def run_simobserve(
 	):
 	"""
 	"""
-	print(skymodel)
 	if array=="12m":
 		antennalist = "alma.cycle5.1.cfg"
-		imsize = np.round(21*300/230.53800*2)
-		mapsize = [imsize, imsize]
-		pointingspacing = np.round(21*300/230.53800/2., 2)
+		pointingspacing = str(np.round(21*300/230.53800/2., 2)) + "arcsec"
 	elif array=="7m":
 		antennalist = "aca.cycle5.cfg"
-		imsize = np.round(21*300/230.53800*12./7.*2)
-		mapsize = [imsize, imsize]
-		pointingspacing = np.round(21*300/230.53800*12./7./2., 2)
+		pointingspacing = str(np.round(21*300/230.53800*12./7./2., 2)) + "arcsec"
 	#
 	default('simobserve')
-	simobserve()
-	antennalist     = antennalist
-	skymodel        = skymodel
-	project         = project
-	indirection     = ""
-	incell          = ""
-	mapsize         = mapsize
-	incenter        = ""
-	inbright        = ""
-	setpointings    = True
-	integration     = "10s"
-	graphics        = "none"
-	obsmode         = "int"
-	totaltime       = totaltime
-	#thermalnoise    = ""
-	pointingspacing = pointingspacing
-	overwrite       = True
-	simobserve()
+	simobserve(
+		antennalist     = antennalist,
+		skymodel        = skymodel,
+		project         = project,
+		indirection     = "",
+		incell          = "",
+		mapsize         = ["",""], # mapsize,
+		incenter        = "",
+		inbright        = "",
+		setpointings    = True,
+		integration     = "10s",
+		graphics        = "none",
+		obsmode         = "int",
+		totaltime       = totaltime,
+		#thermalnoise    = "",
+		pointingspacing = pointingspacing,
+		overwrite       = True,
+		)
 
 
 ##############################
