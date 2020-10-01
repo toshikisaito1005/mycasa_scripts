@@ -57,32 +57,24 @@ def dirty_continuum(
 ##############################
 # concat
 print("### concat")
-vis_12m = glob.glob(dir_project + this_proj + "/*12m.ms")[0]
-vis_7m = glob.glob(dir_project + this_proj + "/*7m.ms")[0]
+vis_12m = glob.glob(dir_project + this_proj + "/" + this_proj + "_12m.ms")[0]
+vis_7m = glob.glob(dir_project + this_proj + "/" + this_proj + "_7m.ms")[0]
 vis_12m7m = vis_12m.replace("12m","12m+7m")
 os.system("rm -rf " + vis_12m7m)
 concat(vis=[vis_12m,vis_7m], concatvis=vis_12m7m)
 
 # dirty map
 print("### dirty map creation: 7m")
-imagename = dir_project + this_proj + "/sim01_7m"
+imagename = dir_project + this_proj + "/image_sim01_7m"
 dirty_continuum(vis_7m, imagename, fov=120, cell=1.0)
 
 print("### dirty map creation: 12m")
-imagename = dir_project + this_proj + "/sim01_12m"
-dirty_continuum(
-	vis_7m,
-	imagename,
-	fov=120,
-	cell=0.25)
+imagename = dir_project + this_proj + "/image_sim01_12m"
+dirty_continuum(vis_12m, imagename, fov=120, cell=0.25)
 
-print("### dirty map creation: 7m")
-imagename = dir_project + this_proj + "/sim01_12+7m"
-dirty_continuum(
-	vis_7m,
-	imagename,
-	fov=120,
-	cell=0.25)
+print("### dirty map creation: 12m+7m")
+imagename = dir_project + this_proj + "/image_sim01_12+7m"
+dirty_continuum(vis_12m7m, imagename, fov=120, cell=0.25)
 
 #
 os.system("rm -rf *.last")
