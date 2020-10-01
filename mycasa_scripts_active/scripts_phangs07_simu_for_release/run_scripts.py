@@ -1,5 +1,6 @@
 
 """
+# done
 ### two point sources, mfs, large mosaic
 this_proj = "sim01"
 imsize = 512
@@ -21,6 +22,7 @@ execfile("myscript04")
 
 
 """
+# done
 ### two point sources, mfs, single pointing
 this_proj = "sim02"
 imsize = 45
