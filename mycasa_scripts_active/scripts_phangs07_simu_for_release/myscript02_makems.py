@@ -6,7 +6,7 @@ import shutil
 
 dir_project = "/Users/saito/data/myproj_active/proj_phangs07_simu_for_release/"
 image_mocksky = "simulated_sky.fits"
-this_proj = "sim01"
+this_proj = "sim02"
 this_mapsize=["40arcsec","40arcsec"]
 
 ##############################
@@ -16,7 +16,7 @@ def run_simobserve(
 	array,
 	skymodel,
 	project,
-	mapsize=["",""]
+	mapsize=["",""],
 	totaltime="6h",
 	):
 	"""
