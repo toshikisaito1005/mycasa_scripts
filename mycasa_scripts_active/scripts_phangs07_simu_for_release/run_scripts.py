@@ -12,7 +12,7 @@ execfile("myscript03_dirtymap_mfs.py")
 
 this_proj = "sim02"
 # size of the mocksky in pixel
-imsize = 64
+imsize = 56
 this_mapsize=["",""]
 
 execfile("myscript01_mocksky.py")
