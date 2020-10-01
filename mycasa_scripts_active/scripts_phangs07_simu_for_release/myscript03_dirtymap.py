@@ -10,6 +10,7 @@ dir_project = "/Users/saito/data/myproj_active/proj_phangs07_simu_for_release/"
 this_proj = "sim01"
 phasecenter = "ICRS 12h21m54.947s 4d28m15.258s"
 
+
 ##############################
 ### def
 ##############################
@@ -64,21 +65,23 @@ vis_12m7m = vis_12m.replace("12m","12m+7m")
 os.system("rm -rf " + vis_12m7m)
 concat(vis=[vis_12m,vis_7m], concatvis=vis_12m7m)
 
-# dirty map
+# 7m-only dirty map
 print("### dirty map creation: 7m")
 imagename = dir_project + this_proj + "/image_sim01_7m"
 os.system("rm -rf " + imagename + "*")
 dirty_continuum(vis_7m, imagename, fov=120, cell=1.0, phasecenter=phasecenter)
 
+# 12m-only dirty map
 print("### dirty map creation: 12m")
 imagename = dir_project + this_proj + "/image_sim01_12m"
 os.system("rm -rf " + imagename + "*")
-dirty_continuum(vis_12m, imagename, fov=120, cell=0.25, phasecenter=phasecenter)
+dirty_continuum(vis_12m, imagename, fov=120, cell=0.4, phasecenter=phasecenter)
 
+# 12m+7m dirty map
 print("### dirty map creation: 12m+7m")
 imagename = dir_project + this_proj + "/image_sim01_12+7m"
 os.system("rm -rf " + imagename + "*")
-dirty_continuum(vis_12m7m, imagename, fov=120, cell=0.25, phasecenter=phasecenter)
+dirty_continuum(vis_12m7m, imagename, fov=120, cell=0.4, phasecenter=phasecenter)
 
 #
 os.system("rm -rf *.last")
