@@ -49,7 +49,7 @@ for i in range(len(skymodels)):
                         #thermalnoise       =  ""
                         pointingspacing    =  "0.4arcmin"
                         overwrite          =  True
-    simobserve()
+                        simobserve()
     #
     ###
     infile = tpmodels[i]

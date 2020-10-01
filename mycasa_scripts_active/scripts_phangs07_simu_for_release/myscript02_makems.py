@@ -10,27 +10,42 @@ dir_project = "/Users/saito/data/myproj_active/proj_phangs07_simu_for_release/"
 ##############################
 ### def
 ##############################
-def set_simobserve_param(
+def run_simobserve(
+	array,
+	skymodel,
+	project,
+	totaltime="6h",,
 	):
 	"""
 	"""
+	if array=="12m":
+		antennalist = "alma.cycle5.1.cfg"
+		imsize = np.round(21*300/230.53800*2)
+		mapsize = [imsize, imsize]
+		
+	elif:
+		antennalist = "aca.cycle5.cfg"
+		imsize = np.round(21*300/230.53800*12./7.*2)
+		mapsize = [imsize, imsize]
+	#
 	default('simobserve')
-	antennalist        =  "aca.cycle5.cfg"
-	skymodel           =  skymodels[i]
-	project            =  dir_this
+	antennalist        =  antennalist
+	skymodel           =  skymodel
+	project            =  project
 	indirection        =  ""
 	incell             =  ""
-	mapsize            =  ["",""]
+	mapsize            =  mapsize
 	incenter           =  ""
 	inbright           =  ""
 	setpointings       =  True
 	integration        =  "10s"
 	graphics           =  "none"
 	obsmode            = "int"
-	totaltime          =  "4h"
+	totaltime          =  totaltime
 	#thermalnoise       =  ""
-	pointingspacing    =  "0.4arcmin"
+	pointingspacing    =  pointingspacing
 	overwrite          =  True
+	simobserve()
 
 
 ##############################
