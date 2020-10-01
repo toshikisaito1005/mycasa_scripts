@@ -70,7 +70,14 @@ print("### making simulted 7m ms")
 run_simobserve("7m", this_skymodel, this_proj+"_7m")
 
 # mv to the working directory
-
+#
+os.mkdir(dir_project + this_proj)
+ms_12m = glob.glob(this_proj + "_12m/*.ms")[0]
+os.system("cp -r " + ms_12m + " " + dir_project + this_proj)
+#
+ms_7m = glob.glob(this_proj + "_7m/*.ms")[0]
+os.system("cp -r " + ms_7m + " " + dir_project + this_proj)
+#
 os.system("mv " + this_proj+"_* " + dir_project)
 
 #
