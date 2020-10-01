@@ -20,6 +20,7 @@ def run_simobserve(
 	):
 	"""
 	"""
+	print(skymodel)
 	if array=="12m":
 		antennalist = "alma.cycle5.1.cfg"
 		imsize = np.round(21*300/230.53800*2)
@@ -32,6 +33,7 @@ def run_simobserve(
 		pointingspacing = np.round(21*300/230.53800*12./7./2., 2)
 	#
 	default('simobserve')
+	simobserve()
 	antennalist     = antennalist
 	skymodel        = skymodel
 	project         = project
@@ -60,12 +62,18 @@ os.mkdir(this_proj)
 
 # path to the mocksky FITS file
 dir_mocksky = dir_project + "sim_images/"
-skymodel = glob.glob(dir_mocksky + image_mocksky)[0]
+this_skymodel = glob.glob(dir_mocksky + image_mocksky)[0]
 
 # make 12m ms
 print("### making simulted 12m ms")
-run_simobserve("12m", skymodel, this_proj+"_12m")
+run_simobserve("12m", this_skymodel, this_proj+"_12m")
 
 # make 7m ms
 print("### making simulted 7m ms")
-run_simobserve("7m", skymodel, this_proj+"_7m")
+run_simobserve("7m", this_skymodel, this_proj+"_7m")
+
+# mv to the working directory
+os.system("mv " + this_proj+"_* " + dir_project)
+
+#
+os.system("rm -rf *.last")
